@@ -1,0 +1,843 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Motivation, Job Satisfaction and Reinforcement · Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one light reading column with a sticky chapter rail; deliberately single (light) theme. */
+:root {
+  color-scheme: light;
+  --bg: #FDF9F9; --panel: #F8EEF0; --paper: #FFFFFF; --tint: #FAE9ED; --line: #EFDDE2;
+  --fg: #2F282B; --muted: #7E6F74; --accent: #C06C84; --accent-ink: #9C4862;
+  --demand: #3F5675; --supply: #C06C84; --ext: #6E3F55; --world: #8A7A5C; --policy: #3F7F7A;
+  --cs: #A7CDB6; --ps: #B2C4E3; --dwl: #D9674F; --rev: #E5C171; --rev2: #F1DCA8; --time: #DDB3CB; --ts: #BFDCC9;
+  --serif: "Noto Serif TC", "Songti TC", Georgia, serif;
+  --sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; background: var(--bg); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 16px; line-height: 1.75; }
+a { color: var(--accent-ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(253, 249, 249, .94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); padding-inline: 16px; }
+.top-in { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 14px; min-height: 56px; flex-wrap: wrap; padding-block: 8px; }
+.brand { font-family: var(--serif); font-weight: 700; font-size: 1.02rem; white-space: nowrap; }
+.brand small { font-family: var(--sans); font-weight: 500; color: var(--muted); font-size: .76rem; margin-left: 6px; letter-spacing: .06em; }
+.sessions { display: flex; gap: 4px; margin-left: auto; }
+.crumbs { font-size: .86rem; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.crumbs a { color: var(--muted); text-decoration: none; } .crumbs a:hover { color: var(--accent-ink); } .crumbs span { color: var(--line); } .crumbs b { font-family: var(--serif); }
+.sessions a.pill { text-decoration: none; }
+.sessions .pill { font: 500 .82rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--muted); padding: 4px 12px; border-radius: 999px; }
+.sessions .pill[aria-current="page"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.sessions .pill.off { opacity: .5; cursor: not-allowed; }
+.toc-btn { display: none; font: 500 .85rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--fg); border-radius: 8px; padding: 5px 12px; }
+
+.wrap { max-width: 1160px; margin: 0 auto; padding-inline: 16px; display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 52px; }
+.rail { position: sticky; top: 76px; align-self: start; max-height: calc(100vh - 92px); overflow: auto; padding-block: 34px 40px; font-size: .86rem; line-height: 1.5; }
+.rail .lbl { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.rail ol { list-style: none; margin: 0; padding: 0; }
+.rail li a { display: block; padding: 4px 10px; color: var(--muted); text-decoration: none; border-radius: 6px; }
+.rail li a:hover { color: var(--fg); background: var(--tint); }
+.rail li.h3 a { padding-left: 22px; font-size: .8rem; }
+.rail li a.on { color: var(--accent-ink); background: var(--tint); font-weight: 500; }
+
+main { min-width: 0; padding-block: 30px 120px; }
+.doc { max-width: 780px; }
+.hero { padding-block: 8px 26px; border-bottom: 1px solid var(--line); }
+.kick { font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); margin: 0 0 6px; font-weight: 500; }
+.hero h1 { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.25; margin: 0 0 12px; text-wrap: balance; }
+.lead { margin: 0; font-size: 1.04rem; max-width: 62ch; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 16px; font-size: .78rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+.doc h2 { font-family: var(--serif); font-size: 1.55rem; line-height: 1.35; margin: 3.4rem 0 .3rem; text-wrap: balance; }
+.doc h3 { font-size: 1.1rem; line-height: 1.45; margin: 2.2rem 0 .5rem; color: var(--accent-ink); text-wrap: balance; }
+.sub { margin: 0 0 1.2rem; color: var(--muted); max-width: 66ch; }
+.doc p, .doc li { max-width: 68ch; }
+.doc ul, .doc ol { padding-left: 1.25em; }
+.doc li { margin: .25rem 0; }
+.zh { display: inline-block; font-size: .78em; line-height: 1.3; color: var(--accent-ink); background: var(--tint); padding: 0 6px; border-radius: 4px; margin-left: 2px; vertical-align: 1px; font-weight: 500; }
+.hint { font-size: .9rem; color: var(--muted); display: flex; gap: 10px; align-items: baseline; }
+.hint b { flex: none; font-size: .72rem; color: #fff; background: var(--accent); padding: 0 7px; border-radius: 4px; font-weight: 500; }
+.key { background: var(--tint); padding: 12px 16px; border-radius: 8px; font-weight: 500; }
+.note-small { font-size: .8rem; color: var(--muted); }
+
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 1rem 0; }
+.pair > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; }
+.pair b { color: var(--accent-ink); }
+.pair p { margin: 4px 0 0; font-size: .92rem; }
+
+.matrix { display: grid; grid-template-columns: minmax(90px, .7fr) repeat(2, minmax(0, 1fr)); gap: 6px; margin: 1rem 0 1.2rem; font-size: .9rem; max-width: 620px; }
+.matrix .mh { font-weight: 700; font-size: .8rem; color: var(--muted); align-self: end; padding: 0 4px 2px; }
+.matrix .mh.side { align-self: center; }
+.matrix .cell { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px; font-weight: 500; }
+.matrix .cell.hi { background: var(--tint); border-color: var(--accent); }
+.matrix small { display: block; font-weight: 400; color: var(--muted); font-size: .8rem; margin-top: 2px; line-height: 1.45; }
+
+.map { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.3fr) auto minmax(0, 1fr); gap: 10px; align-items: center; margin: 1rem 0; }
+.mcol { display: flex; flex-direction: column; gap: 8px; }
+.mbox { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .84rem; line-height: 1.5; display: flex; flex-direction: column; gap: 2px; }
+.mbox b { font-size: .9rem; } .mbox span { color: var(--muted); } .mbox em { font-style: normal; color: var(--accent-ink); font-size: .78rem; font-weight: 500; }
+.mbox.good { border-color: var(--cs); } .mbox.ask { background: var(--tint); border-color: var(--accent); }
+.marrow { color: var(--accent); font-weight: 700; }
+
+.flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 1rem 0; font-size: .86rem; }
+.flow span { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; line-height: 1.45; }
+.flow i { font-style: normal; color: var(--accent); font-weight: 700; }
+.formula { font-family: var(--mono); font-size: .9rem; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; line-height: 1.9; overflow-x: auto; }
+.steps { counter-reset: s; list-style: none; padding-left: 0 !important; }
+.steps li { counter-increment: s; display: flex; gap: 10px; }
+.steps li::before { content: counter(s); flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--tint); color: var(--accent-ink); font: 700 .75rem/22px var(--sans); text-align: center; margin-top: 3px; }
+.assign { margin: 1.6rem 0; border: 1px dashed var(--accent); border-radius: 10px; padding: 14px 16px; background: var(--paper); }
+.assign p { margin: 6px 0 0; font-size: .92rem; }
+
+.tbl { overflow-x: auto; margin: 1rem 0; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+.doc table { border-collapse: collapse; width: 100%; font-size: .88rem; line-height: 1.55; }
+.doc th, .doc td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+.doc th { background: var(--panel); font-weight: 700; }
+.doc tr:last-child td { border-bottom: 0; }
+.drill .ans { filter: blur(5px); cursor: pointer; user-select: none; transition: filter .2s; }
+.drill .ans.shown { filter: none; user-select: auto; }
+
+.traps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 1rem; }
+.traps > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: .88rem; line-height: 1.55; }
+.traps s { color: var(--muted); text-decoration-color: var(--dwl); }
+.traps p { margin: 6px 0 0; font-weight: 500; }
+
+.qa-tools { margin: .4rem 0 .8rem; }
+.qa-tools button { font: 500 .82rem var(--sans); border: 1px solid var(--accent); background: var(--paper); color: var(--accent-ink); border-radius: 6px; padding: 5px 12px; cursor: pointer; }
+.qa { display: flex; flex-direction: column; gap: 6px; }
+.qa details { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
+.qa summary { cursor: pointer; padding: 10px 14px; font-weight: 500; font-size: .93rem; list-style: none; display: flex; gap: 10px; }
+.qa summary::before { content: "Q"; color: var(--accent); font-weight: 700; }
+.qa details[open] summary { border-bottom: 1px dashed var(--line); }
+.qa details p { margin: 0; padding: 10px 14px 12px 36px; font-size: .9rem; }
+
+/* graphs */
+.graph { max-width: 900px; margin: 1.8rem 0 2.2rem; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px 18px 14px; }
+.g-head h4 { font-family: var(--serif); font-size: 1.12rem; margin: 2px 0 2px; line-height: 1.45; }
+.g-head p { margin: 0 0 10px; color: var(--muted); font-size: .86rem; }
+.g-kicker { font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); }
+.g-body { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.g-plot svg { width: 100%; height: auto; display: block; }
+.g-side { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.g-ctrl { display: flex; flex-direction: column; gap: 10px; }
+.sl label { display: flex; justify-content: space-between; font-size: .8rem; color: var(--muted); line-height: 1.3; }
+.sl output { font-family: var(--mono); color: var(--fg); font-size: .8rem; }
+.sl input { width: 100%; accent-color: var(--accent); margin: 4px 0 0; }
+.g-btn { align-self: flex-start; font: 500 .8rem var(--sans); border: 1px solid var(--accent); color: var(--accent-ink); background: transparent; border-radius: 6px; padding: 4px 11px; cursor: pointer; }
+.g-btn:hover { background: var(--tint); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; align-self: flex-start; }
+.seg button { font: 500 .8rem var(--sans); border: 0; background: transparent; color: var(--muted); padding: 5px 12px; cursor: pointer; }
+.seg button[aria-checked="true"] { background: var(--accent); color: var(--paper); }
+.chk { display: flex; gap: 8px; align-items: center; font-size: .8rem; color: var(--muted); }
+.chk input { accent-color: var(--accent); }
+.g-stats { margin: 0; border-top: 1px solid var(--line); padding-top: 10px; display: flex; flex-direction: column; gap: 3px; }
+.st { display: flex; justify-content: space-between; gap: 10px; font-size: .8rem; line-height: 1.45; }
+.st dt { color: var(--muted); display: flex; align-items: center; gap: 7px; }
+.st dd { margin: 0; font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.st.big dd { font-weight: 500; color: var(--accent-ink); font-size: .92rem; }
+.g-note { margin: 12px 0 0; padding: 9px 12px; background: var(--tint); border-radius: 6px; font-size: .85rem; line-height: 1.6; }
+
+.sw { width: 11px; height: 11px; border-radius: 2px; display: inline-block; flex: none; }
+.sw.none { background: transparent; }
+.sw.a-cs { background: var(--cs); } .sw.a-ps { background: var(--ps); } .sw.a-ps2 { background: var(--ps); outline: 1px solid var(--demand); }
+.sw.a-dwl { background: repeating-linear-gradient(45deg, var(--dwl) 0 2px, transparent 2px 4px); outline: 1px solid var(--dwl); }
+.sw.a-rev { background: var(--rev); } .sw.a-rev2 { background: var(--rev2); } .sw.a-time { background: var(--time); } .sw.a-ts { background: var(--ts); }
+.sw.ln { height: 3px; border-radius: 2px; width: 16px; }
+
+svg .ax { stroke: var(--muted); stroke-width: 1.2; }
+svg .axl { fill: var(--muted); font: 500 11px var(--sans); }
+svg .tk { fill: var(--muted); font: 500 10.5px var(--mono); }
+svg .gd { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 4; opacity: .7; }
+svg .cv { stroke-width: 2.6; fill: none; stroke-linecap: round; }
+svg .cv.dash { stroke-dasharray: 7 5; stroke-width: 2; }
+svg .cvl { font: 700 11.5px var(--sans); }
+svg .c-d { stroke: var(--demand); fill: var(--demand); } svg .c-s { stroke: var(--supply); fill: var(--supply); }
+svg .c-x { stroke: var(--ext); fill: var(--ext); } svg .c-w { stroke: var(--world); fill: var(--world); } svg .c-t { stroke: var(--policy); fill: var(--policy); }
+svg text.cvl { stroke: none; }
+svg .pt { fill: var(--paper); stroke: var(--fg); stroke-width: 2; }
+svg .ptl { fill: var(--fg); font: 700 11px var(--sans); }
+svg .atag { fill: var(--fg); font: 700 11px var(--sans); opacity: .8; }
+svg .a-cs { fill: var(--cs); fill-opacity: .6; } svg .a-ps { fill: var(--ps); fill-opacity: .6; }
+svg .a-ps2 { fill: var(--ps); fill-opacity: .95; } svg .a-ts { fill: var(--ts); fill-opacity: .6; }
+svg .a-dwl { fill: url(#dwlHatch); stroke: var(--dwl); stroke-width: 1.2; }
+svg .a-rev { fill: var(--rev); fill-opacity: .75; } svg .a-rev2 { fill: var(--rev2); fill-opacity: .8; } svg .a-time { fill: var(--time); fill-opacity: .65; }
+
+svg .grid { stroke: var(--line); stroke-width: 1; }
+svg .a-prof { fill: var(--cs); fill-opacity: .75; } svg .a-loss { fill: var(--dwl); fill-opacity: .35; }
+.sw.a-prof { background: var(--cs); } .sw.a-loss { background: var(--dwl); opacity: .5; }
+.twin { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.tw-t { margin: 0 0 2px; font-size: .78rem; font-weight: 700; color: var(--muted); }
+.g-ctrl .g-btn + .g-btn { margin-top: -4px; }
+.graph.wide .g-body { grid-template-columns: minmax(0, 1fr); }
+.graph.wide .g-side { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+@media (max-width: 700px) { .twin, .graph.wide .g-side { grid-template-columns: minmax(0, 1fr); } }
+svg polyline.cv { fill: none !important; }
+
+.graph { background: var(--paper); }
+.g-note { background: var(--tint); }
+
+@media (max-width: 900px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .rail { display: none; position: fixed; inset: 64px 0 0 0; max-height: none; background: var(--bg); z-index: 15; padding: 20px 16px 60px; }
+  .rail.open { display: block; }
+  .toc-btn { display: inline-block; }
+  .g-body { grid-template-columns: minmax(0, 1fr); }
+  .map { grid-template-columns: minmax(0, 1fr); }
+  .marrow { transform: rotate(90deg); justify-self: center; }
+}
+@media (max-width: 560px) { .pair, .traps { grid-template-columns: minmax(0, 1fr); } }
+/* Management components */
+.three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 1rem 0; }
+.tcard { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.tcard .tnum { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font: 700 .78rem/24px var(--sans); text-align: center; }
+.tcard p { margin: 0; color: var(--muted); font-size: .88rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+.tags span { font-size: .74rem; background: var(--tint); color: var(--accent-ink); padding: 1px 8px; border-radius: 999px; font-weight: 500; }
+.method, .loop, .cascade { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 1rem 0; font-size: .86rem; }
+.method span, .loop span, .cascade span { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 5px 11px; line-height: 1.4; }
+.method span.hi { background: var(--tint); border-color: var(--accent); color: var(--accent-ink); font-weight: 700; }
+.method i, .loop i, .cascade i { font-style: normal; color: var(--accent); font-weight: 700; }
+.loop i.back { font-size: 1.1rem; }
+.cascade { flex-direction: column; align-items: flex-start; gap: 2px; }
+.cascade span:nth-of-type(2) { margin-left: 18px; } .cascade span:nth-of-type(3) { margin-left: 36px; } .cascade span:nth-of-type(4) { margin-left: 54px; }
+.cascade i:nth-of-type(1) { margin-left: 14px; } .cascade i:nth-of-type(2) { margin-left: 32px; } .cascade i:nth-of-type(3) { margin-left: 50px; }
+.four { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 1rem 0; }
+.four > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+.four b { font-size: .9rem; color: var(--accent-ink); } .four p { margin: 4px 0 0; font-size: .84rem; color: var(--muted); line-height: 1.5; }
+
+.ladder { display: grid; grid-template-columns: minmax(0, 1fr) 118px 118px; grid-template-rows: repeat(5, auto); gap: 5px 8px; margin: 1rem 0 .3rem; max-width: 640px; }
+.lv { grid-column: 1; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; font-weight: 700; font-size: .9rem; line-height: 1.35; }
+.lv small { display: block; font-weight: 400; color: var(--muted); font-size: .78rem; }
+.lv.l5 { grid-row: 1; margin-inline: 22%; } .lv.l4 { grid-row: 2; margin-inline: 16%; } .lv.l3 { grid-row: 3; margin-inline: 10%; } .lv.l2 { grid-row: 4; margin-inline: 5%; } .lv.l1 { grid-row: 5; }
+.lv.l5, .lv.l4 { background: #F6E9F4; } .lv.l3 { background: var(--tint); } .lv.l2, .lv.l1 { background: #EAF2EE; }
+.erg { border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .84rem; text-align: center; padding: 6px; }
+.erg.g { grid-column: 2; grid-row: 1 / span 2; background: #EBD7EA; color: #6E3F6A; }
+.erg.r { grid-column: 3; grid-row: 2 / span 2; background: var(--tint); color: var(--accent-ink); }
+.erg.e { grid-column: 2; grid-row: 4 / span 2; background: #D9EBE1; color: #2F6B4F; }
+
+.mw { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px; margin: 1.6rem 0 2rem; }
+.mw-body { margin-top: 10px; }
+.hz-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.hz-t { margin: 0 0 6px; font-weight: 700; font-size: .88rem; } .hz-t small { font-weight: 400; color: var(--muted); }
+.chips { display: flex; flex-direction: column; gap: 5px; }
+.chip { display: flex; justify-content: space-between; gap: 10px; font: 500 .84rem var(--sans); text-align: left; background: var(--bg); border: 1px solid var(--line); color: var(--fg); border-radius: 7px; padding: 6px 10px; cursor: pointer; }
+.chip em { font-style: normal; font-size: .74rem; color: var(--muted); }
+.hz-cols > div:first-child .chip[aria-pressed="true"] { border-color: var(--dwl); background: #FCEDEA; }
+.hz-cols > div:first-child .chip[aria-pressed="true"] em { color: #A8432F; }
+.hz-cols > div:last-child .chip[aria-pressed="true"] { border-color: #6FAE8B; background: #EAF5EE; }
+.hz-cols > div:last-child .chip[aria-pressed="true"] em { color: #2F6B4F; }
+.scale { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 6px; margin-top: 18px; }
+.half { height: 14px; background: var(--bg); border: 1px solid var(--line); border-radius: 7px; position: relative; overflow: hidden; }
+.half i { position: absolute; top: 0; bottom: 0; transition: width .25s; }
+.half.left i { right: 0; background: var(--dwl); } .half.right i { left: 0; background: #6FAE8B; }
+@media (prefers-reduced-motion: reduce) { .half i { transition: none; } }
+.zero { font: 700 .8rem var(--mono); color: var(--muted); }
+.scale-l { display: flex; justify-content: space-between; font-size: .74rem; color: var(--muted); margin-top: 4px; }
+
+.kpi-flow { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.3fr) auto minmax(0, .8fr) auto minmax(0, 1fr); gap: 8px; align-items: stretch; margin-top: 12px; font-size: .84rem; }
+.kpi-flow > div { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; line-height: 1.45; }
+.kpi-flow > i { font-style: normal; color: var(--accent); font-weight: 700; align-self: center; }
+.kpi-flow b { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.kpi-flow p { margin: 3px 0 0; } .kpi-flow ul { margin: 3px 0 0; padding-left: 1.1em; }
+.kpi-flow .bad { border-color: var(--dwl); background: #FCEDEA; } .kpi-flow .good { border-color: #6FAE8B; background: #EAF5EE; }
+
+.cmp-sel { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; font-size: .84rem; color: var(--muted); }
+.cmp-sel select { font: 500 .88rem var(--sans); padding: 5px 8px; border: 1px solid var(--line); border-radius: 7px; background: var(--paper); color: var(--fg); }
+table.cmp td:first-child { font-weight: 700; color: var(--muted); width: 22%; }
+
+.tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line); }
+.tabs button { font: 500 .86rem var(--sans); background: none; border: 0; border-bottom: 2px solid transparent; color: var(--muted); padding: 6px 12px; cursor: pointer; margin-bottom: -1px; }
+.tabs button[aria-selected="true"] { color: var(--accent-ink); border-bottom-color: var(--accent); }
+.ev { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+.ev > div { display: grid; grid-template-columns: 190px auto minmax(0, 1fr); gap: 10px; align-items: baseline; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; font-size: .86rem; line-height: 1.5; }
+.ev p { margin: 0; }
+.tag { font-size: .72rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; white-space: nowrap; }
+.tag.gap { background: #FCE3DD; color: #A8432F; } .tag.ok { background: #E3F2E9; color: #2F6B4F; }
+.tag.maybe { background: #FBF0D9; color: #8A6216; } .tag.na { background: #EEE9EB; color: var(--muted); }
+.issue { margin-top: 12px; background: var(--tint); border-radius: 8px; padding: 10px 14px; font-size: .9rem; }
+.issue p { margin: 4px 0 0; }
+
+.xgrid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 1rem 0; }
+.xgrid > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 5px; font-size: .84rem; line-height: 1.4; }
+.xgrid small { color: var(--muted); font-size: .76rem; }
+.xgrid .ok, .xgrid .gap { align-self: flex-start; font-size: .72rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; }
+.xgrid .ok { background: #E3F2E9; color: #2F6B4F; } .xgrid .gap { background: #FCE3DD; color: #A8432F; }
+
+@media (max-width: 760px) {
+  .three, .four { grid-template-columns: minmax(0, 1fr); }
+  .xgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hz-cols { grid-template-columns: minmax(0, 1fr); }
+  .kpi-flow { grid-template-columns: minmax(0, 1fr); } .kpi-flow > i { transform: rotate(90deg); justify-self: center; }
+  .ev > div { grid-template-columns: minmax(0, 1fr); gap: 3px; } .ev .tag { justify-self: start; }
+  .ladder { grid-template-columns: minmax(0, 1fr) 84px 84px; }
+}
+
+/* Session 4 + case page */
+.tcard small.dont { color: var(--muted); font-size: .78rem; border-top: 1px dashed var(--line); padding-top: 6px; margin-top: 4px; }
+.quotes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: .6rem 0 1rem; }
+.quotes q { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; font-style: italic; color: var(--muted); font-size: .9rem; }
+.six { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 1rem 0; }
+.six > div { display: flex; gap: 10px; align-items: flex-start; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .88rem; line-height: 1.5; }
+.six span { flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--tint); color: var(--accent-ink); font: 700 .76rem/24px var(--sans); text-align: center; }
+a.cta { display: inline-block; background: var(--accent); color: #fff; text-decoration: none; font-weight: 500; padding: 8px 16px; border-radius: 8px; }
+a.cta:hover { background: var(--accent-ink); }
+blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; font-size: .92rem; line-height: 1.7; }
+.timeline { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 1rem 0; }
+.timeline > div { background: var(--paper); border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: 10px; padding: 10px 14px; font-size: .88rem; line-height: 1.5; }
+.timeline time { font: 500 .76rem var(--mono); color: var(--accent-ink); display: block; }
+.timeline p { margin: 4px 0 0; color: var(--muted); }
+.score { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 1rem 0; }
+.score > div { border-radius: 10px; padding: 10px 12px; font-size: .84rem; line-height: 1.5; border: 1px solid var(--line); }
+.score .up { background: #EAF5EE; border-color: #A9D3BA; } .score .down { background: #FCEDEA; border-color: #EDC2B8; }
+.score b::after { margin-left: 6px; font-size: .78rem; } .score .up b::after { content: "improved"; color: #2F6B4F; } .score .down b::after { content: "worse"; color: #A8432F; }
+.score ul { margin: 6px 0 0; padding-left: 1.1em; }
+
+.jcm { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, .9fr); gap: 16px; }
+.jdims { display: flex; flex-direction: column; gap: 8px; }
+.jd.g0 label span { color: #6E3F6A; } .jd.g1 label span { color: var(--accent-ink); } .jd.g2 label span { color: #2F6B4F; }
+.jstates { display: flex; flex-direction: column; gap: 12px; padding-top: 4px; }
+.jst span { font-size: .8rem; font-weight: 500; }
+.jbar { height: 12px; border-radius: 6px; background: var(--bg); border: 1px solid var(--line); overflow: hidden; margin-top: 3px; }
+.jbar i { display: block; height: 100%; transition: width .25s; }
+.jst.g0 .jbar i { background: #B98AB5; } .jst.g1 .jbar i { background: var(--accent); } .jst.g2 .jbar i { background: #6FAE8B; }
+@media (prefers-reduced-motion: reduce) { .jbar i { transition: none; } }
+.jout ul { margin: 8px 0 0; padding-left: 1.1em; font-size: .82rem; color: var(--muted); }
+.jlvl { display: inline-block; font-weight: 700; padding: 3px 12px; border-radius: 999px; font-size: .86rem; }
+.jlvl.strong { background: #E3F2E9; color: #2F6B4F; } .jlvl.moderate { background: #FBF0D9; color: #8A6216; } .jlvl.weak { background: #FCE3DD; color: #A8432F; }
+.jgns { margin-top: 14px; }
+
+.qz-item { font-size: 1rem; font-weight: 500; margin: 4px 0 12px; }
+.qz-opts { display: grid; gap: 8px; }
+.qz-opts.grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 520px; }
+.qz-opts.row5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.qz-o { font: 500 .88rem var(--sans); background: var(--bg); border: 1px solid var(--line); color: var(--fg); border-radius: 8px; padding: 10px; cursor: pointer; display: flex; flex-direction: column; gap: 2px; text-align: center; }
+.qz-o small { color: var(--muted); font-size: .74rem; font-weight: 400; }
+.qz-o:hover { border-color: var(--accent); }
+.qz-o.right { background: #E3F2E9; border-color: #6FAE8B; } .qz-o.wrong { background: #FCE3DD; border-color: var(--dwl); }
+.qz-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: .8rem; color: var(--muted); }
+
+.rsteps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+.rsteps > div { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: .85rem; line-height: 1.5; }
+.rsteps > div.g { background: var(--tint); border-color: var(--accent); }
+.rsteps b { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.rsteps p { margin: 4px 0 0; }
+.risk { font-size: .88rem; } .risk b { font-size: .72rem; color: #fff; background: #B98A2E; padding: 1px 7px; border-radius: 4px; margin-right: 6px; }
+.sayd summary { cursor: pointer; font-weight: 500; color: var(--accent-ink); font-size: .9rem; }
+
+@media (max-width: 760px) {
+  .quotes, .six, .timeline, .rsteps { grid-template-columns: minmax(0, 1fr); }
+  .score { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .jcm { grid-template-columns: minmax(0, 1fr); }
+  .qz-opts.row5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+</style></head><body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<pattern id="dwlHatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+<rect width="6" height="6" style="fill:var(--dwl);fill-opacity:.12"></rect><rect width="2.2" height="6" style="fill:var(--dwl);fill-opacity:.75"></rect></pattern></defs></svg>
+
+<header class="top"><div class="top-in">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Study Notes</a><span>/</span><a href="management.html">Management</a><span>/</span><b>Session 4</b></nav>
+  <button class="toc-btn" type="button" id="tocBtn" aria-expanded="false">Contents</button>
+  <nav class="sessions" aria-label="Sessions"><a class="pill" href="management-s1.html">S1</a>
+<a class="pill" href="management-s2.html">S2</a>
+<a class="pill" href="management-s3.html">S3</a>
+<span class="pill" aria-current="page">S4</span></nav>
+</div></header>
+
+<div class="wrap">
+  <aside class="rail" id="rail"><p class="lbl">Contents</p><ol id="toc"></ol></aside>
+  <main><article class="doc"><div class="hero">
+  <p class="kick">Managing People in Organizations · Session 4</p>
+  <h1>Motivation, Job Satisfaction and Reinforcement</h1>
+  <p class="lead">Session 3 diagnosed why people are or are not motivated. Session 4 asks how to design the job, how unhappy employees respond, and what behavior the reward system actually reinforces.</p>
+</div>
+
+<h2 id="map">Chapter map</h2>
+<p class="sub">Three levels to check in any case, each with its own framework.</p>
+<div class="three">
+  <div class="tcard"><span class="tnum">1</span><b>Job design</b><p>Does the job create meaning, responsibility and knowledge of results?</p><div class="tags"><span>Job Characteristics Model</span></div></div>
+  <div class="tcard"><span class="tnum">2</span><b>Employee response</b><p>How do people feel, and what do they do when dissatisfied?</p><div class="tags"><span>Satisfaction</span><span>Commitment</span><span>OCB</span><span>EVLN</span></div></div>
+  <div class="tcard"><span class="tnum">3</span><b>Management consequences</b><p>What behavior are we rewarding, and is the system fair?</p><div class="tags"><span>Reinforcement</span><span>Recognition</span><span>Schedules</span></div></div>
+</div>
+<div class="method"><span>Framework</span><i>→</i><span>Evidence</span><i>→</i><span>Gap</span><i>→</i><span>Issue</span><i>→</i><span class="hi">Recommendation</span><i>→</i><span>Metric and risk</span></div>
+<p class="note-small">New in Session 4: the case task moves from identifying issues to recommending improvements.</p>
+
+<!-- 1 -->
+<h2 id="jcm">1. Job Characteristics Model</h2>
+<p class="sub">Five job dimensions create three psychological states, which lead to work outcomes. Source: Robbins and Judge.</p>
+<div data-mw="jcm"></div>
+<div class="tbl"><table>
+<thead><tr><th>Dimension</th><th>Meaning</th><th>Do not confuse with</th></tr></thead>
+<tbody>
+<tr><td><b>Skill variety</b> <span class="zh">技能多樣性</span></td><td>The job uses different skills and activities</td><td>Simply adding more tasks, which can mean overload</td></tr>
+<tr><td><b>Task identity</b> <span class="zh">任務完整性</span></td><td>Completing a whole, identifiable piece of work</td><td>Task significance (impact on others)</td></tr>
+<tr><td><b>Task significance</b></td><td>The work affects other people</td><td>An important-sounding job title</td></tr>
+<tr><td><b>Autonomy</b> <span class="zh">自主權</span></td><td>Freedom in how the work is done</td><td>No accountability or no standards</td></tr>
+<tr><td><b>Feedback</b></td><td>The work itself shows how well it was done</td><td>Having a KPI, which does not guarantee useful feedback</td></tr>
+</tbody></table></div>
+<p class="key">Growth-need strength <span class="zh">成長需求強度</span> moderates the model: people who want challenge respond more strongly to enriched jobs. More autonomy is not a universal fix.</p>
+
+<!-- 2 -->
+<h2 id="satisfaction">2. Satisfaction, commitment and OCB</h2>
+<p class="sub">Related, but not the same. The lecture links job satisfaction to citizenship, commitment, productivity, absenteeism and turnover. The arrows show relationships to examine, not proven causes.</p>
+<div class="three">
+  <div class="tcard"><b>Job satisfaction</b><p>"I like my job."</p><small class="dont">Does not prove they will stay or perform well</small></div>
+  <div class="tcard"><b>Organizational commitment</b> <span class="zh">組織承諾</span><p>"I believe in this organization and want to stay."</p><small class="dont">Does not mean they like every task</small></div>
+  <div class="tcard"><b>OCB</b> <span class="zh">組織公民行為</span><p>"I help a colleague even though no one pays me to."</p><small class="dont">Does not follow from hitting sales targets</small></div>
+</div>
+<h3 id="commitment">Three components of commitment</h3>
+<ol class="steps">
+  <li>Strong acceptance of the organization's goals and values</li>
+  <li>Willingness to put in considerable effort for the organization</li>
+  <li>Desire to remain a member</li>
+</ol>
+<p>Organizational citizenship behavior (OCB) is discretionary, outside the formal reward system, and done without expecting a direct reward. A top performer can still show weak OCB.</p>
+
+<h3 id="leaders">Motivation strategies of leaders</h3>
+<div class="tbl"><table>
+<thead><tr><th>Strategy on the slide</th><th>Links to</th></tr></thead>
+<tbody>
+<tr><td>Create and communicate the vision and every success behind it</td><td>Meaning, recognition</td></tr>
+<tr><td>Participative management</td><td>Theory Y; participation in MBO</td></tr>
+<tr><td>Self-motivation through values alignment between individuals and the organization</td><td>Session 2 values and fit; commitment</td></tr>
+</tbody></table></div>
+<p class="note-small">To analyze a leader, the slide asks: Theory X or Y? Intrinsic or extrinsic motivators? Which Maslow levels?</p>
+
+<!-- 3 -->
+<h2 id="evln">3. Responses to dissatisfaction: EVLN</h2>
+<p class="sub">Dissatisfied employees do not all quit. Two axes, active or passive and constructive or destructive, give four responses.</p>
+<div data-mw="evln"></div>
+<p class="hint"><b>注意</b>Low morale 本身不能判斷員工會選哪一種反應，要看實際行為證據。投影片把 lateness / absence 放在 Exit；Robbins 課本放在 Neglect，考試照投影片寫，必要時向老師確認。</p>
+<p class="note-small">The slide notes that exit, voice and loyalty apply to all stakeholder groups, not only employees.</p>
+
+<!-- 4 -->
+<h2 id="reinforcement">4. Reinforcement theory</h2>
+<p class="sub">Consequences shape future behavior. A reward strengthens whatever behavior it actually pays for.</p>
+<div class="method"><span>Behavior</span><i>→</i><span>Consequence (reward or punishment)</span><i>→</i><span>Likelihood of repeating changes</span></div>
+<div class="pair">
+  <div><b>Positive reinforcement</b> <span class="zh">正向增強</span><p>Slide example: a bonus for reaching a sales quota, to encourage more sales effort.</p></div>
+  <div><b>Punishment</b><p>Slide example: a salary deduction for lateness, to encourage punctuality.</p></div>
+</div>
+<div class="tbl"><table>
+<thead><tr><th>Term</th><th>After the behavior</th><th>Aim</th></tr></thead>
+<tbody>
+<tr><td>Positive reinforcement</td><td>Add something desired</td><td>Increase the behavior</td></tr>
+<tr><td>Negative reinforcement</td><td>Remove something unpleasant</td><td>Increase the behavior</td></tr>
+<tr><td>Punishment</td><td>Apply something unpleasant</td><td>Decrease the behavior</td></tr>
+</tbody></table></div>
+<p class="note-small">Negative reinforcement is a standard textbook term added for clarity; it is not on the slide. "Positive" and "negative" mean adding or removing, not good or bad.</p>
+<p>Managers should understand employees' personality and values to know what each person actually finds rewarding.</p>
+
+<!-- 5 -->
+<h2 id="recognition">5. Why reward systems fail, and how to fix them</h2>
+<p class="sub">Signs of a poor reward system, quoted on the slide:</p>
+<div class="quotes">
+  <q>It doesn't matter how hard I work around here.</q>
+  <q>Who cares.</q>
+  <q>Hey, we can get away with anything around here!</q>
+  <q>If management doesn't care, why should I?</q>
+</div>
+<h3 id="six">Six elements of a recognition system</h3>
+<div class="six">
+  <div><span>1</span>Commitment and support from top and middle management</div>
+  <div><span>2</span>Formal standards and expectations set in policy</div>
+  <div><span>3</span>A system of performance measurement</div>
+  <div><span>4</span>Consequences that participants see as meaningful</div>
+  <div><span>5</span>Fair and regular application</div>
+  <div><span>6</span>Periodic evaluation of the system</div>
+</div>
+<p class="key">A KPI is only one of six. If leaders do not back the system, rewards mean little to staff, or rules are applied unevenly, behavior will not change the way management wants.</p>
+
+<!-- 6 -->
+<h2 id="schedules">6. Schedules of reinforcement</h2>
+<p class="sub">First ask: is the reward tied to <b>time</b> (interval) or to <b>output</b> (ratio)? Then: is the rule <b>fixed</b> or <b>variable</b>?</p>
+<div class="tbl"><table>
+<thead><tr><th>Schedule</th><th>Rule</th><th>Effect on behavior (slide)</th><th>Slide example</th></tr></thead>
+<tbody>
+<tr><td><b>Continuous</b></td><td>Every desired behavior</td><td>Fast learning, fast extinction</td><td>Compliments</td></tr>
+<tr><td><b>Fixed interval</b></td><td>Fixed times</td><td>Average performance, rapid extinction</td><td>Weekly paychecks</td></tr>
+<tr><td><b>Variable interval</b></td><td>Variable times</td><td>Moderate to high performance, slow extinction</td><td>Pop quiz, unannounced inspection</td></tr>
+<tr><td><b>Fixed ratio</b></td><td>Fixed amount of output</td><td>High, stable performance, rapid extinction</td><td>Piece-rate pay</td></tr>
+<tr><td><b>Variable ratio</b></td><td>Variable amount of output</td><td>Very high performance, slow extinction</td><td>Commissioned sales</td></tr>
+</tbody></table></div>
+<p class="note-small">Extinction <span class="zh">消退</span> means a learned behavior fades when reinforcement stops. In a real case, classify by the actual reward rule: a fixed commission on every sale behaves more like fixed ratio.</p>
+<div data-mw="sched"></div>
+
+<!-- 7 -->
+<h2 id="workers">7. Different workers, different motivators</h2>
+<div class="tbl"><table>
+<thead><tr><th>Worker group</th><th>Motivators listed on the slide</th></tr></thead>
+<tbody>
+<tr><td>Professionals</td><td>Challenging tasks, autonomy of work style, learning opportunities</td></tr>
+<tr><td>Temporary / contingent workers</td><td>Chance of permanent status, training, piece-rate, commission</td></tr>
+<tr><td>Diversified workers</td><td>Flexibility, job sharing, flexible hours, different fringe benefits</td></tr>
+<tr><td>Low-skilled service workers</td><td>Family-like climate, profit sharing, shared work targets</td></tr>
+</tbody></table></div>
+<p>These are starting points, not stereotypes. Check each person's needs and values before choosing a reward.</p>
+
+<!-- 8 -->
+<h2 id="lms">8. Lee Medical Supply: Session 4 task</h2>
+<p>Four teams, the same frameworks as Session 3 (Maslow, goal setting, Theory X/Y, Herzberg). This time each team <b>recommends improvements</b> and presents to the class.</p>
+<p>The lecturer's recap: LMS supports physiological needs, esteem only partly, and falls short on safety, social and self-actualization. Apichart uses a Theory X style with both X and Y workers, and high-flyer Y workers leave. Staff do not know the overall 18-month profit goal.</p>
+<p><a class="cta" href="management-lms.html">Open the full Lee Medical Supply case page →</a></p>
+
+<!-- 9 -->
+<h2 id="traps">9. Common mistakes</h2>
+<div class="traps">
+  <div><s>Task identity means the job is important.</s><p>Identity is completing a whole job. Significance is impact on others.</p></div>
+  <div><s>Autonomy tells employees how well they did.</s><p>That is feedback. Autonomy creates responsibility.</p></div>
+  <div><s>Happy workers always perform better.</s><p>They may be related; the slide does not prove cause.</p></div>
+  <div><s>Commitment and OCB are the same.</s><p>Commitment is an attitude. OCB is voluntary behavior.</p></div>
+  <div><s>Low morale means people will resign.</s><p>They may also voice, wait or neglect.</p></div>
+  <div><s>Negative reinforcement is punishment.</s><p>It removes something unpleasant to increase a behavior.</p></div>
+  <div><s>Any sales commission is variable ratio.</s><p>Check the actual rule linking reward to output.</p></div>
+  <div><s>High KPI means organizational success.</s><p>The system may reward the wrong output.</p></div>
+</div>
+
+<!-- 10 -->
+<h2 id="coldcall">10. Cold call practice</h2>
+<div class="qa-tools"><button type="button" id="qaAll">Show all answers</button></div>
+<div class="qa">
+  <details><summary>What is the Job Characteristics Model?</summary><p>It links five job dimensions to three psychological states and to outcomes such as motivation, quality, satisfaction, and lower absenteeism and turnover.</p></details>
+  <details><summary>Which dimensions create experienced meaningfulness?</summary><p>Skill variety, task identity and task significance together.</p></details>
+  <details><summary>Autonomy versus feedback?</summary><p>Autonomy creates experienced responsibility. Feedback gives knowledge of actual results.</p></details>
+  <details><summary>What is growth-need strength?</summary><p>How strongly a person wants challenge and growth. It explains why people respond differently to enriched jobs.</p></details>
+  <details><summary>What is organizational commitment?</summary><p>Accepting the organization's goals and values, willingness to work hard for it, and wanting to stay.</p></details>
+  <details><summary>What is OCB?</summary><p>Discretionary helpful behavior outside the formal reward system, done without expecting a direct reward.</p></details>
+  <details><summary>What is EVLN?</summary><p>Four responses to dissatisfaction: Exit (active, destructive), Voice (active, constructive), Loyalty (passive, constructive), Neglect (passive, destructive).</p></details>
+  <details><summary>What is reinforcement theory?</summary><p>Consequences shape future behavior. Rewarded behavior tends to be repeated; punished behavior tends to decrease.</p></details>
+  <details><summary>Why can a reward system fail?</summary><p>Employees see no reliable link between effort, performance and meaningful, fairly applied consequences.</p></details>
+  <details><summary>Name the six recognition elements.</summary><p>Management support, formal standards, performance measurement, meaningful consequences, fair and regular application, periodic evaluation.</p></details>
+  <details><summary>How do the schedules differ?</summary><p>Interval schedules depend on time, ratio schedules on output. Fixed is predictable, variable is not. Continuous rewards every occurrence.</p></details>
+</div>
+</article></main>
+</div>
+
+<script>/* Management interactive components: Herzberg scale, KPI trap, framework comparator, LMS lens. */
+(function () {
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  let uid = 0;
+  function shell(host, kicker, title, sub) {
+    host.classList.add('mw');
+    host.innerHTML = '<div class="g-head"><span class="g-kicker">' + kicker + '</span><h4>' + title + '</h4>' + (sub ? '<p>' + sub + '</p>' : '') + '</div><div class="mw-body"></div>';
+    return host.querySelector('.mw-body');
+  }
+
+  const W = {};
+
+  W.herzberg = host => {
+    const body = shell(host, 'Interactive', 'Two separate scales', 'Mark each hygiene factor as fixed or poor, and each motivator as present or missing.');
+    const hyg = ['Quality of supervision', 'Rate of pay', 'Company policies', 'Working conditions', 'Relations with others', 'Job security'];
+    const mot = ['Career advancement', 'Personal growth', 'Recognition', 'Responsibility', 'Achievement'];
+    const st = { h: hyg.map((_, i) => i < 3), m: mot.map(() => false) };
+    const id = 'hz' + (++uid);
+    body.innerHTML =
+      '<div class="hz-cols"><div><p class="hz-t">Hygiene factors <small>poor → dissatisfaction</small></p><div class="chips" id="' + id + 'h"></div></div>' +
+      '<div><p class="hz-t">Motivators <small>present → satisfaction</small></p><div class="chips" id="' + id + 'm"></div></div></div>' +
+      '<div class="scale"><div class="half left"><i></i></div><div class="zero">0</div><div class="half right"><i></i></div></div>' +
+      '<div class="scale-l"><span>High dissatisfaction</span><span>High satisfaction</span></div><p class="g-note"></p>';
+    const H = body.querySelector('#' + id + 'h'), M = body.querySelector('#' + id + 'm');
+    const chip = (box, list, arr, onTxt, offTxt) => list.forEach((t, i) => {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'chip';
+      const sync = () => { b.setAttribute('aria-pressed', arr[i]); b.innerHTML = esc(t) + '<em>' + (arr[i] ? onTxt : offTxt) + '</em>'; };
+      b.addEventListener('click', () => { arr[i] = !arr[i]; sync(); draw(); }); sync(); box.appendChild(b);
+    });
+    chip(H, hyg, st.h, 'Poor', 'Fixed'); chip(M, mot, st.m, 'Present', 'Missing');
+    const L = body.querySelector('.left i'), R = body.querySelector('.right i'), note = body.querySelector('.g-note');
+    function draw() {
+      const d = st.h.filter(Boolean).length, s = st.m.filter(Boolean).length;
+      L.style.width = (d / hyg.length * 100) + '%'; R.style.width = (s / mot.length * 100) + '%';
+      if (d && !s) note.textContent = 'Employees are dissatisfied. Fixing the hygiene factors brings them back to zero, not to motivated.';
+      else if (!d && !s) note.textContent = 'No dissatisfaction, but no motivation either. Employees may not complain, yet they are not engaged.';
+      else if (d && s) note.textContent = 'Both problems at once: hygiene issues create dissatisfaction while motivators push the other way. The lecture says fix the hygiene foundation first.';
+      else note.textContent = 'Hygiene is in place and motivators are present: this is where real motivation and satisfaction come from.';
+    }
+    draw();
+  };
+
+  W.kpi = host => {
+    const body = shell(host, 'Interactive', 'What gets measured gets done', 'A call center chooses a KPI. Switch it and see what people optimize.');
+    const K = {
+      calls: { name: 'Calls handled per hour', act: ['Keep calls short', 'Avoid complex cases', 'Transfer customers quickly'], kpi: 'Rises', out: 'Customer problems solved may fall', ok: false },
+      fcr: { name: 'Problems solved on first contact', act: ['Take time to understand the issue', 'Fix it fully before ending', 'Escalate only when needed'], kpi: 'Rises', out: 'Customer satisfaction rises', ok: true }
+    };
+    let cur = 'calls';
+    body.innerHTML = '<div class="seg" role="radiogroup"></div><div class="kpi-flow"></div>';
+    const seg = body.querySelector('.seg'), flow = body.querySelector('.kpi-flow');
+    Object.entries(K).forEach(([k, v]) => {
+      const b = document.createElement('button'); b.type = 'button'; b.textContent = v.name; b.setAttribute('role', 'radio');
+      b.addEventListener('click', () => { cur = k; draw(); }); b.dataset.k = k; seg.appendChild(b);
+    });
+    function draw() {
+      const v = K[cur];
+      seg.querySelectorAll('button').forEach(b => b.setAttribute('aria-checked', b.dataset.k === cur));
+      flow.innerHTML = '<div><b>KPI</b><p>' + v.name + '</p></div><i>→</i><div><b>Behavior</b><ul>' + v.act.map(a => '<li>' + a + '</li>').join('') + '</ul></div><i>→</i>' +
+        '<div><b>KPI result</b><p>' + v.kpi + '</p></div><i>→</i><div class="' + (v.ok ? 'good' : 'bad') + '"><b>Real outcome</b><p>' + v.out + '</p></div>';
+    }
+    draw();
+  };
+
+  const F = {
+    maslow: { n: 'Maslow', q: 'Which level of need is under-supported?', idea: 'Five levels, met from lower to higher.', look: 'Evidence for each of the five levels.', use: 'You need to check which needs the company supports and which it neglects.', trap: 'Labeling a person as "stuck" at a level without evidence.' },
+    erg: { n: 'ERG', q: 'Which needs coexist, and is growth blocked?', idea: 'Existence, Relatedness, Growth can be pursued at the same time.', look: 'Several needs at once; signs that blocked growth shifted attention to pay or security.', use: 'Employees want pay, relationships and growth together.', trap: 'Claiming frustration-regression without evidence of the shift.' },
+    herzberg: { n: 'Herzberg', q: 'Are we only removing dissatisfaction, or creating motivation?', idea: 'Hygiene factors and motivators are two different scales.', look: 'Pay, supervision, policies, conditions versus growth, recognition, responsibility.', use: 'Pay and conditions are fine, yet motivation stays low.', trap: 'Assuming good pay means motivated staff.' },
+    xy: { n: 'Theory X / Y', q: 'What do managers assume about workers?', idea: 'Assumptions drive style: control and punishment, or support and responsibility.', look: 'Approvals, written orders, tolerance of mistakes, how much responsibility is given.', use: 'The case centers on control and how managers treat people.', trap: 'Treating X as always bad, or decentralization as proof of Y.' },
+    goals: { n: 'Goal setting / MBO', q: 'Do goals point effort at the right outcome?', idea: 'Specific goals, a time period, participation and feedback direct effort.', look: 'KPIs, targets, feedback, who sets goals, how goals cascade.', use: 'Targets are hit but the real result does not improve.', trap: 'Calling a KPI-design problem a motivation problem.' }
+  };
+  const ROWS = [['q', 'Core question'], ['idea', 'Key idea'], ['look', 'Look for in the case'], ['use', 'Use it when'], ['trap', 'Common mistake']];
+
+  W.compare = host => {
+    const body = shell(host, 'Compare', 'Framework side by side', '');
+    const id = 'cmp' + (++uid);
+    const opts = Object.entries(F).map(([k, v]) => '<option value="' + k + '">' + v.n + '</option>').join('');
+    body.innerHTML = '<div class="cmp-sel"><label for="' + id + 'a">Framework A</label><select id="' + id + 'a">' + opts + '</select>' +
+      '<label for="' + id + 'b">Framework B</label><select id="' + id + 'b">' + opts + '</select></div><div class="tbl"><table class="cmp"></table></div>';
+    const a = body.querySelector('#' + id + 'a'), b = body.querySelector('#' + id + 'b'), t = body.querySelector('table');
+    a.value = 'maslow'; b.value = 'herzberg';
+    function draw() {
+      const A = F[a.value], B = F[b.value];
+      t.innerHTML = '<thead><tr><th></th><th>' + A.n + '</th><th>' + B.n + '</th></tr></thead><tbody>' +
+        ROWS.map(([k, l]) => '<tr><td>' + l + '</td><td>' + A[k] + '</td><td>' + B[k] + '</td></tr>').join('') + '</tbody>';
+    }
+    a.addEventListener('change', draw); b.addEventListener('change', draw); draw();
+  };
+
+  const LMS = {
+    maslow: { n: 'Maslow', rows: [
+      ['Physiological', 'ok', 'Pay and incentives are strong; many leavers are well paid.'],
+      ['Safety', 'maybe', 'Terminations, turnover and intolerance of mistakes. Job security is not measured directly.'],
+      ['Social', 'gap', 'The family-oriented atmosphere is gone; competition between units is mandated; the workplace is tense.'],
+      ['Self-esteem', 'maybe', 'Recognition exists but is tied narrowly to numbers; little respect for feelings and needs.'],
+      ['Self-actualization', 'gap', 'Career development plan and training stopped; no new products in 12 months.']],
+      issue: 'LMS supports financial rewards but leaves clear gaps in social and higher-level needs: competition replaced the family atmosphere, and training and career development were stopped.' },
+    goals: { n: 'Goal setting', rows: [
+      ['Goal specificity', 'ok', 'Clear sales, profit and cost targets; every unit is a profit center.'],
+      ['Time period', 'na', 'The case gives too little detail. Do not invent a gap.'],
+      ['Participation', 'maybe', 'Written orders and imposed standards suggest weak participation; evidence is indirect.'],
+      ['Performance feedback', 'gap', 'Employees say they get too little feedback and do not know if they meet expectations.'],
+      ['Alignment', 'gap', 'Sales and profit rose while customer satisfaction, innovation and retention fell.']],
+      issue: 'The goal system is strong on financial targets but weak on feedback and broader alignment. What gets measured (sales and profit) gets done, while customer, innovation and people outcomes decline.' },
+    xy: { n: 'Theory X / Y', rows: [
+      ['Assumptions', 'gap', 'Written orders, intolerance of mistakes, unwillingness to discuss problems.'],
+      ['Style', 'gap', 'Control systems, mandated internal competition, rewards tied only to measurable results.'],
+      ['Nuance', 'maybe', 'Staffing and pay decisions were decentralized, but the climate stays control-heavy.'],
+      ['What LMS now needs', 'gap', 'Innovation, customer problem-solving and initiative, which fit Theory Y behavior.']],
+      issue: 'Management is strongly Theory X. The gap: LMS now needs initiative, ideas and customer problem-solving, which a control-heavy climate does not support.' },
+    herzberg: { n: 'Herzberg', rows: [
+      ['Supervision (hygiene)', 'gap', 'Written orders, no tolerance of mistakes, little discussion or feedback.'],
+      ['Pay (hygiene)', 'ok', 'Bonuses and commissions exist; leavers are well paid.'],
+      ['Relations, policies (hygiene)', 'gap', 'Mandated competition; tense workplace; family atmosphere lost.'],
+      ['Growth, advancement (motivator)', 'gap', 'Career development and training stopped.'],
+      ['Recognition, responsibility (motivator)', 'maybe', 'Recognition is narrow (numbers only); lower units gained some authority.']],
+      issue: 'LMS has both hygiene problems (supervision, relations) and weak motivators (growth). Strong pay cannot offset either.' },
+    erg: { n: 'ERG', rows: [
+      ['Existence', 'ok', 'Pay and incentives are present.'],
+      ['Relatedness', 'gap', 'Tense workplace, internal competition, loss of family atmosphere.'],
+      ['Growth', 'gap', 'Training and career development stopped; innovation declined.']],
+      issue: 'Existence rewards are strong while Relatedness and Growth are weak. The case does not prove frustration-regression.' }
+  };
+  const TAG = { ok: 'No clear gap', gap: 'Gap', maybe: 'Possible / mixed', na: 'Not enough evidence' };
+
+  W.lms = host => {
+    const body = shell(host, 'Case lens', 'Lee Medical Supply', 'Switch the framework. The facts stay the same; the question changes.');
+    body.innerHTML = '<div class="tabs" role="tablist"></div><div class="lens"></div>';
+    const tabs = body.querySelector('.tabs'), lens = body.querySelector('.lens');
+    let cur = 'maslow';
+    Object.entries(LMS).forEach(([k, v]) => {
+      const b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'tab'); b.dataset.k = k; b.textContent = v.n;
+      b.addEventListener('click', () => { cur = k; draw(); }); tabs.appendChild(b);
+    });
+    function draw() {
+      const v = LMS[cur];
+      tabs.querySelectorAll('button').forEach(b => b.setAttribute('aria-selected', b.dataset.k === cur));
+      lens.innerHTML = '<div class="ev">' + v.rows.map(r => '<div><b>' + r[0] + '</b><span class="tag ' + r[1] + '">' + TAG[r[1]] + '</span><p>' + r[2] + '</p></div>').join('') + '</div>' +
+        '<div class="issue"><b>Issue statement</b><p>' + v.issue + '</p></div>';
+    }
+    draw();
+  };
+
+
+  W.jcm = host => {
+    const body = shell(host, 'Interactive', 'Design a job', 'Set each dimension from 1 (low) to 5 (high). Illustration of the model, not a measured score.');
+    const D = [['sv', 'Skill variety', 0], ['ti', 'Task identity', 0], ['ts', 'Task significance', 0], ['au', 'Autonomy', 1], ['fb', 'Feedback', 2]];
+    const st = { sv: 2, ti: 2, ts: 4, au: 1, fb: 1, gns: true };
+    const id = 'jc' + (++uid);
+    body.innerHTML = '<div class="jcm"><div class="jcol"><p class="hz-t">Core job dimensions</p><div class="jdims"></div></div>' +
+      '<div class="jcol"><p class="hz-t">Psychological states</p><div class="jstates"></div></div>' +
+      '<div class="jcol"><p class="hz-t">Expected outcomes</p><div class="jout"></div></div></div>' +
+      '<div class="seg jgns" role="radiogroup" aria-label="Growth-need strength"><button type="button" data-v="1">High growth need</button><button type="button" data-v="0">Low growth need</button></div><p class="g-note"></p>';
+    const dims = body.querySelector('.jdims');
+    D.forEach(([k, lab, grp]) => {
+      const w = document.createElement('div'); w.className = 'sl jd g' + grp;
+      w.innerHTML = '<label for="' + id + k + '"><span>' + lab + '</span><output></output></label><input type="range" min="1" max="5" step="1" id="' + id + k + '" value="' + st[k] + '">';
+      const inp = w.querySelector('input'), out = w.querySelector('output');
+      const sync = () => { out.textContent = inp.value; };
+      inp.addEventListener('input', () => { st[k] = +inp.value; sync(); draw(); }); sync(); dims.appendChild(w);
+    });
+    body.querySelectorAll('.jgns button').forEach(b => b.addEventListener('click', () => { st.gns = b.dataset.v === '1'; draw(); }));
+    const S = body.querySelector('.jstates'), O = body.querySelector('.jout'), note = body.querySelector('.g-note');
+    function bar(lab, v, cls) { return '<div class="jst ' + cls + '"><span>' + lab + '</span><div class="jbar"><i style="width:' + Math.round(v * 100) + '%"></i></div></div>'; }
+    function draw() {
+      const m = ((st.sv + st.ti + st.ts) / 3 - 1) / 4, r = (st.au - 1) / 4, k = (st.fb - 1) / 4;
+      S.innerHTML = bar('Experienced meaningfulness', m, 'g0') + bar('Experienced responsibility', r, 'g1') + bar('Knowledge of results', k, 'g2');
+      const core = Math.cbrt(Math.max(m, .02) * Math.max(r, .02) * Math.max(k, .02));
+      const v = st.gns ? core : core * 0.6;
+      const lvl = v > .62 ? 'Strong' : v > .35 ? 'Moderate' : 'Weak';
+      O.innerHTML = '<div class="jlvl ' + lvl.toLowerCase() + '">' + lvl + '</div><ul><li>Internal work motivation</li><li>Quality of performance</li><li>Satisfaction with work</li><li>Low absenteeism and turnover</li></ul>';
+      body.querySelectorAll('.jgns button').forEach(b => b.setAttribute('aria-checked', (b.dataset.v === '1') === st.gns));
+      const weakest = [[m, 'meaningfulness (skill variety, task identity, task significance)'], [r, 'responsibility (autonomy)'], [k, 'knowledge of results (feedback)']].sort((a, b) => a[0] - b[0])[0];
+      note.textContent = (weakest[0] < .5 ? 'The weakest link is ' + weakest[1] + '. One weak state holds back the whole job. ' : 'All three states are supported. ') +
+        (st.gns ? '' : 'Low growth-need strength: the same enriched job produces a weaker response.');
+    }
+    draw();
+  };
+
+  function quiz(host, kicker, title, sub, items, opts, layout) {
+    const body = shell(host, kicker, title, sub);
+    body.innerHTML = '<p class="qz-item"></p><div class="qz-opts ' + (layout || '') + '"></div><p class="g-note"></p><div class="qz-nav"><span class="qz-n"></span><button type="button" class="g-btn">Next</button></div>';
+    const P = body.querySelector('.qz-item'), O = body.querySelector('.qz-opts'), N = body.querySelector('.g-note'), C = body.querySelector('.qz-n');
+    let i = 0, score = 0, done = 0;
+    opts.forEach(([k, lab, sub2]) => {
+      const b = document.createElement('button'); b.type = 'button'; b.dataset.k = k; b.className = 'qz-o';
+      b.innerHTML = '<b>' + lab + '</b>' + (sub2 ? '<small>' + sub2 + '</small>' : '');
+      b.addEventListener('click', () => {
+        if (O.dataset.answered) return; O.dataset.answered = 1;
+        const it = items[i], ok = k === it.a; done++; if (ok) score++;
+        O.querySelectorAll('button').forEach(x => x.classList.toggle('right', x.dataset.k === it.a));
+        if (!ok) b.classList.add('wrong');
+        N.textContent = (ok ? 'Correct. ' : 'Not quite. ') + it.why; N.hidden = false;
+        C.textContent = score + ' / ' + done + ' correct';
+      });
+      O.appendChild(b);
+    });
+    function show() {
+      const it = items[i]; P.textContent = '"' + it.q + '"'; delete O.dataset.answered;
+      O.querySelectorAll('button').forEach(x => x.classList.remove('right', 'wrong')); N.hidden = true;
+    }
+    body.querySelector('.qz-nav button').addEventListener('click', () => { i = (i + 1) % items.length; show(); });
+    C.textContent = items.length + ' items'; show();
+  }
+
+  W.evln = host => quiz(host, 'Classify', 'Which response is this?', 'Read the statement, then pick the quadrant.', [
+    { q: 'I am interviewing elsewhere because management ignores the problem.', a: 'exit', why: 'Active and destructive: moving toward leaving.' },
+    { q: 'I reported the problems and proposed a cross-team solution.', a: 'voice', why: 'Active and constructive: trying to improve conditions.' },
+    { q: 'I believe management will fix things. I will stay and wait.', a: 'loyalty', why: 'Passive and constructive: hoping conditions improve.' },
+    { q: 'Nothing will change, so I stopped checking my work carefully.', a: 'neglect', why: 'Passive and destructive: letting performance slide.' },
+    { q: 'I handed in my resignation letter this morning.', a: 'exit', why: 'Active and destructive toward the relationship: leaving.' },
+    { q: 'I suggested a new workflow to my manager and offered to pilot it.', a: 'voice', why: 'Active and constructive.' }
+  ], [['exit', 'Exit', 'Active · Destructive'], ['voice', 'Voice', 'Active · Constructive'], ['neglect', 'Neglect', 'Passive · Destructive'], ['loyalty', 'Loyalty', 'Passive · Constructive']], 'grid2');
+
+  W.sched = host => quiz(host, 'Classify', 'Which schedule is this?', 'Time or output first, then fixed or variable.', [
+    { q: 'Each time a new staff member completes the safety demonstration, the supervisor praises them.', a: 'c', why: 'Every occurrence is reinforced.' },
+    { q: 'A supervisor gives an incentive after every five verified error-free orders.', a: 'fr', why: 'A fixed count of output.' },
+    { q: 'Teams are evaluated after changing, unannounced periods.', a: 'vi', why: 'Time-based, and the timing varies.' },
+    { q: 'A reward follows an unpredictable number of completed service interactions.', a: 'vr', why: 'Output-based, and the count varies.' },
+    { q: 'Employees receive a paycheck every Friday.', a: 'fi', why: 'Fixed time. This is the slide example for fixed interval.' },
+    { q: 'Factory workers are paid for each batch of 20 units they complete.', a: 'fr', why: 'Piece-rate pay is the slide example for fixed ratio.' },
+    { q: 'The manager runs surprise quality inspections.', a: 'vi', why: 'Unannounced inspection is the slide example for variable interval.' }
+  ], [['c', 'Continuous', 'Every time'], ['fi', 'Fixed interval', 'Set time'], ['vi', 'Variable interval', 'Changing time'], ['fr', 'Fixed ratio', 'Set output'], ['vr', 'Variable ratio', 'Changing output']], 'row5');
+
+  const REC = {
+    maslow: { n: 'Team 1 · Maslow',
+      fw: 'Employees need chances to meet all five levels. Find which are missing instead of assuming money solves everything.',
+      ev: 'Pay and bonuses exist. Harsh control and high turnover are documented. The family atmosphere and training are gone. Lecturer: physiological met, esteem partly, safety, social and self-actualization short.',
+      gap: 'Strong financial output, but weak security, belonging and growth. The source of insecurity is not measured yet.',
+      acts: [['Safety: investigate fears of arbitrary discipline; clarify fair review and grievance steps', 'Predictable rules reduce threat and allow initiative', 'Listening sessions; fairness items in surveys; voluntary turnover'],
+        ['Social: cross-division problem-solving teams and shared customer goals; limit zero-sum contests', 'Belonging without dropping output standards', 'Cross-team projects; collaboration survey'],
+        ['Growth: restore training and career planning; invite product-improvement ideas', 'Rebuilds the growth path removed in the turnaround', 'Training uptake; internal moves; ideas implemented'],
+        ['Esteem: recognize teamwork, customer problem-solving and innovation, not only revenue', 'Widens recognition beyond quotas', 'Perceived fairness; retention of qualified staff']],
+      risk: 'Training and team time cost money. Run budgeted pilots and keep clear accountability.',
+      say: 'Maslow suggests we should examine which needs the workplace allows employees to fulfill. The lecturer\'s LMS diagnosis identifies gaps in safety, social relationships and self-actualization. I would first find out why employees feel insecure, restore cross-functional teamwork, and introduce structured development opportunities. I would keep clear performance standards and measure high-performer retention, employees\' perceived support and innovation output.' },
+    goals: { n: 'Team 2 · Goal setting',
+      fw: 'Effective goals need specificity, a time period, participation and feedback. Hitting a narrow metric may not serve the wider objective.',
+      ev: 'Profit centers, MBO, appraisals and sales and profit targets exist. Staff report too little feedback. Lecturer: staff do not know the overall profit goal. Customer satisfaction and innovation fell.',
+      gap: 'Specific financial goals, but weak shared understanding and feedback, and metrics not aligned with wider strategy.',
+      acts: [['Publish the CEO\'s three priorities in plain language; cascade clear, time-bound team goals', 'Makes success visible beyond profit', 'Staff can explain the goals unaided'],
+        ['Involve employees in goal setting and customer-improvement decisions', 'Builds buy-in and surfaces operational knowledge', 'Participation records; ideas adopted'],
+        ['Regular two-way performance feedback, not only scores', 'Closes the documented feedback gap', 'Feedback frequency and quality'],
+        ['Balanced measures: profit and cost plus customer, innovation and high-performer retention', 'Limits "what gets measured gets done"', 'Complaints, new products, turnover; watch for gaming']],
+      risk: 'Do not claim time periods are missing; the case does not say. Too many KPIs create admin cost and gaming.',
+      say: 'LMS already has measurable sales and profit targets, so I would not simply add more quotas. The handout shows a clear lack of performance feedback, and the lecturer says employees do not understand the overall goal. I would communicate a small set of shared objectives, let employees contribute to how they will be achieved, and provide regular two-way feedback. Success should include customer results, new-product development and high-performer retention, not only short-term profit.' },
+    xy: { n: 'Team 3 · Theory X / Y',
+      fw: 'Theory X relies on control and external consequences; Theory Y on responsibility, ideas and self-direction. The point is fit between style, people and task.',
+      ev: 'Written orders, little discussion, intolerance of mistakes. Staffing and pay authority were decentralized. Lecturer: the X style meets deadlines, but high-flyer Y workers leave.',
+      gap: 'The climate underuses the participation and ownership LMS needs for innovation and customer problem-solving.',
+      acts: [['Keep accountability but give bounded autonomy to experienced staff', 'Responsibility with reliable execution', 'Quality and timeliness; autonomy and retention surveys'],
+        ['Regular employee and customer problem-solving forums with real follow-through', 'Gives a channel for Voice instead of Exit or silence', 'Ideas submitted, decided, implemented'],
+        ['Coach managers to replace one-way orders and automatic punishment with discussion and feedback', 'Reduces fear while keeping standards', 'Upward feedback; complaints'],
+        ['Let cross-functional teams own small innovation projects', 'Points self-directed effort at the CEO\'s goals', 'Ideas tested; customer outcomes']],
+      risk: 'Not everything can be delegated in medical supplies (safety, compliance). Not all turnover comes from management style; interview leavers.',
+      say: 'The professor describes Apichart as using a Theory X style with both X- and Y-oriented employees. His control has improved financial discipline, but high-performing employees continue to leave and the company needs innovation. I would keep clear performance expectations while giving experienced employees more ownership, feedback and input into customer and product decisions. We should measure retention and quality as well as deadlines.' },
+    herz: { n: 'Team 4 · Herzberg',
+      fw: 'Hygiene factors reduce dissatisfaction; motivators create motivation. Fixing only one side is not enough.',
+      ev: 'Unsupportive management, strained relationships, high competition, too little feedback; training and career development ended. Bonuses exist and some authority was decentralized.',
+      gap: 'Possible mix of supervision and relationship hygiene problems with lost growth motivators. Not diagnosed on the slide; built from the case.',
+      acts: [['Hygiene: audit supervisor respect, communication, competition rules and reward fairness', 'Targets dissatisfaction drivers other than pay level', 'Climate and fairness surveys; voluntary turnover'],
+        ['Hygiene: clear, respectful review and corrective procedures', 'Removes uncertainty', 'Perceived fairness; appeals resolved'],
+        ['Motivators: restore development, training and skill-based advancement', 'Rebuilds growth paths', 'Training access; promotions; retention'],
+        ['Motivators: recognize cross-team customer solutions and real achievement; give ownership where suitable', 'Recognition beyond revenue', 'Recognition quality; product and customer improvements']],
+      risk: 'Pay is not shown to be low; some leavers were well paid. Do not promise satisfaction from salary.',
+      say: 'Herzberg tells us to distinguish removing dissatisfaction from creating motivation. LMS has evidence of weak supervision and workplace relationships, even though financial rewards exist. It also removed training and career development, which are important motivators. I would improve fair and supportive management practices while restoring growth opportunities and meaningful recognition. Then I would compare employee satisfaction, retention and innovation outcomes.' }
+  };
+
+  W.lmsrec = host => {
+    const body = shell(host, 'Team view', 'From issue to recommendation', 'Pick a team. Each follows framework, evidence, gap, actions, risk.');
+    body.innerHTML = '<div class="tabs" role="tablist"></div><div class="rec"></div>';
+    const tabs = body.querySelector('.tabs'), box = body.querySelector('.rec');
+    let cur = 'maslow';
+    Object.entries(REC).forEach(([k, v]) => {
+      const b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'tab'); b.dataset.k = k; b.textContent = v.n;
+      b.addEventListener('click', () => { cur = k; draw(); }); tabs.appendChild(b);
+    });
+    function draw() {
+      const v = REC[cur];
+      tabs.querySelectorAll('button').forEach(b => b.setAttribute('aria-selected', b.dataset.k === cur));
+      box.innerHTML = '<div class="rsteps"><div><b>Framework</b><p>' + esc(v.fw) + '</p></div><div><b>Evidence</b><p>' + esc(v.ev) + '</p></div><div class="g"><b>Gap = issue</b><p>' + esc(v.gap) + '</p></div></div>' +
+        '<div class="tbl"><table><thead><tr><th>Action</th><th>Why it helps</th><th>How to check</th></tr></thead><tbody>' +
+        v.acts.map(a => '<tr><td>' + esc(a[0]) + '</td><td>' + esc(a[1]) + '</td><td>' + esc(a[2]) + '</td></tr>').join('') + '</tbody></table></div>' +
+        '<p class="risk"><b>Risk</b> ' + esc(v.risk) + '</p><details class="sayd"><summary>30 to 45 second answer</summary><blockquote class="say">' + esc(v.say) + '</blockquote></details>';
+    }
+    draw();
+  };
+
+  window.MgmtWidgets = { mount(root) { root.querySelectorAll('[data-mw]').forEach(h => { if (!h.dataset.ready && W[h.dataset.mw]) { h.dataset.ready = 1; W[h.dataset.mw](h); } }); } };
+})();
+</script>
+<script>
+(function () {
+  const toc = document.getElementById('toc'), rail = document.getElementById('rail');
+  const hs = [...document.querySelectorAll('.doc > h2, .doc > h3')];
+  hs.forEach(h => {
+    const li = document.createElement('li'); li.className = h.tagName.toLowerCase(); li.dataset.id = h.id;
+    const a = document.createElement('a'); a.href = '#' + h.id; a.textContent = h.childNodes[0].textContent.trim();
+    li.appendChild(a); toc.appendChild(li);
+  });
+  const spy = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    toc.querySelectorAll('a.on').forEach(a => a.classList.remove('on'));
+    const a = toc.querySelector('li[data-id="' + e.target.id + '"] a'); if (a) a.classList.add('on');
+  }), { rootMargin: '-80px 0px -70% 0px' });
+  hs.forEach(h => spy.observe(h));
+
+  const tb = document.getElementById('tocBtn');
+  tb.addEventListener('click', () => { const o = rail.classList.toggle('open'); tb.setAttribute('aria-expanded', o); });
+  toc.addEventListener('click', e => { if (e.target.closest('a')) { rail.classList.remove('open'); tb.setAttribute('aria-expanded', false); } });
+
+  const all = document.getElementById('qaAll');
+  if (all) all.addEventListener('click', () => {
+    const ds = document.querySelectorAll('.qa details'), open = ![...ds].every(d => d.open);
+    ds.forEach(d => d.open = open); all.textContent = open ? 'Hide all answers' : 'Show all answers';
+  });
+  document.querySelectorAll('.drill .ans').forEach(s => s.addEventListener('click', () => s.classList.toggle('shown')));
+
+  if (window.EconWidgets) window.EconWidgets.mount(document);
+  if (window.MgmtWidgets) window.MgmtWidgets.mount(document);
+})();
+</script>
+</body></html>

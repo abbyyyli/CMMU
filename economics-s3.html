@@ -1,0 +1,959 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Markets and Government · Economics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one light reading column with a sticky chapter rail; deliberately single (light) theme. */
+:root {
+  color-scheme: light;
+  --bg: #FDF9F9; --panel: #F8EEF0; --paper: #FFFFFF; --tint: #FAE9ED; --line: #EFDDE2;
+  --fg: #2F282B; --muted: #7E6F74; --accent: #C06C84; --accent-ink: #9C4862;
+  --demand: #3F5675; --supply: #C06C84; --ext: #6E3F55; --world: #8A7A5C; --policy: #3F7F7A;
+  --cs: #A7CDB6; --ps: #B2C4E3; --dwl: #D9674F; --rev: #E5C171; --rev2: #F1DCA8; --time: #DDB3CB; --ts: #BFDCC9;
+  --serif: "Noto Serif TC", "Songti TC", Georgia, serif;
+  --sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; background: var(--bg); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 16px; line-height: 1.75; }
+a { color: var(--accent-ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(253, 249, 249, .94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); padding-inline: 16px; }
+.top-in { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 14px; min-height: 56px; flex-wrap: wrap; padding-block: 8px; }
+.brand { font-family: var(--serif); font-weight: 700; font-size: 1.02rem; white-space: nowrap; }
+.brand small { font-family: var(--sans); font-weight: 500; color: var(--muted); font-size: .76rem; margin-left: 6px; letter-spacing: .06em; }
+.sessions { display: flex; gap: 4px; margin-left: auto; }
+.crumbs { font-size: .86rem; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.crumbs a { color: var(--muted); text-decoration: none; } .crumbs a:hover { color: var(--accent-ink); } .crumbs span { color: var(--line); } .crumbs b { font-family: var(--serif); }
+.sessions a.pill { text-decoration: none; }
+.sessions .pill { font: 500 .82rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--muted); padding: 4px 12px; border-radius: 999px; }
+.sessions .pill[aria-current="page"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.sessions .pill.off { opacity: .5; cursor: not-allowed; }
+.toc-btn { display: none; font: 500 .85rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--fg); border-radius: 8px; padding: 5px 12px; }
+
+.wrap { max-width: 1160px; margin: 0 auto; padding-inline: 16px; display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 52px; }
+.rail { position: sticky; top: 76px; align-self: start; max-height: calc(100vh - 92px); overflow: auto; padding-block: 34px 40px; font-size: .86rem; line-height: 1.5; }
+.rail .lbl { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.rail ol { list-style: none; margin: 0; padding: 0; }
+.rail li a { display: block; padding: 4px 10px; color: var(--muted); text-decoration: none; border-radius: 6px; }
+.rail li a:hover { color: var(--fg); background: var(--tint); }
+.rail li.h3 a { padding-left: 22px; font-size: .8rem; }
+.rail li a.on { color: var(--accent-ink); background: var(--tint); font-weight: 500; }
+
+main { min-width: 0; padding-block: 30px 120px; }
+.doc { max-width: 780px; }
+.hero { padding-block: 8px 26px; border-bottom: 1px solid var(--line); }
+.kick { font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); margin: 0 0 6px; font-weight: 500; }
+.hero h1 { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.25; margin: 0 0 12px; text-wrap: balance; }
+.lead { margin: 0; font-size: 1.04rem; max-width: 62ch; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 16px; font-size: .78rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+.doc h2 { font-family: var(--serif); font-size: 1.55rem; line-height: 1.35; margin: 3.4rem 0 .3rem; text-wrap: balance; }
+.doc h3 { font-size: 1.1rem; line-height: 1.45; margin: 2.2rem 0 .5rem; color: var(--accent-ink); text-wrap: balance; }
+.sub { margin: 0 0 1.2rem; color: var(--muted); max-width: 66ch; }
+.doc p, .doc li { max-width: 68ch; }
+.doc ul, .doc ol { padding-left: 1.25em; }
+.doc li { margin: .25rem 0; }
+.zh { display: inline-block; font-size: .78em; line-height: 1.3; color: var(--accent-ink); background: var(--tint); padding: 0 6px; border-radius: 4px; margin-left: 2px; vertical-align: 1px; font-weight: 500; }
+.hint { font-size: .9rem; color: var(--muted); display: flex; gap: 10px; align-items: baseline; }
+.hint b { flex: none; font-size: .72rem; color: #fff; background: var(--accent); padding: 0 7px; border-radius: 4px; font-weight: 500; }
+.key { background: var(--tint); padding: 12px 16px; border-radius: 8px; font-weight: 500; }
+.note-small { font-size: .8rem; color: var(--muted); }
+
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 1rem 0; }
+.pair > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; }
+.pair b { color: var(--accent-ink); }
+.pair p { margin: 4px 0 0; font-size: .92rem; }
+
+.matrix { display: grid; grid-template-columns: minmax(90px, .7fr) repeat(2, minmax(0, 1fr)); gap: 6px; margin: 1rem 0 1.2rem; font-size: .9rem; max-width: 620px; }
+.matrix .mh { font-weight: 700; font-size: .8rem; color: var(--muted); align-self: end; padding: 0 4px 2px; }
+.matrix .mh.side { align-self: center; }
+.matrix .cell { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px; font-weight: 500; }
+.matrix .cell.hi { background: var(--tint); border-color: var(--accent); }
+.matrix small { display: block; font-weight: 400; color: var(--muted); font-size: .8rem; margin-top: 2px; line-height: 1.45; }
+
+.map { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.3fr) auto minmax(0, 1fr); gap: 10px; align-items: center; margin: 1rem 0; }
+.mcol { display: flex; flex-direction: column; gap: 8px; }
+.mbox { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .84rem; line-height: 1.5; display: flex; flex-direction: column; gap: 2px; }
+.mbox b { font-size: .9rem; } .mbox span { color: var(--muted); } .mbox em { font-style: normal; color: var(--accent-ink); font-size: .78rem; font-weight: 500; }
+.mbox.good { border-color: var(--cs); } .mbox.ask { background: var(--tint); border-color: var(--accent); }
+.marrow { color: var(--accent); font-weight: 700; }
+
+.flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 1rem 0; font-size: .86rem; }
+.flow span { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; line-height: 1.45; }
+.flow i { font-style: normal; color: var(--accent); font-weight: 700; }
+.formula { font-family: var(--mono); font-size: .9rem; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; line-height: 1.9; overflow-x: auto; }
+.steps { counter-reset: s; list-style: none; padding-left: 0 !important; }
+.steps li { counter-increment: s; display: flex; gap: 10px; }
+.steps li::before { content: counter(s); flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--tint); color: var(--accent-ink); font: 700 .75rem/22px var(--sans); text-align: center; margin-top: 3px; }
+.assign { margin: 1.6rem 0; border: 1px dashed var(--accent); border-radius: 10px; padding: 14px 16px; background: var(--paper); }
+.assign p { margin: 6px 0 0; font-size: .92rem; }
+
+.tbl { overflow-x: auto; margin: 1rem 0; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+.doc table { border-collapse: collapse; width: 100%; font-size: .88rem; line-height: 1.55; }
+.doc th, .doc td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+.doc th { background: var(--panel); font-weight: 700; }
+.doc tr:last-child td { border-bottom: 0; }
+.drill .ans { filter: blur(5px); cursor: pointer; user-select: none; transition: filter .2s; }
+.drill .ans.shown { filter: none; user-select: auto; }
+
+.traps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 1rem; }
+.traps > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: .88rem; line-height: 1.55; }
+.traps s { color: var(--muted); text-decoration-color: var(--dwl); }
+.traps p { margin: 6px 0 0; font-weight: 500; }
+
+.qa-tools { margin: .4rem 0 .8rem; }
+.qa-tools button { font: 500 .82rem var(--sans); border: 1px solid var(--accent); background: var(--paper); color: var(--accent-ink); border-radius: 6px; padding: 5px 12px; cursor: pointer; }
+.qa { display: flex; flex-direction: column; gap: 6px; }
+.qa details { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
+.qa summary { cursor: pointer; padding: 10px 14px; font-weight: 500; font-size: .93rem; list-style: none; display: flex; gap: 10px; }
+.qa summary::before { content: "Q"; color: var(--accent); font-weight: 700; }
+.qa details[open] summary { border-bottom: 1px dashed var(--line); }
+.qa details p { margin: 0; padding: 10px 14px 12px 36px; font-size: .9rem; }
+
+/* graphs */
+.graph { max-width: 900px; margin: 1.8rem 0 2.2rem; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px 18px 14px; }
+.g-head h4 { font-family: var(--serif); font-size: 1.12rem; margin: 2px 0 2px; line-height: 1.45; }
+.g-head p { margin: 0 0 10px; color: var(--muted); font-size: .86rem; }
+.g-kicker { font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); }
+.g-body { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.g-plot svg { width: 100%; height: auto; display: block; }
+.g-side { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.g-ctrl { display: flex; flex-direction: column; gap: 10px; }
+.sl label { display: flex; justify-content: space-between; font-size: .8rem; color: var(--muted); line-height: 1.3; }
+.sl output { font-family: var(--mono); color: var(--fg); font-size: .8rem; }
+.sl input { width: 100%; accent-color: var(--accent); margin: 4px 0 0; }
+.g-btn { align-self: flex-start; font: 500 .8rem var(--sans); border: 1px solid var(--accent); color: var(--accent-ink); background: transparent; border-radius: 6px; padding: 4px 11px; cursor: pointer; }
+.g-btn:hover { background: var(--tint); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; align-self: flex-start; }
+.seg button { font: 500 .8rem var(--sans); border: 0; background: transparent; color: var(--muted); padding: 5px 12px; cursor: pointer; }
+.seg button[aria-checked="true"] { background: var(--accent); color: var(--paper); }
+.chk { display: flex; gap: 8px; align-items: center; font-size: .8rem; color: var(--muted); }
+.chk input { accent-color: var(--accent); }
+.g-stats { margin: 0; border-top: 1px solid var(--line); padding-top: 10px; display: flex; flex-direction: column; gap: 3px; }
+.st { display: flex; justify-content: space-between; gap: 10px; font-size: .8rem; line-height: 1.45; }
+.st dt { color: var(--muted); display: flex; align-items: center; gap: 7px; }
+.st dd { margin: 0; font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.st.big dd { font-weight: 500; color: var(--accent-ink); font-size: .92rem; }
+.g-note { margin: 12px 0 0; padding: 9px 12px; background: var(--tint); border-radius: 6px; font-size: .85rem; line-height: 1.6; }
+
+.sw { width: 11px; height: 11px; border-radius: 2px; display: inline-block; flex: none; }
+.sw.none { background: transparent; }
+.sw.a-cs { background: var(--cs); } .sw.a-ps { background: var(--ps); } .sw.a-ps2 { background: var(--ps); outline: 1px solid var(--demand); }
+.sw.a-dwl { background: repeating-linear-gradient(45deg, var(--dwl) 0 2px, transparent 2px 4px); outline: 1px solid var(--dwl); }
+.sw.a-rev { background: var(--rev); } .sw.a-rev2 { background: var(--rev2); } .sw.a-time { background: var(--time); } .sw.a-ts { background: var(--ts); }
+.sw.ln { height: 3px; border-radius: 2px; width: 16px; }
+
+svg .ax { stroke: var(--muted); stroke-width: 1.2; }
+svg .axl { fill: var(--muted); font: 500 11px var(--sans); }
+svg .tk { fill: var(--muted); font: 500 10.5px var(--mono); }
+svg .gd { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 4; opacity: .7; }
+svg .cv { stroke-width: 2.6; fill: none; stroke-linecap: round; }
+svg .cv.dash { stroke-dasharray: 7 5; stroke-width: 2; }
+svg .cvl { font: 700 11.5px var(--sans); }
+svg .c-d { stroke: var(--demand); fill: var(--demand); } svg .c-s { stroke: var(--supply); fill: var(--supply); }
+svg .c-x { stroke: var(--ext); fill: var(--ext); } svg .c-w { stroke: var(--world); fill: var(--world); } svg .c-t { stroke: var(--policy); fill: var(--policy); }
+svg text.cvl { stroke: none; }
+svg .pt { fill: var(--paper); stroke: var(--fg); stroke-width: 2; }
+svg .ptl { fill: var(--fg); font: 700 11px var(--sans); }
+svg .atag { fill: var(--fg); font: 700 11px var(--sans); opacity: .8; }
+svg .a-cs { fill: var(--cs); fill-opacity: .6; } svg .a-ps { fill: var(--ps); fill-opacity: .6; }
+svg .a-ps2 { fill: var(--ps); fill-opacity: .95; } svg .a-ts { fill: var(--ts); fill-opacity: .6; }
+svg .a-dwl { fill: url(#dwlHatch); stroke: var(--dwl); stroke-width: 1.2; }
+svg .a-rev { fill: var(--rev); fill-opacity: .75; } svg .a-rev2 { fill: var(--rev2); fill-opacity: .8; } svg .a-time { fill: var(--time); fill-opacity: .65; }
+
+svg .grid { stroke: var(--line); stroke-width: 1; }
+svg .a-prof { fill: var(--cs); fill-opacity: .75; } svg .a-loss { fill: var(--dwl); fill-opacity: .35; }
+.sw.a-prof { background: var(--cs); } .sw.a-loss { background: var(--dwl); opacity: .5; }
+.twin { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.tw-t { margin: 0 0 2px; font-size: .78rem; font-weight: 700; color: var(--muted); }
+.g-ctrl .g-btn + .g-btn { margin-top: -4px; }
+.graph.wide .g-body { grid-template-columns: minmax(0, 1fr); }
+.graph.wide .g-side { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+@media (max-width: 700px) { .twin, .graph.wide .g-side { grid-template-columns: minmax(0, 1fr); } }
+svg polyline.cv { fill: none !important; }
+
+.graph { background: var(--paper); }
+.g-note { background: var(--tint); }
+
+@media (max-width: 900px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .rail { display: none; position: fixed; inset: 64px 0 0 0; max-height: none; background: var(--bg); z-index: 15; padding: 20px 16px 60px; }
+  .rail.open { display: block; }
+  .toc-btn { display: inline-block; }
+  .g-body { grid-template-columns: minmax(0, 1fr); }
+  .map { grid-template-columns: minmax(0, 1fr); }
+  .marrow { transform: rotate(90deg); justify-self: center; }
+}
+@media (max-width: 560px) { .pair, .traps { grid-template-columns: minmax(0, 1fr); } }
+.spectrum { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: center; margin: 1rem 0 .2rem; font-weight: 700; font-size: .9rem; }
+.spectrum .bar { height: 12px; border-radius: 6px; background: linear-gradient(90deg, #D9674F, #E5C171, #A7CDB6); }
+.spec-l { display: flex; justify-content: space-between; font-size: .78rem; color: var(--muted); margin-bottom: 1rem; }
+.no, .yes { font-size: .74rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; }
+.no { background: #FCE3DD; color: #A8432F; } .yes { background: #E3F2E9; color: #2F6B4F; }
+table.oil { font-variant-numeric: tabular-nums; }
+table.oil th, table.oil td { text-align: right; padding: 6px 8px; white-space: nowrap; }
+table.oil th:first-child, table.oil td:first-child { text-align: left; font-weight: 700; }
+table.oil td.hi { background: var(--tint); color: var(--accent-ink); font-weight: 700; }
+
+</style></head><body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<pattern id="dwlHatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+<rect width="6" height="6" style="fill:var(--dwl);fill-opacity:.12"></rect><rect width="2.2" height="6" style="fill:var(--dwl);fill-opacity:.75"></rect></pattern></defs></svg>
+
+<header class="top"><div class="top-in">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Study Notes</a><span>/</span><a href="economics.html">Economics</a><span>/</span><b>Session 3</b></nav>
+  <button class="toc-btn" type="button" id="tocBtn" aria-expanded="false">Contents</button>
+  <nav class="sessions" aria-label="Sessions"><a class="pill" href="economics-s1.html">S1</a>
+<a class="pill" href="economics-s2.html">S2</a>
+<span class="pill" aria-current="page">S3</span>
+<a class="pill" href="economics-s4.html">S4</a></nav>
+</div></header>
+
+<div class="wrap">
+  <aside class="rail" id="rail"><p class="lbl">Contents</p><ol id="toc"></ol></aside>
+  <main><article class="doc"><div class="hero">
+  <p class="kick">MGMG515 · Session 3</p>
+  <h1>Markets and Government</h1>
+  <p class="lead">Prices coordinate markets well, but markets can fail. Government can help, yet every intervention changes incentives, so compare realistic options and their trade-offs.</p>
+  <div class="legend">
+    <span><i class="sw ln" style="background:var(--demand)"></i>Demand</span>
+    <span><i class="sw ln" style="background:var(--supply)"></i>Supply</span>
+    <span><i class="sw a-cs"></i>Consumer surplus</span>
+    <span><i class="sw a-ps"></i>Producer surplus</span>
+    <span><i class="sw a-rev"></i>Tax / tariff revenue</span>
+    <span><i class="sw a-dwl"></i>Deadweight loss</span>
+  </div>
+</div>
+
+<h2 id="map">Chapter map</h2>
+<div class="map">
+  <div class="mcol">
+    <div class="mbox good"><b>Markets work</b><span>Prices carry information and incentives. Equilibrium maximizes gains from trade.</span></div>
+  </div>
+  <div class="marrow">→</div>
+  <div class="mcol">
+    <div class="mbox"><b>Government intervenes</b><span>Tariffs, price ceilings, price floors</span><em>Result: less trade, DWL</em></div>
+    <div class="mbox"><b>Markets fail</b><span>Externalities, public goods, common resources</span><em>Result: too much or too little</em></div>
+    <div class="mbox"><b>Markets feel wrong</b><span>Moral economics, repugnance, paternalism</span><em>Result: restricted or redesigned</em></div>
+  </div>
+  <div class="marrow">→</div>
+  <div class="mcol">
+    <div class="mbox ask"><b>Always ask</b><span>Who responds, and how? What is the trade-off? Could the policy itself fail?</span></div>
+  </div>
+</div>
+
+<!-- 1 -->
+<h2 id="price-system">1. The price system</h2>
+<p class="sub">Prices solve two problems at once: who knows what, and who has a reason to act.</p>
+
+<h3 id="signal">A price is a signal wrapped up in an incentive</h3>
+<div class="pair">
+  <div><b>Signal</b><p>A rising price tells everyone the good has become scarcer. No one needs to know why.</p></div>
+  <div><b>Incentive</b><p>The same price change rewards the right response: buyers use less, sellers supply more.</p></div>
+</div>
+<ul>
+  <li><b>Dispersed knowledge</b> <span class="zh">分散的資訊</span>: information about costs, resources and wants is spread across millions of people. No planner holds it all.</li>
+  <li><b>Information problem</b>: knowing what to produce and where. <b>Incentive problem</b>: getting people to act on it. Prices address both.</li>
+  <li><b>I, Rose</b>: farmers, air freight and florists each pursue their own income, and roses still reach a cold city on Valentine's Day. This is the <b>invisible hand</b>.</li>
+</ul>
+
+<h3 id="intent">Outcome and intent are different questions</h3>
+<p>The class frame separates intention from result. Markets sit in the unintentional-beneficial cell.</p>
+<div class="matrix">
+  <div></div><div class="mh">Beneficial</div><div class="mh">Harmful</div>
+  <div class="mh side">Intentional</div><div class="cell">Virtue</div><div class="cell">Vice</div>
+  <div class="mh side">Unintentional</div><div class="cell hi">Market coordination</div><div class="cell">Negligence</div>
+</div>
+<ul>
+  <li><b>Adam Smith</b>: the butcher, brewer and baker serve us through self-interest, not benevolence <span class="zh">善意</span>.</li>
+  <li><b>VHS on eBay</b>: an old player let an elderly buyer recover family videos. Value is subjective <span class="zh">主觀</span>; the seller does not need to know why the buyer values it.</li>
+</ul>
+
+<h3 id="welfare">Equilibrium is a welfare benchmark</h3>
+<p>Equilibrium matters for more than Qd = Qs. Up to the equilibrium quantity, willingness to pay (WTP) ≥ marginal cost (MC). Beyond it, MC &gt; WTP.</p>
+<div data-widget="welfare"></div>
+<p class="hint"><b>邏輯</b>後面每張政策圖都在比：政策下的數量 vs. efficient quantity。偏離越多，DWL 越大。</p>
+
+<!-- 2 -->
+<h2 id="trade">2. Trade and tariffs</h2>
+<p class="sub">A tariff <span class="zh">關稅</span> raises the domestic price. Producers gain, consumers lose more, and society loses the DWL.</p>
+<div data-widget="tariff"></div>
+
+<div class="tbl"><table>
+<thead><tr><th>Group</th><th>Effect of the tariff</th></tr></thead>
+<tbody>
+<tr><td>Domestic consumers</td><td>Pay more, buy less. CS falls.</td></tr>
+<tr><td>Domestic producers</td><td>Sell more at a higher price. PS rises.</td></tr>
+<tr><td>Government</td><td>Collects revenue on remaining imports.</td></tr>
+<tr><td>Society</td><td>Deadweight loss from two sources (below).</td></tr>
+</tbody></table></div>
+
+<h3 id="dwl-sources">Two sources of deadweight loss</h3>
+<div class="pair">
+  <div><b>Wasted resources</b><p>High-cost domestic producers replace imports that cost less. Production inefficiency.</p></div>
+  <div><b>Lost gains from trade</b><p>Some buyers value the good above the world price but stop buying at the tariff price.</p></div>
+</div>
+<p class="key">Not all consumer loss is DWL. Part is a <b>transfer</b> <span class="zh">移轉</span> to producers and government. DWL is the part nobody receives.</p>
+
+<h3 id="ev">Case: the $10,000 electric car</h3>
+<p>The US placed a 100% tariff on Chinese EVs in 2024. Analyze it on two levels and keep them separate:</p>
+<div class="pair">
+  <div><b>Static view</b><p>Today's costs: higher prices, lower consumption, wasted resources, DWL.</p></div>
+  <div><b>Dynamic view</b><p>Protection may give domestic firms time to scale, learn and secure supply chains.</p></div>
+</div>
+<p>The tariff model shows the short-run cost. Whether long-run benefits outweigh it is an <b>empirical question</b> <span class="zh">要看實證</span>, not something the graph can prove.</p>
+
+<!-- 3 -->
+<h2 id="controls">3. Price controls</h2>
+<p class="sub">A binding control stops the price from clearing the market, so scarcity shows up in other ways.</p>
+<div data-widget="control"></div>
+
+<div class="tbl"><table>
+<thead><tr><th></th><th>Price ceiling <span class="zh">最高限價</span></th><th>Price floor <span class="zh">最低限價</span></th></tr></thead>
+<tbody>
+<tr><td>Rule</td><td>Legal maximum</td><td>Legal minimum</td></tr>
+<tr><td>Binding when</td><td>Below equilibrium</td><td>Above equilibrium</td></tr>
+<tr><td>Result</td><td>Shortage (Qd &gt; Qs)</td><td>Surplus (Qs &gt; Qd)</td></tr>
+<tr><td>Example</td><td>Rent control</td><td>Minimum wage</td></tr>
+</tbody></table></div>
+
+<h3 id="ceiling-effects">Five effects of a binding ceiling</h3>
+<ol class="steps">
+  <li><b>Shortage</b>: Qd &gt; Qs.</li>
+  <li><b>Lower quality</b>: sellers cut costs they cannot pass on.</li>
+  <li><b>Queues and search costs</b>: people pay with time instead of money.</li>
+  <li><b>Deadweight loss</b>: trades with WTP &gt; cost disappear.</li>
+  <li><b>Misallocation</b>: goods go to whoever queues or has connections, not to those who value them most.</li>
+</ol>
+<p class="key">A low posted price is not a low true cost. Full cost = money price + time + search + lower quality.</p>
+<p class="hint"><b>注意</b>投影片把兩種損失分開：wasted time（排隊搜尋）和 A + B（lost CS + lost PS = DWL）。不要混成同一塊。</p>
+
+<h3 id="mumbai">Case: rent control in Mumbai</h3>
+<div class="flow"><span>Rent ceiling below equilibrium</span><i>→</i><span>Landlord returns fall</span><i>→</i><span>Less maintenance, units withdrawn</span><i>→</i><span>Shortage worsens</span></div>
+<p>The paradox: very cheap legal rent coexists with decaying buildings, vacant units and a housing shortage.</p>
+
+<h3 id="plasma-outlawed">Blood plasma and outlawed markets</h3>
+<ul>
+  <li><b>Blood plasma</b> <span class="zh">血漿</span>: banning donor pay acts like a price fixed at zero. Supply stays low, need stays high, so there is a shortage and DWL. This is an efficiency cost; the moral question needs separate analysis.</li>
+  <li><b>Outlawed markets</b>: the slide shows <b>both</b> demand and supply shifting inward. Legal risk lowers participation on both sides. Quantity falls; the price effect is <b>ambiguous</b> <span class="zh">不確定</span> because it depends on which curve shifts more.</li>
+</ul>
+
+<!-- 4 -->
+<h2 id="externalities">4. Externalities</h2>
+<p class="sub">An externality <span class="zh">外部性</span> is a cost or benefit that falls on a third party outside the trade.</p>
+<div class="formula">Social cost = Private cost + External cost<br>Social benefit = Private benefit + External benefit</div>
+
+<h3 id="negative">Negative externality: the market produces too much</h3>
+<div data-widget="negext"></div>
+<div class="flow"><span>Decision-makers see only private cost</span><i>→</i><span>Cost looks too low</span><i>→</i><span>Q market &gt; Q efficient</span><i>→</i><span>DWL from overuse</span></div>
+<ul>
+  <li><b>Antibiotics</b> (MRU): overuse breeds resistant bacteria, a cost borne by future patients.</li>
+  <li><b>Thailand PM2.5</b>: private activity creates air-pollution costs for people outside the trade. The slide does not name one source, so treat it as an illustration.</li>
+  <li><b>Sugar external-cost graph</b>: MSC above MPC, so the market overuses. A classic externality needs a <b>third-party</b> cost; harm to the consumer alone is not one.</li>
+</ul>
+
+<h3 id="tools">Policy tools for negative externalities</h3>
+<div class="tbl"><table>
+<thead><tr><th>Tool</th><th>How it works</th><th>Trade-off</th></tr></thead>
+<tbody>
+<tr><td><b>Pigouvian tax</b> <span class="zh">庇古稅</span></td><td>Tax equal to marginal external cost, so decision-makers face the full social cost.</td><td>Needs an estimate of the external cost.</td></tr>
+<tr><td><b>Command and control</b></td><td>Government sets rules directly, such as an emission limit or required technology.</td><td>Simple but costly, because firms' reduction costs differ.</td></tr>
+<tr><td><b>Tradable permits</b></td><td>Government caps total pollution. Firms that can cut cheaply cut more and sell permits.</td><td>Meets the cap at the lowest total cost. Permits do not mean more pollution; the cap is fixed.</td></tr>
+<tr><td><b>Coase bargaining</b></td><td>With clear property rights and cheap bargaining, the parties solve it themselves.</td><td>Fails when many people are affected (PM2.5 hits millions).</td></tr>
+</tbody></table></div>
+
+<h3 id="positive">Positive externality: the market produces too little</h3>
+<div data-widget="posext"></div>
+<ul>
+  <li><b>Vaccination</b>: protects the person and lowers infection risk for others.</li>
+  <li><b>COVID vaccine development</b>: the social value of fast vaccines far exceeded what firms could earn, so advance purchase commitments and R&amp;D support made sense.</li>
+  <li><b>Tools</b>: subsidies, public provision, prizes, purchase commitments.</li>
+</ul>
+
+<!-- 5 -->
+<h2 id="goods">5. Public goods and common resources</h2>
+<p class="sub">Classify a good by two questions: can non-payers be excluded, and does one person's use reduce what others get?</p>
+<div class="matrix goods">
+  <div></div><div class="mh">Rival <span class="zh">競爭性</span></div><div class="mh">Nonrival</div>
+  <div class="mh side">Excludable <span class="zh">排他性</span></div><div class="cell">Private good<small>Food, clothing</small></div><div class="cell">Club good<small>Netflix, Spotify</small></div>
+  <div class="mh side">Nonexcludable</div><div class="cell hi">Common resource<small>Ocean tuna. Problem: overuse</small></div><div class="cell hi">Public good<small>Asteroid defense, national defense. Problem: free riders</small></div>
+</div>
+<ul>
+  <li><b>Free rider</b> <span class="zh">搭便車</span>: people enjoy a public good without paying, so voluntary funding falls short.</li>
+  <li><b>Forced rider</b>: tax funding makes some people pay for things they value below their cost.</li>
+  <li>A public good is defined by its traits, not by who provides it.</li>
+</ul>
+
+<h3 id="commons">Tragedy of the commons</h3>
+<p>Each fisher keeps the full gain from one more fish but shares the cost of a smaller stock with everyone. Each choice is rational; the total is overuse.</p>
+<p><b>Elinor Ostrom</b> showed that communities can manage commons with their own rules, monitoring and sanctions. The choice is not only market versus government.</p>
+<p>Other fixes: property rights, quotas, tradable fishing permits.</p>
+
+<!-- 6 -->
+<h2 id="moral">6. Moral economics</h2>
+<p class="sub">A voluntary, mutually beneficial trade can still be socially unacceptable. Efficiency is one criterion, not the only one.</p>
+
+<div class="tbl"><table>
+<thead><tr><th>Concept</th><th>Meaning</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td><b>Repugnance</b> <span class="zh">反感</span></td><td>People reject a trade because paying for it feels wrong, even if both sides agree.</td><td>Kidney sales</td></tr>
+<tr><td><b>Framing</b></td><td>The same exchange is accepted or rejected depending on how it is structured.</td><td>Tax credit for donors instead of cash; life insurance framed as protecting family</td></tr>
+<tr><td><b>Domestic ban, foreign supply</b></td><td>Banning a market at home does not end reliance on it.</td><td>Countries that ban paid plasma import it from paid donors abroad</td></tr>
+<tr><td><b>Hidden economics</b></td><td>Some "moral" objections are also economic problems.</td><td>Subscription firefighting: fire spreads (externality) and people expect rescue anyway (free rider)</td></tr>
+<tr><td><b>Viatical contract</b></td><td>Selling a life insurance policy early for cash. The buyer profits if the seller dies sooner.</td><td>Patients during the AIDS crisis</td></tr>
+<tr><td><b>Paternalism</b> <span class="zh">父愛主義</span></td><td>Limiting choices to protect people from harming themselves.</td><td>Prescriptions; self-set loss limits on betting apps</td></tr>
+</tbody></table></div>
+<p class="key">Externality: does my choice hurt others? Paternalism: will I hurt myself?</p>
+
+<h3 id="design">Beyond allow or ban: market design</h3>
+<p>Change the form of payment, who may participate, or set limits. Examples: kidney exchange matching, rules on who may hold a life policy, loss caps on gambling.</p>
+<ol class="steps">
+  <li>Is there a potential gain from trade?</li>
+  <li>Why is the market contested?</li>
+  <li>What happens if it is banned or restricted? (Demand moves abroad or underground.)</li>
+  <li>Can the institution be redesigned?</li>
+  <li>Evaluate more than efficiency.</li>
+</ol>
+
+<div class="assign">
+  <b>Moral Economics assignment</b>
+  <p>Watch the first two speakers of the panel clip (about 35 minutes). Choose a market that triggers public repugnance, explain the objection, analyze it with supply and demand, welfare, externalities and information problems, compare ban, regulate and legalize using theory and evidence, then propose a policy that raises welfare and addresses the moral concern. The slides list Dec 5 / Dec 7 as due dates.</p>
+</div>
+
+<!-- 7 -->
+<h2 id="tax">7. Taxes, subsidies and government failure</h2>
+<p class="sub">Who legally pays a tax does not decide who bears it. Elasticity does.</p>
+<div data-widget="tax"></div>
+<ul>
+  <li><b>Tax incidence</b> <span class="zh">租稅歸宿</span>: the less elastic side bears more. Cigarette buyers are inelastic, so they carry most of a cigarette tax.</li>
+  <li><b>Subsidy</b>: a negative tax that encourages an activity, such as EV purchase subsidies.</li>
+  <li><b>Government failure</b>: the policy itself produces an inefficient result. Compare realistic market outcomes with realistic government outcomes, not ideal versions of either.</li>
+</ul>
+
+<!-- 8 -->
+<h2 id="traps">8. Common mistakes</h2>
+<div class="traps">
+  <div><s>A high price means market failure.</s><p>A high price may simply signal scarcity.</p></div>
+  <div><s>A price ceiling makes goods affordable for everyone.</s><p>A binding ceiling causes a shortage. Some people get nothing.</p></div>
+  <div><s>All consumer loss from a tariff is DWL.</s><p>Part is transferred to producers and government.</p></div>
+  <div><s>DWL always means too little trade.</s><p>A negative externality creates DWL from too much trade.</p></div>
+  <div><s>Pollution permits allow more pollution.</s><p>The cap is fixed. Trading only decides who cuts.</p></div>
+  <div><s>Anything shared is a public good.</s><p>A fishery is rival, so it is a common resource.</p></div>
+  <div><s>The tragedy of the commons comes from irrational people.</s><p>Each user is rational. The cost is shared.</p></div>
+  <div><s>Banning a market removes demand.</s><p>Demand moves abroad, to imports or to black markets.</p></div>
+  <div><s>Paternalism is the same as an externality.</s><p>Externality harms others. Paternalism protects people from themselves.</p></div>
+  <div><s>The only options are allow or ban.</s><p>Market design can change payment form, eligibility or limits.</p></div>
+</div>
+
+<!-- 9 -->
+<h2 id="coldcall">9. Cold call practice</h2>
+<p class="sub">Answer aloud first, then open the card. Structure: definition, example, why it matters.</p>
+<div class="qa-tools"><button type="button" id="qaAll">Show all answers</button></div>
+<div class="qa">
+  <details><summary>What does "a price is a signal wrapped up in an incentive" mean?</summary><p>A price tells people a good has become scarcer and gives them a reason to act: buyers use less, sellers supply more.</p></details>
+  <details><summary>What is the invisible hand?</summary><p>People pursuing their own interests are coordinated by prices into outcomes that serve others, without a central planner.</p></details>
+  <details><summary>Why is equilibrium more than Qd = Qs?</summary><p>Up to the equilibrium quantity WTP ≥ MC, and beyond it MC &gt; WTP. Equilibrium therefore maximizes total surplus in the basic model.</p></details>
+  <details><summary>Who wins and loses from a tariff?</summary><p>Domestic producers gain, consumers lose, government collects revenue, and society loses DWL from wasted resources and lost gains from trade.</p></details>
+  <details><summary>What is deadweight loss?</summary><p>The value lost because the traded quantity differs from the efficient quantity. Nobody receives it.</p></details>
+  <details><summary>Why can Mumbai have vacant flats and a housing shortage?</summary><p>Rent control cuts landlord returns, so owners reduce maintenance and withhold units. Supply falls even though controlled rent is low.</p></details>
+  <details><summary>How does wasted time differ from A + B?</summary><p>Wasted time is the real cost of queuing and searching. A + B is lost consumer and producer surplus from trades that no longer happen.</p></details>
+  <details><summary>Why does a negative externality cause overproduction?</summary><p>Decision-makers ignore the external cost, so they keep trading past the point where social cost exceeds benefit. Q market &gt; Q efficient.</p></details>
+  <details><summary>How do tradable permits work?</summary><p>Government caps total pollution. Firms that can cut cheaply do so and sell permits, so the cap is met at the lowest total cost.</p></details>
+  <details><summary>When does the Coase theorem fail?</summary><p>When property rights are unclear or bargaining is costly, for example when millions of people are affected by PM2.5.</p></details>
+  <details><summary>Why is a fishery not a public good?</summary><p>It is nonexcludable but rival: one person's catch reduces what others can catch. That makes it a common resource.</p></details>
+  <details><summary>What did Elinor Ostrom show?</summary><p>Communities can govern common resources with their own rules, monitoring and sanctions, without full privatization or central control.</p></details>
+  <details><summary>Why might a voluntary trade be unacceptable?</summary><p>Repugnance: people object to paying for certain things, such as kidneys, even when both sides gain.</p></details>
+  <details><summary>Besides morality, what problems does subscription firefighting create?</summary><p>A negative externality, because fire spreads to neighbors, and a free-rider problem, because people expect to be saved anyway.</p></details>
+  <details><summary>What happens when a market is outlawed?</summary><p>Both demand and supply can shift inward. Quantity falls, while the price effect depends on which shift is larger.</p></details>
+  <details><summary>Who bears the burden of a tax?</summary><p>The less elastic side of the market, regardless of who legally pays it.</p></details>
+</div>
+
+<h3 id="drill">Quick drill: name the problem and the tool</h3>
+<div class="tbl"><table class="drill">
+<thead><tr><th>Situation</th><th>Answer</th></tr></thead>
+<tbody>
+<tr><td>A factory dumps waste water into a river.</td><td><span class="ans">Negative externality. Tax, permits or regulation.</span></td></tr>
+<tr><td>Too few people get flu shots.</td><td><span class="ans">Positive externality. Subsidy.</span></td></tr>
+<tr><td>Fish stocks in the Gulf of Thailand keep falling.</td><td><span class="ans">Tragedy of the commons. Quotas, property rights, community rules.</span></td></tr>
+<tr><td>Rent is capped at half the market rate.</td><td><span class="ans">Binding ceiling. Shortage, lower quality, misallocation.</span></td></tr>
+<tr><td>A 25% tariff on imported steel.</td><td><span class="ans">Domestic price rises, producers gain, consumers lose, DWL.</span></td></tr>
+<tr><td>Everyone wants flood defenses; nobody wants to pay.</td><td><span class="ans">Public good with free riders. Tax-funded provision.</span></td></tr>
+<tr><td>A proposal to allow paid kidney donation.</td><td><span class="ans">Repugnance. Consider framing and market design.</span></td></tr>
+<tr><td>Young people borrow to bet on gambling apps.</td><td><span class="ans">Paternalism and self-control. Loss limits, age limits.</span></td></tr>
+</tbody></table></div>
+<p class="note-small">Click an answer to reveal it.</p>
+</article></main>
+</div>
+
+<script>/* Interactive economics graphs. Linear models, one shared plotting helper. */
+(function () {
+  const NS = 'http://www.w3.org/2000/svg';
+  const W = 560, H = 380, L = 54, R = 92, T = 16, B = 42;
+  const f1 = x => (Math.round(x * 10) / 10).toLocaleString('en-US', { maximumFractionDigits: 1 });
+  const pct = x => Math.round(x * 100) + '%';
+  let uid = 0;
+
+  function el(tag, attrs, parent) {
+    const e = document.createElementNS(NS, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+
+  function Plot(svg, qMax, pMax) {
+    const sx = q => L + (q / qMax) * (W - L - R);
+    const sy = p => H - B - (p / pMax) * (H - T - B);
+    const g = { area: el('g', {}, svg), lines: el('g', {}, svg), top: el('g', {}, svg) };
+    const api = {
+      sx, sy,
+      clear() { g.area.innerHTML = ''; g.lines.innerHTML = ''; g.top.innerHTML = ''; },
+      axes(xl, yl) {
+        el('line', { x1: L, y1: sy(0), x2: W - R + 10, y2: sy(0), class: 'ax' }, g.lines);
+        el('line', { x1: L, y1: sy(0), x2: L, y2: T - 4, class: 'ax' }, g.lines);
+        const tx = el('text', { x: W - R + 10, y: sy(0) + 30, class: 'axl', 'text-anchor': 'end' }, g.top); tx.textContent = xl;
+        const ty = el('text', { x: L + 8, y: T + 4, class: 'axl', 'text-anchor': 'start' }, g.top); ty.textContent = yl;
+      },
+      poly(pts, cls) {
+        if (!pts.length) return;
+        el('polygon', { points: pts.map(p => sx(p[0]) + ',' + sy(p[1])).join(' '), class: cls }, g.area);
+      },
+      lin(a, m, cls, label, dashed) {
+        // P = a + m*Q, clipped to the plot box
+        let q0 = 0, q1 = qMax;
+        if (m !== 0) {
+          const qa = (0 - a) / m, qb = (pMax - a) / m;
+          q0 = Math.max(0, Math.min(qa, qb)); q1 = Math.min(qMax, Math.max(qa, qb));
+        }
+        if (q1 <= q0) return;
+        el('line', { x1: sx(q0), y1: sy(a + m * q0), x2: sx(q1), y2: sy(a + m * q1), class: 'cv ' + cls + (dashed ? ' dash' : '') }, g.lines);
+        if (label) {
+          const t = el('text', { x: sx(q1) + 6, y: sy(a + m * q1) + 4, class: 'cvl ' + cls }, g.top);
+          t.textContent = label;
+        }
+      },
+      hline(p, cls, label) {
+        el('line', { x1: sx(0), y1: sy(p), x2: W - R, y2: sy(p), class: 'cv ' + cls }, g.lines);
+        if (label) { const t = el('text', { x: W - R + 6, y: sy(p) + 4, class: 'cvl ' + cls }, g.top); t.textContent = label; }
+      },
+      guide(q, p, ql, pl) {
+        if (q != null) el('line', { x1: sx(q), y1: sy(p), x2: sx(q), y2: sy(0), class: 'gd' }, g.lines);
+        if (p != null && q != null) el('line', { x1: sx(0), y1: sy(p), x2: sx(q), y2: sy(p), class: 'gd' }, g.lines);
+        if (ql) { const t = el('text', { x: sx(q), y: sy(0) + 16, class: 'tk', 'text-anchor': 'middle' }, g.top); t.textContent = ql; }
+        if (pl) { const t = el('text', { x: L - 6, y: sy(p) + 4, class: 'tk', 'text-anchor': 'end' }, g.top); t.textContent = pl; }
+      },
+      dot(q, p, label, left) {
+        el('circle', { cx: sx(q), cy: sy(p), r: 4.5, class: 'pt' }, g.top);
+        if (label) { const t = el('text', { x: sx(q) + (left ? -9 : 8), y: sy(p) + (left ? 4 : -8), class: 'ptl', 'text-anchor': left ? 'end' : 'start' }, g.top); t.textContent = label; }
+      },
+      path(pts, cls) { el('polyline', { points: pts.map(p => sx(p[0]) + ',' + sy(p[1])).join(' '), class: 'cv ' + cls, fill: 'none' }, g.lines); },
+      label(q, p, s, cls) { const t = el('text', { x: sx(q) + 6, y: sy(p) + 4, class: 'cvl ' + cls }, g.top); t.textContent = s; },
+      xticks(arr) { arr.forEach(v => { const t = el('text', { x: sx(v), y: sy(0) + 16, class: 'tk', 'text-anchor': 'middle' }, g.top); t.textContent = v; }); },
+      yticks(arr, pre) { arr.forEach(v => { el('line', { x1: sx(0), y1: sy(v), x2: W - R, y2: sy(v), class: 'grid' }, g.area); const t = el('text', { x: L - 6, y: sy(v) + 4, class: 'tk', 'text-anchor': 'end' }, g.top); t.textContent = (pre || '') + v; }); },
+      tag(q, p, s) { const t = el('text', { x: sx(q), y: sy(p) + 4, class: 'atag', 'text-anchor': 'middle' }, g.top); t.textContent = s; }
+    };
+    return api;
+  }
+
+  function shell(host, title, sub) {
+    const id = 'w' + (++uid);
+    host.classList.add('graph');
+    host.innerHTML =
+      '<div class="g-head"><span class="g-kicker">Interactive graph</span><h4>' + title + '</h4><p>' + sub + '</p></div>' +
+      '<div class="g-body"><div class="g-plot"><svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + title + '"></svg></div>' +
+      '<div class="g-side"><div class="g-ctrl"></div><dl class="g-stats"></dl></div></div>' +
+      '<p class="g-note" aria-live="polite"></p>';
+    const svg = host.querySelector('svg');
+    return {
+      id, svg,
+      ctrl: host.querySelector('.g-ctrl'),
+      stats: host.querySelector('.g-stats'),
+      note: host.querySelector('.g-note'),
+      slider(key, label, min, max, step, val, fmt, on) {
+        const wrap = document.createElement('div'); wrap.className = 'sl';
+        const iid = id + '-' + key;
+        wrap.innerHTML = '<label for="' + iid + '"><span>' + label + '</span><output></output></label>' +
+          '<input type="range" id="' + iid + '" min="' + min + '" max="' + max + '" step="' + step + '" value="' + val + '">';
+        const inp = wrap.querySelector('input'), out = wrap.querySelector('output');
+        const sync = () => { out.textContent = fmt ? fmt(+inp.value) : inp.value; };
+        inp.addEventListener('input', () => { sync(); on(+inp.value); });
+        sync();
+        this.ctrl.appendChild(wrap);
+        return { set(v) { inp.value = v; sync(); }, input: inp };
+      },
+      button(label, on) {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'g-btn'; b.textContent = label;
+        b.addEventListener('click', on); this.ctrl.appendChild(b); return b;
+      },
+      seg(key, opts, val, on) {
+        const wrap = document.createElement('div'); wrap.className = 'seg'; wrap.setAttribute('role', 'radiogroup');
+        opts.forEach(([v, lab]) => {
+          const b = document.createElement('button'); b.type = 'button'; b.textContent = lab; b.dataset.v = v;
+          b.setAttribute('role', 'radio'); b.setAttribute('aria-checked', v === val);
+          b.addEventListener('click', () => { wrap.querySelectorAll('button').forEach(x => x.setAttribute('aria-checked', x === b)); on(v); });
+          wrap.appendChild(b);
+        });
+        this.ctrl.appendChild(wrap);
+      },
+      check(key, label, val, on) {
+        const wrap = document.createElement('label'); wrap.className = 'chk';
+        const iid = id + '-' + key;
+        wrap.setAttribute('for', iid);
+        wrap.innerHTML = '<input type="checkbox" id="' + iid + '"' + (val ? ' checked' : '') + '><span>' + label + '</span>';
+        wrap.querySelector('input').addEventListener('change', e => on(e.target.checked));
+        this.ctrl.appendChild(wrap);
+      },
+      show(rows, note) {
+        this.stats.innerHTML = rows.map(r =>
+          '<div class="st' + (r.big ? ' big' : '') + '"><dt><i class="sw ' + (r.sw || 'none') + '"></i>' + r.k + '</dt><dd>' + r.v + '</dd></div>').join('');
+        this.note.innerHTML = note || '';
+      }
+    };
+  }
+
+  const W_ = {};
+
+  /* 1. Equilibrium welfare */
+  W_.welfare = host => {
+    const s = shell(host, 'Gains from trade peak at equilibrium',
+      'Shift demand or supply, or force the quantity away from equilibrium, and watch total surplus.');
+    const st = { a: 100, c: 10, q: 45, forced: false };
+    const P = Plot(s.svg, 80, 130);
+    const qe = () => (st.a - st.c) / 2;
+    const draw = () => {
+      const Qe = qe(), Pe = (st.a + st.c) / 2, a = st.a, c = st.c;
+      if (!st.forced) { st.q = Qe; qs.set(Qe); }
+      const q = st.q;
+      P.clear(); P.axes('Quantity', 'Price');
+      const TSe = 0.5 * Qe * (a - c);
+      let rows, note;
+      if (Math.abs(q - Qe) < 0.26) {
+        const CS = 0.5 * Qe * (a - Pe), PS = 0.5 * Qe * (Pe - c);
+        P.poly([[0, a], [Qe, Pe], [0, Pe]], 'a-cs'); P.poly([[0, Pe], [Qe, Pe], [0, c]], 'a-ps');
+        P.tag(Qe / 3, Pe + (a - Pe) / 3, 'CS'); P.tag(Qe / 3, Pe - (Pe - c) / 3, 'PS');
+        rows = [{ k: 'Consumer Surplus', v: f1(CS), sw: 'a-cs' }, { k: 'Producer Surplus', v: f1(PS), sw: 'a-ps' },
+          { k: 'Total Surplus', v: f1(TSe), big: true }, { k: 'Deadweight Loss', v: '0', sw: 'a-dwl' }];
+        note = 'At equilibrium every trade with WTP ≥ MC takes place, so total surplus is at its maximum.';
+      } else if (q < Qe) {
+        const dwl = 0.5 * (Qe - q) * ((a - q) - (c + q));
+        P.poly([[0, a], [q, a - q], [q, c + q], [0, c]], 'a-ts');
+        P.poly([[q, a - q], [Qe, Pe], [q, c + q]], 'a-dwl');
+        P.tag((q + Qe) / 2 - 2, Pe, 'DWL');
+        P.guide(q, null, 'Q');
+        rows = [{ k: 'Surplus realized', v: f1(TSe - dwl), sw: 'a-ts' }, { k: 'Max possible', v: f1(TSe) },
+          { k: 'Deadweight Loss', v: f1(dwl), sw: 'a-dwl', big: true }];
+        note = 'Too little trade: between Q and Qe, buyer WTP still exceeds seller cost, yet these trades do not happen.';
+      } else {
+        const dwl = 0.5 * (q - Qe) * ((c + q) - (a - q));
+        P.poly([[0, a], [Qe, Pe], [0, c]], 'a-ts');
+        P.poly([[Qe, Pe], [q, c + q], [q, a - q]], 'a-dwl');
+        P.tag((q + Qe) / 2 + 2, Pe, 'DWL');
+        P.guide(q, null, 'Q');
+        rows = [{ k: 'Surplus realized', v: f1(TSe - dwl), sw: 'a-ts' }, { k: 'Max possible', v: f1(TSe) },
+          { k: 'Deadweight Loss', v: f1(dwl), sw: 'a-dwl', big: true }];
+        note = 'Too much trade: beyond Qe, MC > WTP, so every extra unit reduces total surplus.';
+      }
+      P.lin(a, -1, 'c-d', 'D'); P.lin(c, 1, 'c-s', 'S');
+      P.guide(Qe, Pe, 'Qe', 'Pe'); P.dot(Qe, Pe, 'E');
+      s.show(rows, note);
+    };
+    s.slider('a', 'Demand shift', 80, 120, 1, st.a, v => (v > 100 ? '+' : '') + (v - 100), v => { st.a = v; draw(); });
+    s.slider('c', 'Supply shift', 0, 30, 1, st.c, v => (v > 10 ? '+' : '') + (v - 10), v => { st.c = v; draw(); });
+    const qs = s.slider('q', 'Quantity traded', 5, 70, 0.5, st.q, f1, v => { st.q = v; st.forced = true; draw(); });
+    s.button('Reset to equilibrium', () => { st.forced = false; draw(); });
+    draw();
+  };
+
+  /* 2. Tariff in a small open economy */
+  W_.tariff = host => {
+    const s = shell(host, 'A tariff transfers surplus and destroys some of it',
+      'Adjust the world price and the tariff to see the domestic price, imports and the welfare areas change.');
+    const st = { pw: 25, t: 12 };
+    const P = Plot(s.svg, 100, 110);
+    const D = p => 100 - p, Sq = p => p - 5, PA = 52.5;
+    const draw = () => {
+      const pw = st.pw, pt = Math.min(pw + st.t, PA);
+      const Q1 = Sq(pw), Q4 = D(pw), Q2 = Sq(pt), Q3 = D(pt), h = pt - pw;
+      P.clear(); P.axes('Quantity', 'Price');
+      P.poly([[0, 100], [Q3, pt], [0, pt]], 'a-cs');
+      P.poly([[0, 5], [Q1, pw], [0, pw]], 'a-ps');
+      if (h > 0) {
+        P.poly([[0, pw], [Q1, pw], [Q2, pt], [0, pt]], 'a-ps2');
+        P.poly([[Q1, pw], [Q2, pt], [Q2, pw]], 'a-dwl');
+        P.poly([[Q2, pw], [Q3, pw], [Q3, pt], [Q2, pt]], 'a-rev');
+        P.poly([[Q3, pt], [Q3, pw], [Q4, pw]], 'a-dwl');
+        if (Q3 - Q2 > 6) P.tag((Q2 + Q3) / 2, (pw + pt) / 2, 'Revenue');
+      }
+      P.lin(100, -1, 'c-d', 'D'); P.lin(5, 1, 'c-s', 'S domestic');
+      P.hline(pw, 'c-w', 'World price');
+      if (h > 0) P.hline(pt, 'c-t', 'With tariff');
+      P.guide(Q1, pw, 'Q1', f1(pw)); P.guide(Q4, pw, 'Q4');
+      if (h > 0) { P.guide(Q2, pt, 'Q2', f1(pt)); P.guide(Q3, pt, 'Q3'); }
+      const csL = h * (Q3 + Q4) / 2, psG = h * (Q1 + Q2) / 2, rev = h * (Q3 - Q2), dP = 0.5 * (Q2 - Q1) * h, dC = 0.5 * (Q4 - Q3) * h;
+      s.show([
+        { k: 'Imports (free trade → tariff)', v: f1(Q4 - Q1) + ' → ' + f1(Q3 - Q2) },
+        { k: 'Consumer Surplus loss', v: '−' + f1(csL), sw: 'a-cs' },
+        { k: 'Producer Surplus gain', v: '+' + f1(psG), sw: 'a-ps2' },
+        { k: 'Government revenue', v: '+' + f1(rev), sw: 'a-rev' },
+        { k: 'DWL: wasted resources', v: f1(dP), sw: 'a-dwl' },
+        { k: 'DWL: lost gains from trade', v: f1(dC), sw: 'a-dwl' },
+        { k: 'Total DWL', v: f1(dP + dC), big: true }
+      ], pt >= PA - 0.01 ? 'Prohibitive tariff: the domestic price returns to the no-trade price and imports fall to zero.'
+        : 'CS loss = PS gain + tariff revenue + two DWL triangles. The first two are transfers; only the DWL is lost to society.');
+    };
+    s.slider('pw', 'World price', 10, 50, 1, st.pw, null, v => { st.pw = v; draw(); });
+    s.slider('t', 'Tariff per unit', 0, 40, 1, st.t, null, v => { st.t = v; draw(); });
+    draw();
+  };
+
+  /* 3. Price ceiling / floor */
+  W_.control = host => {
+    const s = shell(host, 'Binding price controls shrink trade',
+      'Choose ceiling or floor and drag the legal price. A ceiling binds only below equilibrium; a floor binds only above it.');
+    const st = { mode: 'ceiling', p: 35, time: true };
+    const P = Plot(s.svg, 100, 110);
+    const Qe = 45, Pe = 55, Dq = p => 100 - p, Sq = p => p - 10, Dp = q => 100 - q, Sp = q => 10 + q;
+    const draw = () => {
+      const p = st.p; P.clear(); P.axes('Quantity', 'Price');
+      const binding = st.mode === 'ceiling' ? p < Pe : p > Pe;
+      let rows, note;
+      if (!binding) {
+        P.poly([[0, 100], [Qe, Pe], [0, Pe]], 'a-cs'); P.poly([[0, Pe], [Qe, Pe], [0, 10]], 'a-ps');
+        rows = [{ k: 'Status', v: 'Non-binding', big: true }, { k: 'Quantity traded', v: f1(Qe) }, { k: 'Deadweight Loss', v: '0', sw: 'a-dwl' }];
+        note = st.mode === 'ceiling' ? 'The ceiling is above the equilibrium price, so the market still clears at Pe. The control has no effect.'
+          : 'The floor is below the equilibrium price, so the market still clears at Pe. The control has no effect.';
+      } else if (st.mode === 'ceiling') {
+        const qs = Sq(p), qd = Dq(p), pd = Dp(qs);
+        if (st.time) { P.poly([[0, 100], [qs, pd], [0, pd]], 'a-cs'); P.poly([[0, p], [qs, p], [qs, pd], [0, pd]], 'a-time'); }
+        else P.poly([[0, 100], [qs, pd], [qs, p], [0, p]], 'a-cs');
+        P.poly([[0, p], [qs, p], [0, 10]], 'a-ps');
+        P.poly([[qs, pd], [Qe, Pe], [qs, Pe]], 'a-dwl'); P.poly([[qs, Pe], [Qe, Pe], [qs, p]], 'a-dwl');
+        P.tag(qs + (Qe - qs) / 3, Pe + (pd - Pe) / 3, 'A'); P.tag(qs + (Qe - qs) / 3, Pe - (Pe - p) / 3, 'B');
+        if (st.time && qs > 8) P.tag(qs / 2, (p + pd) / 2, 'Wasted time');
+        P.hline(p, 'c-t', 'Ceiling');
+        P.guide(qs, p, 'Qs', f1(p)); P.guide(qd, p, 'Qd');
+        const A = 0.5 * (Qe - qs) * (pd - Pe), Bv = 0.5 * (Qe - qs) * (Pe - p);
+        rows = [{ k: 'Shortage = Qd − Qs', v: f1(qd - qs), big: true },
+          { k: 'A: lost Consumer Surplus', v: f1(A), sw: 'a-dwl' }, { k: 'B: lost Producer Surplus', v: f1(Bv), sw: 'a-dwl' },
+          { k: 'DWL = A + B', v: f1(A + Bv) }];
+        if (st.time) rows.push({ k: 'Wasted time / search (max)', v: f1(qs * (pd - p)), sw: 'a-time' });
+        note = 'Only Qs units are supplied. The marginal buyer would pay up to ' + f1(pd) + ', so the gap turns into queues, search and other non-price costs.';
+      } else {
+        const qd = Dq(p), qs = Sq(p), ps = Sp(qd);
+        P.poly([[0, 100], [qd, p], [0, p]], 'a-cs'); P.poly([[0, p], [qd, p], [qd, ps], [0, 10]], 'a-ps');
+        P.poly([[qd, p], [Qe, Pe], [qd, Pe]], 'a-dwl'); P.poly([[qd, Pe], [Qe, Pe], [qd, ps]], 'a-dwl');
+        P.tag(qd + (Qe - qd) / 3, Pe + (p - Pe) / 3, 'A'); P.tag(qd + (Qe - qd) / 3, Pe - (Pe - ps) / 3, 'B');
+        P.hline(p, 'c-t', 'Floor');
+        P.guide(qd, p, 'Qd', f1(p)); P.guide(qs, p, 'Qs');
+        const A = 0.5 * (Qe - qd) * (p - Pe), Bv = 0.5 * (Qe - qd) * (Pe - ps);
+        rows = [{ k: 'Surplus = Qs − Qd', v: f1(qs - qd), big: true },
+          { k: 'A: lost Consumer Surplus', v: f1(A), sw: 'a-dwl' }, { k: 'B: lost Producer Surplus', v: f1(Bv), sw: 'a-dwl' },
+          { k: 'DWL = A + B', v: f1(A + Bv) }];
+        note = 'Only Qd units are bought; sellers cannot sell the rest. Example: unemployment under a minimum wage.';
+      }
+      P.lin(100, -1, 'c-d', 'D'); P.lin(10, 1, 'c-s', 'S'); P.guide(Qe, Pe, null, 'Pe'); P.dot(Qe, Pe, 'E');
+      s.show(rows, note);
+    };
+    s.seg('mode', [['ceiling', 'Price Ceiling'], ['floor', 'Price Floor']], st.mode, v => {
+      st.mode = v; const np = v === 'ceiling' ? 35 : 75; st.p = np; ps.set(np); draw();
+    });
+    const ps = s.slider('p', 'Legal price', 15, 95, 1, st.p, null, v => { st.p = v; draw(); });
+    s.check('time', 'Show wasted time (ceiling)', st.time, v => { st.time = v; draw(); });
+    draw();
+  };
+
+  /* 4. Negative externality + Pigouvian tax */
+  W_.negext = host => {
+    const s = shell(host, 'A Pigouvian tax corrects overproduction',
+      'Raise the external cost, then use a tax to lift private cost up to social cost.');
+    const st = { e: 25, t: 0 };
+    const P = Plot(s.svg, 100, 110);
+    const draw = () => {
+      const e = st.e, t = st.t, Qm = (90 - t) / 2, Qf = (90 - e) / 2;
+      P.clear(); P.axes('Quantity', 'Price / Cost');
+      const dwl = 0.5 * Math.abs(Qm - Qf) * Math.abs(e - t);
+      if (dwl > 0.01) {
+        P.poly([[Qf, 100 - Qf], [Qm, 100 - Qm], [Qm, 10 + e + Qm]], 'a-dwl');
+        P.tag((2 * Qm + Qf) / 3, ((100 - Qf) + (100 - Qm) + (10 + e + Qm)) / 3, 'DWL');
+      }
+      P.lin(100, -1, 'c-d', 'D = MPB'); P.lin(10, 1, 'c-s', 'MPC'); P.lin(10 + e, 1, 'c-x', 'MSC');
+      if (t > 0) P.lin(10 + t, 1, 'c-t', 'MPC + tax', true);
+      P.guide(Qm, 100 - Qm, 'Q mkt', null); P.dot(Qm, 100 - Qm, 'Market');
+      P.guide(Qf, 100 - Qf, 'Q eff', null); P.dot(Qf, 100 - Qf, 'Efficient', true);
+      let note;
+      if (Math.abs(t - e) < 0.5) note = 'Tax = marginal external cost: decision-makers now face the full social cost, Q returns to the efficient level and the DWL disappears.';
+      else if (t < e) note = 'Tax below the external cost: decision-makers still understate cost, so Q market > Q efficient (overproduction).';
+      else note = 'Tax above the external cost: output falls below the efficient level, which also creates DWL.';
+      s.show([{ k: 'Q market', v: f1(Qm) }, { k: 'Q efficient', v: f1(Qf) },
+        { k: 'Deadweight Loss', v: f1(dwl), sw: 'a-dwl', big: true }, { k: 'Tax revenue', v: f1(t * Qm), sw: 'a-rev' }], note);
+    };
+    s.slider('e', 'External cost per unit', 0, 50, 1, st.e, null, v => { st.e = v; draw(); });
+    const ts = s.slider('t', 'Pigouvian tax per unit', 0, 60, 1, st.t, null, v => { st.t = v; draw(); });
+    s.button('Tax = external cost', () => { st.t = st.e; ts.set(st.e); draw(); });
+    draw();
+  };
+
+  /* 5. Positive externality + subsidy */
+  W_.posext = host => {
+    const s = shell(host, 'A subsidy corrects underproduction',
+      'Raise the external benefit, then use a subsidy to lift private benefit up to social benefit.');
+    const st = { e: 20, s: 0 };
+    const P = Plot(s.svg, 100, 110);
+    const draw = () => {
+      const e = st.e, sb = st.s, Qm = (70 + sb) / 2, Qs = (70 + e) / 2;
+      P.clear(); P.axes('Quantity', 'Price / Benefit');
+      const dwl = 0.5 * Math.abs(Qm - Qs) * Math.abs(e - sb);
+      if (dwl > 0.01) {
+        P.poly([[Qs, 10 + Qs], [Qm, 10 + Qm], [Qm, 80 + e - Qm]], 'a-dwl');
+        P.tag((2 * Qm + Qs) / 3, ((10 + Qs) + (10 + Qm) + (80 + e - Qm)) / 3, 'DWL');
+      }
+      P.lin(80, -1, 'c-d', 'D = MPB'); P.lin(80 + e, -1, 'c-x', 'MSB'); P.lin(10, 1, 'c-s', 'S');
+      if (sb > 0) P.lin(80 + sb, -1, 'c-t', 'MPB + subsidy', true);
+      P.guide(Qm, 10 + Qm, 'Q mkt', null); P.dot(Qm, 10 + Qm, 'Market');
+      P.guide(Qs, 10 + Qs, 'Q soc', null); P.dot(Qs, 10 + Qs, 'Social', true);
+      let note;
+      if (Math.abs(sb - e) < 0.5) note = 'Subsidy = marginal external benefit: Q returns to the social optimum and the DWL disappears.';
+      else if (sb < e) note = 'The market counts only private benefit, so Q market < Q social (too little vaccination, education or R&D).';
+      else note = 'A subsidy above the external benefit pushes quantity too high, which also creates DWL.';
+      s.show([{ k: 'Q market', v: f1(Qm) }, { k: 'Q social', v: f1(Qs) },
+        { k: 'Deadweight Loss', v: f1(dwl), sw: 'a-dwl', big: true }, { k: 'Subsidy cost', v: f1(sb * Qm), sw: 'a-rev' }], note);
+    };
+    s.slider('e', 'External benefit per unit', 0, 40, 1, st.e, null, v => { st.e = v; draw(); });
+    const ss = s.slider('s', 'Subsidy per unit', 0, 50, 1, st.s, null, v => { st.s = v; draw(); });
+    s.button('Subsidy = external benefit', () => { st.s = st.e; ss.set(st.e); draw(); });
+    draw();
+  };
+
+  /* 6. Tax incidence */
+  W_.tax = host => {
+    const s = shell(host, 'The less elastic side bears more of a tax',
+      'Change each curve\'s slope and the tax. A steeper curve is less elastic and carries a larger share of the burden.');
+    const st = { b: 1, d: 1, t: 20 };
+    const svg = s.svg;
+    const draw = () => {
+      const { b, d, t } = st, Qe = 90 / (b + d), Pe = 100 - b * Qe, Qt = (90 - t) / (b + d), Pb = 100 - b * Qt, Ps = Pb - t;
+      svg.innerHTML = '';
+      const P = Plot(svg, Math.max(40, Math.ceil(Qe * 1.7 / 10) * 10), 110);
+      P.axes('Quantity', 'Price');
+      P.poly([[0, Pe], [Qt, Pe], [Qt, Pb], [0, Pb]], 'a-rev');
+      P.poly([[0, Ps], [Qt, Ps], [Qt, Pe], [0, Pe]], 'a-rev2');
+      P.poly([[Qt, Pb], [Qe, Pe], [Qt, Ps]], 'a-dwl');
+      P.lin(100, -b, 'c-d', 'D'); P.lin(10, d, 'c-s', 'S'); P.lin(10 + t, d, 'c-t', 'S + tax', true);
+      P.guide(Qt, Pb, 'Qt', 'Pb ' + f1(Pb)); P.guide(Qt, Ps, null, 'Ps ' + f1(Ps)); P.guide(Qe, Pe, 'Qe', 'Pe');
+      P.dot(Qe, Pe);
+      const bb = Pb - Pe, sbur = Pe - Ps;
+      s.show([{ k: 'Buyers pay more', v: '+' + f1(bb) + ' (' + pct(t ? bb / t : 0) + ')', sw: 'a-rev' },
+        { k: 'Sellers receive less', v: '−' + f1(sbur) + ' (' + pct(t ? sbur / t : 0) + ')', sw: 'a-rev2' },
+        { k: 'Tax revenue', v: f1(t * Qt) }, { k: 'Deadweight Loss', v: f1(0.5 * t * (Qe - Qt)), sw: 'a-dwl', big: true }],
+        b > d + 0.05 ? 'Demand is steeper (less elastic), so buyers bear more. Who legally pays the tax does not change who bears it.'
+          : d > b + 0.05 ? 'Supply is steeper (less elastic), so sellers bear more.'
+            : 'Equal slopes: the burden splits evenly.');
+    };
+    s.slider('b', 'Demand slope', 0.4, 3, 0.1, st.b, v => v.toFixed(1), v => { st.b = v; draw(); });
+    s.slider('d', 'Supply slope', 0.4, 3, 0.1, st.d, v => v.toFixed(1), v => { st.d = v; draw(); });
+    s.slider('t', 'Tax per unit', 0, 40, 1, st.t, null, v => { st.t = v; draw(); });
+    draw();
+  };
+
+
+  /* Professor's oil-well cost table (CMMU Slides 6-8) */
+  const OIL = { FC: 35, VC: [0, 2, 7, 17, 34, 58, 88, 123, 172, 247, 349, 479, 629] };
+  OIL.TC = OIL.VC.map(v => v + OIL.FC);
+  OIL.MC = OIL.TC.map((t, i) => i ? t - OIL.TC[i - 1] : null);
+  function bestQ(P) { let b = 0, bp = -OIL.FC; for (let q = 1; q <= 12; q++) { const p = P * q - OIL.TC[q]; if (p > bp) { bp = p; b = q; } } return [b, bp]; }
+
+  W_.oil = host => {
+    const s = shell(host, 'One oil well: how many barrels?', 'Drag the market price. The firm compares each barrel\'s marginal cost with the price, using the cost table from the class slides.');
+    const st = { p: 50 };
+    const P = Plot(s.svg, 12.5, 160);
+    const draw = () => {
+      const p = st.p, [q, pi] = bestQ(p);
+      P.clear(); P.yticks([50, 100, 150], '$'); P.axes('Barrels per day', 'Dollars');
+      P.xticks([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+      if (q > 0) {
+        const atc = OIL.TC[q] / q;
+        P.poly([[0, Math.min(p, 160)], [q, Math.min(p, 160)], [q, Math.min(atc, 160)], [0, Math.min(atc, 160)]], pi >= 0 ? 'a-prof' : 'a-loss');
+        P.guide(q, Math.min(p, 160), null, null);
+      }
+      const mcPts = [], acPts = [], avcPts = [];
+      for (let i = 1; i <= 12; i++) { mcPts.push([i, OIL.MC[i]]); acPts.push([i, OIL.TC[i] / i]); avcPts.push([i, OIL.VC[i] / i]); }
+      P.path(mcPts.filter(x => x[1] <= 160), 'c-s'); P.path(acPts, 'c-d'); P.path(avcPts, 'c-d dash');
+      P.label(10.4, 155, 'MC', 'c-s'); P.label(10.3, 60, 'AC', 'c-d'); P.label(11.2, 34, 'AVC', 'c-d');
+      P.hline(Math.min(p, 160), 'c-t', 'P = MR');
+      mcPts.forEach(([i, m]) => { if (m <= 160) P.dot(i, m); });
+      const tr = p * q, tc = OIL.TC[q];
+      let status, note;
+      if (q === 0) { status = 'Shut down'; note = 'Even the first barrel costs more than the price ($2). Producing nothing limits the loss to the $35 fixed cost.'; }
+      else if (pi < 0) { status = 'Loss, keep operating'; note = 'Price is below average cost, so the firm loses money. But revenue covers variable cost, so producing loses less than shutting down (−$35).'; }
+      else { status = 'Profit'; note = 'Barrel ' + q + ' costs $' + OIL.MC[q] + ' ≤ $' + p + '. ' + (q < 12 ? 'Barrel ' + (q + 1) + ' would cost $' + OIL.MC[q + 1] + ' > $' + p + ', so stop at ' + q + '.' : ''); }
+      s.show([{ k: 'Best output q*', v: q + ' barrels', big: true }, { k: 'Revenue P × q', v: '$' + tr }, { k: 'Total cost', v: '$' + tc },
+        { k: 'Profit TR − TC', v: (pi < 0 ? '−$' : '$') + Math.abs(pi), sw: pi >= 0 ? 'a-prof' : 'a-loss' }, { k: 'Decision', v: status }], note);
+    };
+    const ps = s.slider('p', 'Market price per barrel', 1, 150, 1, st.p, v => '$' + v, v => { st.p = v; draw(); });
+    s.button('Slide price $50', () => { st.p = 50; ps.set(50); draw(); });
+    s.button('Slide price $100', () => { st.p = 100; ps.set(100); draw(); });
+    draw();
+  };
+
+  W_.taker = host => {
+    const s = shell(host, 'The market sets the price; the firm picks the quantity', 'Shift market demand. The new market price becomes the firm\'s horizontal demand line.');
+    host.classList.add('wide');
+    const plot = host.querySelector('.g-plot');
+    plot.innerHTML = '<div class="twin"><div><p class="tw-t">Market for oil</p><svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Market"></svg></div><div><p class="tw-t">One oil well</p><svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Firm"></svg></div></div>';
+    const [m, f] = plot.querySelectorAll('svg');
+    const k = 40 / 82, st = { a: 90 };
+    const M = Plot(m, 200, 160), F = Plot(f, 12.5, 160);
+    const draw = () => {
+      const a = st.a, Qe = (a - 10) / (2 * k), Pe = 10 + k * Qe, [q, pi] = bestQ(Pe);
+      M.clear(); M.axes('Million barrels', 'Price'); M.lin(a, -k, 'c-d', 'D'); M.lin(10, k, 'c-s', 'S'); M.guide(Qe, Pe, f1(Qe) + 'M', '$' + f1(Pe)); M.dot(Qe, Pe);
+      F.clear(); F.axes('Barrels per day', 'Price');
+      const mc = []; for (let i = 1; i <= 12; i++) if (OIL.MC[i] <= 160) mc.push([i, OIL.MC[i]]);
+      F.path(mc, 'c-s'); F.label(10.4, 155, 'MC', 'c-s'); F.hline(Pe, 'c-t', 'd = MR = P');
+      if (q) { F.guide(q, Pe, 'q* = ' + q, '$' + f1(Pe)); F.dot(q, Pe); }
+      s.show([{ k: 'Market price', v: '$' + f1(Pe) }, { k: 'Market quantity', v: f1(Qe) + ' million' }, { k: 'This firm produces', v: q + ' barrels', big: true }, { k: 'Firm profit', v: (pi < 0 ? '−$' : '$') + f1(Math.abs(pi)) }],
+        'One well\'s ' + q + ' barrels cannot move a market of ' + f1(Qe) + ' million barrels, so the firm takes $' + f1(Pe) + ' as given and only chooses its own output.');
+    };
+    s.slider('a', 'Market demand', 60, 150, 1, st.a, v => (v > 90 ? '+' : '') + (v - 90), v => { st.a = v; draw(); });
+    draw();
+  };
+
+  window.EconWidgets = { mount(root) { root.querySelectorAll('[data-widget]').forEach(h => { const f = W_[h.dataset.widget]; if (f && !h.dataset.ready) { h.dataset.ready = 1; f(h); } }); } };
+})();
+</script>
+<script>
+(function () {
+  const toc = document.getElementById('toc'), rail = document.getElementById('rail');
+  const hs = [...document.querySelectorAll('.doc > h2, .doc > h3')];
+  hs.forEach(h => {
+    const li = document.createElement('li'); li.className = h.tagName.toLowerCase(); li.dataset.id = h.id;
+    const a = document.createElement('a'); a.href = '#' + h.id; a.textContent = h.childNodes[0].textContent.trim();
+    li.appendChild(a); toc.appendChild(li);
+  });
+  const spy = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    toc.querySelectorAll('a.on').forEach(a => a.classList.remove('on'));
+    const a = toc.querySelector('li[data-id="' + e.target.id + '"] a'); if (a) a.classList.add('on');
+  }), { rootMargin: '-80px 0px -70% 0px' });
+  hs.forEach(h => spy.observe(h));
+
+  const tb = document.getElementById('tocBtn');
+  tb.addEventListener('click', () => { const o = rail.classList.toggle('open'); tb.setAttribute('aria-expanded', o); });
+  toc.addEventListener('click', e => { if (e.target.closest('a')) { rail.classList.remove('open'); tb.setAttribute('aria-expanded', false); } });
+
+  const all = document.getElementById('qaAll');
+  if (all) all.addEventListener('click', () => {
+    const ds = document.querySelectorAll('.qa details'), open = ![...ds].every(d => d.open);
+    ds.forEach(d => d.open = open); all.textContent = open ? 'Hide all answers' : 'Show all answers';
+  });
+  document.querySelectorAll('.drill .ans').forEach(s => s.addEventListener('click', () => s.classList.toggle('shown')));
+
+  if (window.EconWidgets) window.EconWidgets.mount(document);
+  if (window.MgmtWidgets) window.MgmtWidgets.mount(document);
+})();
+</script>
+</body></html>
