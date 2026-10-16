@@ -28,7 +28,8 @@ a { color: var(--accent-ink); }
 .sessions { display: flex; gap: 4px; margin-left: auto; }
 .crumbs { font-size: .86rem; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
 .crumbs a { color: var(--muted); text-decoration: none; } .crumbs a:hover { color: var(--accent-ink); } .crumbs span { color: var(--line); } .crumbs b { font-family: var(--serif); }
-.sessions a.pill { text-decoration: none; }
+.sessions a.pill { text-decoration: none; transition: border-color .15s, color .15s; }
+.sessions a.pill:hover, .sessions a.pill:focus-visible { border-color: var(--accent); color: var(--accent-ink); background: var(--tint); }
 .sessions .pill { font: 500 .82rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--muted); padding: 4px 12px; border-radius: 999px; }
 .sessions .pill[aria-current="page"] { background: var(--accent); border-color: var(--accent); color: #fff; }
 .sessions .pill.off { opacity: .5; cursor: not-allowed; }
@@ -340,7 +341,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 .pop-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 18px; align-items: start; }
 .pop-ctrl { display: flex; flex-direction: column; gap: 10px; }
 .pb-h { margin: 6px 0 4px; font-size: .78rem; font-weight: 700; color: var(--muted); }
-.pb { display: grid; grid-template-columns: 54px minmax(0, 1fr) 76px; gap: 8px; align-items: center; font-size: .8rem; margin-bottom: 4px; }
+.pb { display: grid; grid-template-columns: 96px minmax(0, 1fr) 76px; gap: 8px; align-items: center; font-size: .8rem; margin-bottom: 4px; }
 .pb b { font-family: var(--mono); font-weight: 500; text-align: right; }
 .pb-track { height: 14px; background: var(--bg); border: 1px solid var(--line); border-radius: 7px; overflow: hidden; }
 .pb-track i { display: block; height: 100%; transition: width .25s; }
@@ -367,6 +368,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
   .qz-opts.row3 { grid-template-columns: minmax(0, 1fr); }
   .cf { grid-template-columns: minmax(0, 1fr); } .cf i { transform: rotate(90deg); justify-self: center; }
 }
+.ladder2 > i { font-size: .8rem; font-weight: 500; }
 
 </style></head><body>
 
@@ -674,6 +676,158 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
     { q: '"I bought it because of the better specifications," says a buyer who chose on impulse.', a: 'rat', why: 'Rationalization: a logical reason made up after the fact.' },
     { q: 'Shoppers say they care about sustainability but buy the cheapest option.', a: 'gap', why: 'Attitude-behavior gap: stated attitude differs from action.' }
   ], [['sd', 'Social desirability'], ['court', 'Courtesy bias'], ['rat', 'Rationalization'], ['gap', 'Attitude-behavior gap']], 'grid2');
+
+  /* ---------- Session 1 and 2 widgets ---------- */
+  const baht = v => (v < -0.5 ? '−' : '') + '฿' + Math.abs(Math.round(v)).toLocaleString('en-US');
+  function sliders(id, defs) {
+    return defs.map((d, k) => '<div class="sl"><label for="' + id + k + '"><span>' + d[0] + '</span><output></output></label><input type="range" id="' + id + k + '" min="' + d[1] + '" max="' + d[2] + '" step="' + d[3] + '" value="' + d[4] + '"></div>').join('');
+  }
+  function hbar(lab, v, max, cls, txt) {
+    return '<div class="pb"><span>' + lab + '</span><div class="pb-track"><i class="' + cls + '" style="width:' + Math.max(0, Math.min(100, v / max * 100)) + '%"></i></div><b>' + txt + '</b></div>';
+  }
+
+  W.value = host => {
+    const body = shell(host, 'Interactive', 'Which coffee shop gives more value?', 'Shop A: ฿70, 12-minute queue, 8-minute walk. Shop B: ฿100, ready in 1 minute, 2 minutes from the office. Price is only part of what the customer gives up.');
+    const id = 'val' + (++uid);
+    body.innerHTML = '<div class="pop-grid"><div class="pop-ctrl">' + sliders(id, [['What one minute of your time is worth', 0, 8, .5, 1]]) +
+      '<div class="seg" role="radiogroup"><button type="button" role="radio" data-v="0.5">Relaxed student</button><button type="button" role="radio" data-v="4">Busy manager</button></div><dl class="g-stats"></dl></div><div class="pop-bars"></div></div><p class="g-note"></p>';
+    const r = body.querySelector('input'), o = body.querySelector('output'), bars = body.querySelector('.pop-bars'), stats = body.querySelector('.g-stats'), note = body.querySelector('.g-note');
+    const A = { p: 70, m: 20 }, B = { p: 100, m: 3 }, be = (B.p - A.p) / (A.m - B.m);
+    function draw() {
+      const t = +r.value; o.textContent = baht(t) + ' / min';
+      body.querySelectorAll('.seg button').forEach(b => b.setAttribute('aria-checked', +b.dataset.v === t));
+      const ca = A.p + A.m * t, cb = B.p + B.m * t, mx = Math.max(ca, cb, 1) * 1.1;
+      bars.innerHTML = '<p class="pb-h">Price paid</p>' + hbar('Shop A', A.p, mx, 'base', baht(A.p)) + hbar('Shop B', B.p, mx, 'base', baht(B.p)) +
+        '<p class="pb-h">Full cost: price + time</p>' + hbar('Shop A', ca, mx, ca <= cb ? 'ctrl' : 'test', baht(ca)) + hbar('Shop B', cb, mx, cb <= ca ? 'ctrl' : 'test', baht(cb));
+      stats.innerHTML = '<div class="st"><dt>Time cost A / B</dt><dd>' + baht(A.m * t) + ' / ' + baht(B.m * t) + '</dd></div><div class="st big"><dt>Break-even time value</dt><dd>' + '฿' + be.toFixed(1) + ' / min</dd></div>';
+      note.textContent = cb < ca ? 'For this customer the more expensive shop costs less in total. Low price and high value are not the same thing.'
+        : ca < cb ? 'For this customer the cheaper shop wins. The same offer has different value for different targets.' : 'At this point both shops cost the same in total.';
+    }
+    r.addEventListener('input', draw);
+    body.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => { r.value = b.dataset.v; draw(); }));
+    draw();
+  };
+
+  W.funnel = host => {
+    const body = shell(host, 'Interactive', 'Where is the funnel leaking?', 'Start from 1,000 target customers. Set each conversion rate and find the weakest step before choosing an action.');
+    const id = 'fn' + (++uid);
+    const steps = [['Awareness', 'of target customers'], ['Interest', 'of aware'], ['Trial', 'of interested'], ['Repeat', 'of triers']];
+    const fix = ['Do people know us? Look at reach and communication.', 'Is the value proposition relevant? Check the message and the offer.', 'What blocks the first purchase? Check price, access and perceived risk.', 'Why don\'t triers come back? Check the product and the experience.'];
+    body.innerHTML = '<div class="pop-grid"><div class="pop-ctrl">' + sliders(id, steps.map((s, k) => [s[0] + ' rate', 5, 100, 5, [80, 60, 15, 50][k]])) +
+      '<div class="seg" role="radiogroup"><button type="button" data-p="80,60,15,50">Low trial</button><button type="button" data-p="20,70,50,60">Low awareness</button><button type="button" data-p="85,70,60,15">Low repeat</button></div></div><div class="pop-bars"></div></div><p class="g-note"></p>';
+    const rs = body.querySelectorAll('input'), os = body.querySelectorAll('output'), bars = body.querySelector('.pop-bars'), note = body.querySelector('.g-note');
+    function draw() {
+      let n = 1000, h = '<p class="pb-h">Customers left at each stage</p>', lo = 0;
+      const v = [...rs].map(x => +x.value);
+      v.forEach((p, k) => { os[k].textContent = p + '% ' + steps[k][1]; if (p < v[lo]) lo = k; });
+      v.forEach((p, k) => { n = n * p / 100; h += hbar(steps[k][0], n, 1000, k === lo ? 'test' : 'base', Math.round(n).toLocaleString('en-US')); });
+      bars.innerHTML = h;
+      note.innerHTML = '<b>Weakest step: ' + steps[lo][0] + ' (' + v[lo] + '%).</b> ' + fix[lo] + (lo > 0 ? ' More advertising would not fix this.' : '');
+    }
+    rs.forEach(x => x.addEventListener('input', draw));
+    body.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => { b.dataset.p.split(',').forEach((p, k) => rs[k].value = p); draw(); }));
+    draw();
+  };
+
+  W.philo = host => quiz(host, 'Diagnose', 'Which philosophy is driving this decision?', 'Look at the starting point of the decision, not the activity.', [
+    { q: 'We need to cut unit cost and get the product into every province.', a: 'prod', why: 'Production Concept: availability and low cost.' },
+    { q: 'Add two more camera modes. A better phone will sell itself.', a: 'pdt', why: 'Product Concept: features first, with a risk of marketing myopia.' },
+    { q: 'Inventory is too high. Push the sales team to close more deals this month.', a: 'sell', why: 'Selling Concept: persuade people to buy what we already made.' },
+    { q: 'Interview office workers first to learn what they need from a lunch service.', a: 'mkt', why: 'Marketing Concept: start with target customer needs.' },
+    { q: 'Customers love the single-use pods, but what happens to all that plastic waste?', a: 'soc', why: 'Societal Marketing: long-term effects on society and the environment.' },
+    { q: 'Rivals offer the same quality and price. Win through a cheaper delivery system that keeps margins healthy.', a: 'strat', why: 'Strategic Marketing: customer value delivered with better economics.' }
+  ], [['prod', 'Production'], ['pdt', 'Product'], ['sell', 'Selling'], ['mkt', 'Marketing'], ['soc', 'Societal'], ['strat', 'Strategic']], 'row3');
+
+  W.getkeep = host => {
+    const body = shell(host, 'Interactive', 'GET minus churn', 'New customers only tell half the story.');
+    const id = 'gk' + (++uid);
+    body.innerHTML = '<div class="pop-grid"><div class="pop-ctrl">' + sliders(id, [['New customers acquired', 0, 2000, 50, 1000], ['Customers lost (churn)', 0, 2000, 50, 900]]) +
+      '<dl class="g-stats"></dl></div><div class="pop-bars"></div></div><p class="g-note"></p>';
+    const rs = body.querySelectorAll('input'), os = body.querySelectorAll('output'), bars = body.querySelector('.pop-bars'), stats = body.querySelector('.g-stats'), note = body.querySelector('.g-note');
+    function draw() {
+      const a = +rs[0].value, l = +rs[1].value, net = a - l; os[0].textContent = a.toLocaleString('en-US'); os[1].textContent = l.toLocaleString('en-US');
+      bars.innerHTML = '<p class="pb-h">Customer base change</p>' + hbar('GET', a, 2000, 'ctrl', '+' + a.toLocaleString('en-US')) + hbar('Lost', l, 2000, 'test', '−' + l.toLocaleString('en-US')) + hbar('Net', Math.abs(net), 2000, net >= 0 ? 'base' : 'test', (net >= 0 ? '+' : '−') + Math.abs(net).toLocaleString('en-US'));
+      stats.innerHTML = '<div class="st big"><dt>Net growth</dt><dd>' + (net >= 0 ? '+' : '−') + Math.abs(net).toLocaleString('en-US') + '</dd></div>';
+      note.textContent = net <= 0 ? 'The base is shrinking even though acquisition looks busy. Fix retention before buying more acquisition.'
+        : l >= a * .5 ? 'Most acquisition spending only replaces lost customers. "We acquired ' + a.toLocaleString('en-US') + '" is incomplete without churn.' : 'Acquisition and retention are both working.';
+    }
+    rs.forEach(x => x.addEventListener('input', draw)); draw();
+  };
+
+  W.clv = host => {
+    const body = shell(host, 'Interactive', 'Lifetime value versus today\'s sale', 'Customer A spends a little, often. Customer B spends ฿500 once and never returns. Adjust Customer A.');
+    const id = 'clv' + (++uid);
+    body.innerHTML = '<div class="pop-grid"><div class="pop-ctrl">' + sliders(id, [['Spend per visit', 50, 300, 10, 100], ['Visits per week', .5, 5, .5, 3], ['Years retained', .5, 5, .5, 1], ['Gross margin', 10, 70, 5, 40], ['Acquisition cost', 0, 3000, 100, 500]]) +
+      '<dl class="g-stats"></dl></div><div class="pop-bars"></div></div><p class="g-note"></p>';
+    const rs = body.querySelectorAll('input'), os = body.querySelectorAll('output'), bars = body.querySelector('.pop-bars'), stats = body.querySelector('.g-stats'), note = body.querySelector('.g-note');
+    function draw() {
+      const [s, f, y, m, c] = [...rs].map(x => +x.value);
+      os[0].textContent = baht(s); os[1].textContent = f; os[2].textContent = y; os[3].textContent = m + '%'; os[4].textContent = baht(c);
+      const rev = s * f * 52 * y, mar = rev * m / 100, net = mar - c, bNet = 500 * m / 100 - c, mx = Math.max(rev, 500, 1) * 1.05;
+      bars.innerHTML = '<p class="pb-h">Customer A over ' + y + ' year' + (y === 1 ? '' : 's') + '</p>' + hbar('Revenue', rev, mx, 'base', baht(rev)) + hbar('Margin', mar, mx, 'ctrl', baht(mar)) + hbar('Net value', Math.max(net, 0), mx, net >= 0 ? 'ctrl' : 'test', baht(net)) +
+        '<p class="pb-h">Customer B, one visit</p>' + hbar('Revenue', 500, mx, 'base', baht(500)) + hbar('Net value', Math.max(bNet, 0), mx, bNet >= 0 ? 'ctrl' : 'test', baht(bNet));
+      stats.innerHTML = '<div class="st"><dt>A: annual revenue</dt><dd>' + baht(s * f * 52) + '</dd></div><div class="st big"><dt>A: net lifetime value</dt><dd>' + baht(net) + '</dd></div>';
+      note.textContent = net < 0 ? 'Revenue looks large, but after margin and acquisition cost this relationship loses money. CLV is not revenue.'
+        : 'Judge the relationship, not the latest transaction. Revenue is not profit: margin and acquisition cost decide whether the customer is worth keeping.';
+    }
+    rs.forEach(x => x.addEventListener('input', draw)); draw();
+  };
+
+  W.satimp = host => {
+    const body = shell(host, 'Interactive', 'Satisfaction × importance', 'Pick an attribute and move it. Priority rises when an attribute is important and performance is weak.');
+    const id = 'si' + (++uid);
+    const at = [{ n: 'Store music', s: 5, i: 2 }, { n: 'Coffee taste', s: 7, i: 10 }, { n: 'Queue time', s: 4, i: 8 }, { n: 'Free Wi-Fi', s: 3, i: 3 }];
+    let cur = 0;
+    body.innerHTML = '<div class="seg" role="radiogroup">' + at.map((a, k) => '<button type="button" role="radio" data-k="' + k + '">' + a.n + '</button>').join('') + '</div>' +
+      '<div class="pop-grid" style="margin-top:12px"><div class="pop-ctrl">' + sliders(id, [['Satisfaction', 0, 10, 1, 5], ['Importance', 0, 10, 1, 2]]) + '<dl class="g-stats"></dl></div>' +
+      '<svg viewBox="0 0 320 250" role="img" aria-label="Importance versus satisfaction matrix" style="width:100%;height:auto"></svg></div><p class="g-note"></p>';
+    const rs = body.querySelectorAll('input[type=range]'), os = body.querySelectorAll('output'), svg = body.querySelector('svg'), stats = body.querySelector('.g-stats'), note = body.querySelector('.g-note');
+    const X = s => 40 + s * 26, Y = i => 210 - i * 19;
+    function draw() {
+      at[cur].s = +rs[0].value; at[cur].i = +rs[1].value; os[0].textContent = at[cur].s + '/10'; os[1].textContent = at[cur].i + '/10';
+      body.querySelectorAll('.seg button').forEach(b => b.setAttribute('aria-checked', +b.dataset.k === cur));
+      let g = '<rect x="40" y="20" width="130" height="95" fill="#FCE3DD"/><rect x="170" y="20" width="130" height="95" fill="#E3F2E9"/><rect x="40" y="115" width="130" height="95" fill="#F4EFF1"/><rect x="170" y="115" width="130" height="95" fill="#F4EFF1"/>' +
+        '<g font-size="10" font-weight="700" fill="#7E6F74"><text x="46" y="109" fill="#A8432F">FIX FIRST</text><text x="294" y="109" text-anchor="end" fill="#2F6B4F">KEEP IT UP</text><text x="46" y="204">LOW PRIORITY</text><text x="294" y="204" text-anchor="end">POSSIBLE OVERKILL</text></g>' +
+        '<g font-size="10" fill="#7E6F74"><text x="170" y="236" text-anchor="middle">Satisfaction →</text><text x="14" y="115" text-anchor="middle" transform="rotate(-90 14 115)">Importance →</text></g>';
+      at.forEach((a, k) => {
+        const on = k === cur; g += '<circle cx="' + X(a.s) + '" cy="' + Y(a.i) + '" r="' + (on ? 7 : 5) + '" fill="' + (on ? '#C06C84' : '#3F5675') + '" stroke="#fff" stroke-width="1.5"/>' +
+          '<text x="' + (X(a.s) + (a.s > 7 ? -10 : 10)) + '" y="' + (Y(a.i) + 4) + '" font-size="10.5" font-weight="' + (on ? 700 : 500) + '" fill="#2F282B" text-anchor="' + (a.s > 7 ? 'end' : 'start') + '">' + a.n + '</text>';
+      });
+      svg.innerHTML = g;
+      const rank = at.map(a => ({ n: a.n, p: a.i * (10 - a.s) })).sort((p, q) => q.p - p.p);
+      stats.innerHTML = rank.map((r, k) => '<div class="st' + (k === 0 ? ' big' : '') + '"><dt>' + (k + 1) + '. ' + r.n + '</dt><dd>' + r.p + '</dd></div>').join('');
+      note.textContent = 'Priority score = importance × (10 − satisfaction). Store music scores lower on satisfaction than coffee taste, yet matters little to the decision.';
+    }
+    function pick(k) { cur = k; rs[0].value = at[k].s; rs[1].value = at[k].i; draw(); }
+    body.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => pick(+b.dataset.k)));
+    rs.forEach(x => x.addEventListener('input', draw)); pick(0);
+  };
+
+  W.loyalty = host => {
+    const body = shell(host, 'Interactive', 'Did the stamp card create value?', 'Every 10th cup is free. Margin ฿40 per paid cup; each free cup costs ฿30 to make. Compare behavior with and without the program.');
+    const id = 'ly' + (++uid);
+    body.innerHTML = '<div class="pop-grid"><div class="pop-ctrl">' + sliders(id, [['Cups per month without the program', 0, 20, 1, 10], ['Cups per month with the program', 0, 20, 1, 10]]) +
+      '<dl class="g-stats"></dl></div><div class="pop-bars"></div></div><p class="g-note"></p>';
+    const rs = body.querySelectorAll('input'), os = body.querySelectorAll('output'), bars = body.querySelector('.pop-bars'), stats = body.querySelector('.g-stats'), note = body.querySelector('.g-note');
+    function draw() {
+      const b = +rs[0].value, w = +rs[1].value; os[0].textContent = b; os[1].textContent = w;
+      const paidW = w * 9 / 10, gain = (paidW - b) * 40, cost = (w / 10) * 30, net = gain - cost, mx = 600;
+      bars.innerHTML = '<p class="pb-h">Per member, per month</p>' + hbar('Margin change', Math.max(gain, 0), mx, 'ctrl', baht(gain)) + hbar('Free cups', cost, mx, 'test', baht(cost)) + hbar('Net', Math.abs(net), mx, net >= 0 ? 'ctrl' : 'test', baht(net));
+      stats.innerHTML = '<div class="st"><dt>Incremental cups</dt><dd>' + (w - b) + '</dd></div><div class="st big"><dt>Program value</dt><dd>' + baht(net) + '</dd></div>';
+      note.textContent = w <= b ? 'Same behavior as before: the program only gives away margin. Membership is not incremental value.'
+        : net < 0 ? 'Behavior changed, but not enough to pay for the rewards.' : 'The program creates incremental value. Check that the effect lasts after the reward is redeemed.';
+    }
+    rs.forEach(x => x.addEventListener('input', draw)); draw();
+  };
+
+  W.metric = host => quiz(host, 'Match', 'Which metric fits the objective?', 'Choose the measure closest to the objective, not the easiest to count.', [
+    { q: 'Launch: get office workers to try the new oat latte.', a: 'trial', why: 'The objective is trial, so count first purchases in the target group.' },
+    { q: 'Stamp card: make existing customers come back more often.', a: 'rep', why: 'Visit frequency or repeat rate, not membership sign-ups.' },
+    { q: 'New brand entering Bangkok: make the target aware it exists.', a: 'reach', why: 'Awareness or target reach. Likes alone do not show who saw it.' },
+    { q: 'Subscribers keep cancelling after three months.', a: 'churn', why: 'A retention problem: track churn and retention, not new sign-ups.' },
+    { q: 'Discounts lifted sales, but management worries the deals are unprofitable.', a: 'margin', why: 'Profitability needs margin and customer economics, not sales volume.' },
+    { q: 'Test whether the new banner gets people to click through to the menu.', a: 'ctr', why: 'Here CTR fits, because the click itself is the intermediate objective.' }
+  ], [['reach', 'Reach / awareness'], ['ctr', 'Click-through rate'], ['trial', 'First purchase'], ['rep', 'Repeat rate'], ['churn', 'Churn / retention'], ['margin', 'Margin']], 'row3');
 
   window.MktWidgets = { mount(root) { root.querySelectorAll('[data-mk]').forEach(h => { if (!h.dataset.ready && W[h.dataset.mk]) { h.dataset.ready = 1; W[h.dataset.mk](h); } }); } };
 })();
