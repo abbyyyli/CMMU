@@ -1,0 +1,719 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Strategic Planning & Consumer Behavior · Marketing Session 4</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap"><style>
+/* Layout: one light reading column with a sticky chapter rail; deliberately single (light) theme. */
+:root {
+  color-scheme: light;
+  --bg: #FDF9F9; --panel: #F8EEF0; --paper: #FFFFFF; --tint: #FAE9ED; --line: #EFDDE2;
+  --fg: #2F282B; --muted: #7E6F74; --accent: #C06C84; --accent-ink: #9C4862;
+  --demand: #3F5675; --supply: #C06C84; --ext: #6E3F55; --world: #8A7A5C; --policy: #3F7F7A;
+  --cs: #A7CDB6; --ps: #B2C4E3; --dwl: #D9674F; --rev: #E5C171; --rev2: #F1DCA8; --time: #DDB3CB; --ts: #BFDCC9;
+  --serif: "Noto Serif TC", "Songti TC", Georgia, serif;
+  --sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; background: var(--bg); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 16px; line-height: 1.75; }
+a { color: var(--accent-ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(253, 249, 249, .94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); padding-inline: 16px; }
+.top-in { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 14px; min-height: 56px; flex-wrap: wrap; padding-block: 8px; }
+.brand { font-family: var(--serif); font-weight: 700; font-size: 1.02rem; white-space: nowrap; }
+.brand small { font-family: var(--sans); font-weight: 500; color: var(--muted); font-size: .76rem; margin-left: 6px; letter-spacing: .06em; }
+.sessions { display: flex; gap: 4px; margin-left: auto; }
+.crumbs { font-size: .86rem; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.crumbs a { color: var(--muted); text-decoration: none; } .crumbs a:hover { color: var(--accent-ink); } .crumbs span { color: var(--line); } .crumbs b { font-family: var(--serif); }
+.sessions a.pill { text-decoration: none; }
+.sessions .pill { font: 500 .82rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--muted); padding: 4px 12px; border-radius: 999px; }
+.sessions .pill[aria-current="page"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.sessions .pill.off { opacity: .5; cursor: not-allowed; }
+.toc-btn { display: none; font: 500 .85rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--fg); border-radius: 8px; padding: 5px 12px; }
+
+.wrap { max-width: 1160px; margin: 0 auto; padding-inline: 16px; display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 52px; }
+.rail { position: sticky; top: 76px; align-self: start; max-height: calc(100vh - 92px); overflow: auto; padding-block: 34px 40px; font-size: .86rem; line-height: 1.5; }
+.rail .lbl { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.rail ol { list-style: none; margin: 0; padding: 0; }
+.rail li a { display: block; padding: 4px 10px; color: var(--muted); text-decoration: none; border-radius: 6px; }
+.rail li a:hover { color: var(--fg); background: var(--tint); }
+.rail li.h3 a { padding-left: 22px; font-size: .8rem; }
+.rail li a.on { color: var(--accent-ink); background: var(--tint); font-weight: 500; }
+
+main { min-width: 0; padding-block: 30px 120px; }
+.doc { max-width: 780px; }
+.hero { padding-block: 8px 26px; border-bottom: 1px solid var(--line); }
+.kick { font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); margin: 0 0 6px; font-weight: 500; }
+.hero h1 { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.25; margin: 0 0 12px; text-wrap: balance; }
+.lead { margin: 0; font-size: 1.04rem; max-width: 62ch; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 16px; font-size: .78rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+.doc h2 { font-family: var(--serif); font-size: 1.55rem; line-height: 1.35; margin: 3.4rem 0 .3rem; text-wrap: balance; }
+.doc h3 { font-size: 1.1rem; line-height: 1.45; margin: 2.2rem 0 .5rem; color: var(--accent-ink); text-wrap: balance; }
+.sub { margin: 0 0 1.2rem; color: var(--muted); max-width: 66ch; }
+.doc p, .doc li { max-width: 68ch; }
+.doc ul, .doc ol { padding-left: 1.25em; }
+.doc li { margin: .25rem 0; }
+.zh { display: inline-block; font-size: .78em; line-height: 1.3; color: var(--accent-ink); background: var(--tint); padding: 0 6px; border-radius: 4px; margin-left: 2px; vertical-align: 1px; font-weight: 500; }
+.hint { font-size: .9rem; color: var(--muted); display: flex; gap: 10px; align-items: baseline; }
+.hint b { flex: none; font-size: .72rem; color: #fff; background: var(--accent); padding: 0 7px; border-radius: 4px; font-weight: 500; }
+.key { background: var(--tint); padding: 12px 16px; border-radius: 8px; font-weight: 500; }
+.note-small { font-size: .8rem; color: var(--muted); }
+
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 1rem 0; }
+.pair > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; }
+.pair b { color: var(--accent-ink); }
+.pair p { margin: 4px 0 0; font-size: .92rem; }
+
+.matrix { display: grid; grid-template-columns: minmax(90px, .7fr) repeat(2, minmax(0, 1fr)); gap: 6px; margin: 1rem 0 1.2rem; font-size: .9rem; max-width: 620px; }
+.matrix .mh { font-weight: 700; font-size: .8rem; color: var(--muted); align-self: end; padding: 0 4px 2px; }
+.matrix .mh.side { align-self: center; }
+.matrix .cell { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px; font-weight: 500; }
+.matrix .cell.hi { background: var(--tint); border-color: var(--accent); }
+.matrix small { display: block; font-weight: 400; color: var(--muted); font-size: .8rem; margin-top: 2px; line-height: 1.45; }
+
+.map { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.3fr) auto minmax(0, 1fr); gap: 10px; align-items: center; margin: 1rem 0; }
+.mcol { display: flex; flex-direction: column; gap: 8px; }
+.mbox { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .84rem; line-height: 1.5; display: flex; flex-direction: column; gap: 2px; }
+.mbox b { font-size: .9rem; } .mbox span { color: var(--muted); } .mbox em { font-style: normal; color: var(--accent-ink); font-size: .78rem; font-weight: 500; }
+.mbox.good { border-color: var(--cs); } .mbox.ask { background: var(--tint); border-color: var(--accent); }
+.marrow { color: var(--accent); font-weight: 700; }
+
+.flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 1rem 0; font-size: .86rem; }
+.flow span { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; line-height: 1.45; }
+.flow i { font-style: normal; color: var(--accent); font-weight: 700; }
+.formula { font-family: var(--mono); font-size: .9rem; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; line-height: 1.9; overflow-x: auto; }
+.steps { counter-reset: s; list-style: none; padding-left: 0 !important; }
+.steps li { counter-increment: s; display: flex; gap: 10px; }
+.steps li::before { content: counter(s); flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--tint); color: var(--accent-ink); font: 700 .75rem/22px var(--sans); text-align: center; margin-top: 3px; }
+.assign { margin: 1.6rem 0; border: 1px dashed var(--accent); border-radius: 10px; padding: 14px 16px; background: var(--paper); }
+.assign p { margin: 6px 0 0; font-size: .92rem; }
+
+.tbl { overflow-x: auto; margin: 1rem 0; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+.doc table { border-collapse: collapse; width: 100%; font-size: .88rem; line-height: 1.55; }
+.doc th, .doc td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+.doc th { background: var(--panel); font-weight: 700; }
+.doc tr:last-child td { border-bottom: 0; }
+.drill .ans { filter: blur(5px); cursor: pointer; user-select: none; transition: filter .2s; }
+.drill .ans.shown { filter: none; user-select: auto; }
+
+.traps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 1rem; }
+.traps > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: .88rem; line-height: 1.55; }
+.traps s { color: var(--muted); text-decoration-color: var(--dwl); }
+.traps p { margin: 6px 0 0; font-weight: 500; }
+
+.qa-tools { margin: .4rem 0 .8rem; }
+.qa-tools button { font: 500 .82rem var(--sans); border: 1px solid var(--accent); background: var(--paper); color: var(--accent-ink); border-radius: 6px; padding: 5px 12px; cursor: pointer; }
+.qa { display: flex; flex-direction: column; gap: 6px; }
+.qa details { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
+.qa summary { cursor: pointer; padding: 10px 14px; font-weight: 500; font-size: .93rem; list-style: none; display: flex; gap: 10px; }
+.qa summary::before { content: "Q"; color: var(--accent); font-weight: 700; }
+.qa details[open] summary { border-bottom: 1px dashed var(--line); }
+.qa details p { margin: 0; padding: 10px 14px 12px 36px; font-size: .9rem; }
+
+/* graphs */
+.graph { max-width: 900px; margin: 1.8rem 0 2.2rem; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px 18px 14px; }
+.g-head h4 { font-family: var(--serif); font-size: 1.12rem; margin: 2px 0 2px; line-height: 1.45; }
+.g-head p { margin: 0 0 10px; color: var(--muted); font-size: .86rem; }
+.g-kicker { font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); }
+.g-body { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.g-plot svg { width: 100%; height: auto; display: block; }
+.g-side { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.g-ctrl { display: flex; flex-direction: column; gap: 10px; }
+.sl label { display: flex; justify-content: space-between; font-size: .8rem; color: var(--muted); line-height: 1.3; }
+.sl output { font-family: var(--mono); color: var(--fg); font-size: .8rem; }
+.sl input { width: 100%; accent-color: var(--accent); margin: 4px 0 0; }
+.g-btn { align-self: flex-start; font: 500 .8rem var(--sans); border: 1px solid var(--accent); color: var(--accent-ink); background: transparent; border-radius: 6px; padding: 4px 11px; cursor: pointer; }
+.g-btn:hover { background: var(--tint); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; align-self: flex-start; }
+.seg button { font: 500 .8rem var(--sans); border: 0; background: transparent; color: var(--muted); padding: 5px 12px; cursor: pointer; }
+.seg button[aria-checked="true"] { background: var(--accent); color: var(--paper); }
+.chk { display: flex; gap: 8px; align-items: center; font-size: .8rem; color: var(--muted); }
+.chk input { accent-color: var(--accent); }
+.g-stats { margin: 0; border-top: 1px solid var(--line); padding-top: 10px; display: flex; flex-direction: column; gap: 3px; }
+.st { display: flex; justify-content: space-between; gap: 10px; font-size: .8rem; line-height: 1.45; }
+.st dt { color: var(--muted); display: flex; align-items: center; gap: 7px; }
+.st dd { margin: 0; font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.st.big dd { font-weight: 500; color: var(--accent-ink); font-size: .92rem; }
+.g-note { margin: 12px 0 0; padding: 9px 12px; background: var(--tint); border-radius: 6px; font-size: .85rem; line-height: 1.6; }
+
+.sw { width: 11px; height: 11px; border-radius: 2px; display: inline-block; flex: none; }
+.sw.none { background: transparent; }
+.sw.a-cs { background: var(--cs); } .sw.a-ps { background: var(--ps); } .sw.a-ps2 { background: var(--ps); outline: 1px solid var(--demand); }
+.sw.a-dwl { background: repeating-linear-gradient(45deg, var(--dwl) 0 2px, transparent 2px 4px); outline: 1px solid var(--dwl); }
+.sw.a-rev { background: var(--rev); } .sw.a-rev2 { background: var(--rev2); } .sw.a-time { background: var(--time); } .sw.a-ts { background: var(--ts); }
+.sw.ln { height: 3px; border-radius: 2px; width: 16px; }
+
+svg .ax { stroke: var(--muted); stroke-width: 1.2; }
+svg .axl { fill: var(--muted); font: 500 11px var(--sans); }
+svg .tk { fill: var(--muted); font: 500 10.5px var(--mono); }
+svg .gd { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 4; opacity: .7; }
+svg .cv { stroke-width: 2.6; fill: none; stroke-linecap: round; }
+svg .cv.dash { stroke-dasharray: 7 5; stroke-width: 2; }
+svg .cvl { font: 700 11.5px var(--sans); }
+svg .c-d { stroke: var(--demand); fill: var(--demand); } svg .c-s { stroke: var(--supply); fill: var(--supply); }
+svg .c-x { stroke: var(--ext); fill: var(--ext); } svg .c-w { stroke: var(--world); fill: var(--world); } svg .c-t { stroke: var(--policy); fill: var(--policy); }
+svg text.cvl { stroke: none; }
+svg .pt { fill: var(--paper); stroke: var(--fg); stroke-width: 2; }
+svg .ptl { fill: var(--fg); font: 700 11px var(--sans); }
+svg .atag { fill: var(--fg); font: 700 11px var(--sans); opacity: .8; }
+svg .a-cs { fill: var(--cs); fill-opacity: .6; } svg .a-ps { fill: var(--ps); fill-opacity: .6; }
+svg .a-ps2 { fill: var(--ps); fill-opacity: .95; } svg .a-ts { fill: var(--ts); fill-opacity: .6; }
+svg .a-dwl { fill: url(#dwlHatch); stroke: var(--dwl); stroke-width: 1.2; }
+svg .a-rev { fill: var(--rev); fill-opacity: .75; } svg .a-rev2 { fill: var(--rev2); fill-opacity: .8; } svg .a-time { fill: var(--time); fill-opacity: .65; }
+
+svg .grid { stroke: var(--line); stroke-width: 1; }
+svg .a-prof { fill: var(--cs); fill-opacity: .75; } svg .a-loss { fill: var(--dwl); fill-opacity: .35; }
+.sw.a-prof { background: var(--cs); } .sw.a-loss { background: var(--dwl); opacity: .5; }
+.twin { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.tw-t { margin: 0 0 2px; font-size: .78rem; font-weight: 700; color: var(--muted); }
+.g-ctrl .g-btn + .g-btn { margin-top: -4px; }
+.graph.wide .g-body { grid-template-columns: minmax(0, 1fr); }
+.graph.wide .g-side { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+@media (max-width: 700px) { .twin, .graph.wide .g-side { grid-template-columns: minmax(0, 1fr); } }
+svg polyline.cv { fill: none !important; }
+
+.graph { background: var(--paper); }
+.g-note { background: var(--tint); }
+
+@media (max-width: 900px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .rail { display: none; position: fixed; inset: 64px 0 0 0; max-height: none; background: var(--bg); z-index: 15; padding: 20px 16px 60px; }
+  .rail.open { display: block; }
+  .toc-btn { display: inline-block; }
+  .g-body { grid-template-columns: minmax(0, 1fr); }
+  .map { grid-template-columns: minmax(0, 1fr); }
+  .marrow { transform: rotate(90deg); justify-self: center; }
+}
+@media (max-width: 560px) { .pair, .traps { grid-template-columns: minmax(0, 1fr); } }
+/* Management components */
+.three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 1rem 0; }
+.tcard { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.tcard .tnum { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font: 700 .78rem/24px var(--sans); text-align: center; }
+.tcard p { margin: 0; color: var(--muted); font-size: .88rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+.tags span { font-size: .74rem; background: var(--tint); color: var(--accent-ink); padding: 1px 8px; border-radius: 999px; font-weight: 500; }
+.method, .loop, .cascade { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 1rem 0; font-size: .86rem; }
+.method span, .loop span, .cascade span { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 5px 11px; line-height: 1.4; }
+.method span.hi { background: var(--tint); border-color: var(--accent); color: var(--accent-ink); font-weight: 700; }
+.method i, .loop i, .cascade i { font-style: normal; color: var(--accent); font-weight: 700; }
+.loop i.back { font-size: 1.1rem; }
+.cascade { flex-direction: column; align-items: flex-start; gap: 2px; }
+.cascade span:nth-of-type(2) { margin-left: 18px; } .cascade span:nth-of-type(3) { margin-left: 36px; } .cascade span:nth-of-type(4) { margin-left: 54px; }
+.cascade i:nth-of-type(1) { margin-left: 14px; } .cascade i:nth-of-type(2) { margin-left: 32px; } .cascade i:nth-of-type(3) { margin-left: 50px; }
+.four { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 1rem 0; }
+.four > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+.four b { font-size: .9rem; color: var(--accent-ink); } .four p { margin: 4px 0 0; font-size: .84rem; color: var(--muted); line-height: 1.5; }
+
+.ladder { display: grid; grid-template-columns: minmax(0, 1fr) 118px 118px; grid-template-rows: repeat(5, auto); gap: 5px 8px; margin: 1rem 0 .3rem; max-width: 640px; }
+.lv { grid-column: 1; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; font-weight: 700; font-size: .9rem; line-height: 1.35; }
+.lv small { display: block; font-weight: 400; color: var(--muted); font-size: .78rem; }
+.lv.l5 { grid-row: 1; margin-inline: 22%; } .lv.l4 { grid-row: 2; margin-inline: 16%; } .lv.l3 { grid-row: 3; margin-inline: 10%; } .lv.l2 { grid-row: 4; margin-inline: 5%; } .lv.l1 { grid-row: 5; }
+.lv.l5, .lv.l4 { background: #F6E9F4; } .lv.l3 { background: var(--tint); } .lv.l2, .lv.l1 { background: #EAF2EE; }
+.erg { border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .84rem; text-align: center; padding: 6px; }
+.erg.g { grid-column: 2; grid-row: 1 / span 2; background: #EBD7EA; color: #6E3F6A; }
+.erg.r { grid-column: 3; grid-row: 2 / span 2; background: var(--tint); color: var(--accent-ink); }
+.erg.e { grid-column: 2; grid-row: 4 / span 2; background: #D9EBE1; color: #2F6B4F; }
+
+.mw { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px; margin: 1.6rem 0 2rem; }
+.mw-body { margin-top: 10px; }
+.hz-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.hz-t { margin: 0 0 6px; font-weight: 700; font-size: .88rem; } .hz-t small { font-weight: 400; color: var(--muted); }
+.chips { display: flex; flex-direction: column; gap: 5px; }
+.chip { display: flex; justify-content: space-between; gap: 10px; font: 500 .84rem var(--sans); text-align: left; background: var(--bg); border: 1px solid var(--line); color: var(--fg); border-radius: 7px; padding: 6px 10px; cursor: pointer; }
+.chip em { font-style: normal; font-size: .74rem; color: var(--muted); }
+.hz-cols > div:first-child .chip[aria-pressed="true"] { border-color: var(--dwl); background: #FCEDEA; }
+.hz-cols > div:first-child .chip[aria-pressed="true"] em { color: #A8432F; }
+.hz-cols > div:last-child .chip[aria-pressed="true"] { border-color: #6FAE8B; background: #EAF5EE; }
+.hz-cols > div:last-child .chip[aria-pressed="true"] em { color: #2F6B4F; }
+.scale { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 6px; margin-top: 18px; }
+.half { height: 14px; background: var(--bg); border: 1px solid var(--line); border-radius: 7px; position: relative; overflow: hidden; }
+.half i { position: absolute; top: 0; bottom: 0; transition: width .25s; }
+.half.left i { right: 0; background: var(--dwl); } .half.right i { left: 0; background: #6FAE8B; }
+@media (prefers-reduced-motion: reduce) { .half i { transition: none; } }
+.zero { font: 700 .8rem var(--mono); color: var(--muted); }
+.scale-l { display: flex; justify-content: space-between; font-size: .74rem; color: var(--muted); margin-top: 4px; }
+
+.kpi-flow { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.3fr) auto minmax(0, .8fr) auto minmax(0, 1fr); gap: 8px; align-items: stretch; margin-top: 12px; font-size: .84rem; }
+.kpi-flow > div { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; line-height: 1.45; }
+.kpi-flow > i { font-style: normal; color: var(--accent); font-weight: 700; align-self: center; }
+.kpi-flow b { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.kpi-flow p { margin: 3px 0 0; } .kpi-flow ul { margin: 3px 0 0; padding-left: 1.1em; }
+.kpi-flow .bad { border-color: var(--dwl); background: #FCEDEA; } .kpi-flow .good { border-color: #6FAE8B; background: #EAF5EE; }
+
+.cmp-sel { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; font-size: .84rem; color: var(--muted); }
+.cmp-sel select { font: 500 .88rem var(--sans); padding: 5px 8px; border: 1px solid var(--line); border-radius: 7px; background: var(--paper); color: var(--fg); }
+table.cmp td:first-child { font-weight: 700; color: var(--muted); width: 22%; }
+
+.tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line); }
+.tabs button { font: 500 .86rem var(--sans); background: none; border: 0; border-bottom: 2px solid transparent; color: var(--muted); padding: 6px 12px; cursor: pointer; margin-bottom: -1px; }
+.tabs button[aria-selected="true"] { color: var(--accent-ink); border-bottom-color: var(--accent); }
+.ev { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+.ev > div { display: grid; grid-template-columns: 190px auto minmax(0, 1fr); gap: 10px; align-items: baseline; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; font-size: .86rem; line-height: 1.5; }
+.ev p { margin: 0; }
+.tag { font-size: .72rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; white-space: nowrap; }
+.tag.gap { background: #FCE3DD; color: #A8432F; } .tag.ok { background: #E3F2E9; color: #2F6B4F; }
+.tag.maybe { background: #FBF0D9; color: #8A6216; } .tag.na { background: #EEE9EB; color: var(--muted); }
+.issue { margin-top: 12px; background: var(--tint); border-radius: 8px; padding: 10px 14px; font-size: .9rem; }
+.issue p { margin: 4px 0 0; }
+
+.xgrid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 1rem 0; }
+.xgrid > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 5px; font-size: .84rem; line-height: 1.4; }
+.xgrid small { color: var(--muted); font-size: .76rem; }
+.xgrid .ok, .xgrid .gap { align-self: flex-start; font-size: .72rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; }
+.xgrid .ok { background: #E3F2E9; color: #2F6B4F; } .xgrid .gap { background: #FCE3DD; color: #A8432F; }
+
+@media (max-width: 760px) {
+  .three, .four { grid-template-columns: minmax(0, 1fr); }
+  .xgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hz-cols { grid-template-columns: minmax(0, 1fr); }
+  .kpi-flow { grid-template-columns: minmax(0, 1fr); } .kpi-flow > i { transform: rotate(90deg); justify-self: center; }
+  .ev > div { grid-template-columns: minmax(0, 1fr); gap: 3px; } .ev .tag { justify-self: start; }
+  .ladder { grid-template-columns: minmax(0, 1fr) 84px 84px; }
+}
+
+/* Session 4 + case page */
+.tcard small.dont { color: var(--muted); font-size: .78rem; border-top: 1px dashed var(--line); padding-top: 6px; margin-top: 4px; }
+.quotes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: .6rem 0 1rem; }
+.quotes q { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; font-style: italic; color: var(--muted); font-size: .9rem; }
+.six { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 1rem 0; }
+.six > div { display: flex; gap: 10px; align-items: flex-start; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .88rem; line-height: 1.5; }
+.six span { flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--tint); color: var(--accent-ink); font: 700 .76rem/24px var(--sans); text-align: center; }
+a.cta { display: inline-block; background: var(--accent); color: #fff; text-decoration: none; font-weight: 500; padding: 8px 16px; border-radius: 8px; }
+a.cta:hover { background: var(--accent-ink); }
+blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; font-size: .92rem; line-height: 1.7; }
+.timeline { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 1rem 0; }
+.timeline > div { background: var(--paper); border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: 10px; padding: 10px 14px; font-size: .88rem; line-height: 1.5; }
+.timeline time { font: 500 .76rem var(--mono); color: var(--accent-ink); display: block; }
+.timeline p { margin: 4px 0 0; color: var(--muted); }
+.score { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 1rem 0; }
+.score > div { border-radius: 10px; padding: 10px 12px; font-size: .84rem; line-height: 1.5; border: 1px solid var(--line); }
+.score .up { background: #EAF5EE; border-color: #A9D3BA; } .score .down { background: #FCEDEA; border-color: #EDC2B8; }
+.score b::after { margin-left: 6px; font-size: .78rem; } .score .up b::after { content: "improved"; color: #2F6B4F; } .score .down b::after { content: "worse"; color: #A8432F; }
+.score ul { margin: 6px 0 0; padding-left: 1.1em; }
+
+.jcm { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, .9fr); gap: 16px; }
+.jdims { display: flex; flex-direction: column; gap: 8px; }
+.jd.g0 label span { color: #6E3F6A; } .jd.g1 label span { color: var(--accent-ink); } .jd.g2 label span { color: #2F6B4F; }
+.jstates { display: flex; flex-direction: column; gap: 12px; padding-top: 4px; }
+.jst span { font-size: .8rem; font-weight: 500; }
+.jbar { height: 12px; border-radius: 6px; background: var(--bg); border: 1px solid var(--line); overflow: hidden; margin-top: 3px; }
+.jbar i { display: block; height: 100%; transition: width .25s; }
+.jst.g0 .jbar i { background: #B98AB5; } .jst.g1 .jbar i { background: var(--accent); } .jst.g2 .jbar i { background: #6FAE8B; }
+@media (prefers-reduced-motion: reduce) { .jbar i { transition: none; } }
+.jout ul { margin: 8px 0 0; padding-left: 1.1em; font-size: .82rem; color: var(--muted); }
+.jlvl { display: inline-block; font-weight: 700; padding: 3px 12px; border-radius: 999px; font-size: .86rem; }
+.jlvl.strong { background: #E3F2E9; color: #2F6B4F; } .jlvl.moderate { background: #FBF0D9; color: #8A6216; } .jlvl.weak { background: #FCE3DD; color: #A8432F; }
+.jgns { margin-top: 14px; }
+
+.qz-item { font-size: 1rem; font-weight: 500; margin: 4px 0 12px; }
+.qz-opts { display: grid; gap: 8px; }
+.qz-opts.grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 520px; }
+.qz-opts.row5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.qz-o { font: 500 .88rem var(--sans); background: var(--bg); border: 1px solid var(--line); color: var(--fg); border-radius: 8px; padding: 10px; cursor: pointer; display: flex; flex-direction: column; gap: 2px; text-align: center; }
+.qz-o small { color: var(--muted); font-size: .74rem; font-weight: 400; }
+.qz-o:hover { border-color: var(--accent); }
+.qz-o.right { background: #E3F2E9; border-color: #6FAE8B; } .qz-o.wrong { background: #FCE3DD; border-color: var(--dwl); }
+.qz-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: .8rem; color: var(--muted); }
+
+.rsteps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+.rsteps > div { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: .85rem; line-height: 1.5; }
+.rsteps > div.g { background: var(--tint); border-color: var(--accent); }
+.rsteps b { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.rsteps p { margin: 4px 0 0; }
+.risk { font-size: .88rem; } .risk b { font-size: .72rem; color: #fff; background: #B98A2E; padding: 1px 7px; border-radius: 4px; margin-right: 6px; }
+.sayd summary { cursor: pointer; font-weight: 500; color: var(--accent-ink); font-size: .9rem; }
+
+@media (max-width: 760px) {
+  .quotes, .six, .timeline, .rsteps { grid-template-columns: minmax(0, 1fr); }
+  .score { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .jcm { grid-template-columns: minmax(0, 1fr); }
+  .qz-opts.row5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+
+
+/* Marketing interactions: same CMMU palette, different learning mechanics */
+body {margin:0}
+.doc h2 {border-top:1px solid var(--line);padding-top:1.35rem;margin-top:2.5rem}
+.doc h2#map {border-top:0;padding-top:0}
+.doc h3 {margin-top:1.7rem}
+.doc > .hero {border-bottom:1px solid var(--line)}
+.hero .lead {max-width:68ch}
+.m-widget {background:var(--paper);border:1px solid var(--line);border-radius:12px;margin:1.3rem 0 1.6rem;padding:18px}
+.m-widget h4 {font-family:var(--serif);font-size:1.12rem;margin:0 0 3px}
+.m-widget .mw-sub {margin:0 0 14px;color:var(--muted);font-size:.88rem}
+.m-widget .m-grid {display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:22px;align-items:start}
+.m-control {margin:.6rem 0 1.1rem}
+.m-control label{display:flex;gap:8px;align-items:baseline;justify-content:space-between;font-size:.88rem;font-weight:500}
+.m-control output{font-family:var(--mono);color:var(--accent-ink);font-weight:700}
+.m-control input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer;min-height:23px}
+.m-pillrow{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.m-pillrow button,.m-action,.flash button {font:500 .85rem var(--sans);padding:9px 12px;border:1px solid var(--line);border-radius:8px;color:var(--fg);background:var(--paper);cursor:pointer}
+.m-pillrow button:hover,.m-action:hover,.flash button:hover{border-color:var(--accent)}
+.m-pillrow button[aria-pressed=true] {background:var(--accent);color:#fff;border-color:var(--accent)}
+.m-action {border-color:var(--accent);color:var(--accent-ink)}
+.m-action.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.m-answer{background:var(--tint);padding:13px 15px;border-radius:9px;line-height:1.6;font-size:.88rem}
+.m-answer b{color:var(--accent-ink)}
+.m-answer p{margin:5px 0 0}
+.m-two {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.m-two>div {background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 13px}
+.m-two strong{display:block;color:var(--accent-ink)}
+.m-two small{color:var(--muted)}
+.m-interact-note{font-size:.78rem;color:var(--muted);margin-top:12px;line-height:1.55}
+.bcg-svg {width:100%;height:auto;display:block;touch-action:none;cursor:crosshair;border:1px solid var(--line);border-radius:8px;background:#fff}
+.bcg-svg text{font-family:var(--sans)}
+.bcg-svg .bq-label{font-weight:700;font-size:13px;fill:#3a2830}
+.bcg-svg .bq-axis{font-size:10px;fill:#77636e}
+.bcg-point{stroke:#fff;stroke-width:3;filter:drop-shadow(0 1px 2px #876)}
+.m-feedback{min-height:65px;margin:12px 0;padding:12px 14px;border-radius:8px;border:1px solid var(--line);background:var(--bg);font-size:.9rem}
+.m-feedback.good{border-color:#88bb9c;background:#eff9f1}
+.m-feedback.bad{border-color:#dfb6ac;background:#fff3ee}
+.m-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}
+.m-choices button{font:500 .89rem var(--sans);border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:8px;padding:12px 9px;cursor:pointer;min-height:50px}
+.m-choices button:hover,.m-choices button:focus-visible{border-color:var(--accent)}
+.m-choices button.correct{border-color:#70ae85;background:#eff9f1}
+.m-choices button.incorrect{border-color:#cf8877;background:#fff1ed}
+.m-choices button:disabled{cursor:default;opacity:.88}
+.m-progress{font-size:.81rem;color:var(--muted)}
+.decision-flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:16px 0}
+.decision-step{font:500 .79rem var(--sans);color:var(--fg);border:1px solid var(--line);border-top:4px solid #B5A4A9;background:#fff;border-radius:8px;min-height:95px;padding:10px 7px;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;line-height:1.4}
+.decision-step b{color:var(--accent-ink);font-size:.75rem}
+.decision-step span{font-size:.74rem;color:var(--muted)}
+.decision-step.active{border-color:var(--accent);background:var(--tint)}
+.decision-step.long{border-top-color:#53866c}
+.decision-step.quick{border-top-color:#d6ba68}
+.decision-step.optional{border-top-color:#c7bcc0}
+.weight-row{display:grid;grid-template-columns:140px minmax(0,1fr) 52px;align-items:center;gap:8px;font-size:.85rem;margin:10px 0}
+.weight-track{height:17px;border-radius:6px;background:var(--panel);overflow:hidden}
+.weight-fill{height:100%;width:0;background:var(--accent);border-radius:6px;transition:width .25s}
+.weight-row:nth-of-type(2) .weight-fill{background:#6f99ba}
+.weight-row:nth-of-type(3) .weight-fill{background:#86ad95}
+.weight-row:nth-of-type(4) .weight-fill{background:#ceb17d}
+.m-funnel{display:flex;flex-direction:column;align-items:center;gap:9px;margin:14px 0}
+.funnel-level{background:var(--accent);min-width:16%;max-width:100%;height:57px;color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;gap:12px;transition:width .25s;white-space:nowrap;padding:0 5px;text-align:center}
+.funnel-level:nth-child(2){background:#ba8299}
+.funnel-level:nth-child(3){background:#987a92}
+.funnel-level strong{font-size:1.06rem}
+.flash-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0 18px}
+.flash{min-height:102px;perspective:700px}
+.flash button{height:100%;width:100%;text-align:left;padding:14px 16px;display:block;transition:background .15s}
+.flash button[aria-pressed=true]{background:var(--tint);border-color:var(--accent)}
+.flash .front{display:block;font-weight:700;color:var(--accent-ink);font-size:.94rem}
+.flash .back{display:none;font-weight:400;margin-top:8px;font-size:.83rem;color:var(--fg);line-height:1.5}
+.flash button[aria-pressed=true] .back{display:block}
+.flash button[aria-pressed=true] .front{color:var(--fg)}
+.mnemonic{padding:10px 13px;border-left:3px solid var(--accent);margin:.9rem 0;background:var(--paper)}
+.zhtext{color:var(--accent-ink)}
+.doc .note-small{font-size:.8rem}
+.chapterline{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:12px 0}
+.chapterline span{font-size:.81rem;border:1px solid var(--line);border-radius:99px;background:#fff;padding:5px 9px}
+.chapterline i{font-style:normal;color:var(--accent)}
+@media(max-width:760px){
+ .m-widget{padding:13px}
+ .m-widget .m-grid,.m-two,.flash-grid{grid-template-columns:minmax(0,1fr)}
+ .decision-flow{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .weight-row{grid-template-columns:111px minmax(0,1fr) 36px;font-size:.76rem}
+ .m-choices{grid-template-columns:minmax(0,1fr)}
+ .decision-step{min-height:66px}
+ .funnel-level{font-size:.78rem}
+}
+@media(max-width:460px){.top-in{gap:8px}.sessions{margin-left:0}.hero h1{font-size:1.7rem}.decision-flow{grid-template-columns:minmax(0,1fr)}}
+@media(prefers-reduced-motion:reduce){.weight-fill,.funnel-level{transition:none}}
+
+/* Small, restrained retrieval disclosures; Chinese glossary remains persistent. */
+.m-reveal{background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:10px 14px;margin:12px 0;font-size:.91rem}
+.m-reveal summary{cursor:pointer;color:var(--accent-ink);font-weight:600;line-height:1.55}
+.m-reveal p{margin:10px 0 2px;font-size:.91rem;line-height:1.7}
+@media(max-width:460px){
+@media(max-width:560px){.sessions a.pill{text-decoration:none;transition:border-color .15s,color .15s}
+.sessions a.pill:hover,.sessions a.pill:focus-visible{border-color:var(--accent);color:var(--accent-ink);background:var(--tint)}
+</style></head><body><header class="top"><div class="top-in">
+ <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Study Notes</a><span>/</span><a href="marketing.html">Marketing</a><span>/</span><b>Session 4</b></nav>
+ <button class="toc-btn" type="button" id="tocBtn" aria-expanded="false" aria-controls="rail">Contents</button>
+ 
+ <nav class="sessions" aria-label="Sessions"><a class="pill" href="marketing-s1.html">S1</a><a class="pill" href="marketing-s2.html">S2</a><a class="pill" href="marketing-s3.html">S3</a><span class="pill" aria-current="page">S4</span></nav>
+</div></header>
+<div class="wrap"><aside class="rail" id="rail"><p class="lbl">Contents</p><ol id="toc"></ol></aside>
+<main><article class="doc">
+ <div class="hero"><p class="kick">Strategic Marketing Management · Session 4</p>
+ <h1>Strategic Planning &amp; Consumer Behavior</h1>
+ <p class="lead">A company chooses where to compete and what value to promise. Consumers decide which brands deserve their attention, trust and money. Practice the judgment connecting the two.</p>
+ <div class="legend"><span>Strategy → action → metric</span><span>Customer → motive → choice</span><span>English-first <span class="zh">中文輔助</span></span></div>
+ </div>
+ <h2 id="map">Chapter map · Two questions, one marketing decision</h2>
+ <div class="m-two"><div><strong>1 · Company direction</strong><p>Vision → mission → objectives → coordinated brand delivery.</p><small>Portfolio, growth options and environmental fit</small></div><div><strong>2 · Consumer choice</strong><p>Need → involvement → alternatives → purchase → postpurchase.</p><small>Benefits, situation, trust, social context</small></div></div>
+ <div class="chapterline"><span>Choose an objective</span><i>→</i><span>Understand the customer</span><i>→</i><span>Make a decision</span><i>→</i><span>Measure behavior</span></div>
+ <p class="hint"><b>中文邏輯</b><span class="zhtext">前半堂是公司要往哪裡走，後半堂是顧客為什麼選你。真正的 Marketing 需要讓兩邊接得上。</span></p>
+ <h3 id="four-lesson">The four-session reasoning chain</h3>
+ <div class="four"><div><b>Session 1</b><p>Customer needs &amp; value<br><small>What matters?</small></p></div><div><b>Session 2</b><p>Data &amp; customer patterns<br><small>What happened?</small></p></div><div><b>Session 3</b><p>Research &amp; evidence<br><small>How can we know?</small></p></div><div><b>Session 4</b><p>Strategy &amp; behavior<br><small>What should we do?</small></p></div></div>
+ <p class="note-small">A framework suggests where to look. Evidence determines whether a claim is justified; the objective determines the relevant metric.</p>
+
+ <h2 id="direction">1. Strategic planning: the plan must reach the customer</h2>
+ <p class="sub">Strategic planning maintains a fit between goals, organizational capabilities and changing opportunities. The point is not to keep people busy, but to coordinate useful action.</p>
+ <div class="method"><span>Vision</span><i>→</i><span>Mission</span><i>→</i><span>Objectives</span><i>→</i><span>Department plans</span><i>→</i><span>Frontline behavior</span><i>→</i><span>Feedback</span></div>
+ <div class="three"><div class="tcard"><b>Vision</b><p>Where do we want to go?</p><div class="tags"><span>Future</span></div></div><div class="tcard"><b>Mission</b><p>Why do we exist, and what customer need do we serve?</p><div class="tags"><span>Purpose + value</span></div></div><div class="tcard"><b>Objectives</b><p>What will change, by how much and by when?</p><div class="tags"><span>Measurable</span></div></div></div>
+ <h3 id="tops">Case · Tops: posters are not brand experience</h3>
+ <p>A company can display friendly-service values everywhere in its office yet deliver an indifferent store greeting. Customers judge the <b>actual touchpoint</b>, not only the internal slogan.</p>
+ <div class="method"><span>Promised warmth</span><i>→</i><span>Frontline interaction</span><i>→</i><span>Customer experience</span><i>→</i><span>Consistency test</span></div>
+ <p class="hint"><b>Question</b>Does a disappointing greeting prove a low-pay problem? <span class="zhtext">不能，還要考慮訓練、流程、主管、負荷及顧客證據。</span></p>
+ <h3 id="mission">Market-oriented mission and brand fit</h3>
+ <p>“We sell photocopiers” is narrower than “We help offices work productively.” The first depends on today's technology; the second centers on an enduring customer need.</p>
+ <div class="tbl"><table><thead><tr><th>Class example</th><th>Business question</th><th>What not to assume</th></tr></thead><tbody>
+ <tr><td><b>Malee · “The Fruit Expert”</b></td><td>Would a mushroom drink fit the brand promise?</td><td>Brand extension is not automatically good or bad.</td></tr>
+ <tr><td><b>Starbucks</b></td><td>Does it sell only coffee, or also a third place and social experience?</td><td>The product is not always the entire value.</td></tr>
+ <tr><td><b>AT&amp;T / Xerox</b></td><td>Communications and office productivity vs. specific hardware?</td><td>Broad missions still need capabilities.</td></tr>
+ <tr><td><b>Family business</b></td><td>Can founder values survive delegation and succession?</td><td>Family generation alone does not predict failure.</td></tr>
+ </tbody></table></div>
+ <p class="key">Mission ≠ slogan. A useful mission changes which opportunities a firm pursues and what customers actually experience.</p>
+
+ <h2 id="portfolio">2. BCG: classify the business, then judge the option</h2>
+ <p class="sub">A portfolio uses limited resources across products or business units. BCG compares <b>market growth rate</b> and <b>relative market share</b>, not total sales and not profitability itself.</p>
+ <div class="m-widget" id="bcgWidget"><h4>Interactive · BCG positioning lab</h4><p class="mw-sub">Move the two sliders or drag the point. Watch the quadrant change, but do not let the quadrant make the decision for you.</p>
+ <div class="m-grid"><div>
+ <svg class="bcg-svg" id="bcgSvg" viewBox="0 0 420 340" role="img" aria-label="BCG quadrant with draggable business position">
+ <rect x="50" y="22" width="330" height="276" fill="#fff"/>
+ <rect x="50" y="22" width="165" height="138" fill="#ecf4ef"/>
+ <rect x="215" y="22" width="165" height="138" fill="#faf0e2"/>
+ <rect x="50" y="160" width="165" height="138" fill="#edf1f7"/>
+ <rect x="215" y="160" width="165" height="138" fill="#f8edf1"/>
+ <line x1="215" x2="215" y1="22" y2="298" stroke="#cdbcc4" stroke-width="1.3"/>
+ <line x1="50" x2="380" y1="160" y2="160" stroke="#cdbcc4" stroke-width="1.3"/>
+ <rect x="50" y="22" width="330" height="276" fill="transparent" stroke="#9f8790" stroke-width="1"/>
+ <text x="67" y="48" class="bq-label">STAR</text><text x="230" y="48" class="bq-label">QUESTION MARK</text>
+ <text x="67" y="186" class="bq-label">CASH COW</text><text x="230" y="186" class="bq-label">DOG</text>
+ <text x="215" y="327" text-anchor="middle" class="bq-axis">Relative market share: stronger ← 1.0× → weaker</text>
+ <text x="13" y="165" transform="rotate(-90 13 165)" text-anchor="middle" class="bq-axis">Market growth: ↑ faster</text>
+ <circle id="bcgDot" cx="175" cy="116" r="10" fill="#c06c84" class="bcg-point" tabindex="0" aria-label="Drag or use arrow keys to reposition"/>
+ </svg>
+ </div><div>
+ <div class="m-control"><label for="growthRange">Market growth <output id="growthOut">15%</output></label><input type="range" id="growthRange" min="-5" max="30" step="1" value="15"></div>
+ <div class="m-control"><label for="shareRange">Relative market share <output id="shareOut">1.8×</output></label><input type="range" id="shareRange" min="0.2" max="3" step="0.1" value="1.8"></div>
+ <div class="m-answer" aria-live="polite"><b id="bcgQuad">Star</b><p id="bcgAnalysis"></p></div>
+ <div class="m-control"><label for="bcgOption">Possible management choice</label><select id="bcgOption" style="width:100%;padding:9px;border:1px solid var(--line);border-radius:7px;background:#fff"><option>Build</option><option>Hold</option><option>Harvest</option><option>Divest</option></select></div>
+ <p class="note-small" id="bcgOptionNote" aria-live="polite"></p>
+ </div></div>
+ <p class="m-interact-note">Practice cutoffs only: 10% annual growth and 1.0× relative share. They are <b>not</b> universal BCG rules or real market data. The dot uses stronger share on the <b>left</b>, the conventional BCG orientation.</p></div>
+ <h3 id="bcg-logic">Why the quadrant is not an automatic instruction</h3>
+ <div class="tbl"><table><thead><tr><th>Position</th><th>Interpretation</th><th>Management question</th></tr></thead><tbody>
+ <tr><td><b>Star</b></td><td>Fast-growing market; strong relative position</td><td>Can we fund growth efficiently and protect our lead?</td></tr>
+ <tr><td><b>Cash Cow</b></td><td>Slow-growth market; strong relative position</td><td>How much cash can the business generate without eroding strength?</td></tr>
+ <tr><td><b>Question Mark</b></td><td>Fast-growing market; weak position</td><td>Can we realistically gain share?</td></tr>
+ <tr><td><b>Dog</b></td><td>Slow-growth market; weak position</td><td>Is there niche, strategic or future value worth keeping?</td></tr>
+ </tbody></table></div>
+ <p>Questions about <b>Breeze, hybrid cars, EVs and smartphones</b> are invitations to identify the relevant market, its growth rate, its competitors and the date. A product name alone cannot establish its quadrant.</p>
+ <p class="hint"><b>中文邏輯</b><span class="zhtext">市場高成長 ≠ 本公司市占率高；市占率高 ≠ 一定獲利。BCG 幫你思考資源分配，不會自動給唯一答案。</span></p>
+
+
+ <h3 id="plc">Product Life Cycle · different stages, different management questions</h3>
+ <p>A product category may move through <b>introduction, growth, maturity and decline</b>. Early growth often requires awareness and distribution investment. Mature markets may place greater weight on repeat purchase, efficiency and differentiation. Decline can call for renewal, repositioning or withdrawal, but the decision still requires evidence.</p>
+ <div class="pair"><div><b>PLC asks: what stage?</b><p>The Product Life Cycle describes how a category's sales may develop over time. It is a useful pattern, not a guaranteed timetable.</p></div><div><b>BCG asks: what position?</b><p>The matrix combines <em>market growth</em> with our <em>relative competitive share</em>. A mature category is not automatically a Cash Cow for every brand.</p></div></div>
+ <p class="hint"><b>中文邏輯</b><span class="zhtext">PLC 描述市場或產品可能經歷的生命週期；BCG 還要看「本公司的相對市占率」。市場成熟不代表每個品牌都成了金牛事業。</span></p>
+ <details class="m-reveal"><summary>BCG decision check · A Star is losing money. Must we invest?</summary><p><b>Not automatically.</b> First check whether losses come from temporary growth investment or an unviable business model. Compare future margins, funding needs, competitive advantage and alternatives. <b>Quadrant → hypotheses → evidence → decision</b>, not quadrant → command.</p></details>
+ 
+ <h2 id="ansoff">3. Growth choices: Ansoff, SWOT and the environment</h2>
+ <p class="sub">BCG looks at portfolio position. Ansoff asks <b>how to grow</b> by changing the product and/or the target market.</p>
+ <div class="matrix"><div></div><div class="mh">Existing product</div><div class="mh">New product</div><div class="mh side">Existing market</div><div class="cell">Market penetration<small>More of today's offering to current customers</small></div><div class="cell">Product development<small>New offer for current market</small></div><div class="mh side">New market</div><div class="cell">Market development<small>Existing offer, new region/segment</small></div><div class="cell hi">Diversification<small>New offering + new market</small></div></div>
+ <div class="m-widget" id="ansoffWidget"><h4>Interactive · Classify the growth move</h4><p class="mw-sub">Choose the Ansoff category. After answering, read why the other categories do not fit.</p><p class="m-progress" id="ansoffProgress">Scenario 1 of 5</p><p class="qz-item" id="ansoffQuestion"></p><div class="m-choices" id="ansoffChoices"></div><div class="m-feedback" id="ansoffFeedback" role="status" aria-live="polite">Choose an answer to check your reasoning.</div><button class="m-action primary" type="button" id="ansoffNext" disabled>Next scenario →</button><p class="m-interact-note">Scenarios are constructed for practice; they are not claims about a company's actual expansion plan.</p></div>
+ <h3 id="swot">SWOT and environmental scanning</h3>
+ <div class="pair"><div><b>Internal: Strengths / Weaknesses</b><p>Resources, capabilities, execution and constraints inside the firm.</p></div><div><b>External: Opportunities / Threats</b><p>Competition, technology, demographics, politics, culture and changing customer needs.</p></div></div>
+ <p><b>Generational cohort</b> labels often come from a specific national history. Do not copy U.S. Gen X/Y meanings directly into Thailand without evidence of comparable formative experiences.</p>
+ <p><b>Kodak</b> illustrates why a business defined too narrowly by current film technology can be vulnerable when consumers continue wanting memories but adopt a different way to capture and share them.</p>
+ <p class="key">SWOT ≠ strategy. Turning a box into a decision requires an objective, a realistic action and evidence that it will create value.</p>
+
+ <h2 id="buyer">4. Buyer Decision Process: a guide, not a compulsory ritual</h2>
+ <p class="sub">Marketing stimuli pass through the consumer's “black box”: needs, experience, social context and perception shape what the customer eventually does.</p>
+ <div class="m-widget" id="decisionWidget"><h4>Interactive · How the five stages change</h4><p class="mw-sub">Switch situations. Select a stage to see why it is long, brief or sometimes skipped.</p>
+ <div class="m-pillrow" id="decisionModes" role="group" aria-label="Purchase contexts"><button type="button" data-mode="routine" aria-pressed="true">Routine water</button><button type="button" data-mode="high" aria-pressed="false">Carefully chosen car</button><button type="button" data-mode="impulse" aria-pressed="false">Impulsive car purchase</button></div>
+ <div class="decision-flow" id="decisionFlow"></div><div class="m-answer" id="decisionAnalysis" aria-live="polite"></div>
+ <p class="m-interact-note">These are plausible paths, not fixed empirical stage durations. The professor's Volvo anecdote illustrates an exception; it does not mean all car buying is impulsive.</p></div>
+ <h3 id="self-image">Who is buying? Demographics, psychographics and self-image</h3>
+ <div class="pair"><div><b>Demographics</b><p>Age, family status, income, location: <em>who</em> the buyer is.</p></div><div><b>Psychographics</b><p>Values, interests, lifestyle, identity: <em>why</em> the benefit matters.</p></div></div>
+ <p>Corvette and station-wagon image exercises show that a brand can project a <b>personality or ideal self-image</b> without proving the real age, wealth or family situation of all its owners.</p>
+ <p class="hint"><b>Trap</b>VALS and other segments organize hypotheses; they do not reveal each person's entire identity. <span class="zhtext">品牌印象 ≠ 真實買家的人口統計。</span></p>
+
+
+ <p class="hint"><b>中文抓重點</b><span class="zhtext">人口統計能描述「誰」，但無法單靠年齡預測「為什麼買」。教授用跑車與旅行車讓你看到品牌形象和真實車主可能完全不同。</span></p>
+ 
+ <h2 id="motives">5. Motivation, involvement, risk and postpurchase behavior</h2>
+ <p class="sub">The same category can satisfy physiological, safety, belonging, esteem and self-actualization motives in different proportions.</p>
+ <div class="method"><span>Need / context</span><i>→</i><span>Importance &amp; perceived risk</span><i>→</i><span>Information search</span><i>→</i><span>Choice</span><i>→</i><span>Postpurchase feeling</span></div>
+ <div class="tbl"><table><thead><tr><th>Do not mix up</th><th>What it means</th></tr></thead><tbody>
+ <tr><td><b>Involvement</b></td><td>How important or risky the decision seems <b>before/during</b> purchase. Price alone does not determine it.</td></tr>
+ <tr><td><b>Perceived risk</b></td><td>Expected consequences: financial, functional, social or safety concerns.</td></tr>
+ <tr><td><b>Cognitive dissonance</b></td><td>Uncomfortable doubt <b>after</b> choosing between appealing alternatives.</td></tr>
+ <tr><td><b>Diffusion</b></td><td>How an innovation spreads across adopters with different risk and benefit perceptions.</td></tr>
+ </tbody></table></div>
+ <p><b>Water for instant coffee vs. water used for infant formula:</b> the purpose changes perceived stakes and therefore involvement. This is about the shopper's perception, <b>not</b> medical advice or a claim that one water is unsafe.</p>
+ <p><b>Louis Vuitton vs. Hermès:</b> someone may like the item purchased yet wonder if the forgone option was better. That is postpurchase dissonance, not necessarily dissatisfaction.</p>
+ <p><b>Microwave vs. CD adoption:</b> the perceived advantage, risk, compatibility and ease of use can affect adoption pace. An <b>innovator</b> buys early; an <b>opinion leader</b> influences others. One does not guarantee the other.</p>
+
+
+ <h3 id="maslow">Maslow's needs · several motives can operate at once</h3>
+ <p>Maslow's categories include <b>physiological needs, safety, belonging, esteem and self-actualization</b>. These are useful prompts for exploring motivation; the professor emphasizes that they need not activate one at a time in a strict ladder.</p>
+ <p>In a restaurant, food may satisfy hunger, safe preparation addresses security, eating with friends supports belonging, and choosing a premium venue may express esteem. Which motive is most important depends on the customer and occasion. This is a question for marketing research, not a fact the framework can answer alone.</p>
+ <p class="hint"><b>中文邏輯</b><span class="zhtext">同一餐可能同時滿足吃飽、安全、社交與面子需求。不要把 Maslow 當成「第一層完全滿足才能進入第二層」的固定規則。</span></p>
+ <h3 id="diffusion">Diffusion of Innovations · early buyer vs. influential buyer</h3>
+ <p>Innovators may accept uncertainty to try new technology early; other buyers may wait for reliability, a larger product ecosystem or lower prices. The professor's software-upgrade and new media-format stories highlight <b>compatibility risk and waiting costs</b>, not a universal adoption schedule.</p>
+ <p><b>Innovator ≠ Opinion Leader.</b> Someone who buys first does not necessarily persuade others. To market a new product, ask both who will try it and whose recommendation other customers trust.</p>
+ 
+ <h2 id="coffee">6. Coffee choice: which benefit matters <em>in this situation</em>?</h2>
+ <p class="sub">Utilitarian benefits <span class="zh">功能性價值</span>, hedonic/social benefits <span class="zh">情感／體驗價值</span>, taste and convenience can all coexist. Their importance changes with the purchase occasion.</p>
+ <div class="m-widget" id="coffeeWidget"><h4>Interactive · Change the coffee context</h4><p class="mw-sub">A teaching model of relative decision weights, <b>not</b> measured preferences from class research.</p>
+ <div class="m-pillrow" id="coffeeModes" role="group" aria-label="Coffee contexts"><button type="button" data-context="commute" aria-pressed="true">Rushing to work</button><button type="button" data-context="friends" aria-pressed="false">Meeting friends</button><button type="button" data-context="home" aria-pressed="false">Brewing at home</button></div>
+ <div id="coffeeBars"></div><div class="m-answer" aria-live="polite"><b id="coffeeTop"></b><p id="coffeeMessage"></p></div><p class="m-interact-note">The numbers are illustrative weights summing to 100, not claims about Thai consumers or a particular brand. Test the hypothesis in Session 3 research.</p></div>
+ <h3 id="message">Creative message vs. measurable marketing outcome</h3>
+ <p>In class, the Xcite mint example shows how a memorable creative concept can attract attention but fail to connect clearly to the brand. The same goes for premium and private-label bottled water: perceived cleanliness, convenience, taste, trust, status and packaging matter differently by customer and occasion.</p>
+ <p class="key">Attention ≠ brand recall ≠ consideration ≠ purchase ≠ profit. Pick the metric that matches the objective.</p>
+
+ <h2 id="funnel">7. Brand awareness is not the same as consideration or purchase</h2>
+ <p class="sub">This class distinguishes brands the consumer <b>knows</b> (the lecturer's use of “evoked set”) from brands they would actually <b>consider</b>, and then from brands purchased. Other textbooks sometimes define “evoked set” more narrowly.</p>
+ <div class="m-widget" id="funnelWidget"><h4>Interactive · Brand-choice funnel</h4><p class="mw-sub">Start with 100 potential shoppers. Change what share knows the brand, what share of the aware would consider it, and what share of considerers purchase.</p>
+ <div class="m-grid"><div id="funnelSliders"><div class="m-control"><label for="fAwareness">Awareness among 100 shoppers <output id="fAwareOut"></output></label><input id="fAwareness" type="range" min="0" max="100" value="80" step="1"></div>
+ <div class="m-control"><label for="fConsider">Consideration among aware <output id="fConsiderOut"></output></label><input id="fConsider" type="range" min="0" max="100" value="35" step="1"></div>
+ <div class="m-control"><label for="fBuy">Purchase among considerers <output id="fBuyOut"></output></label><input id="fBuy" type="range" min="0" max="100" value="20" step="1"></div></div>
+ <div><div class="m-funnel" id="funnelShape" aria-live="polite"><div class="funnel-level" id="funnelAware"></div><div class="funnel-level" id="funnelConsider"></div><div class="funnel-level" id="funnelBuy"></div></div></div></div>
+ <div class="m-answer"><b id="funnelResult"></b><p id="funnelLesson"></p></div>
+ <p class="m-interact-note">These are example counts and conditional conversion rates. The sequence is for reasoning; slider changes do not prove any marketing action caused an outcome.</p></div>
+ <h3 id="water">Case lab · Bottled water: differentiation beyond the liquid</h3>
+ <div class="tbl"><table><thead><tr><th>Case</th><th>Possible motive/message</th><th>Research needed</th></tr></thead><tbody>
+ <tr><td><b>PUR water purifier</b></td><td>Perceived risk, reassurance, trust.</td><td>Which concern motivates purchase, and does the message build product trust?</td></tr>
+ <tr><td><b>Aquafina / Dasani / Namthip</b></td><td>Familiar name and brand reassurance.</td><td>What associations actually drive consideration?</td></tr>
+ <tr><td><b>Private-label water</b></td><td>Basic function, convenience and value for money.</td><td>For which use cases are people comfortable choosing it?</td></tr>
+ <tr><td><b>Imported premium water</b></td><td>Origin story, status, lifestyle cues.</td><td>Is the premium paid for real perceived value or only a packaging impression?</td></tr>
+ </tbody></table></div>
+ <p class="hint"><b>中文邏輯</b><span class="zhtext">分析水品牌，不是「水明明差不多，為何有人買貴？」而是先區分不同顧客、用途、風險、情緒，再找要用什麼指標驗證。</span></p>
+
+
+ <h3 id="water-judgment">Decision practice · what would convince you?</h3>
+ <p>A premium water bottle and a cheaper private-label bottle can both meet the basic need for hydration. But the <b>buying occasion</b> changes the perceived trade-off: convenience at home, reassurance when caring for a child, or appearance at a public event. The professor uses these contrasts to reveal consumer motives, <b>not</b> to prove that expensive water is medically superior.</p>
+ <details class="m-reveal"><summary>Case A · A consumer says: “I buy premium water because it tastes better.” What can we conclude?</summary><p><b>Evidence:</b> the consumer reports a taste preference. <b>Not yet proven:</b> that taste objectively explains the premium purchase or predicts other consumers. A blind taste test and an occasion-specific choice study could help distinguish sensory preference from branding and social context.</p></details>
+ <details class="m-reveal"><summary>Case B · A bottled-water advertisement gets lots of views. Did the campaign succeed?</summary><p><b>It depends on the objective.</b> Views may support an awareness goal, but cannot by themselves prove brand attribution, consideration or sales. Choose the outcome first, then the relevant metric; compare results with a suitable baseline if making a causal claim.</p></details>
+ 
+ <h2 id="traps">8. Do not mix these up · Flip-to-check cards</h2>
+ <p class="sub">Click a misconception to reveal the correct distinction. Use these as retrieval practice before opening the answers.</p>
+ <div class="flash-grid" id="flipCards"></div>
+
+ <h2 id="cases">9. Classroom cases · One-line lookup</h2>
+ <div class="tbl"><table><thead><tr><th>Case</th><th>What it teaches you to ask</th></tr></thead><tbody>
+ <tr><td><b>Tops</b></td><td>Do brand values reach real customer touchpoints?</td></tr>
+ <tr><td><b>Malee</b></td><td>Does brand extension fit the promised expertise?</td></tr>
+ <tr><td><b>Starbucks</b></td><td>What experience does the customer buy beyond coffee?</td></tr>
+ <tr><td><b>Kodak</b></td><td>What customer need remains when the technology changes?</td></tr>
+ <tr><td><b>Volvo</b></td><td>Must an expensive purchase always follow every decision stage?</td></tr>
+ <tr><td><b>Heineken / coffee choice</b></td><td>How does social context shift motives and brand choice?</td></tr>
+ <tr><td><b>Xcite mint</b></td><td>Can the message be remembered without the brand being remembered?</td></tr>
+ <tr><td><b>Bottled water</b></td><td>Which risk, trust, function or status motive makes this brand relevant?</td></tr>
+ </tbody></table></div>
+
+ <h2 id="coldcall">10. Cold call &amp; Class Discussion practice</h2>
+ <p class="sub">Try saying the answer in English before opening it. These responses are short practice scripts, not recorded quotations.</p>
+ <div class="qa-tools"><button type="button" id="qaAll">Show all answers</button></div>
+ <div class="qa" id="qaContainer">
+ <details><summary>What makes a mission different from an objective?</summary><p>A mission explains whom the organization serves and the value it aims to create. Objectives turn that direction into measurable results, deadlines and actions.</p></details>
+ <details><summary>Why doesn't a Star automatically deserve more investment?</summary><p>BCG describes growth and relative market position, but investment still depends on profitability, cash needs, capabilities and feasible future returns.</p></details>
+ <details><summary>What is Ansoff's diversification strategy?</summary><p>Entering a new market with a new product. It differs from product development, where the market already exists, and market development, where the product already exists.</p></details>
+ <details><summary>Why can a car buyer skip stages in the Buyer Decision Process?</summary><p>The five stages are a conceptual model. Prior experience, urgency, emotion or an impulse can shorten search or evaluation even in a high-priced category.</p></details>
+ <details><summary>What is the difference between demographics and psychographics?</summary><p>Demographics describe characteristics such as age or income. Psychographics examine values, lifestyle and motives that may better explain choices.</p></details>
+ <details><summary>Why is postpurchase dissonance different from dissatisfaction?</summary><p>A buyer may like a product while wondering whether a forgone alternative would have been better. Dissatisfaction is usually about perceived poor product or service performance.</p></details>
+ <details><summary>How should a marketer analyze premium bottled water?</summary><p>I would define the segment and buying occasion, identify the important functional, risk-related and symbolic benefits, then test which message improves consideration or trial rather than assuming premium means healthier.</p></details>
+ <details><summary>What was the marketing weakness of the Xcite creative example?</summary><p>A memorable idea may not link to the advertised brand. We should measure brand attribution, recall and relevant consumer response, not just attention.</p></details>
+ <details><summary>Why can't we copy U.S. generational cohorts directly into Thailand?</summary><p>The experiences defining a cohort depend on local history, culture and technology. Birth-year labels alone do not establish the same motives or behavior in a different market.</p></details>
+ </div>
+ <p class="mnemonic">Integrated answer template: <b>Customer → Value → Proposed action → Metric → Evidence limit</b>. <span class="zhtext">先定義誰、要創造什麼價值，再想行動和能驗證結果的指標。</span></p>
+ </article></main></div>
+
+<script>'use strict';
+(function(){
+  // navigation and bilingual support
+  const rail=document.getElementById('rail'),toc=document.getElementById('toc'),tocBtn=document.getElementById('tocBtn');
+  const headings=[...document.querySelectorAll('.doc > h2, .doc > h3')];
+  headings.forEach(h=>{const li=document.createElement('li');li.className=h.tagName.toLowerCase();li.dataset.id=h.id;const a=document.createElement('a');a.href='#'+h.id;a.textContent=h.textContent.trim().replace(/\s+/g,' ');li.appendChild(a);toc.appendChild(li)});
+  if('IntersectionObserver' in window){const observer=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;toc.querySelectorAll('a.on').forEach(a=>a.classList.remove('on'));const a=toc.querySelector(`li[data-id="${e.target.id}"] a`);if(a)a.classList.add('on')}),{rootMargin:'-80px 0px -70% 0px'});headings.forEach(h=>observer.observe(h))}
+  tocBtn.addEventListener('click',()=>{const open=rail.classList.toggle('open');tocBtn.setAttribute('aria-expanded',String(open))});
+  toc.addEventListener('click',e=>{if(e.target.closest('a')){rail.classList.remove('open');tocBtn.setAttribute('aria-expanded','false')}});
+  // The unobtrusive full-page Chinese language switch is wired by the i18n module.
+
+  const all=document.getElementById('qaAll');all.addEventListener('click',()=>{const d=[...document.querySelectorAll('.qa details')];const show=!d.every(x=>x.open);d.forEach(x=>x.open=show);all.textContent=show?'Hide all answers':'Show all answers'});
+
+  // BCG: piecewise coordinate transform keeps share=1x and growth=10% exactly on the center lines.
+  const gr=document.getElementById('growthRange'),sh=document.getElementById('shareRange'),go=document.getElementById('growthOut'),so=document.getElementById('shareOut');
+  const dot=document.getElementById('bcgDot'),svg=document.getElementById('bcgSvg'),quad=document.getElementById('bcgQuad'),analysis=document.getElementById('bcgAnalysis');
+  const opt=document.getElementById('bcgOption'),optNote=document.getElementById('bcgOptionNote');
+  const bcgData={Star:{txt:'High market growth + strong relative share. Position may require investment to defend it; profitability is not guaranteed.',opts:['Build to capture growing demand if returns justify it.','Hold a valuable competitive lead with deliberate support.','Harvest only if growth opportunity is limited relative to cash needs.','Divest only if future economics and alternatives justify exit.']},'Question Mark':{txt:'High market growth + weak relative share. The decision is whether a realistic path to a stronger position exists.',opts:['Build if capability and evidence support a feasible share gain.','Hold while learning, if the learning has enough value.','Harvest only in unusual circumstances; examine whether leaving cash on the table harms the option.','Divest if share building is too costly or strategically implausible.']},'Cash Cow':{txt:'Low-growth market + strong relative share. Can help fund other activities, but still needs maintenance.',opts:['Build if there is a compelling adjacent opportunity or defensible growth path.','Hold when defending profitability and loyalty makes sense.','Harvest carefully, without destroying useful long-term value.','Divest if economics or strategic fit deteriorate enough.']},Dog:{txt:'Low-growth market + weak relative share. An unfavorable quadrant is not proof that the business has no niche value.',opts:['Build if evidence suggests a special opportunity not visible in the matrix.','Hold a profitable niche or vital complement when justified.','Harvest if cash generation outweighs future investment opportunity.','Divest if projected returns, fit and exit alternatives justify it.']}};
+  let bcgName='Star';
+  function xShare(s){return s>=1?215-(s-1)/2*165:215+(1-s)/0.8*165}
+  function yGrowth(g){return g>=10?160-(g-10)/20*138:160+(10-g)/15*138}
+  function updateBCG(){const g=Number(gr.value),s=Number(sh.value);go.textContent=g+'%';so.textContent=s.toFixed(1)+'×';dot.setAttribute('cx',xShare(s));dot.setAttribute('cy',yGrowth(g));
+    bcgName=g>=10?(s>=1?'Star':'Question Mark'):(s>=1?'Cash Cow':'Dog');quad.textContent=bcgName;analysis.textContent=bcgData[bcgName].txt;optionText()}
+  function optionText(){optNote.textContent=bcgData[bcgName].opts[opt.selectedIndex]+' These are possible choices, not instructions from the quadrant.'}
+  [gr,sh].forEach(e=>e.addEventListener('input',updateBCG));opt.addEventListener('change',optionText);
+  let dragging=false;
+  function pointToBCG(clientX,clientY){const pt=svg.createSVGPoint();pt.x=clientX;pt.y=clientY;const mat=svg.getScreenCTM();if(!mat)return;const p=pt.matrixTransform(mat.inverse()),x=Math.max(50,Math.min(380,p.x)),y=Math.max(22,Math.min(298,p.y));
+    const s=x<=215?1+(215-x)/165*2:1-(x-215)/165*0.8;const g=y<=160?10+(160-y)/138*20:10-(y-160)/138*15;
+    sh.value=(Math.round(s*10)/10).toString();gr.value=Math.round(g).toString();updateBCG()}
+  svg.addEventListener('pointerdown',e=>{dragging=true;svg.setPointerCapture(e.pointerId);pointToBCG(e.clientX,e.clientY)});
+  svg.addEventListener('pointermove',e=>{if(dragging)pointToBCG(e.clientX,e.clientY)});
+  svg.addEventListener('pointerup',()=>dragging=false);svg.addEventListener('pointercancel',()=>dragging=false);
+  dot.addEventListener('keydown',e=>{const k=e.key;if(!['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(k))return;e.preventDefault();if(k==='ArrowUp')gr.value=Math.min(30,Number(gr.value)+1);if(k==='ArrowDown')gr.value=Math.max(-5,Number(gr.value)-1);if(k==='ArrowLeft')sh.value=Math.min(3,Number(sh.value)+.1);if(k==='ArrowRight')sh.value=Math.max(.2,Number(sh.value)-.1);updateBCG()});
+  updateBCG();
+
+  // Ansoff categorization: explicit feedback & rationale per scenario.
+  const cases=[
+    {q:'A Thai café keeps the same coffee menu but encourages its existing Bangkok customers to visit more often.',a:0,why:'Existing products + existing market = market penetration. The goal is more usage among customers already served.'},
+    {q:'A coffee chain launches a new plant-based bottled latte for its existing Bangkok customer base.',a:1,why:'New product + existing market = product development. It changes the offering, not the market being targeted.'},
+    {q:'A café sells the same bottled latte to new customers in a province it has never served.',a:2,why:'Existing product + new geographic market = market development.'},
+    {q:'A local coffee business starts a new skincare line for a separate overseas consumer segment.',a:3,why:'New product category + new market = diversification. It changes both dimensions.'},
+    {q:'An existing Thai mineral-water brand increases distribution and promotions to gain share among its current retail shoppers.',a:0,why:'Same product in the same market = market penetration. New distribution effort alone does not prove a new market.'}
+  ];
+  const names=['Market penetration','Product development','Market development','Diversification'];
+  let idx=0,score=0,answered=false;
+  const ansQ=document.getElementById('ansoffQuestion'),ansC=document.getElementById('ansoffChoices'),ansF=document.getElementById('ansoffFeedback'),ansP=document.getElementById('ansoffProgress'),ansNext=document.getElementById('ansoffNext');
+  function renderQuiz(){if(idx>=cases.length){ansQ.textContent=`Completed: ${score} / ${cases.length} correct on first try.`;ansP.textContent='Review complete';ansC.innerHTML='';ansF.className='m-feedback good';ansF.textContent='The question is always: is the product new, and is the target market new?';ansNext.textContent='Try again ↻';ansNext.disabled=false;return}
+    answered=false;ansNext.disabled=true;ansNext.textContent=idx===cases.length-1?'See results →':'Next scenario →';ansP.textContent=`Scenario ${idx+1} of ${cases.length} · ${score} correct`;
+    ansQ.textContent=cases[idx].q;ansC.innerHTML='';names.forEach((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;b.dataset.answer=i;b.addEventListener('click',()=>choose(i));ansC.appendChild(b)});ansF.className='m-feedback';ansF.textContent='Choose a category to see the reasoning.';}
+  function choose(n){if(answered)return;answered=true;const right=n===cases[idx].a;if(right)score++;ansC.querySelectorAll('button').forEach(b=>{const v=Number(b.dataset.answer);b.disabled=true;if(v===cases[idx].a)b.classList.add('correct');else if(v===n)b.classList.add('incorrect')});ansF.className='m-feedback '+(right?'good':'bad');ansF.textContent=(right?'Correct. ':'Not quite. Correct category: '+names[cases[idx].a]+'. ')+cases[idx].why;ansNext.disabled=false;}
+  ansNext.addEventListener('click',()=>{if(idx>=cases.length){idx=0;score=0}else idx++;renderQuiz()});renderQuiz();
+
+  // Buyer decision process: explicit selection, no universal stages assumption.
+  const stageNames=['Problem recognition','Information search','Alternative evaluation','Purchase decision','Postpurchase response'];
+  const scenarios={routine:{title:'Habitual low-involvement purchase',desc:'Routine bottled water purchase: familiarity, shelf location and convenience may dominate. Search and formal comparison can be almost absent.',flags:['long','optional','optional','quick','quick'],detail:['Thirst or a routine need triggers a purchase.','The buyer may rely on known brands and packaging, with almost no fresh search.','A shopper may compare only available options or immediately repeat a habit.','Availability and convenience can drive quick purchase.','Use or satisfaction occurs; extensive review-checking is not required.']},high:{title:'Careful high-involvement purchase',desc:'Planned car purchase: financial, performance and social risks may motivate detailed research and brand comparison.',flags:['long','long','long','long','long'],detail:['A transport, status or family need becomes important.','The buyer researches models, safety, financing and ownership costs.','Several alternatives may be compared systematically.','The buyer chooses given risks, budget, availability and advice.','Confidence or doubts about forgone options may continue after purchase.']},impulse:{title:'A high-price decision can still happen quickly',desc:'The professor’s Volvo story challenges the idea that a car must always involve prolonged rational comparison. An anecdote does not define all car buyers.',flags:['quick','optional','quick','quick','long'],detail:['A sudden desire, occasion or opportunity can create urgent motivation.','Little external research may occur at the time of decision.','A shortcut or strong preference can narrow alternatives.','The decision happens quickly despite the price.','The buyer may later evaluate whether the choice was wise, including dissonance.']}};
+  let mode='routine',stage=0;const modes=document.getElementById('decisionModes'),flow=document.getElementById('decisionFlow'),decA=document.getElementById('decisionAnalysis');
+  function drawDecision(){modes.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===mode)));flow.innerHTML='';const s=scenarios[mode];stageNames.forEach((n,i)=>{const b=document.createElement('button');b.type='button';b.className='decision-step '+s.flags[i]+(i===stage?' active':'');b.innerHTML=`<b>0${i+1}</b>${n}<span>${s.flags[i]==='long'?'More attention':s.flags[i]==='quick'?'Quick stage':'May be skipped'}</span>`;b.addEventListener('click',()=>{stage=i;drawDecision()});flow.appendChild(b)});decA.innerHTML=`<b>${s.title} · Stage ${stage+1}</b><p>${s.detail[stage]}</p><p><small>${s.desc}</small></p>`;}
+  modes.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{mode=b.dataset.mode;stage=0;drawDecision()}));drawDecision();
+
+  // Coffee: completely illustrative normalized weights.
+  const coffeeData={commute:{name:'Rushing to work',weights:[20,20,10,50],key:'Convenience and situation fit are most important.',message:'Promising quick ordering, predictable pickup and accessibility may be more persuasive than a long emotional brand story. Test waiting time, trial and repeat visits.'},friends:{name:'Meeting friends',weights:[10,25,45,20],key:'Social and emotional meaning carry the most weight.',message:'Promising a welcoming place to share time may fit better than focusing only on caffeine. Test consideration for group occasions and visit frequency.'},home:{name:'Brewing at home',weights:[25,45,10,20],key:'Taste and the brewing experience dominate.',message:'Communicating taste, freshness and brewing quality may be relevant. Test product preference, trial and repurchase rather than assuming every home brewer is a connoisseur.'}};
+  const dims=['Functional','Taste','Social / emotion','Situation fit'];
+  const cb=document.getElementById('coffeeBars'),ct=document.getElementById('coffeeTop'),cm=document.getElementById('coffeeMessage'),co=document.getElementById('coffeeModes');
+  function drawCoffee(context){const v=coffeeData[context];co.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.context===context)));cb.innerHTML='';v.weights.forEach((w,i)=>{const row=document.createElement('div');row.className='weight-row';row.innerHTML=`<span>${dims[i]}</span><div class="weight-track"><div class="weight-fill" style="width:${w}%"></div></div><b>${w}%</b>`;cb.appendChild(row)});ct.textContent=v.key;cm.textContent=v.message}
+  co.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>drawCoffee(b.dataset.context)));drawCoffee('commute');
+
+  // Brand funnel: true percentages are defined conditionally, sample size 100.
+  const ar=document.getElementById('fAwareness'),cr=document.getElementById('fConsider'),br=document.getElementById('fBuy');
+  function drawFunnel(){const aware=Number(ar.value),consider=Math.round(aware*Number(cr.value)/100),buy=Math.round(aware*Number(cr.value)/100*Number(br.value)/100);
+    document.getElementById('fAwareOut').textContent=aware+'%';document.getElementById('fConsiderOut').textContent=cr.value+'%';document.getElementById('fBuyOut').textContent=br.value+'%';
+    [['funnelAware',aware,'Know: '],['funnelConsider',consider,'Consider: '],['funnelBuy',buy,'Buy: ']].forEach(([id,n,t])=>{const el=document.getElementById(id);el.style.width=Math.max(19,n)+'%';el.textContent=t+n});
+    const mid=aware?Math.round(consider/aware*100):0;document.getElementById('funnelResult').textContent=`Out of 100: ${aware} know → ${consider} consider → ${buy} buy.`;
+    document.getElementById('funnelLesson').textContent=aware===0?'If nobody knows the brand, this illustration cannot produce consideration or purchases.':`Only ${mid}% of aware shoppers are in the consideration set. Awareness growth does not automatically raise that percentage. For purchase objectives, track trial or conversion instead of only recall.`;
+  }
+  [ar,cr,br].forEach(e=>e.addEventListener('input',drawFunnel));drawFunnel();
+
+  const misconceptions=[
+    ['Mission ≠ slogan','A mission should guide trade-offs and frontline delivery, not only look inspiring.'],
+    ['BCG share ≠ profit','Relative market position and market growth do not themselves establish profitability.'],
+    ['SWOT ≠ strategy','Lists of strengths and opportunities need an action and a testable objective.'],
+    ['Age ≠ motivation','Birth year alone does not explain the values of every local consumer.'],
+    ['Evoked ≠ consideration','In this class, knowing a brand is broader than seriously considering it.'],
+    ['Involvement ≠ price','Stakes, risk and usage context can matter even with identical price.'],
+    ['Dissonance ≠ dissatisfaction','Doubt about forgone alternatives may exist even when the chosen product is good.'],
+    ['Innovator ≠ opinion leader','Buying early is different from influencing others.'],
+    ['Ad attention ≠ brand lift','People can remember the creative while forgetting which brand paid for it.'],
+    ['Premium price ≠ superior health','Brand trust and status are possible motives, not clinical proof of better water.']
+  ];
+  const fc=document.getElementById('flipCards');misconceptions.forEach(([a,b])=>{const row=document.createElement('div');row.className='flash';const btn=document.createElement('button');btn.type='button';btn.setAttribute('aria-pressed','false');btn.setAttribute('aria-label','Flip '+a);const front=document.createElement('span'),back=document.createElement('span');front.className='front';front.textContent=a;back.className='back';back.textContent=b;btn.append(front,back);btn.addEventListener('click',()=>{btn.setAttribute('aria-pressed',String(btn.getAttribute('aria-pressed')!=='true'))});row.appendChild(btn);fc.appendChild(row)});
+})();
+</script>
+
+</body></html>
