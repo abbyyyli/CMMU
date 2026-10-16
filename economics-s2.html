@@ -28,7 +28,8 @@ a { color: var(--accent-ink); }
 .sessions { display: flex; gap: 4px; margin-left: auto; }
 .crumbs { font-size: .86rem; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
 .crumbs a { color: var(--muted); text-decoration: none; } .crumbs a:hover { color: var(--accent-ink); } .crumbs span { color: var(--line); } .crumbs b { font-family: var(--serif); }
-.sessions a.pill { text-decoration: none; }
+.sessions a.pill { text-decoration: none; transition: border-color .15s, color .15s; }
+.sessions a.pill:hover, .sessions a.pill:focus-visible { border-color: var(--accent); color: var(--accent-ink); background: var(--tint); }
 .sessions .pill { font: 500 .82rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--muted); padding: 4px 12px; border-radius: 999px; }
 .sessions .pill[aria-current="page"] { background: var(--accent); border-color: var(--accent); color: #fff; }
 .sessions .pill.off { opacity: .5; cursor: not-allowed; }
@@ -200,6 +201,18 @@ table.oil { font-variant-numeric: tabular-nums; }
 table.oil th, table.oil td { text-align: right; padding: 6px 8px; white-space: nowrap; }
 table.oil th:first-child, table.oil td:first-child { text-align: left; font-weight: 700; }
 table.oil td.hi { background: var(--tint); color: var(--accent-ink); font-weight: 700; }
+.ap-q { font-size: .86rem; line-height: 1.45; } .ap-q b { display: block; } .ap-q span { color: var(--muted); font-size: .8rem; }
+.ap-opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+.ap-opts .qz-o { padding: 7px 6px; font: 500 .82rem var(--sans); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; cursor: pointer; color: var(--fg); }
+.ap-opts .qz-o:hover { border-color: var(--accent); }
+.ap-opts .qz-o.right { background: #E3F2E9; border-color: #6FAE8B; } .ap-opts .qz-o.wrong { background: #FCE3DD; border-color: var(--dwl); }
+.ap-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 1rem 0 1.6rem; }
+.ap-grid figure { margin: 0; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px 10px; }
+.ap-grid svg { width: 100%; height: auto; display: block; }
+.ap-grid .tk { font-size: 9px; }
+.ap-grid figcaption { font-size: .8rem; line-height: 1.4; } .ap-grid figcaption b { display: block; } .ap-grid figcaption span { font-family: var(--mono); color: var(--accent-ink); font-size: .78rem; }
+@media (max-width: 760px) { .ap-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.g-note:empty { display: none; }
 
 </style></head><body>
 
@@ -892,6 +905,137 @@ table.oil td.hi { background: var(--tint); color: var(--accent-ink); font-weight
     s.seg('mode', Object.entries(M).map(([k, v]) => [k, v.name]), 'dd', v => { st.mode = v; draw(); });
     const sl = s.slider('v', 'Elasticity of the other curve', 0, 100, 1, st.v, v => v <= 0 ? 'Perfectly elastic' : v < 35 ? 'Elastic (flat)' : v > 65 ? 'Inelastic (steep)' : 'Moderate', v => { st.v = v; draw(); });
     const lab = sl.input.parentElement.querySelector('label span');
+    draw();
+  };
+
+  /* ---------- Session 1: quinoa market ---------- */
+  W_.quinoa = host => {
+    const s = shell(host, 'Quinoa world market: shortage, surplus, equilibrium',
+      'Class numbers: equilibrium near $500 per ton and 45 thousand tons in 2001. Move the price away from $500, or switch on the 2010 demand.');
+    const st = { p: 400, y2010: false };
+    const P = Plot(s.svg, 100, 1600);
+    const qd = p => (1400 - p) / 20, qs = p => (p + 400) / 20, qd2 = p => (2800 - p) / 20;
+    const pr = s.slider('p', 'Market price ($ per ton)', 300, 700, 50, st.p, v => '$' + v, v => { st.p = v; draw(); });
+    s.check('y', 'Show 2010 demand', false, v => { st.y2010 = v; pr.input.disabled = v; draw(); });
+    function draw() {
+      P.clear(); P.axes('Quantity (thousand tons)', 'Price ($/ton)');
+      P.yticks([800], '$');
+      P.lin(-400, 20, 'c-s', 'S');
+      if (st.y2010) {
+        P.lin(1400, -20, 'c-d', 'D 2001', true); P.lin(2800, -20, 'c-d', 'D 2010');
+        P.guide(45, 500, '45', '$500'); P.guide(80, 1200, '80', '$1,200');
+        P.dot(45, 500, 'E 2001', true); P.dot(80, 1200, 'E 2010', true);
+        s.show([{ k: 'Price', v: '$500 → $1,200', big: true }, { k: 'Quantity', v: '45 → 80 thousand tons' }, { k: 'Supply', v: 'Unchanged' }],
+          'Demand itself increased: the whole curve shifted right while supply stayed put, so both price and quantity rose. The slide does not name one cause, so do not invent one.');
+        return;
+      }
+      P.lin(1400, -20, 'c-d', 'D');
+      const p = st.p, a = qd(p), b = qs(p);
+      P.dot(45, 500, 'E', true);
+      if (p !== 500) {
+        P.hline(p, 'c-t'); P.poly([[Math.min(a, b), p - 18], [Math.max(a, b), p - 18], [Math.max(a, b), p + 18], [Math.min(a, b), p + 18]], p < 500 ? 'a-loss' : 'a-rev2');
+        P.guide(a, p, 'Qd ' + a); P.guide(b, p, 'Qs ' + b, '$' + p);
+        P.tag((a + b) / 2, p + (p < 500 ? -70 : 70), p < 500 ? 'Shortage ' + (a - b) : 'Surplus ' + (b - a));
+      } else P.guide(45, 500, '45', '$500');
+      s.show([{ k: 'Quantity demanded', v: a + 'k tons' }, { k: 'Quantity supplied', v: b + 'k tons' },
+        { k: p < 500 ? 'Shortage' : p > 500 ? 'Surplus' : 'Equilibrium', v: p === 500 ? 'Qd = Qs' : Math.abs(a - b) + 'k tons', big: true }],
+        p < 500 ? 'Below equilibrium Qd > Qs. Buyers compete with other buyers, pushing the price up toward $500.'
+          : p > 500 ? 'Above equilibrium Qs > Qd. Sellers compete with other sellers, pushing the price down toward $500.'
+            : 'At $500 buyers want to buy what sellers want to sell. No pressure to change.');
+    }
+    draw();
+  };
+
+  const APPS = [
+    { t: 'There is a virus pandemic', c: 'D', d: -1, f: 'Demand shock', a: 'A virus pandemic reduces demand for quinoa in the teacher\'s model. The demand curve shifts left, so equilibrium price and quantity both fall.' },
+    { t: 'La Niña causes a major drought in Bolivia', c: 'S', d: -1, f: 'Natural conditions', a: 'A major drought makes quinoa harder to produce, so supply decreases. The supply curve shifts left: equilibrium price rises and quantity falls.' },
+    { t: 'Riceberry becomes very cheap', c: 'D', d: -1, f: 'Substitute price', a: 'Riceberry is treated as a substitute. Its lower price draws buyers away, so demand for quinoa falls. Demand shifts left: price and quantity fall.' },
+    { t: 'China begins to grow quinoa', c: 'S', d: 1, f: 'Number of producers', a: 'A new producing country increases world supply. The supply curve shifts right: equilibrium price falls and quantity rises.' },
+    { t: 'New evidence that quinoa can reduce the risk of diabetes', c: 'D', d: 1, f: 'Preferences', a: 'Favorable health evidence makes consumers want more quinoa at every price. Demand shifts right: price and quantity both rise.' },
+    { t: 'Rare-earth deposits are discovered in Bolivia', c: 'S', d: -1, f: 'Opportunity cost', a: 'Mining becomes a more valuable use of Bolivian resources, raising the opportunity cost of growing quinoa. Supply shifts left: price rises, quantity falls.' }
+  ];
+  function appDraw(P, ap, reveal) {
+    P.clear(); P.axes('Quantity of quinoa', 'Price');
+    const dA = 90 + (reveal && ap.c === 'D' ? 20 * ap.d : 0), sA = 10 + (reveal && ap.c === 'S' ? -20 * ap.d : 0);
+    const q2 = (dA - sA) / 2, p2 = (dA + sA) / 2;
+    if (reveal && ap.c === 'D') { P.lin(90, -1, 'c-d', 'D1', true); P.lin(dA, -1, 'c-d', 'D2'); P.lin(10, 1, 'c-s', 'S'); }
+    else if (reveal) { P.lin(90, -1, 'c-d', 'D'); P.lin(10, 1, 'c-s', 'S1', true); P.lin(sA, 1, 'c-s', 'S2'); }
+    else { P.lin(90, -1, 'c-d', 'D'); P.lin(10, 1, 'c-s', 'S'); }
+    P.guide(40, 50, reveal ? 'Q1' : 'Q', reveal ? 'P1' : 'P');
+    P.dot(40, 50, reveal ? 'E1' : 'E', true);
+    if (reveal) {
+      P.guide(q2, p2, 'Q2', 'P2'); P.dot(q2, p2, 'E2');
+      const arrow = ap.d > 0 ? '→' : '←';
+      if (ap.c === 'D') P.tag(dA - 78, 82, 'D shifts ' + arrow); else P.tag(78 - sA + 2, 82, 'S shifts ' + arrow);
+    }
+    return { q2, p2 };
+  }
+  W_.apps = host => {
+    const s = shell(host, 'The quinoa applications, one graph each', 'Pick an event and predict which curve moves and which way. Then check the graph.');
+    const P = Plot(s.svg, 100, 100);
+    let cur = 0, guess = null;
+    s.seg('ev', APPS.map((a, k) => [k, String(k + 1)]), 0, v => { cur = v; guess = null; draw(); });
+    const box = document.createElement('div'); box.className = 'ap-q'; s.ctrl.appendChild(box);
+    const opts = document.createElement('div'); opts.className = 'ap-opts'; s.ctrl.appendChild(opts);
+    [['D', -1, 'Demand ←'], ['D', 1, 'Demand →'], ['S', -1, 'Supply ←'], ['S', 1, 'Supply →']].forEach(([c, d, lab]) => {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'qz-o'; b.textContent = lab;
+      b.addEventListener('click', () => { guess = { c, d }; draw(); }); b.dataset.k = c + d; opts.appendChild(b);
+    });
+    s.button('Show answer', () => { guess = { c: '?', d: 0 }; draw(); });
+    function draw() {
+      const ap = APPS[cur], rev = !!guess;
+      box.innerHTML = '<b>' + (cur + 1) + '. ' + ap.t + '.</b><span>What happens to the equilibrium price and quantity of quinoa?</span>';
+      opts.querySelectorAll('button').forEach(b => { b.classList.toggle('right', rev && b.dataset.k === ap.c + ap.d); b.classList.toggle('wrong', rev && guess.c + guess.d === b.dataset.k && b.dataset.k !== ap.c + ap.d); });
+      appDraw(P, ap, rev);
+      if (!rev) { s.show([{ k: 'Step 1', v: 'Buyer side or seller side?' }, { k: 'Step 2', v: 'Own price or other factor?' }, { k: 'Step 3', v: 'Left or right?' }], ''); return; }
+      const up = (ap.c === 'D') === (ap.d > 0);
+      s.show([{ k: 'Factor', v: ap.f }, { k: 'Curve', v: (ap.c === 'D' ? 'Demand' : 'Supply') + (ap.d > 0 ? ' → right' : ' ← left') },
+        { k: 'Price', v: up ? 'P2 > P1 ↑' : 'P2 < P1 ↓', big: true }, { k: 'Quantity', v: ap.d > 0 ? 'Q2 > Q1 ↑' : 'Q2 < Q1 ↓', big: true }],
+        (guess.c === '?' ? '' : guess.c + guess.d === ap.c + ap.d ? '<b>Correct.</b> ' : '<b>Not quite.</b> ') + ap.a);
+    }
+    draw();
+  };
+
+  W_.appgrid = host => {
+    host.classList.add('ap-grid');
+    host.innerHTML = APPS.map((ap, k) => {
+      const dA = 90 + (ap.c === 'D' ? 20 * ap.d : 0), sA = 10 + (ap.c === 'S' ? -20 * ap.d : 0), q2 = (dA - sA) / 2, p2 = (dA + sA) / 2;
+      const X = q => 22 + q * 1.5, Y = p => 128 - p * 1.15;
+      const ln = (a, m, cls, dash, lab) => { const q0 = Math.max(0, m < 0 ? a - 100 : -a), q1 = m < 0 ? Math.min(100, a) : Math.min(100, (100 - a) / m); return '<line x1="' + X(q0) + '" y1="' + Y(a + m * q0) + '" x2="' + X(q1) + '" y2="' + Y(a + m * q1) + '" class="cv ' + cls + (dash ? ' dash' : '') + '"/>' + (lab ? '<text x="' + (X(q1) + 3) + '" y="' + (Y(a + m * q1) + (m < 0 ? -2 : 8)) + '" class="cvl ' + cls + '" font-size="9">' + lab + '</text>' : ''); };
+      let g = '<line x1="22" y1="128" x2="186" y2="128" class="ax"/><line x1="22" y1="128" x2="22" y2="8" class="ax"/>';
+      g += ap.c === 'D' ? ln(90, -1, 'c-d', 1, 'D1') + ln(dA, -1, 'c-d', 0, 'D2') + ln(10, 1, 'c-s', 0, 'S') : ln(90, -1, 'c-d', 0, 'D') + ln(10, 1, 'c-s', 1, 'S1') + ln(sA, 1, 'c-s', 0, 'S2');
+      g += '<line x1="' + X(40) + '" y1="' + Y(50) + '" x2="' + X(40) + '" y2="128" class="gd"/><line x1="22" y1="' + Y(50) + '" x2="' + X(40) + '" y2="' + Y(50) + '" class="gd"/>';
+      g += '<line x1="' + X(q2) + '" y1="' + Y(p2) + '" x2="' + X(q2) + '" y2="128" class="gd"/><line x1="22" y1="' + Y(p2) + '" x2="' + X(q2) + '" y2="' + Y(p2) + '" class="gd"/>';
+      g += '<circle cx="' + X(40) + '" cy="' + Y(50) + '" r="3" class="pt"/><circle cx="' + X(q2) + '" cy="' + Y(p2) + '" r="3.5" class="pt"/>';
+      g += '<text x="18" y="' + (Y(50) + 3) + '" class="tk" text-anchor="end">P1</text><text x="18" y="' + (Y(p2) + 3) + '" class="tk" text-anchor="end">P2</text><text x="' + X(40) + '" y="139" class="tk" text-anchor="middle">Q1</text><text x="' + X(q2) + '" y="139" class="tk" text-anchor="middle">Q2</text>';
+      const up = (ap.c === 'D') === (ap.d > 0);
+      return '<figure><svg viewBox="0 0 200 145" role="img" aria-label="' + ap.t + '">' + g + '</svg><figcaption><b>' + (k + 1) + '. ' + ap.t + '</b><span>' + (ap.c === 'D' ? 'D' : 'S') + (ap.d > 0 ? ' →' : ' ←') + ' · P ' + (up ? '↑' : '↓') + ' · Q ' + (ap.d > 0 ? '↑' : '↓') + '</span></figcaption></figure>';
+    }).join('');
+  };
+
+  W_.both = host => {
+    const s = shell(host, 'When both curves shift', 'Move demand and supply together. One result is always certain; the other depends on which shift is bigger.');
+    const st = { d: 20, s: -10 };
+    const P = Plot(s.svg, 100, 100);
+    const ds = s.slider('d', 'Demand shift', -20, 20, 5, st.d, v => (v > 0 ? 'right +' : v < 0 ? 'left ' : '') + v, v => { st.d = v; draw(); });
+    const ss = s.slider('s', 'Supply shift', -20, 20, 5, st.s, v => (v > 0 ? 'right +' : v < 0 ? 'left ' : '') + v, v => { st.s = v; draw(); });
+    s.button('Health report + drought', () => { st.d = 20; st.s = -10; ds.set(20); ss.set(-10); draw(); });
+    function draw() {
+      const dA = 90 + st.d, sA = 10 - st.s, q2 = (dA - sA) / 2, p2 = (dA + sA) / 2;
+      P.clear(); P.axes('Quantity', 'Price');
+      P.lin(90, -1, 'c-d', st.d ? 'D1' : 'D', !!st.d); if (st.d) P.lin(dA, -1, 'c-d', 'D2');
+      P.lin(10, 1, 'c-s', st.s ? 'S1' : 'S', !!st.s); if (st.s) P.lin(sA, 1, 'c-s', 'S2');
+      P.guide(40, 50, 'Q1', 'P1'); P.dot(40, 50, 'E1', true);
+      if (st.d || st.s) { P.guide(q2, p2, Math.abs(q2 - 40) < 5 ? '' : 'Q2', Math.abs(p2 - 50) < 5 ? '' : 'P2'); P.dot(q2, p2, 'E2'); }
+      const dP = p2 - 50, dQ = q2 - 40, sg = x => x > 0 ? '↑' : x < 0 ? '↓' : 'no change';
+      let note;
+      if (st.d && st.s) {
+        const same = (st.d > 0) === (st.s > 0);
+        note = same ? 'Both curves move the same way, so <b>quantity is certain (' + sg(st.d) + ')</b>. Price depends on which shift is larger; here it is ' + sg(dP) + '. Try making the shifts equal.'
+          : 'The curves move in opposite directions, so <b>price is certain (' + sg(st.d) + ')</b>. Quantity depends on which shift is larger; here it is ' + sg(dQ) + '.';
+      } else note = 'Only one curve moved, so both price and quantity are determined. Shift the other curve too.';
+      s.show([{ k: 'Price', v: sg(dP) + ' (' + (dP > 0 ? '+' : '') + dP + ')', big: true }, { k: 'Quantity', v: sg(dQ) + ' (' + (dQ > 0 ? '+' : '') + dQ + ')', big: true }], note);
+    }
     draw();
   };
 

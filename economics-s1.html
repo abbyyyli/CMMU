@@ -1,0 +1,1089 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Supply, Demand and Equilibrium · Economics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one light reading column with a sticky chapter rail; deliberately single (light) theme. */
+:root {
+  color-scheme: light;
+  --bg: #FDF9F9; --panel: #F8EEF0; --paper: #FFFFFF; --tint: #FAE9ED; --line: #EFDDE2;
+  --fg: #2F282B; --muted: #7E6F74; --accent: #C06C84; --accent-ink: #9C4862;
+  --demand: #3F5675; --supply: #C06C84; --ext: #6E3F55; --world: #8A7A5C; --policy: #3F7F7A;
+  --cs: #A7CDB6; --ps: #B2C4E3; --dwl: #D9674F; --rev: #E5C171; --rev2: #F1DCA8; --time: #DDB3CB; --ts: #BFDCC9;
+  --serif: "Noto Serif TC", "Songti TC", Georgia, serif;
+  --sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; background: var(--bg); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 16px; line-height: 1.75; }
+a { color: var(--accent-ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(253, 249, 249, .94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); padding-inline: 16px; }
+.top-in { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 14px; min-height: 56px; flex-wrap: wrap; padding-block: 8px; }
+.brand { font-family: var(--serif); font-weight: 700; font-size: 1.02rem; white-space: nowrap; }
+.brand small { font-family: var(--sans); font-weight: 500; color: var(--muted); font-size: .76rem; margin-left: 6px; letter-spacing: .06em; }
+.sessions { display: flex; gap: 4px; margin-left: auto; }
+.crumbs { font-size: .86rem; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.crumbs a { color: var(--muted); text-decoration: none; } .crumbs a:hover { color: var(--accent-ink); } .crumbs span { color: var(--line); } .crumbs b { font-family: var(--serif); }
+.sessions a.pill { text-decoration: none; transition: border-color .15s, color .15s; }
+.sessions a.pill:hover, .sessions a.pill:focus-visible { border-color: var(--accent); color: var(--accent-ink); background: var(--tint); }
+.sessions .pill { font: 500 .82rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--muted); padding: 4px 12px; border-radius: 999px; }
+.sessions .pill[aria-current="page"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.sessions .pill.off { opacity: .5; cursor: not-allowed; }
+.toc-btn { display: none; font: 500 .85rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--fg); border-radius: 8px; padding: 5px 12px; }
+
+.wrap { max-width: 1160px; margin: 0 auto; padding-inline: 16px; display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 52px; }
+.rail { position: sticky; top: 76px; align-self: start; max-height: calc(100vh - 92px); overflow: auto; padding-block: 34px 40px; font-size: .86rem; line-height: 1.5; }
+.rail .lbl { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.rail ol { list-style: none; margin: 0; padding: 0; }
+.rail li a { display: block; padding: 4px 10px; color: var(--muted); text-decoration: none; border-radius: 6px; }
+.rail li a:hover { color: var(--fg); background: var(--tint); }
+.rail li.h3 a { padding-left: 22px; font-size: .8rem; }
+.rail li a.on { color: var(--accent-ink); background: var(--tint); font-weight: 500; }
+
+main { min-width: 0; padding-block: 30px 120px; }
+.doc { max-width: 780px; }
+.hero { padding-block: 8px 26px; border-bottom: 1px solid var(--line); }
+.kick { font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); margin: 0 0 6px; font-weight: 500; }
+.hero h1 { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.25; margin: 0 0 12px; text-wrap: balance; }
+.lead { margin: 0; font-size: 1.04rem; max-width: 62ch; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 16px; font-size: .78rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+.doc h2 { font-family: var(--serif); font-size: 1.55rem; line-height: 1.35; margin: 3.4rem 0 .3rem; text-wrap: balance; }
+.doc h3 { font-size: 1.1rem; line-height: 1.45; margin: 2.2rem 0 .5rem; color: var(--accent-ink); text-wrap: balance; }
+.sub { margin: 0 0 1.2rem; color: var(--muted); max-width: 66ch; }
+.doc p, .doc li { max-width: 68ch; }
+.doc ul, .doc ol { padding-left: 1.25em; }
+.doc li { margin: .25rem 0; }
+.zh { display: inline-block; font-size: .78em; line-height: 1.3; color: var(--accent-ink); background: var(--tint); padding: 0 6px; border-radius: 4px; margin-left: 2px; vertical-align: 1px; font-weight: 500; }
+.hint { font-size: .9rem; color: var(--muted); display: flex; gap: 10px; align-items: baseline; }
+.hint b { flex: none; font-size: .72rem; color: #fff; background: var(--accent); padding: 0 7px; border-radius: 4px; font-weight: 500; }
+.key { background: var(--tint); padding: 12px 16px; border-radius: 8px; font-weight: 500; }
+.note-small { font-size: .8rem; color: var(--muted); }
+
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 1rem 0; }
+.pair > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; }
+.pair b { color: var(--accent-ink); }
+.pair p { margin: 4px 0 0; font-size: .92rem; }
+
+.matrix { display: grid; grid-template-columns: minmax(90px, .7fr) repeat(2, minmax(0, 1fr)); gap: 6px; margin: 1rem 0 1.2rem; font-size: .9rem; max-width: 620px; }
+.matrix .mh { font-weight: 700; font-size: .8rem; color: var(--muted); align-self: end; padding: 0 4px 2px; }
+.matrix .mh.side { align-self: center; }
+.matrix .cell { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px; font-weight: 500; }
+.matrix .cell.hi { background: var(--tint); border-color: var(--accent); }
+.matrix small { display: block; font-weight: 400; color: var(--muted); font-size: .8rem; margin-top: 2px; line-height: 1.45; }
+
+.map { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.3fr) auto minmax(0, 1fr); gap: 10px; align-items: center; margin: 1rem 0; }
+.mcol { display: flex; flex-direction: column; gap: 8px; }
+.mbox { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .84rem; line-height: 1.5; display: flex; flex-direction: column; gap: 2px; }
+.mbox b { font-size: .9rem; } .mbox span { color: var(--muted); } .mbox em { font-style: normal; color: var(--accent-ink); font-size: .78rem; font-weight: 500; }
+.mbox.good { border-color: var(--cs); } .mbox.ask { background: var(--tint); border-color: var(--accent); }
+.marrow { color: var(--accent); font-weight: 700; }
+
+.flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 1rem 0; font-size: .86rem; }
+.flow span { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; line-height: 1.45; }
+.flow i { font-style: normal; color: var(--accent); font-weight: 700; }
+.formula { font-family: var(--mono); font-size: .9rem; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; line-height: 1.9; overflow-x: auto; }
+.steps { counter-reset: s; list-style: none; padding-left: 0 !important; }
+.steps li { counter-increment: s; display: flex; gap: 10px; }
+.steps li::before { content: counter(s); flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--tint); color: var(--accent-ink); font: 700 .75rem/22px var(--sans); text-align: center; margin-top: 3px; }
+.assign { margin: 1.6rem 0; border: 1px dashed var(--accent); border-radius: 10px; padding: 14px 16px; background: var(--paper); }
+.assign p { margin: 6px 0 0; font-size: .92rem; }
+
+.tbl { overflow-x: auto; margin: 1rem 0; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+.doc table { border-collapse: collapse; width: 100%; font-size: .88rem; line-height: 1.55; }
+.doc th, .doc td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+.doc th { background: var(--panel); font-weight: 700; }
+.doc tr:last-child td { border-bottom: 0; }
+.drill .ans { filter: blur(5px); cursor: pointer; user-select: none; transition: filter .2s; }
+.drill .ans.shown { filter: none; user-select: auto; }
+
+.traps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 1rem; }
+.traps > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: .88rem; line-height: 1.55; }
+.traps s { color: var(--muted); text-decoration-color: var(--dwl); }
+.traps p { margin: 6px 0 0; font-weight: 500; }
+
+.qa-tools { margin: .4rem 0 .8rem; }
+.qa-tools button { font: 500 .82rem var(--sans); border: 1px solid var(--accent); background: var(--paper); color: var(--accent-ink); border-radius: 6px; padding: 5px 12px; cursor: pointer; }
+.qa { display: flex; flex-direction: column; gap: 6px; }
+.qa details { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
+.qa summary { cursor: pointer; padding: 10px 14px; font-weight: 500; font-size: .93rem; list-style: none; display: flex; gap: 10px; }
+.qa summary::before { content: "Q"; color: var(--accent); font-weight: 700; }
+.qa details[open] summary { border-bottom: 1px dashed var(--line); }
+.qa details p { margin: 0; padding: 10px 14px 12px 36px; font-size: .9rem; }
+
+/* graphs */
+.graph { max-width: 900px; margin: 1.8rem 0 2.2rem; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px 18px 14px; }
+.g-head h4 { font-family: var(--serif); font-size: 1.12rem; margin: 2px 0 2px; line-height: 1.45; }
+.g-head p { margin: 0 0 10px; color: var(--muted); font-size: .86rem; }
+.g-kicker { font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); }
+.g-body { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.g-plot svg { width: 100%; height: auto; display: block; }
+.g-side { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.g-ctrl { display: flex; flex-direction: column; gap: 10px; }
+.sl label { display: flex; justify-content: space-between; font-size: .8rem; color: var(--muted); line-height: 1.3; }
+.sl output { font-family: var(--mono); color: var(--fg); font-size: .8rem; }
+.sl input { width: 100%; accent-color: var(--accent); margin: 4px 0 0; }
+.g-btn { align-self: flex-start; font: 500 .8rem var(--sans); border: 1px solid var(--accent); color: var(--accent-ink); background: transparent; border-radius: 6px; padding: 4px 11px; cursor: pointer; }
+.g-btn:hover { background: var(--tint); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; align-self: flex-start; }
+.seg button { font: 500 .8rem var(--sans); border: 0; background: transparent; color: var(--muted); padding: 5px 12px; cursor: pointer; }
+.seg button[aria-checked="true"] { background: var(--accent); color: var(--paper); }
+.chk { display: flex; gap: 8px; align-items: center; font-size: .8rem; color: var(--muted); }
+.chk input { accent-color: var(--accent); }
+.g-stats { margin: 0; border-top: 1px solid var(--line); padding-top: 10px; display: flex; flex-direction: column; gap: 3px; }
+.st { display: flex; justify-content: space-between; gap: 10px; font-size: .8rem; line-height: 1.45; }
+.st dt { color: var(--muted); display: flex; align-items: center; gap: 7px; }
+.st dd { margin: 0; font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.st.big dd { font-weight: 500; color: var(--accent-ink); font-size: .92rem; }
+.g-note { margin: 12px 0 0; padding: 9px 12px; background: var(--tint); border-radius: 6px; font-size: .85rem; line-height: 1.6; }
+
+.sw { width: 11px; height: 11px; border-radius: 2px; display: inline-block; flex: none; }
+.sw.none { background: transparent; }
+.sw.a-cs { background: var(--cs); } .sw.a-ps { background: var(--ps); } .sw.a-ps2 { background: var(--ps); outline: 1px solid var(--demand); }
+.sw.a-dwl { background: repeating-linear-gradient(45deg, var(--dwl) 0 2px, transparent 2px 4px); outline: 1px solid var(--dwl); }
+.sw.a-rev { background: var(--rev); } .sw.a-rev2 { background: var(--rev2); } .sw.a-time { background: var(--time); } .sw.a-ts { background: var(--ts); }
+.sw.ln { height: 3px; border-radius: 2px; width: 16px; }
+
+svg .ax { stroke: var(--muted); stroke-width: 1.2; }
+svg .axl { fill: var(--muted); font: 500 11px var(--sans); }
+svg .tk { fill: var(--muted); font: 500 10.5px var(--mono); }
+svg .gd { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 4; opacity: .7; }
+svg .cv { stroke-width: 2.6; fill: none; stroke-linecap: round; }
+svg .cv.dash { stroke-dasharray: 7 5; stroke-width: 2; }
+svg .cvl { font: 700 11.5px var(--sans); }
+svg .c-d { stroke: var(--demand); fill: var(--demand); } svg .c-s { stroke: var(--supply); fill: var(--supply); }
+svg .c-x { stroke: var(--ext); fill: var(--ext); } svg .c-w { stroke: var(--world); fill: var(--world); } svg .c-t { stroke: var(--policy); fill: var(--policy); }
+svg text.cvl { stroke: none; }
+svg .pt { fill: var(--paper); stroke: var(--fg); stroke-width: 2; }
+svg .ptl { fill: var(--fg); font: 700 11px var(--sans); }
+svg .atag { fill: var(--fg); font: 700 11px var(--sans); opacity: .8; }
+svg .a-cs { fill: var(--cs); fill-opacity: .6; } svg .a-ps { fill: var(--ps); fill-opacity: .6; }
+svg .a-ps2 { fill: var(--ps); fill-opacity: .95; } svg .a-ts { fill: var(--ts); fill-opacity: .6; }
+svg .a-dwl { fill: url(#dwlHatch); stroke: var(--dwl); stroke-width: 1.2; }
+svg .a-rev { fill: var(--rev); fill-opacity: .75; } svg .a-rev2 { fill: var(--rev2); fill-opacity: .8; } svg .a-time { fill: var(--time); fill-opacity: .65; }
+
+svg .grid { stroke: var(--line); stroke-width: 1; }
+svg .a-prof { fill: var(--cs); fill-opacity: .75; } svg .a-loss { fill: var(--dwl); fill-opacity: .35; }
+.sw.a-prof { background: var(--cs); } .sw.a-loss { background: var(--dwl); opacity: .5; }
+.twin { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.tw-t { margin: 0 0 2px; font-size: .78rem; font-weight: 700; color: var(--muted); }
+.g-ctrl .g-btn + .g-btn { margin-top: -4px; }
+.graph.wide .g-body { grid-template-columns: minmax(0, 1fr); }
+.graph.wide .g-side { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+@media (max-width: 700px) { .twin, .graph.wide .g-side { grid-template-columns: minmax(0, 1fr); } }
+svg polyline.cv { fill: none !important; }
+.seg { flex-wrap: wrap; }
+
+.graph { background: var(--paper); }
+.g-note { background: var(--tint); }
+
+@media (max-width: 900px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .rail { display: none; position: fixed; inset: 64px 0 0 0; max-height: none; background: var(--bg); z-index: 15; padding: 20px 16px 60px; }
+  .rail.open { display: block; }
+  .toc-btn { display: inline-block; }
+  .g-body { grid-template-columns: minmax(0, 1fr); }
+  .map { grid-template-columns: minmax(0, 1fr); }
+  .marrow { transform: rotate(90deg); justify-self: center; }
+}
+@media (max-width: 560px) { .pair, .traps { grid-template-columns: minmax(0, 1fr); } }
+.spectrum { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: center; margin: 1rem 0 .2rem; font-weight: 700; font-size: .9rem; }
+.spectrum .bar { height: 12px; border-radius: 6px; background: linear-gradient(90deg, #D9674F, #E5C171, #A7CDB6); }
+.spec-l { display: flex; justify-content: space-between; font-size: .78rem; color: var(--muted); margin-bottom: 1rem; }
+.no, .yes { font-size: .74rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; }
+.no { background: #FCE3DD; color: #A8432F; } .yes { background: #E3F2E9; color: #2F6B4F; }
+table.oil { font-variant-numeric: tabular-nums; }
+table.oil th, table.oil td { text-align: right; padding: 6px 8px; white-space: nowrap; }
+table.oil th:first-child, table.oil td:first-child { text-align: left; font-weight: 700; }
+table.oil td.hi { background: var(--tint); color: var(--accent-ink); font-weight: 700; }
+.ap-q { font-size: .86rem; line-height: 1.45; } .ap-q b { display: block; } .ap-q span { color: var(--muted); font-size: .8rem; }
+.ap-opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+.ap-opts .qz-o { padding: 7px 6px; font: 500 .82rem var(--sans); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; cursor: pointer; color: var(--fg); }
+.ap-opts .qz-o:hover { border-color: var(--accent); }
+.ap-opts .qz-o.right { background: #E3F2E9; border-color: #6FAE8B; } .ap-opts .qz-o.wrong { background: #FCE3DD; border-color: var(--dwl); }
+.ap-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 1rem 0 1.6rem; }
+.ap-grid figure { margin: 0; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px 10px; }
+.ap-grid svg { width: 100%; height: auto; display: block; }
+.ap-grid .tk { font-size: 9px; }
+.ap-grid figcaption { font-size: .8rem; line-height: 1.4; } .ap-grid figcaption b { display: block; } .ap-grid figcaption span { font-family: var(--mono); color: var(--accent-ink); font-size: .78rem; }
+@media (max-width: 760px) { .ap-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.g-note:empty { display: none; }
+
+</style></head><body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<pattern id="dwlHatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+<rect width="6" height="6" style="fill:var(--dwl);fill-opacity:.12"></rect><rect width="2.2" height="6" style="fill:var(--dwl);fill-opacity:.75"></rect></pattern></defs></svg>
+
+<header class="top"><div class="top-in">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Study Notes</a><span>/</span><a href="economics.html">Economics</a><span>/</span><b>Session 1</b></nav>
+  <button class="toc-btn" type="button" id="tocBtn" aria-expanded="false">Contents</button>
+  <nav class="sessions" aria-label="Sessions"><span class="pill" aria-current="page">S1</span><a class="pill" href="economics-s2.html">S2</a><a class="pill" href="economics-s3.html">S3</a><a class="pill" href="economics-s4.html">S4</a></nav>
+</div></header>
+
+<div class="wrap">
+  <aside class="rail" id="rail"><p class="lbl">Contents</p><ol id="toc"></ol></aside>
+  <main><article class="doc"><div class="hero">
+  <p class="kick">MGMG515 · Session 1</p>
+  <h1>Supply, Demand and Equilibrium</h1>
+  <p class="lead">For any market event, ask what changes first, whether it hits buyers or sellers, which curve shifts and which way, then read the new equilibrium price and quantity from the new intersection.</p>
+</div>
+
+<h2 id="map">Chapter map</h2>
+<div class="flow"><span>Willingness to pay → Demand</span><i>+</i><span>Cost and ability to sell → Supply</span><i>→</i><span>Qd = Qs: equilibrium</span><i>→</i><span>Event shifts a curve</span><i>→</i><span>New P and Q</span></div>
+<p class="hint"><b>中文邏輯</b><span>不要先背答案。先問：這件事最先影響 buyer 還是 seller？只有商品自己的價格變，是沿著曲線移動，不是 shift。</span></p>
+
+<!-- 1 -->
+<h2 id="demand">1. Demand</h2>
+<p class="sub">Demand is the relationship between price and the quantity consumers are willing to buy, other things equal.</p>
+<div class="pair">
+  <div><b>Law of demand</b><p>Price ↑ → quantity demanded ↓. At higher prices some buyers stop, some buy less, some switch to substitutes.</p></div>
+  <div><b>Reading the curve</b><p>Horizontally: at this price, how much do buyers want? Vertically: the height is the marginal buyer's willingness to pay <span class="zh">願付價格</span>.</p></div>
+</div>
+<div class="pair">
+  <div><b>Change in quantity demanded</b><p>The good's own price changes → movement along the same curve. Quinoa gets cheaper, people buy more.</p></div>
+  <div><b>Change in demand</b><p>A non-price factor changes → the whole curve shifts. Right = more at every price; left = less.</p></div>
+</div>
+<h3 id="dshift">Demand shifters</h3>
+<div class="tbl"><table>
+<thead><tr><th>Factor</th><th>Effect</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td><b>Income ↑</b></td><td>Normal good: D ↑. Inferior good <span class="zh">劣等財</span>: D ↓</td><td>Higher income: more restaurant meals, fewer instant noodles. Inferior is about income response, not low quality.</td></tr>
+<tr><td><b>Population ↑</b></td><td>D ↑</td><td>More tourists, more Bangkok hotel demand</td></tr>
+<tr><td><b>Tastes and preferences</b></td><td>Favorable → D ↑</td><td>Health research, trends, advertising</td></tr>
+<tr><td><b>Price of a substitute ↑</b></td><td>D ↑</td><td>Pepsi rises → Coke demand rises; Grab and Bolt</td></tr>
+<tr><td><b>Price of a complement ↑</b></td><td>D ↓</td><td>Gasoline rises → demand for large cars falls</td></tr>
+<tr><td><b>Expect higher future price</b></td><td>Current D ↑</td><td>Fill the tank before the announced price rise</td></tr>
+</tbody></table></div>
+
+<!-- 2 -->
+<h2 id="supply">2. Supply</h2>
+<p class="sub">Supply is the relationship between price and the quantity producers are willing to sell, other things equal.</p>
+<div class="pair">
+  <div><b>Law of supply</b><p>Price ↑ → quantity supplied ↑. Producing more uses higher-cost sources, which only pay at higher prices.</p></div>
+  <div><b>Reading the curve</b><p>The height is the minimum acceptable price <span class="zh">最低願售價</span> for that unit.</p></div>
+</div>
+<div class="tbl"><table>
+<thead><tr><th>Factor</th><th>Effect</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td><b>Input cost ↑</b></td><td>S ↓</td><td>Fertilizer, wages, energy</td></tr>
+<tr><td><b>Better technology</b></td><td>S ↑</td><td>Higher yield per tree</td></tr>
+<tr><td><b>Tax ↑ / subsidy ↑</b></td><td>S ↓ / S ↑</td><td>Changes the effective cost</td></tr>
+<tr><td><b>More producers</b></td><td>S ↑</td><td>China starts growing quinoa</td></tr>
+<tr><td><b>Opportunity cost ↑</b> <span class="zh">機會成本</span></td><td>S ↓</td><td>Resources move to a more profitable use</td></tr>
+<tr><td><b>Bad natural conditions</b></td><td>S ↓</td><td>La Niña drought</td></tr>
+<tr><td><b>Imports allowed</b></td><td>Market S ↑</td><td>More foreign sellers serve the market</td></tr>
+<tr><td><b>Producers expect higher prices</b></td><td>Current S ↓</td><td>Storable goods held back to sell later</td></tr>
+</tbody></table></div>
+
+<!-- 3 -->
+<h2 id="eq">3. Equilibrium: the quinoa market</h2>
+<p class="sub">Equilibrium is where quantity demanded equals quantity supplied: no shortage, no surplus.</p>
+<div data-widget="quinoa"></div>
+<p class="note-small">Curves are straight lines fitted through the slide's points ($500 / 45k in 2001, $1,200 / 80k in 2010) so the shortage and surplus can be measured.</p>
+<div class="tbl"><table>
+<thead><tr><th>Price</th><th>Relationship</th><th>Situation</th><th>Who competes</th><th>Pressure</th></tr></thead>
+<tbody>
+<tr><td>Below equilibrium</td><td>Qd > Qs</td><td>Shortage <span class="zh">短缺</span></td><td>Buyers with buyers</td><td>P ↑</td></tr>
+<tr><td>Above equilibrium</td><td>Qs > Qd</td><td>Surplus <span class="zh">過剩</span></td><td>Sellers with sellers</td><td>P ↓</td></tr>
+</tbody></table></div>
+
+<h3 id="surplus">Consumer and producer surplus</h3>
+<div class="pair">
+  <div><b>Consumer surplus</b><p>Willingness to pay − price paid. Willing to pay ฿80, pay ฿50: surplus ฿30. Area under demand, above price.</p></div>
+  <div><b>Producer surplus</b><p>Price − minimum acceptable price. Cost ฿30, sell at ฿50: surplus ฿20. Area above supply, below price.</p></div>
+</div>
+<div data-widget="welfare"></div>
+<p class="key">At equilibrium every trade where the buyer values the good more than it costs to produce takes place, so total surplus is maximized.</p>
+
+<!-- 4 -->
+<h2 id="shifts">4. One curve shifts</h2>
+<div class="tbl"><table>
+<thead><tr><th>Shift</th><th>Price</th><th>Quantity</th></tr></thead>
+<tbody>
+<tr><td>Demand ↑ (right)</td><td>↑</td><td>↑</td></tr>
+<tr><td>Demand ↓ (left)</td><td>↓</td><td>↓</td></tr>
+<tr><td>Supply ↑ (right)</td><td>↓</td><td>↑</td></tr>
+<tr><td>Supply ↓ (left)</td><td>↑</td><td>↓</td></tr>
+</tbody></table></div>
+<p class="key">Classic trap: a drought shifts supply left and raises the price. Buyers then buy less, but that is a fall in <b>quantity demanded</b>. Demand did not move.</p>
+
+<!-- 5 -->
+<h2 id="apps">5. The class applications</h2>
+<p class="sub">"What would happen to the equilibrium quantity and price of quinoa if...?" Predict first, then check the graph.</p>
+<div data-widget="apps"></div>
+<h3 id="all">All six graphs at a glance</h3>
+<div data-widget="appgrid"></div>
+<div class="tbl"><table>
+<thead><tr><th>#</th><th>Event</th><th>What it tests</th><th>Curve</th><th>P</th><th>Q</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Virus pandemic</td><td>Demand shock</td><td>D ←</td><td>↓</td><td>↓</td></tr>
+<tr><td>2</td><td>La Niña drought</td><td>Natural conditions</td><td>S ←</td><td>↑</td><td>↓</td></tr>
+<tr><td>3</td><td>Riceberry becomes cheap</td><td>Price of a substitute</td><td>D ←</td><td>↓</td><td>↓</td></tr>
+<tr><td>4</td><td>China grows quinoa</td><td>Number of producers</td><td>S →</td><td>↓</td><td>↑</td></tr>
+<tr><td>5</td><td>Diabetes-risk evidence</td><td>Preferences</td><td>D →</td><td>↑</td><td>↑</td></tr>
+<tr><td>6</td><td>Rare-earth discovery</td><td>Opportunity cost</td><td>S ←</td><td>↑</td><td>↓</td></tr>
+</tbody></table></div>
+<div class="traps">
+  <div><s>Riceberry is cheaper → move along quinoa demand.</s><p>Another good's price changed, so quinoa demand shifts.</p></div>
+  <div><s>Drought → demand falls.</s><p>Production is hit, so supply falls.</p></div>
+  <div><s>China grows quinoa → demand rises.</s><p>More producers: supply rises.</p></div>
+  <div><s>Rare earth → people dislike quinoa.</s><p>Opportunity cost rises: supply falls.</p></div>
+</div>
+<p class="note-small">The pandemic graph comes straight from the teacher's answer: demand falls. The slide does not name a single channel, so do not add one. For rare earth, the slide gives the direction; opportunity cost is the economic explanation.</p>
+
+<!-- 6 -->
+<h2 id="both">6. Both curves shift</h2>
+<div class="tbl"><table>
+<thead><tr><th>Shift</th><th>Price</th><th>Quantity</th></tr></thead>
+<tbody>
+<tr><td>D ↑ + S ↑</td><td>?</td><td>↑</td></tr>
+<tr><td>D ↓ + S ↓</td><td>?</td><td>↓</td></tr>
+<tr><td>D ↑ + S ↓</td><td>↑</td><td>?</td></tr>
+<tr><td>D ↓ + S ↑</td><td>↓</td><td>?</td></tr>
+</tbody></table></div>
+<div data-widget="both"></div>
+<p class="key">"?" depends on which shift is larger. If the question does not say, do not guess.</p>
+
+<!-- 7 -->
+<h2 id="method">7. Seven-step method</h2>
+<div class="steps">
+  <div><b>1 · Market</b><p>Define it: the world market for quinoa.</p></div>
+  <div><b>2 · Event</b><p>What changed?</p></div>
+  <div><b>3 · Side</b><p>Buyers (demand) or sellers (supply)?</p></div>
+  <div><b>4 · Price or factor</b><p>Own price = movement; other factor = shift.</p></div>
+  <div><b>5 · Direction</b><p>Left or right?</p></div>
+  <div><b>6 · New E</b><p>Read P2 and Q2.</p></div>
+  <div><b>7 · Explain</b><p>Event → factor → curve → direction → P → Q.</p></div>
+</div>
+
+<!-- 8 -->
+<h2 id="drills">8. Graph drills</h2>
+<p class="sub">Draw E1, E2, P1, P2, Q1, Q2 for each, then tap to check.</p>
+<div class="tbl drill"><table>
+<thead><tr><th>Event</th><th>Answer</th></tr></thead>
+<tbody>
+<tr><td>Fertilizer prices double. Thai rice market?</td><td class="ans">S ← · P ↑ · Q ↓</td></tr>
+<tr><td>A viral news story makes bubble tea a health concern.</td><td class="ans">D ← · P ↓ · Q ↓</td></tr>
+<tr><td>Bolt cuts fares by 30%. Grab's market?</td><td class="ans">Substitute cheaper: D ← · P ↓ · Q ↓</td></tr>
+<tr><td>New technology doubles durian yield per tree.</td><td class="ans">S → · P ↓ · Q ↑</td></tr>
+<tr><td>Income rises; instant noodles are an inferior good.</td><td class="ans">D ← · P ↓ · Q ↓</td></tr>
+<tr><td>EV demand rises while battery costs fall.</td><td class="ans">D → and S →: Q ↑ certain, P ambiguous</td></tr>
+<tr><td>A health report raises quinoa demand while a drought raises costs.</td><td class="ans">D → and S ←: P ↑ certain, Q ambiguous</td></tr>
+</tbody></table></div>
+
+<!-- 9 -->
+<h2 id="traps">9. Do not mix these up</h2>
+<div class="traps">
+  <div><s>Price fell, so demand increased.</s><p>Quantity demanded increased: a movement.</p></div>
+  <div><s>Price rose, so supply increased.</s><p>Quantity supplied increased.</p></div>
+  <div><s>Supply fell, so demand also fell.</s><p>The higher price cut quantity demanded.</p></div>
+  <div><s>Income ↑ → demand ↑.</s><p>Only for normal goods.</p></div>
+  <div><s>Above equilibrium = shortage.</s><p>Above = surplus; below = shortage.</p></div>
+  <div><s>Both curves shift, so P and Q are both known.</s><p>One is ambiguous.</p></div>
+</div>
+
+<!-- 10 -->
+<h2 id="coldcall">10. Cold call practice</h2>
+<div class="qa-tools"><button type="button" id="qaAll">Show all answers</button></div>
+<div class="qa">
+  <details><summary>Demand versus quantity demanded?</summary><p>Demand is the whole curve; quantity demanded is the amount at one price. Own price changes move along the curve.</p></details>
+  <details><summary>Why does demand slope downward?</summary><p>At higher prices some buyers stop, some buy less and some switch to substitutes.</p></details>
+  <details><summary>Why does supply slope upward?</summary><p>More output needs higher-cost sources, which need a higher price.</p></details>
+  <details><summary>What happens below equilibrium, and who competes?</summary><p>A shortage: buyers compete with other buyers and push the price up.</p></details>
+  <details><summary>Why can rare-earth deposits reduce quinoa supply?</summary><p>They raise the opportunity cost of land, labor and capital used for quinoa, so resources move to mining.</p></details>
+  <details><summary>Drought cuts supply. Must demand shift too?</summary><p>No. The higher price lowers quantity demanded along the same curve.</p></details>
+  <details><summary>Why is equilibrium efficient?</summary><p>All trades where value exceeds cost take place, so consumer plus producer surplus is maximized.</p></details>
+</div>
+<h3 id="templates">Answer templates</h3>
+<div class="tbl"><table>
+<tbody>
+<tr><td><b>Demand shift</b></td><td>Demand for ___ increases/decreases because ___. The demand curve shifts right/left, so equilibrium price ___ and quantity ___.</td></tr>
+<tr><td><b>Supply shift</b></td><td>Supply of ___ increases/decreases because ___. The supply curve shifts right/left, so equilibrium price ___ and quantity ___.</td></tr>
+<tr><td><b>Substitute</b></td><td>Because ___ is a substitute for ___, a fall in its price reduces demand for ___.</td></tr>
+<tr><td><b>Opportunity cost</b></td><td>The new opportunity raises the opportunity cost of producing ___, so supply decreases.</td></tr>
+</tbody></table></div>
+</article></main>
+</div>
+
+<script>/* Interactive economics graphs. Linear models, one shared plotting helper. */
+(function () {
+  const NS = 'http://www.w3.org/2000/svg';
+  const W = 560, H = 380, L = 54, R = 92, T = 16, B = 42;
+  const f1 = x => (Math.round(x * 10) / 10).toLocaleString('en-US', { maximumFractionDigits: 1 });
+  const pct = x => Math.round(x * 100) + '%';
+  let uid = 0;
+
+  function el(tag, attrs, parent) {
+    const e = document.createElementNS(NS, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+
+  function Plot(svg, qMax, pMax) {
+    const sx = q => L + (q / qMax) * (W - L - R);
+    const sy = p => H - B - (p / pMax) * (H - T - B);
+    const g = { area: el('g', {}, svg), lines: el('g', {}, svg), top: el('g', {}, svg) };
+    const api = {
+      sx, sy,
+      clear() { g.area.innerHTML = ''; g.lines.innerHTML = ''; g.top.innerHTML = ''; },
+      axes(xl, yl) {
+        el('line', { x1: L, y1: sy(0), x2: W - R + 10, y2: sy(0), class: 'ax' }, g.lines);
+        el('line', { x1: L, y1: sy(0), x2: L, y2: T - 4, class: 'ax' }, g.lines);
+        const tx = el('text', { x: W - R + 10, y: sy(0) + 30, class: 'axl', 'text-anchor': 'end' }, g.top); tx.textContent = xl;
+        const ty = el('text', { x: L + 8, y: T + 4, class: 'axl', 'text-anchor': 'start' }, g.top); ty.textContent = yl;
+      },
+      poly(pts, cls) {
+        if (!pts.length) return;
+        el('polygon', { points: pts.map(p => sx(p[0]) + ',' + sy(p[1])).join(' '), class: cls }, g.area);
+      },
+      lin(a, m, cls, label, dashed) {
+        // P = a + m*Q, clipped to the plot box
+        let q0 = 0, q1 = qMax;
+        if (m !== 0) {
+          const qa = (0 - a) / m, qb = (pMax - a) / m;
+          q0 = Math.max(0, Math.min(qa, qb)); q1 = Math.min(qMax, Math.max(qa, qb));
+        }
+        if (q1 <= q0) return;
+        el('line', { x1: sx(q0), y1: sy(a + m * q0), x2: sx(q1), y2: sy(a + m * q1), class: 'cv ' + cls + (dashed ? ' dash' : '') }, g.lines);
+        if (label) {
+          const t = el('text', { x: sx(q1) + 6, y: sy(a + m * q1) + 4, class: 'cvl ' + cls }, g.top);
+          t.textContent = label;
+        }
+      },
+      hline(p, cls, label) {
+        el('line', { x1: sx(0), y1: sy(p), x2: W - R, y2: sy(p), class: 'cv ' + cls }, g.lines);
+        if (label) { const t = el('text', { x: W - R + 6, y: sy(p) + 4, class: 'cvl ' + cls }, g.top); t.textContent = label; }
+      },
+      guide(q, p, ql, pl) {
+        if (q != null) el('line', { x1: sx(q), y1: sy(p), x2: sx(q), y2: sy(0), class: 'gd' }, g.lines);
+        if (p != null && q != null) el('line', { x1: sx(0), y1: sy(p), x2: sx(q), y2: sy(p), class: 'gd' }, g.lines);
+        if (ql) { const t = el('text', { x: sx(q), y: sy(0) + 16, class: 'tk', 'text-anchor': 'middle' }, g.top); t.textContent = ql; }
+        if (pl) { const t = el('text', { x: L - 6, y: sy(p) + 4, class: 'tk', 'text-anchor': 'end' }, g.top); t.textContent = pl; }
+      },
+      dot(q, p, label, left) {
+        el('circle', { cx: sx(q), cy: sy(p), r: 4.5, class: 'pt' }, g.top);
+        if (label) { const t = el('text', { x: sx(q) + (left ? -9 : 8), y: sy(p) + (left ? 4 : -8), class: 'ptl', 'text-anchor': left ? 'end' : 'start' }, g.top); t.textContent = label; }
+      },
+      path(pts, cls) { el('polyline', { points: pts.map(p => sx(p[0]) + ',' + sy(p[1])).join(' '), class: 'cv ' + cls, fill: 'none' }, g.lines); },
+      label(q, p, s, cls) { const t = el('text', { x: sx(q) + 6, y: sy(p) + 4, class: 'cvl ' + cls }, g.top); t.textContent = s; },
+      xticks(arr) { arr.forEach(v => { const t = el('text', { x: sx(v), y: sy(0) + 16, class: 'tk', 'text-anchor': 'middle' }, g.top); t.textContent = v; }); },
+      yticks(arr, pre) { arr.forEach(v => { el('line', { x1: sx(0), y1: sy(v), x2: W - R, y2: sy(v), class: 'grid' }, g.area); const t = el('text', { x: L - 6, y: sy(v) + 4, class: 'tk', 'text-anchor': 'end' }, g.top); t.textContent = (pre || '') + v; }); },
+      tag(q, p, s) { const t = el('text', { x: sx(q), y: sy(p) + 4, class: 'atag', 'text-anchor': 'middle' }, g.top); t.textContent = s; }
+    };
+    return api;
+  }
+
+  function shell(host, title, sub) {
+    const id = 'w' + (++uid);
+    host.classList.add('graph');
+    host.innerHTML =
+      '<div class="g-head"><span class="g-kicker">Interactive graph</span><h4>' + title + '</h4><p>' + sub + '</p></div>' +
+      '<div class="g-body"><div class="g-plot"><svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + title + '"></svg></div>' +
+      '<div class="g-side"><div class="g-ctrl"></div><dl class="g-stats"></dl></div></div>' +
+      '<p class="g-note" aria-live="polite"></p>';
+    const svg = host.querySelector('svg');
+    return {
+      id, svg,
+      ctrl: host.querySelector('.g-ctrl'),
+      stats: host.querySelector('.g-stats'),
+      note: host.querySelector('.g-note'),
+      slider(key, label, min, max, step, val, fmt, on) {
+        const wrap = document.createElement('div'); wrap.className = 'sl';
+        const iid = id + '-' + key;
+        wrap.innerHTML = '<label for="' + iid + '"><span>' + label + '</span><output></output></label>' +
+          '<input type="range" id="' + iid + '" min="' + min + '" max="' + max + '" step="' + step + '" value="' + val + '">';
+        const inp = wrap.querySelector('input'), out = wrap.querySelector('output');
+        const sync = () => { out.textContent = fmt ? fmt(+inp.value) : inp.value; };
+        inp.addEventListener('input', () => { sync(); on(+inp.value); });
+        sync();
+        this.ctrl.appendChild(wrap);
+        return { set(v) { inp.value = v; sync(); }, input: inp };
+      },
+      button(label, on) {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'g-btn'; b.textContent = label;
+        b.addEventListener('click', on); this.ctrl.appendChild(b); return b;
+      },
+      seg(key, opts, val, on) {
+        const wrap = document.createElement('div'); wrap.className = 'seg'; wrap.setAttribute('role', 'radiogroup');
+        opts.forEach(([v, lab]) => {
+          const b = document.createElement('button'); b.type = 'button'; b.textContent = lab; b.dataset.v = v;
+          b.setAttribute('role', 'radio'); b.setAttribute('aria-checked', v === val);
+          b.addEventListener('click', () => { wrap.querySelectorAll('button').forEach(x => x.setAttribute('aria-checked', x === b)); on(v); });
+          wrap.appendChild(b);
+        });
+        this.ctrl.appendChild(wrap);
+      },
+      check(key, label, val, on) {
+        const wrap = document.createElement('label'); wrap.className = 'chk';
+        const iid = id + '-' + key;
+        wrap.setAttribute('for', iid);
+        wrap.innerHTML = '<input type="checkbox" id="' + iid + '"' + (val ? ' checked' : '') + '><span>' + label + '</span>';
+        wrap.querySelector('input').addEventListener('change', e => on(e.target.checked));
+        this.ctrl.appendChild(wrap);
+      },
+      show(rows, note) {
+        this.stats.innerHTML = rows.map(r =>
+          '<div class="st' + (r.big ? ' big' : '') + '"><dt><i class="sw ' + (r.sw || 'none') + '"></i>' + r.k + '</dt><dd>' + r.v + '</dd></div>').join('');
+        this.note.innerHTML = note || '';
+      }
+    };
+  }
+
+  const W_ = {};
+
+  /* 1. Equilibrium welfare */
+  W_.welfare = host => {
+    const s = shell(host, 'Gains from trade peak at equilibrium',
+      'Shift demand or supply, or force the quantity away from equilibrium, and watch total surplus.');
+    const st = { a: 100, c: 10, q: 45, forced: false };
+    const P = Plot(s.svg, 80, 130);
+    const qe = () => (st.a - st.c) / 2;
+    const draw = () => {
+      const Qe = qe(), Pe = (st.a + st.c) / 2, a = st.a, c = st.c;
+      if (!st.forced) { st.q = Qe; qs.set(Qe); }
+      const q = st.q;
+      P.clear(); P.axes('Quantity', 'Price');
+      const TSe = 0.5 * Qe * (a - c);
+      let rows, note;
+      if (Math.abs(q - Qe) < 0.26) {
+        const CS = 0.5 * Qe * (a - Pe), PS = 0.5 * Qe * (Pe - c);
+        P.poly([[0, a], [Qe, Pe], [0, Pe]], 'a-cs'); P.poly([[0, Pe], [Qe, Pe], [0, c]], 'a-ps');
+        P.tag(Qe / 3, Pe + (a - Pe) / 3, 'CS'); P.tag(Qe / 3, Pe - (Pe - c) / 3, 'PS');
+        rows = [{ k: 'Consumer Surplus', v: f1(CS), sw: 'a-cs' }, { k: 'Producer Surplus', v: f1(PS), sw: 'a-ps' },
+          { k: 'Total Surplus', v: f1(TSe), big: true }, { k: 'Deadweight Loss', v: '0', sw: 'a-dwl' }];
+        note = 'At equilibrium every trade with WTP ≥ MC takes place, so total surplus is at its maximum.';
+      } else if (q < Qe) {
+        const dwl = 0.5 * (Qe - q) * ((a - q) - (c + q));
+        P.poly([[0, a], [q, a - q], [q, c + q], [0, c]], 'a-ts');
+        P.poly([[q, a - q], [Qe, Pe], [q, c + q]], 'a-dwl');
+        P.tag((q + Qe) / 2 - 2, Pe, 'DWL');
+        P.guide(q, null, 'Q');
+        rows = [{ k: 'Surplus realized', v: f1(TSe - dwl), sw: 'a-ts' }, { k: 'Max possible', v: f1(TSe) },
+          { k: 'Deadweight Loss', v: f1(dwl), sw: 'a-dwl', big: true }];
+        note = 'Too little trade: between Q and Qe, buyer WTP still exceeds seller cost, yet these trades do not happen.';
+      } else {
+        const dwl = 0.5 * (q - Qe) * ((c + q) - (a - q));
+        P.poly([[0, a], [Qe, Pe], [0, c]], 'a-ts');
+        P.poly([[Qe, Pe], [q, c + q], [q, a - q]], 'a-dwl');
+        P.tag((q + Qe) / 2 + 2, Pe, 'DWL');
+        P.guide(q, null, 'Q');
+        rows = [{ k: 'Surplus realized', v: f1(TSe - dwl), sw: 'a-ts' }, { k: 'Max possible', v: f1(TSe) },
+          { k: 'Deadweight Loss', v: f1(dwl), sw: 'a-dwl', big: true }];
+        note = 'Too much trade: beyond Qe, MC > WTP, so every extra unit reduces total surplus.';
+      }
+      P.lin(a, -1, 'c-d', 'D'); P.lin(c, 1, 'c-s', 'S');
+      P.guide(Qe, Pe, 'Qe', 'Pe'); P.dot(Qe, Pe, 'E');
+      s.show(rows, note);
+    };
+    s.slider('a', 'Demand shift', 80, 120, 1, st.a, v => (v > 100 ? '+' : '') + (v - 100), v => { st.a = v; draw(); });
+    s.slider('c', 'Supply shift', 0, 30, 1, st.c, v => (v > 10 ? '+' : '') + (v - 10), v => { st.c = v; draw(); });
+    const qs = s.slider('q', 'Quantity traded', 5, 70, 0.5, st.q, f1, v => { st.q = v; st.forced = true; draw(); });
+    s.button('Reset to equilibrium', () => { st.forced = false; draw(); });
+    draw();
+  };
+
+  /* 2. Tariff in a small open economy */
+  W_.tariff = host => {
+    const s = shell(host, 'A tariff transfers surplus and destroys some of it',
+      'Adjust the world price and the tariff to see the domestic price, imports and the welfare areas change.');
+    const st = { pw: 25, t: 12 };
+    const P = Plot(s.svg, 100, 110);
+    const D = p => 100 - p, Sq = p => p - 5, PA = 52.5;
+    const draw = () => {
+      const pw = st.pw, pt = Math.min(pw + st.t, PA);
+      const Q1 = Sq(pw), Q4 = D(pw), Q2 = Sq(pt), Q3 = D(pt), h = pt - pw;
+      P.clear(); P.axes('Quantity', 'Price');
+      P.poly([[0, 100], [Q3, pt], [0, pt]], 'a-cs');
+      P.poly([[0, 5], [Q1, pw], [0, pw]], 'a-ps');
+      if (h > 0) {
+        P.poly([[0, pw], [Q1, pw], [Q2, pt], [0, pt]], 'a-ps2');
+        P.poly([[Q1, pw], [Q2, pt], [Q2, pw]], 'a-dwl');
+        P.poly([[Q2, pw], [Q3, pw], [Q3, pt], [Q2, pt]], 'a-rev');
+        P.poly([[Q3, pt], [Q3, pw], [Q4, pw]], 'a-dwl');
+        if (Q3 - Q2 > 6) P.tag((Q2 + Q3) / 2, (pw + pt) / 2, 'Revenue');
+      }
+      P.lin(100, -1, 'c-d', 'D'); P.lin(5, 1, 'c-s', 'S domestic');
+      P.hline(pw, 'c-w', 'World price');
+      if (h > 0) P.hline(pt, 'c-t', 'With tariff');
+      P.guide(Q1, pw, 'Q1', f1(pw)); P.guide(Q4, pw, 'Q4');
+      if (h > 0) { P.guide(Q2, pt, 'Q2', f1(pt)); P.guide(Q3, pt, 'Q3'); }
+      const csL = h * (Q3 + Q4) / 2, psG = h * (Q1 + Q2) / 2, rev = h * (Q3 - Q2), dP = 0.5 * (Q2 - Q1) * h, dC = 0.5 * (Q4 - Q3) * h;
+      s.show([
+        { k: 'Imports (free trade → tariff)', v: f1(Q4 - Q1) + ' → ' + f1(Q3 - Q2) },
+        { k: 'Consumer Surplus loss', v: '−' + f1(csL), sw: 'a-cs' },
+        { k: 'Producer Surplus gain', v: '+' + f1(psG), sw: 'a-ps2' },
+        { k: 'Government revenue', v: '+' + f1(rev), sw: 'a-rev' },
+        { k: 'DWL: wasted resources', v: f1(dP), sw: 'a-dwl' },
+        { k: 'DWL: lost gains from trade', v: f1(dC), sw: 'a-dwl' },
+        { k: 'Total DWL', v: f1(dP + dC), big: true }
+      ], pt >= PA - 0.01 ? 'Prohibitive tariff: the domestic price returns to the no-trade price and imports fall to zero.'
+        : 'CS loss = PS gain + tariff revenue + two DWL triangles. The first two are transfers; only the DWL is lost to society.');
+    };
+    s.slider('pw', 'World price', 10, 50, 1, st.pw, null, v => { st.pw = v; draw(); });
+    s.slider('t', 'Tariff per unit', 0, 40, 1, st.t, null, v => { st.t = v; draw(); });
+    draw();
+  };
+
+  /* 3. Price ceiling / floor */
+  W_.control = host => {
+    const s = shell(host, 'Binding price controls shrink trade',
+      'Choose ceiling or floor and drag the legal price. A ceiling binds only below equilibrium; a floor binds only above it.');
+    const st = { mode: 'ceiling', p: 35, time: true };
+    const P = Plot(s.svg, 100, 110);
+    const Qe = 45, Pe = 55, Dq = p => 100 - p, Sq = p => p - 10, Dp = q => 100 - q, Sp = q => 10 + q;
+    const draw = () => {
+      const p = st.p; P.clear(); P.axes('Quantity', 'Price');
+      const binding = st.mode === 'ceiling' ? p < Pe : p > Pe;
+      let rows, note;
+      if (!binding) {
+        P.poly([[0, 100], [Qe, Pe], [0, Pe]], 'a-cs'); P.poly([[0, Pe], [Qe, Pe], [0, 10]], 'a-ps');
+        rows = [{ k: 'Status', v: 'Non-binding', big: true }, { k: 'Quantity traded', v: f1(Qe) }, { k: 'Deadweight Loss', v: '0', sw: 'a-dwl' }];
+        note = st.mode === 'ceiling' ? 'The ceiling is above the equilibrium price, so the market still clears at Pe. The control has no effect.'
+          : 'The floor is below the equilibrium price, so the market still clears at Pe. The control has no effect.';
+      } else if (st.mode === 'ceiling') {
+        const qs = Sq(p), qd = Dq(p), pd = Dp(qs);
+        if (st.time) { P.poly([[0, 100], [qs, pd], [0, pd]], 'a-cs'); P.poly([[0, p], [qs, p], [qs, pd], [0, pd]], 'a-time'); }
+        else P.poly([[0, 100], [qs, pd], [qs, p], [0, p]], 'a-cs');
+        P.poly([[0, p], [qs, p], [0, 10]], 'a-ps');
+        P.poly([[qs, pd], [Qe, Pe], [qs, Pe]], 'a-dwl'); P.poly([[qs, Pe], [Qe, Pe], [qs, p]], 'a-dwl');
+        P.tag(qs + (Qe - qs) / 3, Pe + (pd - Pe) / 3, 'A'); P.tag(qs + (Qe - qs) / 3, Pe - (Pe - p) / 3, 'B');
+        if (st.time && qs > 8) P.tag(qs / 2, (p + pd) / 2, 'Wasted time');
+        P.hline(p, 'c-t', 'Ceiling');
+        P.guide(qs, p, 'Qs', f1(p)); P.guide(qd, p, 'Qd');
+        const A = 0.5 * (Qe - qs) * (pd - Pe), Bv = 0.5 * (Qe - qs) * (Pe - p);
+        rows = [{ k: 'Shortage = Qd − Qs', v: f1(qd - qs), big: true },
+          { k: 'A: lost Consumer Surplus', v: f1(A), sw: 'a-dwl' }, { k: 'B: lost Producer Surplus', v: f1(Bv), sw: 'a-dwl' },
+          { k: 'DWL = A + B', v: f1(A + Bv) }];
+        if (st.time) rows.push({ k: 'Wasted time / search (max)', v: f1(qs * (pd - p)), sw: 'a-time' });
+        note = 'Only Qs units are supplied. The marginal buyer would pay up to ' + f1(pd) + ', so the gap turns into queues, search and other non-price costs.';
+      } else {
+        const qd = Dq(p), qs = Sq(p), ps = Sp(qd);
+        P.poly([[0, 100], [qd, p], [0, p]], 'a-cs'); P.poly([[0, p], [qd, p], [qd, ps], [0, 10]], 'a-ps');
+        P.poly([[qd, p], [Qe, Pe], [qd, Pe]], 'a-dwl'); P.poly([[qd, Pe], [Qe, Pe], [qd, ps]], 'a-dwl');
+        P.tag(qd + (Qe - qd) / 3, Pe + (p - Pe) / 3, 'A'); P.tag(qd + (Qe - qd) / 3, Pe - (Pe - ps) / 3, 'B');
+        P.hline(p, 'c-t', 'Floor');
+        P.guide(qd, p, 'Qd', f1(p)); P.guide(qs, p, 'Qs');
+        const A = 0.5 * (Qe - qd) * (p - Pe), Bv = 0.5 * (Qe - qd) * (Pe - ps);
+        rows = [{ k: 'Surplus = Qs − Qd', v: f1(qs - qd), big: true },
+          { k: 'A: lost Consumer Surplus', v: f1(A), sw: 'a-dwl' }, { k: 'B: lost Producer Surplus', v: f1(Bv), sw: 'a-dwl' },
+          { k: 'DWL = A + B', v: f1(A + Bv) }];
+        note = 'Only Qd units are bought; sellers cannot sell the rest. Example: unemployment under a minimum wage.';
+      }
+      P.lin(100, -1, 'c-d', 'D'); P.lin(10, 1, 'c-s', 'S'); P.guide(Qe, Pe, null, 'Pe'); P.dot(Qe, Pe, 'E');
+      s.show(rows, note);
+    };
+    s.seg('mode', [['ceiling', 'Price Ceiling'], ['floor', 'Price Floor']], st.mode, v => {
+      st.mode = v; const np = v === 'ceiling' ? 35 : 75; st.p = np; ps.set(np); draw();
+    });
+    const ps = s.slider('p', 'Legal price', 15, 95, 1, st.p, null, v => { st.p = v; draw(); });
+    s.check('time', 'Show wasted time (ceiling)', st.time, v => { st.time = v; draw(); });
+    draw();
+  };
+
+  /* 4. Negative externality + Pigouvian tax */
+  W_.negext = host => {
+    const s = shell(host, 'A Pigouvian tax corrects overproduction',
+      'Raise the external cost, then use a tax to lift private cost up to social cost.');
+    const st = { e: 25, t: 0 };
+    const P = Plot(s.svg, 100, 110);
+    const draw = () => {
+      const e = st.e, t = st.t, Qm = (90 - t) / 2, Qf = (90 - e) / 2;
+      P.clear(); P.axes('Quantity', 'Price / Cost');
+      const dwl = 0.5 * Math.abs(Qm - Qf) * Math.abs(e - t);
+      if (dwl > 0.01) {
+        P.poly([[Qf, 100 - Qf], [Qm, 100 - Qm], [Qm, 10 + e + Qm]], 'a-dwl');
+        P.tag((2 * Qm + Qf) / 3, ((100 - Qf) + (100 - Qm) + (10 + e + Qm)) / 3, 'DWL');
+      }
+      P.lin(100, -1, 'c-d', 'D = MPB'); P.lin(10, 1, 'c-s', 'MPC'); P.lin(10 + e, 1, 'c-x', 'MSC');
+      if (t > 0) P.lin(10 + t, 1, 'c-t', 'MPC + tax', true);
+      P.guide(Qm, 100 - Qm, 'Q mkt', null); P.dot(Qm, 100 - Qm, 'Market');
+      P.guide(Qf, 100 - Qf, 'Q eff', null); P.dot(Qf, 100 - Qf, 'Efficient', true);
+      let note;
+      if (Math.abs(t - e) < 0.5) note = 'Tax = marginal external cost: decision-makers now face the full social cost, Q returns to the efficient level and the DWL disappears.';
+      else if (t < e) note = 'Tax below the external cost: decision-makers still understate cost, so Q market > Q efficient (overproduction).';
+      else note = 'Tax above the external cost: output falls below the efficient level, which also creates DWL.';
+      s.show([{ k: 'Q market', v: f1(Qm) }, { k: 'Q efficient', v: f1(Qf) },
+        { k: 'Deadweight Loss', v: f1(dwl), sw: 'a-dwl', big: true }, { k: 'Tax revenue', v: f1(t * Qm), sw: 'a-rev' }], note);
+    };
+    s.slider('e', 'External cost per unit', 0, 50, 1, st.e, null, v => { st.e = v; draw(); });
+    const ts = s.slider('t', 'Pigouvian tax per unit', 0, 60, 1, st.t, null, v => { st.t = v; draw(); });
+    s.button('Tax = external cost', () => { st.t = st.e; ts.set(st.e); draw(); });
+    draw();
+  };
+
+  /* 5. Positive externality + subsidy */
+  W_.posext = host => {
+    const s = shell(host, 'A subsidy corrects underproduction',
+      'Raise the external benefit, then use a subsidy to lift private benefit up to social benefit.');
+    const st = { e: 20, s: 0 };
+    const P = Plot(s.svg, 100, 110);
+    const draw = () => {
+      const e = st.e, sb = st.s, Qm = (70 + sb) / 2, Qs = (70 + e) / 2;
+      P.clear(); P.axes('Quantity', 'Price / Benefit');
+      const dwl = 0.5 * Math.abs(Qm - Qs) * Math.abs(e - sb);
+      if (dwl > 0.01) {
+        P.poly([[Qs, 10 + Qs], [Qm, 10 + Qm], [Qm, 80 + e - Qm]], 'a-dwl');
+        P.tag((2 * Qm + Qs) / 3, ((10 + Qs) + (10 + Qm) + (80 + e - Qm)) / 3, 'DWL');
+      }
+      P.lin(80, -1, 'c-d', 'D = MPB'); P.lin(80 + e, -1, 'c-x', 'MSB'); P.lin(10, 1, 'c-s', 'S');
+      if (sb > 0) P.lin(80 + sb, -1, 'c-t', 'MPB + subsidy', true);
+      P.guide(Qm, 10 + Qm, 'Q mkt', null); P.dot(Qm, 10 + Qm, 'Market');
+      P.guide(Qs, 10 + Qs, 'Q soc', null); P.dot(Qs, 10 + Qs, 'Social', true);
+      let note;
+      if (Math.abs(sb - e) < 0.5) note = 'Subsidy = marginal external benefit: Q returns to the social optimum and the DWL disappears.';
+      else if (sb < e) note = 'The market counts only private benefit, so Q market < Q social (too little vaccination, education or R&D).';
+      else note = 'A subsidy above the external benefit pushes quantity too high, which also creates DWL.';
+      s.show([{ k: 'Q market', v: f1(Qm) }, { k: 'Q social', v: f1(Qs) },
+        { k: 'Deadweight Loss', v: f1(dwl), sw: 'a-dwl', big: true }, { k: 'Subsidy cost', v: f1(sb * Qm), sw: 'a-rev' }], note);
+    };
+    s.slider('e', 'External benefit per unit', 0, 40, 1, st.e, null, v => { st.e = v; draw(); });
+    const ss = s.slider('s', 'Subsidy per unit', 0, 50, 1, st.s, null, v => { st.s = v; draw(); });
+    s.button('Subsidy = external benefit', () => { st.s = st.e; ss.set(st.e); draw(); });
+    draw();
+  };
+
+  /* 6. Tax incidence */
+  W_.tax = host => {
+    const s = shell(host, 'The less elastic side bears more of a tax',
+      'Change each curve\'s slope and the tax. A steeper curve is less elastic and carries a larger share of the burden.');
+    const st = { b: 1, d: 1, t: 20 };
+    const svg = s.svg;
+    const draw = () => {
+      const { b, d, t } = st, Qe = 90 / (b + d), Pe = 100 - b * Qe, Qt = (90 - t) / (b + d), Pb = 100 - b * Qt, Ps = Pb - t;
+      svg.innerHTML = '';
+      const P = Plot(svg, Math.max(40, Math.ceil(Qe * 1.7 / 10) * 10), 110);
+      P.axes('Quantity', 'Price');
+      P.poly([[0, Pe], [Qt, Pe], [Qt, Pb], [0, Pb]], 'a-rev');
+      P.poly([[0, Ps], [Qt, Ps], [Qt, Pe], [0, Pe]], 'a-rev2');
+      P.poly([[Qt, Pb], [Qe, Pe], [Qt, Ps]], 'a-dwl');
+      P.lin(100, -b, 'c-d', 'D'); P.lin(10, d, 'c-s', 'S'); P.lin(10 + t, d, 'c-t', 'S + tax', true);
+      P.guide(Qt, Pb, 'Qt', 'Pb ' + f1(Pb)); P.guide(Qt, Ps, null, 'Ps ' + f1(Ps)); P.guide(Qe, Pe, 'Qe', 'Pe');
+      P.dot(Qe, Pe);
+      const bb = Pb - Pe, sbur = Pe - Ps;
+      s.show([{ k: 'Buyers pay more', v: '+' + f1(bb) + ' (' + pct(t ? bb / t : 0) + ')', sw: 'a-rev' },
+        { k: 'Sellers receive less', v: '−' + f1(sbur) + ' (' + pct(t ? sbur / t : 0) + ')', sw: 'a-rev2' },
+        { k: 'Tax revenue', v: f1(t * Qt) }, { k: 'Deadweight Loss', v: f1(0.5 * t * (Qe - Qt)), sw: 'a-dwl', big: true }],
+        b > d + 0.05 ? 'Demand is steeper (less elastic), so buyers bear more. Who legally pays the tax does not change who bears it.'
+          : d > b + 0.05 ? 'Supply is steeper (less elastic), so sellers bear more.'
+            : 'Equal slopes: the burden splits evenly.');
+    };
+    s.slider('b', 'Demand slope', 0.4, 3, 0.1, st.b, v => v.toFixed(1), v => { st.b = v; draw(); });
+    s.slider('d', 'Supply slope', 0.4, 3, 0.1, st.d, v => v.toFixed(1), v => { st.d = v; draw(); });
+    s.slider('t', 'Tax per unit', 0, 40, 1, st.t, null, v => { st.t = v; draw(); });
+    draw();
+  };
+
+
+  /* Professor's oil-well cost table (CMMU Slides 6-8) */
+  const OIL = { FC: 35, VC: [0, 2, 7, 17, 34, 58, 88, 123, 172, 247, 349, 479, 629] };
+  OIL.TC = OIL.VC.map(v => v + OIL.FC);
+  OIL.MC = OIL.TC.map((t, i) => i ? t - OIL.TC[i - 1] : null);
+  function bestQ(P) { let b = 0, bp = -OIL.FC; for (let q = 1; q <= 12; q++) { const p = P * q - OIL.TC[q]; if (p > bp) { bp = p; b = q; } } return [b, bp]; }
+
+  W_.oil = host => {
+    const s = shell(host, 'One oil well: how many barrels?', 'Drag the market price. The firm compares each barrel\'s marginal cost with the price, using the cost table from the class slides.');
+    const st = { p: 50 };
+    const P = Plot(s.svg, 12.5, 160);
+    const draw = () => {
+      const p = st.p, [q, pi] = bestQ(p);
+      P.clear(); P.yticks([50, 100, 150], '$'); P.axes('Barrels per day', 'Dollars');
+      P.xticks([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+      if (q > 0) {
+        const atc = OIL.TC[q] / q;
+        P.poly([[0, Math.min(p, 160)], [q, Math.min(p, 160)], [q, Math.min(atc, 160)], [0, Math.min(atc, 160)]], pi >= 0 ? 'a-prof' : 'a-loss');
+        P.guide(q, Math.min(p, 160), null, null);
+      }
+      const mcPts = [], acPts = [], avcPts = [];
+      for (let i = 1; i <= 12; i++) { mcPts.push([i, OIL.MC[i]]); acPts.push([i, OIL.TC[i] / i]); avcPts.push([i, OIL.VC[i] / i]); }
+      P.path(mcPts.filter(x => x[1] <= 160), 'c-s'); P.path(acPts, 'c-d'); P.path(avcPts, 'c-d dash');
+      P.label(10.4, 155, 'MC', 'c-s'); P.label(10.3, 60, 'AC', 'c-d'); P.label(11.2, 34, 'AVC', 'c-d');
+      P.hline(Math.min(p, 160), 'c-t', 'P = MR');
+      mcPts.forEach(([i, m]) => { if (m <= 160) P.dot(i, m); });
+      const tr = p * q, tc = OIL.TC[q];
+      let status, note;
+      if (q === 0) { status = 'Shut down'; note = 'Even the first barrel costs more than the price ($2). Producing nothing limits the loss to the $35 fixed cost.'; }
+      else if (pi < 0) { status = 'Loss, keep operating'; note = 'Price is below average cost, so the firm loses money. But revenue covers variable cost, so producing loses less than shutting down (−$35).'; }
+      else { status = 'Profit'; note = 'Barrel ' + q + ' costs $' + OIL.MC[q] + ' ≤ $' + p + '. ' + (q < 12 ? 'Barrel ' + (q + 1) + ' would cost $' + OIL.MC[q + 1] + ' > $' + p + ', so stop at ' + q + '.' : ''); }
+      s.show([{ k: 'Best output q*', v: q + ' barrels', big: true }, { k: 'Revenue P × q', v: '$' + tr }, { k: 'Total cost', v: '$' + tc },
+        { k: 'Profit TR − TC', v: (pi < 0 ? '−$' : '$') + Math.abs(pi), sw: pi >= 0 ? 'a-prof' : 'a-loss' }, { k: 'Decision', v: status }], note);
+    };
+    const ps = s.slider('p', 'Market price per barrel', 1, 150, 1, st.p, v => '$' + v, v => { st.p = v; draw(); });
+    s.button('Slide price $50', () => { st.p = 50; ps.set(50); draw(); });
+    s.button('Slide price $100', () => { st.p = 100; ps.set(100); draw(); });
+    draw();
+  };
+
+  W_.taker = host => {
+    const s = shell(host, 'The market sets the price; the firm picks the quantity', 'Shift market demand. The new market price becomes the firm\'s horizontal demand line.');
+    host.classList.add('wide');
+    const plot = host.querySelector('.g-plot');
+    plot.innerHTML = '<div class="twin"><div><p class="tw-t">Market for oil</p><svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Market"></svg></div><div><p class="tw-t">One oil well</p><svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Firm"></svg></div></div>';
+    const [m, f] = plot.querySelectorAll('svg');
+    const k = 40 / 82, st = { a: 90 };
+    const M = Plot(m, 200, 160), F = Plot(f, 12.5, 160);
+    const draw = () => {
+      const a = st.a, Qe = (a - 10) / (2 * k), Pe = 10 + k * Qe, [q, pi] = bestQ(Pe);
+      M.clear(); M.axes('Million barrels', 'Price'); M.lin(a, -k, 'c-d', 'D'); M.lin(10, k, 'c-s', 'S'); M.guide(Qe, Pe, f1(Qe) + 'M', '$' + f1(Pe)); M.dot(Qe, Pe);
+      F.clear(); F.axes('Barrels per day', 'Price');
+      const mc = []; for (let i = 1; i <= 12; i++) if (OIL.MC[i] <= 160) mc.push([i, OIL.MC[i]]);
+      F.path(mc, 'c-s'); F.label(10.4, 155, 'MC', 'c-s'); F.hline(Pe, 'c-t', 'd = MR = P');
+      if (q) { F.guide(q, Pe, 'q* = ' + q, '$' + f1(Pe)); F.dot(q, Pe); }
+      s.show([{ k: 'Market price', v: '$' + f1(Pe) }, { k: 'Market quantity', v: f1(Qe) + ' million' }, { k: 'This firm produces', v: q + ' barrels', big: true }, { k: 'Firm profit', v: (pi < 0 ? '−$' : '$') + f1(Math.abs(pi)) }],
+        'One well\'s ' + q + ' barrels cannot move a market of ' + f1(Qe) + ' million barrels, so the firm takes $' + f1(Pe) + ' as given and only chooses its own output.');
+    };
+    s.slider('a', 'Market demand', 60, 150, 1, st.a, v => (v > 90 ? '+' : '') + (v - 90), v => { st.a = v; draw(); });
+    draw();
+  };
+
+
+  /* Session 2: same price change, different demand response */
+  W_.elastic = host => {
+    const s = shell(host, 'Same price change, different response', 'The slide raises price from $40 to $50. Drag how much quantity falls and watch revenue.');
+    const st = { q2: 20, dir: 'up' };
+    const P = Plot(s.svg, 170, 70);
+    const draw = () => {
+      const k = 10 / (80 - st.q2);                    // slope of demand through (80, 40)
+      const p1 = 40, p2 = st.dir === 'up' ? 50 : 30;
+      const q2 = st.dir === 'up' ? st.q2 : 80 + (80 - st.q2);
+      P.clear(); P.yticks([30, 40, 50, 60], '$'); P.axes('Quantity', 'Price');
+      const tr1 = p1 * 80, tr2 = p2 * q2;
+      if (st.dir === 'up') {
+        P.poly([[0, 40], [q2, 40], [q2, 50], [0, 50]], 'a-prof');
+        P.poly([[q2, 0], [80, 0], [80, 40], [q2, 40]], 'a-loss');
+        P.poly([[0, 0], [q2, 0], [q2, 40], [0, 40]], 'a-ps');
+      } else {
+        P.poly([[0, 30], [80, 30], [80, 40], [0, 40]], 'a-loss');
+        P.poly([[80, 0], [q2, 0], [q2, 30], [80, 30]], 'a-prof');
+        P.poly([[0, 0], [80, 0], [80, 30], [0, 30]], 'a-ps');
+      }
+      P.lin(40 + 80 * k, -k, 'c-d', 'D');
+      P.guide(80, 40, '80', null); P.guide(q2, p2, f1(q2), null); P.dot(80, 40, 'A'); P.dot(q2, p2, 'B');
+      const pq = (q2 - 80) / 80, pp = (p2 - 40) / 40, ped = Math.abs(pq / pp);
+      const kind = ped > 1.02 ? 'Elastic' : ped < 0.98 ? 'Inelastic' : 'Unit elastic';
+      s.show([{ k: 'Price', v: '$40 → $' + p2 }, { k: 'Quantity', v: '80 → ' + f1(q2) },
+        { k: '|%ΔQ| ÷ |%ΔP|', v: f1(ped), big: true }, { k: 'Type', v: kind },
+        { k: 'Revenue P × Q', v: '$' + tr1 + ' → $' + Math.round(tr2) }, { k: 'Revenue change', v: (tr2 >= tr1 ? '+$' : '−$') + Math.abs(Math.round(tr2 - tr1)), sw: tr2 >= tr1 ? 'a-prof' : 'a-loss' }],
+        (st.dir === 'up' ? 'Green is revenue gained from the higher price on units still sold; red is revenue lost on units no longer sold. ' : 'Red is revenue lost from the lower price on existing units; green is revenue gained from extra units. ')
+        + (kind === 'Elastic' ? 'Quantity reacts more than price, so the quantity effect wins.' : kind === 'Inelastic' ? 'Quantity reacts less than price, so the price effect wins.' : 'The two effects roughly cancel.'));
+    };
+    s.seg('dir', [['up', 'Price rises to $50'], ['down', 'Price falls to $30']], 'up', v => { st.dir = v; draw(); });
+    const qs = s.slider('q2', 'Quantity at $50 (sets elasticity)', 10, 79, 1, st.q2, null, v => { st.q2 = v; draw(); });
+    s.button('Slide: elastic (80 → 20)', () => { st.q2 = 20; qs.set(20); draw(); });
+    s.button('Slide: inelastic (80 → 75)', () => { st.q2 = 75; qs.set(75); draw(); });
+    draw();
+  };
+
+  /* Session 2: a curve shifts; the OTHER curve's elasticity decides P vs Q */
+  W_.shiftel = host => {
+    const s = shell(host, 'Which moves more: price or quantity?', 'Pick a case, then change the elasticity of the curve that does not move.');
+    const st = { mode: 'dd', v: 75 };
+    const P = Plot(s.svg, 100, 100);
+    const M = {
+      dd: { name: 'Demand falls (Food Waste)', other: 'supply' },
+      sd: { name: 'Supply falls (War on Drugs, Onionomics)', other: 'demand' },
+      du: { name: 'Demand rises (Housing)', other: 'supply' }
+    };
+    const draw = () => {
+      const sl = st.v <= 0 ? 0 : 0.2 * Math.pow(25, st.v / 100);
+      P.clear(); P.axes('Quantity', 'Price');
+      let x, dp;
+      if (st.mode === 'dd') { x = -20 / (sl + 1); dp = sl * x;
+        P.lin(100, -1, 'c-d', 'D1'); P.lin(80, -1, 'c-d dash', 'D2'); P.lin(50 - 50 * sl, sl, 'c-s', 'S'); }
+      else if (st.mode === 'sd') { x = -20 / (sl + 1); dp = -sl * x;
+        P.lin(50 + 50 * sl, -sl, 'c-d', 'D'); P.lin(0, 1, 'c-s', 'S1'); P.lin(20, 1, 'c-s dash', 'S2'); }
+      else { x = 20 / (sl + 1); dp = sl * x;
+        P.lin(100, -1, 'c-d', 'D1'); P.lin(120, -1, 'c-d dash', 'D2'); P.lin(50 - 50 * sl, sl, 'c-s', 'S'); }
+      const q2 = 50 + x, p2 = 50 + dp;
+      P.guide(50, 50, 'Q1', 'P1'); P.guide(q2, p2, 'Q2', 'P2'); P.dot(50, 50, 'E1'); P.dot(q2, p2, 'E2');
+      const tr = (p2 * q2) - 2500;
+      const which = Math.abs(dp) > Math.abs(x) + 0.5 ? 'Mostly price' : Math.abs(x) > Math.abs(dp) + 0.5 ? 'Mostly quantity' : 'About equal';
+      const other = M[st.mode].other;
+      let note = which === 'Mostly price' ? 'The ' + other + ' curve is steep (inelastic), so the adjustment shows up mainly in price.' :
+        which === 'Mostly quantity' ? 'The ' + other + ' curve is flat (elastic), so the adjustment shows up mainly in quantity.' : 'Price and quantity adjust by similar amounts.';
+      if (st.mode === 'sd' && tr > 0) note += ' Seller revenue rises: buyers keep buying at a much higher price.';
+      if (st.mode === 'dd') note += ' Lower prices help poor food buyers but cut poor farmers\' income.';
+      if (st.mode === 'du' && sl === 0) note = 'Perfectly elastic supply: price does not move at all; only quantity rises (the gun buyback logic).';
+      s.show([{ k: 'Price change', v: (dp >= 0 ? '+' : '−') + f1(Math.abs(dp)) }, { k: 'Quantity change', v: (x >= 0 ? '+' : '−') + f1(Math.abs(x)) },
+        { k: 'Adjustment', v: which, big: true }, { k: 'Seller revenue', v: (tr >= 0 ? '+' : '−') + f1(Math.abs(tr)), sw: tr >= 0 ? 'a-prof' : 'a-loss' }], note);
+      lab.textContent = 'Elasticity of ' + other;
+    };
+    s.seg('mode', Object.entries(M).map(([k, v]) => [k, v.name]), 'dd', v => { st.mode = v; draw(); });
+    const sl = s.slider('v', 'Elasticity of the other curve', 0, 100, 1, st.v, v => v <= 0 ? 'Perfectly elastic' : v < 35 ? 'Elastic (flat)' : v > 65 ? 'Inelastic (steep)' : 'Moderate', v => { st.v = v; draw(); });
+    const lab = sl.input.parentElement.querySelector('label span');
+    draw();
+  };
+
+  /* ---------- Session 1: quinoa market ---------- */
+  W_.quinoa = host => {
+    const s = shell(host, 'Quinoa world market: shortage, surplus, equilibrium',
+      'Class numbers: equilibrium near $500 per ton and 45 thousand tons in 2001. Move the price away from $500, or switch on the 2010 demand.');
+    const st = { p: 400, y2010: false };
+    const P = Plot(s.svg, 100, 1600);
+    const qd = p => (1400 - p) / 20, qs = p => (p + 400) / 20, qd2 = p => (2800 - p) / 20;
+    const pr = s.slider('p', 'Market price ($ per ton)', 300, 700, 50, st.p, v => '$' + v, v => { st.p = v; draw(); });
+    s.check('y', 'Show 2010 demand', false, v => { st.y2010 = v; pr.input.disabled = v; draw(); });
+    function draw() {
+      P.clear(); P.axes('Quantity (thousand tons)', 'Price ($/ton)');
+      P.yticks([800], '$');
+      P.lin(-400, 20, 'c-s', 'S');
+      if (st.y2010) {
+        P.lin(1400, -20, 'c-d', 'D 2001', true); P.lin(2800, -20, 'c-d', 'D 2010');
+        P.guide(45, 500, '45', '$500'); P.guide(80, 1200, '80', '$1,200');
+        P.dot(45, 500, 'E 2001', true); P.dot(80, 1200, 'E 2010', true);
+        s.show([{ k: 'Price', v: '$500 → $1,200', big: true }, { k: 'Quantity', v: '45 → 80 thousand tons' }, { k: 'Supply', v: 'Unchanged' }],
+          'Demand itself increased: the whole curve shifted right while supply stayed put, so both price and quantity rose. The slide does not name one cause, so do not invent one.');
+        return;
+      }
+      P.lin(1400, -20, 'c-d', 'D');
+      const p = st.p, a = qd(p), b = qs(p);
+      P.dot(45, 500, 'E', true);
+      if (p !== 500) {
+        P.hline(p, 'c-t'); P.poly([[Math.min(a, b), p - 18], [Math.max(a, b), p - 18], [Math.max(a, b), p + 18], [Math.min(a, b), p + 18]], p < 500 ? 'a-loss' : 'a-rev2');
+        P.guide(a, p, 'Qd ' + a); P.guide(b, p, 'Qs ' + b, '$' + p);
+        P.tag((a + b) / 2, p + (p < 500 ? -70 : 70), p < 500 ? 'Shortage ' + (a - b) : 'Surplus ' + (b - a));
+      } else P.guide(45, 500, '45', '$500');
+      s.show([{ k: 'Quantity demanded', v: a + 'k tons' }, { k: 'Quantity supplied', v: b + 'k tons' },
+        { k: p < 500 ? 'Shortage' : p > 500 ? 'Surplus' : 'Equilibrium', v: p === 500 ? 'Qd = Qs' : Math.abs(a - b) + 'k tons', big: true }],
+        p < 500 ? 'Below equilibrium Qd > Qs. Buyers compete with other buyers, pushing the price up toward $500.'
+          : p > 500 ? 'Above equilibrium Qs > Qd. Sellers compete with other sellers, pushing the price down toward $500.'
+            : 'At $500 buyers want to buy what sellers want to sell. No pressure to change.');
+    }
+    draw();
+  };
+
+  const APPS = [
+    { t: 'There is a virus pandemic', c: 'D', d: -1, f: 'Demand shock', a: 'A virus pandemic reduces demand for quinoa in the teacher\'s model. The demand curve shifts left, so equilibrium price and quantity both fall.' },
+    { t: 'La Niña causes a major drought in Bolivia', c: 'S', d: -1, f: 'Natural conditions', a: 'A major drought makes quinoa harder to produce, so supply decreases. The supply curve shifts left: equilibrium price rises and quantity falls.' },
+    { t: 'Riceberry becomes very cheap', c: 'D', d: -1, f: 'Substitute price', a: 'Riceberry is treated as a substitute. Its lower price draws buyers away, so demand for quinoa falls. Demand shifts left: price and quantity fall.' },
+    { t: 'China begins to grow quinoa', c: 'S', d: 1, f: 'Number of producers', a: 'A new producing country increases world supply. The supply curve shifts right: equilibrium price falls and quantity rises.' },
+    { t: 'New evidence that quinoa can reduce the risk of diabetes', c: 'D', d: 1, f: 'Preferences', a: 'Favorable health evidence makes consumers want more quinoa at every price. Demand shifts right: price and quantity both rise.' },
+    { t: 'Rare-earth deposits are discovered in Bolivia', c: 'S', d: -1, f: 'Opportunity cost', a: 'Mining becomes a more valuable use of Bolivian resources, raising the opportunity cost of growing quinoa. Supply shifts left: price rises, quantity falls.' }
+  ];
+  function appDraw(P, ap, reveal) {
+    P.clear(); P.axes('Quantity of quinoa', 'Price');
+    const dA = 90 + (reveal && ap.c === 'D' ? 20 * ap.d : 0), sA = 10 + (reveal && ap.c === 'S' ? -20 * ap.d : 0);
+    const q2 = (dA - sA) / 2, p2 = (dA + sA) / 2;
+    if (reveal && ap.c === 'D') { P.lin(90, -1, 'c-d', 'D1', true); P.lin(dA, -1, 'c-d', 'D2'); P.lin(10, 1, 'c-s', 'S'); }
+    else if (reveal) { P.lin(90, -1, 'c-d', 'D'); P.lin(10, 1, 'c-s', 'S1', true); P.lin(sA, 1, 'c-s', 'S2'); }
+    else { P.lin(90, -1, 'c-d', 'D'); P.lin(10, 1, 'c-s', 'S'); }
+    P.guide(40, 50, reveal ? 'Q1' : 'Q', reveal ? 'P1' : 'P');
+    P.dot(40, 50, reveal ? 'E1' : 'E', true);
+    if (reveal) {
+      P.guide(q2, p2, 'Q2', 'P2'); P.dot(q2, p2, 'E2');
+      const arrow = ap.d > 0 ? '→' : '←';
+      if (ap.c === 'D') P.tag(dA - 78, 82, 'D shifts ' + arrow); else P.tag(78 - sA + 2, 82, 'S shifts ' + arrow);
+    }
+    return { q2, p2 };
+  }
+  W_.apps = host => {
+    const s = shell(host, 'The quinoa applications, one graph each', 'Pick an event and predict which curve moves and which way. Then check the graph.');
+    const P = Plot(s.svg, 100, 100);
+    let cur = 0, guess = null;
+    s.seg('ev', APPS.map((a, k) => [k, String(k + 1)]), 0, v => { cur = v; guess = null; draw(); });
+    const box = document.createElement('div'); box.className = 'ap-q'; s.ctrl.appendChild(box);
+    const opts = document.createElement('div'); opts.className = 'ap-opts'; s.ctrl.appendChild(opts);
+    [['D', -1, 'Demand ←'], ['D', 1, 'Demand →'], ['S', -1, 'Supply ←'], ['S', 1, 'Supply →']].forEach(([c, d, lab]) => {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'qz-o'; b.textContent = lab;
+      b.addEventListener('click', () => { guess = { c, d }; draw(); }); b.dataset.k = c + d; opts.appendChild(b);
+    });
+    s.button('Show answer', () => { guess = { c: '?', d: 0 }; draw(); });
+    function draw() {
+      const ap = APPS[cur], rev = !!guess;
+      box.innerHTML = '<b>' + (cur + 1) + '. ' + ap.t + '.</b><span>What happens to the equilibrium price and quantity of quinoa?</span>';
+      opts.querySelectorAll('button').forEach(b => { b.classList.toggle('right', rev && b.dataset.k === ap.c + ap.d); b.classList.toggle('wrong', rev && guess.c + guess.d === b.dataset.k && b.dataset.k !== ap.c + ap.d); });
+      appDraw(P, ap, rev);
+      if (!rev) { s.show([{ k: 'Step 1', v: 'Buyer side or seller side?' }, { k: 'Step 2', v: 'Own price or other factor?' }, { k: 'Step 3', v: 'Left or right?' }], ''); return; }
+      const up = (ap.c === 'D') === (ap.d > 0);
+      s.show([{ k: 'Factor', v: ap.f }, { k: 'Curve', v: (ap.c === 'D' ? 'Demand' : 'Supply') + (ap.d > 0 ? ' → right' : ' ← left') },
+        { k: 'Price', v: up ? 'P2 > P1 ↑' : 'P2 < P1 ↓', big: true }, { k: 'Quantity', v: ap.d > 0 ? 'Q2 > Q1 ↑' : 'Q2 < Q1 ↓', big: true }],
+        (guess.c === '?' ? '' : guess.c + guess.d === ap.c + ap.d ? '<b>Correct.</b> ' : '<b>Not quite.</b> ') + ap.a);
+    }
+    draw();
+  };
+
+  W_.appgrid = host => {
+    host.classList.add('ap-grid');
+    host.innerHTML = APPS.map((ap, k) => {
+      const dA = 90 + (ap.c === 'D' ? 20 * ap.d : 0), sA = 10 + (ap.c === 'S' ? -20 * ap.d : 0), q2 = (dA - sA) / 2, p2 = (dA + sA) / 2;
+      const X = q => 22 + q * 1.5, Y = p => 128 - p * 1.15;
+      const ln = (a, m, cls, dash, lab) => { const q0 = Math.max(0, m < 0 ? a - 100 : -a), q1 = m < 0 ? Math.min(100, a) : Math.min(100, (100 - a) / m); return '<line x1="' + X(q0) + '" y1="' + Y(a + m * q0) + '" x2="' + X(q1) + '" y2="' + Y(a + m * q1) + '" class="cv ' + cls + (dash ? ' dash' : '') + '"/>' + (lab ? '<text x="' + (X(q1) + 3) + '" y="' + (Y(a + m * q1) + (m < 0 ? -2 : 8)) + '" class="cvl ' + cls + '" font-size="9">' + lab + '</text>' : ''); };
+      let g = '<line x1="22" y1="128" x2="186" y2="128" class="ax"/><line x1="22" y1="128" x2="22" y2="8" class="ax"/>';
+      g += ap.c === 'D' ? ln(90, -1, 'c-d', 1, 'D1') + ln(dA, -1, 'c-d', 0, 'D2') + ln(10, 1, 'c-s', 0, 'S') : ln(90, -1, 'c-d', 0, 'D') + ln(10, 1, 'c-s', 1, 'S1') + ln(sA, 1, 'c-s', 0, 'S2');
+      g += '<line x1="' + X(40) + '" y1="' + Y(50) + '" x2="' + X(40) + '" y2="128" class="gd"/><line x1="22" y1="' + Y(50) + '" x2="' + X(40) + '" y2="' + Y(50) + '" class="gd"/>';
+      g += '<line x1="' + X(q2) + '" y1="' + Y(p2) + '" x2="' + X(q2) + '" y2="128" class="gd"/><line x1="22" y1="' + Y(p2) + '" x2="' + X(q2) + '" y2="' + Y(p2) + '" class="gd"/>';
+      g += '<circle cx="' + X(40) + '" cy="' + Y(50) + '" r="3" class="pt"/><circle cx="' + X(q2) + '" cy="' + Y(p2) + '" r="3.5" class="pt"/>';
+      g += '<text x="18" y="' + (Y(50) + 3) + '" class="tk" text-anchor="end">P1</text><text x="18" y="' + (Y(p2) + 3) + '" class="tk" text-anchor="end">P2</text><text x="' + X(40) + '" y="139" class="tk" text-anchor="middle">Q1</text><text x="' + X(q2) + '" y="139" class="tk" text-anchor="middle">Q2</text>';
+      const up = (ap.c === 'D') === (ap.d > 0);
+      return '<figure><svg viewBox="0 0 200 145" role="img" aria-label="' + ap.t + '">' + g + '</svg><figcaption><b>' + (k + 1) + '. ' + ap.t + '</b><span>' + (ap.c === 'D' ? 'D' : 'S') + (ap.d > 0 ? ' →' : ' ←') + ' · P ' + (up ? '↑' : '↓') + ' · Q ' + (ap.d > 0 ? '↑' : '↓') + '</span></figcaption></figure>';
+    }).join('');
+  };
+
+  W_.both = host => {
+    const s = shell(host, 'When both curves shift', 'Move demand and supply together. One result is always certain; the other depends on which shift is bigger.');
+    const st = { d: 20, s: -10 };
+    const P = Plot(s.svg, 100, 100);
+    const ds = s.slider('d', 'Demand shift', -20, 20, 5, st.d, v => (v > 0 ? 'right +' : v < 0 ? 'left ' : '') + v, v => { st.d = v; draw(); });
+    const ss = s.slider('s', 'Supply shift', -20, 20, 5, st.s, v => (v > 0 ? 'right +' : v < 0 ? 'left ' : '') + v, v => { st.s = v; draw(); });
+    s.button('Health report + drought', () => { st.d = 20; st.s = -10; ds.set(20); ss.set(-10); draw(); });
+    function draw() {
+      const dA = 90 + st.d, sA = 10 - st.s, q2 = (dA - sA) / 2, p2 = (dA + sA) / 2;
+      P.clear(); P.axes('Quantity', 'Price');
+      P.lin(90, -1, 'c-d', st.d ? 'D1' : 'D', !!st.d); if (st.d) P.lin(dA, -1, 'c-d', 'D2');
+      P.lin(10, 1, 'c-s', st.s ? 'S1' : 'S', !!st.s); if (st.s) P.lin(sA, 1, 'c-s', 'S2');
+      P.guide(40, 50, 'Q1', 'P1'); P.dot(40, 50, 'E1', true);
+      if (st.d || st.s) { P.guide(q2, p2, Math.abs(q2 - 40) < 5 ? '' : 'Q2', Math.abs(p2 - 50) < 5 ? '' : 'P2'); P.dot(q2, p2, 'E2'); }
+      const dP = p2 - 50, dQ = q2 - 40, sg = x => x > 0 ? '↑' : x < 0 ? '↓' : 'no change';
+      let note;
+      if (st.d && st.s) {
+        const same = (st.d > 0) === (st.s > 0);
+        note = same ? 'Both curves move the same way, so <b>quantity is certain (' + sg(st.d) + ')</b>. Price depends on which shift is larger; here it is ' + sg(dP) + '. Try making the shifts equal.'
+          : 'The curves move in opposite directions, so <b>price is certain (' + sg(st.d) + ')</b>. Quantity depends on which shift is larger; here it is ' + sg(dQ) + '.';
+      } else note = 'Only one curve moved, so both price and quantity are determined. Shift the other curve too.';
+      s.show([{ k: 'Price', v: sg(dP) + ' (' + (dP > 0 ? '+' : '') + dP + ')', big: true }, { k: 'Quantity', v: sg(dQ) + ' (' + (dQ > 0 ? '+' : '') + dQ + ')', big: true }], note);
+    }
+    draw();
+  };
+
+  window.EconWidgets = { mount(root) { root.querySelectorAll('[data-widget]').forEach(h => { const f = W_[h.dataset.widget]; if (f && !h.dataset.ready) { h.dataset.ready = 1; f(h); } }); } };
+})();
+</script>
+<script>
+(function () {
+  const toc = document.getElementById('toc'), rail = document.getElementById('rail');
+  const hs = [...document.querySelectorAll('.doc > h2, .doc > h3')];
+  hs.forEach(h => {
+    const li = document.createElement('li'); li.className = h.tagName.toLowerCase(); li.dataset.id = h.id;
+    const a = document.createElement('a'); a.href = '#' + h.id; a.textContent = h.childNodes[0].textContent.trim();
+    li.appendChild(a); toc.appendChild(li);
+  });
+  const spy = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    toc.querySelectorAll('a.on').forEach(a => a.classList.remove('on'));
+    const a = toc.querySelector('li[data-id="' + e.target.id + '"] a'); if (a) a.classList.add('on');
+  }), { rootMargin: '-80px 0px -70% 0px' });
+  hs.forEach(h => spy.observe(h));
+
+  const tb = document.getElementById('tocBtn');
+  tb.addEventListener('click', () => { const o = rail.classList.toggle('open'); tb.setAttribute('aria-expanded', o); });
+  toc.addEventListener('click', e => { if (e.target.closest('a')) { rail.classList.remove('open'); tb.setAttribute('aria-expanded', false); } });
+
+  const all = document.getElementById('qaAll');
+  if (all) all.addEventListener('click', () => {
+    const ds = document.querySelectorAll('.qa details'), open = ![...ds].every(d => d.open);
+    ds.forEach(d => d.open = open); all.textContent = open ? 'Hide all answers' : 'Show all answers';
+  });
+  document.querySelectorAll('.drill .ans').forEach(s => s.addEventListener('click', () => s.classList.toggle('shown')));
+
+  if (window.EconWidgets) window.EconWidgets.mount(document);
+  if (window.MgmtWidgets) window.MgmtWidgets.mount(document);
+  if (window.MktWidgets) window.MktWidgets.mount(document);
+})();
+</script>
+</body></html>

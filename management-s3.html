@@ -28,7 +28,8 @@ a { color: var(--accent-ink); }
 .sessions { display: flex; gap: 4px; margin-left: auto; }
 .crumbs { font-size: .86rem; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
 .crumbs a { color: var(--muted); text-decoration: none; } .crumbs a:hover { color: var(--accent-ink); } .crumbs span { color: var(--line); } .crumbs b { font-family: var(--serif); }
-.sessions a.pill { text-decoration: none; }
+.sessions a.pill { text-decoration: none; transition: border-color .15s, color .15s; }
+.sessions a.pill:hover, .sessions a.pill:focus-visible { border-color: var(--accent); color: var(--accent-ink); background: var(--tint); }
 .sessions .pill { font: 500 .82rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--muted); padding: 4px 12px; border-radius: 999px; }
 .sessions .pill[aria-current="page"] { background: var(--accent); border-color: var(--accent); color: #fff; }
 .sessions .pill.off { opacity: .5; cursor: not-allowed; }
@@ -176,6 +177,7 @@ svg .a-prof { fill: var(--cs); fill-opacity: .75; } svg .a-loss { fill: var(--dw
 .graph.wide .g-side { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
 @media (max-width: 700px) { .twin, .graph.wide .g-side { grid-template-columns: minmax(0, 1fr); } }
 svg polyline.cv { fill: none !important; }
+.seg { flex-wrap: wrap; }
 
 .graph { background: var(--paper); }
 .g-note { background: var(--tint); }
@@ -334,6 +336,17 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
   .jcm { grid-template-columns: minmax(0, 1fr); }
   .qz-opts.row5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+.qz-opts.row4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.mb-sel { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 16px; }
+.mb-sel small { display: block; font-size: .74rem; color: var(--muted); margin-bottom: 3px; }
+.mb-code { margin: 14px 0 8px; } .mb-code b { font: 700 1.6rem var(--serif); color: var(--accent-ink); letter-spacing: .06em; margin-right: 8px; } .mb-code span { color: var(--muted); font-size: .84rem; }
+.mb-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.mb-grid > div { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .82rem; line-height: 1.45; }
+.mb-grid > div > b { color: var(--accent-ink); } .mb-grid > div > p { margin: 4px 0 6px; color: var(--muted); }
+.mb-grid dl { margin: 0; } .mb-grid dt { font-size: .68rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-top: 6px; font-weight: 700; } .mb-grid dd { margin: 1px 0 0; }
+.al-ctl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 16px; }
+@media (max-width: 760px) { .mb-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .qz-opts.row4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .mb-sel, .mb-grid, .al-ctl { grid-template-columns: minmax(0, 1fr); } .mb-sel .seg button { padding: 5px 8px; } }
 
 </style></head><body>
 
@@ -344,10 +357,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 <header class="top"><div class="top-in">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Study Notes</a><span>/</span><a href="management.html">Management</a><span>/</span><b>Session 3</b></nav>
   <button class="toc-btn" type="button" id="tocBtn" aria-expanded="false">Contents</button>
-  <nav class="sessions" aria-label="Sessions"><a class="pill" href="management-s1.html">S1</a>
-<a class="pill" href="management-s2.html">S2</a>
-<span class="pill" aria-current="page">S3</span>
-<a class="pill" href="management-s4.html">S4</a></nav>
+  <nav class="sessions" aria-label="Sessions"><a class="pill" href="management-s1.html">S1</a><a class="pill" href="management-s2.html">S2</a><span class="pill" aria-current="page">S3</span><a class="pill" href="management-s4.html">S4</a></nav>
 </div></header>
 
 <div class="wrap">
@@ -827,6 +837,93 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
     draw();
   };
 
+  /* ---------- Session 1 and 2 widgets ---------- */
+  const PREF = {
+    E: { n: 'Extravert', d: 'Processes verbally; gains energy from people.', s: 'Quick engagement and action.', r: 'Easily distracted; may not think things through.', c: 'Pause and think before committing.', w: 'Discuss ideas aloud early; do not wait until your thinking is finished.' },
+    I: { n: 'Introvert', d: 'Processes internally; gains energy from the inner self.', s: 'Thinks before speaking; comfortable in writing.', r: 'May not seek out the opinions of others.', c: 'Ask: what am I missing from the people closest to the problem?', w: 'Send material in advance and give time to think before asking for a view.' },
+    S: { n: 'Sensing', d: 'Concrete, here-and-now, detail and data.', s: 'Accurate, practical execution.', r: 'May lose sight of the big picture.', c: 'Ask what pattern or implication the details point to.', w: 'Translate concepts into facts, examples, sequence and steps.' },
+    N: { n: 'Intuitive', d: 'Patterns, possibilities, big-picture connections.', s: 'Vision and system thinking.', r: 'May ignore details; impatient.', c: 'Ask which concrete facts could disprove the idea.', w: 'Start with the big picture and the why before the details.' },
+    T: { n: 'Thinking', d: 'Decides by logic, facts and pros and cons.', s: 'Objective, consistent analysis.', r: 'May be judgmental; may not support people.', c: 'Ask how the people involved will experience it and what support they need.', w: 'Lead with logic, data and clear criteria.' },
+    F: { n: 'Feeling', d: 'Decides by personal values and impact on people.', s: 'Sees the human consequences.', r: 'May avoid conflict; may struggle with criticism.', c: 'State the criteria and the hard trade-off openly.', w: 'Explain how the decision affects people, not only why it is logical.' },
+    J: { n: 'Judging', d: 'Structure, deadlines, closure.', s: 'Decides and follows through.', r: 'May decide too quickly; dislikes changing plans.', c: 'Ask what new information would justify revising the plan.', w: 'Give deadlines, decisions, ownership and closure.' },
+    P: { n: 'Perceiving', d: 'Flexible, keeps options open.', s: 'Adapts when conditions change.', r: 'May delay decisions; lacks follow-through.', c: 'Ask what information would actually change the decision. If none, decide.', w: 'Leave room for options, and explain why closure is needed now.' }
+  };
+  W.mbti = host => {
+    const body = shell(host, 'Interactive', 'Build a type, read it as a pattern', 'Pick one side of each pair. Every preference brings a strength, a risk when overused, and an adjustment.');
+    const pairs = [['E', 'I', 'Energy and interaction'], ['S', 'N', 'Taking in information'], ['T', 'F', 'Making decisions'], ['J', 'P', 'Organizing work']];
+    const cur = ['I', 'N', 'T', 'P'];
+    body.innerHTML = '<div class="mb-sel">' + pairs.map((p, k) => '<div><small>' + p[2] + '</small><div class="seg" role="radiogroup" data-k="' + k + '">' + p.slice(0, 2).map(x => '<button type="button" role="radio" data-v="' + x + '">' + x + ' · ' + PREF[x].n + '</button>').join('') + '</div></div>').join('') +
+      '</div><p class="mb-code"></p><div class="mb-grid"></div><p class="g-note"></p>';
+    const grid = body.querySelector('.mb-grid'), code = body.querySelector('.mb-code'), note = body.querySelector('.g-note');
+    function draw() {
+      body.querySelectorAll('.seg').forEach(s => s.querySelectorAll('button').forEach(b => b.setAttribute('aria-checked', b.dataset.v === cur[+s.dataset.k])));
+      code.innerHTML = '<b>' + cur.join('') + '</b> <span>' + cur.map(x => PREF[x].n).join(' · ') + '</span>';
+      grid.innerHTML = cur.map((x, k) => {
+        const p = PREF[x], o = PREF[pairs[k][x === pairs[k][0] ? 1 : 0]];
+        return '<div><b>' + x + ' · ' + p.n + '</b><p>' + p.d + '</p><dl><dt>Strength</dt><dd>' + p.s + '</dd><dt>If overused</dt><dd>' + p.r + '</dd><dt>Adjustment</dt><dd>' + p.c + '</dd><dt>Working with ' + o.n + ' colleagues</dt><dd>' + o.w + '</dd></dl></div>';
+      }).join('');
+      note.textContent = 'Preferences, not abilities. Use the type to adapt, not to label. Weaknesses come from the lecture; adjustments and working tips extend the lecture definitions.';
+    }
+    body.querySelectorAll('.seg').forEach(s => s.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { cur[+s.dataset.k] = b.dataset.v; draw(); })));
+    draw();
+  };
+
+  W.overuse = host => quiz(host, 'Diagnose', 'Which preference is being overused?', 'Name the preference, then think of one adjustment.', [
+    { q: 'The manager keeps generating new options and still will not decide, even with the deadline close.', a: 'P', why: 'P overused. Set a decision boundary: what information would actually change the decision?' },
+    { q: 'The strategy is conceptually excellent, but implementation details are missed again and again.', a: 'N', why: 'N overused. Add a concrete detail and implementation check.' },
+    { q: 'The decision is logically sound, but the team feels ignored and unsupported.', a: 'T', why: 'T overused. Add a people-impact check and communicate support.' },
+    { q: 'The manager reaches a conclusion alone and never asks frontline staff for input.', a: 'I', why: 'I overused. Seek input before finalizing.' },
+    { q: 'The plan was locked in week one; new market data arrives, but the manager refuses to adjust.', a: 'J', why: 'J overused. Decide in advance what new information would justify revising the plan.' },
+    { q: 'To keep harmony, the manager avoids giving a team member critical feedback the project needs.', a: 'F', why: 'F overused. Conflict avoidance; state the criteria and the issue openly.' },
+    { q: 'He talks through ideas in the meeting and commits the team before thinking them through.', a: 'E', why: 'E overused. Pause and think before committing.' },
+    { q: 'The team is buried in operational detail; nobody can explain where the project is heading.', a: 'S', why: 'S overused. Step back to the big picture.' }
+  ], ['E', 'I', 'S', 'N', 'T', 'F', 'J', 'P'].map(x => [x, x, PREF[x].n]), 'row4');
+
+  W.tiv = host => quiz(host, 'Classify', 'Terminal or instrumental value?', 'Terminal = the destination. Instrumental = how you travel there.', [
+    { q: 'Freedom', a: 't', why: 'A desired end state.' }, { q: 'Honest', a: 'i', why: 'A way of behaving.' },
+    { q: 'Wealth', a: 't', why: 'A desired end state.' }, { q: 'Ambitious', a: 'i', why: 'A way of behaving that can lead to wealth or recognition.' },
+    { q: 'Self-respect', a: 't', why: 'A desired end state.' }, { q: 'Logical', a: 'i', why: 'A way of thinking and acting.' },
+    { q: 'Social contribution', a: 't', why: 'A desired end state.' }, { q: 'Self-disciplined', a: 'i', why: 'A way of behaving.' },
+    { q: 'Recognition', a: 't', why: 'A desired end state.' }, { q: 'Imaginative / creative', a: 'i', why: 'A way of working.' }
+  ], [['t', 'Terminal', 'Destination: a noun-like end state'], ['i', 'Instrumental', 'Path: a way of behaving']], 'grid2');
+
+  W.abc = host => quiz(host, 'Classify', 'Which attitude component?', 'Belief, feeling, or intention to act.', [
+    { q: 'My boss is a mean person.', a: 'c', why: 'Cognitive: an opinion or belief.' },
+    { q: 'I am angry because my boss is mean.', a: 'a', why: 'Affective: an emotion.' },
+    { q: 'I am going to go to HR and report my mean boss.', a: 'b', why: 'Behavioral: an intention to act.' },
+    { q: 'This new overtime policy is unfair to junior staff.', a: 'c', why: 'Cognitive: a judgment or belief.' },
+    { q: 'I feel anxious every Sunday night before work.', a: 'a', why: 'Affective: a feeling.' },
+    { q: 'I plan to ask for a transfer next quarter.', a: 'b', why: 'Behavioral: an intention, not yet the behavior itself.' }
+  ], [['c', 'Cognitive', 'Opinion or belief'], ['a', 'Affective', 'Emotion or feeling'], ['b', 'Behavioral', 'Intention to act']], 'row3');
+
+  W.wattitude = host => quiz(host, 'Classify', 'Which workplace attitude or behavior?', 'Job, identity, organization, or optional extra effort?', [
+    { q: 'I am fulfilled by my day-to-day work here.', a: 'sat', why: 'Job satisfaction: fulfillment toward the job.' },
+    { q: 'Being a nurse is part of who I am.', a: 'inv', why: 'Job involvement: identification with the job.' },
+    { q: 'I believe in where this company is going and want to stay a member.', a: 'com', why: 'Organizational commitment: identification with goals, desire for membership.' },
+    { q: 'She stays late to help a new colleague learn the system, though no one asked her to.', a: 'ocb', why: 'OCB: discretionary behavior that helps the organization. A behavior, not an attitude.' },
+    { q: 'I would rather stay here than move to a rival paying slightly more.', a: 'com', why: 'Desire to remain a member points to organizational commitment.' },
+    { q: 'He volunteers to organize the department training day.', a: 'ocb', why: 'Optional extra-role behavior: OCB.' }
+  ], [['sat', 'Job satisfaction'], ['inv', 'Job involvement'], ['com', 'Org. commitment'], ['ocb', 'OCB']], 'row4');
+
+  W.align = host => {
+    const body = shell(host, 'Interactive', 'Value mismatch or stated-practice gap?', 'The company says it values empowerment. Switch each layer on or off and read the diagnosis.');
+    const L = [['emp', 'Employee personally values autonomy', true], ['lead', 'Leader behavior models empowerment', false], ['rew', 'Rewards and promotions follow it', false], ['com', 'The value is communicated repeatedly', true]];
+    body.innerHTML = '<div class="al-ctl">' + L.map(l => '<label class="chk"><input type="checkbox" data-k="' + l[0] + '"' + (l[2] ? ' checked' : '') + '><span>' + l[1] + '</span></label>').join('') + '</div><div class="ev"></div><div class="issue"></div>';
+    const ev = body.querySelector('.ev'), out = body.querySelector('.issue');
+    function draw() {
+      const v = {}; body.querySelectorAll('input').forEach(x => v[x.dataset.k] = x.checked);
+      const rows = [['Stated value', 'Empowerment', true], ['Leader behavior', v.lead ? 'Delegates decisions' : 'Approval needed for every small decision', v.lead], ['Reward / policy', v.rew ? 'Promotes people who empower others' : 'Rewards control and compliance', v.rew], ['Communication', v.com ? 'Repeated in meetings and channels' : 'Rarely mentioned', v.com], ['Employee value', v.emp ? 'Values autonomy' : 'Prefers close direction', v.emp]];
+      ev.innerHTML = rows.map(r => '<div><b>' + r[0] + '</b><span class="tag ' + (r[2] ? 'ok' : 'gap') + '">' + (r[2] ? 'Aligned' : 'Gap') + '</span><p>' + r[1] + '</p></div>').join('');
+      let h;
+      if (!v.lead || !v.rew) h = '<b>Stated-practice discrepancy.</b><p>The company says empowerment but its practices reward something else. Fix leader behavior and rewards first' + (v.emp ? '; the employee already agrees with the stated value, so changing the employee is the wrong target.' : '.') + '</p>';
+      else if (!v.emp) h = '<b>Value mismatch.</b><p>The organization practices its value, but the employee values something different. Check person-organization fit, role design and recruitment; values are hard to change.</p>';
+      else if (!v.com) h = '<b>Practice is aligned, the signal is weak.</b><p>Add communication channels so employees recognize the value consistently.</p>';
+      else h = '<b>Consistent signal.</b><p>Stated value, leader behavior, rewards and communication agree with the employee. This is how a strong culture aligns values.</p>';
+      out.innerHTML = h + '<p class="note-small">Boundary: none of these settings proves the employee will leave. That needs evidence of turnover intention or actual leaving.</p>';
+    }
+    body.querySelectorAll('input').forEach(x => x.addEventListener('change', draw)); draw();
+  };
+
   window.MgmtWidgets = { mount(root) { root.querySelectorAll('[data-mw]').forEach(h => { if (!h.dataset.ready && W[h.dataset.mw]) { h.dataset.ready = 1; W[h.dataset.mw](h); } }); } };
 })();
 </script>
@@ -859,6 +956,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 
   if (window.EconWidgets) window.EconWidgets.mount(document);
   if (window.MgmtWidgets) window.MgmtWidgets.mount(document);
+  if (window.MktWidgets) window.MktWidgets.mount(document);
 })();
 </script>
 </body></html>

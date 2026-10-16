@@ -336,6 +336,17 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
   .jcm { grid-template-columns: minmax(0, 1fr); }
   .qz-opts.row5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+.qz-opts.row4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.mb-sel { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 16px; }
+.mb-sel small { display: block; font-size: .74rem; color: var(--muted); margin-bottom: 3px; }
+.mb-code { margin: 14px 0 8px; } .mb-code b { font: 700 1.6rem var(--serif); color: var(--accent-ink); letter-spacing: .06em; margin-right: 8px; } .mb-code span { color: var(--muted); font-size: .84rem; }
+.mb-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.mb-grid > div { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .82rem; line-height: 1.45; }
+.mb-grid > div > b { color: var(--accent-ink); } .mb-grid > div > p { margin: 4px 0 6px; color: var(--muted); }
+.mb-grid dl { margin: 0; } .mb-grid dt { font-size: .68rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-top: 6px; font-weight: 700; } .mb-grid dd { margin: 1px 0 0; }
+.al-ctl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 16px; }
+@media (max-width: 760px) { .mb-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .qz-opts.row4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .mb-sel, .mb-grid, .al-ctl { grid-template-columns: minmax(0, 1fr); } .mb-sel .seg button { padding: 5px 8px; } }
 /* Marketing components */
 .qz-opts.row3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .pop-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 18px; align-items: start; }
