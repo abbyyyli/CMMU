@@ -332,8 +332,6 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
   .qz-opts.row5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-
-
 /* Marketing interactions: same CMMU palette, different learning mechanics */
 body {margin:0}
 .doc h2 {border-top:1px solid var(--line);padding-top:1.35rem;margin-top:2.5rem}
@@ -434,7 +432,6 @@ body {margin:0}
 }
 .sessions a.pill[href]:not([aria-current=page]):focus-visible{outline:2px solid #b86b7b;outline-offset:2px}
 
-
 /* These elements extend the existing S4 design rather than replacing it. */
 .doc h2{scroll-margin-top:90px}.doc h3{scroll-margin-top:95px}
 .chapterline{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:1.1rem 0;font-size:.84rem}
@@ -501,6 +498,18 @@ body {margin:0}
 @media(max-width:700px){.mapbox{grid-template-columns:1fr}.s5-cards,.kpi{grid-template-columns:1fr 1fr}.seg-flow{grid-template-columns:1fr 1fr}}
 @media(max-width:510px){.s5-cards,.kpi,.s5-grid,.flashgrid{grid-template-columns:1fr}}
 @media print{.rail,.toc-btn,.buttonrow,.qa-tools{display:none!important}.wrap{display:block}.doc{max-width:none}.mw,.mapbox{break-inside:avoid}.flash .back{display:block}.flash .front{display:none}}
+
+/* Optional, distraction-free thinking prompts; hidden unless Practice mode is on. */
+.practice-toolbar{display:flex;justify-content:flex-end;margin-top:11px}
+.practice-toggle{font:500 .78rem var(--sans);padding:5px 11px;border:1px solid var(--line);background:var(--paper);color:var(--muted);border-radius:999px;cursor:pointer;transition:background-color .15s,border-color .15s}
+.practice-toggle:hover,.practice-toggle:focus-visible{border-color:var(--accent);background:var(--tint);color:var(--accent-ink)}
+.practice-toggle[aria-pressed="true"]{border-color:var(--accent);background:var(--tint);color:var(--accent-ink)}
+.practice-toggle .mode-state{font-weight:700}
+.practice-prompt[hidden]{display:none!important}
+.practice-prompt{border-left:3px solid var(--accent);border-radius:0 8px 8px 0;background:var(--paper);padding:11px 15px;margin:1rem 0 1.7rem;font-size:.91rem;line-height:1.65}
+.practice-prompt strong{display:block;color:var(--accent-ink);font-size:.81rem;margin-bottom:2px}
+.practice-prompt p{margin:0}
+@media(prefers-reduced-motion:reduce){.practice-toggle{transition:none}}
 </style></head><body>
 <header class="top"><div class="top-in">
  <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Study Notes</a><span>/</span><a href="marketing.html">Marketing</a><span>/</span><b>Session 5</b></nav>
@@ -511,50 +520,50 @@ body {margin:0}
 <main><article class="doc">
 <div class="hero"><p class="kick">Strategic Marketing Management · Session 5</p>
 <h1>STP, Competition &amp; Marketing Ethics</h1>
-<p class="lead">A brand must stand for something, but customers can choose across brands and categories. Start with needs and occasions, test competitors and substitutes, and check incremental profit without losing customer trust.</p>
+<p class="lead">Identify useful segments, choose targets, build a clear position, and understand the alternatives customers may choose.</p>
 <div class="legend"><span><i class="sw ln" style="background:var(--supply)"></i>STP: strategic focus</span><span><i class="sw ln" style="background:var(--demand)"></i>Competition: alternatives</span><span><i class="sw ln" style="background:var(--policy)"></i>Profit and ethics: reality check</span></div>
+<div class="practice-toolbar"><button type="button" class="practice-toggle" id="practiceToggle" aria-pressed="false" title="Show or hide short questions within chapters">Practice mode <span class="mode-state" id="practiceState">Off</span></button></div>
 </div>
 
-<h2 id="map">Chapter map · One customer decision, three questions</h2>
+<h2 id="map">Chapter map</h2>
 <div class="s5-cards"><div><b>5a · STP</b><p>Whose needs matter? Which segments are worth pursuing? What should the brand mean?</p></div><div><b>5b · Competition</b><p>What else could the customer choose? Which channels and strategies create value?</p></div><div><b>Decision test</b><p>Will behavior change, will the business earn incremental profit, and is the offer fair?</p></div></div>
 <div class="chapterline"><span>5Cs + research</span><i>→</i><span>Segment</span><i>→</i><span>Target</span><i>→</i><span>Position</span><i>→</i><span>4Ps</span><i>→</i><span>Choice &amp; substitutes</span><i>→</i><span>Incremental profit + trust</span></div>
-<p class="key">The lecturer's central caution: STP is useful, but consumers are not permanently locked into a single segment or a single brand. A successful position needs evidence and consistent delivery.</p>
-<h3 id="continuity">Connect Session 5 to earlier sessions</h3>
-<div class="four"><div><b>Session 1</b><p>Customer needs, value and brand meaning</p></div><div><b>Session 2</b><p>CRM, repertoire, data and actual purchase</p></div><div><b>Session 3</b><p>Research designs and evidence limits</p></div><div><b>Session 4</b><p>Strategy, motivations and consumer choice</p></div></div>
-<p class="note-small">Source scope: Dr. Randall Shannon's Session 5a STP and 5b Competition slides, their lecture recordings, and the supplementary A Taste of Marketing video. Historical examples are lecturer illustrations, not verified current market performance. Interactive numbers below are teaching assumptions.</p>
+<p class="key">STP guides strategy, but consumers can buy across brands and occasions. Positioning needs evidence and consistent delivery.</p>
 
-<h2 id="segmentation">1. Segmentation · Start with meaningful differences</h2>
+<h2 id="segmentation">1. Market segmentation</h2>
 <p class="sub">Segmentation divides a diverse market into groups that share needs, characteristics or usage conditions. The challenge is choosing a difference that actually affects value or behavior.</p>
-<p class="hint"><b>中文邏輯</b><span>分群要依「需求和使用情境」的差異，不是只看年齡性別；同一個人也可能跨群、買多個品牌。</span></p>
+
 <div class="four"><div><b>Geographic</b><p>Country, region, access, climate; where the offer is feasible.</p></div><div><b>Demographic</b><p>Age, income, family stage; describes who, not necessarily why.</p></div><div><b>Psychographic</b> <span class="zh">心理特徵</span><p>Motives, interests, values and lifestyle; the reason benefits may matter.</p></div><div><b>Behavioral</b><p>Occasion, frequency, brand repertoire, benefit sought and switching.</p></div></div>
 <h3 id="effective">Four tests for an effective segment</h3>
 <div class="seg-flow"><div><strong>Measurable</strong><small>Can you size or describe the opportunity?</small></div><div><strong>Accessible</strong><small>Can your channels and message reach it?</small></div><div><strong>Substantial</strong><small>Is demand large and valuable enough?</small></div><div><strong>Actionable</strong><small>Can you serve it with a viable offer?</small></div></div>
-<p>A platform reporting 500,000 people with an interest does <b>not</b> show that 500,000 will buy. Similarly, the lecturer's left-handed-consumer example shows that a countable group is not automatically a relevant market for every product.</p>
+<p>A platform reporting 500,000 people with an interest does <b>not</b> show that 500,000 will buy. A countable left-handed-consumer group shows that a countable group is not automatically a relevant market for every product.</p>
 <div class="mw" id="segLab"><p class="mw-label">Decision lab · Segment before you target</p><h4>Would you launch a special product for this group?</h4><p class="sub">Change the proposed segment. Identify which unanswered question could invalidate the business case.</p><div class="buttonrow" role="group" aria-label="Segment example"><button type="button" data-seg="0" aria-pressed="true">People aged 20–30</button><button type="button" data-seg="1" aria-pressed="false">After-gym hydration</button><button type="button" data-seg="2" aria-pressed="false">Water-exercise shoes</button></div><div class="result" aria-live="polite"><p class="big" id="segTitle">Age is a description, not a need.</p><p id="segBody">Research the benefit, purchasing occasion and substitutes; age alone does not establish a separate product requirement.</p></div></div>
-<div class="practice"><b>Pause and answer aloud</b><p>Why can a large measurable segment still be a poor target market? Give an example of a better behavioral variable.</p></div>
 
-<h2 id="targeting">2. Targeting · More variants can mean less profit</h2>
+<aside class="practice-prompt" hidden><strong>Pause &amp; think</strong><p>Why can a large measurable segment still be a poor target market? Give an example of a better behavioral variable.</p></aside>
+
+<h2 id="targeting">2. Targeting</h2>
 <p class="sub">Targeting chooses segments the company can reach, satisfy and serve sustainably. No strategy is automatically best: balance coverage, specialization, costs and competitive response.</p>
-<p class="hint"><b>中文邏輯</b><span>多推一個口味不等於多賺：要扣掉自家產品被搶走的銷量和新增成本，看的是增量利潤。</span></p>
+
 <div class="three"><div class="tcard"><b>Undifferentiated</b><p>One broad offer for many buyers; simpler to produce and communicate, but may be too generic.</p><div class="tags"><span>Candy / basic gum</span></div></div><div class="tcard"><b>Differentiated</b><p>Multiple products or messages for different benefits; potentially higher sales, complexity and cannibalization <span class="zh">自家互搶</span>.</p><div class="tags"><span>Breeze / Omo / shampoo lines</span></div></div><div class="tcard"><b>Concentrated / niche</b> <span class="zh">利基</span><p>Deep focus on a small group; strong fit, but limited customer pool and purchase frequency.</p><div class="tags"><span>Ryka pool shoes / Jolt Cola</span></div></div></div>
 <h3 id="cannibalization">Product line proliferation · Sales are not incremental profit</h3>
-<p>Variant launches can produce trial and fill shelf space, yet some purchases simply move from an existing company brand. The lecturer uses Breeze versions, shampoo variants, unusual Pepsi flavors and Lay's/Pringles choices to ask whether added SKUs truly create demand.</p>
+<p>Variant launches can produce trial and fill shelf space, yet some purchases simply move from an existing company brand. Breeze versions, shampoo variants, unusual Pepsi flavors and Lay's/Pringles illustrate why added SKUs do not necessarily create new demand.</p>
 <div class="mw" id="cannibalLab"><p class="mw-label">Interactive · Cannibalization economics</p><h4>What did the company actually gain?</h4><p class="sub">Hypothetical launch. The new product's margin is counted on every new sale, but existing contribution lost from diverted sales must be deducted.</p>
 <div class="s5-grid"><div class="field"><label for="newUnits">New-product units sold</label><input id="newUnits" type="number" min="0" max="1000000" value="1000" step="100"></div><div class="field"><label for="diverted">Units diverted from existing product</label><input id="diverted" type="number" min="0" max="1000000" value="700" step="100"></div><div class="field"><label for="newMargin">New product contribution per unit (THB)</label><input id="newMargin" type="number" min="0" max="10000" value="30" step="5"></div><div class="field"><label for="oldMargin">Lost old-product contribution per unit (THB)</label><input id="oldMargin" type="number" min="0" max="10000" value="20" step="5"></div><div class="field"><label for="launchCost">Additional launch / operating costs (THB)</label><input id="launchCost" type="number" min="0" max="10000000" value="6000" step="1000"></div></div>
 <div class="kpi"><div>Gross new SKU units<b id="grossUnits">1,000</b></div><div>Truly additional units (assumed)<b id="netUnits">300</b></div><div>Incremental operating contribution<b id="netProfit">+THB 10,000</b></div></div><p class="s5-muted" id="cannibFormula"></p></div>
 <p>A specialty niche has a related problem: even if every customer is interested, <b>potential buyers × buying frequency</b> may be too small. Being a highly distinctive product is not proof of commercial viability.</p>
 <h3 id="repertoire">A Taste of Marketing · Repertoire is not the absence of preference</h3>
 <div class="pair"><div><b>Single-month observation</b><p>A customer visits one Indian restaurant exactly once. That outlet has 100% of their observed Indian-restaurant visits that month.</p></div><div><b>What the observation cannot prove</b><p>Permanent loyalty, no future switching, or an exclusive consumer segment. Test a longer period and other occasions.</p></div></div>
-<p>The lecturer points out that the same individual can use an Apple and a Samsung device, or own a Volvo and a sports car. One person can belong to several apparent psychographic profiles. <b>A target does not exclude other buyers.</b></p>
-<div class="practice"><b>Pause and answer aloud</b><p>Why might differentiated marketing increase total sales but reduce net profit? How does observed share over one month differ from customer loyalty?</p></div>
+<p>The same individual can use an Apple and a Samsung device, or own a Volvo and a sports car. One person can belong to several apparent psychographic profiles. <b>A target does not exclude other buyers.</b></p>
 
-<h2 id="positioning">3. Positioning · What the customer actually thinks</h2>
+<aside class="practice-prompt" hidden><strong>Pause &amp; think</strong><p>Why might differentiated marketing increase total sales but reduce net profit? How does observed share over one month differ from loyalty?</p></aside>
+
+<h2 id="positioning">3. Positioning</h2>
 <p class="sub">Positioning is the place a brand occupies in consumers' minds relative to alternatives. A firm's intended slogan is not the same as the associations that shoppers actually form.</p>
-<p class="hint"><b>中文邏輯</b><span>定位由顧客心中的印象決定，不是公司寫的標語；4Ps 要一致，否則就是定位混亂。</span></p>
+
 <div class="method"><span>Find a meaningful advantage</span><i>→</i><span>Select a credible promise</span><i>→</i><span>Deliver with the 4Ps</span><i>→</i><span>Research the perceived result</span></div>
 <div class="tbl"><table><thead><tr><th>Failure</th><th>What it looks like</th><th>Class illustration</th></tr></thead><tbody>
 <tr><td><b>Underpositioning</b> <span class="zh">定位不足</span></td><td>Consumers recognize the name but cannot say what the brand stands for.</td><td>Weak or fuzzy associations.</td></tr>
-<tr><td><b>Overpositioning</b> <span class="zh">定位過窄</span></td><td>The promise is so narrow that other relevant buyers or uses feel excluded.</td><td>Cooler Club's gendered message in the lecturer's discussion.</td></tr>
+<tr><td><b>Overpositioning</b> <span class="zh">定位過窄</span></td><td>The promise is so narrow that other relevant buyers or uses feel excluded.</td><td>Cooler Club's gendered message.</td></tr>
 <tr><td><b>Confused positioning</b> <span class="zh">定位混亂</span></td><td>Product, price, placement and communication send different signals.</td><td>Lux: celebrity luxury image versus low shelf placement and discounting in the class anecdote.</td></tr>
 </tbody></table></div>
 <p>Meaningful differentiation can come from the product, service, employees or recognizable brand assets. A scientific-sounding <b>reason to believe (RTB)</b> <span class="zh">理由支撐</span> or a "No. 1" claim is not proof that customers value the advantage. Always ask <b>No. 1 in which defined market and measured how?</b></p>
@@ -567,12 +576,13 @@ body {margin:0}
 <line class="axis" x1="65" y1="175" x2="575" y2="175"/><line class="axis" x1="320" y1="300" x2="320" y2="50"/>
 <text class="axislabel" id="axisLeft" x="64" y="331">Everyday use</text><text class="axislabel" id="axisRight" x="572" y="331" text-anchor="end">Specialized use</text><text class="axislabel" id="axisTop" x="322" y="20" text-anchor="middle">High functional support</text><text class="axislabel" id="axisBottom" x="322" y="350" text-anchor="middle">Low functional support</text>
 <g id="plotBrands"></g></svg>
-<div class="mapexplainer"><b id="mapHeading">The class's age and image positioning dimensions</b><p id="mapExplanation">The lecture plots A–E on old-fashioned versus modern and older versus younger perceived-image axes. These positions are only a teaching adaptation, not a reproduction of precise slide coordinates.</p><p class="note-small">Perceived position is not necessarily actual quality. An empty area on the map is not proven demand.</p></div></div></div>
-<p><b>Source boundary:</b> The original lecture map places hypothetical brands A–E on Old-fashioned / Modern and Older / Younger axes. Our schematic reproduces the instructional idea; see the original slide for the exact placement.</p>
-<p><b>Professor's example:</b> BMW and Mercedes may appear close together on a broad "luxury" map, but separate when the horizontal dimension becomes performance versus luxury. Changing axes changes the story; it does not change historical sales.</p>
-<div class="practice"><b>Pause and answer aloud</b><p>How would you defend your two chosen axes? Why is an empty position not automatically a viable market opportunity?</p></div>
+<div class="mapexplainer"><b id="mapHeading">The class's age and image positioning dimensions</b><p id="mapExplanation">A–E illustrate old-fashioned versus modern and older versus younger perceived-image dimensions. Positions are hypothetical.</p><p class="note-small">Perceived position is not necessarily actual quality. An empty area on the map is not proven demand.</p></div></div></div>
 
-<h2 id="cases">4. Positioning and targeting · The lecturer's case gallery</h2>
+<p>BMW and Mercedes may appear close together on a broad "luxury" map, but separate when one dimension becomes performance versus luxury. <b>The axes determine what a perceptual map reveals.</b></p>
+
+<aside class="practice-prompt" hidden><strong>Pause &amp; think</strong><p>How would you defend the two axes of a perceptual map? Why is an empty position not necessarily a market opportunity?</p></aside>
+
+<h2 id="cases">4. Positioning and targeting cases</h2>
 <p class="sub">Use these examples to identify the claim, the competing consumer interpretation, and what evidence would be needed. They illustrate concepts; they are not up-to-date product-performance rankings.</p>
 <div class="tbl"><table><thead><tr><th>Classroom case</th><th>Analytical question</th><th>Lesson</th></tr></thead><tbody>
 <tr><td><b>Breeze / Breeze Excel / Breeze Color / Omo</b></td><td>Do users recognize and pay for distinct benefits?</td><td>Variants, portfolio overlap, category management and cannibalization.</td></tr>
@@ -587,46 +597,48 @@ body {margin:0}
 </tbody></table></div>
 <p class="key">Marketing reasoning: A unique product feature is not a successful positioning until buyers notice it, value it, believe it and experience consistent delivery.</p>
 
-<h2 id="channels">5. Disintermediation · Cutting out the middleman is not free</h2>
+<h2 id="channels">5. Disintermediation</h2>
 <p class="sub">Disintermediation <span class="zh">去中間化</span> bypasses intermediaries. Vertical integration <span class="zh">垂直整合</span> brings an activity under ownership or control; the two can overlap, but are not synonyms.</p>
-<p class="hint"><b>中文邏輯</b><span>去掉中間商，中間商做的倉儲、配送、售後工作不會消失，只是變成自己的成本。</span></p>
+
 <div class="value-chain"><span>Manufacturer</span><i>→</i><span>Wholesaler</span><i>→</i><span>Retailer</span><i>→</i><span>Customer</span></div>
 <div class="value-chain"><span>Manufacturer</span><i>→</i><span>Direct web / delivery</span><i>→</i><span>Customer</span></div>
 <p>Direct sales may improve customer relationships and pricing control, but the producer must now handle acquisition, fulfillment, service, returns and possible retailer conflict. The middleman's markup is not pure free profit.</p>
 <div class="mw" id="d2cLab"><p class="mw-label">Interactive · Distribution economics</p><h4>Does direct-to-consumer improve contribution?</h4><p class="sub">Two illustrative per-unit business models at the <em>same assumed volume</em>. Change the D2C acquisition cost; real demand and channel conflict may also change.</p>
 <div class="s5-grid"><div class="field"><label for="d2cCost">Direct customer acquisition cost per order (THB)</label><input id="d2cCost" type="number" value="35" min="0" max="1000" step="5"></div><div class="field"><label for="unitsChannel">Units sold (assumed same both channels)</label><input id="unitsChannel" type="number" value="500" min="1" max="100000" step="100"></div></div>
 <div class="kpi"><div>Retail route: (100 − 65)/unit<b id="retailProfit">THB 17,500</b></div><div>Direct: (160 − 65 − 20 − acquisition − 8)/unit<b id="directProfit">THB 16,000</b></div><div>D2C minus retailer route<b id="d2cDifference">−THB 1,500</b></div></div><p class="note-small">THB 100 and THB 160 are assumed prices received by the producer; THB 65 product cost, THB 20 fulfillment and THB 8 service/returns are hypothetical. This is a sensitivity model, not data about Amazon or Agoda.</p></div>
-<div class="tbl"><table><thead><tr><th>Lecture illustration</th><th>What it changes</th></tr></thead><tbody>
+<div class="tbl"><table><thead><tr><th>Example</th><th>What it changes</th></tr></thead><tbody>
 <tr><td>Indian villages and telephones</td><td>Better price information can weaken an intermediary's bargaining advantage even without physically removing it.</td></tr>
 <tr><td>Travel agencies versus Expedia / Travelocity / Agoda</td><td>Self-booking replaces some agency tasks; complex itinerary services may remain valuable.</td></tr>
 <tr><td>Amazon logistics and delivery capacity</td><td>Owning capabilities can improve control but compete with previous logistics partners.</td></tr>
 <tr><td>Buy.com direct selling / DuPont Stainmaster anecdote</td><td>Channel partners can oppose moves that threaten their margins or repeat replacement revenue.</td></tr>
 </tbody></table></div>
-<p>Entry barriers <span class="zh">進入障礙</span> (capital, technology, distribution) differ from exit barriers <span class="zh">退出障礙</span> (warranties, contracts, obligations to existing customers). The lecturer introduces the following market structures as context, not as a full Porter Five Forces exercise.</p>
+<p>Entry barriers <span class="zh">進入障礙</span> (capital, technology, distribution) differ from exit barriers <span class="zh">退出障礙</span> (warranties, contracts, obligations to existing customers). Four common market structures differ in seller concentration and pricing power:</p>
 <div class="tbl"><table><thead><tr><th>Market structure</th><th>Competitive situation</th><th>Marketing implication</th></tr></thead><tbody>
 <tr><td>Pure monopoly</td><td>One seller in the defined market, with no close substitutes.</td><td>More pricing power; legal constraints may apply.</td></tr>
 <tr><td>Oligopoly</td><td>A few large interdependent sellers.</td><td>Pay close attention to likely rival response.</td></tr>
 <tr><td>Monopolistic competition</td><td>Many differentiated offers.</td><td>Brand image and unique value can matter.</td></tr>
 <tr><td>Pure competition</td><td>Many sellers of near-identical products.</td><td>Individual firms have very little price control.</td></tr>
 </tbody></table></div>
-<div class="practice"><b>Pause and answer aloud</b><p>Why might removing a retailer reduce producer profit? Give two new costs and one possible relationship cost.</p></div>
 
-<h2 id="competition">6. Direct vs. indirect competition · Define the category first</h2>
-<p class="sub">In the lecturer's category-based definition, direct competitors sell the same product/service type. Indirect competitors come from another category but can satisfy the same need, occasion, budget or time constraint.</p>
-<p class="hint"><b>中文邏輯</b><span>先用品類定義分直接或間接競爭，再從顧客「同一個場合、同一筆預算」看真正的替代品。</span></p>
+<aside class="practice-prompt" hidden><strong>Pause &amp; think</strong><p>Why might removing a retailer reduce producer profit? Name two costs and one relationship risk.</p></aside>
+
+<h2 id="competition">6. Direct and indirect competition</h2>
+<p class="sub">Direct competitors sell the same product or service type. Indirect competitors come from another category but can satisfy the same need, occasion, budget or time constraint.</p>
+
 <div class="pair"><div><b>Direct competition</b><p>Coke versus Pepsi; one coffee brand versus another; one pretzel seller versus another.</p></div><div><b>Indirect competition</b><p>Auntie Anne's versus a Dairy Queen snack option; sports drinks versus water; mouth strips versus chewing gum.</p></div></div>
 <h3 id="auntie">Case · Auntie Anne's vs. Dairy Queen</h3>
-<p>The lecturer describes research in Thailand suggesting that a pretzel stand's practical rival could be a different-category snack sold at a comparable price in the same mall. The customer asks <em>"What can I eat here and now with this budget?"</em> rather than <em>"Which pretzel brand exists?"</em> This is a class research anecdote, not a current national market-share claim.</p>
+<p>In a Thai shopping-mall example, a pretzel stand may compete with a different-category snack at a comparable price. The customer asks <em>"What can I eat here and now with this budget?"</em> rather than <em>"Which pretzel brand exists?"</em></p>
 <div class="method"><span>Consumer job</span><i>→</i><span>Alternative offers</span><i>→</i><span>Realistic same-occasion substitution</span><i>→</i><span>Direct / indirect label</span></div>
-<div class="mw" id="compLab"><p class="mw-label">Interactive · Classification practice</p><h4 id="compQuestion">Auntie Anne's pretzel vs. Dairy Queen snack set</h4><p class="sub">Classify by the lecturer's category-based definition. Then consider whether actual switching is plausible.</p><div class="buttonrow"><button type="button" id="chooseDirect">Direct</button><button type="button" id="chooseIndirect">Indirect</button><button type="button" id="nextComp">Next scenario →</button></div><div class="result" id="compFeedback" aria-live="polite"><p>Choose an answer to see the reasoning.</p></div><p class="s5-muted" id="compCount">Scenario 1 of 7</p></div>
-<p>Classification always depends on the market definition. The lecturer treats BTS and MRT as similar types of urban rail transport, whereas rail versus taxi is a different transport mode. A product can be <b>indirect by category yet a powerful practical rival</b>.</p>
+<div class="mw" id="compLab"><p class="mw-label">Interactive · Classification practice</p><h4 id="compQuestion">Auntie Anne's pretzel vs. Dairy Queen snack set</h4><p class="sub">Classify by product category. Then consider whether actual switching is plausible.</p><div class="buttonrow"><button type="button" id="chooseDirect">Direct</button><button type="button" id="chooseIndirect">Indirect</button><button type="button" id="nextComp">Next scenario →</button></div><div class="result" id="compFeedback" aria-live="polite"><p>Choose an answer to see the reasoning.</p></div><p class="s5-muted" id="compCount">Scenario 1 of 7</p></div>
+<p>Classification always depends on the market definition. BTS and MRT are both urban rail transport, whereas rail versus taxi compares different transport modes. A product can be <b>indirect by category yet a powerful practical rival</b>.</p>
 <h3 id="customer-value">Customer Value Analysis · Benefits and costs from the buyer's view</h3>
 <p>Value is a comparison of perceived benefits and sacrifices: money, time, effort, risk and social meaning. It is not merely the cheapest option, nor proof that consumers always optimize rationally. Competitive intelligence should reduce decision uncertainty without waiting forever for perfect data.</p>
 <div class="key">Microwave-popcorn lesson: before estimating Thai demand for microwave popcorn, ask how many accessible households have a usable microwave. A large population is not a large addressable market when a necessary condition is missing.</div>
-<div class="practice"><b>Pause and answer aloud</b><p>Could a product outside your official category take the customer's purchase? Give the category, the common job, and the evidence you would collect.</p></div>
 
-<h2 id="growth">7. Competitive growth · New users, new uses, more usage</h2>
-<p class="sub">The lecturer uses these three paths as questions, not promises. Each path requires a realistic source of demand and an ethical check.</p>
+<aside class="practice-prompt" hidden><strong>Pause &amp; think</strong><p>Could a product outside your official category win the same purchase? Identify the job, substitutes and evidence needed.</p></aside>
+
+<h2 id="growth">7. Competitive growth</h2>
+<p class="sub">Growth can come from new users, new uses or higher usage. Each path requires profitable demand and responsible execution.</p>
 <div class="three"><div class="tcard"><b>New users</b><p>Increase category penetration <span class="zh">品類滲透率</span> by converting non-users. The potential depends on current penetration and access.</p><div class="tags"><span>Floor cleaner</span><span>Shampoo</span></div></div><div class="tcard"><b>New uses</b><p>Find additional valuable uses or formats. Customers may discover uses before marketers do.</p><div class="tags"><span>Baking soda</span><span>Utaitip → Utip</span></div></div><div class="tcard"><b>More usage</b><p>Raise use frequency or quantity. Investigate pantry loading, occasion framing and responsible quantities.</p><div class="tags"><span>Multipacks</span><span>Shampoo dispensers</span></div></div></div>
 <h3 id="growth-cases">Growth examples and caveats</h3>
 <div class="tbl"><table><thead><tr><th>Case</th><th>Growth mechanism</th><th>Question worth asking</th></tr></thead><tbody>
@@ -639,27 +651,28 @@ body {margin:0}
 <h3 id="obsolescence">Innovation vs. planned obsolescence</h3>
 <p>Gillette's moves from single to multiple blades illustrate new features, consumable refills, copycat competition and the possibility of higher prices. More blades or a scientific-sounding enhancement do not necessarily increase value for everyone.</p>
 <div class="pair"><div><b>Useful innovation</b><p>A demonstrable performance, durability, service or convenience improvement that helps relevant buyers.</p></div><div><b>Planned obsolescence</b><p>Deliberately engineering premature replacement. This can generate turnover at the expense of consumer welfare and trust.</p></div></div>
-<p>The lecturer also discusses <em>The Best a Man Can Get</em> as broad advertising puffery, distinct from a specific factual claim requiring evidence. Health-related repurposing anecdotes in the lecture are not medical advice.</p>
+<p><em>The Best a Man Can Get</em> illustrates broad advertising puffery, unlike a specific claim that requires evidence.</p>
 
-<h2 id="downsizing">8. Downsizing · Same shelf price, less product</h2>
+<h2 id="downsizing">8. Downsizing</h2>
 <p class="sub">Downsizing (shrinkflation) reduces net quantity without a proportional price reduction. The shelf label can stay unchanged while the unit price rises.</p>
-<p class="hint"><b>中文邏輯</b><span>同價縮量：數量減少的百分比用舊容量當分母，單位價格上漲的百分比會更大。</span></p>
-<div class="mw" id="shrinkLab"><p class="mw-label">Interactive · Unit price calculator</p><h4>Quantity reduction is not the same % as unit-price increase</h4><p class="sub">The 355, 330 and 320 mL examples come from lecture discussions; the sample shelf price is hypothetical.</p>
+
+<div class="mw" id="shrinkLab"><p class="mw-label">Interactive · Unit price calculator</p><h4>Quantity reduction is not the same % as unit-price increase</h4><p class="sub">The 355, 330 and 320 mL sizes illustrate the calculation. The shelf price is hypothetical.</p>
 <div class="s5-grid"><div class="field"><label for="oldSize">Original net amount (mL)</label><input id="oldSize" type="number" min="1" max="1000000" value="355" step="5"></div><div class="field"><label for="newSize">New net amount (mL)</label><input id="newSize" type="number" min="1" max="1000000" value="320" step="5"></div><div class="field"><label for="packPrice">Unchanged package price (THB)</label><input id="packPrice" type="number" min="0.01" max="1000000" value="30" step="5"></div></div>
 <div class="kpi"><div>Quantity change<b id="sizeChange">−9.86%</b></div><div>Unit-price change<b id="unitChange">+10.94%</b></div><div>New price per 100 mL<b id="newUnitPrice">THB 9.38</b></div></div><p class="s5-muted" id="shrinkFormula"></p></div>
 <div class="pair"><div><b>What shoppers should check</b><p>Actual net weight or mL, unit price, package count and date/variant. Similar-looking boxes can hold different amounts.</p></div><div><b>What managers should check</b><p>Consumer disclosure, complaint rates, repeat behavior, unit margin, reputation and whether the portion serves a real need.</p></div></div>
-<p>The lecturer's packaging comparisons include beer/can formats, Nestlé versus differently sized packs (such as 800 versus 830 mL), bottled water and snack packages. A photograph or similar package silhouette alone cannot establish today's net amount: compare a dated, labeled product with the same variant and market.</p>
-<p>Not every smaller package is unethical. Clearly disclosed smaller portions may have legitimate convenience or waste-reduction benefits. The lecture's concern is concealed quantity changes that mislead buyers about value. Cost savings alone do not prove higher net profit.</p>
-<div class="practice"><b>Pause and answer aloud</b><p>A package shrinks from 355 to 320 mL at an unchanged price. Which denominator belongs in the quantity-reduction calculation, and why is unit-price inflation a different percentage?</p></div>
+<p>Packaging examples include 355/330 mL cans, 800/830 mL beverage packs, water and snacks. A photograph or similar package silhouette alone cannot establish today's net amount: compare a dated, labeled product with the same variant and market.</p>
+<p>Not every smaller package is unethical. Clearly disclosed smaller portions may have legitimate convenience or waste-reduction benefits. Concealed quantity changes can mislead buyers about value. Cost savings alone do not prove higher net profit.</p>
 
-<h2 id="traps">9. Do not mix these up · Flip-to-check cards</h2>
+<aside class="practice-prompt" hidden><strong>Pause &amp; think</strong><p>A package shrinks from 355 to 320 mL at the same price. Why are the quantity reduction and unit-price increase different percentages?</p></aside>
+
+<h2 id="traps">9. Do not mix these up</h2>
 <p class="sub">Click any misconception to reveal the distinction. Practice stating a short example before flipping it.</p>
 <div class="flashgrid" id="flipCards"></div>
 
-<h2 id="coldcall">10. Cold call &amp; integrated case practice</h2>
-<p class="sub">Answer aloud in English first, then open the answer. These are exam-ready formulations grounded in the supplied Review note, not direct lecturer quotations.</p>
+<h2 id="coldcall">10. Cold call practice</h2>
+<p class="sub">Click a question to reveal its answer.</p>
 <div class="qa-tools"><button type="button" id="qaAll" aria-expanded="false">Show all answers</button></div><div class="qa" id="qaBox"><details><summary>What is STP?</summary><p>Segmentation divides the market by relevant differences, targeting selects attractive and feasible groups, and positioning builds the intended brand meaning relative to alternatives.</p></details>
-<details><summary>Why does the professor criticize strict STP?</summary><p>One person can buy across brands, categories and apparent segments. Segments guide decisions but do not dictate behavior.</p></details>
+<details><summary>Why is strict STP sometimes misleading?</summary><p>One person can buy across brands, categories and apparent segments. Segments guide decisions but do not dictate behavior.</p></details>
 <details><summary>What makes segmentation effective?</summary><p>Measurability, accessibility, substantiality and actionability.</p></details>
 <details><summary>What is a niche&#x27;s biggest risk?</summary><p>A specialized group may be too small or buy too infrequently; rivals can divide the limited demand further.</p></details>
 <details><summary>What is cannibalization?</summary><p>A firm&#x27;s new product takes sales from its existing products instead of attracting genuinely additional purchases.</p></details>
@@ -687,12 +700,22 @@ body {margin:0}
 <div class="qa"><details><summary>What is wrong with using 400,000 interests as demand?</summary><p>Interests are an audience estimate, not proof of willingness to pay, category frequency, retail availability or repeat behavior. Qualify a real segment and test trial and retention with representative research.</p></details><details><summary>Who are the direct and indirect competitors?</summary><p>Direct competitors may include other flavored hydration or sports-water products in the defined category. Indirect competitors could include bottled water, fruit juice or other refreshments that serve the same post-exercise occasion. Confirm substitution with actual buyer evidence.</p></details><details><summary>Does premium positioning fit heavy discounting?</summary><p>It may produce confused signals if price, product, packaging, retail environment and advertising conflict. Research perceived value and use a coherent pricing strategy, while recognizing that not all temporary promotions necessarily damage a premium brand.</p></details><details><summary>What should the manager decide about undisclosed downsizing?</summary><p>Reject concealed reductions. Price and quantity changes should be transparent, with clear net-content disclosure and realistic assessment of long-term customer trust, repeat purchase and profitability.</p></details></div>
 <h3 id="finalmodel">Final decision framework</h3>
 <div class="chapterline"><span>Customer + occasion</span><i>→</i><span>Meaningful segment</span><i>→</i><span>Credible position</span><i>→</i><span>Direct + indirect rivals</span><i>→</i><span>Incremental profit</span><i>→</i><span>Fair, testable decision</span></div>
-<p class="note-small">Recorded assignment and midterm comments in the lecture are historical instructions, not verified current LMS deadlines or exam rules. Check official course announcements for present requirements. The accompanying Markdown files retain the complete lecture-derived explanations and checkpoint answer key.</p>
+
 </article></main></div>
 <script>
 'use strict';
 (function(){
  const $=(id)=>document.getElementById(id);
+ // Practice mode does not affect the teaching tools or cold-call answers.
+ const practiceToggle=$('practiceToggle'),practiceState=$('practiceState');
+ const practicePrompts=[...document.querySelectorAll('.practice-prompt')];
+ practiceToggle.addEventListener('click',()=>{
+   const isOn=practiceToggle.getAttribute('aria-pressed')!=='true';
+   practiceToggle.setAttribute('aria-pressed',String(isOn));
+   practiceState.textContent=isOn?'On':'Off';
+   practicePrompts.forEach(prompt=>{prompt.hidden=!isOn});
+ });
+
  const fmt=new Intl.NumberFormat('en-US',{maximumFractionDigits:0});
  const baht=v=>'THB '+fmt.format(Math.abs(v));
  const asNum=(id)=>{const n=Number($(id).value);return Number.isFinite(n)?Math.max(0,n):0};
@@ -714,19 +737,19 @@ body {margin:0}
  function cannib(){const sold=asNum('newUnits'),div=Math.min(sold,asNum('diverted')),mNew=asNum('newMargin'),mOld=asNum('oldMargin'),cost=asNum('launchCost');const v=sold*mNew-div*mOld-cost;$('grossUnits').textContent=fmt.format(sold);$('netUnits').textContent=fmt.format(sold-div);$('netProfit').textContent=(v>=0?'+':'−')+baht(v);$('cannibFormula').textContent=`${fmt.format(sold)} × ${fmt.format(mNew)} − ${fmt.format(div)} × ${fmt.format(mOld)} − ${fmt.format(cost)} = ${v>=0?'+':'−'}${baht(v)}. Assumes diverted sales would otherwise have occurred and all listed unit contributions are comparable.`}
  ['newUnits','diverted','newMargin','oldMargin','launchCost'].forEach(id=>$(id).addEventListener('input',cannib));cannib();
  // Illustrative perceptual map. All plots explicitly hypothetical, never market estimates.
- const maps={lecture:{labels:['Old-fashioned','Modern','Older perceived image','Younger perceived image'],points:[['A',139,92,'#C06C84'],['B',278,103,'#3F5675'],['C',471,235,'#3F7F7A'],['D',306,205,'#8A7A5C'],['E',196,260,'#7657A8']],heading:'The class\'s age and image positioning dimensions',text:'The lecture plots A–E using Old-fashioned vs. Modern and Older vs. Younger perceived-image axes. These are approximate teaching coordinates, not the professor\'s exact slide geometry or measured consumer data.'},sports:{labels:['Everyday / generic','Specialized for sport','Higher performance association','Lower performance association'],points:[['Gatorade',428,92,'#C06C84'],['Propel',446,148,'#3F5675'],['Water',165,249,'#3F7F7A'],['Fruit juice',223,212,'#8A7A5C']],heading:'What does the sports-drink map suggest?',text:'Gatorade and Propel can compete in adjacent functional beverage categories, while water and juice may be indirect alternatives for the post-tennis occasion. Their positions are invented.'},cars:{labels:['Traditional image','Sporty / modern image','Higher perceived luxury','Lower perceived luxury'],points:[['Mercedes',241,103,'#C06C84'],['BMW',431,121,'#3F5675'],['Volvo',230,209,'#3F7F7A'],['Compact car',466,263,'#8A7A5C']],heading:'Why do changing axes change the conclusion?',text:'When one axis measures perceived performance and another luxury, brands that seem similar on a generic price chart may separate. These positions are illustrative, not actual consumer data.'}};
+ const maps={lecture:{labels:['Old-fashioned','Modern','Older perceived image','Younger perceived image'],points:[['A',139,92,'#C06C84'],['B',278,103,'#3F5675'],['C',471,235,'#3F7F7A'],['D',306,205,'#8A7A5C'],['E',196,260,'#7657A8']],heading:'The class\'s age and image positioning dimensions',text:'The illustrative map uses Old-fashioned vs. Modern and Older vs. Younger perceived-image axes. Positions are hypothetical, not survey estimates.'},sports:{labels:['Everyday / generic','Specialized for sport','Higher performance association','Lower performance association'],points:[['Gatorade',428,92,'#C06C84'],['Propel',446,148,'#3F5675'],['Water',165,249,'#3F7F7A'],['Fruit juice',223,212,'#8A7A5C']],heading:'What does the sports-drink map suggest?',text:'Gatorade and Propel can compete in adjacent functional beverage categories, while water and juice may be indirect alternatives for the post-tennis occasion. Their positions are invented.'},cars:{labels:['Traditional image','Sporty / modern image','Higher perceived luxury','Lower perceived luxury'],points:[['Mercedes',241,103,'#C06C84'],['BMW',431,121,'#3F5675'],['Volvo',230,209,'#3F7F7A'],['Compact car',466,263,'#8A7A5C']],heading:'Why do changing axes change the conclusion?',text:'When one axis measures perceived performance and another luxury, brands that seem similar on a generic price chart may separate. These positions are illustrative, not actual consumer data.'}};
  function drawMap(key){const m=maps[key];['axisLeft','axisRight','axisTop','axisBottom'].forEach((id,i)=>$(id).textContent=m.labels[i]);$('mapHeading').textContent=m.heading;$('mapExplanation').textContent=m.text;const ns='http://www.w3.org/2000/svg',g=$('plotBrands');g.replaceChildren();m.points.forEach(([name,x,y,color])=>{let c=document.createElementNS(ns,'circle');c.setAttribute('cx',x);c.setAttribute('cy',y);c.setAttribute('r',7);c.setAttribute('fill',color);const title=document.createElementNS(ns,'title');title.textContent=name+' (hypothetical position)';c.appendChild(title);g.appendChild(c);let t=document.createElementNS(ns,'text');t.setAttribute('x',x+10);t.setAttribute('y',y-11);t.setAttribute('class','brandlabel');t.textContent=name;g.appendChild(t)})}
  document.querySelectorAll('[data-map]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-map]').forEach(q=>q.setAttribute('aria-pressed',String(q===b)));drawMap(b.dataset.map)}));drawMap('lecture');
  // Constant-volume channel experiment; sensitive to acquisition costs.
  function d2c(){let n=Math.max(1,asNum('unitsChannel')),ac=asNum('d2cCost'),ret=35*n,dir=(160-65-20-ac-8)*n,delta=dir-ret;$('retailProfit').textContent=baht(ret);$('directProfit').textContent=(dir<0?'−':'')+baht(dir);$('d2cDifference').textContent=(delta>=0?'+':'−')+baht(delta)}
  ['d2cCost','unitsChannel'].forEach(id=>$(id).addEventListener('input',d2c));d2c();
  const scenarios=[
- ['Auntie Anne\'s pretzel vs. Dairy Queen snack set','Indirect','Different product categories but a competing mall-snack occasion and similar buyer budget in the lecturer\'s anecdote.'],
+ ['Auntie Anne\'s pretzel vs. Dairy Queen snack set','Indirect','Different product categories but a competing mall-snack occasion and similar buyer budget in the mall-shopping example.'],
  ['Coke vs. Pepsi','Direct','Both are cola brands within the same product category.'],
  ['Listerine breath strips vs. chewing gum','Indirect','Different product categories; both may serve the fresh-breath job.'],
  ['A pretzel seller vs. another pretzel seller','Direct','The same broad pretzel category.'],
  ['BTS urban rail vs. a taxi','Indirect','Different transport modes serving a similar journey.'],
- ['MRT urban rail vs. BTS urban rail','Direct','The lecturer generally treats both as urban rail transport, though a stricter definition could alter the classification.'],
+ ['MRT urban rail vs. BTS urban rail','Direct','Both are urban rail transport in this category definition; a narrower definition could change the label.'],
  ['Gatorade sports drink vs. fruit juice','Indirect','Different beverage categories but possible substitutes after exercise.']
  ];let scenarioIndex=0,answered=false;
  function renderScenario(){answered=false;const [q]=scenarios[scenarioIndex];$('compQuestion').textContent=q;$('compCount').textContent=`Scenario ${scenarioIndex+1} of ${scenarios.length}`;$('compFeedback').innerHTML='<p>Choose an answer to see the reasoning.</p>';['chooseDirect','chooseIndirect'].forEach(id=>{$(id).disabled=false;$(id).setAttribute('aria-pressed','false')})}
