@@ -498,18 +498,6 @@ body {margin:0}
 @media(max-width:700px){.mapbox{grid-template-columns:1fr}.s5-cards,.kpi{grid-template-columns:1fr 1fr}.seg-flow{grid-template-columns:1fr 1fr}}
 @media(max-width:510px){.s5-cards,.kpi,.s5-grid,.flashgrid{grid-template-columns:1fr}}
 @media print{.rail,.toc-btn,.buttonrow,.qa-tools{display:none!important}.wrap{display:block}.doc{max-width:none}.mw,.mapbox{break-inside:avoid}.flash .back{display:block}.flash .front{display:none}}
-
-/* Optional, distraction-free thinking prompts; hidden unless Practice mode is on. */
-.practice-toolbar{display:flex;justify-content:flex-end;margin-top:11px}
-.practice-toggle{font:500 .78rem var(--sans);padding:5px 11px;border:1px solid var(--line);background:var(--paper);color:var(--muted);border-radius:999px;cursor:pointer;transition:background-color .15s,border-color .15s}
-.practice-toggle:hover,.practice-toggle:focus-visible{border-color:var(--accent);background:var(--tint);color:var(--accent-ink)}
-.practice-toggle[aria-pressed="true"]{border-color:var(--accent);background:var(--tint);color:var(--accent-ink)}
-.practice-toggle .mode-state{font-weight:700}
-.practice-prompt[hidden]{display:none!important}
-.practice-prompt{border-left:3px solid var(--accent);border-radius:0 8px 8px 0;background:var(--paper);padding:11px 15px;margin:1rem 0 1.7rem;font-size:.91rem;line-height:1.65}
-.practice-prompt strong{display:block;color:var(--accent-ink);font-size:.81rem;margin-bottom:2px}
-.practice-prompt p{margin:0}
-@media(prefers-reduced-motion:reduce){.practice-toggle{transition:none}}
 </style></head><body>
 <header class="top"><div class="top-in">
  <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Study Notes</a><span>/</span><a href="marketing.html">Marketing</a><span>/</span><b>Session 5</b></nav>
@@ -522,7 +510,6 @@ body {margin:0}
 <h1>STP, Competition &amp; Marketing Ethics</h1>
 <p class="lead">Identify useful segments, choose targets, build a clear position, and understand the alternatives customers may choose.</p>
 <div class="legend"><span><i class="sw ln" style="background:var(--supply)"></i>STP: strategic focus</span><span><i class="sw ln" style="background:var(--demand)"></i>Competition: alternatives</span><span><i class="sw ln" style="background:var(--policy)"></i>Profit and ethics: reality check</span></div>
-<div class="practice-toolbar"><button type="button" class="practice-toggle" id="practiceToggle" aria-pressed="false" title="Show or hide short questions within chapters">Practice mode <span class="mode-state" id="practiceState">Off</span></button></div>
 </div>
 
 <h2 id="map">Chapter map</h2>
@@ -539,8 +526,6 @@ body {margin:0}
 <p>A platform reporting 500,000 people with an interest does <b>not</b> show that 500,000 will buy. A countable left-handed-consumer group shows that a countable group is not automatically a relevant market for every product.</p>
 <div class="mw" id="segLab"><p class="mw-label">Decision lab · Segment before you target</p><h4>Would you launch a special product for this group?</h4><p class="sub">Change the proposed segment. Identify which unanswered question could invalidate the business case.</p><div class="buttonrow" role="group" aria-label="Segment example"><button type="button" data-seg="0" aria-pressed="true">People aged 20–30</button><button type="button" data-seg="1" aria-pressed="false">After-gym hydration</button><button type="button" data-seg="2" aria-pressed="false">Water-exercise shoes</button></div><div class="result" aria-live="polite"><p class="big" id="segTitle">Age is a description, not a need.</p><p id="segBody">Research the benefit, purchasing occasion and substitutes; age alone does not establish a separate product requirement.</p></div></div>
 
-<aside class="practice-prompt" hidden><strong>Pause &amp; think</strong><p>Why can a large measurable segment still be a poor target market? Give an example of a better behavioral variable.</p></aside>
-
 <h2 id="targeting">2. Targeting</h2>
 <p class="sub">Targeting chooses segments the company can reach, satisfy and serve sustainably. No strategy is automatically best: balance coverage, specialization, costs and competitive response.</p>
 
@@ -554,8 +539,6 @@ body {margin:0}
 <h3 id="repertoire">A Taste of Marketing · Repertoire is not the absence of preference</h3>
 <div class="pair"><div><b>Single-month observation</b><p>A customer visits one Indian restaurant exactly once. That outlet has 100% of their observed Indian-restaurant visits that month.</p></div><div><b>What the observation cannot prove</b><p>Permanent loyalty, no future switching, or an exclusive consumer segment. Test a longer period and other occasions.</p></div></div>
 <p>The same individual can use an Apple and a Samsung device, or own a Volvo and a sports car. One person can belong to several apparent psychographic profiles. <b>A target does not exclude other buyers.</b></p>
-
-<aside class="practice-prompt" hidden><strong>Pause &amp; think</strong><p>Why might differentiated marketing increase total sales but reduce net profit? How does observed share over one month differ from loyalty?</p></aside>
 
 <h2 id="positioning">3. Positioning</h2>
 <p class="sub">Positioning is the place a brand occupies in consumers' minds relative to alternatives. A firm's intended slogan is not the same as the associations that shoppers actually form.</p>
@@ -579,8 +562,6 @@ body {margin:0}
 <div class="mapexplainer"><b id="mapHeading">The class's age and image positioning dimensions</b><p id="mapExplanation">A–E illustrate old-fashioned versus modern and older versus younger perceived-image dimensions. Positions are hypothetical.</p><p class="note-small">Perceived position is not necessarily actual quality. An empty area on the map is not proven demand.</p></div></div></div>
 
 <p>BMW and Mercedes may appear close together on a broad "luxury" map, but separate when one dimension becomes performance versus luxury. <b>The axes determine what a perceptual map reveals.</b></p>
-
-<aside class="practice-prompt" hidden><strong>Pause &amp; think</strong><p>How would you defend the two axes of a perceptual map? Why is an empty position not necessarily a market opportunity?</p></aside>
 
 <h2 id="cases">4. Positioning and targeting cases</h2>
 <p class="sub">Use these examples to identify the claim, the competing consumer interpretation, and what evidence would be needed. They illustrate concepts; they are not up-to-date product-performance rankings.</p>
@@ -620,8 +601,6 @@ body {margin:0}
 <tr><td>Pure competition</td><td>Many sellers of near-identical products.</td><td>Individual firms have very little price control.</td></tr>
 </tbody></table></div>
 
-<aside class="practice-prompt" hidden><strong>Pause &amp; think</strong><p>Why might removing a retailer reduce producer profit? Name two costs and one relationship risk.</p></aside>
-
 <h2 id="competition">6. Direct and indirect competition</h2>
 <p class="sub">Direct competitors sell the same product or service type. Indirect competitors come from another category but can satisfy the same need, occasion, budget or time constraint.</p>
 
@@ -634,8 +613,6 @@ body {margin:0}
 <h3 id="customer-value">Customer Value Analysis · Benefits and costs from the buyer's view</h3>
 <p>Value is a comparison of perceived benefits and sacrifices: money, time, effort, risk and social meaning. It is not merely the cheapest option, nor proof that consumers always optimize rationally. Competitive intelligence should reduce decision uncertainty without waiting forever for perfect data.</p>
 <div class="key">Microwave-popcorn lesson: before estimating Thai demand for microwave popcorn, ask how many accessible households have a usable microwave. A large population is not a large addressable market when a necessary condition is missing.</div>
-
-<aside class="practice-prompt" hidden><strong>Pause &amp; think</strong><p>Could a product outside your official category win the same purchase? Identify the job, substitutes and evidence needed.</p></aside>
 
 <h2 id="growth">7. Competitive growth</h2>
 <p class="sub">Growth can come from new users, new uses or higher usage. Each path requires profitable demand and responsible execution.</p>
@@ -662,8 +639,6 @@ body {margin:0}
 <div class="pair"><div><b>What shoppers should check</b><p>Actual net weight or mL, unit price, package count and date/variant. Similar-looking boxes can hold different amounts.</p></div><div><b>What managers should check</b><p>Consumer disclosure, complaint rates, repeat behavior, unit margin, reputation and whether the portion serves a real need.</p></div></div>
 <p>Packaging examples include 355/330 mL cans, 800/830 mL beverage packs, water and snacks. A photograph or similar package silhouette alone cannot establish today's net amount: compare a dated, labeled product with the same variant and market.</p>
 <p>Not every smaller package is unethical. Clearly disclosed smaller portions may have legitimate convenience or waste-reduction benefits. Concealed quantity changes can mislead buyers about value. Cost savings alone do not prove higher net profit.</p>
-
-<aside class="practice-prompt" hidden><strong>Pause &amp; think</strong><p>A package shrinks from 355 to 320 mL at the same price. Why are the quantity reduction and unit-price increase different percentages?</p></aside>
 
 <h2 id="traps">9. Do not mix these up</h2>
 <p class="sub">Click any misconception to reveal the distinction. Practice stating a short example before flipping it.</p>
@@ -706,16 +681,6 @@ body {margin:0}
 'use strict';
 (function(){
  const $=(id)=>document.getElementById(id);
- // Practice mode does not affect the teaching tools or cold-call answers.
- const practiceToggle=$('practiceToggle'),practiceState=$('practiceState');
- const practicePrompts=[...document.querySelectorAll('.practice-prompt')];
- practiceToggle.addEventListener('click',()=>{
-   const isOn=practiceToggle.getAttribute('aria-pressed')!=='true';
-   practiceToggle.setAttribute('aria-pressed',String(isOn));
-   practiceState.textContent=isOn?'On':'Off';
-   practicePrompts.forEach(prompt=>{prompt.hidden=!isOn});
- });
-
  const fmt=new Intl.NumberFormat('en-US',{maximumFractionDigits:0});
  const baht=v=>'THB '+fmt.format(Math.abs(v));
  const asNum=(id)=>{const n=Number($(id).value);return Number.isFinite(n)?Math.max(0,n):0};

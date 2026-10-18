@@ -1,14 +1,559 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Management Session 6 · Study Notes</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Cross-Cultural Management · Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-:root{--bg:#FDF9F9;--paper:#FFFFFF;--tint:#FAE9ED;--line:#EFDDE2;--fg:#2F282B;--muted:#7E6F74;--accent:#C06C84;--accent-ink:#9C4862;--sans:"Noto Sans TC","PingFang TC",system-ui,sans-serif;--serif:"Noto Serif TC",Georgia,serif}
-*{box-sizing:border-box}html{color-scheme:light;background:var(--bg)}body{margin:0;font:16px/1.75 var(--sans);color:var(--fg)}a{color:var(--accent-ink)}:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-header{border-bottom:1px solid var(--line);background:rgba(253,249,249,.96)}.top{max-width:1160px;margin:auto;padding:13px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:16px}
-.crumbs{font-size:.86rem;display:flex;align-items:center;flex-wrap:wrap;gap:8px;color:var(--muted)}.crumbs a{text-decoration:none;color:var(--muted)}.crumbs a:hover{color:var(--accent-ink)}
-.sessions{display:flex;gap:5px;margin-left:auto}.pill{font:.85rem var(--sans);text-decoration:none;padding:5px 12px;border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--muted)}.pill[aria-current="page"]{background:var(--accent);border-color:var(--accent);color:#fff}.sessions a.pill:hover,.sessions a.pill:focus-visible{background:#fceef2;border-color:#b86b7b;color:#8e4357}
-main{max-width:780px;margin:0 auto;padding:74px 22px 120px}.kick{color:var(--accent-ink);letter-spacing:.15em;text-transform:uppercase;font-size:.76rem;font-weight:700}h1{font:700 clamp(2.2rem,5vw,3.2rem)/1.23 var(--serif);margin:6px 0 16px}.note{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:24px 28px;margin-top:30px}.label{font-weight:700;color:var(--accent-ink);font-size:.82rem;letter-spacing:.07em;text-transform:uppercase}.note p{margin:9px 0 0}.back{display:inline-block;margin-top:22px;text-decoration:none;border-bottom:1px solid var(--accent);font-weight:600}
-@media(max-width:520px){.sessions{margin-left:0}main{padding-top:50px}.note{padding:20px}}
-</style></head><body>
-<header><div class="top"><nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Study Notes</a><span>/</span><a href="management.html">Management</a><span>/</span><b>Session 6</b></nav><nav class="sessions" aria-label="Sessions 5–8"><a class="pill" href="management-s5.html">S5</a><span class="pill" aria-current="page">S6</span><a class="pill" href="management-s7.html">S7</a><a class="pill" href="management-s8.html">S8</a></nav></div></header>
-<main><p class="kick">CMMU · Session 6</p><h1>Management — Session 6</h1><section class="note"><div class="label">Coming soon</div><p>This lesson is not published yet. This reserved page keeps the S5–S8 navigation working in the meantime.</p><p>When the lesson is ready, the completed HTML can replace this file directly.</p></section><a class="back" href="management.html">← Back to Management sessions</a></main></body></html>
+/* Layout: one light reading column with a sticky chapter rail; deliberately single (light) theme. */
+:root {
+  color-scheme: light;
+  --bg: #FDF9F9; --panel: #F8EEF0; --paper: #FFFFFF; --tint: #FAE9ED; --line: #EFDDE2;
+  --fg: #2F282B; --muted: #7E6F74; --accent: #C06C84; --accent-ink: #9C4862;
+  --demand: #3F5675; --supply: #C06C84; --ext: #6E3F55; --world: #8A7A5C; --policy: #3F7F7A;
+  --cs: #A7CDB6; --ps: #B2C4E3; --dwl: #D9674F; --rev: #E5C171; --rev2: #F1DCA8; --time: #DDB3CB; --ts: #BFDCC9;
+  --serif: "Noto Serif TC", "Songti TC", Georgia, serif;
+  --sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; background: var(--bg); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 16px; line-height: 1.75; }
+a { color: var(--accent-ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(253, 249, 249, .94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); padding-inline: 16px; }
+.top-in { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 14px; min-height: 56px; flex-wrap: wrap; padding-block: 8px; }
+.brand { font-family: var(--serif); font-weight: 700; font-size: 1.02rem; white-space: nowrap; }
+.brand small { font-family: var(--sans); font-weight: 500; color: var(--muted); font-size: .76rem; margin-left: 6px; letter-spacing: .06em; }
+.sessions { display: flex; gap: 4px; margin-left: auto; }
+.crumbs { font-size: .86rem; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.crumbs a { color: var(--muted); text-decoration: none; } .crumbs a:hover { color: var(--accent-ink); } .crumbs span { color: var(--line); } .crumbs b { font-family: var(--serif); }
+.sessions a.pill { text-decoration: none; transition: border-color .15s, color .15s; }
+.sessions a.pill:hover, .sessions a.pill:focus-visible { border-color: var(--accent); color: var(--accent-ink); background: var(--tint); }
+.sessions .pill { font: 500 .82rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--muted); padding: 4px 12px; border-radius: 999px; }
+.sessions .pill[aria-current="page"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.sessions .pill.off { opacity: .5; cursor: not-allowed; }
+.toc-btn { display: none; font: 500 .85rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--fg); border-radius: 8px; padding: 5px 12px; }
+
+.wrap { max-width: 1160px; margin: 0 auto; padding-inline: 16px; display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 52px; }
+.rail { position: sticky; top: 76px; align-self: start; max-height: calc(100vh - 92px); overflow: auto; padding-block: 34px 40px; font-size: .86rem; line-height: 1.5; }
+.rail .lbl { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.rail ol { list-style: none; margin: 0; padding: 0; }
+.rail li a { display: block; padding: 4px 10px; color: var(--muted); text-decoration: none; border-radius: 6px; }
+.rail li a:hover { color: var(--fg); background: var(--tint); }
+.rail li.h3 a { padding-left: 22px; font-size: .8rem; }
+.rail li a.on { color: var(--accent-ink); background: var(--tint); font-weight: 500; }
+
+main { min-width: 0; padding-block: 30px 120px; }
+.doc { max-width: 780px; }
+.hero { padding-block: 8px 26px; border-bottom: 1px solid var(--line); }
+.kick { font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); margin: 0 0 6px; font-weight: 500; }
+.hero h1 { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.25; margin: 0 0 12px; text-wrap: balance; }
+.lead { margin: 0; font-size: 1.04rem; max-width: 62ch; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 16px; font-size: .78rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+.doc h2 { font-family: var(--serif); font-size: 1.55rem; line-height: 1.35; margin: 3.4rem 0 .3rem; text-wrap: balance; }
+.doc h3 { font-size: 1.1rem; line-height: 1.45; margin: 2.2rem 0 .5rem; color: var(--accent-ink); text-wrap: balance; }
+.sub { margin: 0 0 1.2rem; color: var(--muted); max-width: 66ch; }
+.doc p, .doc li { max-width: 68ch; }
+.doc ul, .doc ol { padding-left: 1.25em; }
+.doc li { margin: .25rem 0; }
+.zh { display: inline-block; font-size: .78em; line-height: 1.3; color: var(--accent-ink); background: var(--tint); padding: 0 6px; border-radius: 4px; margin-left: 2px; vertical-align: 1px; font-weight: 500; }
+.hint { font-size: .9rem; color: var(--muted); display: flex; gap: 10px; align-items: baseline; }
+.hint b { flex: none; font-size: .72rem; color: #fff; background: var(--accent); padding: 0 7px; border-radius: 4px; font-weight: 500; }
+.key { background: var(--tint); padding: 12px 16px; border-radius: 8px; font-weight: 500; }
+.note-small { font-size: .8rem; color: var(--muted); }
+
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 1rem 0; }
+.pair > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; }
+.pair b { color: var(--accent-ink); }
+.pair p { margin: 4px 0 0; font-size: .92rem; }
+
+.matrix { display: grid; grid-template-columns: minmax(90px, .7fr) repeat(2, minmax(0, 1fr)); gap: 6px; margin: 1rem 0 1.2rem; font-size: .9rem; max-width: 620px; }
+.matrix .mh { font-weight: 700; font-size: .8rem; color: var(--muted); align-self: end; padding: 0 4px 2px; }
+.matrix .mh.side { align-self: center; }
+.matrix .cell { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px; font-weight: 500; }
+.matrix .cell.hi { background: var(--tint); border-color: var(--accent); }
+.matrix small { display: block; font-weight: 400; color: var(--muted); font-size: .8rem; margin-top: 2px; line-height: 1.45; }
+
+.map { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.3fr) auto minmax(0, 1fr); gap: 10px; align-items: center; margin: 1rem 0; }
+.mcol { display: flex; flex-direction: column; gap: 8px; }
+.mbox { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .84rem; line-height: 1.5; display: flex; flex-direction: column; gap: 2px; }
+.mbox b { font-size: .9rem; } .mbox span { color: var(--muted); } .mbox em { font-style: normal; color: var(--accent-ink); font-size: .78rem; font-weight: 500; }
+.mbox.good { border-color: var(--cs); } .mbox.ask { background: var(--tint); border-color: var(--accent); }
+.marrow { color: var(--accent); font-weight: 700; }
+
+.flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 1rem 0; font-size: .86rem; }
+.flow span { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; line-height: 1.45; }
+.flow i { font-style: normal; color: var(--accent); font-weight: 700; }
+.formula { font-family: var(--mono); font-size: .9rem; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; line-height: 1.9; overflow-x: auto; }
+.steps { counter-reset: s; list-style: none; padding-left: 0 !important; }
+.steps li { counter-increment: s; display: flex; gap: 10px; }
+.steps li::before { content: counter(s); flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--tint); color: var(--accent-ink); font: 700 .75rem/22px var(--sans); text-align: center; margin-top: 3px; }
+.assign { margin: 1.6rem 0; border: 1px dashed var(--accent); border-radius: 10px; padding: 14px 16px; background: var(--paper); }
+.assign p { margin: 6px 0 0; font-size: .92rem; }
+
+.tbl { overflow-x: auto; margin: 1rem 0; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+.doc table { border-collapse: collapse; width: 100%; font-size: .88rem; line-height: 1.55; }
+.doc th, .doc td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+.doc th { background: var(--panel); font-weight: 700; }
+.doc tr:last-child td { border-bottom: 0; }
+.drill .ans { filter: blur(5px); cursor: pointer; user-select: none; transition: filter .2s; }
+.drill .ans.shown { filter: none; user-select: auto; }
+
+.traps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 1rem; }
+.traps > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: .88rem; line-height: 1.55; }
+.traps s { color: var(--muted); text-decoration-color: var(--dwl); }
+.traps p { margin: 6px 0 0; font-weight: 500; }
+
+.qa-tools { margin: .4rem 0 .8rem; }
+.qa-tools button { font: 500 .82rem var(--sans); border: 1px solid var(--accent); background: var(--paper); color: var(--accent-ink); border-radius: 6px; padding: 5px 12px; cursor: pointer; }
+.qa { display: flex; flex-direction: column; gap: 6px; }
+.qa details { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
+.qa summary { cursor: pointer; padding: 10px 14px; font-weight: 500; font-size: .93rem; list-style: none; display: flex; gap: 10px; }
+.qa summary::before { content: "Q"; color: var(--accent); font-weight: 700; }
+.qa details[open] summary { border-bottom: 1px dashed var(--line); }
+.qa details p { margin: 0; padding: 10px 14px 12px 36px; font-size: .9rem; }
+
+/* graphs */
+.graph { max-width: 900px; margin: 1.8rem 0 2.2rem; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px 18px 14px; }
+.g-head h4 { font-family: var(--serif); font-size: 1.12rem; margin: 2px 0 2px; line-height: 1.45; }
+.g-head p { margin: 0 0 10px; color: var(--muted); font-size: .86rem; }
+.g-kicker { font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); }
+.g-body { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.g-plot svg { width: 100%; height: auto; display: block; }
+.g-side { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.g-ctrl { display: flex; flex-direction: column; gap: 10px; }
+.sl label { display: flex; justify-content: space-between; font-size: .8rem; color: var(--muted); line-height: 1.3; }
+.sl output { font-family: var(--mono); color: var(--fg); font-size: .8rem; }
+.sl input { width: 100%; accent-color: var(--accent); margin: 4px 0 0; }
+.g-btn { align-self: flex-start; font: 500 .8rem var(--sans); border: 1px solid var(--accent); color: var(--accent-ink); background: transparent; border-radius: 6px; padding: 4px 11px; cursor: pointer; }
+.g-btn:hover { background: var(--tint); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; align-self: flex-start; }
+.seg button { font: 500 .8rem var(--sans); border: 0; background: transparent; color: var(--muted); padding: 5px 12px; cursor: pointer; }
+.seg button[aria-checked="true"] { background: var(--accent); color: var(--paper); }
+.chk { display: flex; gap: 8px; align-items: center; font-size: .8rem; color: var(--muted); }
+.chk input { accent-color: var(--accent); }
+.g-stats { margin: 0; border-top: 1px solid var(--line); padding-top: 10px; display: flex; flex-direction: column; gap: 3px; }
+.st { display: flex; justify-content: space-between; gap: 10px; font-size: .8rem; line-height: 1.45; }
+.st dt { color: var(--muted); display: flex; align-items: center; gap: 7px; }
+.st dd { margin: 0; font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.st.big dd { font-weight: 500; color: var(--accent-ink); font-size: .92rem; }
+.g-note { margin: 12px 0 0; padding: 9px 12px; background: var(--tint); border-radius: 6px; font-size: .85rem; line-height: 1.6; }
+
+.sw { width: 11px; height: 11px; border-radius: 2px; display: inline-block; flex: none; }
+.sw.none { background: transparent; }
+.sw.a-cs { background: var(--cs); } .sw.a-ps { background: var(--ps); } .sw.a-ps2 { background: var(--ps); outline: 1px solid var(--demand); }
+.sw.a-dwl { background: repeating-linear-gradient(45deg, var(--dwl) 0 2px, transparent 2px 4px); outline: 1px solid var(--dwl); }
+.sw.a-rev { background: var(--rev); } .sw.a-rev2 { background: var(--rev2); } .sw.a-time { background: var(--time); } .sw.a-ts { background: var(--ts); }
+.sw.ln { height: 3px; border-radius: 2px; width: 16px; }
+
+svg .ax { stroke: var(--muted); stroke-width: 1.2; }
+svg .axl { fill: var(--muted); font: 500 11px var(--sans); }
+svg .tk { fill: var(--muted); font: 500 10.5px var(--mono); }
+svg .gd { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 4; opacity: .7; }
+svg .cv { stroke-width: 2.6; fill: none; stroke-linecap: round; }
+svg .cv.dash { stroke-dasharray: 7 5; stroke-width: 2; }
+svg .cvl { font: 700 11.5px var(--sans); }
+svg .c-d { stroke: var(--demand); fill: var(--demand); } svg .c-s { stroke: var(--supply); fill: var(--supply); }
+svg .c-x { stroke: var(--ext); fill: var(--ext); } svg .c-w { stroke: var(--world); fill: var(--world); } svg .c-t { stroke: var(--policy); fill: var(--policy); }
+svg text.cvl { stroke: none; }
+svg .pt { fill: var(--paper); stroke: var(--fg); stroke-width: 2; }
+svg .ptl { fill: var(--fg); font: 700 11px var(--sans); }
+svg .atag { fill: var(--fg); font: 700 11px var(--sans); opacity: .8; }
+svg .a-cs { fill: var(--cs); fill-opacity: .6; } svg .a-ps { fill: var(--ps); fill-opacity: .6; }
+svg .a-ps2 { fill: var(--ps); fill-opacity: .95; } svg .a-ts { fill: var(--ts); fill-opacity: .6; }
+svg .a-dwl { fill: url(#dwlHatch); stroke: var(--dwl); stroke-width: 1.2; }
+svg .a-rev { fill: var(--rev); fill-opacity: .75; } svg .a-rev2 { fill: var(--rev2); fill-opacity: .8; } svg .a-time { fill: var(--time); fill-opacity: .65; }
+
+svg .grid { stroke: var(--line); stroke-width: 1; }
+svg .a-prof { fill: var(--cs); fill-opacity: .75; } svg .a-loss { fill: var(--dwl); fill-opacity: .35; }
+.sw.a-prof { background: var(--cs); } .sw.a-loss { background: var(--dwl); opacity: .5; }
+.twin { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.tw-t { margin: 0 0 2px; font-size: .78rem; font-weight: 700; color: var(--muted); }
+.g-ctrl .g-btn + .g-btn { margin-top: -4px; }
+.graph.wide .g-body { grid-template-columns: minmax(0, 1fr); }
+.graph.wide .g-side { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+@media (max-width: 700px) { .twin, .graph.wide .g-side { grid-template-columns: minmax(0, 1fr); } }
+svg polyline.cv { fill: none !important; }
+
+.graph { background: var(--paper); }
+.g-note { background: var(--tint); }
+
+@media (max-width: 900px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .rail { display: none; position: fixed; inset: 64px 0 0 0; max-height: none; background: var(--bg); z-index: 15; padding: 20px 16px 60px; }
+  .rail.open { display: block; }
+  .toc-btn { display: inline-block; }
+  .g-body { grid-template-columns: minmax(0, 1fr); }
+  .map { grid-template-columns: minmax(0, 1fr); }
+  .marrow { transform: rotate(90deg); justify-self: center; }
+}
+@media (max-width: 560px) { .pair, .traps { grid-template-columns: minmax(0, 1fr); } }
+/* Management components */
+.three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 1rem 0; }
+.tcard { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.tcard .tnum { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font: 700 .78rem/24px var(--sans); text-align: center; }
+.tcard p { margin: 0; color: var(--muted); font-size: .88rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+.tags span { font-size: .74rem; background: var(--tint); color: var(--accent-ink); padding: 1px 8px; border-radius: 999px; font-weight: 500; }
+.method, .loop, .cascade { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 1rem 0; font-size: .86rem; }
+.method span, .loop span, .cascade span { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 5px 11px; line-height: 1.4; }
+.method span.hi { background: var(--tint); border-color: var(--accent); color: var(--accent-ink); font-weight: 700; }
+.method i, .loop i, .cascade i { font-style: normal; color: var(--accent); font-weight: 700; }
+.loop i.back { font-size: 1.1rem; }
+.cascade { flex-direction: column; align-items: flex-start; gap: 2px; }
+.cascade span:nth-of-type(2) { margin-left: 18px; } .cascade span:nth-of-type(3) { margin-left: 36px; } .cascade span:nth-of-type(4) { margin-left: 54px; }
+.cascade i:nth-of-type(1) { margin-left: 14px; } .cascade i:nth-of-type(2) { margin-left: 32px; } .cascade i:nth-of-type(3) { margin-left: 50px; }
+.four { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 1rem 0; }
+.four > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+.four b { font-size: .9rem; color: var(--accent-ink); } .four p { margin: 4px 0 0; font-size: .84rem; color: var(--muted); line-height: 1.5; }
+
+.ladder { display: grid; grid-template-columns: minmax(0, 1fr) 118px 118px; grid-template-rows: repeat(5, auto); gap: 5px 8px; margin: 1rem 0 .3rem; max-width: 640px; }
+.lv { grid-column: 1; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; font-weight: 700; font-size: .9rem; line-height: 1.35; }
+.lv small { display: block; font-weight: 400; color: var(--muted); font-size: .78rem; }
+.lv.l5 { grid-row: 1; margin-inline: 22%; } .lv.l4 { grid-row: 2; margin-inline: 16%; } .lv.l3 { grid-row: 3; margin-inline: 10%; } .lv.l2 { grid-row: 4; margin-inline: 5%; } .lv.l1 { grid-row: 5; }
+.lv.l5, .lv.l4 { background: #F6E9F4; } .lv.l3 { background: var(--tint); } .lv.l2, .lv.l1 { background: #EAF2EE; }
+.erg { border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .84rem; text-align: center; padding: 6px; }
+.erg.g { grid-column: 2; grid-row: 1 / span 2; background: #EBD7EA; color: #6E3F6A; }
+.erg.r { grid-column: 3; grid-row: 2 / span 2; background: var(--tint); color: var(--accent-ink); }
+.erg.e { grid-column: 2; grid-row: 4 / span 2; background: #D9EBE1; color: #2F6B4F; }
+
+.mw { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px; margin: 1.6rem 0 2rem; }
+.mw-body { margin-top: 10px; }
+.hz-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.hz-t { margin: 0 0 6px; font-weight: 700; font-size: .88rem; } .hz-t small { font-weight: 400; color: var(--muted); }
+.chips { display: flex; flex-direction: column; gap: 5px; }
+.chip { display: flex; justify-content: space-between; gap: 10px; font: 500 .84rem var(--sans); text-align: left; background: var(--bg); border: 1px solid var(--line); color: var(--fg); border-radius: 7px; padding: 6px 10px; cursor: pointer; }
+.chip em { font-style: normal; font-size: .74rem; color: var(--muted); }
+.hz-cols > div:first-child .chip[aria-pressed="true"] { border-color: var(--dwl); background: #FCEDEA; }
+.hz-cols > div:first-child .chip[aria-pressed="true"] em { color: #A8432F; }
+.hz-cols > div:last-child .chip[aria-pressed="true"] { border-color: #6FAE8B; background: #EAF5EE; }
+.hz-cols > div:last-child .chip[aria-pressed="true"] em { color: #2F6B4F; }
+.scale { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 6px; margin-top: 18px; }
+.half { height: 14px; background: var(--bg); border: 1px solid var(--line); border-radius: 7px; position: relative; overflow: hidden; }
+.half i { position: absolute; top: 0; bottom: 0; transition: width .25s; }
+.half.left i { right: 0; background: var(--dwl); } .half.right i { left: 0; background: #6FAE8B; }
+@media (prefers-reduced-motion: reduce) { .half i { transition: none; } }
+.zero { font: 700 .8rem var(--mono); color: var(--muted); }
+.scale-l { display: flex; justify-content: space-between; font-size: .74rem; color: var(--muted); margin-top: 4px; }
+
+.kpi-flow { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.3fr) auto minmax(0, .8fr) auto minmax(0, 1fr); gap: 8px; align-items: stretch; margin-top: 12px; font-size: .84rem; }
+.kpi-flow > div { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; line-height: 1.45; }
+.kpi-flow > i { font-style: normal; color: var(--accent); font-weight: 700; align-self: center; }
+.kpi-flow b { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.kpi-flow p { margin: 3px 0 0; } .kpi-flow ul { margin: 3px 0 0; padding-left: 1.1em; }
+.kpi-flow .bad { border-color: var(--dwl); background: #FCEDEA; } .kpi-flow .good { border-color: #6FAE8B; background: #EAF5EE; }
+
+.cmp-sel { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; font-size: .84rem; color: var(--muted); }
+.cmp-sel select { font: 500 .88rem var(--sans); padding: 5px 8px; border: 1px solid var(--line); border-radius: 7px; background: var(--paper); color: var(--fg); }
+table.cmp td:first-child { font-weight: 700; color: var(--muted); width: 22%; }
+
+.tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line); }
+.tabs button { font: 500 .86rem var(--sans); background: none; border: 0; border-bottom: 2px solid transparent; color: var(--muted); padding: 6px 12px; cursor: pointer; margin-bottom: -1px; }
+.tabs button[aria-selected="true"] { color: var(--accent-ink); border-bottom-color: var(--accent); }
+.ev { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+.ev > div { display: grid; grid-template-columns: 190px auto minmax(0, 1fr); gap: 10px; align-items: baseline; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; font-size: .86rem; line-height: 1.5; }
+.ev p { margin: 0; }
+.tag { font-size: .72rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; white-space: nowrap; }
+.tag.gap { background: #FCE3DD; color: #A8432F; } .tag.ok { background: #E3F2E9; color: #2F6B4F; }
+.tag.maybe { background: #FBF0D9; color: #8A6216; } .tag.na { background: #EEE9EB; color: var(--muted); }
+.issue { margin-top: 12px; background: var(--tint); border-radius: 8px; padding: 10px 14px; font-size: .9rem; }
+.issue p { margin: 4px 0 0; }
+
+.xgrid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 1rem 0; }
+.xgrid > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 5px; font-size: .84rem; line-height: 1.4; }
+.xgrid small { color: var(--muted); font-size: .76rem; }
+.xgrid .ok, .xgrid .gap { align-self: flex-start; font-size: .72rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; }
+.xgrid .ok { background: #E3F2E9; color: #2F6B4F; } .xgrid .gap { background: #FCE3DD; color: #A8432F; }
+
+@media (max-width: 760px) {
+  .three, .four { grid-template-columns: minmax(0, 1fr); }
+  .xgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hz-cols { grid-template-columns: minmax(0, 1fr); }
+  .kpi-flow { grid-template-columns: minmax(0, 1fr); } .kpi-flow > i { transform: rotate(90deg); justify-self: center; }
+  .ev > div { grid-template-columns: minmax(0, 1fr); gap: 3px; } .ev .tag { justify-self: start; }
+  .ladder { grid-template-columns: minmax(0, 1fr) 84px 84px; }
+}
+
+/* Session 4 + case page */
+.tcard small.dont { color: var(--muted); font-size: .78rem; border-top: 1px dashed var(--line); padding-top: 6px; margin-top: 4px; }
+.quotes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: .6rem 0 1rem; }
+.quotes q { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; font-style: italic; color: var(--muted); font-size: .9rem; }
+.six { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 1rem 0; }
+.six > div { display: flex; gap: 10px; align-items: flex-start; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .88rem; line-height: 1.5; }
+.six span { flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--tint); color: var(--accent-ink); font: 700 .76rem/24px var(--sans); text-align: center; }
+a.cta { display: inline-block; background: var(--accent); color: #fff; text-decoration: none; font-weight: 500; padding: 8px 16px; border-radius: 8px; }
+a.cta:hover { background: var(--accent-ink); }
+blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; font-size: .92rem; line-height: 1.7; }
+.timeline { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 1rem 0; }
+.timeline > div { background: var(--paper); border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: 10px; padding: 10px 14px; font-size: .88rem; line-height: 1.5; }
+.timeline time { font: 500 .76rem var(--mono); color: var(--accent-ink); display: block; }
+.timeline p { margin: 4px 0 0; color: var(--muted); }
+.score { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 1rem 0; }
+.score > div { border-radius: 10px; padding: 10px 12px; font-size: .84rem; line-height: 1.5; border: 1px solid var(--line); }
+.score .up { background: #EAF5EE; border-color: #A9D3BA; } .score .down { background: #FCEDEA; border-color: #EDC2B8; }
+.score b::after { margin-left: 6px; font-size: .78rem; } .score .up b::after { content: "improved"; color: #2F6B4F; } .score .down b::after { content: "worse"; color: #A8432F; }
+.score ul { margin: 6px 0 0; padding-left: 1.1em; }
+
+.jcm { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, .9fr); gap: 16px; }
+.jdims { display: flex; flex-direction: column; gap: 8px; }
+.jd.g0 label span { color: #6E3F6A; } .jd.g1 label span { color: var(--accent-ink); } .jd.g2 label span { color: #2F6B4F; }
+.jstates { display: flex; flex-direction: column; gap: 12px; padding-top: 4px; }
+.jst span { font-size: .8rem; font-weight: 500; }
+.jbar { height: 12px; border-radius: 6px; background: var(--bg); border: 1px solid var(--line); overflow: hidden; margin-top: 3px; }
+.jbar i { display: block; height: 100%; transition: width .25s; }
+.jst.g0 .jbar i { background: #B98AB5; } .jst.g1 .jbar i { background: var(--accent); } .jst.g2 .jbar i { background: #6FAE8B; }
+@media (prefers-reduced-motion: reduce) { .jbar i { transition: none; } }
+.jout ul { margin: 8px 0 0; padding-left: 1.1em; font-size: .82rem; color: var(--muted); }
+.jlvl { display: inline-block; font-weight: 700; padding: 3px 12px; border-radius: 999px; font-size: .86rem; }
+.jlvl.strong { background: #E3F2E9; color: #2F6B4F; } .jlvl.moderate { background: #FBF0D9; color: #8A6216; } .jlvl.weak { background: #FCE3DD; color: #A8432F; }
+.jgns { margin-top: 14px; }
+
+.qz-item { font-size: 1rem; font-weight: 500; margin: 4px 0 12px; }
+.qz-opts { display: grid; gap: 8px; }
+.qz-opts.grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 520px; }
+.qz-opts.row5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.qz-o { font: 500 .88rem var(--sans); background: var(--bg); border: 1px solid var(--line); color: var(--fg); border-radius: 8px; padding: 10px; cursor: pointer; display: flex; flex-direction: column; gap: 2px; text-align: center; }
+.qz-o small { color: var(--muted); font-size: .74rem; font-weight: 400; }
+.qz-o:hover { border-color: var(--accent); }
+.qz-o.right { background: #E3F2E9; border-color: #6FAE8B; } .qz-o.wrong { background: #FCE3DD; border-color: var(--dwl); }
+.qz-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: .8rem; color: var(--muted); }
+
+.rsteps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+.rsteps > div { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: .85rem; line-height: 1.5; }
+.rsteps > div.g { background: var(--tint); border-color: var(--accent); }
+.rsteps b { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.rsteps p { margin: 4px 0 0; }
+.risk { font-size: .88rem; } .risk b { font-size: .72rem; color: #fff; background: #B98A2E; padding: 1px 7px; border-radius: 4px; margin-right: 6px; }
+.sayd summary { cursor: pointer; font-weight: 500; color: var(--accent-ink); font-size: .9rem; }
+
+@media (max-width: 760px) {
+  .quotes, .six, .timeline, .rsteps { grid-template-columns: minmax(0, 1fr); }
+  .score { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .jcm { grid-template-columns: minmax(0, 1fr); }
+  .qz-opts.row5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+
+.eq-controls{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}.eq-controls button,.eq-controls select{font:500 .86rem var(--sans);color:var(--accent-ink);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:8px 12px;max-width:100%;cursor:pointer}.eq-controls button[aria-pressed="true"]{background:var(--tint);border-color:var(--accent)}.eq-result{background:var(--tint);border-radius:8px;padding:14px;min-height:100px}.eq-result p{margin:5px 0}.eq-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.eq-grid>div{border:1px solid var(--line);border-radius:10px;padding:14px;background:var(--paper)}.eq-grid b{color:var(--accent-ink)}.eq-num{font:500 1.8rem var(--mono);display:block;color:var(--accent-ink)}.eq-map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.eq-map>div{padding:16px;background:var(--paper);border:1px solid var(--line);border-radius:10px}.eq-map p{margin:6px 0}body{margin:0}.hint span{min-width:0} @media(max-width:600px){.eq-grid,.eq-map{grid-template-columns:minmax(0,1fr)}.hint{flex-wrap:wrap}.mw{padding:14px}.doc{overflow-wrap:break-word}}
+
+html{scroll-padding-top:calc(var(--header-height,64px) + 12px)}@media(max-width:900px){.rail.open{top:var(--header-height,64px);max-height:calc(100vh - var(--header-height,64px));bottom:0}}
+.culture-rows{display:grid;gap:18px;margin:18px 0}.culture-row{border-bottom:1px solid var(--line);padding-bottom:12px}.culture-row:last-child{border:0}.culture-dimension{font-weight:700;font-size:.88rem;margin-bottom:6px;color:var(--accent-ink)}.culture-bar{display:grid;grid-template-columns:100px minmax(0,1fr) 30px;gap:9px;align-items:center;margin:5px 0;font-size:.8rem}.culture-track{height:11px;background:var(--bg);border-radius:99px;overflow:hidden}.culture-track i{display:block;height:100%;background:var(--accent);border-radius:99px}.culture-bar.comparison .culture-track i{background:var(--demand)}.culture-bar output{font-family:var(--mono);text-align:right}.culture-cue{font:500 .8rem var(--mono);color:var(--accent-ink);margin-top:5px}.culture-compact p{margin:.4rem 0}.culture-answer{padding:14px;background:var(--tint);border-radius:8px;min-height:84px}.culture-answer p{margin:4px 0}.culture-count{font-size:.78rem;color:var(--muted)}.culture-roles{display:flex;flex-wrap:wrap;gap:6px}.culture-roles button{font-size:.8rem}.eq-controls label{min-width:0;max-width:100%}.eq-controls select{display:block;width:100%;max-width:100%;margin-top:5px}.source{margin-top:1rem}@media(max-width:560px){.culture-bar{grid-template-columns:82px minmax(0,1fr) 25px;gap:7px}.eq-controls button{padding:7px 9px}.hint{flex-wrap:wrap}.doc td,.doc th{padding:8px}}
+
+.context-diagram .flow{align-items:center;gap:5px;font-size:.8rem;margin:.8rem 0}.context-diagram .flow span{padding:4px 7px}.context-diagram small{display:block;color:var(--muted);font-size:.8rem;margin-top:7px}
+.message-chain{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:9px;margin:1rem 0}.message-chain>div{border:1px solid var(--line);background:var(--paper);border-radius:9px;padding:13px}.message-chain>div.hi{background:var(--tint);border-color:var(--accent)}.message-chain b{font-size:.83rem;color:var(--accent-ink)}.message-chain p{margin:5px 0 0;font-size:.9rem}.message-chain>i{font-style:normal;color:var(--accent)}
+.culture-map{margin:1.2rem 0 1.7rem;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px}.chart-axis-label,.culture-map figcaption{font:500 .8rem/1.6 var(--sans);color:var(--muted)}.pd-ua-chart{width:100%;max-width:560px;height:auto;display:block;margin:5px auto}.chart-grid{stroke:var(--line);stroke-width:1;fill:none}.chart-axis{stroke:var(--muted);stroke-width:1.3;fill:none}.chart-tick{fill:var(--muted);font:400 14px var(--mono)}.chart-country{font:500 16px var(--sans)}
+.culture-cue{font-family:var(--sans)}
+@media(max-width:560px){.message-chain{grid-template-columns:minmax(0,1fr);gap:6px}.message-chain>i{text-align:center;transform:rotate(90deg)}.culture-map{padding:10px}.chart-country{font-size:18px}}
+
+#map + .sub + .three > .tcard > .zh, .three > .tcard > .zh { align-self: flex-start; }
+
+.qz-o:focus-visible,.qz-nav .g-btn:focus-visible{outline:2px solid var(--accent-ink);outline-offset:3px}
+.qz-o[aria-disabled="true"]{cursor:default}
+
+</style></head><body><header class="top"><div class="top-in"><nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Study Notes</a><span>/</span><a href="management.html">Management</a><span>/</span><b>Session 6</b></nav><button class="toc-btn" type="button" id="tocBtn" aria-expanded="false">Contents</button><nav class="sessions" aria-label="Sessions"><a class="pill" href="management-s5.html">S5</a><span class="pill" aria-current="page">S6</span><span class="pill off">S7</span><span class="pill off">S8</span></nav></div></header><div class="wrap"><aside class="rail" id="rail"><p class="lbl">Contents</p><ol id="toc"></ol></aside><main><article class="doc"><div class="hero"><p class="kick">Managing People in Organizations · Session 6</p><h1>Cross-Cultural Management</h1><p class="lead">Use cultural differences to ask better questions, then adapt to the person and the workplace.</p></div>
+
+<h2 id="map">Chapter map</h2>
+<div class="three"><div class="tcard"><b>Read the message</b><p>Culture and high/low context</p><span class="zh">理解情境</span></div><div class="tcard"><b>Choose a lens</b><p>Five dimensions and Thai illustrations</p><span class="zh">辨認構面</span></div><div class="tcard"><b>Check and adapt</b><p>Country comparison, boss preparation and case answers</p><span class="zh">驗證與調整</span></div></div>
+<div class="method"><span>Framework</span><i>→</i><span>Actual evidence</span><i>→</i><span>Possible gap</span><i>→</i><span class="hi">Adapt and check</span></div>
+
+<h2 id="culture">1. Culture and communication context</h2>
+<p>In <b>Hofstede's definition</b>, culture is collective mental programming learned through shared education and life experience. Family, institutions and repeated experience turn expectations into habits. A new “speak up” policy can therefore arrive faster than employees' willingness to challenge a senior person.</p>
+<p class="key">Use cultural patterns to identify expectations; use actual behavior to explain the person.</p>
+<div class="pair context-diagram">
+<div><b>High context</b> <span class="zh">高情境</span><div class="flow"><span>Words</span><i>+</i><span>Relationship</span><i>+</i><span>Situation and tone</span></div><p>Meaning depends heavily on shared context.</p><small>Lecture examples: Thai smile and Wai.</small></div>
+<div><b>Low context</b> <span class="zh">低情境</span><div class="flow"><span>Explicit words</span><i>+</i><span>Clear detail</span><i>→</i><span>Message</span></div><p>More of the meaning is stated directly.</p><small>Lecture example: USA.</small></div>
+</div>
+<h3 id="misreading">How a message gets misread</h3>
+<div class="message-chain"><div><b>Boss asks</b><p>“Any objections?”</p></div><i>→</i><div><b>Employee responds</b><p>A smile and silence.</p></div><i>→</i><div class="hi"><b>Boss assumes</b><p>“Everyone agrees.”</p></div></div>
+<p>The missing step is checking meaning. Ask for one concern or risk, and offer a private or written reply. Agreement, politeness and hesitation can look similar from the outside.</p>
+
+<p class="hint"><b>中文邏輯</b><span>訊號不等於完整意思；先確認對方怎麼理解，再把決定說清楚。</span></p>
+
+<h2 id="dimensions">2. Five dimensions: definition and application</h2>
+<p>The five main dimensions compare different cultural expectations. The lecture also introduces <b>Indulgence/Restraint</b>: how desires and impulses are regulated.</p>
+<div class="tbl"><table><thead><tr><th>Dimension</th><th>Definition and contrast</th><th>Workplace example</th><th>Do not confuse with</th></tr></thead><tbody>
+<tr><td><b>Power Distance (PD)</b> <span class="zh">權力距離</span></td><td>Acceptance of differences in authority and status.<br><b>Higher:</b> greater deference to rank.<br><b>Lower:</b> smaller status differences.</td><td>A junior employee prefers to question a senior manager privately rather than in a meeting.</td><td>Aggression or technical ability</td></tr>
+<tr><td><b>Individualism (IDV)</b> <span class="zh">個人／集體</span></td><td>Individual versus group-centered identity and obligations.<br><b>Higher:</b> personal independence and goals.<br><b>Lower:</b> belonging, duties and “we.”</td><td>Agree whether recognition should emphasize individual ownership, team success or both.</td><td>Introversion or refusing teamwork</td></tr>
+<tr><td><b>Uncertainty Avoidance (UA)</b> <span class="zh">不確定性規避</span></td><td>Preference for structure over ambiguity.<br><b>Higher:</b> rules, expertise and predictability.<br><b>Lower:</b> more room for experimentation.</td><td>Before a new process launches, staff ask for clear roles, written procedures and a review point.</td><td>Hierarchy or J/P preference</td></tr>
+<tr><td><b>Masculinity (MAS)</b> <span class="zh">成就／關懷</span></td><td>Achievement versus care and quality of life.<br><b>Higher:</b> competition, money and assertiveness.<br><b>Lower:</b> harmony, care and life quality.</td><td>A reward discussion balances performance targets with employee well-being and relationships.</td><td>Biological sex, intelligence or EQ</td></tr>
+<tr><td><b>Time Orientation (LTO)</b> <span class="zh">時間取向</span></td><td>Longer-run versus shorter-run focus.<br><b>Higher:</b> long-term orientation on the index.<br><b>Lower:</b> shorter-term priorities.</td><td>Clarify how an immediate milestone contributes to a longer development plan.</td><td>Planning ability or an MBO deadline</td></tr>
+</tbody></table></div>
+
+<div class="pair"><div><b>PD: how is rank accepted?</b><p>Who may challenge whom, and how should disagreement be raised?</p></div><div><b>UA: how is uncertainty handled?</b><p>How much structure is needed before people can act?</p></div></div>
+
+<div data-mw="culture-sort"></div>
+
+<h2 id="thai">3. Thai illustrations in the lecture</h2>
+<div class="tbl"><table><thead><tr><th>Concept</th><th>What it illustrates</th><th>Management implication</th></tr></thead><tbody>
+<tr><td><b>Sakdi Na; Pi/Nong</b> <span class="zh">等級與長幼</span></td><td>Status hierarchy, ranks linked to birth, and senior/junior expectations. The slide dates Sakdi Na to 1454 and abolition to 1932.</td><td>Clarify seniority, approvals and how concerns should be raised</td></tr>
+<tr><td><b>Patron–client</b></td><td>The lecturer describes voluntary, mutually beneficial support across status levels</td><td>Understand the expected support and reciprocal obligations</td></tr>
+<tr><td><b>Jai Yen</b> <span class="zh">沉著／耐心</span></td><td>Restraint, patience, politeness, moderation, win-win solutions, face and harmony; a Buddhist middle-way reference</td><td>Offer feedback tactfully and confirm the actual decision</td></tr>
+<tr><td><b>Jai Ron</b> <span class="zh">心急／急躁</span></td><td>Visible emotion, direct criticism, confrontation, win-lose emphasis and results/merit over seniority</td><td>Be specific about the work and the required result</td></tr>
+<tr><td><b>Sanuk</b> <span class="zh">工作與樂趣</span></td><td>Enjoyment, freedom, social relationships and “work to live”</td><td>Build cooperation through relationships and shared activities</td></tr>
+</tbody></table></div>
+<p class="note-small">Patron–client reference: Holmes and Tangtongtavy (2003), cited on lecture p.9.</p>
+<p>The teaching comparisons place Thailand toward hierarchy, collectivism, moderate UA and care/harmony relative to the USA, Britain and Australia. The UA slide also says clear rules may be welcomed while overly restrictive rules are resisted.</p>
+
+<h2 id="conflict">4. Conflict: different assumptions</h2>
+<div class="pair"><div><b>“Western” assumptions on the slide</b><p>Productivity is central. Managed conflict, collaboration and confrontation can improve solutions; face-saving may weaken effectiveness.</p></div><div><b>“Thai” assumptions on the slide</b><p>Harmony, face and boss loyalty matter. Relationships and hierarchy may take priority; unspoken conflict can remain even when confrontation is avoided.</p></div></div>
+<p class="note-small">Source: Roongrengsuke and Chansuthus (1998), cited on lecture pp.20–21.</p>
+<div class="flow"><span>Invite concerns</span><i>→</i><span>Offer a suitable channel</span><i>→</i><span>Discuss evidence</span><i>→</i><span>Confirm the decision</span></div>
+
+<p class="hint"><b>中文邏輯</b><span>沒有公開衝突，不代表沒有問題；直接討論，也不等於可以羞辱對方。</span></p>
+
+<h2 id="time-personality">5. Time orientation and personality</h2>
+<div class="tbl"><table><thead><tr><th>Lecture illustration</th><th>Emphasis</th></tr></thead><tbody>
+<tr><td>Japan: longer term</td><td>Thrift, future savings, persistence and connections across time</td></tr>
+<tr><td>USA/Britain/Australia: shorter term</td><td>Task schedules, urgency and getting things done</td></tr>
+<tr><td>Thailand: mixed</td><td>Quick results alongside a longer view in Buddhist thinking</td></tr>
+</tbody></table></div>
+<p>Long- and short-term tendencies can coexist. The lecture links the longer view to patience, cycles and less emphasis on immediate goals. In practice, connect persistence toward a longer purpose with milestones for current work.</p>
+
+<p><b>Culture and personality operate at different levels.</b> The lecturer suggests I could weaken presumed group orientation and J could strengthen performance emphasis in a Thai example. Use this as an interaction idea: ask how the individual prefers to process information, decide and work with others.</p>
+<div class="flow"><span>Country norms</span><i>+</i><span>Individual preferences</span><i>+</i><span>Workplace situation</span><i>→</i><span>Observe the actual response</span></div>
+<p class="hint"><b>中文邏輯</b><span>人格偏好可能影響文化傾向的表現，但不能用四個字母換算國家構面分數。</span></p>
+
+<h2 id="countries">6. Read the four-country chart</h2>
+<div class="tbl"><table><thead><tr><th>Index</th><th>China</th><th>Russia</th><th>Switzerland</th><th>Thailand</th></tr></thead><tbody>
+<tr><td>PD</td><td>80</td><td>93</td><td>34</td><td>64</td></tr>
+<tr><td>IDV</td><td>43</td><td>46</td><td>79</td><td>19</td></tr>
+<tr><td>MAS</td><td>66</td><td>36</td><td>70</td><td>34</td></tr>
+<tr><td>UA</td><td>30</td><td>95</td><td>58</td><td>64</td></tr>
+<tr><td>LTO</td><td>77</td><td>58</td><td>42</td><td>67</td></tr>
+</tbody></table></div>
+<p class="note-small">Source: lecturer's four-country comparison, p.25.</p>
+
+<h3 id="pd-ua-map">PD × UA: two different questions</h3><figure class="culture-map"><div class="chart-axis-label">Higher UA: more structure and predictability</div><svg class="pd-ua-chart" viewBox="0 0 500 310" role="img" aria-labelledby="pd-ua-title pd-ua-desc"><title id="pd-ua-title">Power Distance and Uncertainty Avoidance</title><desc id="pd-ua-desc">China: PD 80, UA 30. Russia: PD 93, UA 95. Switzerland: PD 34, UA 58. Thailand: PD 64, UA 64. Higher power distance does not imply the same uncertainty avoidance.</desc><path class="chart-grid" d="M 42.0 30 V 275 M 42 275.0 H 460"/><text class="chart-tick" x="42.0" y="298" text-anchor="middle">0</text><text class="chart-tick" x="31" y="280.0" text-anchor="end">0</text><path class="chart-grid" d="M 146.5 30 V 275 M 42 213.75 H 460"/><text class="chart-tick" x="146.5" y="298" text-anchor="middle">25</text><text class="chart-tick" x="31" y="218.75" text-anchor="end">25</text><path class="chart-grid" d="M 251.0 30 V 275 M 42 152.5 H 460"/><text class="chart-tick" x="251.0" y="298" text-anchor="middle">50</text><text class="chart-tick" x="31" y="157.5" text-anchor="end">50</text><path class="chart-grid" d="M 355.5 30 V 275 M 42 91.25 H 460"/><text class="chart-tick" x="355.5" y="298" text-anchor="middle">75</text><text class="chart-tick" x="31" y="96.25" text-anchor="end">75</text><path class="chart-grid" d="M 460.0 30 V 275 M 42 29.99999999999997 H 460"/><text class="chart-tick" x="460.0" y="298" text-anchor="middle">100</text><text class="chart-tick" x="31" y="34.99999999999997" text-anchor="end">100</text><path class="chart-axis" d="M 42 30 V 275 H 460"/><g><title>China: PD 80, UA 30</title><circle cx="376.4" cy="201.5" r="6" fill="#C06C84"/><text class="chart-country" x="367.4" y="191.5" text-anchor="end" fill="#C06C84">China (80, 30)</text></g><g><title>Russia: PD 93, UA 95</title><circle cx="430.73999999999995" cy="42.24999999999997" r="6" fill="#9C4862"/><text class="chart-country" x="421.73999999999995" y="31.24999999999997" text-anchor="end" fill="#9C4862">Russia (93, 95)</text></g><g><title>Switzerland: PD 34, UA 58</title><circle cx="184.12" cy="132.89999999999998" r="6" fill="#3F5675"/><text class="chart-country" x="193.12" y="156.9" text-anchor="start" fill="#3F5675">Switzerland (34, 58)</text></g><g><title>Thailand: PD 64, UA 64</title><circle cx="309.52" cy="118.19999999999999" r="6" fill="#7E6F74"/><text class="chart-country" x="318.52" y="108.19999999999999" text-anchor="start" fill="#7E6F74">Thailand (64, 64)</text></g></svg><figcaption>Horizontal axis: Power Distance →<br>Country labels show (PD, UA).</figcaption></figure>
+<div data-mw="culture-chart"></div>
+<p><b>Read the contrast:</b> China and Russia both have high PD, yet UA is <b>30 versus 95</b>. Hierarchy and demand for predictability are separate. Switzerland's largest gap from Thailand is IDV: <b>+60 points</b>.</p>
+
+<h2 id="bosses">7. Four-boss preparation activity</h2>
+<p>Choose <b>one</b> boss and present how a hypothetical “typical Thai” employee should prepare: <b>Chinese, Russian, Swiss or INTJ Thai</b>. Use a relevant dimension, explain a possible mismatch, and ask about actual expectations.</p>
+<div data-mw="culture-boss"></div>
+
+
+<h2 id="traps">8. Do not mix these up</h2>
+<div class="traps"><div><b>Group index / person</b><p>A country score cannot diagnose one manager.</p></div><div><b>Context / PD</b><p>How meaning travels differs from acceptance of hierarchy.</p></div><div><b>PD / UA</b><p>Authority and ambiguity are separate questions.</p></div><div><b>Calm / agreement</b><p>Face-saving can coexist with unspoken conflict.</p></div><div><b>MAS / sex</b><p>The index names values, not biological sex.</p></div><div><b>Possible gap / event</b><p>The boss role-play supplies a scenario, not a conflict that already occurred.</p></div></div>
+
+<h2 id="coldcall">9. Cold call practice</h2>
+<div class="qa-tools"><button type="button" id="qaAll">Show all answers</button></div><div class="qa">
+<details><summary>What is culture, and why can it resist change?</summary><p>Collective mental programming shaped by shared learning and experience. Early habits and institutions reinforce expectations.</p></details>
+<details><summary>High context versus low context?</summary><p>High context relies more on shared knowledge and situational cues; low context communicates more explicitly. Neither is inherently better.</p></details>
+<details><summary>Name the five core dimensions in lecture order.</summary><p>Power Distance, Individualism/Collectivism, Uncertainty Avoidance, Masculinity/Femininity and Time Orientation. Indulgence/Restraint is additional.</p></details>
+<details><summary>What do Jai Yen, Jai Ron and Sanuk illustrate?</summary><p>Respectively, restraint and harmony; directness, visible emotion and results; enjoyment and relationships in work/life.</p></details>
+<details><summary>Why can clear rules coexist with resistance to restrictions?</summary><p>Predictability can be helpful while excessive controls still limit freedom. UA does not imply approval of every rule.</p></details>
+<details><summary>Can INTJ establish cultural scores or EQ?</summary><p>No. Personality preferences, country indices and emotional skills are different constructs.</p></details>
+</div>
+
+<h2 id="templates">10. Answer templates</h2>
+<div class="pair"><div><b>Observed case</b><p>“The relevant framework is ___. It explains ___. The case shows ___. The gap is ___ because ___. The management issue is ___.”</p></div><div><b>Boss preparation</b><p>“The chart places ___ at ___ versus Thailand's ___. The key difference is ___. I would confirm ___, adapt ___ and check ___.”</p></div></div>
+
+<p class="note-small source">Source: S6 lecture slides, pp.3–26.</p>
+</article></main></div>
+<script>
+/* Shared option explanations for Management classification tools. */
+window.MgmtQuizExplain = function(panel, labels, reasons, correct, chosen) {
+  panel.textContent = chosen === correct
+    ? 'Correct. ' + reasons[chosen]
+    : 'Not quite. Best answer: ' + labels[correct] + '. ' + reasons[chosen];
+  panel.hidden = false;
+};
+</script>
+<script>
+/* Shared Management classification cards, adapted from the Session 4 quiz. */
+window.MgmtQuiz = function(host, title, instruction, items) {
+  const make = (tag, text, cls) => { const e = document.createElement(tag); if (text) e.textContent = text; if (cls) e.className = cls; return e; };
+  host.classList.add('mw');
+  const head = make('div', null, 'g-head');
+  head.append(make('span', 'Classify', 'g-kicker'), make('h4', title), make('p', instruction));
+  const body = make('div', null, 'mw-body'), question = make('p', null, 'qz-item'), options = make('div', null, 'qz-opts grid2'), note = make('div', null, 'g-note'), nav = make('div', null, 'qz-nav'), count = make('span'), next = make('button', 'Next', 'g-btn');
+  note.setAttribute('aria-live', 'polite'); next.type = 'button';
+  nav.append(count, next); body.append(question, options, note, nav); host.append(head, body);
+  let index = 0, score = 0, done = 0, answered = false;
+  function show() {
+    const item = items[index]; answered = false; question.textContent = item.q; options.replaceChildren(); note.textContent = ''; note.hidden = true;
+    count.textContent = 'Item ' + (index + 1) + ' of ' + items.length + (done ? ' · ' + score + ' / ' + done + ' correct' : '');
+    item.options.forEach((option, choice) => {
+      const button = make('button', null, 'qz-o'); button.type = 'button'; button.append(make('b', option));
+      button.addEventListener('click', () => {
+        if (answered) return; answered = true; done++; const correct = choice === item.answer; if (correct) score++;
+        options.querySelectorAll('button').forEach((b, i) => { b.classList.toggle('right', i === item.answer); b.setAttribute('aria-disabled', 'true'); });
+        if (!correct) button.classList.add('wrong');
+        window.MgmtQuizExplain(note, item.explanationLabels || item.options, item.explanations, item.answer, choice);
+        count.textContent = 'Item ' + (index + 1) + ' of ' + items.length + ' · ' + score + ' / ' + done + ' correct';
+      });
+      options.append(button);
+    });
+  }
+  next.addEventListener('click', () => { index = (index + 1) % items.length; show(); }); show();
+};
+</script>
+<script>
+(function(){
+ const countries={China:[80,43,66,30,77],Russia:[93,46,36,95,58],Switzerland:[34,79,70,58,42],Thailand:[64,19,34,64,67]};
+ const dimensions=['Power Distance (PD)','Individualism (IDV)','Masculinity (MAS)','Uncertainty Avoidance (UA)','Long-Term Orientation (LTO)'];
+ const create=(tag,text,cls)=>{const e=document.createElement(tag);if(text!==undefined&&text!==null)e.textContent=text;if(cls)e.className=cls;return e};
+ function shell(host,title){host.classList.add('mw');host.append(create('p','Interactive · '+title,'mw-label'));const body=create('div');host.append(body);return body}
+ function paragraph(host,label,text){const p=create('p');p.append(create('b',label+' '),document.createTextNode(text));host.append(p)}
+ const W={};
+ W['culture-chart']=host=>{
+  const body=shell(host,'Compare with Thailand'),controls=create('div',null,'eq-controls'),label=create('label','Comparison country'),select=create('select');select.setAttribute('aria-label','Comparison country');
+  Object.keys(countries).filter(n=>n!=='Thailand').forEach(n=>{const o=create('option',n);o.value=n;select.append(o)});label.append(select);controls.append(label);const rows=create('div',null,'culture-rows');rows.setAttribute('aria-live','polite');body.append(controls,rows);
+  function draw(){rows.replaceChildren();dimensions.forEach((name,i)=>{const row=create('div',null,'culture-row');row.append(create('div',name,'culture-dimension'));[['Thailand',countries.Thailand[i]], [select.value,countries[select.value][i]]].forEach(([country,value],j)=>{const b=create('div',null,'culture-bar'+(j?' comparison':'')),track=create('div',null,'culture-track'),fill=create('i');fill.style.width=value+'%';track.setAttribute('aria-hidden','true');track.append(fill);b.append(create('span',country),track,create('output',String(value)));row.append(b)});const delta=countries[select.value][i]-countries.Thailand[i];row.append(create('div',(delta>0?'+':'')+delta+' index points vs. Thailand','culture-cue'));rows.append(row)})}
+  select.addEventListener('change',draw);draw();
+ };
+ const scenarios=[
+  ['A team asks for written roles and a test plan before trying an unfamiliar system. Which lens most directly addresses this request?',['Uncertainty Avoidance','Power Distance','Individualism'],0,'The request concerns predictability and ambiguity. It does not tell us who should have authority.'],
+  ['Staff say it is inappropriate to contradict a senior manager because of rank. Which lens is most direct?',['Masculinity','Power Distance','Low context'],1,'The stated reason is rank: the employee treats authority differences as important.'],
+  ['A message cannot be understood without knowing the relationship, tone and setting. Which concept fits?',['High context','Uncertainty Avoidance','Long-term orientation'],0,'The issue is where meaning comes from, rather than hierarchy, rules or time horizon.'],
+  ['A team values individual ownership and personal achievement over obligations to the group. Which dimension addresses the I-versus-we distinction?',['Power Distance','Individualism','Introversion'],1,'IDV concerns cultural expectations around individual versus group priorities. Introversion is a separate personality preference.'],
+  ['A manager chooses a competitive earnings target over an initiative focused on care and quality of life. Which cultural value contrast is most relevant?',['Uncertainty Avoidance','Time orientation','Masculinity/Femininity'],2,'MAS contrasts achievement and assertiveness with care and quality of life.']
+ ];
+ const cultureExplanations=[["Written roles and a test plan create predictability before an unfamiliar task, addressing uncertainty and ambiguity.", "Power Distance concerns authority and acceptance of rank differences; the request does not identify who should decide.", "Individualism concerns personal versus group priorities; wanting a plan does not identify that preference."], ["Masculinity concerns achievement and assertiveness versus care and quality of life; the cue here is rank.", "The stated objection is to contradicting a senior person because of rank, directly linking to acceptance of unequal authority.", "Low context emphasizes explicit messages; the issue here is the right to challenge authority, not where a message gets its meaning."], ["Meaning depends on the relationship, tone and setting, which is the defining cue for High context.", "Uncertainty Avoidance concerns comfort with ambiguity and unpredictability; the question asks where meaning comes from.", "Long-term orientation concerns priorities across time; no future-versus-present choice appears here."], ["Power Distance concerns unequal authority; the question contrasts individual with group priorities.", "The I-versus-we contrast directly concerns individual ownership and obligations to the group.", "Introversion is an individual personality preference concerning inward focus; it is separate from a cultural I-versus-we value."], ["Uncertainty Avoidance concerns ambiguity and predictability; the choice here compares achievement with care.", "Time orientation concerns present and future priorities; no time-horizon contrast is stated.", "Competitive earnings versus care and quality of life directly matches the Masculinity/Femininity value contrast."]];
+ W['culture-sort']=host=>window.MgmtQuiz(host,'Choose the relevant lens','Read the situation, then choose the concept that best explains the stated cue.',scenarios.map((v,i)=>({q:v[0],options:v[1],answer:v[2],why:v[3],explanations:cultureExplanations[i]})));
+ const bosses=[
+ ['Chinese','MAS 66 vs. 34; UA 30 vs. 64.','Clarify performance priorities, decision speed and how much discretion is expected.','How should I report a performance problem, and which decisions can I make with incomplete information?','Check agreed targets, decision rights and whether rework or delays fall.'],
+ ['Russian','PD 93 vs. 64; UA 95 vs. 64.','Confirm approval responsibilities, written standards and escalation rules.','Which decisions need approval, and what documentation is expected before implementation?','Check approval clarity, avoidable revisions and escalation timeliness.'],
+ ['Swiss','IDV 79 vs. 19; MAS 70 vs. 34; PD 34 vs. 64.','Clarify individual ownership, performance criteria and expectations for evidence-based input.','How independently should I take responsibility, and how should I challenge a proposal?','Check ownership, accepted feedback channels and reliable follow-through.'],
+ ['INTJ Thai','Individual preferences alongside the Thai cultural context.','Prepare structured strategic alternatives, then verify this person’s actual preferences.','How do you prefer to review options, decide and receive updates?','Check whether the agreed format improves decisions and coordination.']
+ ];
+ W['culture-boss']=host=>{const body=shell(host,'Four-boss preparation'),controls=create('div',null,'eq-controls culture-roles'),panel=create('div',null,'eq-result culture-compact');panel.setAttribute('aria-live','polite');body.append(controls,panel);bosses.forEach(v=>{const b=create('button',v[0]);b.type='button';b.addEventListener('click',()=>{controls.querySelectorAll('button').forEach(n=>n.setAttribute('aria-pressed',String(n===b)));panel.replaceChildren();paragraph(panel,'Starting contrast:',v[1]);paragraph(panel,'Preparation:',v[2]);paragraph(panel,'Ask:',v[3]);paragraph(panel,'Check:',v[4])});controls.append(b)});controls.firstChild.click()};
+ const header=document.querySelector('.top');function measureHeader(){document.documentElement.style.setProperty('--header-height',Math.ceil(header.getBoundingClientRect().height)+'px')}if('ResizeObserver'in window)new ResizeObserver(measureHeader).observe(header);measureHeader();
+ window.MgmtWidgets={mount(root){root.querySelectorAll('[data-mw]').forEach(host=>{if(!host.dataset.ready&&W[host.dataset.mw]){host.dataset.ready='1';W[host.dataset.mw](host)}})}};
+})();
+</script>
+<script>
+(function () {
+  const toc = document.getElementById('toc'), rail = document.getElementById('rail');
+  const hs = [...document.querySelectorAll('.doc > h2, .doc > h3')];
+  hs.forEach(h => {
+    const li = document.createElement('li'); li.className = h.tagName.toLowerCase(); li.dataset.id = h.id;
+    const a = document.createElement('a'); a.href = '#' + h.id; a.textContent = h.childNodes[0].textContent.trim();
+    li.appendChild(a); toc.appendChild(li);
+  });
+  const spy = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    toc.querySelectorAll('a.on').forEach(a => a.classList.remove('on'));
+    const a = toc.querySelector('li[data-id="' + e.target.id + '"] a'); if (a) a.classList.add('on');
+  }), { rootMargin: '-80px 0px -70% 0px' });
+  hs.forEach(h => spy.observe(h));
+
+  const tb = document.getElementById('tocBtn');
+  tb.addEventListener('click', () => { const o = rail.classList.toggle('open'); tb.setAttribute('aria-expanded', o); });
+  toc.addEventListener('click', e => { if (e.target.closest('a')) { rail.classList.remove('open'); tb.setAttribute('aria-expanded', false); } });
+
+  const all = document.getElementById('qaAll');
+  if (all) all.addEventListener('click', () => {
+    const ds = document.querySelectorAll('.qa details'), open = ![...ds].every(d => d.open);
+    ds.forEach(d => d.open = open); all.textContent = open ? 'Hide all answers' : 'Show all answers';
+  });
+  document.querySelectorAll('.drill .ans').forEach(s => s.addEventListener('click', () => s.classList.toggle('shown')));
+
+  if (window.EconWidgets) window.EconWidgets.mount(document);
+  if (window.MgmtWidgets) window.MgmtWidgets.mount(document);
+})();
+</script>
+</body></html>

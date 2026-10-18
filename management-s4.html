@@ -336,6 +336,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
   .qz-opts.row5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
+
 </style></head><body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
@@ -520,6 +521,15 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 </article></main>
 </div>
 
+<script>
+/* Shared option explanations for Management classification tools. */
+window.MgmtQuizExplain = function(panel, labels, reasons, correct, chosen) {
+  panel.textContent = chosen === correct
+    ? 'Correct. ' + reasons[chosen]
+    : 'Not quite. Best answer: ' + labels[correct] + '. ' + reasons[chosen];
+  panel.hidden = false;
+};
+</script>
 <script>/* Management interactive components: Herzberg scale, KPI trap, framework comparator, LMS lens. */
 (function () {
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -701,7 +711,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 
   function quiz(host, kicker, title, sub, items, opts, layout) {
     const body = shell(host, kicker, title, sub);
-    body.innerHTML = '<p class="qz-item"></p><div class="qz-opts ' + (layout || '') + '"></div><p class="g-note"></p><div class="qz-nav"><span class="qz-n"></span><button type="button" class="g-btn">Next</button></div>';
+    body.innerHTML = '<p class="qz-item"></p><div class="qz-opts ' + (layout || '') + '"></div><div class="g-note" aria-live="polite"></div><div class="qz-nav"><span class="qz-n"></span><button type="button" class="g-btn">Next</button></div>';
     const P = body.querySelector('.qz-item'), O = body.querySelector('.qz-opts'), N = body.querySelector('.g-note'), C = body.querySelector('.qz-n');
     let i = 0, score = 0, done = 0;
     opts.forEach(([k, lab, sub2]) => {
@@ -712,7 +722,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
         const it = items[i], ok = k === it.a; done++; if (ok) score++;
         O.querySelectorAll('button').forEach(x => x.classList.toggle('right', x.dataset.k === it.a));
         if (!ok) b.classList.add('wrong');
-        N.textContent = (ok ? 'Correct. ' : 'Not quite. ') + it.why; N.hidden = false;
+        window.MgmtQuizExplain(N, opts.map(x => x[1]), it.explanations, opts.findIndex(x => x[0] === it.a), opts.findIndex(x => x[0] === k));
         C.textContent = score + ' / ' + done + ' correct';
       });
       O.appendChild(b);
@@ -726,22 +736,22 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
   }
 
   W.evln = host => quiz(host, 'Classify', 'Which response is this?', 'Read the statement, then pick the quadrant.', [
-    { q: 'I am interviewing elsewhere because management ignores the problem.', a: 'exit', why: 'Active and destructive: moving toward leaving.' },
-    { q: 'I reported the problems and proposed a cross-team solution.', a: 'voice', why: 'Active and constructive: trying to improve conditions.' },
-    { q: 'I believe management will fix things. I will stay and wait.', a: 'loyalty', why: 'Passive and constructive: hoping conditions improve.' },
-    { q: 'Nothing will change, so I stopped checking my work carefully.', a: 'neglect', why: 'Passive and destructive: letting performance slide.' },
-    { q: 'I handed in my resignation letter this morning.', a: 'exit', why: 'Active and destructive toward the relationship: leaving.' },
-    { q: 'I suggested a new workflow to my manager and offered to pilot it.', a: 'voice', why: 'Active and constructive.' }
+    { q: 'I am interviewing elsewhere because management ignores the problem.', a: 'exit', why: 'Active and destructive: moving toward leaving.', explanations: ["Interviewing elsewhere is an active move toward leaving the organization.", "Voice would raise the issue and seek improvement inside the organization; this statement describes job searching.", "Neglect would reduce effort or care in the current job; no decline in work is stated.", "Loyalty would mean staying and waiting for improvement; the employee is preparing to leave."] },
+    { q: 'I reported the problems and proposed a cross-team solution.', a: 'voice', why: 'Active and constructive: trying to improve conditions.', explanations: ["Exit would move toward leaving; the employee is working to improve the existing organization.", "Reporting the problem and proposing a solution are active, constructive efforts to improve conditions.", "Neglect allows performance or conditions to deteriorate; proposing a solution does the opposite.", "Loyalty waits for others to fix the problem; this employee takes action."] },
+    { q: 'I believe management will fix things. I will stay and wait.', a: 'loyalty', why: 'Passive and constructive: hoping conditions improve.', explanations: ["Exit involves leaving or preparing to leave; the employee explicitly plans to stay.", "Voice actively raises concerns or proposes changes; this employee is waiting.", "Neglect lets effort or performance deteriorate; the statement expresses patient support.", "Staying and hoping management improves conditions is passive and constructive."] },
+    { q: 'Nothing will change, so I stopped checking my work carefully.', a: 'neglect', why: 'Passive and destructive: letting performance slide.', explanations: ["Exit means leaving or moving toward another job; the employee remains but reduces care.", "Voice seeks a constructive change; no concern or solution is raised here.", "Stopping careful checks lets performance deteriorate: passive and destructive.", "Loyalty is patient support for improvement; deliberately reducing care undermines performance."] },
+    { q: 'I handed in my resignation letter this morning.', a: 'exit', why: 'Active and destructive toward the relationship: leaving.', explanations: ["Submitting a resignation is a direct, active step to end the employment relationship.", "Voice aims to improve conditions while remaining; a resignation ends the relationship.", "Neglect is declining effort or care while staying; this employee is leaving.", "Loyalty stays and waits for improvement; resignation is the opposite response."] },
+    { q: 'I suggested a new workflow to my manager and offered to pilot it.', a: 'voice', why: 'Active and constructive.', explanations: ["Exit would involve leaving; offering to pilot a workflow invests effort in the organization.", "Suggesting and offering to test an improvement is active, constructive Voice.", "Neglect reduces performance or effort; volunteering for a pilot adds effort toward improvement.", "Loyalty waits for improvement; this employee proposes and tests the change."] }
   ], [['exit', 'Exit', 'Active · Destructive'], ['voice', 'Voice', 'Active · Constructive'], ['neglect', 'Neglect', 'Passive · Destructive'], ['loyalty', 'Loyalty', 'Passive · Constructive']], 'grid2');
 
   W.sched = host => quiz(host, 'Classify', 'Which schedule is this?', 'Time or output first, then fixed or variable.', [
-    { q: 'Each time a new staff member completes the safety demonstration, the supervisor praises them.', a: 'c', why: 'Every occurrence is reinforced.' },
-    { q: 'A supervisor gives an incentive after every five verified error-free orders.', a: 'fr', why: 'A fixed count of output.' },
-    { q: 'Teams are evaluated after changing, unannounced periods.', a: 'vi', why: 'Time-based, and the timing varies.' },
-    { q: 'A reward follows an unpredictable number of completed service interactions.', a: 'vr', why: 'Output-based, and the count varies.' },
-    { q: 'Employees receive a paycheck every Friday.', a: 'fi', why: 'Fixed time. This is the slide example for fixed interval.' },
-    { q: 'Factory workers are paid for each batch of 20 units they complete.', a: 'fr', why: 'Piece-rate pay is the slide example for fixed ratio.' },
-    { q: 'The manager runs surprise quality inspections.', a: 'vi', why: 'Unannounced inspection is the slide example for variable interval.' }
+    { q: 'Each time a new staff member completes the safety demonstration, the supervisor praises them.', a: 'c', why: 'Every occurrence is reinforced.', explanations: ["Praise follows every successful demonstration, so every occurrence of the target behavior is reinforced.", "Fixed interval depends on elapsed time; this praise follows a behavior each time.", "Variable interval uses changing time gaps; no time interval controls this reward.", "Every response is reinforced (equivalent to FR 1); Continuous is the more specific label here.", "Variable ratio requires an unpredictable output count; here every demonstration receives praise."] },
+    { q: 'A supervisor gives an incentive after every five verified error-free orders.', a: 'fr', why: 'A fixed count of output.', explanations: ["Continuous would reward every correct order; this reward waits for a batch of five.", "Fixed interval would use a set time period; the rule counts orders.", "Variable interval would use changing periods; no time rule is given.", "The reward follows a fixed count of five verified orders.", "Variable ratio would change the required count; the count here is always five."] },
+    { q: 'Teams are evaluated after changing, unannounced periods.', a: 'vi', why: 'Time-based, and the timing varies.', explanations: ["Continuous follows each target behavior; these evaluations depend on elapsed time.", "Fixed interval would use a predictable time gap; the evaluation periods change.", "Changing, unannounced time periods identify Variable interval.", "Fixed ratio counts a set number of outputs; this rule concerns periods of time.", "Variable ratio changes the output count; the changing quantity here is time."] },
+    { q: 'A reward follows an unpredictable number of completed service interactions.', a: 'vr', why: 'Output-based, and the count varies.', explanations: ["Continuous rewards every occurrence; this reward waits for several interactions.", "Fixed interval is based on a set period; this rule counts service interactions.", "Variable interval varies elapsed time; this rule varies the number of interactions.", "Fixed ratio would specify a stable count; the required count here is unpredictable.", "An unpredictable number of completed interactions is Variable ratio."] },
+    { q: 'Employees receive a paycheck every Friday.', a: 'fi', why: 'Fixed time. This is the slide example for fixed interval.', explanations: ["Continuous would follow each occurrence of a target behavior; this payment follows the calendar.", "Every Friday is a predictable time interval, the lecturer’s Fixed interval example.", "Variable interval would change the payment timing; Friday is fixed.", "Fixed ratio pays after a set output count; no output quota triggers this paycheck.", "Variable ratio requires a changing output count; this example uses time."] },
+    { q: 'Factory workers are paid for each batch of 20 units they complete.', a: 'fr', why: 'Piece-rate pay is the slide example for fixed ratio.', explanations: ["Continuous would reward each individual unit; this payment follows a 20-unit batch.", "Fixed interval would pay after elapsed time; this rule pays for output.", "Variable interval would use changing time gaps; time is not the trigger.", "Each completed batch of 20 units is a fixed output requirement.", "Variable ratio would vary the batch size; each batch here contains 20 units."] },
+    { q: 'The manager runs surprise quality inspections.', a: 'vi', why: 'Unannounced inspection is the slide example for variable interval.', explanations: ["Continuous would follow every target occurrence; surprise inspections are intermittent.", "Fixed interval uses predictable timing; surprise timing is unannounced.", "Surprise inspections are the lecturer’s Variable interval example: checks occur at unpredictable times.", "Fixed ratio needs a stated output count; the example gives no such count.", "Variable ratio changes the output count; this example concerns inspection timing."] }
   ], [['c', 'Continuous', 'Every time'], ['fi', 'Fixed interval', 'Set time'], ['vi', 'Variable interval', 'Changing time'], ['fr', 'Fixed ratio', 'Set output'], ['vr', 'Variable ratio', 'Changing output']], 'row5');
 
   const REC = {
