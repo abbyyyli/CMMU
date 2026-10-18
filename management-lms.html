@@ -1,7 +1,8 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Lee Medical Supply · Management</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/><title>Lee Medical Supply · Management</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
 <style>
 /* Layout: one light reading column with a sticky chapter rail; deliberately single (light) theme. */
 :root {
@@ -283,7 +284,7 @@ table.cmp td:first-child { font-weight: 700; color: var(--muted); width: 22%; }
 .quotes q { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; font-style: italic; color: var(--muted); font-size: .9rem; }
 .six { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 1rem 0; }
 .six > div { display: flex; gap: 10px; align-items: flex-start; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .88rem; line-height: 1.5; }
-.six span { flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--tint); color: var(--accent-ink); font: 700 .76rem/24px var(--sans); text-align: center; }
+.six > div > span { flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--tint); color: var(--accent-ink); font: 700 .76rem/24px var(--sans); text-align: center; }
 a.cta { display: inline-block; background: var(--accent); color: #fff; text-decoration: none; font-weight: 500; padding: 8px 16px; border-radius: 8px; }
 a.cta:hover { background: var(--accent-ink); }
 blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; font-size: .92rem; line-height: 1.7; }
@@ -338,51 +339,44 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 
 
 .eq-controls{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}.eq-controls button,.eq-controls select{font:500 .86rem var(--sans);color:var(--accent-ink);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:8px 12px;max-width:100%;cursor:pointer}.eq-controls button[aria-pressed="true"]{background:var(--tint);border-color:var(--accent)}.eq-result{background:var(--tint);border-radius:8px;padding:14px;min-height:100px}.eq-result p{margin:5px 0}.eq-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.eq-grid>div{border:1px solid var(--line);border-radius:10px;padding:14px;background:var(--paper)}.eq-grid b{color:var(--accent-ink)}.eq-num{font:500 1.8rem var(--mono);display:block;color:var(--accent-ink)}.eq-map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.eq-map>div{padding:16px;background:var(--paper);border:1px solid var(--line);border-radius:10px}.eq-map p{margin:6px 0}body{margin:0}.hint span{min-width:0} @media(max-width:600px){.eq-grid,.eq-map{grid-template-columns:minmax(0,1fr)}.hint{flex-wrap:wrap}.mw{padding:14px}.doc{overflow-wrap:break-word}}
-</style></head><body>
-
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-<pattern id="dwlHatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-<rect width="6" height="6" style="fill:var(--dwl);fill-opacity:.12"></rect><rect width="2.2" height="6" style="fill:var(--dwl);fill-opacity:.75"></rect></pattern></defs></svg>
-
+</style><style>.six .plan-copy{flex:1;min-width:0}.six .plan-copy p{margin:6px 0 0}.six .plan-copy b{display:block}.case-map>div{min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px}.case-map p{margin:6px 0 0}.case-map b{color:var(--accent-ink)}.qa-session{font:600 .85rem var(--sans);color:var(--accent-ink);margin:1.25rem 0 .6rem}.traps small{display:block;color:var(--accent-ink);font:600 .75rem var(--sans);margin-bottom:7px}@media(max-width:600px){.case-map{grid-template-columns:minmax(0,1fr)}}</style></head><body>
+<svg aria-hidden="true" height="0" style="position:absolute" width="0"><defs>
+<pattern height="6" id="dwlHatch" patterntransform="rotate(45)" patternunits="userSpaceOnUse" width="6">
+<rect height="6" style="fill:var(--dwl);fill-opacity:.12" width="6"></rect><rect height="6" style="fill:var(--dwl);fill-opacity:.75" width="2.2"></rect></pattern></defs></svg>
 <header class="top"><div class="top-in">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Study Notes</a><span>/</span><a href="management.html">Management</a><span>/</span><b>Lee Medical Supply case</b></nav>
-  <button class="toc-btn" type="button" id="tocBtn" aria-expanded="false">Contents</button>
-  <nav class="sessions" aria-label="Sessions"><a class="pill" href="management-s3.html">S3</a><a class="pill" href="management-s4.html">S4</a><a class="pill" href="management-s5.html">S5</a></nav>
+<nav aria-label="Breadcrumb" class="crumbs"><a href="index.html">Study Notes</a><span>/</span><a href="management.html">Management</a><span>/</span><b>Lee Medical Supply case</b></nav>
+<button aria-expanded="false" class="toc-btn" id="tocBtn" type="button">Contents</button>
+<nav aria-label="Sessions" class="sessions"><a class="pill" href="management-s3.html">S3</a><a class="pill" href="management-s4.html">S4</a><a class="pill" href="management-s5.html">S5</a></nav>
 </div></header>
-
 <div class="wrap">
-  <aside class="rail" id="rail"><p class="lbl">Contents</p><ol id="toc"></ol></aside>
-  <main><article class="doc"><div class="hero">
-  <p class="kick">Managing People in Organizations · Case</p>
-  <h1>Lee Medical Supply</h1>
-  <p class="lead">A financial turnaround that worked, and a people system that broke. The case runs across sessions: Session 3 diagnoses the issues, Session 4 recommends fixes, and Session 5 adds EQ diagnosis and executive coaching.</p>
-</div>
-
+<aside class="rail" id="rail"><p class="lbl">Contents</p><ol id="toc"></ol></aside>
+<main><article class="doc"><div class="hero">
+<p class="kick">Managing People in Organizations · Case</p>
+<h1>Lee Medical Supply</h1>
+<p class="lead">A financial turnaround that worked, and a people system that broke. The case runs across sessions: Session 3 diagnoses the issues, Session 4 recommends fixes, and Session 5 adds EQ diagnosis and executive coaching.</p>
+</div><div aria-label="Session roles in the case" class="three case-map"><div><b>S3 · Diagnose</b><p>Explain the motivation gap with Maslow, Herzberg, Theory X/Y and goal setting.</p></div><div><b>S4 · Design improvements</b><p>Link each recommendation to a mechanism, a measure and a practical trade-off.</p></div><div><b>S5 · Coach the leader</b><p>Use the new incidents to identify EQ gaps and practice better leadership behavior.</p></div></div>
 <h2 id="glance">1. The case at a glance</h2>
 <p class="sub">KP Industries buys distressed companies and installs new leaders to turn them around. Lee Medical Supply (LMS) distributes medical items, with sales of about $300 million and net earnings of about $12 million.</p>
 <div class="timeline">
-  <div><time>Jan 4, 2025</time><b>Apichart appointed President</b><p>Task: bring sales and profit up to KP standards. Review planned after 18 months.</p></div>
-  <div><time>Jul 20, 2025</time><b>CEO Krisada reviews results</b><p>Finances meet KP standards, but a consultant report shows serious people and strategic problems.</p></div>
-  <div><time>Aug 6, 2025</time><b>New expectations</b><p>Apichart must deliver a plan within two weeks to cure the "corporate cancer". First review after six months.</p></div>
+<div><time>Jan 4, 2025</time><b>Apichart appointed President</b><p>Task: bring sales and profit up to KP standards. Review planned after 18 months.</p></div>
+<div><time>Jul 20, 2025</time><b>CEO Krisada reviews results</b><p>Finances meet KP standards, but a consultant report shows serious people and strategic problems.</p></div>
+<div><time>Aug 6, 2025</time><b>New expectations</b><p>Apichart must deliver a plan within two weeks to cure the "corporate cancer". First review after six months.</p></div>
 </div>
 <p class="note-small">The handout's dates are about 6.5 months apart but the text says 18 months. Refer to "the stated 18-month turnaround" and do not guess which is wrong.</p>
 <p class="note-small">KPI in this case can mean KP Industries, the parent company, not key performance indicator.</p>
-
 <h3 id="scoreboard">Scoreboard</h3>
 <div class="score">
-  <div class="up"><b>Financial</b><ul><li>Sales up</li><li>Profit up</li><li>Timely, accurate reports</li><li>Accountability up</li></ul></div>
-  <div class="down"><b>People</b><ul><li>3 of 9 VPs resigned, 4 terminated</li><li>Well-paid, well-trained staff leaving</li><li>Low morale</li><li>Training and career plans stopped</li><li>Too little feedback</li></ul></div>
-  <div class="down"><b>Customer</b><ul><li>Formal complaints rising</li><li>Survey results worse</li></ul></div>
-  <div class="down"><b>Innovation</b><ul><li>No new products in 12 months</li><li>New-product rate at an all-time low</li></ul></div>
+<div class="up"><b>Financial</b><ul><li>Sales up</li><li>Profit up</li><li>Timely, accurate reports</li><li>Accountability up</li></ul></div>
+<div class="down"><b>People</b><ul><li>3 of 9 VPs resigned, 4 terminated</li><li>Well-paid, well-trained staff leaving</li><li>Low morale</li><li>Training and career plans stopped</li><li>Too little feedback</li></ul></div>
+<div class="down"><b>Customer</b><ul><li>Formal complaints rising</li><li>Survey results worse</li></ul></div>
+<div class="down"><b>Innovation</b><ul><li>No new products in 12 months</li><li>New-product rate at an all-time low</li></ul></div>
 </div>
 <p class="key">The central tension: Apichart optimized financial performance, but the people system and broader strategic results declined. This is a trade-off problem, not "Apichart is bad" or "the old culture was good".</p>
-
 <h2 id="perspectives">2. Two sides of the story</h2>
 <div class="pair">
-  <div><b>Consultant and employees</b><p>Written orders, intolerance of mistakes, unwillingness to discuss problems. Managers "only interested in numbers". Tense competition replaced a collegial, family-oriented atmosphere.</p></div>
-  <div><b>Apichart</b><p>He inherited "a happy but unproductive workplace": 22-year average tenure, low technical skills, seniority-based promotion, straight salaries, tolerance of poor performance. Progress has costs; his job is results.</p></div>
+<div><b>Consultant and employees</b><p>Written orders, intolerance of mistakes, unwillingness to discuss problems. Managers "only interested in numbers". Tense competition replaced a collegial, family-oriented atmosphere.</p></div>
+<div><b>Apichart</b><p>He inherited "a happy but unproductive workplace": 22-year average tenure, low technical skills, seniority-based promotion, straight salaries, tolerance of poor performance. Progress has costs; his job is results.</p></div>
 </div>
-
 <h3 id="changes">What Apichart changed</h3>
 <div class="tbl"><table>
 <tbody>
@@ -393,18 +387,15 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 <tr><td><b>Rewards</b></td><td>Profit-based bonuses, sales commissions, incentives tied to measurable results</td></tr>
 <tr><td><b>Culture</b></td><td>Internal competition made formal policy</td></tr>
 </tbody></table></div>
-
 <h3 id="ceo-goals">The CEO's new definition of success</h3>
 <div class="method"><span>Financial performance</span><i>+</i><span class="hi">Lower turnover among high performers</span><i>+</i><span class="hi">More customer influence on operations</span><i>+</i><span class="hi">Better new-product development</span></div>
-
 <h2 id="evidence">3. Evidence discipline</h2>
 <p class="sub">Strong answers separate what the case states from what we infer.</p>
 <div class="three">
-  <div class="tcard"><b>Stated in the case</b><p>Turnover; leavers well paid; training stopped; weak feedback; no new products; rising complaints; bonuses, commissions and mandated competition exist.</p></div>
-  <div class="tcard"><b>Reasonable inference</b><p>Relationships and growth opportunities weakened; financial KPIs may be too narrow; the climate may discourage ideas.</p></div>
-  <div class="tcard"><b>Cannot conclude</b><p>That low pay caused turnover; that bonuses alone caused competition; that staff fear speaking up (this is only the CEO's suspicion); the exact reward schedule.</p></div>
+<div class="tcard"><b>Stated in the case</b><p>Turnover; leavers well paid; training stopped; weak feedback; no new products; rising complaints; bonuses, commissions and mandated competition exist.</p></div>
+<div class="tcard"><b>Reasonable inference</b><p>Relationships and growth opportunities weakened; financial KPIs may be too narrow; the climate may discourage ideas.</p></div>
+<div class="tcard"><b>Cannot conclude</b><p>That low pay caused turnover; that bonuses alone caused competition; that staff fear speaking up (this is only the CEO's suspicion); the exact reward schedule.</p></div>
 </div>
-
 <h2 id="diagnose">4. Session 3: diagnose the issues</h2>
 <p class="sub">Task: identify motivation issues only, with no recommendations. Each framework asks a different question of the same facts.</p>
 <div data-mw="lms"></div>
@@ -416,7 +407,6 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 <tr><td><b>Theory X / Y</b>: control-heavy style does not support needed initiative</td></tr>
 <tr><td><b>Herzberg</b>: hygiene problems plus weakened growth motivators</td></tr>
 </tbody></table></div>
-
 <h2 id="recap">5. The lecturer's recap (Session 4)</h2>
 <div class="tbl"><table>
 <thead><tr><th>Framework</th><th>Lecturer's diagnosis</th></tr></thead>
@@ -427,11 +417,9 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 <tr><td>Herzberg</td><td>Not diagnosed on the slide. The team builds it from the case.</td></tr>
 </tbody></table></div>
 <p class="note-small">Session 3 marked safety only as a possible gap. Use the lecturer's recap when explaining the slide, but say what evidence a safety fix would still need.</p>
-
 <h2 id="recommend">6. Session 4: recommend improvements</h2>
 <p class="sub">Each team adds recommendation, mechanism, metric and risk to its diagnosis. The actions below are proposed analysis, not the lecturer's answer key.</p>
 <div data-mw="lmsrec"></div>
-
 <h3 id="new-models">Session 4 models as extra lenses</h3>
 <p>The team assignment still uses the four Session 3 frameworks. The new models add depth but should not replace them.</p>
 <div class="tbl"><table>
@@ -443,28 +431,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 <tr><td>EVLN</td><td>Resignations are Exit; complaints to consultants are Voice</td><td>Terminated VPs did not choose to exit</td></tr>
 <tr><td>Reinforcement</td><td>Bonuses, commissions and mandated competition exist</td><td>Exact reward rules, fairness and causal effects</td></tr>
 </tbody></table></div>
-
-<h2 id="plan">7. An integrated plan: keep the gains, repair the gaps</h2>
-<div class="six">
-  <div><span>A</span><b>Baseline and root causes.</b> Separate resignations from terminations; confidential interviews; audit rewards, communication and supervision.</div>
-  <div><span>B</span><b>Low-regret repairs.</b> Communicate CEO priorities; give feedback; reopen development; fix disrespectful supervision; pilot cross-functional teams.</div>
-  <div><span>C</span><b>Align incentives.</b> Keep a few financial KPIs; also recognize customer problem-solving, teamwork, learning and innovation.</div>
-  <div><span>D</span><b>Evaluate, then scale.</b> Compare units and periods. A better score after a change does not prove the change caused it.</div>
-</div>
-<div class="tbl"><table>
-<thead><tr><th>CEO outcome</th><th>Measure</th><th>Watch out</th></tr></thead>
-<tbody>
-<tr><td>Lower high-performer turnover</td><td>Voluntary high-performer resignation rate; exit reasons</td><td>Separate resignations from terminations</td></tr>
-<tr><td>More customer influence</td><td>Complaint resolution quality; customer feedback used in decisions</td><td>Complaints may rise because reporting improves</td></tr>
-<tr><td>Better new-product development</td><td>Ideas tested, launches, project cycle time</td><td>More ideas is not the same as profitable innovation</td></tr>
-<tr><td>Keep financial discipline</td><td>Margin, cost control, quality</td><td>Margins boosted by cutting needed investment</td></tr>
-</tbody></table></div>
-
-<h3 id="answer">Integrated answer (60 to 90 seconds)</h3>
-<blockquote class="say">Lee Medical Supplies achieved an important financial turnaround, so I would not simply remove performance controls. However, the case also documents turnover among qualified employees, declining collaboration, stopped training, limited feedback and deteriorating customer and innovation outcomes. Under Maslow, I would strengthen safety, belonging and growth opportunities. Under goal-setting theory, I would communicate shared objectives and create regular feedback while balancing financial with strategic measures. Under Theory X and Y, I would give suitable employees more responsibility and participation without sacrificing accountability. Under Herzberg, I would improve supervision and workplace relationships while restoring development and recognition. Finally, I would track high-performer retention, customer responsiveness and new-product development alongside financial performance. These are proposed interventions, so their effects need evaluation.</blockquote>
-
-
-<h2 id="eq-task">8. Session 5: EQ and executive coaching</h2>
+<h2 id="eq-task">7. Session 5: EQ and executive coaching</h2>
 <p>Task: use the original LMS case plus the new Apichart narrative. Apply the five EQ factors, find the gaps, assess his personality type and self-awareness, and propose practical executive coaching. <a href="management-s5.html">Session 5</a> explains the framework.</p>
 <div class="eq-map"><div><b>Execution strength</b> <span class="zh">執行優勢</span><p>Apichart is organized and follows plans. Sales and profit improve.</p></div><div><b>Human cost</b> <span class="zh">人際代價</span><p>Public insult, ignored grief, rejected feedback, a capable employee lost.</p></div><div><b>Coaching objective</b> <span class="zh">教練目標</span><p>Change conduct while preserving financial discipline and work quality.</p></div></div>
 <h3 id="new-evidence">New evidence and what it supports</h3>
@@ -479,7 +446,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 </tbody></table></div>
 <p><b>His stated beliefs:</b> family-style care complicates management; winning hearts and minds does not matter; staff are replaceable because the work needs little skill. The last belief conflicts with the CEO's priority to retain high performers, and with losing a capable employee like Syamol.</p>
 <p class="hint"><b>中文邏輯</b><span>先分清楚事件、員工看法與分析推論。Syamol 已離職，旁觀同事只是考慮離職。</span></p>
-<h3 id="eq-diagnosis">Five factors: framework → evidence → gap → action</h3>
+<div data-mw="eq-evidence"></div><h3 id="eq-diagnosis">Five factors: framework → evidence → gap → action</h3>
 <div class="tbl"><table><thead><tr><th>Factor</th><th>Case gap</th><th>Proposed coaching</th></tr></thead><tbody>
 <tr><td><b>Self-awareness and self-control</b> <span class="zh">覺察與調節</span></td><td>Public insult shows weak self-control. Rejecting feedback suggests he does not see his impact on others.</td><td>Recognize the report-error trigger; pause; correct specific errors privately; agree follow-up and seek feedback.</td></tr>
 <tr><td><b>Empathy</b> <span class="zh">同理</span></td><td>Continuing the agenda past visible grief.</td><td>Acknowledge distress, ask what support is wanted and arrange urgent work honestly.</td></tr>
@@ -488,7 +455,6 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 <tr><td><b>Mastery of vision</b> <span class="zh">願景</span></td><td>Staff know only "profit"; no broader direction is communicated.</td><td>Connect financial discipline to retention, customer influence and innovation; check staff understanding.</td></tr>
 </tbody></table></div>
 <p class="note-small">One incident can touch several factors. Name the most direct one.</p>
-
 <h3 id="ptype">Personality type: claim only what the case shows</h3>
 <div class="tbl"><table><thead><tr><th>Dimension</th><th>Defensible interpretation</th><th>Missing evidence</th></tr></thead><tbody>
 <tr><td>E / I</td><td>Indeterminate. Avoiding events does not establish introversion.</td><td>Sources of energy and cross-context preferences.</td></tr>
@@ -498,8 +464,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 </tbody></table></div>
 <p class="hint"><b>中文邏輯</b><span>結構化的工作表現只支持暫定偏好；是否了解自己，還需要本人反思與他人回饋。</span></p><p class="key">A J-like working preference is plausible. A complete four-letter type and his awareness of it are unverified.</p>
 <p>He states clear management values, so "no self-awareness" overstates it. The precise gap is awareness of his <b>impact on people</b>.</p>
-
-<h2 id="coaching">9. A practical coaching plan</h2>
+<h2 id="coaching">8. A practical coaching plan</h2>
 <p>Built on the lecturer's methods: coaching, honest feedback from trusted people, a personal plan and practice at work. The schedule is a proposal.</p>
 <div data-mw="eq-coach"></div>
 <div class="tbl"><table><thead><tr><th>Proposed stage</th><th>Practice</th><th>Check</th></tr></thead><tbody>
@@ -518,25 +483,20 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 <tr><td>Business outcome</td><td>High-performer resignations, complaint resolution, product launches, margin</td><td>Complaints may rise because reporting is safer; pay or market changes can also move retention</td></tr>
 </tbody></table></div>
 <p class="hint"><b>中文邏輯</b><span>先驗證主管的行為有沒有改，再看員工感受與公司結果；結果變好不代表全部由 coaching 造成。</span></p>
-<h2 id="eq-traps">10. Do not mix these up</h2>
-<div class="pair"><div><b>Standards and respect</b><p>A flawed report still needs correction. Public insult is a separate behavioral choice.</p></div><div><b>Counterevidence and exemption</b><p>Chalermsak's preference prevents a universal claim; it does not justify humiliating other staff.</p></div><div><b>Stated values and accurate impact awareness</b><p>Knowing a management belief does not establish understanding of its consequences.</p></div><div><b>Shared vision and private purpose</b><p>No communicated broader direction does not prove no internal vision.</p></div></div>
-<h2 id="practice">11. Cold call practice</h2>
-<div class="qa-tools"><button type="button" id="qaAll">Show all answers</button></div>
-<div class="qa">
-  <details><summary>What is the strongest evidence that the problem is not simply low pay?</summary><p>Many of those leaving are the best-trained, best-qualified and well-paid employees.</p></details>
-  <details><summary>Why must a recommendation keep some of Apichart's changes?</summary><p>He delivered real gains: higher sales and profit, accountability and accurate reporting. The old LMS was not obviously healthy either.</p></details>
-  <details><summary>Which goal-setting gap is in the handout, and which does the slide add?</summary><p>The handout shows weak performance feedback. The slide adds that staff do not know the overall profit goal.</p></details>
-  <details><summary>Does decentralized authority mean Apichart uses Theory Y?</summary><p>No. Formal authority was decentralized, but the climate stays control-heavy and quota-driven.</p></details>
-  <details><summary>Why is calling the commission scheme variable ratio premature?</summary><p>The case does not give the exact rule linking rewards to output. The name "commission" is not enough.</p></details>
-  <details><summary>How would you test whether an intervention worked?</summary><p>Set a baseline, compare similar units or periods, and rule out other causes such as market shifts or staff mix.</p></details>
-<details><summary>Which personality preference is most defensible here?</summary><p>A J-like preference is plausible from organized execution. A full type, and whether he knows it, remain unverified.</p></details><details><summary>What does the grief incident establish?</summary><p>Apichart did not visibly acknowledge distress. It supports an empathy-response concern, not knowledge of every private feeling.</p></details></div>
-<h2 id="eq-template">12. Answer templates</h2>
-<div class="pair"><div><b>Diagnosis</b><p>“The framework requires ___. The case reports ___. This supports a gap in ___, but does not establish ___.”</p></div><div><b>Coaching</b><p>“When ___ occurs, practice ___. Preserve ___. Observe ___ and evaluate ___ alongside other explanations.”</p></div></div>
-<blockquote class="say">Apichart is a strong executor whose financial gains should be preserved. The public insult shows a self-control gap; continuing past grief suggests an empathy-response gap. Rejected feedback undermines relationships, and staff lack a communicated broader direction. I would coach respectful correction and listening, challenge the replaceability assumption, and connect work to retention, customers and innovation. His organized style is J-like, but a complete personality type is unverified. Evaluate behavior and business outcomes separately.</blockquote>
-<p class="note-small">Sample answer, not the lecturer's key.</p>
-</article></main>
-</div>
+<h2 id="plan">9. An integrated plan: keep the gains, repair the gaps</h2>
+<div class="six"><div><span>A</span><div class="plan-copy"><b>Diagnose the causes.</b><p>Separate resignations from terminations; use confidential interviews to check needs, job design, rewards and supervision.</p></div></div><div><span>B</span><div class="plan-copy"><b>Repair the system and behavior.</b><p>Clarify shared goals, restore feedback and development, and coach private correction and listening.</p></div></div><div><span>C</span><div class="plan-copy"><b>Align incentives.</b><p>Keep financial accountability; also recognize customer problem-solving, teamwork, learning and innovation.</p></div></div><div><span>D</span><div class="plan-copy"><b>Evaluate, then scale.</b><p>Compare the baseline with similar units or periods. Track leadership behavior and the CEO’s outcomes together.</p></div></div></div>
+<div class="tbl"><table>
+<thead><tr><th>CEO outcome</th><th>Measure</th><th>Watch out</th></tr></thead>
+<tbody>
+<tr><td>Lower high-performer turnover</td><td>Voluntary high-performer resignation rate; exit reasons</td><td>Separate resignations from terminations</td></tr>
+<tr><td>More customer influence</td><td>Complaint resolution quality; customer feedback used in decisions</td><td>Complaints may rise because reporting improves</td></tr>
+<tr><td>Better new-product development</td><td>Ideas tested, launches, project cycle time</td><td>More ideas is not the same as profitable innovation</td></tr>
+<tr><td>Keep financial discipline</td><td>Margin, cost control, quality</td><td>Margins boosted by cutting needed investment</td></tr>
+</tbody></table></div>
 
+
+<h2 id="eq-traps">10. Do not mix these up</h2><div class="traps"><div><small>S3</small><s>High pay means motivation needs are met.</s><p>Pay addresses only part of the problem. Stopped development and weakened relationships point to unmet growth and belonging needs.</p></div><div><small>S3</small><s>Decentralized authority proves a Theory Y approach.</s><p>Formal authority was delegated, but intolerance of mistakes and imposed competition keep the management climate control-heavy.</p></div><div><small>S4</small><s>Any employee departure is Exit in EVLN.</s><p>Resignation can be an Exit response. A terminated employee did not choose to leave; keep the two groups separate.</p></div><div><small>S4</small><s>Rewarding sales automatically improves teamwork and customers.</s><p>Rewards strengthen the behavior they pay for. Include cooperation and customer problem-solving when these are required outcomes.</p></div><div><small>S5</small><s>Respectful correction means lowering the standard.</s><p>Correct the report and preserve accountability. Change the public insult, dismissive response and rejection of feedback.</p></div><div><small>S5</small><s>An organized manager’s personality label measures EQ.</s><p>J-like execution describes a working preference. EQ analysis examines emotional awareness, regulation and the effect on relationships.</p></div></div><h2 id="practice">11. Cold call practice</h2><div class="qa-tools"><button id="qaAll" type="button">Show all answers</button></div><h3 class="qa-session" id="recall-s3">S3 · Motivation diagnosis</h3><div class="qa"><details><summary>Why is low pay an incomplete explanation for turnover?</summary><p>Many leavers are capable, trained and well paid. Examine supervision, relationships, feedback and growth as well as pay.</p></details><details><summary>What does Herzberg distinguish in this case?</summary><p>Supervision and relationships are hygiene factors. Development, recognition and responsibility are motivators. Improve both sides.</p></details><details><summary>Which goal-setting gaps come from the handout and the recap?</summary><p>The handout reports weak performance feedback. The recap adds that staff do not know the overall profit goal.</p></details></div><h3 class="qa-session" id="recall-s4">S4 · System improvements</h3><div class="qa"><details><summary>Why keep some of Apichart’s controls?</summary><p>They improved sales, profit, reporting and accountability. Repair the people system while preserving those gains.</p></details><details><summary>How can EVLN connect the original and new narratives?</summary><p>Voluntary resignations are Exit. Syamol first offers constructive Voice and later leaves. Terminated VPs are a separate group.</p></details><details><summary>What should a reward redesign reinforce?</summary><p>Financial accountability plus customer problem-solving, cooperation, learning and innovation. Specify the reward rule before naming its schedule.</p></details></div><h3 class="qa-session" id="recall-s5">S5 · EQ and coaching</h3><div class="qa"><details><summary>Which EQ factors are most directly implicated by insult, ignored grief and rejected feedback?</summary><p>Self-control, empathy and social expertise, respectively. Link each diagnosis to the specific behavior.</p></details><details><summary>What can personality analysis add without replacing EQ analysis?</summary><p>Organized execution supports a J-like preference. It does not explain humiliation; assess emotional conduct and awareness of impact separately.</p></details><details><summary>How would you check whether coaching is working?</summary><p>Observe repeated private correction, listening and follow-through; collect confidential employee feedback; track retention, customers, innovation and finance together.</p></details></div><h2 id="eq-template">12. Answer templates</h2><div class="three case-map"><div><b>S3 · Diagnose</b><p>“The case shows ___. Under ___, this points to ___ because ___.”</p></div><div><b>S4 · Recommend</b><p>“Change ___ to strengthen ___. Keep ___. Track ___ and watch for ___.”</p></div><div><b>S5 · Coach</b><p>“When ___ happens, practice ___. Preserve the work standard for ___. Observe ___.”</p></div></div><h3 id="answer">Integrated answer (60 to 90 seconds)</h3><blockquote class="say">LMS improved sales, profit and accountability, but lost capable people while customer and innovation outcomes weakened. In S3 terms, stopped development and damaged relationships weaken growth and belonging; poor feedback and unclear shared goals reduce direction. A control-heavy style also limits initiative. For S4, keep financial discipline while restoring development, regular feedback and participation; align rewards with teamwork, customer problem-solving and innovation. For S5, coach Apichart to pause, correct errors privately, acknowledge distress and receive criticism constructively. Connect these behaviors to a shared direction beyond profit. Evaluate respectful conduct and employee experience alongside high-performer retention, customer responsiveness, product development and margin. The plan joins motivation, organizational systems and leadership behavior.</blockquote></article></main>
+</div>
 <script>/* Management interactive components: Herzberg scale, KPI trap, framework comparator, LMS lens. */
 (function () {
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -827,7 +787,6 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
   window.MgmtWidgets = { mount(root) { root.querySelectorAll('[data-mw]').forEach(h => { if (!h.dataset.ready && W[h.dataset.mw]) { h.dataset.ready = 1; W[h.dataset.mw](h); } }); } };
 })();
 </script>
-
 <script>
 (function(){
  const factors=[
@@ -856,8 +815,8 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
  const EQ={
  'eq-factors'(h){let[c,r]=setup(h,'Five-factor explorer');factors.forEach((v,i)=>{let b=el('button',String(i+1));b.type='button';b.setAttribute('aria-label',v[0]);b.onclick=()=>{c.querySelectorAll('button').forEach(n=>n.setAttribute('aria-pressed',String(n===b)));lines(r,[[v[0],v[1]],['Illustrative application:',v[2]],['Distinction:',v[3]]]);};c.append(b)});c.firstChild.click()},
  'eq-response'(h){let[c,r]=setup(h,'Response comparison');const examples=[['Dismiss concern','“The difficulty is irrelevant. Complete the report.”','A standard is stated, but the person’s perspective is dismissed.'],['Avoid the standard','“Do not worry about the report; no correction is needed.”','Comfort replaces honesty about a real performance gap.'],['Balance both','“I understand this is difficult. The report still needs supporting data. Let’s agree on practical support and a revision.”','Acknowledgment and an honest requirement appear together.']];examples.forEach(v=>{let b=el('button',v[0]);b.type='button';b.onclick=()=>{c.querySelectorAll('button').forEach(n=>n.setAttribute('aria-pressed',String(n===b)));lines(r,[['Suggested response:',v[1]],['Reasoning:',v[2]]])};c.append(b)});c.firstChild.click()},
- 'eq-coach'(h){let[c,r]=setup(h,'Coaching action and measure');let label=el('label','Trigger '),select=el('select');select.setAttribute('aria-label','Choose a coaching trigger');coaching.forEach((v,i)=>{let o=el('option',v[0]);o.value=i;select.append(o)});label.append(select);c.append(label);select.onchange=()=>{let v=coaching[+select.value];lines(r,[['Factor:',v[1]],['Practice:',v[2]],['Check:',v[3]],['Risk:',v[4]]])};select.onchange()},
- 'eq-evidence'(h){let[c,r]=setup(h,'Evidence classification');let q=el('p'),feedback=el('p'),i=0;h.insertBefore(q,c);let options=['Know','Infer','Cannot conclude'];options.forEach(v=>{let b=el('button',v);b.type='button';b.onclick=()=>{feedback.textContent=(v===evidence[i][1]?'Supported classification. ':'Reconsider the evidence. ')+'Classification: '+evidence[i][1]+'. '+evidence[i][2]};c.append(b)});let next=el('button','Next statement →');next.type='button';next.onclick=()=>{i=(i+1)%evidence.length;show()};c.append(next);r.append(feedback);function show(){q.textContent='Statement '+(i+1)+' of '+evidence.length+': '+evidence[i][0];feedback.textContent='Choose the statement’s evidence status. No score is recorded.'}show()}
+ 'eq-coach'(h){let[c,r]=setup(h,'Coaching action and measure');let label=el('label','Trigger '),select=el('select');select.setAttribute('aria-label','Choose a coaching trigger');coaching.forEach((v,i)=>{let o=el('option',v[0]);o.value=i;select.append(o)});label.append(select);c.append(label);select.onchange=()=>{let v=coaching[+select.value];lines(r,[['Factor:',v[1]],['Action:',v[2]],['Check:',v[3]]])};select.onchange()},
+ 'eq-evidence'(h){let[c,r]=setup(h,'Evidence classification');let q=el('p'),feedback=el('p'),i=0;h.insertBefore(q,c);let options=['Know','Infer','Cannot conclude'];options.forEach(v=>{let b=el('button',v);b.type='button';b.onclick=()=>{feedback.textContent=(v===evidence[i][1]?'Supported classification. ':'Reconsider the evidence. ')+'Classification: '+evidence[i][1]+'. '+evidence[i][2]};c.append(b)});let next=el('button','Next statement →');next.type='button';next.onclick=()=>{i=(i+1)%evidence.length;show()};c.append(next);r.append(feedback);function show(){q.textContent='Statement '+(i+1)+' of '+evidence.length+': '+evidence[i][0];feedback.textContent='Choose the statement’s evidence status.'}show()}
  };
  const prior=window.MgmtWidgets;
  window.MgmtWidgets={mount(root){if(prior)prior.mount(root);root.querySelectorAll('[data-mw]').forEach(h=>{if(!h.dataset.ready&&EQ[h.dataset.mw]){h.dataset.ready='1';EQ[h.dataset.mw](h)}})}};
