@@ -1,28 +1,233 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Economics Session 5 · Study Notes</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Monopoly and Price Discrimination · Economics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-:root{--bg:var(--tone-fdf9f9);--paper:var(--tone-ffffff);--tint:var(--tone-fae9ed);--line:var(--tone-efdde2);--fg:var(--tone-2f282b);--muted:var(--tone-7e6f74);--accent:var(--tone-c06c84);--accent-ink:var(--tone-9c4862);--sans:"Noto Sans TC","PingFang TC",system-ui,sans-serif;--serif:"Noto Serif TC",Georgia,serif}
-*{box-sizing:border-box}html{color-scheme:light;background:var(--bg)}body{margin:0;font:16px/1.75 var(--sans);color:var(--fg)}a{color:var(--accent-ink)}:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-header{border-bottom:1px solid var(--line);background:rgba(var(--header-rgb), .96)}.top{max-width:1160px;margin:auto;padding:13px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:16px}
-.crumbs{font-size:.86rem;display:flex;align-items:center;flex-wrap:wrap;gap:8px;color:var(--muted)}.crumbs a{text-decoration:none;color:var(--muted)}.crumbs a:hover{color:var(--accent-ink)}
-.sessions{display:flex;gap:5px;margin-left:auto}.pill{font:.85rem var(--sans);text-decoration:none;padding:5px 12px;border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--muted)}.pill[aria-current="page"]{background:var(--accent);border-color:var(--accent);color:var(--tone-ffffff)}.sessions a.pill:hover,.sessions a.pill:focus-visible{background:var(--tone-fceef2);border-color:var(--tone-b86b7b);color:var(--tone-8e4357)}
-main{max-width:780px;margin:0 auto;padding:74px 22px 120px}.kick{color:var(--accent-ink);letter-spacing:.15em;text-transform:uppercase;font-size:.76rem;font-weight:700}h1{font:700 clamp(2.2rem,5vw,3.2rem)/1.23 var(--serif);margin:6px 0 16px}.note{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:24px 28px;margin-top:30px}.label{font-weight:700;color:var(--accent-ink);font-size:.82rem;letter-spacing:.07em;text-transform:uppercase}.note p{margin:9px 0 0}.back{display:inline-block;margin-top:22px;text-decoration:none;border-bottom:1px solid var(--accent);font-weight:600}
-@media(max-width:520px){.sessions{margin-left:0}main{padding-top:50px}.note{padding:20px}}
+/* Layout: one reading column with a sticky chapter rail; colors follow system appearance. */
+:root {
+  color-scheme: light;
+  --bg: var(--tone-fdf9f9); --panel: var(--tone-f8eef0); --paper: var(--tone-ffffff); --tint: var(--tone-fae9ed); --line: var(--tone-efdde2);
+  --fg: var(--tone-2f282b); --muted: var(--tone-7e6f74); --accent: var(--tone-c06c84); --accent-ink: var(--tone-9c4862);
+  --demand: var(--tone-3f5675); --supply: var(--tone-c06c84); --ext: var(--tone-6e3f55); --world: var(--tone-8a7a5c); --policy: var(--tone-3f7f7a);
+  --cs: var(--tone-a7cdb6); --ps: var(--tone-b2c4e3); --dwl: var(--tone-d9674f); --rev: var(--tone-e5c171); --rev2: var(--tone-f1dca8); --time: var(--tone-ddb3cb); --ts: var(--tone-bfdcc9);
+  --serif: "Noto Serif TC", "Songti TC", Georgia, serif;
+  --sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; background: var(--bg); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 16px; line-height: 1.75; }
+a { color: var(--accent-ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(var(--header-rgb), .94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); padding-inline: 16px; }
+.top-in { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 14px; min-height: 56px; flex-wrap: wrap; padding-block: 8px; }
+.brand { font-family: var(--serif); font-weight: 700; font-size: 1.02rem; white-space: nowrap; }
+.brand small { font-family: var(--sans); font-weight: 500; color: var(--muted); font-size: .76rem; margin-left: 6px; letter-spacing: .06em; }
+.sessions { display: flex; gap: 4px; margin-left: auto; }
+.crumbs { font-size: .86rem; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.crumbs a { color: var(--muted); text-decoration: none; } .crumbs a:hover { color: var(--accent-ink); } .crumbs span { color: var(--line); } .crumbs b { font-family: var(--serif); }
+.sessions a.pill { text-decoration: none; transition: border-color .15s, color .15s; }
+.sessions a.pill:hover, .sessions a.pill:focus-visible { border-color: var(--accent); color: var(--accent-ink); background: var(--tint); }
+.sessions .pill { font: 500 .82rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--muted); padding: 4px 12px; border-radius: 999px; }
+.sessions .pill[aria-current="page"] { background: var(--accent); border-color: var(--accent); color: var(--tone-ffffff); }
+.sessions .pill.off { opacity: .5; cursor: not-allowed; }
+.toc-btn { display: none; font: 500 .85rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--fg); border-radius: 8px; padding: 5px 12px; }
+
+.wrap { max-width: 1160px; margin: 0 auto; padding-inline: 16px; display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 52px; }
+.rail { position: sticky; top: 76px; align-self: start; max-height: calc(100vh - 92px); overflow: auto; padding-block: 34px 40px; font-size: .86rem; line-height: 1.5; }
+.rail .lbl { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.rail ol { list-style: none; margin: 0; padding: 0; }
+.rail li a { display: block; padding: 4px 10px; color: var(--muted); text-decoration: none; border-radius: 6px; }
+.rail li a:hover { color: var(--fg); background: var(--tint); }
+.rail li.h3 a { padding-left: 22px; font-size: .8rem; }
+.rail li a.on { color: var(--accent-ink); background: var(--tint); font-weight: 500; }
+
+main { min-width: 0; padding-block: 30px 120px; }
+.doc { max-width: 780px; }
+.hero { padding-block: 8px 26px; border-bottom: 1px solid var(--line); }
+.kick { font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); margin: 0 0 6px; font-weight: 500; }
+.hero h1 { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.25; margin: 0 0 12px; text-wrap: balance; }
+.lead { margin: 0; font-size: 1.04rem; max-width: 62ch; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 16px; font-size: .78rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+.doc h2 { font-family: var(--serif); font-size: 1.55rem; line-height: 1.35; margin: 3.4rem 0 .3rem; text-wrap: balance; }
+.doc h3 { font-size: 1.1rem; line-height: 1.45; margin: 2.2rem 0 .5rem; color: var(--accent-ink); text-wrap: balance; }
+.sub { margin: 0 0 1.2rem; color: var(--muted); max-width: 66ch; }
+.doc p, .doc li { max-width: none; }
+.doc ul, .doc ol { padding-left: 1.25em; }
+.doc li { margin: .25rem 0; }
+.zh { display: inline-block; font-size: .78em; line-height: 1.3; color: var(--accent-ink); background: var(--tint); padding: 0 6px; border-radius: 4px; margin-left: 2px; vertical-align: 1px; font-weight: 500; }
+.hint { font-size: .9rem; color: var(--muted); display: flex; gap: 10px; align-items: baseline; }
+.hint b { flex: none; font-size: .72rem; color: var(--tone-ffffff); background: var(--accent); padding: 0 7px; border-radius: 4px; font-weight: 500; }
+.key { background: var(--tint); padding: 12px 16px; border-radius: 8px; font-weight: 500; }
+.note-small { font-size: .8rem; color: var(--muted); }
+
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 1rem 0; }
+.pair > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; }
+.pair b { color: var(--accent-ink); }
+.pair p { margin: 4px 0 0; font-size: .92rem; }
+
+.matrix { display: grid; grid-template-columns: minmax(90px, .7fr) repeat(2, minmax(0, 1fr)); gap: 6px; margin: 1rem 0 1.2rem; font-size: .9rem; max-width: 620px; }
+.matrix .mh { font-weight: 700; font-size: .8rem; color: var(--muted); align-self: end; padding: 0 4px 2px; }
+.matrix .mh.side { align-self: center; }
+.matrix .cell { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px; font-weight: 500; }
+.matrix .cell.hi { background: var(--tint); border-color: var(--accent); }
+.matrix small { display: block; font-weight: 400; color: var(--muted); font-size: .8rem; margin-top: 2px; line-height: 1.45; }
+
+.map { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.3fr) auto minmax(0, 1fr); gap: 10px; align-items: center; margin: 1rem 0; }
+.mcol { display: flex; flex-direction: column; gap: 8px; }
+.mbox { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .84rem; line-height: 1.5; display: flex; flex-direction: column; gap: 2px; }
+.mbox b { font-size: .9rem; } .mbox span { color: var(--muted); } .mbox em { font-style: normal; color: var(--accent-ink); font-size: .78rem; font-weight: 500; }
+.mbox.good { border-color: var(--cs); } .mbox.ask { background: var(--tint); border-color: var(--accent); }
+.marrow { color: var(--accent); font-weight: 700; }
+
+.flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 1rem 0; font-size: .86rem; }
+.flow span { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; line-height: 1.45; }
+.flow i { font-style: normal; color: var(--accent); font-weight: 700; }
+.formula { font-family: var(--mono); font-size: .9rem; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; line-height: 1.9; overflow-x: auto; }
+.steps { counter-reset: s; list-style: none; padding-left: 0 !important; }
+.steps li { counter-increment: s; display: flex; gap: 10px; }
+.steps li::before { content: counter(s); flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--tint); color: var(--accent-ink); font: 700 .75rem/22px var(--sans); text-align: center; margin-top: 3px; }
+.assign { margin: 1.6rem 0; border: 1px dashed var(--accent); border-radius: 10px; padding: 14px 16px; background: var(--paper); }
+.assign p { margin: 6px 0 0; font-size: .92rem; }
+
+.tbl { overflow-x: auto; margin: 1rem 0; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+.doc table { border-collapse: collapse; width: 100%; font-size: .88rem; line-height: 1.55; }
+.doc th, .doc td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+.doc th { background: var(--panel); font-weight: 700; }
+.doc tr:last-child td { border-bottom: 0; }
+.drill .ans { filter: blur(5px); cursor: pointer; user-select: none; transition: filter .2s; }
+.drill .ans.shown { filter: none; user-select: auto; }
+
+.traps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 1rem; }
+.traps > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: .88rem; line-height: 1.55; }
+.traps s { color: var(--muted); text-decoration-color: var(--dwl); }
+.traps p { margin: 6px 0 0; font-weight: 500; }
+
+.qa-tools { margin: .4rem 0 .8rem; }
+.qa-tools button { font: 500 .82rem var(--sans); border: 1px solid var(--accent); background: var(--paper); color: var(--accent-ink); border-radius: 6px; padding: 5px 12px; cursor: pointer; }
+.qa { display: flex; flex-direction: column; gap: 6px; }
+.qa details { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
+.qa summary { cursor: pointer; padding: 10px 14px; font-weight: 500; font-size: .93rem; list-style: none; display: flex; gap: 10px; }
+.qa summary::before { content: "Q"; color: var(--accent); font-weight: 700; }
+.qa details[open] summary { border-bottom: 1px dashed var(--line); }
+.qa details p { margin: 0; padding: 10px 14px 12px 36px; font-size: .9rem; }
+
+/* graphs */
+.graph { max-width: 900px; margin: 1.8rem 0 2.2rem; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px 18px 14px; }
+.g-head h4 { font-family: var(--serif); font-size: 1.12rem; margin: 2px 0 2px; line-height: 1.45; }
+.g-head p { margin: 0 0 10px; color: var(--muted); font-size: .86rem; }
+.g-kicker { font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); }
+.g-body { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.g-plot svg { width: 100%; height: auto; display: block; }
+.g-side { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.g-ctrl { display: flex; flex-direction: column; gap: 10px; }
+.sl label { display: flex; justify-content: space-between; font-size: .8rem; color: var(--muted); line-height: 1.3; }
+.sl output { font-family: var(--mono); color: var(--fg); font-size: .8rem; }
+.sl input { width: 100%; accent-color: var(--accent); margin: 4px 0 0; }
+.g-btn { align-self: flex-start; font: 500 .8rem var(--sans); border: 1px solid var(--accent); color: var(--accent-ink); background: transparent; border-radius: 6px; padding: 4px 11px; cursor: pointer; }
+.g-btn:hover { background: var(--tint); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; align-self: flex-start; }
+.seg button { font: 500 .8rem var(--sans); border: 0; background: transparent; color: var(--muted); padding: 5px 12px; cursor: pointer; }
+.seg button[aria-checked="true"] { background: var(--accent); color: var(--paper); }
+.chk { display: flex; gap: 8px; align-items: center; font-size: .8rem; color: var(--muted); }
+.chk input { accent-color: var(--accent); }
+.g-stats { margin: 0; border-top: 1px solid var(--line); padding-top: 10px; display: flex; flex-direction: column; gap: 3px; }
+.st { display: flex; justify-content: space-between; gap: 10px; font-size: .8rem; line-height: 1.45; }
+.st dt { color: var(--muted); display: flex; align-items: center; gap: 7px; }
+.st dd { margin: 0; font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.st.big dd { font-weight: 500; color: var(--accent-ink); font-size: .92rem; }
+.g-note { margin: 12px 0 0; padding: 9px 12px; background: var(--tint); border-radius: 6px; font-size: .85rem; line-height: 1.6; }
+
+.sw { width: 11px; height: 11px; border-radius: 2px; display: inline-block; flex: none; }
+.sw.none { background: transparent; }
+.sw.a-cs { background: var(--cs); } .sw.a-ps { background: var(--ps); } .sw.a-ps2 { background: var(--ps); outline: 1px solid var(--demand); }
+.sw.a-dwl { background: repeating-linear-gradient(45deg, var(--dwl) 0 2px, transparent 2px 4px); outline: 1px solid var(--dwl); }
+.sw.a-rev { background: var(--rev); } .sw.a-rev2 { background: var(--rev2); } .sw.a-time { background: var(--time); } .sw.a-ts { background: var(--ts); }
+.sw.ln { height: 3px; border-radius: 2px; width: 16px; }
+
+svg .ax { stroke: var(--muted); stroke-width: 1.2; }
+svg .axl { fill: var(--muted); font: 500 11px var(--sans); }
+svg .tk { fill: var(--muted); font: 500 10.5px var(--mono); }
+svg .gd { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 4; opacity: .7; }
+svg .cv { stroke-width: 2.6; fill: none; stroke-linecap: round; }
+svg .cv.dash { stroke-dasharray: 7 5; stroke-width: 2; }
+svg .cvl { font: 700 11.5px var(--sans); }
+svg .c-d { stroke: var(--demand); fill: var(--demand); } svg .c-s { stroke: var(--supply); fill: var(--supply); }
+svg .c-x { stroke: var(--ext); fill: var(--ext); } svg .c-w { stroke: var(--world); fill: var(--world); } svg .c-t { stroke: var(--policy); fill: var(--policy); }
+svg text.cvl { stroke: none; }
+svg .pt { fill: var(--paper); stroke: var(--fg); stroke-width: 2; }
+svg .ptl { fill: var(--fg); font: 700 11px var(--sans); }
+svg .atag { fill: var(--fg); font: 700 11px var(--sans); opacity: .8; }
+svg .a-cs { fill: var(--cs); fill-opacity: .6; } svg .a-ps { fill: var(--ps); fill-opacity: .6; }
+svg .a-ps2 { fill: var(--ps); fill-opacity: .95; } svg .a-ts { fill: var(--ts); fill-opacity: .6; }
+svg .a-dwl { fill: url(#dwlHatch); stroke: var(--dwl); stroke-width: 1.2; }
+svg .a-rev { fill: var(--rev); fill-opacity: .75; } svg .a-rev2 { fill: var(--rev2); fill-opacity: .8; } svg .a-time { fill: var(--time); fill-opacity: .65; }
+
+svg .grid { stroke: var(--line); stroke-width: 1; }
+svg .a-prof { fill: var(--cs); fill-opacity: .75; } svg .a-loss { fill: var(--dwl); fill-opacity: .35; }
+.sw.a-prof { background: var(--cs); } .sw.a-loss { background: var(--dwl); opacity: .5; }
+.twin { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.tw-t { margin: 0 0 2px; font-size: .78rem; font-weight: 700; color: var(--muted); }
+.g-ctrl .g-btn + .g-btn { margin-top: -4px; }
+.graph.wide .g-body { grid-template-columns: minmax(0, 1fr); }
+.graph.wide .g-side { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+@media (max-width: 700px) { .twin, .graph.wide .g-side { grid-template-columns: minmax(0, 1fr); } }
+svg polyline.cv { fill: none !important; }
+
+.graph { background: var(--paper); }
+.g-note { background: var(--tint); }
+
+@media (max-width: 900px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .rail { display: none; position: fixed; inset: 64px 0 0 0; max-height: none; background: var(--bg); z-index: 15; padding: 20px 16px 60px; }
+  .rail.open { display: block; }
+  .toc-btn { display: inline-block; }
+  .g-body { grid-template-columns: minmax(0, 1fr); }
+  .map { grid-template-columns: minmax(0, 1fr); }
+  .marrow { transform: rotate(90deg); justify-self: center; }
+}
+@media (max-width: 560px) { .pair, .traps { grid-template-columns: minmax(0, 1fr); } }
+.spectrum { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: center; margin: 1rem 0 .2rem; font-weight: 700; font-size: .9rem; }
+.spectrum .bar { height: 12px; border-radius: 6px; background: linear-gradient(90deg, var(--tone-d9674f), var(--tone-e5c171), var(--tone-a7cdb6)); }
+.spec-l { display: flex; justify-content: space-between; font-size: .78rem; color: var(--muted); margin-bottom: 1rem; }
+.no, .yes { font-size: .74rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; }
+.no { background: var(--tone-fce3dd); color: var(--tone-a8432f); } .yes { background: var(--tone-e3f2e9); color: var(--tone-2f6b4f); }
+table.oil { font-variant-numeric: tabular-nums; }
+table.oil th, table.oil td { text-align: right; padding: 6px 8px; white-space: nowrap; }
+table.oil th:first-child, table.oil td:first-child { text-align: left; font-weight: 700; }
+table.oil td.hi { background: var(--tint); color: var(--accent-ink); font-weight: 700; }
+
 </style>
 <style id="system-theme">
 /* System appearance only changes colors. Print retains the light palette. */
 :root {
   --header-rgb: 253, 249, 249;
   --tone-2f282b: #2f282b;
+  --tone-2f6b4f: #2f6b4f;
+  --tone-3f5675: #3f5675;
+  --tone-3f7f7a: #3f7f7a;
+  --tone-6e3f55: #6e3f55;
   --tone-7e6f74: #7e6f74;
-  --tone-8e4357: #8e4357;
+  --tone-8a7a5c: #8a7a5c;
   --tone-9c4862: #9c4862;
-  --tone-b86b7b: #b86b7b;
+  --tone-a7cdb6: #a7cdb6;
+  --tone-a8432f: #a8432f;
+  --tone-b2c4e3: #b2c4e3;
+  --tone-bfdcc9: #bfdcc9;
   --tone-c06c84: #c06c84;
+  --tone-d9674f: #d9674f;
+  --tone-ddb3cb: #ddb3cb;
+  --tone-e3f2e9: #e3f2e9;
+  --tone-e5c171: #e5c171;
   --tone-efdde2: #efdde2;
+  --tone-f1dca8: #f1dca8;
+  --tone-f8eef0: #f8eef0;
   --tone-fae9ed: #fae9ed;
-  --tone-fceef2: #fceef2;
+  --tone-fce3dd: #fce3dd;
   --tone-fdf9f9: #fdf9f9;
   --tone-ffffff: #ffffff;
 }
@@ -31,19 +236,386 @@ main{max-width:780px;margin:0 auto;padding:74px 22px 120px}.kick{color:var(--acc
     color-scheme: dark;
     --header-rgb: 29, 24, 26;
     --tone-2f282b: #EEE4E6;
+    --tone-2f6b4f: #A0D2B2;
+    --tone-3f5675: #93AECB;
+    --tone-3f7f7a: #8CC4BE;
+    --tone-6e3f55: #C9A3D6;
     --tone-7e6f74: #BEACB2;
-    --tone-8e4357: #E6B3BE;
+    --tone-8a7a5c: #C9B68C;
     --tone-9c4862: #E6B3BE;
-    --tone-b86b7b: #D79AA7;
+    --tone-a7cdb6: #6E8C6B;
+    --tone-a8432f: #F0A48D;
+    --tone-b2c4e3: #667C96;
+    --tone-bfdcc9: #5F7A5C;
     --tone-c06c84: #D79AA7;
+    --tone-d9674f: #E08A6F;
+    --tone-ddb3cb: #8C6680;
+    --tone-e3f2e9: #23372D;
+    --tone-e5c171: #C9A250;
     --tone-efdde2: #55424A;
+    --tone-f1dca8: #8F7A4A;
+    --tone-f8eef0: #2B2226;
     --tone-fae9ed: #35272D;
-    --tone-fceef2: #35272D;
+    --tone-fce3dd: #412B28;
     --tone-fdf9f9: #1D181A;
     --tone-ffffff: #241E21;
   }
 }
 </style>
+
+<style>
+body{margin:0}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:1rem 0}
+.three>div,.method{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+.three b,.method>b{color:var(--accent-ink)}.three p,.method p{margin:4px 0 0;font-size:.92rem}
+.method{margin:12px 0}.endnote{margin-top:32px}
+.plot-legend{display:flex;flex-wrap:wrap;gap:7px 16px;margin:4px 0 14px;font-size:.78rem;color:var(--muted)}
+.plot-legend span{display:inline-flex;gap:6px;align-items:center}
+svg .tk{font-size:11.5px}svg .axl{font-size:12px}.g-plot svg{overflow:visible}
+.seg{display:flex;flex-wrap:wrap;gap:2px;max-width:100%}.seg button{flex:1 1 auto;white-space:normal}
+.seg button[aria-pressed=true]{background:var(--accent);color:var(--paper)}
+.best-row{background:var(--tint);font-weight:700;color:var(--accent-ink)}
+.g-ctrl [hidden]{display:none!important}.sl label{gap:12px}.sl label span{min-width:0}
+.sl output{flex-shrink:0}.g-note:empty{display:none}.doc p,.doc li{overflow-wrap:break-word}
+@media(max-width:700px){.three{grid-template-columns:minmax(0,1fr)}.graph{padding:14px 12px}.st dd{white-space:normal;text-align:right;max-width:60%}.top-in{gap:8px 12px}}
+@media(max-width:420px){.top-in{align-items:center}.sessions{margin-left:0}.crumbs{flex:1 1 100%;font-size:.8rem}.toc-btn{order:2;margin-left:auto}.sessions{order:1}.rail{inset:108px 0 0}.graph.wide .g-side{gap:14px}.doc h2{font-size:1.4rem}}
+@media print{.top,.rail,.g-ctrl,.qa-tools{display:none}.wrap{display:block}.qa details p{display:block}.graph{break-inside:avoid}body{background:#fff}.doc{max-width:none}}
+</style>
+
+<style>
+.extra,.graph-guide,.number-readout{background:var(--paper);border:1px solid var(--line);border-radius:9px;margin:1rem 0;padding:0 14px}
+.extra>summary,.graph-guide>summary,.number-readout>summary{cursor:pointer;padding:11px 0;color:var(--accent-ink);font-size:.87rem;font-weight:500}
+.extra[open]>summary,.graph-guide[open]>summary,.number-readout[open]>summary{border-bottom:1px dashed var(--line)}
+.extra>p,.graph-guide>p{font-size:.9rem}.graph-guide .steps{font-size:.91rem;line-height:1.65}.graph-guide .steps li{margin:12px 0}
+.g-reading{min-width:0}.g-reading .g-note{margin:0}.number-readout{margin:12px 0 0;padding:0 10px}.number-readout .g-stats{border-top:0;padding-bottom:10px}
+</style>
 </head><body>
-<header><div class="top"><nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Study Notes</a><span>/</span><a href="economics.html">Economics</a><span>/</span><b>Session 5</b></nav><nav class="sessions" aria-label="Sessions 5–8"><span class="pill" aria-current="page">S5</span><a class="pill" href="economics-s6.html">S6</a><a class="pill" href="economics-s7.html">S7</a><a class="pill" href="economics-s8.html">S8</a></nav></div></header>
-<main><p class="kick">MGMG515 · Session 5</p><h1>Economics — Session 5</h1><section class="note"><div class="label">Coming soon</div><p>This lesson is not published yet. This reserved page keeps the S5–S8 navigation working in the meantime.</p><p>When the lesson is ready, the completed HTML can replace this file directly.</p></section><a class="back" href="economics.html">← Back to Economics sessions</a></main></body></html>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><pattern id="dwlHatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" style="fill:var(--dwl);fill-opacity:.12"/><rect width="2.2" height="6" style="fill:var(--dwl);fill-opacity:.75"/></pattern></defs></svg>
+<header class="top"><div class="top-in">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Study Notes</a><span>/</span><a href="economics.html">Economics</a><span>/</span><b>Session 5</b></nav>
+<button class="toc-btn" type="button" id="tocBtn" aria-expanded="false" aria-controls="rail">Contents</button>
+<nav class="sessions" aria-label="Sessions 5–8"><span class="pill" aria-current="page">S5</span><span class="pill off" aria-disabled="true">S6</span><span class="pill off" aria-disabled="true">S7</span><span class="pill off" aria-disabled="true">S8</span></nav>
+</div></header>
+<div class="wrap"><aside class="rail" id="rail"><p class="lbl">Contents</p><ol id="toc"></ol></aside>
+<main><article class="doc"><div class="hero"><p class="kick">MGMG515 · Session 5</p><h1>Monopoly and Price Discrimination</h1><p class="lead">A monopolist can influence price, but demand still limits sales. Choose output using marginal revenue and marginal cost, read price from demand, and use average total cost to check profit. Then ask who gains when prices differ across customers.</p>
+<div class="legend"><span><i class="sw ln" style="background:var(--demand)"></i>Demand D</span><span><i class="sw ln" style="background:var(--ext)"></i>MR</span><span><i class="sw ln" style="background:var(--supply)"></i>MC</span><span><i class="sw ln" style="background:var(--world)"></i>ATC</span></div></div>
+
+<h2 id="map">Chapter map</h2>
+<div class="flow"><span>Entry barriers</span><i>→</i><span>Downward-sloping demand</span><i>→</i><span>MR versus MC: choose Q</span><i>→</i><span>Demand: read P</span><i>→</i><span>ATC: assess profit or loss</span><i>→</i><span>Output and surplus: evaluate pricing</span></div>
+<p class="hint"><b>中文邏輯</b><span>先用 MR、MC 找產量，再回需求線找價格；ATC 看利潤，D 與 MC 看少掉哪些有價值的交易。</span></p>
+
+<h2 id="power">1. Market power still faces demand</h2>
+<p class="sub">Control over entry creates pricing discretion, not unlimited willingness to pay.</p>
+<div class="tbl"><table><thead><tr><th>Concept</th><th>Definition</th><th>Do not confuse with</th></tr></thead><tbody>
+<tr><td><b>Monopoly</b><span class="zh">獨占</span></td><td>One seller in a defined product and geographic market, with no close substitutes.</td><td>Being the only shop in one building when buyers can easily go elsewhere.</td></tr>
+<tr><td><b>Market power</b><span class="zh">市場力量</span></td><td>Ability to sustain price above marginal cost; some differentiated firms have it without being sole sellers.</td><td>Guaranteed profit or an ability to choose P and Q independently.</td></tr>
+<tr><td><b>Entry barrier</b><span class="zh">進入障礙</span></td><td>A restriction or advantage that makes rival entry difficult.</td><td>High sales or market share alone.</td></tr>
+<tr><td><b>Natural monopoly</b></td><td>One firm can serve relevant demand at lower total cost than multiple firms.</td><td>A legal monopoly, resource control, or high fixed cost by itself.</td></tr></tbody></table></div>
+<div class="pair"><div><b>Class opening: Greene Planet</b><p>In <i>Quantum of Solace</i>, Dominic Greene's company seeks control of Bolivia's water supply. Exclusive access to an essential resource makes rival supply and substitution harder. The mechanism is control of an input.</p></div><div><b>Medicine and legal exclusion</b><p>The historical Combivir example links patent protection to restricted entry and pricing power. Scale economies, exclusive licenses, and temporary technological advantages are other possible barriers.</p></div></div>
+<p class="note-small">The medicine example uses historical prices and patent conditions.</p>
+<p>A price maker selects a feasible point on demand. Raising price generally reduces quantity demanded; a higher price can therefore reduce total revenue or profit. Define the market and available substitutes before judging how much pricing power a firm has.</p>
+
+<h2 id="revenue">2. Why marginal revenue is below price</h2>
+<p class="sub">The key is how an extra sale changes revenue across the whole sales plan.</p>
+<p><b>Demand D</b> shows the highest common price buyers will pay for each quantity. <b>Marginal revenue MR</b> shows how much total revenue increases when the seller expands output. They answer different questions.</p>
+<p>Under uniform pricing, a larger quantity requires a lower price on all units in that sales plan. The extra unit brings revenue in, while the lower price reduces receipts on the other units. As a result, <b>MR lies below D</b>. The relevant comparison is the extra revenue after this price effect, not simply the extra unit's selling price.</p>
+<div class="pair"><div><b>Competitive firm</b><p>Takes market price as given. An extra unit does not require a price cut on the other units, so MR=P.</p></div><div><b>Single-price monopolist</b><p>Faces downward-sloping demand. Expanding sales lowers the common price, so MR&lt;P.</p></div></div>
+<p class="key">If the next unit adds more revenue than cost, expansion improves profit. If it adds less, reducing output improves profit. The usual MR–MC crossing identifies where that incentive changes.</p>
+<details class="extra"><summary>Optional: linear demand and the numerical example</summary>
+<p>Linear demand is a straight-line relationship: each additional unit requires the same price reduction. For linear inverse demand, MR has the same vertical intercept and twice the negative slope. This shortcut is specific to linear demand.</p>
+<div class="formula">TR = P × Q; MR = ΔTR / ΔQ<br>P = a − bQ; continuous MR = a − 2bQ<br>D reaches zero at Q = a/b; MR reaches zero at Q = a/(2b)</div>
+<p>In MRU's example, two units at $16 earn $32. Three units at $14 earn $42. The extra unit adds $10: its $14 receipt minus the $4 lost on the other two units. For whole-unit tables, use the actual change in revenue rather than a continuous derivative.</p>
+</details>
+<details class="graph-guide"><summary>How to build this graph</summary>
+<ol class="steps">
+<li><span><b>Identify the question.</b> A single-price monopolist chooses along downward-sloping demand. Use Q on the horizontal axis and price/cost per unit on the vertical axis.</span></li>
+<li><span><b>Start with D, then add MR.</b> D gives buyers' price constraint. MR lies below it because expanding sales lowers the common price.</span></li>
+<li><span><b>Add MC and find output.</b> Locate the relevant MR–MC crossing and project down to Qm. For whole-unit tables, find where an additional unit stops improving profit; exact equality is not required.</span></li>
+<li><span><b>Move up to D for price.</b> At Qm, mark the point on D and read Pm. The height of the MR–MC crossing is not the selling price.</span></li>
+<li><span><b>Add only what the question needs.</b> For profit or loss, add ATC and compare it with Pm at Qm. For efficiency, find D–MC and mark Qe; excluded beneficial trades lie between D and MC.</span></li>
+</ol>
+<p class="key">Class drug graph: mark MR–MC at (80, 0.50), D at (80, 12.50), and ATC at (80, 2.50). These points share the same output but play different roles.</p>
+</details>
+
+<h2 id="water">3. The professor's whole-gallon decision</h2>
+<p class="sub">Compare the benefit and cost of the next unit, rather than chasing the largest revenue.</p>
+<p>The class example makes the marginal decision concrete. The fourth gallon still increases profit; the fifth reduces it. The best listed choice is therefore <b>four gallons per day at $7</b>, with <b>$11/day profit</b>.</p>
+<p>Revenue keeps rising beyond the best output, but additional production also costs resources. <b>More sales need not mean more profit.</b> When quantities come in whole units, the decision can switch from a profitable extra unit to an unprofitable one without any row having exactly equal MR and MC.</p>
+<div data-widget="water"></div>
+<p>At the chosen output, price lies above ATC, so the firm earns a profit. The vertical gap between P and ATC is profit per gallon; the rectangle's width is the number of gallons. Fixed cost is paid even with zero production in this short-run example, so shutdown can be worse than operating.</p>
+<details class="extra"><summary>Optional: professor's full table and calculations</summary>
+<div class="tbl"><table class="oil" aria-label="Professor's monopoly table, quantities in gallons per day"><thead><tr><th>Q/day</th><th>P</th><th>TR</th><th>FC</th><th>VC</th><th>TC</th><th>MR</th><th>MC</th><th>Profit/day</th></tr></thead><tbody>
+<tr><td>0</td><td>11</td><td>0</td><td>10</td><td>0</td><td>10</td><td>N/A</td><td>N/A</td><td>−10</td></tr>
+<tr><td>1</td><td>10</td><td>10</td><td>10</td><td>1</td><td>11</td><td>10</td><td>1</td><td>−1</td></tr>
+<tr><td>2</td><td>9</td><td>18</td><td>10</td><td>2</td><td>12</td><td>8</td><td>1</td><td>6</td></tr>
+<tr><td>3</td><td>8</td><td>24</td><td>10</td><td>4</td><td>14</td><td>6</td><td>2</td><td>10</td></tr>
+<tr class="best-row"><td>4</td><td>7</td><td>28</td><td>10</td><td>7</td><td>17</td><td>4</td><td>3</td><td>11</td></tr>
+<tr><td>5</td><td>6</td><td>30</td><td>10</td><td>11</td><td>21</td><td>2</td><td>4</td><td>9</td></tr>
+<tr><td>6</td><td>5</td><td>30</td><td>10</td><td>16</td><td>26</td><td>0</td><td>5</td><td>4</td></tr>
+<tr><td>7</td><td>4</td><td>28</td><td>10</td><td>22</td><td>32</td><td>−2</td><td>6</td><td>−4</td></tr>
+<tr><td>8</td><td>3</td><td>24</td><td>10</td><td>33</td><td>43</td><td>−4</td><td>11</td><td>−19</td></tr></tbody></table></div>
+<p class="note-small">Class table, slides 2–6. P is dollars/gallon; MR and MC are dollars per extra gallon; TR, FC, VC, TC, and profit are dollars/day.</p>
+
+<p>The fourth gallon adds 4−3=$1 to profit; the fifth adds 2−4=−$2. Revenue peaks at both Q=5 and Q=6, where profits are $9 and $4, below $11 at Q=4. Fixed cost is $10/day, so shutdown loses $10/day.</p>
+<div class="formula">ATC(4) = TC / Q = 17 / 4 = $4.25<br>Profit = (P − ATC)Q = (7 − 4.25) × 4 = $11/day</div>
+<p>MR and MC are the changes from the previous row. Use those whole-unit comparisons to identify when another gallon stops improving profit.</p>
+</details>
+
+<h2 id="medicine">4. From demand information to a drug price</h2>
+<p class="sub">Estimate demand, choose output, read price, then measure profit.</p>
+<p>The class advertisement shows <b>Magic Johnson and Combivir</b>. The accurate historical wording is an HIV-positive diagnosis. The economic discussion asks how a drug seller learns demand: research or consultants can estimate sales at alternative prices, taking account of substitutes, budgets, and who pays.</p>
+<div class="flow"><span>Define product, buyers and period</span><i>→</i><span>Estimate D</span><i>→</i><span>Construct TR and MR</span><i>→</i><span>Combine with MC</span><i>→</i><span>Choose Q, read P</span><i>→</i><span>Check ATC and profit</span></div>
+<p>Costs alone cannot identify the monopoly price. For any proposed Q, D gives its feasible common price; the most profitable Q also depends on MR and MC. Observed price/quantity pairs need not trace one stable demand curve if costs, substitution, or other conditions changed.</p>
+<div data-widget="monopoly" data-preset="drug"></div>
+<div class="three"><div><b>Output and price</b><p>MR=MC=$0.50 at <b>80 million pills</b>. Move up to D: <b>P=$12.50</b>.</p></div><div><b>Average total cost</b><p>The slide labels it AC. At that output, <b>ATC=$2.50</b>, so profit is $10/pill.</p></div><div><b>Total profit</b><p>TR=$1,000 million; TC=$200 million. Profit=<b>$800 million</b>.</p></div></div>
+<p>The graph separates three roles: <b>MC helps choose output, D determines its price, and ATC determines profit or loss</b>. Even a price well above MC can coexist with a loss if average total cost is higher still. In the class example, markup is $12 per pill, while profit per pill is $10.</p>
+<p class="note-small">Class drug example, slides 9–11. Quantity is in millions of pills; no sales period is specified.</p>
+<p class="hint"><b>中文邏輯</b><span>D 先回答各價格下能賣多少；MR、MC 再選最賺的產量。價格減 MC 是加價，價格減 ATC 才是每單位利潤。</span></p>
+
+<h2 id="markup">5. Elasticity, markup, and cost changes</h2>
+<p class="sub">Less price sensitivity can support a larger markup; a steeper line alone is not enough.</p>
+<p><b>Elasticity</b><span class="zh">需求彈性</span> measures percentage quantity response to percentage price change. Fewer close substitutes can make buyers less responsive. MRU's medicine discussion adds two mechanisms: serious illness can increase the priority of treatment, and third-party payment can reduce the user's sensitivity to the bill.</p>
+<div data-widget="elasticity" data-readout="optional"></div>
+<p><b>The intuition:</b> when buyers can easily switch, a price increase loses many sales and the seller's markup is constrained. With weaker substitutes, the seller can sustain a larger gap between price and MC. In the class comparison, “relatively inelastic” means less responsive than the other demand case.</p>
+<p>The standard positive-MC interior optimum remains on the <b>elastic part of demand</b>. On an inelastic part, reducing output and raising price would increase revenue while reducing variable cost, so the seller would want to change its choice.</p>
+<details class="extra"><summary>Optional: markup measures and the linear examples</summary>
+<div class="formula">Absolute markup = P − MC<br>Lerner index = (P − MC) / P = 1 / |ε|</div>
+<p>The Lerner formula applies at a differentiable, unconstrained interior single-price optimum; with positive MC, |ε|&gt;1. The comparison uses P=60−2Q and P=140−4Q, both with MC=20. Their optimal markups are 20 and 60, and elasticity magnitudes are 2 and 4/3. Both the intercept and slope change; steepness alone does not identify elasticity.</p>
+</details>
+
+
+<p>MRU's historical airline puzzle contrasts a Washington–Dallas ticket with a longer Washington–San Francisco journey through Dallas. Fewer convenient alternatives for the hub destination can support a larger markup. Distance alone does not determine fares.</p>
+<div class="tbl"><table><thead><tr><th>Change</th><th>Curve logic</th><th>Result, conditional on operating</th></tr></thead><tbody>
+<tr><td>Higher per-unit input cost</td><td>MC rises; D and MR stay fixed.</td><td>Lower Q and higher P in the linear-demand, constant-MC model.</td></tr>
+<tr><td>Higher unavoidable fixed cost</td><td>ATC rises; MC stays fixed.</td><td>Same optimal Q and P, lower profit.</td></tr>
+<tr><td>Higher demand intercept</td><td>D and MR shift upward.</td><td>Higher Q and P with the slope and MC unchanged.</td></tr></tbody></table></div>
+<p>A monopolist generally has <b>no demand-independent supply curve</b>. Output depends on demand/MR as well as costs; MC is not a competitive supply schedule that can be used without demand.</p>
+
+<h2 id="welfare">6. Profit, lost trades, and innovation</h2>
+<p class="sub">A transfer to the seller differs from a loss of combined gains.</p>
+<div class="tbl"><table><thead><tr><th>Object</th><th>Meaning</th><th>Graph / calculation</th></tr></thead><tbody>
+<tr><td>Consumer surplus<span class="zh">消費者剩餘</span></td><td>Willingness to pay minus payment.</td><td>Area below D and above price for units sold.</td></tr>
+<tr><td>Producer surplus</td><td>TR minus variable cost.</td><td>Revenue minus the area under MC.</td></tr>
+<tr><td>Economic profit<span class="zh">經濟利潤</span></td><td>TR minus all economic costs.</td><td>PS minus fixed cost in this model.</td></tr>
+<tr><td>Deadweight loss<span class="zh">無謂損失</span></td><td>Combined gains from trade that are lost.</td><td>Area between D and MC over excluded beneficial units.</td></tr></tbody></table></div>
+<p>Uniform monopoly pricing excludes some units whose WTP exceeds MC but falls below the monopoly price. Efficient output satisfies <b>D=MC</b>; monopoly output satisfies <b>MR=MC</b>. Lost consumer surplus includes both transfers and DWL.</p>
+<div data-widget="monopoly" data-preset="office" data-readout="optional"></div>
+<p>The monopoly price transfers some surplus from buyers to the seller. It also prevents trades that would create value because the buyer's willingness to pay exceeds the resource cost. <b>The transfer changes who receives the gains; the missing trades reduce total gains.</b> That is why all lost consumer surplus cannot be labeled DWL.</p>
+<p>Higher fixed cost can turn profit into a loss without changing the marginal output choice. If that fixed cost is unavoidable now, operating may still lose less than shutting down. Conversely, pricing at MC can serve efficient output while leaving fixed cost uncovered; efficient allocation and financing are separate questions.</p>
+<details class="extra"><summary>Optional: follow the MRU numerical example</summary>
+<p>With P=100−2Q, MC=20 and FC=100: Qm=20, Pm=60, ATC=25, profit=700, CS=400, PS=800 and DWL=400. Efficient Q=40 raises CS+PS from 1,200 to 1,600 before common fixed cost. Consumers lose 1,200: 800 transfers to the seller and 400 disappears.</p>
+<p>At FC=1,000, output and price stay unchanged, but ATC becomes 70 and profit becomes −200. Operating still beats losing the unavoidable 1,000 through shutdown.</p>
+</details>
+<div class="pair"><div><b>Static allocation</b><p>Use existing knowledge and resources efficiently. The diagram measures lost current trades.</p></div><div><b>Dynamic incentives</b><p>Expected patent profits may encourage innovation. Whether extra innovation outweighs access costs requires evidence.</p></div></div>
+<p>Patent buyouts and innovation prizes attempt to reward discovery separately from a high per-unit price. Their evaluation also requires financing, administration, and incentive effects. A possible innovation benefit does not validate every protected monopoly.</p>
+<p class="note-small">MRU Office Hours example. Surplus excludes fixed cost; economic profit deducts it.</p>
+
+<h2 id="discrimination">7. Different prices, different customers</h2>
+<p class="sub">Identify the information used, the resale constraint, and the relevant counterfactual.</p>
+<p><b>Price discrimination</b><span class="zh">差別取價</span> charges different prices for comparable units for reasons beyond different supply costs. Sustaining it requires pricing power, a way to segment customers or induce sorting, and limits on <b>arbitrage</b><span class="zh">套利轉售</span>.</p>
+<div class="tbl"><table><thead><tr><th>Device</th><th>Information / selection</th><th>Example</th></tr></thead><tbody>
+<tr><td>First-degree / perfect</td><td>Exact unit-level willingness to pay<span class="zh">願付價格</span>.</td><td>Charge each buyer's reservation value; sell while WTP≥MC.</td></tr>
+<tr><td>Second-degree</td><td>A menu induces self-selection.</td><td>Different usage plans or restricted/flexible tickets.</td></tr>
+<tr><td>Third-degree</td><td>Identify observable groups.</td><td>Student, senior, or other verified customer categories.</td></tr></tbody></table></div>
+<p>The class examples show <b>senior and student Rabbit cards</b>, and an admission sign charging <b>Thai visitors ฿10 and foreigners ฿50</b>. The cards illustrate observable categories; the sign shows a ฿40 gap and a fivefold price ratio.</p>
+<p class="note-small">Class examples, slide 15. Rabbit fare amounts are not shown. The photographed admission prices are historical; the price gap alone does not identify demand elasticity.</p>
+<p>Resale can defeat segmentation: full-price buyers obtain discounted units through others. ID checks or nontransferable admission can help sustain separate prices. If resale forces a uniform price, the new optimum need not equal the former low price. Product differences also matter: a business-class fare gap alone does not isolate discrimination.</p>
+<div data-widget="groups" data-readout="optional"></div>
+<p>Separate pricing lets the seller respond to each group's demand instead of compromising on one common price. The optimal group choices equate each group's MR with common MC. The group with less elastic demand at its chosen point supports a larger markup.</p>
+<p><b>Higher seller profit does not settle welfare.</b> In this example, total output stays unchanged, but sales shift away from higher-value marginal buyers in A toward lower-value buyers in B. The seller gains while combined gains fall. Who receives the units matters alongside how many are sold.</p>
+<p>Under <b>perfect discrimination</b>, the seller can charge each unit's WTP without lowering prices on the other units. It expands until WTP meets MC, serving efficient output and capturing the gains. Consumer surplus can fall to zero even as DWL disappears; efficiency does not imply that every buyer benefits.</p>
+<details class="extra"><summary>Optional: group demand and surplus figures</summary>
+<p>Group A: P=100−2Q. Group B: P=60−2Q. Common MC=20. At uniform P=50, A buys 25 and B buys 5; CS=650 and PS=900. Separate prices of 60 and 40 give quantities 20 and 10; CS=500 and PS=1,000. Total output remains 30 while total surplus falls by 50.</p>
+<p>Under perfect discrimination in the earlier MRU model, Q=40, CS=0, PS=1,600, and profit=1,500 after FC=100. There is no common selling price; the last unit pays 20.</p>
+</details>
+<p class="hint"><b>中文邏輯</b><span>先看怎麼分群、能不能轉賣，再看各群 MR。賣方多賺可能只是剩餘轉移；總量相同時，分配給誰也影響福利。</span></p>
+
+<h2 id="packages">8. Tying and bundling solve different problems</h2>
+<p class="sub">Usage metering differs from a fixed package; revenue differs from profit.</p>
+<div class="pair"><div><b>Tying and metering<span class="zh">搭售與計量</span></b><p>A base good is linked to repeated purchases of a tied good, such as a printer and required proprietary ink. A low access price can attract light users; recurring marked-up purchases collect more from heavy users.</p></div><div><b>Bundling<span class="zh">組合銷售</span></b><p>Two or more goods are sold as a package. Pure bundling offers only the package; mixed bundling also offers components separately. The fixed package does not charge each time an app is used.</p></div></div>
+<p>Tying can increase system adoption while an above-MC consumable price reduces use per adopter. Both margins matter for welfare. Complementarity alone does not prove a tie; some restriction or practical dependency must connect purchases.</p>
+<p>A package can solve a pricing problem: one buyer values the first component highly, while another values the second highly. Separate high prices lose some useful sales. If their combined values are more similar, one package price can appeal to both buyers and increase consumption.</p>
+<div data-widget="bundle" data-readout="optional"></div>
+<details class="extra"><summary>Optional: MRU buyer values and numerical comparison</summary>
+<div class="tbl"><table><thead><tr><th>MRU buyer values</th><th>Word</th><th>Excel</th><th>Bundle</th></tr></thead><tbody><tr><td>Amanda</td><td>$100</td><td>$20</td><td>$120</td></tr><tr><td>Yvonne</td><td>$40</td><td>$90</td><td>$130</td></tr></tbody></table></div>
+<p>At zero MC, separate Word=$100 and Excel=$90 earn $190. A $120 bundle sells to both and earns $240, an increase of $50, or about 26.3%. CS rises from zero to $10; total surplus rises from 190 to 250 because additional valuable components are consumed at zero incremental cost.</p>
+</details>
+<p>Opposite component preferences make the buyers' bundle values more similar. Negative correlation helps but is not necessary; low incremental cost and sufficiently concentrated package values matter. With positive MC, unwanted components can consume real resources. Higher revenue alone does not establish higher economic profit or welfare.</p>
+<p class="note-small">MRU Word–Excel example. Assume additive values, one copy per buyer, and purchase when indifferent. The baseline MC is zero; figures exclude development costs.</p>
+
+<h2 id="traps">9. Do not mix these up</h2>
+<div class="traps">
+<div><s>MR=MC gives the selling price.</s><p>It gives an output candidate; return to D for price.</p></div>
+<div><s>Maximize revenue in the water table.</s><p>Q=5 and 6 maximize TR; Q=4 maximizes profit.</p></div>
+<div><s>A discrete optimum needs exact equality.</s><p>The next unit can switch from MR&gt;MC to MR&lt;MC.</p></div>
+<div><s>P−MC is profit per unit.</s><p>Use P−ATC; total profit also needs Q.</p></div>
+<div><s>All lost consumer surplus is DWL.</s><p>Separate transfers from destroyed combined gains.</p></div>
+<div><s>Less elastic means the optimum is inelastic.</s><p>With positive MC, the standard interior optimum has |ε|&gt;1.</p></div>
+<div><s>Discrimination always raises total output.</s><p>Output and allocation depend on group demand and the counterfactual.</p></div>
+<div><s>More revenue proves a better bundle.</s><p>Subtract costs, then compare consumption and surplus.</p></div></div>
+
+<h2 id="coldcall">10. Cold call practice</h2>
+<div class="qa-tools"><button type="button" id="qaAll">Show all answers</button></div>
+<div class="qa">
+<details><summary>What makes a market a monopoly?</summary><p>One seller faces no close substitutes in a defined product and geographic market; entry barriers sustain its position.</p></details>
+<details><summary>What is marginal revenue?</summary><p>The change in total revenue from an additional unit. Under uniform monopoly pricing, it includes revenue lost by repricing earlier units.</p></details>
+<details><summary>What is economic profit?</summary><p>Total revenue minus all explicit and implicit economic costs, equal to (P−ATC)Q under a common price.</p></details>
+<details><summary>Why can a price maker not choose any price and quantity?</summary><p>Demand links the two. A higher common price generally means fewer sales, so the firm must choose a feasible point on demand.</p></details>
+<details><summary>What is deadweight loss?</summary><p>Lost total gains from trade. In the monopoly diagram, it lies between demand and MC over beneficial units not sold.</p></details>
+<details><summary>What sustains group price discrimination?</summary><p>Pricing power, workable segmentation or sorting, and limits on resale. Separate group demand and costs determine the optimal prices.</p></details>
+<details><summary>How does perfect discrimination change revenue?</summary><p>An extra unit can be sold at its own willingness to pay without reducing prior unit prices, so the seller expands while WTP covers MC.</p></details>
+<details><summary>How do static and dynamic efficiency differ?</summary><p>Static efficiency concerns current allocation; dynamic efficiency concerns future innovation and improvements. A current price diagram does not measure the latter.</p></details>
+</div>
+
+<h2 id="templates">11. Answer templates</h2>
+<div class="method"><b>Price and profit</b><p>“I ask whether another unit adds more revenue than cost. I identify the output where that incentive changes, then use demand to read its price. I compare price with ATC to explain profit or loss. For whole-unit choices, an exact MR–MC equality is unnecessary.”</p></div>
+<div class="method"><b>A change in costs</b><p>“I identify whether marginal or fixed cost changed. A marginal-cost increase changes the MR–MC output choice and the price read from D. An unavoidable fixed-cost increase lowers profit without changing that interior choice, conditional on operating.”</p></div>
+<div class="method"><b>Pricing and welfare</b><p>“I specify the feasible alternative, then compare quantities by buyer, willingness to pay, resource costs, CS, and PS. I deduct fixed and implementation costs where relevant. Greater seller profit alone does not settle welfare; innovation effects require separate evidence.”</p></div>
+<p class="note-small endnote">Continue from <a href="economics-s4.html">Session 4: competitive firms</a>, or return to <a href="economics.html">Economics sessions</a>.</p>
+</article></main></div>
+
+<script>/* Reusable economics widgets. Shared Plot and controls are embedded for offline use. */
+(() => {
+  'use strict';
+  const NS='http://www.w3.org/2000/svg'; let uid=0;
+  const money=n=>{const value=Math.round(Math.abs(n)*100)/100;return (n<0?'−$':'$')+value.toLocaleString('en-US',{minimumFractionDigits:Number.isInteger(value)?0:2,maximumFractionDigits:2});};
+  const num=n=>n.toLocaleString('en-US',{maximumFractionDigits:2});
+  const colors={d:'var(--demand)',mr:'var(--ext)',mc:'var(--supply)',atc:'var(--world)',cs:'var(--cs)',ps:'var(--ps)'};
+  function el(tag,attrs={},parent){const e=document.createElementNS(NS,tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));if(parent)parent.append(e);return e;}
+  function Plot(svg,qMax,pMax,pMin=0){
+    const W=Math.max(280,svg.getBoundingClientRect().width||500),H=340,L=48,R=18,T=28,B=51;
+    svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.replaceChildren();
+    const sx=q=>L+q/qMax*(W-L-R),sy=p=>H-B-(p-pMin)/(pMax-pMin)*(H-T-B);
+    const defs=el('defs',{},svg),clip=el('clipPath',{id:'plot-clip-'+(++uid)},defs);
+    el('rect',{x:L,y:T,width:W-L-R,height:H-T-B},clip);
+    const grid=el('g',{},svg),area=el('g',{'clip-path':'url(#'+clip.id+')'},svg),lines=el('g',{'clip-path':'url(#'+clip.id+')'},svg),top=el('g',{},svg);
+    const text=(x,y,s,attrs={})=>{const t=el('text',{x,y,class:'tk',...attrs},top);t.textContent=s;return t;};
+    return {sx,sy,W,H,
+      axes(xl,yl){el('line',{x1:L,y1:T,x2:L,y2:H-B,class:'ax'},grid);el('line',{x1:L,y1:H-B,x2:W-R,y2:H-B,class:'ax'},grid);text(L,T-12,yl,{class:'axl'});text((L+W-R)/2,H-8,xl,{'text-anchor':'middle',class:'axl'});},
+      xticks(values,fmt=num){values.forEach(q=>text(sx(q),H-B+19,fmt(q),{'text-anchor':'middle'}));},
+      yticks(values,fmt=num){values.forEach(p=>{el('line',{x1:L,y1:sy(p),x2:W-R,y2:sy(p),class:'grid'},grid);text(L-7,sy(p)+4,fmt(p),{'text-anchor':'end'});});},
+      path(points,color,dash=false){el('polyline',{points:points.map(([q,p])=>sx(q)+','+sy(p)).join(' '),fill:'none',stroke:color,'stroke-width':2.5,'stroke-dasharray':dash?'6 5':'none'},lines);},
+      line(a,b,color){this.path([[0,a],[qMax,a+b*qMax]],color);},
+      hline(p,color,dash=false){this.path([[0,p],[qMax,p]],color,dash);},
+      poly(points,cls){el('polygon',{points:points.map(([q,p])=>sx(q)+','+sy(p)).join(' '),class:cls},area);},
+      rect(q0,q1,p0,p1,cls){this.poly([[q0,p0],[q1,p0],[q1,p1],[q0,p1]],cls);},
+      guide(q,p){el('line',{x1:sx(q),y1:sy(p),x2:sx(q),y2:sy(pMin),class:'gd'},lines);el('line',{x1:L,y1:sy(p),x2:sx(q),y2:sy(p),class:'gd'},lines);},
+      point(q,p,color){el('circle',{cx:sx(q),cy:sy(p),r:4,fill:color,stroke:'var(--paper)','stroke-width':1.3},lines);},
+      bar(q,value,color){el('rect',{x:sx(q-.28),y:sy(value),width:sx(q+.28)-sx(q-.28),height:Math.max(0,sy(0)-sy(value)),fill:color},area);text(sx(q),sy(value)-8,num(value),{'text-anchor':'middle'});}
+    };
+  }
+  function shell(host,title,sub,legend,twinTitles){
+    host.classList.add('graph','wide');const id='econ-'+(++uid);
+    host.innerHTML='<div class="g-head"><span class="g-kicker">Interactive graph</span><h4></h4><p></p></div><div class="plot-legend"></div><div class="g-body"><div class="g-plot"></div><div class="g-side"><div class="g-ctrl"></div><dl class="g-stats" aria-live="off"></dl></div></div><p class="g-note" aria-live="polite"></p>';
+    host.querySelector('h4').textContent=title;host.querySelector('.g-head p').textContent=sub;
+    const leg=host.querySelector('.plot-legend');legend.forEach(([s,c])=>{const item=document.createElement('span'),sw=document.createElement('i');sw.style.background=c;sw.className='sw ln';item.append(sw,document.createTextNode(s));leg.append(item);});
+    if(host.dataset.readout==='optional'){
+      const side=host.querySelector('.g-side'),stats=host.querySelector('.g-stats'),note=host.querySelector('.g-note');
+      const reading=document.createElement('div'),details=document.createElement('details'),summary=document.createElement('summary');
+      reading.className='g-reading';details.className='number-readout';summary.textContent='View numerical readout';details.append(summary,stats);reading.append(note,details);side.append(reading);
+    }
+    const plot=host.querySelector('.g-plot'),svgs=[];
+    if(twinTitles){plot.classList.add('twin');twinTitles.forEach(name=>{const div=document.createElement('div'),t=document.createElement('p');t.className='tw-t';t.textContent=name;div.append(t);const svg=el('svg',{role:'img','aria-label':title+': '+name},div);plot.append(div);svgs.push(svg);});}
+    else svgs.push(el('svg',{role:'img','aria-label':title},plot));
+    const ctrl=host.querySelector('.g-ctrl');
+    return {svgs,host,
+      slider(key,label,min,max,step,value,format,on){const row=document.createElement('div');row.className='sl';const lab=document.createElement('label'),span=document.createElement('span'),output=document.createElement('output'),input=document.createElement('input');input.type='range';input.setAttribute('aria-label',label);Object.assign(input,{id:id+'-'+key,min,max,step,value});lab.htmlFor=input.id;span.textContent=label;lab.append(span,output);output.htmlFor=input.id;row.append(lab,input);ctrl.append(row);const sync=()=>output.textContent=format(+input.value);input.addEventListener('input',()=>{sync();on(+input.value);});sync();return {set(v){input.value=v;sync();},input};},
+      button(label,on){const b=document.createElement('button');b.type='button';b.className='g-btn';b.textContent=label;b.addEventListener('click',on);ctrl.append(b);return b;},
+      seg(label,options,value,on){const group=document.createElement('div');group.className='seg';group.setAttribute('role','group');group.setAttribute('aria-label',label);options.forEach(([v,t])=>{const b=document.createElement('button');b.type='button';b.textContent=t;b.dataset.value=v;b.setAttribute('aria-pressed',String(v===value));b.addEventListener('click',()=>{[...group.children].forEach(x=>x.setAttribute('aria-pressed',String(x===b)));on(v);});group.append(b);});ctrl.append(group);},
+      show(rows,note){const stats=host.querySelector('.g-stats');stats.replaceChildren();rows.forEach(([key,value,big=false])=>{const row=document.createElement('div');row.className='st'+(big?' big':'');row.dataset.stat=key;const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=key;dd.textContent=value;row.append(dt,dd);stats.append(row);});host.querySelector('.g-note').textContent=note;},
+      redrawOnResize(draw){let last='';const obs=new ResizeObserver(()=>{const widths=svgs.map(svg=>Math.round(svg.getBoundingClientRect().width)).join('|');if(widths!==last){last=widths;draw();}});obs.observe(plot);svgs.forEach(svg=>obs.observe(svg.parentElement));}
+    };
+  }
+  const W_={};
+  W_.water=host=>{
+    const vc=[0,1,2,4,7,11,16,22,33],tc=vc.map(v=>v+10),price=q=>11-q,tr=q=>q*price(q),profit=q=>tr(q)-tc[q];
+    const s=shell(host,'Compare the next whole gallon','Predict whether moving from three to four, then five gallons improves profit. Drag Q or reveal the best listed choice.',[['D',colors.d],['ATC',colors.atc],['MR',colors.mr],['MC',colors.mc]],['Demand, ATC, and profit','Per-gallon marginal values']);let q=3,revealed=false;
+    const draw=()=>{
+      const A=Plot(s.svgs[0],8.6,12),B=Plot(s.svgs[1],8.6,12,-5);
+      A.axes('Gallons per day','Dollars / gallon');A.xticks([0,2,4,6,8]);A.yticks([0,4,8,12]);
+      if(q)A.rect(0,q,price(q),tc[q]/q,profit(q)>=0?'a-prof':'a-loss');
+      A.path(Array.from({length:9},(_,i)=>[i,price(i)]),colors.d);A.path(Array.from({length:8},(_,i)=>[i+1,tc[i+1]/(i+1)]),colors.atc);
+      A.guide(q,price(q));A.point(q,price(q),colors.d);if(q)A.point(q,tc[q]/q,colors.atc);
+      B.axes('Additional gallon Q','Dollars / extra gallon');B.xticks([1,2,3,4,5,6,7,8]);B.yticks([-4,0,4,8,12]);
+      for(let i=1;i<=8;i++){B.point(i-.08,tr(i)-tr(i-1),colors.mr);B.point(i+.08,tc[i]-tc[i-1],colors.mc);}
+      if(q)B.guide(q,tr(q)-tr(q-1));
+      const marginal=q?'This gallon adds '+money(tr(q)-tr(q-1))+' of revenue and costs '+money(tc[q]-tc[q-1])+'. ':'';
+      s.show([['Chosen output',q+' gallons/day',true],['Price',money(price(q))+'/gallon'],['Revenue',money(tr(q))+'/day'],['Total cost',money(tc[q])+'/day'],['ATC',q?money(tc[q]/q)+'/gallon':'Undefined at Q=0'],['Profit',money(profit(q))+'/day',true]],marginal+(revealed?'The greatest listed profit is $11/day at Q=4. The fifth gallon reduces profit by $2.':'Move one step at a time. Compare total profit, not total revenue.'));
+    };
+    const control=s.slider('q','Chosen daily quantity',0,8,1,q,v=>v+' gallons',v=>{q=v;draw();});s.button('Reveal best listed output',()=>{q=4;revealed=true;control.set(q);draw();});draw();s.redrawOnResize(draw);
+  };
+  function monopolyModel(a,b,c,fc,regime='uniform'){
+    const qe=(a-c)/b,q=regime==='uniform'?qe/2:qe,p=regime==='efficient'?c:a-b*q;
+    const cs=regime==='perfect'?0:.5*(a-p)*q;
+    const ps=regime==='perfect'?(a-c)*q-.5*b*q*q:(p-c)*q;
+    return {q,qe,p,cs,ps,profit:ps-fc,atc:c+fc/q,dwl:.5*b*(qe-q)**2};
+  }
+  function drawMonopoly(svg,a,b,c,fc,choice,regime='uniform',drug=false){
+    const P=Plot(svg,drug?170:52,drug?26:108);P.axes(drug?'Quantity (million pills)':'Quantity','Price / unit');P.xticks(drug?[0,40,80,120,160]:[0,10,20,30,40,50]);P.yticks(drug?[0,5,10,15,20,25]:[0,20,40,60,80,100]);
+    const m=monopolyModel(a,b,c,fc,regime),q=choice??m.q,p=a-b*q;
+    if(drug){P.rect(0,q,c+fc/q,p,(p-c-fc/q)>=0?'a-prof':'a-loss');}
+    else if(regime==='perfect'){P.poly([[0,c],[0,a],[m.q,c]],'a-ps');}
+    else{P.poly([[0,m.p],[0,a],[m.q,m.p]],'a-cs');P.rect(0,m.q,c,m.p,'a-ps');if(regime==='uniform')P.poly([[m.q,c],[m.q,m.p],[m.qe,c]],'a-dwl');}
+    P.line(a,-b,colors.d);P.line(a,-2*b,colors.mr);P.hline(c,colors.mc);
+    const pts=[];for(let x=.5;x<=(drug?170:52);x+=.5)pts.push([x,c+fc/x]);P.path(pts,colors.atc);
+    P.guide(q,regime==='efficient'?c:p);P.point(q,p,colors.d);P.point(q,c+fc/q,colors.atc);P.point(q,a-2*b*q,colors.mr);
+    return m;
+  }
+  W_.monopoly=host=>{
+    const drug=host.dataset.preset==='drug';
+    const s=shell(host,drug?'Choose output, then read the drug price':'Explore costs, profit, and lost trades',drug?'Before revealing the optimum, predict what happens when output exceeds the MR–MC crossing.':'Predict what changes when MC rises or only FC rises. Compare uniform pricing with the efficient allocation and perfect discrimination.',[['D',colors.d],['MR',colors.mr],['MC',colors.mc],['ATC',colors.atc],...(!drug?[['CS',colors.cs],['PS',colors.ps],['DWL','var(--dwl)']]:[])]);
+    let q=60,c=20,fc=100,regime='uniform';
+    const draw=()=>{
+      if(drug){const a=24.5,b=.15,mc=.5,fixed=160;drawMonopoly(s.svgs[0],a,b,mc,fixed,q,'uniform',true);const p=a-b*q,atc=mc+fixed/q,pi=p*q-mc*q-fixed;
+        s.show([['Chosen output',num(q)+' million pills',true],['Price on demand',money(p)+'/pill'],['MR at chosen Q',money(a-2*b*q)+'/pill'],['MC',money(mc)+'/pill'],['ATC',money(atc)+'/pill'],['Total profit',money(pi)+' million',true]],q===80?'At 80 million pills, MR=MC=$0.50. D gives $12.50, ATC is $2.50, and total profit is $800 million.':(a-2*b*q>mc?'MR exceeds MC at this quantity, so a small output increase improves profit.':'MR is below MC at this quantity, so reducing output improves profit.'));
+      }else{const m=drawMonopoly(s.svgs[0],100,2,c,fc,null,regime);
+        s.show([['Output',num(m.q),true],['Price',regime==='perfect'?'Varies; last '+money(c):money(m.p)],['ATC',money(m.atc)],['Economic profit',money(m.profit),true],['Consumer surplus',money(m.cs)],['Producer surplus',money(m.ps)],['Deadweight loss',money(m.dwl)]],regime==='perfect'?'Each unit pays its own WTP. D supplies marginal unit receipts; the conventional MR line remains a reference for uniform pricing.':regime==='efficient'?'D=MC gives efficient output. The price covers variable cost but leaves the fixed cost uncovered.':'MR=MC determines Q; D gives P. Producer surplus excludes FC; profit subtracts it. Shutdown would lose '+money(fc)+' when FC is unavoidable.');
+      }
+    };
+    if(drug){const slider=s.slider('q','Proposed output',10,160,1,q,v=>v+' million pills',v=>{q=v;draw();});s.button('Reveal profit-maximizing output',()=>{q=80;slider.set(q);draw();});}
+    else{s.seg('Pricing regime',[['uniform','Uniform monopoly'],['efficient','MC-price benchmark'],['perfect','Perfect discrimination']],regime,v=>{regime=v;draw();});const cost=s.slider('mc','Marginal cost',0,60,1,c,money,v=>{c=v;draw();}),fixed=s.slider('fc','Unavoidable fixed cost',0,1000,10,fc,money,v=>{fc=v;draw();});s.button('Reset MRU example',()=>{c=20;fc=100;regime='uniform';s.host.querySelectorAll('.seg button').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.value==='uniform')));cost.set(c);fixed.set(fc);draw();});}
+    draw();s.redrawOnResize(draw);
+  };
+  W_.elasticity=host=>{
+    const s=shell(host,'Compare two demand environments','Keep MC=20. Switch between the two cases and compare the optimal markup and point elasticity.',[['D',colors.d],['MR',colors.mr],['MC',colors.mc]]);let choice='more';
+    const draw=()=>{const [a,b]=choice==='more'?[60,2]:[140,4],m=monopolyModel(a,b,20,0),eps=m.p/(b*m.q);const P=Plot(s.svgs[0],38,150);P.axes('Quantity','Price / unit');P.xticks([0,10,20,30]);P.yticks([0,30,60,90,120,150]);P.line(a,-b,colors.d);P.line(a,-2*b,colors.mr);P.hline(20,colors.mc);P.guide(m.q,m.p);P.point(m.q,m.p,colors.d);P.point(m.q,20,colors.mc);
+      s.show([['Demand',`P = ${a} − ${b}Q`],['Optimal Q',num(m.q)],['Price',money(m.p)],['Absolute markup',money(m.p-20),true],['|Point elasticity|',num(eps),true],['Lerner index',num((m.p-20)/m.p)]],'Both optima are elastic. Both the intercept and slope change; slope alone does not identify elasticity.');};
+    s.seg('Demand environment',[['more','More elastic'],['less','Less elastic']],choice,v=>{choice=v;draw();});draw();s.redrawOnResize(draw);
+  };
+  W_.groups=host=>{
+    const s=shell(host,'Uniform price versus separate group prices','Predict whether total output must rise when the seller can charge each group separately.',[['D',colors.d],['MR',colors.mr],['MC',colors.mc]],['Group A','Group B']);let separate=false;
+    const draw=()=>{const qA=separate?20:25,qB=separate?10:5,pA=separate?60:50,pB=separate?40:50;
+      [[100,qA,pA],[60,qB,pB]].forEach(([a,q,p],i)=>{const P=Plot(s.svgs[i],52,108);P.axes('Group quantity','Price');P.xticks([0,10,20,30,40,50]);P.yticks([0,20,40,60,80,100]);P.poly([[0,p],[0,a],[q,p]],'a-cs');P.rect(0,q,20,p,'a-ps');P.line(a,-2,colors.d);P.line(a,-4,colors.mr);P.hline(20,colors.mc);P.guide(q,p);P.point(q,p,colors.d);});
+      const cs=.5*(100-pA)*qA+.5*(60-pB)*qB,ps=(pA-20)*qA+(pB-20)*qB;
+      s.show([['A: Q; price',qA+'; '+money(pA)],['B: Q; price',qB+'; '+money(pB)],['Total quantity',String(qA+qB),true],['Consumer surplus',money(cs)],['PS before fixed cost',money(ps)],['Total surplus',money(cs+ps),true]],separate?'Separate prices let each group respond to its own demand. Profit rises here, but total output is unchanged and the altered allocation lowers combined gains.':"One common price links the two groups' sales decisions. The optimum need not make each group's MR equal MC, because changing that price affects both groups.");};
+    s.seg('Group pricing',[['uniform','One common price'],['separate','Separate group prices']],'uniform',v=>{separate=v==='separate';draw();});draw();s.redrawOnResize(draw);
+    const note=document.createElement('p');note.className='note-small';note.textContent='MC=20, no resale or capacity constraint. Surplus is shown before common fixed cost.';host.after(note);
+  };
+  W_.bundle=host=>{
+    const s=shell(host,'Choose separate prices or a bundle','Predict which buyers purchase, then change prices or per-component marginal cost.',[['Revenue',colors.ps],['Variable cost',colors.mc],['Consumer surplus',colors.cs]]);let mode='separate',pw=100,pe=90,pb=120,c=0;
+    const values=[[100,20],[40,90]];
+    function outcome(w,e,b,cost,bundle){let tr=0,vc=0,cs=0,units=0;values.forEach(v=>{if(bundle){if(v[0]+v[1]>=b){tr+=b;vc+=2*cost;cs+=v[0]+v[1]-b;units+=2;}}else{[w,e].forEach((p,i)=>{if(v[i]>=p){tr+=p;vc+=cost;cs+=v[i]-p;units++;}});}});return {tr,vc,cs,units,ps:tr-vc};}
+    const draw=()=>{const m=outcome(pw,pe,pb,c,mode==='bundle'),P=Plot(s.svgs[0],3.8,400);P.axes('Outcome category','Dollars');P.xticks([1,2,3],v=>['','TR','VC','CS'][v]);P.yticks([0,100,200,300,400]);P.bar(1,m.tr,colors.ps);P.bar(2,m.vc,colors.mc);P.bar(3,m.cs,colors.cs);
+      s.show([['Mode',mode==='bundle'?'Bundle':'Separate components'],['Component units sold',String(m.units)],['Revenue',money(m.tr)],['Variable cost',money(m.vc)],['Contribution before FC',money(m.ps),true],['Consumer surplus',money(m.cs)],['Total surplus before FC',money(m.cs+m.ps)]],mode==='bundle'?'Each buyer purchases one bundle if combined WTP covers its price. Both included components incur the chosen MC.':'Each buyer separately purchases each component whose WTP covers its price. Contribution subtracts variable cost, not development FC.');};
+    s.seg('Selling method',[['separate','Separate sales'],['bundle','Bundle']],mode,v=>{mode=v;syncVisibility();draw();});
+    const word=s.slider('word','Word price',0,130,1,pw,money,v=>{pw=v;draw();}),excel=s.slider('excel','Excel price',0,130,1,pe,money,v=>{pe=v;draw();}),bundle=s.slider('bundle','Bundle price',0,150,1,pb,money,v=>{pb=v;draw();});s.slider('mc','MC per component',0,80,1,c,money,v=>{c=v;draw();});
+    function syncVisibility(){word.input.closest('.sl').hidden=mode==='bundle';excel.input.closest('.sl').hidden=mode==='bundle';bundle.input.closest('.sl').hidden=mode!=='bundle';}
+    s.button('Use best prices at this MC',()=>{if(mode==='bundle'){const opts=[120,130,131];pb=opts.reduce((best,p)=>outcome(pw,pe,p,c,true).ps>outcome(pw,pe,best,c,true).ps?p:best,opts[0]);bundle.set(pb);}else{let best=-Infinity;for(const w of [40,100,101])for(const e of [20,90,91]){const m=outcome(w,e,pb,c,false);if(m.ps>best){best=m.ps;pw=w;pe=e;}}word.set(pw);excel.set(pe);}draw();});syncVisibility();draw();s.redrawOnResize(draw);
+  };
+  window.EconWidgets={mount(root){root.querySelectorAll('[data-widget]').forEach(host=>{const init=W_[host.dataset.widget];if(init&&!host.dataset.ready){host.dataset.ready='1';init(host);}});}};
+})();
+</script>
+<script>
+(() => {
+ const toc=document.getElementById('toc'),rail=document.getElementById('rail'),button=document.getElementById('tocBtn');
+ const headings=[...document.querySelectorAll('.doc > h2,.doc > h3')];
+ headings.forEach(h=>{const li=document.createElement('li'),a=document.createElement('a');li.className=h.tagName.toLowerCase();li.dataset.id=h.id;a.href='#'+h.id;a.textContent=h.textContent;li.append(a);toc.append(li);});
+ const spy=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;toc.querySelectorAll('.on').forEach(a=>a.classList.remove('on'));const a=toc.querySelector('[data-id="'+e.target.id+'"] a');if(a)a.classList.add('on');}),{rootMargin:'-100px 0px -65% 0px'});headings.forEach(h=>spy.observe(h));
+ function close(){rail.classList.remove('open');button.setAttribute('aria-expanded','false');}
+ button.addEventListener('click',()=>{const open=rail.classList.toggle('open');button.setAttribute('aria-expanded',String(open));});
+ toc.addEventListener('click',e=>{if(e.target.closest('a'))close();});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&rail.classList.contains('open')){close();button.focus();}});
+ const all=document.getElementById('qaAll');all.addEventListener('click',()=>{const ds=[...document.querySelectorAll('.qa details')],open=!ds.every(d=>d.open);ds.forEach(d=>d.open=open);all.textContent=open?'Hide all answers':'Show all answers';});
+ window.EconWidgets.mount(document);
+})();
+</script>
+</body></html>
