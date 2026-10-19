@@ -1,16 +1,17 @@
 <!DOCTYPE html>
+
 <html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/><title>Lee Medical Supply · Management</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
 <style>
-/* Layout: one reading column with a sticky chapter rail; colors follow system appearance. */
+/* Layout: one light reading column with a sticky chapter rail; deliberately single (light) theme. */
 :root {
   color-scheme: light;
-  --bg: var(--tone-fdf9f9); --panel: var(--tone-f8eef0); --paper: var(--tone-ffffff); --tint: var(--tone-fae9ed); --line: var(--tone-efdde2);
-  --fg: var(--tone-2f282b); --muted: var(--tone-7e6f74); --accent: var(--tone-c06c84); --accent-ink: var(--tone-9c4862);
-  --demand: var(--tone-3f5675); --supply: var(--tone-c06c84); --ext: var(--tone-6e3f55); --world: var(--tone-8a7a5c); --policy: var(--tone-3f7f7a);
-  --cs: var(--tone-a7cdb6); --ps: var(--tone-b2c4e3); --dwl: var(--tone-d9674f); --rev: var(--tone-e5c171); --rev2: var(--tone-f1dca8); --time: var(--tone-ddb3cb); --ts: var(--tone-bfdcc9);
+  --bg: #FDF9F9; --panel: #F8EEF0; --paper: #FFFFFF; --tint: #FAE9ED; --line: #EFDDE2;
+  --fg: #2F282B; --muted: #7E6F74; --accent: #C06C84; --accent-ink: #9C4862;
+  --demand: #3F5675; --supply: #C06C84; --ext: #6E3F55; --world: #8A7A5C; --policy: #3F7F7A;
+  --cs: #A7CDB6; --ps: #B2C4E3; --dwl: #D9674F; --rev: #E5C171; --rev2: #F1DCA8; --time: #DDB3CB; --ts: #BFDCC9;
   --serif: "Noto Serif TC", "Songti TC", Georgia, serif;
   --sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
@@ -22,7 +23,7 @@ body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-s
 a { color: var(--accent-ink); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(var(--header-rgb), .94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); padding-inline: 16px; }
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(253, 249, 249, .94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); padding-inline: 16px; }
 .top-in { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 14px; min-height: 56px; flex-wrap: wrap; padding-block: 8px; }
 .brand { font-family: var(--serif); font-weight: 700; font-size: 1.02rem; white-space: nowrap; }
 .brand small { font-family: var(--sans); font-weight: 500; color: var(--muted); font-size: .76rem; margin-left: 6px; letter-spacing: .06em; }
@@ -32,7 +33,7 @@ a { color: var(--accent-ink); }
 .sessions a.pill { text-decoration: none; transition: border-color .15s, color .15s; }
 .sessions a.pill:hover, .sessions a.pill:focus-visible { border-color: var(--accent); color: var(--accent-ink); background: var(--tint); }
 .sessions .pill { font: 500 .82rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--muted); padding: 4px 12px; border-radius: 999px; }
-.sessions .pill[aria-current="page"] { background: var(--accent); border-color: var(--accent); color: var(--tone-ffffff); }
+.sessions .pill[aria-current="page"] { background: var(--accent); border-color: var(--accent); color: #fff; }
 .sessions .pill.off { opacity: .5; cursor: not-allowed; }
 .toc-btn { display: none; font: 500 .85rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--fg); border-radius: 8px; padding: 5px 12px; }
 
@@ -57,12 +58,12 @@ main { min-width: 0; padding-block: 30px 120px; }
 .doc h2 { font-family: var(--serif); font-size: 1.55rem; line-height: 1.35; margin: 3.4rem 0 .3rem; text-wrap: balance; }
 .doc h3 { font-size: 1.1rem; line-height: 1.45; margin: 2.2rem 0 .5rem; color: var(--accent-ink); text-wrap: balance; }
 .sub { margin: 0 0 1.2rem; color: var(--muted); max-width: 66ch; }
-.doc p, .doc li { max-width: none; }
+.doc p, .doc li { max-width: 68ch; }
 .doc ul, .doc ol { padding-left: 1.25em; }
 .doc li { margin: .25rem 0; }
 .zh { display: inline-block; font-size: .78em; line-height: 1.3; color: var(--accent-ink); background: var(--tint); padding: 0 6px; border-radius: 4px; margin-left: 2px; vertical-align: 1px; font-weight: 500; }
 .hint { font-size: .9rem; color: var(--muted); display: flex; gap: 10px; align-items: baseline; }
-.hint b { flex: none; font-size: .72rem; color: var(--tone-ffffff); background: var(--accent); padding: 0 7px; border-radius: 4px; font-weight: 500; }
+.hint b { flex: none; font-size: .72rem; color: #fff; background: var(--accent); padding: 0 7px; border-radius: 4px; font-weight: 500; }
 .key { background: var(--tint); padding: 12px 16px; border-radius: 8px; font-weight: 500; }
 .note-small { font-size: .8rem; color: var(--muted); }
 
@@ -195,7 +196,7 @@ svg polyline.cv { fill: none !important; }
 /* Management components */
 .three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 1rem 0; }
 .tcard { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
-.tcard .tnum { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: var(--tone-ffffff); font: 700 .78rem/24px var(--sans); text-align: center; }
+.tcard .tnum { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font: 700 .78rem/24px var(--sans); text-align: center; }
 .tcard p { margin: 0; color: var(--muted); font-size: .88rem; }
 .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
 .tags span { font-size: .74rem; background: var(--tint); color: var(--accent-ink); padding: 1px 8px; border-radius: 999px; font-weight: 500; }
@@ -215,11 +216,11 @@ svg polyline.cv { fill: none !important; }
 .lv { grid-column: 1; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; font-weight: 700; font-size: .9rem; line-height: 1.35; }
 .lv small { display: block; font-weight: 400; color: var(--muted); font-size: .78rem; }
 .lv.l5 { grid-row: 1; margin-inline: 22%; } .lv.l4 { grid-row: 2; margin-inline: 16%; } .lv.l3 { grid-row: 3; margin-inline: 10%; } .lv.l2 { grid-row: 4; margin-inline: 5%; } .lv.l1 { grid-row: 5; }
-.lv.l5, .lv.l4 { background: var(--tone-f6e9f4); } .lv.l3 { background: var(--tint); } .lv.l2, .lv.l1 { background: var(--tone-eaf2ee); }
+.lv.l5, .lv.l4 { background: #F6E9F4; } .lv.l3 { background: var(--tint); } .lv.l2, .lv.l1 { background: #EAF2EE; }
 .erg { border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .84rem; text-align: center; padding: 6px; }
-.erg.g { grid-column: 2; grid-row: 1 / span 2; background: var(--tone-ebd7ea); color: var(--tone-6e3f6a); }
+.erg.g { grid-column: 2; grid-row: 1 / span 2; background: #EBD7EA; color: #6E3F6A; }
 .erg.r { grid-column: 3; grid-row: 2 / span 2; background: var(--tint); color: var(--accent-ink); }
-.erg.e { grid-column: 2; grid-row: 4 / span 2; background: var(--tone-d9ebe1); color: var(--tone-2f6b4f); }
+.erg.e { grid-column: 2; grid-row: 4 / span 2; background: #D9EBE1; color: #2F6B4F; }
 
 .mw { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px; margin: 1.6rem 0 2rem; }
 .mw-body { margin-top: 10px; }
@@ -228,14 +229,14 @@ svg polyline.cv { fill: none !important; }
 .chips { display: flex; flex-direction: column; gap: 5px; }
 .chip { display: flex; justify-content: space-between; gap: 10px; font: 500 .84rem var(--sans); text-align: left; background: var(--bg); border: 1px solid var(--line); color: var(--fg); border-radius: 7px; padding: 6px 10px; cursor: pointer; }
 .chip em { font-style: normal; font-size: .74rem; color: var(--muted); }
-.hz-cols > div:first-child .chip[aria-pressed="true"] { border-color: var(--dwl); background: var(--tone-fcedea); }
-.hz-cols > div:first-child .chip[aria-pressed="true"] em { color: var(--tone-a8432f); }
-.hz-cols > div:last-child .chip[aria-pressed="true"] { border-color: var(--tone-6fae8b); background: var(--tone-eaf5ee); }
-.hz-cols > div:last-child .chip[aria-pressed="true"] em { color: var(--tone-2f6b4f); }
+.hz-cols > div:first-child .chip[aria-pressed="true"] { border-color: var(--dwl); background: #FCEDEA; }
+.hz-cols > div:first-child .chip[aria-pressed="true"] em { color: #A8432F; }
+.hz-cols > div:last-child .chip[aria-pressed="true"] { border-color: #6FAE8B; background: #EAF5EE; }
+.hz-cols > div:last-child .chip[aria-pressed="true"] em { color: #2F6B4F; }
 .scale { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 6px; margin-top: 18px; }
 .half { height: 14px; background: var(--bg); border: 1px solid var(--line); border-radius: 7px; position: relative; overflow: hidden; }
 .half i { position: absolute; top: 0; bottom: 0; transition: width .25s; }
-.half.left i { right: 0; background: var(--dwl); } .half.right i { left: 0; background: var(--tone-6fae8b); }
+.half.left i { right: 0; background: var(--dwl); } .half.right i { left: 0; background: #6FAE8B; }
 @media (prefers-reduced-motion: reduce) { .half i { transition: none; } }
 .zero { font: 700 .8rem var(--mono); color: var(--muted); }
 .scale-l { display: flex; justify-content: space-between; font-size: .74rem; color: var(--muted); margin-top: 4px; }
@@ -245,7 +246,7 @@ svg polyline.cv { fill: none !important; }
 .kpi-flow > i { font-style: normal; color: var(--accent); font-weight: 700; align-self: center; }
 .kpi-flow b { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 .kpi-flow p { margin: 3px 0 0; } .kpi-flow ul { margin: 3px 0 0; padding-left: 1.1em; }
-.kpi-flow .bad { border-color: var(--dwl); background: var(--tone-fcedea); } .kpi-flow .good { border-color: var(--tone-6fae8b); background: var(--tone-eaf5ee); }
+.kpi-flow .bad { border-color: var(--dwl); background: #FCEDEA; } .kpi-flow .good { border-color: #6FAE8B; background: #EAF5EE; }
 
 .cmp-sel { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; font-size: .84rem; color: var(--muted); }
 .cmp-sel select { font: 500 .88rem var(--sans); padding: 5px 8px; border: 1px solid var(--line); border-radius: 7px; background: var(--paper); color: var(--fg); }
@@ -258,8 +259,8 @@ table.cmp td:first-child { font-weight: 700; color: var(--muted); width: 22%; }
 .ev > div { display: grid; grid-template-columns: 190px auto minmax(0, 1fr); gap: 10px; align-items: baseline; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; font-size: .86rem; line-height: 1.5; }
 .ev p { margin: 0; }
 .tag { font-size: .72rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; white-space: nowrap; }
-.tag.gap { background: var(--tone-fce3dd); color: var(--tone-a8432f); } .tag.ok { background: var(--tone-e3f2e9); color: var(--tone-2f6b4f); }
-.tag.maybe { background: var(--tone-fbf0d9); color: var(--tone-8a6216); } .tag.na { background: var(--tone-eee9eb); color: var(--muted); }
+.tag.gap { background: #FCE3DD; color: #A8432F; } .tag.ok { background: #E3F2E9; color: #2F6B4F; }
+.tag.maybe { background: #FBF0D9; color: #8A6216; } .tag.na { background: #EEE9EB; color: var(--muted); }
 .issue { margin-top: 12px; background: var(--tint); border-radius: 8px; padding: 10px 14px; font-size: .9rem; }
 .issue p { margin: 4px 0 0; }
 
@@ -267,7 +268,7 @@ table.cmp td:first-child { font-weight: 700; color: var(--muted); width: 22%; }
 .xgrid > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 5px; font-size: .84rem; line-height: 1.4; }
 .xgrid small { color: var(--muted); font-size: .76rem; }
 .xgrid .ok, .xgrid .gap { align-self: flex-start; font-size: .72rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; }
-.xgrid .ok { background: var(--tone-e3f2e9); color: var(--tone-2f6b4f); } .xgrid .gap { background: var(--tone-fce3dd); color: var(--tone-a8432f); }
+.xgrid .ok { background: #E3F2E9; color: #2F6B4F; } .xgrid .gap { background: #FCE3DD; color: #A8432F; }
 
 @media (max-width: 760px) {
   .three, .four { grid-template-columns: minmax(0, 1fr); }
@@ -285,7 +286,7 @@ table.cmp td:first-child { font-weight: 700; color: var(--muted); width: 22%; }
 .six { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 1rem 0; }
 .six > div { display: flex; gap: 10px; align-items: flex-start; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .88rem; line-height: 1.5; }
 .six > div > span { flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--tint); color: var(--accent-ink); font: 700 .76rem/24px var(--sans); text-align: center; }
-a.cta { display: inline-block; background: var(--accent); color: var(--tone-ffffff); text-decoration: none; font-weight: 500; padding: 8px 16px; border-radius: 8px; }
+a.cta { display: inline-block; background: var(--accent); color: #fff; text-decoration: none; font-weight: 500; padding: 8px 16px; border-radius: 8px; }
 a.cta:hover { background: var(--accent-ink); }
 blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; font-size: .92rem; line-height: 1.7; }
 .timeline { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 1rem 0; }
@@ -294,22 +295,22 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 .timeline p { margin: 4px 0 0; color: var(--muted); }
 .score { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 1rem 0; }
 .score > div { border-radius: 10px; padding: 10px 12px; font-size: .84rem; line-height: 1.5; border: 1px solid var(--line); }
-.score .up { background: var(--tone-eaf5ee); border-color: var(--tone-a9d3ba); } .score .down { background: var(--tone-fcedea); border-color: var(--tone-edc2b8); }
-.score b::after { margin-left: 6px; font-size: .78rem; } .score .up b::after { content: "improved"; color: var(--tone-2f6b4f); } .score .down b::after { content: "worse"; color: var(--tone-a8432f); }
+.score .up { background: #EAF5EE; border-color: #A9D3BA; } .score .down { background: #FCEDEA; border-color: #EDC2B8; }
+.score b::after { margin-left: 6px; font-size: .78rem; } .score .up b::after { content: "improved"; color: #2F6B4F; } .score .down b::after { content: "worse"; color: #A8432F; }
 .score ul { margin: 6px 0 0; padding-left: 1.1em; }
 
 .jcm { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, .9fr); gap: 16px; }
 .jdims { display: flex; flex-direction: column; gap: 8px; }
-.jd.g0 label span { color: var(--tone-6e3f6a); } .jd.g1 label span { color: var(--accent-ink); } .jd.g2 label span { color: var(--tone-2f6b4f); }
+.jd.g0 label span { color: #6E3F6A; } .jd.g1 label span { color: var(--accent-ink); } .jd.g2 label span { color: #2F6B4F; }
 .jstates { display: flex; flex-direction: column; gap: 12px; padding-top: 4px; }
 .jst span { font-size: .8rem; font-weight: 500; }
 .jbar { height: 12px; border-radius: 6px; background: var(--bg); border: 1px solid var(--line); overflow: hidden; margin-top: 3px; }
 .jbar i { display: block; height: 100%; transition: width .25s; }
-.jst.g0 .jbar i { background: var(--tone-b98ab5); } .jst.g1 .jbar i { background: var(--accent); } .jst.g2 .jbar i { background: var(--tone-6fae8b); }
+.jst.g0 .jbar i { background: #B98AB5; } .jst.g1 .jbar i { background: var(--accent); } .jst.g2 .jbar i { background: #6FAE8B; }
 @media (prefers-reduced-motion: reduce) { .jbar i { transition: none; } }
 .jout ul { margin: 8px 0 0; padding-left: 1.1em; font-size: .82rem; color: var(--muted); }
 .jlvl { display: inline-block; font-weight: 700; padding: 3px 12px; border-radius: 999px; font-size: .86rem; }
-.jlvl.strong { background: var(--tone-e3f2e9); color: var(--tone-2f6b4f); } .jlvl.moderate { background: var(--tone-fbf0d9); color: var(--tone-8a6216); } .jlvl.weak { background: var(--tone-fce3dd); color: var(--tone-a8432f); }
+.jlvl.strong { background: #E3F2E9; color: #2F6B4F; } .jlvl.moderate { background: #FBF0D9; color: #8A6216; } .jlvl.weak { background: #FCE3DD; color: #A8432F; }
 .jgns { margin-top: 14px; }
 
 .qz-item { font-size: 1rem; font-weight: 500; margin: 4px 0 12px; }
@@ -319,7 +320,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 .qz-o { font: 500 .88rem var(--sans); background: var(--bg); border: 1px solid var(--line); color: var(--fg); border-radius: 8px; padding: 10px; cursor: pointer; display: flex; flex-direction: column; gap: 2px; text-align: center; }
 .qz-o small { color: var(--muted); font-size: .74rem; font-weight: 400; }
 .qz-o:hover { border-color: var(--accent); }
-.qz-o.right { background: var(--tone-e3f2e9); border-color: var(--tone-6fae8b); } .qz-o.wrong { background: var(--tone-fce3dd); border-color: var(--dwl); }
+.qz-o.right { background: #E3F2E9; border-color: #6FAE8B; } .qz-o.wrong { background: #FCE3DD; border-color: var(--dwl); }
 .qz-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: .8rem; color: var(--muted); }
 
 .rsteps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
@@ -327,7 +328,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 .rsteps > div.g { background: var(--tint); border-color: var(--accent); }
 .rsteps b { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 .rsteps p { margin: 4px 0 0; }
-.risk { font-size: .88rem; } .risk b { font-size: .72rem; color: var(--tone-ffffff); background: var(--tone-b98a2e); padding: 1px 7px; border-radius: 4px; margin-right: 6px; }
+.risk { font-size: .88rem; } .risk b { font-size: .72rem; color: #fff; background: #B98A2E; padding: 1px 7px; border-radius: 4px; margin-right: 6px; }
 .sayd summary { cursor: pointer; font-weight: 500; color: var(--accent-ink); font-size: .9rem; }
 
 @media (max-width: 760px) {
@@ -339,98 +340,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 
 
 .eq-controls{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}.eq-controls button,.eq-controls select{font:500 .86rem var(--sans);color:var(--accent-ink);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:8px 12px;max-width:100%;cursor:pointer}.eq-controls button[aria-pressed="true"]{background:var(--tint);border-color:var(--accent)}.eq-result{background:var(--tint);border-radius:8px;padding:14px;min-height:100px}.eq-result p{margin:5px 0}.eq-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.eq-grid>div{border:1px solid var(--line);border-radius:10px;padding:14px;background:var(--paper)}.eq-grid b{color:var(--accent-ink)}.eq-num{font:500 1.8rem var(--mono);display:block;color:var(--accent-ink)}.eq-map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.eq-map>div{padding:16px;background:var(--paper);border:1px solid var(--line);border-radius:10px}.eq-map p{margin:6px 0}body{margin:0}.hint span{min-width:0} @media(max-width:600px){.eq-grid,.eq-map{grid-template-columns:minmax(0,1fr)}.hint{flex-wrap:wrap}.mw{padding:14px}.doc{overflow-wrap:break-word}}
-</style><style>.six .plan-copy{flex:1;min-width:0}.six .plan-copy p{margin:6px 0 0}.six .plan-copy b{display:block}.case-map>div{min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px}.case-map p{margin:6px 0 0}.case-map b{color:var(--accent-ink)}.qa-session{font:600 .85rem var(--sans);color:var(--accent-ink);margin:1.25rem 0 .6rem}.traps small{display:block;color:var(--accent-ink);font:600 .75rem var(--sans);margin-bottom:7px}@media(max-width:600px){.case-map{grid-template-columns:minmax(0,1fr)}}</style>
-<style id="system-theme">
-/* System appearance only changes colors. Print retains the light palette. */
-:root {
-  --header-rgb: 253, 249, 249;
-  --tone-2f282b: #2f282b;
-  --tone-2f6b4f: #2f6b4f;
-  --tone-3f5675: #3f5675;
-  --tone-3f7f7a: #3f7f7a;
-  --tone-6e3f55: #6e3f55;
-  --tone-6e3f6a: #6e3f6a;
-  --tone-6fae8b: #6fae8b;
-  --tone-7e6f74: #7e6f74;
-  --tone-8a6216: #8a6216;
-  --tone-8a7a5c: #8a7a5c;
-  --tone-9c4862: #9c4862;
-  --tone-a7cdb6: #a7cdb6;
-  --tone-a8432f: #a8432f;
-  --tone-a9d3ba: #a9d3ba;
-  --tone-b2c4e3: #b2c4e3;
-  --tone-b98a2e: #b98a2e;
-  --tone-b98ab5: #b98ab5;
-  --tone-bfdcc9: #bfdcc9;
-  --tone-c06c84: #c06c84;
-  --tone-d9674f: #d9674f;
-  --tone-d9ebe1: #d9ebe1;
-  --tone-ddb3cb: #ddb3cb;
-  --tone-e3f2e9: #e3f2e9;
-  --tone-e5c171: #e5c171;
-  --tone-eaf2ee: #eaf2ee;
-  --tone-eaf5ee: #eaf5ee;
-  --tone-ebd7ea: #ebd7ea;
-  --tone-edc2b8: #edc2b8;
-  --tone-eee9eb: #eee9eb;
-  --tone-efdde2: #efdde2;
-  --tone-f1dca8: #f1dca8;
-  --tone-f6e9f4: #f6e9f4;
-  --tone-f8eef0: #f8eef0;
-  --tone-fae9ed: #fae9ed;
-  --tone-fbf0d9: #fbf0d9;
-  --tone-fce3dd: #fce3dd;
-  --tone-fcedea: #fcedea;
-  --tone-fdf9f9: #fdf9f9;
-  --tone-ffffff: #ffffff;
-}
-@media screen and (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-    --header-rgb: 29, 24, 26;
-    --tone-2f282b: #EEE4E6;
-    --tone-2f6b4f: #A0D2B2;
-    --tone-3f5675: #93AECB;
-    --tone-3f7f7a: #8CC4BE;
-    --tone-6e3f55: #C9A3D6;
-    --tone-6e3f6a: #DAB3D6;
-    --tone-6fae8b: #8CC3A0;
-    --tone-7e6f74: #BEACB2;
-    --tone-8a6216: #E3C480;
-    --tone-8a7a5c: #C9B68C;
-    --tone-9c4862: #E6B3BE;
-    --tone-a7cdb6: #6E8C6B;
-    --tone-a8432f: #F0A48D;
-    --tone-a9d3ba: #669C7D;
-    --tone-b2c4e3: #667C96;
-    --tone-b98a2e: #D8B66B;
-    --tone-b98ab5: #BD99C1;
-    --tone-bfdcc9: #5F7A5C;
-    --tone-c06c84: #D79AA7;
-    --tone-d9674f: #E08A6F;
-    --tone-d9ebe1: #2C4135;
-    --tone-ddb3cb: #8C6680;
-    --tone-e3f2e9: #23372D;
-    --tone-e5c171: #C9A250;
-    --tone-eaf2ee: #29362F;
-    --tone-eaf5ee: #25372D;
-    --tone-ebd7ea: #413047;
-    --tone-edc2b8: #B77F70;
-    --tone-eee9eb: #30282D;
-    --tone-efdde2: #55424A;
-    --tone-f1dca8: #8F7A4A;
-    --tone-f6e9f4: #342938;
-    --tone-f8eef0: #2B2226;
-    --tone-fae9ed: #35272D;
-    --tone-fbf0d9: #3C3223;
-    --tone-fce3dd: #412B28;
-    --tone-fcedea: #382724;
-    --tone-fdf9f9: #1D181A;
-    --tone-ffffff: #241E21;
-  }
-}
-</style>
-</head><body>
+</style><style>.six .plan-copy{flex:1;min-width:0}.six .plan-copy p{margin:6px 0 0}.six .plan-copy b{display:block}.case-map>div{min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px}.case-map p{margin:6px 0 0}.case-map b{color:var(--accent-ink)}.qa-session{font:600 .85rem var(--sans);color:var(--accent-ink);margin:1.25rem 0 .6rem}.traps small{display:block;color:var(--accent-ink);font:600 .75rem var(--sans);margin-bottom:7px}@media(max-width:600px){.case-map{grid-template-columns:minmax(0,1fr)}}</style></head><body>
 <svg aria-hidden="true" height="0" style="position:absolute" width="0"><defs>
 <pattern height="6" id="dwlHatch" patterntransform="rotate(45)" patternunits="userSpaceOnUse" width="6">
 <rect height="6" style="fill:var(--dwl);fill-opacity:.12" width="6"></rect><rect height="6" style="fill:var(--dwl);fill-opacity:.75" width="2.2"></rect></pattern></defs></svg>
@@ -445,7 +355,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 <p class="kick">Managing People in Organizations · Case</p>
 <h1>Lee Medical Supply</h1>
 <p class="lead">A financial turnaround that worked, and a people system that broke. The case runs across sessions: Session 3 diagnoses the issues, Session 4 recommends fixes, and Session 5 adds EQ diagnosis and executive coaching.</p>
-</div><div aria-label="Session roles in the case" class="three case-map"><div><b>S3 · Diagnose</b><p>Explain the motivation gap with Maslow, Herzberg, Theory X/Y and goal setting.</p></div><div><b>S4 · Design improvements</b><p>Link each recommendation to a mechanism, a measure and a practical trade-off.</p></div><div><b>S5 · Coach the leader</b><p>Use the new incidents to identify EQ gaps and practice better leadership behavior.</p></div></div>
+</div><div aria-label="Four motivation levers" class="pair case-map"><div><b><a href="#lever-needs">Needs</a></b><p>What is missing?</p></div><div><b><a href="#lever-style">Management style</a></b><p>How is responsibility managed?</p></div><div><b><a href="#lever-goals">Goals and feedback</a></b><p>Where does effort go?</p></div><div><b><a href="#lever-eq">Leadership EQ</a></b><p>How are people treated?</p></div></div>
 <h2 id="glance">1. The case at a glance</h2>
 <p class="sub">KP Industries buys distressed companies and installs new leaders to turn them around. Lee Medical Supply (LMS) distributes medical items, with sales of about $300 million and net earnings of about $12 million.</p>
 <div class="timeline">
@@ -574,19 +484,14 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 <tr><td>Business outcome</td><td>High-performer resignations, complaint resolution, product launches, margin</td><td>Complaints may rise because reporting is safer; pay or market changes can also move retention</td></tr>
 </tbody></table></div>
 <p class="hint"><b>中文邏輯</b><span>先驗證主管的行為有沒有改，再看員工感受與公司結果；結果變好不代表全部由 coaching 造成。</span></p>
-<h2 id="plan">9. An integrated plan: keep the gains, repair the gaps</h2>
-<div class="six"><div><span>A</span><div class="plan-copy"><b>Diagnose the causes.</b><p>Separate resignations from terminations; use confidential interviews to check needs, job design, rewards and supervision.</p></div></div><div><span>B</span><div class="plan-copy"><b>Repair the system and behavior.</b><p>Clarify shared goals, restore feedback and development, and coach private correction and listening.</p></div></div><div><span>C</span><div class="plan-copy"><b>Align incentives.</b><p>Keep financial accountability; also recognize customer problem-solving, teamwork, learning and innovation.</p></div></div><div><span>D</span><div class="plan-copy"><b>Evaluate, then scale.</b><p>Compare the baseline with similar units or periods. Track leadership behavior and the CEO’s outcomes together.</p></div></div></div>
-<div class="tbl"><table>
+<h2 id="plan">9. Integrate the diagnosis and actions</h2><p>The final S5 slide brings the course together in four levers. Choose the lens that best explains the question, then connect the actions needed to make it work. The CEO still requires financial discipline, high-performer retention, customer responsiveness and innovation.</p><div class="tbl"><table><thead><tr><th>Main lens</th><th>Case evidence</th><th>Action and mechanism</th><th>Check</th></tr></thead><tbody><tr id="lever-needs"><td>Needs: Maslow / Herzberg</td><td>Leavers are well paid; relationships deteriorate, public humiliation harms respect, and training and career plans stop.</td><td>Check safety concerns through fair reviews; rebuild belonging, recognition and development. Pair respectful supervision with meaningful responsibility and learning.</td><td>Staff feedback on fairness, belonging and growth; development uptake and high-performer retention.</td></tr><tr id="lever-style"><td>Management style: X/Y</td><td>Control and intolerance of mistakes coexist with a need for initiative. Chalermsak values clear routines.</td><td>Keep clear instructions where useful; give capable staff bounded decisions, participation and responsibility. Leaders must listen and respond without retaliation.</td><td>Appropriate decisions resolved without escalation; quality, customer resolution and employees’ experience of autonomy.</td></tr><tr id="lever-goals"><td>Goal setting: MBO</td><td>Weak feedback and an unknown overall goal limit direction. Narrow financial rewards conflict with cooperation and innovation.</td><td>Set specific, time-bound goals with employee participation. Monitor progress, give feedback, adjust support and reinforce customer and team contributions as well as finance.</td><td>Staff can explain goals; reviews occur; financial and strategic measures are tracked together.</td></tr><tr id="lever-eq"><td>Leadership EQ at all levels</td><td>Public insult, ignored grief and rejected feedback undermine respectful correction, trust and communication.</td><td>Coach pausing, private factual correction, acknowledgment and listening. Extend practice, feedback and follow-through to senior, middle and frontline leaders.</td><td>Repeated respectful behavior, confidential employee feedback and safe use of Voice; preserve work quality.</td></tr></tbody></table></div><h3 id="supporting-concepts">Use supporting concepts for a clear purpose</h3><div class="tbl"><table><thead><tr><th>Concept</th><th>Role in the answer</th></tr></thead><tbody><tr><td>Job Characteristics Model</td><td>Turns growth and responsibility into job design: meaningful work, autonomy and feedback. Match changes to the employee and task.</td></tr><tr><td>Reinforcement</td><td>Checks whether rewards strengthen the behavior required by shared goals. Teamwork and customer service need support alongside financial output.</td></tr><tr><td>EVLN, satisfaction, commitment and OCB</td><td>Describe responses and evaluate change. Syamol moves from Voice to Exit; turnover, job feelings, commitment and voluntary helping are distinct indicators.</td></tr></tbody></table></div><h3 id="ceo-check">Keep the CEO’s outcomes in view</h3><div class="tbl"><table>
 <thead><tr><th>CEO outcome</th><th>Measure</th><th>Watch out</th></tr></thead>
 <tbody>
 <tr><td>Lower high-performer turnover</td><td>Voluntary high-performer resignation rate; exit reasons</td><td>Separate resignations from terminations</td></tr>
 <tr><td>More customer influence</td><td>Complaint resolution quality; customer feedback used in decisions</td><td>Complaints may rise because reporting improves</td></tr>
 <tr><td>Better new-product development</td><td>Ideas tested, launches, project cycle time</td><td>More ideas is not the same as profitable innovation</td></tr>
 <tr><td>Keep financial discipline</td><td>Margin, cost control, quality</td><td>Margins boosted by cutting needed investment</td></tr>
-</tbody></table></div>
-
-
-<h2 id="eq-traps">10. Do not mix these up</h2><div class="traps"><div><small>S3</small><s>High pay means motivation needs are met.</s><p>Pay addresses only part of the problem. Stopped development and weakened relationships point to unmet growth and belonging needs.</p></div><div><small>S3</small><s>Decentralized authority proves a Theory Y approach.</s><p>Formal authority was delegated, but intolerance of mistakes and imposed competition keep the management climate control-heavy.</p></div><div><small>S4</small><s>Any employee departure is Exit in EVLN.</s><p>Resignation can be an Exit response. A terminated employee did not choose to leave; keep the two groups separate.</p></div><div><small>S4</small><s>Rewarding sales automatically improves teamwork and customers.</s><p>Rewards strengthen the behavior they pay for. Include cooperation and customer problem-solving when these are required outcomes.</p></div><div><small>S5</small><s>Respectful correction means lowering the standard.</s><p>Correct the report and preserve accountability. Change the public insult, dismissive response and rejection of feedback.</p></div><div><small>S5</small><s>An organized manager’s personality label measures EQ.</s><p>J-like execution describes a working preference. EQ analysis examines emotional awareness, regulation and the effect on relationships.</p></div></div><h2 id="practice">11. Cold call practice</h2><div class="qa-tools"><button id="qaAll" type="button">Show all answers</button></div><h3 class="qa-session" id="recall-s3">S3 · Motivation diagnosis</h3><div class="qa"><details><summary>Why is low pay an incomplete explanation for turnover?</summary><p>Many leavers are capable, trained and well paid. Examine supervision, relationships, feedback and growth as well as pay.</p></details><details><summary>What does Herzberg distinguish in this case?</summary><p>Supervision and relationships are hygiene factors. Development, recognition and responsibility are motivators. Improve both sides.</p></details><details><summary>Which goal-setting gaps come from the handout and the recap?</summary><p>The handout reports weak performance feedback. The recap adds that staff do not know the overall profit goal.</p></details></div><h3 class="qa-session" id="recall-s4">S4 · System improvements</h3><div class="qa"><details><summary>Why keep some of Apichart’s controls?</summary><p>They improved sales, profit, reporting and accountability. Repair the people system while preserving those gains.</p></details><details><summary>How can EVLN connect the original and new narratives?</summary><p>Voluntary resignations are Exit. Syamol first offers constructive Voice and later leaves. Terminated VPs are a separate group.</p></details><details><summary>What should a reward redesign reinforce?</summary><p>Financial accountability plus customer problem-solving, cooperation, learning and innovation. Specify the reward rule before naming its schedule.</p></details></div><h3 class="qa-session" id="recall-s5">S5 · EQ and coaching</h3><div class="qa"><details><summary>Which EQ factors are most directly implicated by insult, ignored grief and rejected feedback?</summary><p>Self-control, empathy and social expertise, respectively. Link each diagnosis to the specific behavior.</p></details><details><summary>What can personality analysis add without replacing EQ analysis?</summary><p>Organized execution supports a J-like preference. It does not explain humiliation; assess emotional conduct and awareness of impact separately.</p></details><details><summary>How would you check whether coaching is working?</summary><p>Observe repeated private correction, listening and follow-through; collect confidential employee feedback; track retention, customers, innovation and finance together.</p></details></div><h2 id="eq-template">12. Answer templates</h2><div class="three case-map"><div><b>S3 · Diagnose</b><p>“The case shows ___. Under ___, this points to ___ because ___.”</p></div><div><b>S4 · Recommend</b><p>“Change ___ to strengthen ___. Keep ___. Track ___ and watch for ___.”</p></div><div><b>S5 · Coach</b><p>“When ___ happens, practice ___. Preserve the work standard for ___. Observe ___.”</p></div></div><h3 id="answer">Integrated answer (60 to 90 seconds)</h3><blockquote class="say">LMS improved sales, profit and accountability, but lost capable people while customer and innovation outcomes weakened. In S3 terms, stopped development and damaged relationships weaken growth and belonging; poor feedback and unclear shared goals reduce direction. A control-heavy style also limits initiative. For S4, keep financial discipline while restoring development, regular feedback and participation; align rewards with teamwork, customer problem-solving and innovation. For S5, coach Apichart to pause, correct errors privately, acknowledge distress and receive criticism constructively. Connect these behaviors to a shared direction beyond profit. Evaluate respectful conduct and employee experience alongside high-performer retention, customer responsiveness, product development and margin. The plan joins motivation, organizational systems and leadership behavior.</blockquote></article></main>
+</tbody></table></div><h2 id="eq-traps">10. Do not mix these up</h2><div class="traps"><div><s>High pay satisfies all motivation needs.</s><p>Pay can coexist with poor relationships, disrespect and blocked growth. Use need categories and Herzberg’s two-factor distinction to locate the gap.</p></div><div><s>One management style fits everyone.</s><p>Chalermsak values routine; other work needs initiative. Match structure and responsibility to the person and task, with clear accountability.</p></div><div><s>A numerical target is a complete goal system.</s><p>MBO needs specificity, an explicit time period, participation and feedback. Set, monitor and manage; check whether rewards support the intended outcome.</p></div><div><s>EQ coaching alone repairs the whole company.</s><p>Respectful leaders still need sound jobs, development, goals and rewards. Join behavioral practice to the organizational changes required by the diagnosis.</p></div><div><s>Naming more theories makes an answer stronger.</s><p>Develop one main explanation with evidence, mechanism and action. Add another concept only when it explains a missing link.</p></div><div><s>Lower turnover proves higher motivation and commitment.</s><p>Separate resignations from terminations. Check job feelings, commitment, Voice and voluntary helping directly, alongside business results.</p></div></div><h2 id="practice">11. Cold call practice</h2><div class="qa-tools"><button id="qaAll" type="button">Show all answers</button></div><div class="qa"><details><summary>How do you choose the main theory when the question leaves the choice open?</summary><p>Choose the framework whose mechanism best explains the strongest facts. State the issue it explains, then trace evidence to the gap and action.</p></details><details><summary>How can Maslow explain high-paid employees leaving?</summary><p>Pay addresses physiological needs. Competition weakens belonging, public insult undermines esteem and stopped development restricts self-actualization. Check safety concerns rather than assume them.</p></details><details><summary>How does Herzberg sharpen a needs-based answer?</summary><p>Fix poor supervision and relationships to reduce dissatisfaction; restore development, recognition and responsibility to build motivation. These are different tasks.</p></details><details><summary>What does X/Y add beyond “give everyone autonomy”?</summary><p>Examine managerial assumptions and their effect on control. Keep useful structure for routine work and add bounded participation where initiative is needed.</p></details><details><summary>How do goals and reinforcement work together?</summary><p>Goals specify direction, time and feedback; rewards shape the behavior pursued. Align both with finance, customers, retention and innovation.</p></details><details><summary>What makes an EQ recommendation actionable?</summary><p>Name the trigger, factor and replacement behavior: when a report is weak, pause, correct factual errors privately and agree follow-up. Practice across leadership levels.</p></details><details><summary>How can EVLN and OCB help evaluate an intervention?</summary><p>Track constructive Voice, voluntary resignations and voluntary helping separately. Syamol’s criticism is Voice; her later departure is Exit. Neither alone measures every attitude.</p></details></div><h2 id="eq-template">12. Exam: from a chosen theory to management action</h2><div aria-label="Case answer sequence" class="method"><span>Choose a lens</span><i aria-hidden="true">→</i><span>Use evidence</span><i aria-hidden="true">→</i><span>Identify the gap</span><i aria-hidden="true">→</i><span>Act</span><i aria-hidden="true">→</i><span>Explain why</span><i aria-hidden="true">→</i><span>Check results</span></div><p>If the prompt specifies a theory, use it. If you may choose, state the main theory and build one complete argument. Use exact events from the case, explain the gap through the theory, then recommend actions that change the cause.</p><blockquote class="say">“Using ___, the central problem is ___. Evidence is ___ and ___. These show ___ because ___. The manager should ___ and ___. These actions work by ___. Track ___ while keeping ___.”</blockquote><h3 id="answer">Worked answers: two ways to analyze the same case</h3><div class="qa exam-models"><details><summary>Main theory: Maslow</summary><p>Using Maslow, LMS’s main problem is that financial rewards coexist with unmet higher-level needs. Many capable leavers are well paid, so low pay is not the strongest explanation. Mandated competition weakens belonging, public humiliation undermines esteem, and stopped training and career planning restrict self-actualization. I would restore cross-unit customer projects, recognize useful contributions and reopen development paths. These actions provide connection, respect and growth. Apichart and other supervisors should give private, factual feedback so these changes are delivered respectfully. Keep financial targets, but add shared customer and development goals with regular progress reviews. Track staff feedback on belonging and growth, high-performer resignations and customer outcomes. This links the need diagnosis to job design, leadership behavior and goal management.</p></details><details><summary>Main theory: Theory X / Y</summary><p>Using Theory X/Y, the issue is a control-heavy management approach applied too broadly. Apichart’s written orders, intolerance of mistakes and rejection of feedback discourage the initiative needed for customer service and innovation. Yet Chalermsak likes clear routines, so useful structure should remain. I would keep clear standards and give experienced staff bounded authority over customer problems, participation in goals and responsibility for results. The mechanism is greater self-direction and ownership while accountability remains. Apichart and other leaders must listen without retaliation, explain decision rights and correct mistakes privately. Agree specific goals and review dates; recognize cooperation as well as individual output. Check decision quality, customer resolution, constructive Voice and financial performance. This joins the main style diagnosis with EQ, job design and aligned goals.</p></details></div><h3 id="answer-check">Check the reasoning before you finish</h3><p class="key">Can each claim point to a case fact? Does the theory explain why the fact matters? Does each action repair that gap, and does the measure test the expected change? For a new case, replace the evidence and adapt the action; keep the reasoning sequence.</p></article></main>
 </div>
 <script>/* Management interactive components: Herzberg scale, KPI trap, framework comparator, LMS lens. */
 (function () {
