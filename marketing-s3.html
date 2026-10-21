@@ -1,7 +1,8 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Marketing Research · Marketing</title>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Marketing Research · Marketing</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
 <style>
 /* Layout: one reading column with a sticky chapter rail; colors follow system appearance. */
 :root {
@@ -476,15 +477,29 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
   }
 }
 </style>
-</head><body>
+<style id="learning-revision">
+/* Reading additions use the established system palette and full body column. */
+.doc p,.doc li,.hero .lead{max-width:none}
+.doc h2,.doc h3{scroll-margin-top:calc(var(--header-height,80px) + 20px)}
+.doc .tbl{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+.doc .tbl table{width:100%}
+.doc .tbl th{vertical-align:top}
+.doc .tbl td{vertical-align:top;overflow-wrap:break-word}
+.doc .method,.doc .flow{max-width:100%;flex-wrap:wrap}
+.answer-example{margin:1rem 0;padding:16px 18px;background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px}
+.answer-example>b{color:var(--accent-ink);font-size:.9rem}
+.answer-example p{margin:.5rem 0 0}
+.sessions a.pill:hover{background:var(--tint);color:var(--accent-ink);border-color:var(--accent)}
+@media(max-width:600px){.top-in{gap:8px 10px}.page-tools{flex-basis:100%;justify-content:flex-end;flex-wrap:wrap;margin:0}.page-tools .practice-toggle{max-width:100%}.answer-example{padding:14px}.doc .tbl td,.doc .tbl th{min-width:130px}}
+</style></head><body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-<pattern id="dwlHatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+<pattern id="dwlHatch" width="6" height="6" patternunits="userSpaceOnUse" patterntransform="rotate(45)">
 <rect width="6" height="6" style="fill:var(--dwl);fill-opacity:.12"></rect><rect width="2.2" height="6" style="fill:var(--dwl);fill-opacity:.75"></rect></pattern></defs></svg>
 
 <header class="top"><div class="top-in">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Study Notes</a><span>/</span><a href="marketing.html">Marketing</a><span>/</span><b>Session 3</b></nav>
-  <button class="toc-btn" type="button" id="tocBtn" aria-expanded="false">Contents</button>
+  <button class="toc-btn" type="button" id="tocBtn" aria-expanded="false" aria-controls="rail">Contents</button>
   <nav class="sessions" aria-label="Sessions"><a class="pill" href="marketing-s1.html">S1</a><a class="pill" href="marketing-s2.html">S2</a><span class="pill" aria-current="page">S3</span><a class="pill" href="marketing-s4.html">S4</a></nav>
 </div></header>
 
@@ -527,7 +542,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
   <div><b>Wrong order</b><p>"Let's run a survey." Then invent a question for it.</p></div>
   <div><b>Right order</b><p>Question → objective → information needed → method.</p></div>
 </div>
-<h3 id="problem">Business problem versus research question</h3>
+<p>Start with the decision the manager must make. Weak drink sales might call for a price change, clearer communication, wider distribution or an improved experience. Each choice requires different evidence. A survey asking whether people like the product cannot reliably choose among those actions unless it measures the relevant uncertainty.</p><h3 id="problem">Business problem versus research question</h3>
 <p>"Sales of a new drink are weak" is a symptom <span class="zh">症狀</span>. Research questions turn it into something evidence can answer:</p>
 <ul>
   <li>Are customers aware of the product?</li>
@@ -563,20 +578,16 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 <tr><td>Questions</td><td>Why? How?</td><td>Who? How many? How often? How much?</td></tr>
 <tr><td>Good for</td><td>Motivations, barriers, emotions, meanings, decision processes, concept and ad development</td><td>Awareness, usage, satisfaction, purchase intention, frequency, group differences</td></tr>
 <tr><td>Methods</td><td>Focus groups, in-depth interviews</td><td>Structured surveys</td></tr>
-<tr><td>Stop when</td><td><b>Saturation</b>: new interviews add no new themes</td><td>The sample can <b>represent</b> the population</td></tr>
+<tr><td>Evidence standard</td><td><b>Saturation</b>: new interviews add no new themes</td><td>The sample can <b>represent</b> the population</td></tr>
 <tr><td>Not for</td><td>Counting or population percentages</td><td>Fully explaining why</td></tr>
 </tbody></table></div>
-<p>They work in sequence: qualitative research finds the possible reasons (EV barriers: price, charging, battery, resale value); quantitative research measures which matters most across the target market.</p>
+<p><b>Why understanding comes before counting in an unfamiliar problem.</b> EV interviews might reveal charging access, price, battery concerns and resale uncertainty in customers' own words. Those themes help design a survey that measures their prevalence and importance among realistic buyers. Ten interviews do not establish that a barrier affects a particular percentage of Thailand. Conversely, a large survey can precisely count the wrong options if the researcher omitted an important barrier.</p>
 <div data-mk="method"></div>
 
 <!-- 5 -->
 <h2 id="sampling">5. Sampling</h2>
 <p class="sub">The first sampling question is not "how many?" but "who is the right respondent?"</p>
-<ul>
-  <li><b>Probability sampling</b>: selection by known probabilities, so results can be projected to the population with a known sampling error.</li>
-  <li><b>Non-probability sampling</b>: needs more caution before claiming the sample represents anyone.</li>
-  <li><b>Screening question</b> <span class="zh">篩選題</span>: "Have you visited Siam Paragon in the past three months?" Without it, satisfaction ratings may come from people with no recent experience.</li>
-</ul>
+<div class="tbl"><table><thead><tr><th scope="col">Concept</th><th scope="col">What it establishes</th><th scope="col">Limit</th></tr></thead><tbody><tr><td>Target population and screen</td><td>Define whose experience or decision matters. A recent Siam Paragon visit is relevant to a study of its recent service.</td><td>A valid screen does not make recruitment representative.</td></tr><tr><td>Probability sampling</td><td>Known selection probabilities support population estimates and sampling-error calculations under the design.</td><td>Coverage, nonresponse and measurement errors can remain.</td></tr><tr><td>Non-probability sampling</td><td>Convenient or purposive recruitment can explore relevant experiences.</td><td>Selection probabilities are unknown; a large count alone cannot justify population percentages.</td></tr><tr><td>Saturation</td><td>Further qualitative discussions add no materially new themes for the question.</td><td>Theme coverage differs from representing population proportions.</td></tr></tbody></table></div>
 <p class="key">"We interviewed 100 people, so the results represent Thailand" is wrong. Sample size is not representativeness.</p>
 
 <!-- 6 -->
@@ -595,10 +606,10 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
   <div><b>Conceptual definition: what it means</b>Low fat, low calories, high fiber, nutritional value, no sugar</div><i>↓</i>
   <div><b>Operational definition: how we measure it</b>"I prefer my ice cream to be low fat." "I prefer ice cream with low calories." Rated on a scale from 1 (strongly disagree) to 4 (strongly agree).</div>
 </div>
-<p class="hint"><b>注意</b>問卷有數字不代表量對了。用字、概念定義、受訪者理解和偏誤都會影響品質。</p>
+<p>The health-benefit example shows a construct becoming observable. First define which aspects count as health benefits; then write items that reflect those aspects; finally specify a response scale and how responses will be interpreted. The class uses 1 = strongly disagree through 4 = strongly agree. Those numbers code answers. They do not prove that respondents understand the wording, that the items cover the intended construct, or that stated preference predicts buying.</p><p class="hint"><b>注意</b>問卷有數字不代表量對了。用字、概念定義、受訪者理解和偏誤都會影響品質。</p>
 <h3 id="rv">Validity versus reliability</h3>
 <p><b>Validity</b> <span class="zh">效度</span>: are we measuring what we intend to? <b>Reliability</b> <span class="zh">信度</span>: is the measurement consistent? A survey can be consistently wrong.</p>
-<div class="targets"><div><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" style="fill:var(--paper);stroke:var(--line)"/><circle cx="50" cy="50" r="34" style="fill:var(--tint);stroke:var(--line)"/><circle cx="50" cy="50" r="22" style="fill:var(--paper);stroke:var(--line)"/><circle cx="50" cy="50" r="10" style="fill:var(--tint);stroke:var(--line)"/><circle cx="48" cy="48" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"/><circle cx="52" cy="50" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"/><circle cx="50" cy="53" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"/><circle cx="47" cy="52" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"/><circle cx="53" cy="47" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"/><circle cx="50" cy="49" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"/></svg><b>Reliable and valid</b><small>Consistent and on target</small></div><div><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" style="fill:var(--paper);stroke:var(--line)"/><circle cx="50" cy="50" r="34" style="fill:var(--tint);stroke:var(--line)"/><circle cx="50" cy="50" r="22" style="fill:var(--paper);stroke:var(--line)"/><circle cx="50" cy="50" r="10" style="fill:var(--tint);stroke:var(--line)"/><circle cx="70" cy="28" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"/><circle cx="74" cy="30" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"/><circle cx="72" cy="33" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"/><circle cx="69" cy="31" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"/><circle cx="75" cy="27" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"/><circle cx="72" cy="30" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"/></svg><b>Reliable, not valid</b><small>Consistently measures the wrong thing</small></div><div><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" style="fill:var(--paper);stroke:var(--line)"/><circle cx="50" cy="50" r="34" style="fill:var(--tint);stroke:var(--line)"/><circle cx="50" cy="50" r="22" style="fill:var(--paper);stroke:var(--line)"/><circle cx="50" cy="50" r="10" style="fill:var(--tint);stroke:var(--line)"/><circle cx="50" cy="22" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"/><circle cx="76" cy="48" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"/><circle cx="50" cy="78" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"/><circle cx="24" cy="52" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"/><circle cx="70" cy="70" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"/><circle cx="30" cy="30" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"/></svg><b>Valid on average, not reliable</b><small>Scattered around the target</small></div><div><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" style="fill:var(--paper);stroke:var(--line)"/><circle cx="50" cy="50" r="34" style="fill:var(--tint);stroke:var(--line)"/><circle cx="50" cy="50" r="22" style="fill:var(--paper);stroke:var(--line)"/><circle cx="50" cy="50" r="10" style="fill:var(--tint);stroke:var(--line)"/><circle cx="22" cy="62" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"/><circle cx="40" cy="82" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"/><circle cx="30" cy="72" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"/><circle cx="18" cy="80" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"/><circle cx="44" cy="66" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"/><circle cx="28" cy="88" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"/></svg><b>Neither</b><small>Scattered and off target</small></div></div>
+<div class="targets"><div><svg viewbox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" style="fill:var(--paper);stroke:var(--line)"></circle><circle cx="50" cy="50" r="34" style="fill:var(--tint);stroke:var(--line)"></circle><circle cx="50" cy="50" r="22" style="fill:var(--paper);stroke:var(--line)"></circle><circle cx="50" cy="50" r="10" style="fill:var(--tint);stroke:var(--line)"></circle><circle cx="48" cy="48" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="52" cy="50" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="50" cy="53" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="47" cy="52" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="53" cy="47" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="50" cy="49" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle></svg><b>Reliable and valid</b><small>Consistent and on target</small></div><div><svg viewbox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" style="fill:var(--paper);stroke:var(--line)"></circle><circle cx="50" cy="50" r="34" style="fill:var(--tint);stroke:var(--line)"></circle><circle cx="50" cy="50" r="22" style="fill:var(--paper);stroke:var(--line)"></circle><circle cx="50" cy="50" r="10" style="fill:var(--tint);stroke:var(--line)"></circle><circle cx="70" cy="28" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="74" cy="30" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="72" cy="33" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="69" cy="31" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="75" cy="27" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="72" cy="30" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle></svg><b>Reliable, not valid</b><small>Consistently measures the wrong thing</small></div><div><svg viewbox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" style="fill:var(--paper);stroke:var(--line)"></circle><circle cx="50" cy="50" r="34" style="fill:var(--tint);stroke:var(--line)"></circle><circle cx="50" cy="50" r="22" style="fill:var(--paper);stroke:var(--line)"></circle><circle cx="50" cy="50" r="10" style="fill:var(--tint);stroke:var(--line)"></circle><circle cx="50" cy="22" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="76" cy="48" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="50" cy="78" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="24" cy="52" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="70" cy="70" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="30" cy="30" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle></svg><b>Valid on average, not reliable</b><small>Scattered around the target</small></div><div><svg viewbox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" style="fill:var(--paper);stroke:var(--line)"></circle><circle cx="50" cy="50" r="34" style="fill:var(--tint);stroke:var(--line)"></circle><circle cx="50" cy="50" r="22" style="fill:var(--paper);stroke:var(--line)"></circle><circle cx="50" cy="50" r="10" style="fill:var(--tint);stroke:var(--line)"></circle><circle cx="22" cy="62" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="40" cy="82" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="30" cy="72" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="18" cy="80" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="44" cy="66" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="28" cy="88" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle></svg><b>Neither</b><small>Scattered and off target</small></div></div>
 
 <!-- 7 -->
 <h2 id="bias">7. Can we trust what people say?</h2>
@@ -611,7 +622,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 <tr><td><b>Courtesy bias</b></td><td>Overly positive feedback to be polite, common face to face and where criticism is uncomfortable</td></tr>
 <tr><td><b>Attitude-behavior gap</b></td><td>"I care about sustainability," then buys the cheapest option</td></tr>
 </tbody></table></div>
-<div data-mk="bias"></div>
+<p>These problems differ. Someone may sincerely explain a purchase using a reason reconstructed afterward (rationalization), report healthier habits to look responsible (social desirability), or praise a service to avoid offending the interviewer (courtesy). An attitude–behavior gap can occur even with an honestly reported attitude: budget or convenience may dominate at checkout. Neutral wording and additional behavioral evidence improve interpretation, but do not make motives directly observable.</p><div data-mk="bias"></div>
 <p>Garbage in, garbage out: statistics cannot rescue a bad question. When possible, combine stated attitudes with observed behavior or transaction data.</p>
 
 <!-- 8 -->
@@ -619,16 +630,16 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 <div class="three">
   <div class="tcard"><b>Survey</b><p>Door-to-door, mall intercept, phone, online, mobile, paper. No single best mode: choose by respondent, complexity, cost, speed and control.</p></div>
   <div class="tcard"><b>Observation</b><p>Records what people actually do and avoids some self-report bias, but cannot directly show motives. Mystery shoppers check real service, prices and displays.</p></div>
-  <div class="tcard"><b>Experiment</b><p>Change something (X, the treatment) and observe (O) what happens. The only method built to test cause.</p></div>
+  <div class="tcard"><b>Experiment</b><p>Change a treatment (X) and observe the outcome (O). Experiments are designed to test effects; credible control conditions are needed to isolate a cause.</p></div>
 </div>
-<h3 id="pop">Correlation is not causation: the POP display</h3>
-<div data-mk="pop"></div>
+<h3 id="method-fit">Choose the mode for the information needed</h3><div class="tbl"><table><thead><tr><th scope="col">Method / setting</th><th scope="col">Useful task</th><th scope="col">Trade-off</th></tr></thead><tbody><tr><td>In-depth interview / focus group</td><td>Explore an unfamiliar buying process or an early storyboard.</td><td>Rich meaning; not a population vote.</td></tr><tr><td>Online / phone survey</td><td>Measure defined attributes among reachable qualified respondents.</td><td>Reach, question complexity and participation differ by mode.</td></tr><tr><td>Mall intercept / central location test</td><td>Evaluate a product or concept in a controlled setting.</td><td>Accessible for testing; recruited visitors may not reflect all buyers.</td></tr><tr><td>Observation / mystery shopper</td><td>See laundry routines, navigation, displays or actual service execution.</td><td>Shows actions; one visit does not represent all experiences or explain motives.</td></tr><tr><td>Controlled taste test / experiment</td><td>Compare formulas or test a defined change.</td><td>Control helps isolate a difference; realism and alternative explanations still matter.</td></tr></tbody></table></div><h3 id="pop">Correlation is not causation: the POP display</h3>
+<p><b>Read O → X → O:</b> observe sales, install the point-of-purchase (POP) display, observe sales again. A worked example rises from THB 100,000 to THB 130,000, a 30% before–after increase. That describes the change. It does not isolate the display's contribution because payday, traffic, stockouts or other promotions may also change. The comparison-store tool below asks how much of the increase would plausibly have happened without the display.</p><div data-mk="pop"></div>
 <p>A spurious factor <span class="zh">干擾因素</span> such as payday, weekend traffic, a competitor stockout, seasonality or another promotion can explain part of a before/after change. Stronger designs use comparison stores or periods and repeated observations.</p>
 <div class="pair">
   <div><b>Laboratory</b><p>High control, but artificial.</p></div>
   <div><b>Field</b><p>Realistic, but less control over other factors.</p></div>
 </div>
-<p class="note-small">This closes Lesson 2's open question: a loyalty program's real effect is the difference between members and a comparable group without the program.</p>
+<p><b>A comparable group needs a credible design.</b> Loyalty members may already be more frequent buyers than nonmembers. A stronger test assigns comparable customers or stores to treatment and control when feasible, tracks both over the same period, and checks other changes. A raw member–nonmember difference is not automatically the program's effect. Experiments are designed to test causes; a poorly controlled experiment can still mislead.</p><p class="note-small">This develops Session 2's counterfactual: estimate the difference a program makes using comparable treatment and control conditions, not self-selected membership alone.</p>
 
 <!-- 9 -->
 <h2 id="tools">9. Advanced tools and analysis</h2>
@@ -644,7 +655,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 <p class="key">"63% satisfied" is a result, not an analysis. Ask which group is lower, which attribute matters most, what changed, what explains it, and what evidence is still missing.</p>
 
 <!-- 10 -->
-<h2 id="traps">10. Do not mix these up</h2>
+<h3 id="tools-worked">From an output to a management choice</h3><p><b>Cluster analysis</b> may group shoppers by similar habits, but managers still need to interpret the groups and decide whether an offer or channel can serve them. <b>Conjoint analysis</b> compares bundles: for example, a lower price with shorter battery life versus a higher price with longer battery life. It reveals trade-offs that asking for the best of every feature misses. Neither tool can compensate for irrelevant attributes or the wrong respondents.</p><p>A restaurant reporting 63% satisfaction has produced a result. Analysis asks which customers and attributes are weaker, what changed, and which explanations fit. A useful sequence is: measure the problem, explore reasons, observe peak service, test a process change, then measure again. Proactive research spots emerging needs before failure; reactive research diagnoses a problem already observed. Both need an owner who can act on the findings.</p><h2 id="traps">10. Do not mix these up</h2>
 <div class="traps">
   <div><s>A business problem is a research question.</s><p>The problem is a symptom; the question targets one uncertainty.</p></div>
   <div><s>We should run a survey.</s><p>The method follows the objective.</p></div>
@@ -676,14 +687,14 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
   <details><summary>Cluster versus conjoint analysis?</summary><p>Cluster groups similar respondents; conjoint reveals trade-offs between bundles of attributes.</p></details>
 </div>
 
-<h3 id="templates">Answer templates</h3>
+<h2 id="answer-templates">Answer templates</h2>
 <div class="tbl"><table>
 <tbody>
 <tr><td><b>Choose a method</b></td><td>Objective → information needed → method → sample → why it fits → limitation</td></tr>
 <tr><td><b>Critique a study</b></td><td>Question → sample → measurement → bias → analysis → is the conclusion stronger than the evidence?</td></tr>
 <tr><td><b>Causal claim</b></td><td>Did X come before Y? Did Y change? Were other factors controlled? Was there a comparison group? Could it be spurious?</td></tr>
 </tbody></table></div>
-</article></main>
+<div class="answer-example"><b>Example · Choose an EV research method</b><p>The objective is to understand why realistic prospective buyers hesitate to choose an EV. I would begin with in-depth interviews to explore the decision process and unexpected barriers. I would then use a suitably sampled survey to estimate which barriers are most common. Interview themes do not establish population percentages, and purchase intention does not prove actual adoption. A proposed solution would need its own behavioral test.</p></div></article></main>
 </div>
 
 <script>/* Marketing Session 3 widgets: method quiz, research-type quiz, POP display experiment. */
@@ -795,7 +806,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
   W.value = host => {
     const body = shell(host, 'Interactive', 'Which coffee shop gives more value?', 'Shop A: ฿70, 12-minute queue, 8-minute walk. Shop B: ฿100, ready in 1 minute, 2 minutes from the office. Price is only part of what the customer gives up.');
     const id = 'val' + (++uid);
-    body.innerHTML = '<div class="pop-grid"><div class="pop-ctrl">' + sliders(id, [['What one minute of your time is worth', 0, 8, .5, 1]]) +
+    body.innerHTML = '<div class="pop-grid"><div class="pop-ctrl">' + sliders(id, [['Assumed value of one minute', 0, 8, .5, 1]]) +
       '<div class="seg" role="radiogroup"><button type="button" role="radio" data-v="0.5">Relaxed student</button><button type="button" role="radio" data-v="4">Busy manager</button></div><dl class="g-stats"></dl></div><div class="pop-bars"></div></div><p class="g-note"></p>';
     const r = body.querySelector('input'), o = body.querySelector('output'), bars = body.querySelector('.pop-bars'), stats = body.querySelector('.g-stats'), note = body.querySelector('.g-note');
     const A = { p: 70, m: 20 }, B = { p: 100, m: 3 }, be = (B.p - A.p) / (A.m - B.m);

@@ -1,7 +1,8 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Marketing Fundamentals and Customer Value · Marketing</title>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Marketing Fundamentals and Customer Value · Marketing</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
 <style>
 /* Layout: one reading column with a sticky chapter rail; colors follow system appearance. */
 :root {
@@ -476,15 +477,29 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
   }
 }
 </style>
-</head><body>
+<style id="learning-revision">
+/* Reading additions use the established system palette and full body column. */
+.doc p,.doc li,.hero .lead{max-width:none}
+.doc h2,.doc h3{scroll-margin-top:calc(var(--header-height,80px) + 20px)}
+.doc .tbl{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+.doc .tbl table{width:100%}
+.doc .tbl th{vertical-align:top}
+.doc .tbl td{vertical-align:top;overflow-wrap:break-word}
+.doc .method,.doc .flow{max-width:100%;flex-wrap:wrap}
+.answer-example{margin:1rem 0;padding:16px 18px;background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px}
+.answer-example>b{color:var(--accent-ink);font-size:.9rem}
+.answer-example p{margin:.5rem 0 0}
+.sessions a.pill:hover{background:var(--tint);color:var(--accent-ink);border-color:var(--accent)}
+@media(max-width:600px){.top-in{gap:8px 10px}.page-tools{flex-basis:100%;justify-content:flex-end;flex-wrap:wrap;margin:0}.page-tools .practice-toggle{max-width:100%}.answer-example{padding:14px}.doc .tbl td,.doc .tbl th{min-width:130px}}
+</style></head><body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-<pattern id="dwlHatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+<pattern id="dwlHatch" width="6" height="6" patternunits="userSpaceOnUse" patterntransform="rotate(45)">
 <rect width="6" height="6" style="fill:var(--dwl);fill-opacity:.12"></rect><rect width="2.2" height="6" style="fill:var(--dwl);fill-opacity:.75"></rect></pattern></defs></svg>
 
 <header class="top"><div class="top-in">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Study Notes</a><span>/</span><a href="marketing.html">Marketing</a><span>/</span><b>Session 1</b></nav>
-  <button class="toc-btn" type="button" id="tocBtn" aria-expanded="false">Contents</button>
+  <button class="toc-btn" type="button" id="tocBtn" aria-expanded="false" aria-controls="rail">Contents</button>
   <nav class="sessions" aria-label="Sessions"><span class="pill" aria-current="page">S1</span><a class="pill" href="marketing-s2.html">S2</a><a class="pill" href="marketing-s3.html">S3</a><a class="pill" href="marketing-s4.html">S4</a></nav>
 </div></header>
 
@@ -507,7 +522,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
   <div><b>Advertising</b><p>One communication tool inside Promotion.</p></div>
   <div><b>Marketing</b><p>Customer + value + market + strategy + execution: product, price, distribution, service, branding, research, experience and demand management.</p></div>
 </div>
-<h3 id="evidence">Evidence, not common sense</h3>
+<p>The order matters. A firm first learns whose problem it can solve, decides what value to offer, and arranges price, access and delivery. Advertising then helps people understand that offer. An attractive ad cannot compensate for a product that is unavailable or solves the wrong problem.</p><h3 id="evidence">Evidence, not common sense</h3>
 <p>Store A sells more iced coffee than Store B. "It is hotter there" is plausible, but customer profile, traffic, competitors, price, opening hours or promotions could explain the same pattern.</p>
 <div class="method"><span>Observation</span><i>→</i><span>Possible explanation</span><i>≠</i><span class="hi">Proven explanation</span></div>
 <p class="key">Common sense can generate a hypothesis <span class="zh">假設</span>. Evidence is needed to support a conclusion. Always ask: what other variables could explain the same pattern?</p>
@@ -527,7 +542,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 <h3 id="cv">Customer value</h3>
 <div class="formula">Customer value ≈ perceived benefits ÷ perceived costs</div>
 <p>Costs include money, time, effort, risk and inconvenience. Benefits can be functional, emotional, social, convenience or experience.</p>
-<div data-mk="value"></div>
+<p><b>Read the comparison from the customer's perspective.</b> A THB 70 coffee may involve more waiting and travel than a THB 100 coffee near the office. Someone in a hurry may prefer the second shop; someone with spare time may prefer the first. The benefit–cost ratio is a conceptual aid: it does not put all emotions, risk and time on one objectively correct scale. The calculator below isolates price and time so this trade-off is easier to see.</p><div data-mk="value"></div>
 <p class="note-small">Illustrative numbers built on the class two-shop example.</p>
 
 <h3 id="loyal">Satisfaction, repeat purchase, loyalty</h3>
@@ -563,7 +578,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
   <div><b>Branding</b><p>When features are copied, brand meaning matters more: recognition, associations, expectations and trust. A brand is what customers associate with the offering, not a logo.</p></div>
 </div>
 
-<!-- 4 -->
+<p>A <b>Unique Selling Proposition (USP)</b> is a distinct selling claim. Its commercial value depends on a chain: customers notice the difference, understand its benefit, value it relative to alternatives, and choose accordingly. A copied feature may lose uniqueness quickly. Consistent experience and recognizable brand associations can preserve a reason to choose even when technical features converge.</p><!-- 4 -->
 <h2 id="market">4. Understanding the market</h2>
 <h3 id="forwhom">Attractive for whom?</h3>
 <p>The professor asks: how big is the Thai market, how attractive is it, and <b>for whom?</b> A market is only attractive for a specific offering, target and business model.</p>
@@ -574,7 +589,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 <tr><td>Purchase frequency</td><td>Rare, high value</td><td>Weekly, low value</td></tr>
 <tr><td>What matters most</td><td>Buying power, status</td><td>Population size, access, price</td></tr>
 </tbody></table></div>
-<p>Check population, age, income, purchasing power, needs, growth, competition and distribution access. A big population with weak buying power, poor fit or hard distribution can still be unattractive.</p>
+<p>The Mercedes–Tesco Lotus comparison illustrates why the same population figure can lead to different decisions. A car business needs enough reachable buyers with the required purchasing power, even though purchases are infrequent. A mass retailer needs convenient access and repeated shopping trips. Market size becomes useful only after the category, customer, occasion and economics have been defined.</p><p>Check population, age, income, purchasing power, needs, growth, competition and distribution access. A big population with weak buying power, poor fit or hard distribution can still be unattractive.</p>
 
 <h3 id="season">Seasonality and demographics</h3>
 <div class="pair">
@@ -585,14 +600,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 
 <h3 id="env">External environment</h3>
 <p>Monitor customers, competitors, the economy, technology, culture, demographics, the natural environment and globalization. A strategy can fail because the environment changed, even if the company did not.</p>
-<div class="tbl"><table>
-<thead><tr><th>Challenge</th><th>Marketing question</th></tr></thead>
-<tbody>
-<tr><td>Changing customer values</td><td>Is our value proposition still relevant?</td></tr>
-<tr><td>Recession</td><td>Wants remain, buying power falls: fewer wants become demand.</td></tr>
-<tr><td>Technology and e-commerce</td><td>Channels change how value is delivered, not whether we must understand customers.</td></tr>
-<tr><td>Globalization</td><td>Are our competitors only local firms, or global alternatives too?</td></tr>
-</tbody></table></div>
+<h3 id="context-to-mix">How environmental change reaches the 4Ps</h3><div class="tbl"><table><thead><tr><th scope="col">Change</th><th scope="col">Mechanism</th><th scope="col">Possible response</th></tr></thead><tbody><tr><td>Changing customer values</td><td>A once-relevant benefit may matter less as needs, routines and social expectations change.</td><td>Research whether the value proposition still fits the target.</td></tr><tr><td>Recession</td><td>Desire can remain while buying power falls; some wants no longer become demand.</td><td>Reconsider pack sizes, value tiers and payment/access friction.</td></tr><tr><td>E-commerce</td><td>Search and comparison become easier; delivery and returns become part of the offer.</td><td>Coordinate product information, total price, fulfillment and communication.</td></tr><tr><td>Globalization</td><td>Customers gain alternatives beyond familiar local competitors.</td><td>Recheck the benefit and competitive set, including substitutes.</td></tr></tbody></table></div>
 <p class="hint"><b>中文邏輯</b><span>「上網賣」只是 channel 選擇，不是 strategy；仍需 target、value proposition 和 4Ps 配合。</span></p>
 
 <!-- 5 -->
@@ -609,12 +617,12 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 <h3 id="funnel">The funnel is a diagnostic tool</h3>
 <div class="method"><span>Awareness</span><i>→</i><span>Interest</span><i>→</i><span>Trial</span><i>→</i><span>Repeat purchase</span></div>
 <div data-mk="funnel"></div>
-<p>Low sales can come from any stage. Do not answer every problem with more advertising.</p>
+<div class="tbl"><table><thead><tr><th scope="col">Observed bottleneck</th><th scope="col">What it may mean</th><th scope="col">First investigation</th></tr></thead><tbody><tr><td>Low awareness</td><td>Relevant customers may not know the offer exists.</td><td>Target reach and distribution of the message.</td></tr><tr><td>Aware, little interest</td><td>The benefit may seem irrelevant or unclear.</td><td>Need fit and message understanding.</td></tr><tr><td>Interested, little trial</td><td>Price, access, risk or friction may block purchase.</td><td>Where the first transaction becomes difficult.</td></tr><tr><td>Trial, little repeat</td><td>The experience or the next occasion may not support return.</td><td>Product experience, frequency and alternatives.</td></tr></tbody></table></div><p>These are diagnostic hypotheses. A low conversion rate locates a problem; research is still needed to explain it. Raising awareness may send more people into the same purchase barrier without resolving it.</p><p>Low sales can come from any stage. Do not answer every problem with more advertising.</p>
 
 <h3 id="demand">Demand management and GET + KEEP</h3>
 <div class="pair">
   <div><b>Demand management</b> <span class="zh">需求管理</span><p>Too much demand means queues, lower service quality and unhappy customers; too little means idle staff and assets. The goal is appropriate demand at the right time for the capacity. A gym can shift peak users to off-peak hours.</p></div>
-  <div><b>GET + KEEP</b><p>Demand comes from new and repeat customers. New + retained − lost = customer base development. 10,000 new customers with 9,500 lost is weak growth. This is the bridge to Session 2 CRM.</p></div>
+  <div><b>GET + KEEP</b><p>Demand comes from new and repeat customers. Starting customer base + acquired customers − customers lost = ending customer base, using consistent definitions and periods. 10,000 new customers with 9,500 lost gives a net addition of 500. Session 2 develops acquisition, retention and relationship economics.</p></div>
 </div>
 
 <!-- 6 -->
@@ -633,7 +641,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
   <div><b>Selling Concept</b><p>Product first → sell harder.</p></div>
   <div><b>Marketing Concept</b><p>Customer first → design the offering to fit.</p></div>
 </div>
-<div data-mk="philo"></div>
+<h3 id="philosophy-logic">Why the starting assumption changes the decision</h3><p>Production thinking is useful when affordability and availability are the main customer problems. Product thinking becomes risky when managers equate more features with better value. Selling starts with existing output and tries to persuade buyers; marketing starts with the target's need and designs an offer around it. Societal marketing checks long-term welfare. Strategic marketing also checks whether logistics, costs and competitive conditions let the firm deliver that value profitably.</p><p><b>Diagnose the reason for an action.</b> Cutting delivery cost could express a production focus on efficiency, or support a customer-led promise of convenient service. The visible action alone does not identify the philosophy; the decision's starting logic does.</p><div data-mk="philo"></div>
 
 <!-- 7 -->
 <h2 id="system">7. The strategic marketing system</h2>
@@ -647,11 +655,11 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 <p>Marketing drives consumption, yet society may need less waste, reuse and healthier behavior. Marketing can also promote better behavior (reusable bags, energy saving, recycling) and create value through durability, repair, reuse and access rather than more units.</p>
 
 <!-- 8 -->
-<h2 id="cases">8. Class cases</h2>
+<p><b>Customer value and societal value can diverge.</b> A convenient disposable product may satisfy buyers today while increasing waste. A repair service may sell fewer replacement units while earning service revenue and building trust. Evaluate customer benefit, business viability and resource consequences together; reduced physical consumption alone does not establish commercial failure.</p><p><b>Corporate Social Responsibility (CSR)</b> concerns a company's broader social and environmental responsibilities. Societal marketing applies a related welfare check to marketing decisions: an offer should be assessed through customer satisfaction, company viability and long-term effects on society. A charitable message alone does not show that the product, sourcing or daily operations are responsible.</p><h2 id="cases">8. Class cases</h2>
 <div class="tbl"><table>
 <thead><tr><th>Case</th><th>Analysis</th><th>Lesson</th></tr></thead>
 <tbody>
-<tr><td><b>McDonald's 60-second guarantee</b></td><td>Customer problem: waiting. Value: speed and reliability. Risk: staff stress, quality, gaming the clock.</td><td>A promotion can also be an operational promise.</td></tr>
+<tr><td><b>McDonald's 60-second guarantee</b></td><td>In the class example, an order taking longer than 60 seconds earns a small Coke or fries. The promise lowers expected waiting uncertainty and puts pressure on the service process.</td><td>Measure actual waiting, fulfillment of the guarantee and customer response; check staff workload, quality and gaming. A promise needs operating capacity.</td></tr>
 <tr><td><b>Aging Thailand</b></td><td>Pain points: mobility, health, independent living, medication.</td><td>Ask what problems demographic change will make more important.</td></tr>
 <tr><td><b>Mercedes vs Tesco Lotus</b></td><td>Same country, different targets, frequency and value propositions.</td><td>A market fact matters only relative to a specific business.</td></tr>
 <tr><td><b>7-Eleven, coffee, taxis</b></td><td>Recurring, context-dependent demand.</td><td>Transfer the reasoning, not the example.</td></tr>
@@ -687,7 +695,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
   <details><summary>Why is lower consumption not necessarily a failure?</summary><p>A firm can create value through durability, repair or reuse while building trust and long-run viability.</p></details>
 </div>
 
-<h3 id="templates">Answer templates</h3>
+<h2 id="answer-templates">Answer templates</h2>
 <div class="tbl"><table>
 <tbody>
 <tr><td><b>Analyze a business</b></td><td>Objective → target customer → value → action → expected behavior → metric → risk</td></tr>
@@ -696,7 +704,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 <tr><td><b>Market attractiveness</b></td><td>Target → need → buying power → competition → access → company fit</td></tr>
 <tr><td><b>Will it survive?</b></td><td>Real need → meaningful value → enough demand → advantage → distribution → repeat → economics</td></tr>
 </tbody></table></div>
-<p class="key">Strategic marketing understands customers and context, turns insight into meaningful value and a coherent mix, and judges success by behavior, competitive performance, profit and long-term consequences.</p>
+<div class="answer-example"><b>Example · Product launch</b><p>The seasonal Thai-tea latte offers novelty and familiar local flavor to existing café customers and potential new visitors. I would first test whether that benefit creates additional purchases or only replaces the usual drink. Product, price, store/app availability and promotion should support the same promise. Trial is the first response to measure; repeat visits and contribution show whether the launch creates lasting business value.</p></div><p class="key">Strategic marketing understands customers and context, turns insight into meaningful value and a coherent mix, and judges success by behavior, competitive performance, profit and long-term consequences.</p>
 </article></main>
 </div>
 
@@ -809,7 +817,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
   W.value = host => {
     const body = shell(host, 'Interactive', 'Which coffee shop gives more value?', 'Shop A: ฿70, 12-minute queue, 8-minute walk. Shop B: ฿100, ready in 1 minute, 2 minutes from the office. Price is only part of what the customer gives up.');
     const id = 'val' + (++uid);
-    body.innerHTML = '<div class="pop-grid"><div class="pop-ctrl">' + sliders(id, [['What one minute of your time is worth', 0, 8, .5, 1]]) +
+    body.innerHTML = '<div class="pop-grid"><div class="pop-ctrl">' + sliders(id, [['Assumed value of one minute', 0, 8, .5, 1]]) +
       '<div class="seg" role="radiogroup"><button type="button" role="radio" data-v="0.5">Relaxed student</button><button type="button" role="radio" data-v="4">Busy manager</button></div><dl class="g-stats"></dl></div><div class="pop-bars"></div></div><p class="g-note"></p>';
     const r = body.querySelector('input'), o = body.querySelector('output'), bars = body.querySelector('.pop-bars'), stats = body.querySelector('.g-stats'), note = body.querySelector('.g-note');
     const A = { p: 70, m: 20 }, B = { p: 100, m: 3 }, be = (B.p - A.p) / (A.m - B.m);
