@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/><title>Northstar Client Solutions · Management practice</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<style>
+/* Layout: one reading column with a sticky chapter rail; colors follow system appearance. */
+:root {
+  color-scheme: light;
+  --bg: var(--tone-fdf9f9); --panel: var(--tone-f8eef0); --paper: var(--tone-ffffff); --tint: var(--tone-fae9ed); --line: var(--tone-efdde2);
+  --fg: var(--tone-2f282b); --muted: var(--tone-7e6f74); --accent: var(--tone-c06c84); --accent-ink: var(--tone-9c4862);
+  --demand: var(--tone-3f5675); --supply: var(--tone-c06c84); --ext: var(--tone-6e3f55); --world: var(--tone-8a7a5c); --policy: var(--tone-3f7f7a);
+  --cs: var(--tone-a7cdb6); --ps: var(--tone-b2c4e3); --dwl: var(--tone-d9674f); --rev: var(--tone-e5c171); --rev2: var(--tone-f1dca8); --time: var(--tone-ddb3cb); --ts: var(--tone-bfdcc9);
+  --serif: "Noto Serif TC", "Songti TC", Georgia, serif;
+  --sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; background: var(--bg); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 16px; line-height: 1.75; }
+a { color: var(--accent-ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(var(--header-rgb), .94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); padding-inline: 16px; }
+.top-in { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 14px; min-height: 56px; flex-wrap: wrap; padding-block: 8px; }
+.brand { font-family: var(--serif); font-weight: 700; font-size: 1.02rem; white-space: nowrap; }
+.brand small { font-family: var(--sans); font-weight: 500; color: var(--muted); font-size: .76rem; margin-left: 6px; letter-spacing: .06em; }
+.sessions { display: flex; gap: 4px; margin-left: auto; }
+.crumbs { font-size: .86rem; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.crumbs a { color: var(--muted); text-decoration: none; } .crumbs a:hover { color: var(--accent-ink); } .crumbs span { color: var(--line); } .crumbs b { font-family: var(--serif); }
+.sessions a.pill { text-decoration: none; transition: border-color .15s, color .15s; }
+.sessions a.pill:hover, .sessions a.pill:focus-visible { border-color: var(--accent); color: var(--accent-ink); background: var(--tint); }
+.sessions .pill { font: 500 .82rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--muted); padding: 4px 12px; border-radius: 999px; }
+.sessions .pill[aria-current="page"] { background: var(--accent); border-color: var(--accent); color: #FFFFFF; }
+.sessions .pill.off { opacity: .5; cursor: not-allowed; }
+.toc-btn { display: none; font: 500 .85rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--fg); border-radius: 8px; padding: 5px 12px; }
+
+.wrap { max-width: 1160px; margin: 0 auto; padding-inline: 16px; display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 52px; }
+.rail { position: sticky; top: 76px; align-self: start; max-height: calc(100vh - 92px); overflow: auto; padding-block: 34px 40px; font-size: .86rem; line-height: 1.5; }
+.rail .lbl { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.rail ol { list-style: none; margin: 0; padding: 0; }
+.rail li a { display: block; padding: 4px 10px; color: var(--muted); text-decoration: none; border-radius: 6px; }
+.rail li a:hover { color: var(--fg); background: var(--tint); }
+.rail li.h3 a { padding-left: 22px; font-size: .8rem; }
+.rail li a.on { color: var(--accent-ink); background: var(--tint); font-weight: 500; }
+
+main { min-width: 0; padding-block: 30px 120px; }
+.doc { max-width: 780px; }
+.hero { padding-block: 8px 26px; border-bottom: 1px solid var(--line); }
+.kick { font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); margin: 0 0 6px; font-weight: 500; }
+.hero h1 { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.25; margin: 0 0 12px; text-wrap: balance; }
+.lead { margin: 0; font-size: 1.04rem; max-width: 62ch; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 16px; font-size: .78rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+.doc h2 { font-family: var(--serif); font-size: 1.55rem; line-height: 1.35; margin: 3.4rem 0 .3rem; text-wrap: balance; }
+.doc h3 { font-size: 1.1rem; line-height: 1.45; margin: 2.2rem 0 .5rem; color: var(--accent-ink); text-wrap: balance; }
+.sub { margin: 0 0 1.2rem; color: var(--muted); max-width: 66ch; }
+.doc p, .doc li { max-width: none; }
+.doc ul, .doc ol { padding-left: 1.25em; }
+.doc li { margin: .25rem 0; }
+.zh { display: inline-block; font-size: .78em; line-height: 1.3; color: var(--accent-ink); background: var(--tint); padding: 0 6px; border-radius: 4px; margin-left: 2px; vertical-align: 1px; font-weight: 500; }
+.hint { font-size: .9rem; color: var(--muted); display: flex; gap: 10px; align-items: baseline; }
+.hint b { flex: none; font-size: .72rem; color: #FFFFFF; background: var(--accent); padding: 0 7px; border-radius: 4px; font-weight: 500; }
+.key { background: var(--tint); padding: 12px 16px; border-radius: 8px; font-weight: 500; }
+.note-small { font-size: .8rem; color: var(--muted); }
+
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 1rem 0; }
+.pair > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; }
+.pair b { color: var(--accent-ink); }
+.pair p { margin: 4px 0 0; font-size: .92rem; }
+
+.matrix { display: grid; grid-template-columns: minmax(90px, .7fr) repeat(2, minmax(0, 1fr)); gap: 6px; margin: 1rem 0 1.2rem; font-size: .9rem; max-width: 620px; }
+.matrix .mh { font-weight: 700; font-size: .8rem; color: var(--muted); align-self: end; padding: 0 4px 2px; }
+.matrix .mh.side { align-self: center; }
+.matrix .cell { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px; font-weight: 500; }
+.matrix .cell.hi { background: var(--tint); border-color: var(--accent); }
+.matrix small { display: block; font-weight: 400; color: var(--muted); font-size: .8rem; margin-top: 2px; line-height: 1.45; }
+
+.map { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.3fr) auto minmax(0, 1fr); gap: 10px; align-items: center; margin: 1rem 0; }
+.mcol { display: flex; flex-direction: column; gap: 8px; }
+.mbox { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .84rem; line-height: 1.5; display: flex; flex-direction: column; gap: 2px; }
+.mbox b { font-size: .9rem; } .mbox span { color: var(--muted); } .mbox em { font-style: normal; color: var(--accent-ink); font-size: .78rem; font-weight: 500; }
+.mbox.good { border-color: var(--cs); } .mbox.ask { background: var(--tint); border-color: var(--accent); }
+.marrow { color: var(--accent); font-weight: 700; }
+
+.flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 1rem 0; font-size: .86rem; }
+.flow span { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; line-height: 1.45; }
+.flow i { font-style: normal; color: var(--accent); font-weight: 700; }
+.formula { font-family: var(--mono); font-size: .9rem; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; line-height: 1.9; overflow-x: auto; }
+.steps { counter-reset: s; list-style: none; padding-left: 0 !important; }
+.steps li { counter-increment: s; display: flex; gap: 10px; }
+.steps li::before { content: counter(s); flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--tint); color: var(--accent-ink); font: 700 .75rem/22px var(--sans); text-align: center; margin-top: 3px; }
+.assign { margin: 1.6rem 0; border: 1px dashed var(--accent); border-radius: 10px; padding: 14px 16px; background: var(--paper); }
+.assign p { margin: 6px 0 0; font-size: .92rem; }
+
+.tbl { overflow-x: auto; margin: 1rem 0; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+.doc table { border-collapse: collapse; width: 100%; font-size: .88rem; line-height: 1.55; }
+.doc th, .doc td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+.doc th { background: var(--panel); font-weight: 700; }
+.doc tr:last-child td { border-bottom: 0; }
+.drill .ans { filter: blur(5px); cursor: pointer; user-select: none; transition: filter .2s; }
+.drill .ans.shown { filter: none; user-select: auto; }
+
+.traps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 1rem; }
+.traps > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: .88rem; line-height: 1.55; }
+.traps s { color: var(--muted); text-decoration-color: var(--dwl); }
+.traps p { margin: 6px 0 0; font-weight: 500; }
+
+.qa-tools { margin: .4rem 0 .8rem; }
+.qa-tools button { font: 500 .82rem var(--sans); border: 1px solid var(--accent); background: var(--paper); color: var(--accent-ink); border-radius: 6px; padding: 5px 12px; cursor: pointer; }
+.qa { display: flex; flex-direction: column; gap: 6px; }
+.qa details { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
+.qa summary { cursor: pointer; padding: 10px 14px; font-weight: 500; font-size: .93rem; list-style: none; display: flex; gap: 10px; }
+.qa summary::before { content: "Q"; color: var(--accent); font-weight: 700; }
+.qa details[open] summary { border-bottom: 1px dashed var(--line); }
+.qa details p { margin: 0; padding: 10px 14px 12px 36px; font-size: .9rem; }
+
+/* graphs */
+.graph { max-width: 900px; margin: 1.8rem 0 2.2rem; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px 18px 14px; }
+.g-head h4 { font-family: var(--serif); font-size: 1.12rem; margin: 2px 0 2px; line-height: 1.45; }
+.g-head p { margin: 0 0 10px; color: var(--muted); font-size: .86rem; }
+.g-kicker { font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); }
+.g-body { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.g-plot svg { width: 100%; height: auto; display: block; }
+.g-side { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.g-ctrl { display: flex; flex-direction: column; gap: 10px; }
+.sl label { display: flex; justify-content: space-between; font-size: .8rem; color: var(--muted); line-height: 1.3; }
+.sl output { font-family: var(--mono); color: var(--fg); font-size: .8rem; }
+.sl input { width: 100%; accent-color: var(--accent); margin: 4px 0 0; }
+.g-btn { align-self: flex-start; font: 500 .8rem var(--sans); border: 1px solid var(--accent); color: var(--accent-ink); background: transparent; border-radius: 6px; padding: 4px 11px; cursor: pointer; }
+.g-btn:hover { background: var(--tint); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; align-self: flex-start; }
+.seg button { font: 500 .8rem var(--sans); border: 0; background: transparent; color: var(--muted); padding: 5px 12px; cursor: pointer; }
+.seg button[aria-checked="true"] { background: var(--accent); color: var(--paper); }
+.chk { display: flex; gap: 8px; align-items: center; font-size: .8rem; color: var(--muted); }
+.chk input { accent-color: var(--accent); }
+.g-stats { margin: 0; border-top: 1px solid var(--line); padding-top: 10px; display: flex; flex-direction: column; gap: 3px; }
+.st { display: flex; justify-content: space-between; gap: 10px; font-size: .8rem; line-height: 1.45; }
+.st dt { color: var(--muted); display: flex; align-items: center; gap: 7px; }
+.st dd { margin: 0; font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.st.big dd { font-weight: 500; color: var(--accent-ink); font-size: .92rem; }
+.g-note { margin: 12px 0 0; padding: 9px 12px; background: var(--tint); border-radius: 6px; font-size: .85rem; line-height: 1.6; }
+
+.sw { width: 11px; height: 11px; border-radius: 2px; display: inline-block; flex: none; }
+.sw.none { background: transparent; }
+.sw.a-cs { background: var(--cs); } .sw.a-ps { background: var(--ps); } .sw.a-ps2 { background: var(--ps); outline: 1px solid var(--demand); }
+.sw.a-dwl { background: repeating-linear-gradient(45deg, var(--dwl) 0 2px, transparent 2px 4px); outline: 1px solid var(--dwl); }
+.sw.a-rev { background: var(--rev); } .sw.a-rev2 { background: var(--rev2); } .sw.a-time { background: var(--time); } .sw.a-ts { background: var(--ts); }
+.sw.ln { height: 3px; border-radius: 2px; width: 16px; }
+
+svg .ax { stroke: var(--muted); stroke-width: 1.2; }
+svg .axl { fill: var(--muted); font: 500 11px var(--sans); }
+svg .tk { fill: var(--muted); font: 500 10.5px var(--mono); }
+svg .gd { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 4; opacity: .7; }
+svg .cv { stroke-width: 2.6; fill: none; stroke-linecap: round; }
+svg .cv.dash { stroke-dasharray: 7 5; stroke-width: 2; }
+svg .cvl { font: 700 11.5px var(--sans); }
+svg .c-d { stroke: var(--demand); fill: var(--demand); } svg .c-s { stroke: var(--supply); fill: var(--supply); }
+svg .c-x { stroke: var(--ext); fill: var(--ext); } svg .c-w { stroke: var(--world); fill: var(--world); } svg .c-t { stroke: var(--policy); fill: var(--policy); }
+svg text.cvl { stroke: none; }
+svg .pt { fill: var(--paper); stroke: var(--fg); stroke-width: 2; }
+svg .ptl { fill: var(--fg); font: 700 11px var(--sans); }
+svg .atag { fill: var(--fg); font: 700 11px var(--sans); opacity: .8; }
+svg .a-cs { fill: var(--cs); fill-opacity: .6; } svg .a-ps { fill: var(--ps); fill-opacity: .6; }
+svg .a-ps2 { fill: var(--ps); fill-opacity: .95; } svg .a-ts { fill: var(--ts); fill-opacity: .6; }
+svg .a-dwl { fill: url(#dwlHatch); stroke: var(--dwl); stroke-width: 1.2; }
+svg .a-rev { fill: var(--rev); fill-opacity: .75; } svg .a-rev2 { fill: var(--rev2); fill-opacity: .8; } svg .a-time { fill: var(--time); fill-opacity: .65; }
+
+svg .grid { stroke: var(--line); stroke-width: 1; }
+svg .a-prof { fill: var(--cs); fill-opacity: .75; } svg .a-loss { fill: var(--dwl); fill-opacity: .35; }
+.sw.a-prof { background: var(--cs); } .sw.a-loss { background: var(--dwl); opacity: .5; }
+.twin { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.tw-t { margin: 0 0 2px; font-size: .78rem; font-weight: 700; color: var(--muted); }
+.g-ctrl .g-btn + .g-btn { margin-top: -4px; }
+.graph.wide .g-body { grid-template-columns: minmax(0, 1fr); }
+.graph.wide .g-side { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+@media (max-width: 700px) { .twin, .graph.wide .g-side { grid-template-columns: minmax(0, 1fr); } }
+svg polyline.cv { fill: none !important; }
+
+.graph { background: var(--paper); }
+.g-note { background: var(--tint); }
+
+@media (max-width: 900px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .rail { display: none; position: fixed; inset: 64px 0 0 0; max-height: none; background: var(--bg); z-index: 15; padding: 20px 16px 60px; }
+  .rail.open { display: block; }
+  .toc-btn { display: inline-block; }
+  .g-body { grid-template-columns: minmax(0, 1fr); }
+  .map { grid-template-columns: minmax(0, 1fr); }
+  .marrow { transform: rotate(90deg); justify-self: center; }
+}
+@media (max-width: 560px) { .pair, .traps { grid-template-columns: minmax(0, 1fr); } }
+/* Management components */
+.three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 1rem 0; }
+.tcard { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.tcard .tnum { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #FFFFFF; font: 700 .78rem/24px var(--sans); text-align: center; }
+.tcard p { margin: 0; color: var(--muted); font-size: .88rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+.tags span { font-size: .74rem; background: var(--tint); color: var(--accent-ink); padding: 1px 8px; border-radius: 999px; font-weight: 500; }
+.method, .loop, .cascade { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 1rem 0; font-size: .86rem; }
+.method span, .loop span, .cascade span { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 5px 11px; line-height: 1.4; }
+.method span.hi { background: var(--tint); border-color: var(--accent); color: var(--accent-ink); font-weight: 700; }
+.method i, .loop i, .cascade i { font-style: normal; color: var(--accent); font-weight: 700; }
+.loop i.back { font-size: 1.1rem; }
+.cascade { flex-direction: column; align-items: flex-start; gap: 2px; }
+.cascade span:nth-of-type(2) { margin-left: 18px; } .cascade span:nth-of-type(3) { margin-left: 36px; } .cascade span:nth-of-type(4) { margin-left: 54px; }
+.cascade i:nth-of-type(1) { margin-left: 14px; } .cascade i:nth-of-type(2) { margin-left: 32px; } .cascade i:nth-of-type(3) { margin-left: 50px; }
+.four { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 1rem 0; }
+.four > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+.four b { font-size: .9rem; color: var(--accent-ink); } .four p { margin: 4px 0 0; font-size: .84rem; color: var(--muted); line-height: 1.5; }
+
+.ladder { display: grid; grid-template-columns: minmax(0, 1fr) 118px 118px; grid-template-rows: repeat(5, auto); gap: 5px 8px; margin: 1rem 0 .3rem; max-width: 640px; }
+.lv { grid-column: 1; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; font-weight: 700; font-size: .9rem; line-height: 1.35; }
+.lv small { display: block; font-weight: 400; color: var(--muted); font-size: .78rem; }
+.lv.l5 { grid-row: 1; margin-inline: 22%; } .lv.l4 { grid-row: 2; margin-inline: 16%; } .lv.l3 { grid-row: 3; margin-inline: 10%; } .lv.l2 { grid-row: 4; margin-inline: 5%; } .lv.l1 { grid-row: 5; }
+.lv.l5, .lv.l4 { background: var(--tone-f6e9f4); } .lv.l3 { background: var(--tint); } .lv.l2, .lv.l1 { background: var(--tone-eaf2ee); }
+.erg { border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .84rem; text-align: center; padding: 6px; }
+.erg.g { grid-column: 2; grid-row: 1 / span 2; background: var(--tone-ebd7ea); color: var(--tone-6e3f6a); }
+.erg.r { grid-column: 3; grid-row: 2 / span 2; background: var(--tint); color: var(--accent-ink); }
+.erg.e { grid-column: 2; grid-row: 4 / span 2; background: var(--tone-d9ebe1); color: var(--tone-2f6b4f); }
+
+.mw { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px; margin: 1.6rem 0 2rem; }
+.mw-body { margin-top: 10px; }
+.hz-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.hz-t { margin: 0 0 6px; font-weight: 700; font-size: .88rem; } .hz-t small { font-weight: 400; color: var(--muted); }
+.chips { display: flex; flex-direction: column; gap: 5px; }
+.chip { display: flex; justify-content: space-between; gap: 10px; font: 500 .84rem var(--sans); text-align: left; background: var(--bg); border: 1px solid var(--line); color: var(--fg); border-radius: 7px; padding: 6px 10px; cursor: pointer; }
+.chip em { font-style: normal; font-size: .74rem; color: var(--muted); }
+.hz-cols > div:first-child .chip[aria-pressed="true"] { border-color: var(--dwl); background: var(--tone-fcedea); }
+.hz-cols > div:first-child .chip[aria-pressed="true"] em { color: var(--tone-a8432f); }
+.hz-cols > div:last-child .chip[aria-pressed="true"] { border-color: var(--tone-6fae8b); background: var(--tone-eaf5ee); }
+.hz-cols > div:last-child .chip[aria-pressed="true"] em { color: var(--tone-2f6b4f); }
+.scale { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 6px; margin-top: 18px; }
+.half { height: 14px; background: var(--bg); border: 1px solid var(--line); border-radius: 7px; position: relative; overflow: hidden; }
+.half i { position: absolute; top: 0; bottom: 0; transition: width .25s; }
+.half.left i { right: 0; background: var(--dwl); } .half.right i { left: 0; background: var(--tone-6fae8b); }
+@media (prefers-reduced-motion: reduce) { .half i { transition: none; } }
+.zero { font: 700 .8rem var(--mono); color: var(--muted); }
+.scale-l { display: flex; justify-content: space-between; font-size: .74rem; color: var(--muted); margin-top: 4px; }
+
+.kpi-flow { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.3fr) auto minmax(0, .8fr) auto minmax(0, 1fr); gap: 8px; align-items: stretch; margin-top: 12px; font-size: .84rem; }
+.kpi-flow > div { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; line-height: 1.45; }
+.kpi-flow > i { font-style: normal; color: var(--accent); font-weight: 700; align-self: center; }
+.kpi-flow b { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.kpi-flow p { margin: 3px 0 0; } .kpi-flow ul { margin: 3px 0 0; padding-left: 1.1em; }
+.kpi-flow .bad { border-color: var(--dwl); background: var(--tone-fcedea); } .kpi-flow .good { border-color: var(--tone-6fae8b); background: var(--tone-eaf5ee); }
+
+.cmp-sel { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; font-size: .84rem; color: var(--muted); }
+.cmp-sel select { font: 500 .88rem var(--sans); padding: 5px 8px; border: 1px solid var(--line); border-radius: 7px; background: var(--paper); color: var(--fg); }
+table.cmp td:first-child { font-weight: 700; color: var(--muted); width: 22%; }
+
+.tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line); }
+.tabs button { font: 500 .86rem var(--sans); background: none; border: 0; border-bottom: 2px solid transparent; color: var(--muted); padding: 6px 12px; cursor: pointer; margin-bottom: -1px; }
+.tabs button[aria-selected="true"] { color: var(--accent-ink); border-bottom-color: var(--accent); }
+.ev { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+.ev > div { display: grid; grid-template-columns: 190px auto minmax(0, 1fr); gap: 10px; align-items: baseline; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; font-size: .86rem; line-height: 1.5; }
+.ev p { margin: 0; }
+.tag { font-size: .72rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; white-space: nowrap; }
+.tag.gap { background: var(--tone-fce3dd); color: var(--tone-a8432f); } .tag.ok { background: var(--tone-e3f2e9); color: var(--tone-2f6b4f); }
+.tag.maybe { background: var(--tone-fbf0d9); color: var(--tone-8a6216); } .tag.na { background: var(--tone-eee9eb); color: var(--muted); }
+.issue { margin-top: 12px; background: var(--tint); border-radius: 8px; padding: 10px 14px; font-size: .9rem; }
+.issue p { margin: 4px 0 0; }
+
+.xgrid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 1rem 0; }
+.xgrid > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 5px; font-size: .84rem; line-height: 1.4; }
+.xgrid small { color: var(--muted); font-size: .76rem; }
+.xgrid .ok, .xgrid .gap { align-self: flex-start; font-size: .72rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; }
+.xgrid .ok { background: var(--tone-e3f2e9); color: var(--tone-2f6b4f); } .xgrid .gap { background: var(--tone-fce3dd); color: var(--tone-a8432f); }
+
+@media (max-width: 760px) {
+  .three, .four { grid-template-columns: minmax(0, 1fr); }
+  .xgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hz-cols { grid-template-columns: minmax(0, 1fr); }
+  .kpi-flow { grid-template-columns: minmax(0, 1fr); } .kpi-flow > i { transform: rotate(90deg); justify-self: center; }
+  .ev > div { grid-template-columns: minmax(0, 1fr); gap: 3px; } .ev .tag { justify-self: start; }
+  .ladder { grid-template-columns: minmax(0, 1fr) 84px 84px; }
+}
+
+/* Session 4 + case page */
+.tcard small.dont { color: var(--muted); font-size: .78rem; border-top: 1px dashed var(--line); padding-top: 6px; margin-top: 4px; }
+.quotes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: .6rem 0 1rem; }
+.quotes q { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; font-style: italic; color: var(--muted); font-size: .9rem; }
+.six { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 1rem 0; }
+.six > div { display: flex; gap: 10px; align-items: flex-start; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .88rem; line-height: 1.5; }
+.six > div > span { flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--tint); color: var(--accent-ink); font: 700 .76rem/24px var(--sans); text-align: center; }
+a.cta { display: inline-block; background: var(--accent); color: #FFFFFF; text-decoration: none; font-weight: 500; padding: 8px 16px; border-radius: 8px; }
+a.cta:hover { background: var(--accent-ink); }
+blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; font-size: .92rem; line-height: 1.7; }
+.timeline { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 1rem 0; }
+.timeline > div { background: var(--paper); border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: 10px; padding: 10px 14px; font-size: .88rem; line-height: 1.5; }
+.timeline time { font: 500 .76rem var(--mono); color: var(--accent-ink); display: block; }
+.timeline p { margin: 4px 0 0; color: var(--muted); }
+.score { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 1rem 0; }
+.score > div { border-radius: 10px; padding: 10px 12px; font-size: .84rem; line-height: 1.5; border: 1px solid var(--line); }
+.score .up { background: var(--tone-eaf5ee); border-color: var(--tone-a9d3ba); } .score .down { background: var(--tone-fcedea); border-color: var(--tone-edc2b8); }
+.score b::after { margin-left: 6px; font-size: .78rem; } .score .up b::after { content: "improved"; color: var(--tone-2f6b4f); } .score .down b::after { content: "worse"; color: var(--tone-a8432f); }
+.score ul { margin: 6px 0 0; padding-left: 1.1em; }
+
+.jcm { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, .9fr); gap: 16px; }
+.jdims { display: flex; flex-direction: column; gap: 8px; }
+.jd.g0 label span { color: var(--tone-6e3f6a); } .jd.g1 label span { color: var(--accent-ink); } .jd.g2 label span { color: var(--tone-2f6b4f); }
+.jstates { display: flex; flex-direction: column; gap: 12px; padding-top: 4px; }
+.jst span { font-size: .8rem; font-weight: 500; }
+.jbar { height: 12px; border-radius: 6px; background: var(--bg); border: 1px solid var(--line); overflow: hidden; margin-top: 3px; }
+.jbar i { display: block; height: 100%; transition: width .25s; }
+.jst.g0 .jbar i { background: var(--tone-b98ab5); } .jst.g1 .jbar i { background: var(--accent); } .jst.g2 .jbar i { background: var(--tone-6fae8b); }
+@media (prefers-reduced-motion: reduce) { .jbar i { transition: none; } }
+.jout ul { margin: 8px 0 0; padding-left: 1.1em; font-size: .82rem; color: var(--muted); }
+.jlvl { display: inline-block; font-weight: 700; padding: 3px 12px; border-radius: 999px; font-size: .86rem; }
+.jlvl.strong { background: var(--tone-e3f2e9); color: var(--tone-2f6b4f); } .jlvl.moderate { background: var(--tone-fbf0d9); color: var(--tone-8a6216); } .jlvl.weak { background: var(--tone-fce3dd); color: var(--tone-a8432f); }
+.jgns { margin-top: 14px; }
+
+.qz-item { font-size: 1rem; font-weight: 500; margin: 4px 0 12px; }
+.qz-opts { display: grid; gap: 8px; }
+.qz-opts.grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 520px; }
+.qz-opts.row5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.qz-o { font: 500 .88rem var(--sans); background: var(--bg); border: 1px solid var(--line); color: var(--fg); border-radius: 8px; padding: 10px; cursor: pointer; display: flex; flex-direction: column; gap: 2px; text-align: center; }
+.qz-o small { color: var(--muted); font-size: .74rem; font-weight: 400; }
+.qz-o:hover { border-color: var(--accent); }
+.qz-o.right { background: var(--tone-e3f2e9); border-color: var(--tone-6fae8b); } .qz-o.wrong { background: var(--tone-fce3dd); border-color: var(--dwl); }
+.qz-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: .8rem; color: var(--muted); }
+
+.rsteps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+.rsteps > div { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: .85rem; line-height: 1.5; }
+.rsteps > div.g { background: var(--tint); border-color: var(--accent); }
+.rsteps b { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.rsteps p { margin: 4px 0 0; }
+.risk { font-size: .88rem; } .risk b { font-size: .72rem; color: #FFFFFF; background: var(--tone-b98a2e); padding: 1px 7px; border-radius: 4px; margin-right: 6px; }
+.sayd summary { cursor: pointer; font-weight: 500; color: var(--accent-ink); font-size: .9rem; }
+
+@media (max-width: 760px) {
+  .quotes, .six, .timeline, .rsteps { grid-template-columns: minmax(0, 1fr); }
+  .score { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .jcm { grid-template-columns: minmax(0, 1fr); }
+  .qz-opts.row5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+
+.eq-controls{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}.eq-controls button,.eq-controls select{font:500 .86rem var(--sans);color:var(--accent-ink);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:8px 12px;max-width:100%;cursor:pointer}.eq-controls button[aria-pressed="true"]{background:var(--tint);border-color:var(--accent)}.eq-result{background:var(--tint);border-radius:8px;padding:14px;min-height:100px}.eq-result p{margin:5px 0}.eq-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.eq-grid>div{border:1px solid var(--line);border-radius:10px;padding:14px;background:var(--paper)}.eq-grid b{color:var(--accent-ink)}.eq-num{font:500 1.8rem var(--mono);display:block;color:var(--accent-ink)}.eq-map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.eq-map>div{padding:16px;background:var(--paper);border:1px solid var(--line);border-radius:10px}.eq-map p{margin:6px 0}body{margin:0}.hint span{min-width:0} @media(max-width:600px){.eq-grid,.eq-map{grid-template-columns:minmax(0,1fr)}.hint{flex-wrap:wrap}.mw{padding:14px}.doc{overflow-wrap:break-word}}
+</style><style>.six .plan-copy{flex:1;min-width:0}.six .plan-copy p{margin:6px 0 0}.six .plan-copy b{display:block}.case-map>div{min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px}.case-map p{margin:6px 0 0}.case-map b{color:var(--accent-ink)}.qa-session{font:600 .85rem var(--sans);color:var(--accent-ink);margin:1.25rem 0 .6rem}.traps small{display:block;color:var(--accent-ink);font:600 .75rem var(--sans);margin-bottom:7px}@media(max-width:600px){.case-map{grid-template-columns:minmax(0,1fr)}}</style><style id="system-appearance">
+/* System appearance only changes colors. Print retains the light palette. */
+:root {
+  --header-rgb: 253, 249, 249;
+  --tone-2f282b: #2f282b;
+  --tone-2f6b4f: #2f6b4f;
+  --tone-3f5675: #3f5675;
+  --tone-3f7f7a: #3f7f7a;
+  --tone-6e3f55: #6e3f55;
+  --tone-6e3f6a: #6e3f6a;
+  --tone-6fae8b: #6fae8b;
+  --tone-7e6f74: #7e6f74;
+  --tone-8a6216: #8a6216;
+  --tone-8a7a5c: #8a7a5c;
+  --tone-9c4862: #9c4862;
+  --tone-a7cdb6: #a7cdb6;
+  --tone-a8432f: #a8432f;
+  --tone-a9d3ba: #a9d3ba;
+  --tone-b2c4e3: #b2c4e3;
+  --tone-b98a2e: #b98a2e;
+  --tone-b98ab5: #b98ab5;
+  --tone-bfdcc9: #bfdcc9;
+  --tone-c06c84: #c06c84;
+  --tone-d9674f: #d9674f;
+  --tone-d9ebe1: #d9ebe1;
+  --tone-ddb3cb: #ddb3cb;
+  --tone-e3f2e9: #e3f2e9;
+  --tone-e5c171: #e5c171;
+  --tone-eaf2ee: #eaf2ee;
+  --tone-eaf5ee: #eaf5ee;
+  --tone-ebd7ea: #ebd7ea;
+  --tone-edc2b8: #edc2b8;
+  --tone-eee9eb: #eee9eb;
+  --tone-efdde2: #efdde2;
+  --tone-f1dca8: #f1dca8;
+  --tone-f6e9f4: #f6e9f4;
+  --tone-f8eef0: #f8eef0;
+  --tone-fae9ed: #fae9ed;
+  --tone-fbf0d9: #fbf0d9;
+  --tone-fce3dd: #fce3dd;
+  --tone-fcedea: #fcedea;
+  --tone-fdf9f9: #fdf9f9;
+  --tone-ffffff: #ffffff;
+}
+@media screen and (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --header-rgb: 29, 24, 26;
+    --tone-2f282b: #EEE4E6;
+    --tone-2f6b4f: #A0D2B2;
+    --tone-3f5675: #93AECB;
+    --tone-3f7f7a: #8CC4BE;
+    --tone-6e3f55: #C9A3D6;
+    --tone-6e3f6a: #DAB3D6;
+    --tone-6fae8b: #8CC3A0;
+    --tone-7e6f74: #BEACB2;
+    --tone-8a6216: #E3C480;
+    --tone-8a7a5c: #C9B68C;
+    --tone-9c4862: #E6B3BE;
+    --tone-a7cdb6: #6E8C6B;
+    --tone-a8432f: #F0A48D;
+    --tone-a9d3ba: #669C7D;
+    --tone-b2c4e3: #667C96;
+    --tone-b98a2e: #D8B66B;
+    --tone-b98ab5: #BD99C1;
+    --tone-bfdcc9: #5F7A5C;
+    --tone-c06c84: #D79AA7;
+    --tone-d9674f: #E08A6F;
+    --tone-d9ebe1: #2C4135;
+    --tone-ddb3cb: #8C6680;
+    --tone-e3f2e9: #23372D;
+    --tone-e5c171: #C9A250;
+    --tone-eaf2ee: #29362F;
+    --tone-eaf5ee: #25372D;
+    --tone-ebd7ea: #413047;
+    --tone-edc2b8: #B77F70;
+    --tone-eee9eb: #30282D;
+    --tone-efdde2: #55424A;
+    --tone-f1dca8: #8F7A4A;
+    --tone-f6e9f4: #342938;
+    --tone-f8eef0: #2B2226;
+    --tone-fae9ed: #35272D;
+    --tone-fbf0d9: #3C3223;
+    --tone-fce3dd: #412B28;
+    --tone-fcedea: #382724;
+    --tone-fdf9f9: #1D181A;
+    --tone-ffffff: #241E21;
+  }
+}
+</style><style id="reading-layout-fix">.six > div > p{flex:1;min-width:0;margin:0}.steps > li{align-items:flex-start}.steps > li > .step-copy{flex:1;min-width:0;margin:0}</style><meta content="An integrated Management S1–S5 practice case: full story, bilingual framework analysis, visual evidence maps and six model answers." name="description"/><style id="northstar-layout">
+.ns-paths{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 4px}.ns-paths a,.ns-button{border:1px solid var(--line);background:var(--paper);color:var(--accent-ink);border-radius:8px;padding:8px 12px;font:500 .83rem/1.45 var(--sans);text-decoration:none;cursor:pointer}.ns-paths a:hover,.ns-button:hover{background:var(--tint)}
+.ns-stats,.ns-grid,.ns-mbti,.ns-values,.ns-evln{display:grid;gap:12px;margin:20px 0;grid-template-columns:repeat(2,minmax(0,1fr))}.ns-stats figure{margin:0;padding:18px;border:1px solid var(--line);border-radius:12px;background:var(--paper)}.ns-stats figcaption{font-weight:700;font-size:.9rem}.ns-metric{font:500 1.75rem/1.4 var(--mono);margin:8px 0}.ns-scale{font-size:.73rem;color:var(--muted);margin:6px 0 0}.ns-bar-row{display:grid;grid-template-columns:44px minmax(0,1fr) 30px;gap:8px;align-items:center;margin:7px 0;font-size:.76rem}.ns-track{height:9px;background:var(--panel);border-radius:12px;overflow:hidden}.ns-track i{display:block;height:100%;background:var(--accent-ink);border-radius:12px}.ns-before i{opacity:.45}.ns-bar-row output{font-family:var(--mono);text-align:right}.ns-grid>div,.ns-mbti>div,.ns-values>div,.ns-evln>div{min-width:0;padding:16px;border:1px solid var(--line);border-radius:10px;background:var(--paper)}.ns-values{grid-template-columns:repeat(3,minmax(0,1fr))}.ns-values b,.ns-mbti b{display:block;color:var(--accent-ink)}.ns-values p,.ns-grid p,.ns-mbti p,.ns-evln p{font-size:.88rem;line-height:1.65;margin:8px 0 0}.ns-letter{font:500 1.8rem/1.15 var(--mono);color:var(--accent-ink);margin-bottom:6px}.ns-story{border-top:1px solid var(--line);padding-top:4px}.ns-story h3{display:flex;gap:12px;align-items:flex-start}.ns-story h3>.ns-count{flex:none;width:27px;height:27px;text-align:center;line-height:27px;margin-top:3px;background:var(--tint);border-radius:50%;font-family:var(--mono);font-size:.8rem}.ns-story h3>.ns-heading{min-width:0}.ns-story p{margin:.7rem 0}
+.ns-flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;margin:18px 0}.ns-flow>div{flex:1 1 140px;padding:13px;border-radius:9px;background:var(--paper);border:1px solid var(--line);min-width:0;font-size:.88rem}.ns-flow>i{align-self:center;font-style:normal;color:var(--accent-ink)}.ns-flow strong{display:block;font:500 1.05rem/1.5 var(--mono)}.ns-rule{border-left:3px solid var(--accent);padding:10px 15px;background:var(--panel);border-radius:0 9px 9px 0;margin:16px 0;font-size:.9rem}.ns-rule p{margin:0}.ns-tag{display:inline-block;font-size:.69rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-ink);font-weight:700;margin-bottom:4px}.ns-grid small,.ns-evln small{display:block;color:var(--muted);font-size:.74rem}.ns-evln .ns-axis{font-size:.7rem;color:var(--accent-ink);font-weight:700}.ns-evln b{display:block;font-size:1.05rem;margin:3px 0}.ns-subtle{color:var(--muted);font-size:.87rem}.ns-tabs{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0}.ns-tabs button{border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--accent-ink);font:500 .78rem/1.45 var(--sans);padding:8px 10px;cursor:pointer}.ns-tabs button[aria-selected=true]{background:var(--accent-ink);color:var(--paper)}.ns-tabs button[aria-selected=true] .zh-full{color:inherit}.ns-panel{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px}.ns-panel dl{margin:0}.ns-panel dt{font-size:.75rem;font-weight:700;color:var(--accent-ink);margin:14px 0 4px}.ns-panel dt:first-child{margin-top:0}.ns-panel dd{margin:0;font-size:.92rem}.ns-panel a{display:inline-block;margin-top:14px;font-size:.84rem}.ns-firstpass{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:14px 0}.ns-firstpass>div{padding:12px;background:var(--panel);border-radius:8px;font-size:.85rem}.ns-firstpass b{display:block;color:var(--accent-ink)}.ns-question{border:1px solid var(--line);background:var(--paper);border-radius:12px;margin:18px 0;overflow:hidden}.ns-question-head{padding:18px 18px 10px}.ns-question-head h3{margin:0 0 10px;font-size:1.03rem;font-family:var(--sans);line-height:1.55}.ns-question-head p{font-size:.9rem;margin:0 0 8px}.ns-answer summary{padding:12px 18px;background:var(--panel);font-weight:500;color:var(--accent-ink);font-size:.86rem;cursor:pointer}.ns-answer[open] summary{border-bottom:1px solid var(--line)}.ns-answer-body{padding:8px 18px 18px}.ns-answer-body p{font-size:.91rem}.ns-answer-body h4{font-family:var(--sans);font-size:.94rem;margin:20px 0 6px;color:var(--accent-ink)}.ns-answer-body h4:first-child{margin-top:10px}.ns-answer-body p .zh-full{font-size:.92em}.ns-answer-tools{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:16px 0}.ns-answer-tools p{font-size:.83rem;color:var(--muted);margin:0}.ns-footer{margin:32px 0 0;padding-top:18px;border-top:1px solid var(--line);font-size:.85rem}.ns-footer a{text-decoration:underline;text-underline-offset:3px;color:var(--accent-ink)}
+html{scroll-padding-top:calc(var(--header-height,80px) + 18px)}.doc h2,.doc h3{scroll-margin-top:calc(var(--header-height,80px) + 18px)}.rail{top:calc(var(--header-height,56px) + 18px);max-height:calc(100vh - var(--header-height,56px) - 36px)}.ns-content{min-width:0}.ns-content .ns-reading-label{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-ink)}.zh-full{display:none}body.show-zh .zh-full{display:block}.ns-story h3 .zh-full{font-size:.78em}.ns-story h3 .ns-heading{font:inherit}.ns-metric .zh-full{font-family:var(--sans);font-size:.48em}.ns-content .tbl table.ns-wide{min-width:610px}.ns-content .tbl{max-width:100%}.ns-synthesis{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}.ns-synthesis p{margin:0}.ns-evln{position:relative}.ns-answer a{color:var(--accent-ink)}.ns-content :where(button,a,summary,input):focus-visible,.top :where(button,a,summary,input):focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+@media(max-width:600px){.ns-stats,.ns-grid,.ns-mbti,.ns-values,.ns-evln{grid-template-columns:minmax(0,1fr)}.ns-firstpass{grid-template-columns:minmax(0,1fr)}.ns-stats figure,.ns-panel{padding:15px}.ns-answer-tools{align-items:flex-start;flex-wrap:wrap}.ns-question-head{padding:15px 15px 8px}.ns-answer-body{padding:8px 15px 16px}.ns-flow>div{flex-basis:100%}.ns-flow>i{width:100%;text-align:center;transform:rotate(90deg)}.top-in{gap:9px}.sessions{margin-left:0}.page-tools{margin-left:auto;gap:10px}.crumbs{width:100%}.ns-question-head h3{font-size:.98rem}}
+@media print{.ns-paths,.ns-tabs,.ns-answer-tools,.ns-button,.ns-panel>a{display:none!important}.ns-answer{break-inside:auto}.ns-stats,.ns-mbti,.ns-values,.ns-evln{grid-template-columns:repeat(2,minmax(0,1fr))}.ns-panel,.ns-question,.ns-stats figure{box-shadow:none}.ns-question-head{break-after:avoid}.ns-content .tbl table.ns-wide{min-width:0}}
+</style></head><body><header class="top"><div class="top-in"><nav aria-label="Breadcrumb" class="crumbs"><a href="index.html">Study Notes</a><span>/</span><a href="management.html">Management</a><span>/</span><b>Northstar case</b></nav><button aria-controls="rail" aria-expanded="false" class="toc-btn" id="tocBtn" type="button">Contents</button><nav aria-label="Sessions" class="sessions"><a class="pill" href="management-s1.html">S1</a><a class="pill" href="management-s2.html">S2</a><a class="pill" href="management-s3.html">S3</a><a class="pill" href="management-s4.html">S4</a><a class="pill" href="management-s5.html">S5</a></nav></div></header><div class="wrap"><aside class="rail" id="rail"><p class="lbl">Contents</p><ol id="toc"></ol></aside><main class="ns-content"><article class="doc"><div class="hero"><p class="kick">Management · Integrated practice case · Sessions 1–5</p><h1 id="northstar">Northstar Client Solutions</h1><p class="lead">Delivery improves. Quality, cooperation and growth come under pressure. Read the facts, choose a useful framework, and build a case-specific answer.</p><p class="note-small">Fictional practice case. Figures and events belong to this exercise.</p><nav aria-label="Reading paths" class="ns-paths"><a href="#case">1 · Read the case</a><a href="#map">2 · Analyze S1–S5</a><a href="#questions">3 · Try six questions</a></nav></div><div class="ns-stats"><figure><figcaption>On-time completion</figcaption><div class="ns-metric">72% → 94%</div><div class="ns-bar-row ns-before"><span>Before</span><div aria-hidden="true" class="ns-track"><i style="width:72.0%"></i></div><output>72%</output></div><div class="ns-bar-row"><span>Now</span><div aria-hidden="true" class="ns-track"><i style="width:94.0%"></i></div><output>94%</output></div><p class="ns-scale">Scale: 0–100%.</p></figure><figure><figcaption>Reopened cases per 100</figcaption><div class="ns-metric">4 → 11</div><div class="ns-bar-row ns-before"><span>Before</span><div aria-hidden="true" class="ns-track"><i style="width:33.33%"></i></div><output>4</output></div><div class="ns-bar-row"><span>Now</span><div aria-hidden="true" class="ns-track"><i style="width:91.67%"></i></div><output>11</output></div><p class="ns-scale">Scale: 0–12 reopened cases per 100.</p></figure></div><h2 id="case">1. Read the complete case</h2><p>Northstar is a business software implementation company in Bangkok with 24 employees. Staff organize client data, configure systems and complete system launches.</p><p>Six months ago, Mira became operations manager. Better scheduling and a cleared backlog increased on-time completion from 72% to 94%. The owner praised this result, but other concerns have emerged.</p><section class="ns-story"><h3 id="case-working-style"><span aria-hidden="true" class="ns-count">1</span><span class="ns-heading">Mira’s working style</span></h3><p>Mira enjoys bringing people together to discuss new services. She often develops her ideas while talking. She usually starts with future possibilities and leaves the detailed implementation procedures to her colleagues.</p><p>When choosing between options, she asks for comparisons of costs, profits and test results. Even close to a system launch, she may change direction: “If there is a better option, why should we decide so early?”</p><p>She says, “I know that I like thinking aloud and that my ideas change quickly.” When staff explain that frequent changes create rework, she replies, “You should be more flexible.”</p></section><section class="ns-story"><h3 id="case-promises"><span aria-hidden="true" class="ns-count">2</span><span class="ns-heading">Company promises and employee experience</span></h3><p>The company has always emphasized “autonomy, learning and reliable service.” Ana joined because she strongly values learning new skills and solving problems independently.</p><p>Mira has suspended training and asked everyone to focus on closing more cases. Even small customer remedies require her approval.</p><p>Ana says, “I still enjoy solving clients’ problems, but the way the company works now no longer reflects the company I identified with.” She still completes assigned work, but no longer volunteers to help new employees.</p></section><section class="ns-story"><h3 id="case-arrangements"><span aria-hidden="true" class="ns-count">3</span><span class="ns-heading">Job design and rewards</span></h3><p>Previously, one employee managed a client’s entire implementation. The work is now divided into small, repetitive steps, and each employee handles only one part. Staff rarely learn whether the client’s launch succeeds or how their own work affects the result.</p><p>Each employee must close 30 cases per week. Mira set the target without discussing differences in case difficulty. Individual closure rankings are published daily, but there is little discussion of quality or improvement.</p><p>Employees earn THB 500 for every ten completed cases. Bonuses are paid together at month end. Once earned, a bonus is not withdrawn even if a case is later reopened. Helping colleagues does not count toward the reward.</p><p>Reopened cases have increased from four to eleven per hundred cases.</p></section><section class="ns-story"><h3 id="case-responses"><span aria-hidden="true" class="ns-count">4</span><span class="ns-heading">Different employee responses</span></h3><p>Ana suggests testing a new process that would maintain efficiency and reduce rework. Another employee resigns, saying that there are no opportunities for growth.</p><p>Ben prefers clear, stable procedures and finds the new checklists helpful. He believes management will improve the situation, so he continues to support the company and waits.</p><p>Another employee deliberately delays replies to clients and does only the minimum required.</p></section><section class="ns-story"><h3 id="case-meeting"><span aria-hidden="true" class="ns-count">5</span><span class="ns-heading">A team meeting</span></h3><p>After Mira makes a last-minute change in priorities, an employee explains that two deadlines now conflict. She interrupts him in front of the team: “If you cannot even handle this, perhaps you are not right for this role.”</p><p>Ana later suggests that Mira should first listen to the employee’s difficulties. Mira replies, “I am maintaining standards. I do not need you to tell me how to manage.”</p><p>Afterward, employees raise fewer concerns during meetings. No one volunteers to lead the new improvement project.</p></section><section class="ns-story"><h3 id="case-direction"><span aria-hidden="true" class="ns-count">6</span><span class="ns-heading">The company’s direction</span></h3><p>Mira is good at presenting new ideas to clients and has improved delivery discipline. However, staff hear a new slogan every week and do not know what takes priority when speed, quality and development conflict.</p><p>The owner asks Mira for a plan that preserves the gains in on-time delivery while improving quality, cooperation and retention.</p></section><p class="ns-subtle">First pass: before reading the analysis, choose a question and write these four items.</p><div class="ns-firstpass"><div><b>Selected framework</b></div><div><b>Two key case facts</b></div><div><b>How the facts fit the framework</b></div><div><b>Any necessary assumption</b></div></div><p><a class="case-text-link" href="#questions">Go straight to the questions →</a></p><h2 id="map">2. Facts first, then a useful lens <span class="zh">選框架</span></h2><p>A fact is reported in the case. An inference explains it through a concept. An assumption supplies a needed premise that the case does not state. Keep these separate.</p><div data-mw="northstar-lens"><div aria-label="Choose an analytical lens" class="ns-tabs" role="tablist"></div><div class="ns-panel" id="ns-lens-panel" role="tabpanel" tabindex="0"></div></div><p class="hint"><b>中文邏輯</b><span>同一個事實可支持不同框架。重點是說清楚理論如何解釋問題，不是把事實配到唯一標準答案。</span></p><h2 id="s1">3. S1 · Personality and people management</h2><p>Mira’s scheduling has helped delivery. However, job design, rewards, people and culture also affect performance. Personality is one part of the explanation.</p><div class="tbl"><table><thead><tr><th scope="col">Management element</th><th scope="col">Case evidence</th></tr></thead><tbody><tr><td>Leader</td><td>Mira’s preferences, decisions, communication and response to criticism.</td></tr><tr><td>People</td><td>Ana values learning and autonomy; Ben prefers stable procedures.</td></tr><tr><td>Process and culture</td><td>Fragmented jobs, daily rankings, weak quality discussion and less employee voice.</td></tr><tr><td>Outcomes</td><td>Faster delivery, more reopened cases, less helping and a resignation linked to weak growth.</td></tr></tbody></table></div><h3 id="mbti">A supported interpretation: ENTP <span class="zh">偏好</span></h3><p>Assume these repeated work habits reflect her usual preferences. Each letter needs its own evidence.</p><div class="ns-mbti"><div><div class="ns-letter">E</div><b>Extraversion</b><p>She develops ideas through group discussion. Discussion is a strength; speaking before fully listening is a possible overuse.</p></div><div><div class="ns-letter">N</div><b>Intuition</b><p>She starts with future possibilities and leaves detailed procedures to others. New ideas help; implementation details can be missed.</p></div><div><div class="ns-letter">T</div><b>Thinking</b><p>She compares costs, profits and test results. Clear criteria help decisions; the effect on people still needs attention.</p></div><div><div class="ns-letter">P</div><b>Perceiving</b><p>She keeps options open and changes direction near launch. Flexibility helps, but late changes can create rework.</p></div></div><p>Improved scheduling does not automatically make her J. Planning is a skill; keeping options open can remain a preference. T does not explain public threats: examine that conduct through EQ.</p><div class="ns-grid"><div><b>Awareness of preferences</b><p>She knows she thinks aloud and changes ideas quickly. The case does not say that she knows her full type.</p></div><div><b>Awareness of impact</b><p>She dismisses the rework caused by her changes. Understanding her impact on others is weaker.</p></div></div><p class="ns-subtle">Ben’s stable-procedure preference is a J-like clue, not a full type. Ana’s wish for autonomy is clearer evidence of a value than an MBTI type.</p><h2 id="s2">4. S2 · Values, attitudes and behavior</h2><h3 id="value-gap">Stated values versus daily practice <span class="zh">說做不一</span></h3><div class="ns-values"><div><b>Autonomy</b><p>Small customer remedies need Mira’s approval. Daily practice leaves little room for independent decisions.</p></div><div><b>Learning</b><p>Training stops while staff are told to close more cases.</p></div><div><b>Reliable service</b><p>The company promises reliable service, but its policy pays for closure counts even when cases later reopen. The reward policy does not fully support the stated value.</p></div></div><p class="ns-subtle">The same fact can support three different arguments. The framework determines the question being asked.</p><div class="tbl"><table><thead><tr><th>Lens</th><th>What this fact means</th></tr></thead><tbody><tr><td>Values</td><td>Reliable service is the stated value, but the reward policy gives little weight to lasting quality: a stated-practice discrepancy.</td></tr><tr><td>Goal setting / MBO</td><td>Thirty closures per week measures quantity, not whether clients’ problems stay solved: weak alignment between the target and the intended result.</td></tr><tr><td>Reinforcement</td><td>Ten closures earn THB 500 even if cases reopen: the consequence rewards closure volume more directly than lasting quality.</td></tr></tbody></table></div><p>Ana agrees with the stated values. The clearer problem is a stated-practice discrepancy: current practices do not support autonomy and learning. Mira’s actions give greater weight to speed, output and control.</p><p>Ana values learning and independence. Ben prefers stable procedures. The same arrangement can help one employee and frustrate another.</p><h3 id="ana">Separate Ana’s attitude from her behavior <span class="zh">態度與行為</span></h3><div class="tbl"><table><thead><tr><th scope="col">Component</th><th scope="col">What the case supports</th></tr></thead><tbody><tr><td>Cognitive</td><td>She believes current practice no longer reflects the company she identified with.</td></tr><tr><td>Affective</td><td>She still enjoys client problem-solving; her statement suggests disappointment with the organization.</td></tr><tr><td>Behavioral intention</td><td>No intention to resign is stated. Stopping voluntary help is an observed action, not a stated resignation intention.</td></tr></tbody></table></div><div class="tbl"><table><thead><tr><th scope="col">Concept</th><th scope="col">What changes, what remains</th></tr></thead><tbody><tr><td>Job satisfaction</td><td>Enjoyment of client work remains. This does not mean satisfaction with every part of the job.</td></tr><tr><td>Organizational commitment</td><td>Identification with the company weakens, although she still offers improvements.</td></tr><tr><td>OCB</td><td>Voluntary help for newcomers declines.</td></tr><tr><td>Task performance</td><td>Assigned work is still completed. Her individual quality results are not given.</td></tr><tr><td>Job involvement</td><td>Enjoying the work alone does not show how strongly the job forms part of her identity.</td></tr></tbody></table></div><p class="hint"><b>中文邏輯</b><span>知道偏好不等於知道影響；喜歡工作不等於認同公司；少做自願協助不等於本職績效下降。</span></p><p>Daily rankings communicate “close more cases.” Public criticism suggests that raising concerns may be risky. These daily signals compete with the stated values. Mira shows some A-like impatience and performance pressure, but the case is not enough for a full A/B classification.</p><h2 id="s3">5. S3 · Needs, management style and goals <span class="zh">動機</span></h2><p>The bonus is extrinsic. Ana’s enjoyment of solving client problems is intrinsic. External rewards do not directly replace learning, independence or meaningful work.</p><h3 id="maslow">Maslow: assess all five needs</h3><div class="tbl"><table><thead><tr><th scope="col">Need</th><th scope="col">Evidence → assessment</th></tr></thead><tbody><tr><td>Physiological</td><td>Bonuses provide material rewards. Basic pay and living needs are not described enough to judge full support.</td></tr><tr><td>Safety</td><td>Mira publicly questions whether an employee fits the role. If staff interpret this as a job threat, insecurity is a possible gap.</td></tr><tr><td>Social / belonging</td><td>Fragmented work, less helping and poor responses to concerns weaken cooperation and support.</td></tr><tr><td>Esteem</td><td>Rankings recognize output, but public criticism harms respect. Quality and helping receive little recognition.</td></tr><tr><td>Self-actualization</td><td>Training stops and independent problem-solving is restricted. One employee leaves because growth is weak.</td></tr></tbody></table></div><h3 id="erg-herzberg">ERG: several needs can matter at the same time</h3><p>ERG groups needs into Existence, Relatedness and Growth. A financial reward can support one group while the other groups remain weak.</p><div class="tbl"><table><thead><tr><th>Need and meaning</th><th>Case fact → assessment</th></tr></thead><tbody><tr><td>Existence: material basics</td><td>THB 500 per ten cases provides a financial reward. This supports material needs, but base pay is not given, so full adequacy cannot be judged.</td></tr><tr><td>Relatedness: supportive relationships</td><td>Mira rejects concerns, staff speak less and Ana stops helping newcomers. These facts show weaker support and cooperation, which are relatedness gaps.</td></tr><tr><td>Growth: developing and using abilities</td><td>Training stops, jobs become small repeated steps and independent problem-solving is restricted. Staff have fewer chances to learn and use their abilities: a growth gap.</td></tr></tbody></table></div><p class="key">ERG diagnosis: financial rewards coexist with relationship and growth gaps. These needs can matter together; receiving money does not remove the other needs.</p><p class="ns-subtle">Frustration-regression requires a shift toward lower needs after growth is blocked. The case shows blocked growth, but not that shift.</p><h3 id="herzberg">Herzberg: dissatisfaction and motivation are different</h3><p>Hygiene factors are conditions around the job; poor supervision or policy can create dissatisfaction. Motivators are growth, responsibility, achievement and recognition in the work itself.</p><div class="tbl"><table><thead><tr><th>Factor</th><th>Case fact → assessment</th></tr></thead><tbody><tr><td>Hygiene: supervision and policy</td><td>Mira publicly questions an employee’s suitability and dismisses Ana’s feedback. Even small remedies need approval. Poor treatment and restrictive policy can make the job frustrating.</td></tr><tr><td>Hygiene: pay</td><td>A bonus is provided. This does not fix poor supervision, and the case gives no basis for judging base-pay adequacy.</td></tr><tr><td>Motivators: growth and responsibility</td><td>Suspended training reduces learning. Fragmented jobs and approval rules reduce ownership and independent decisions. These weaken growth and responsibility.</td></tr><tr><td>Motivators: achievement and recognition</td><td>Rankings recognize case numbers, but staff rarely see successful client launches. Recognition is narrow and staff have less information about the value of their completed work.</td></tr></tbody></table></div><p class="key">Herzberg diagnosis: poor treatment can create dissatisfaction, while restricted growth and ownership weaken motivation. A bonus alone does not solve either problem.</p><p class="ns-subtle">ERG identifies which needs are weak. Herzberg explains why reducing dissatisfaction and building motivation require different conditions.</p><h3 id="theory-xy">Theory X/Y: belief → style → fit</h3><div class="ns-grid"><div><b>Theory X assumption</b><p>Staff need external control and pressure because they avoid work or responsibility.</p></div><div><b>Theory Y assumption</b><p>Staff can accept responsibility and direct their own work when committed to clear goals.</p></div></div><div class="tbl"><table><thead><tr><th>Reasoning step</th><th>Case-specific argument</th></tr></thead><tbody><tr><td>Observed management style</td><td>Mira approves even small remedies, sets targets without staff input and rejects feedback. Decisions remain strongly controlled by her.</td></tr><tr><td>Inferred assumption</td><td>Assume these rules reflect her belief that staff cannot make reliable decisions without close control. Under that assumption, the approach is X-like.</td></tr><tr><td>Evidence of employee initiative</td><td>Ana proposes a process to preserve efficiency and reduce rework. This shows a willingness to improve work and supports the Y view of potential responsibility.</td></tr><tr><td>Management-fit diagnosis</td><td>The control-heavy style gives an employee who shows initiative little room to decide or contribute. This is a mismatch between the style and the initiative the company needs.</td></tr></tbody></table></div><p class="key">Targets and bonuses alone do not identify Theory X. Ben’s preference for clear procedures also does not make him an “X employee”: clear structure can support Theory Y. MBTI describes Mira’s preferences; X/Y concerns her assumptions about employees.</p><h3 id="mbo">MBO: clear numbers, weak alignment</h3><div class="tbl"><table><thead><tr><th scope="col">Element</th><th scope="col">Case assessment</th></tr></thead><tbody><tr><td>Specificity</td><td>Thirty closures is clear, but success focuses mainly on quantity.</td></tr><tr><td>Time period</td><td>A weekly deadline is present.</td></tr><tr><td>Participation</td><td>Mira sets the target without discussing case difficulty.</td></tr><tr><td>Feedback</td><td>Rankings show quantity. Quality, final outcomes and improvement feedback are weak.</td></tr></tbody></table></div><p>The main alignment gap is between rewarded closures and reliable service. Reopening does not change the earned reward. The rule creates a risk of premature closure or choosing easy cases, but those behaviors are not directly reported.</p><h2 id="s4">6. S4 · Job design, responses and rewards</h2><h3 id="jcm">JCM: the experience of the job</h3><div class="tbl"><table><thead><tr><th scope="col">Dimension</th><th scope="col">Case fact → work experience</th></tr></thead><tbody><tr><td>Skill variety</td><td>Repeated small steps use fewer different skills.</td></tr><tr><td>Task identity</td><td>Staff handle one part rather than a complete implementation.</td></tr><tr><td>Task significance</td><td>Staff cannot clearly see their effect on the client. This is unclear perceived impact, not proof the job is unimportant.</td></tr><tr><td>Autonomy</td><td>Small remedies require Mira’s approval.</td></tr><tr><td>Feedback</td><td>Closure counts are visible, but successful client launches and quality outcomes rarely return to staff.</td></tr></tbody></table></div><div class="ns-flow"><div><b>Meaningfulness</b><p>Variety + whole work + visible client impact</p></div><div><b>Responsibility</b><p>Freedom within clear decision limits</p></div><div><b>Knowledge of results</b><p>Feedback on actual client outcomes</p></div></div><p>Ana values learning, so reduced development may affect her strongly. Ben’s liking for procedures does not show that he has low growth needs.</p><h3 id="evln">EVLN: four different responses <span class="zh">員工反應</span></h3><div class="ns-evln"><div><div class="ns-axis">Active · constructive</div><b>Voice</b><p>Ana proposes a better process.</p></div><div><div class="ns-axis">Active · destructive</div><b>Exit</b><p>An employee resigns because growth is weak.</p></div><div><div class="ns-axis">Passive · constructive</div><b>Loyalty</b><p>Ben supports the company and waits for improvement.</p></div><div><div class="ns-axis">Passive · destructive</div><b>Neglect</b><p>An employee delays replies and does the minimum.</p></div></div><p class="ns-subtle">“Destructive” is a model category, not a moral judgment about a person who leaves. Silence is not automatically loyalty: after public criticism it may reflect fear or withdrawal.</p><h3 id="rewards">Follow the reward rule <span class="zh">固定比率</span></h3><div class="ns-flow"><div><strong>10 cases</strong><p>Required output</p></div><i aria-hidden="true">→</i><div><strong>THB 500</strong><p>Bonus is earned</p></div><i aria-hidden="true">→</i><div><strong>Month end</strong><p>Money is paid</p></div></div><div class="ns-rule"><p>Fixed ratio: FR10. Monthly payment does not turn an output-based earning rule into fixed interval.</p></div><p>Money is added after completion as positive reinforcement. Yet a later reopening does not remove the reward, so volume is rewarded more directly than reliable service. Helping colleagues is outside the reward rule.</p><p>The public threat can act as punishment for speaking up; later questions decline. No clear negative-reinforcement example is given. Declining help is not automatically extinction because no previous reinforcer is identified as removed.</p><p class="hint"><b>中文邏輯</b><span>先看獎勵資格依什麼取得，再看何時發款。行為是完成一件案件時，每十件取得獎金就是 FR10。</span></p><h3 id="recognition">Check all six recognition-system elements</h3><div class="tbl"><table><thead><tr><th scope="col">Element</th><th scope="col">Case issue</th></tr></thead><tbody><tr><td>Management support</td><td>Speed has visible support; quality and cooperation receive less.</td></tr><tr><td>Standards</td><td>Volume and bonus rules are clear; quality and cooperation standards are weaker.</td></tr><tr><td>Measurement</td><td>Daily counts are visible; final outcomes rarely return to staff.</td></tr><tr><td>Meaningful consequences</td><td>Money may matter, but it does not address Ana’s value of learning and autonomy.</td></tr><tr><td>Fair application</td><td>A common target ignores case difficulty and may give unequal chances to earn rewards.</td></tr><tr><td>Evaluation</td><td>Reopenings rise; no adjustment to the system is reported.</td></tr></tbody></table></div><h2 id="s5">7. S5 · EQ: events and distinct gaps <span class="zh">情緒智商</span></h2><div class="tbl"><table><thead><tr><th scope="col">Factor</th><th scope="col">Event → diagnosis</th></tr></thead><tbody><tr><td>Self-awareness and self-control</td><td>She knows some habits but dismisses their impact. Public interruption and a threat are an unhelpful response under pressure.</td></tr><tr><td>Empathy</td><td>She does not first understand the conflicting deadlines or the rework her changes create.</td></tr><tr><td>Social expertise</td><td>She rejects feedback and handles disagreement through authority. Staff become less willing to speak.</td></tr><tr><td>Personal influence</td><td>She presents ideas well to clients, but internal willing support weakens: no one volunteers for the project.</td></tr><tr><td>Mastery of vision</td><td>New slogans do not give staff a stable direction for balancing speed, quality and development.</td></tr></tbody></table></div><div class="ns-grid"><div><b>Ideas are not a shared vision</b><p>Future ideas help only when staff understand the priorities and use them in real decisions.</p></div><div><b>Standards and respect can coexist</b><p>Maintaining standards does not require public threats. Understanding a workload problem does not mean removing the standard.</p></div></div><h2 id="synthesis">8. Bring the diagnosis together</h2><div class="ns-synthesis"><p>Mira improves delivery, but the company rewards quantity more clearly than quality and cooperation. Jobs offer less ownership, learning and independence. Her response to concerns also reduces voice. Together, these gaps explain why bonuses can exist while motivation, cooperation and retention weaken.</p></div><p class="key">Choose the framework that explains the question’s central problem and briefly say why. Develop that argument with facts and stated assumptions. Add another concept only when it improves the explanation.</p><h2 id="questions">9. Six questions: write first, then compare</h2><p>The questions do not name a required theory. Model answers show reasonable choices, not the only possible frameworks.</p><div class="ns-answer-tools"><p>All six model answers start closed.</p><button aria-expanded="false" class="ns-button" id="nsAnswersAll" type="button">Show all model answers</button></div><section class="ns-question"><div class="ns-question-head"><h3 id="q1">Q1 · Why are employees losing engagement despite increased bonuses?</h3><p>Choose the framework that best explains the problem. Identify which arrangements help, where the gaps are and how they affect employees. Do not simply list theory names.</p></div><details class="ns-answer" id="answer-1"><summary>Show model answer</summary><div class="ns-answer-body"><p class="ns-reading-label">Selected framework: Herzberg’s two-factor theory</p><p>I would use Herzberg to separate dissatisfaction from motivation. Mira publicly questions an employee’s suitability and rejects feedback. These are supervision problems, so they concern hygiene factors and can create dissatisfaction even when a bonus is paid.</p><p>Training stops, employees handle only small parts of a case and even minor decisions need approval. These facts show weaker growth and responsibility, which are motivators. Rankings recognize quantity, but employees rarely see successful client outcomes.</p><p>The bonus may encourage closures, and checklists help Ben. However, money does not replace respectful supervision, learning, responsibility or meaningful achievement.</p><p class="ns-subtle">The case gives the current bonus rule, but no before-and-after bonus amount. This answer explains why the current scheme is not enough.</p></div></details></section><section class="ns-question"><div class="ns-question-head"><h3 id="q2">Q2 · What has changed for Ana, and what do the other employees’ responses mean?</h3><p>Analyze Ana’s statements and behavior. Separate what has changed from what remains. Then explain the different employee responses using suitable concepts.</p></div><details class="ns-answer" id="answer-2"><summary>Show model answer</summary><div class="ns-answer-body"><p class="ns-reading-label">Selected concepts: values, attitudes, OCB and EVLN</p><p>Ana’s values fit the company’s stated values, but not its current practices. She values learning and autonomy, while training is stopped and small decisions need approval.</p><p>She still enjoys helping clients and completes assigned work. Her identification with the company has weakened, and she no longer volunteers to help newcomers. This shows weaker organizational identification and lower OCB, rather than a complete loss of interest in her work. She has not stated an intention to resign.</p><p>Her process suggestion is Voice. The employee who resigns shows Exit. Ben shows Loyalty because he supports the company and waits. Delaying client replies and doing the minimum are Neglect.</p></div></details></section><section class="ns-question"><div class="ns-question-head"><h3 id="q3">Q3 · How would you interpret Mira’s working preferences?</h3><p>Propose a personality type and support each preference with case evidence. Explain her awareness of her own preferences and suggest a suitable way to communicate an improvement proposal. Do not simply guess four letters.</p></div><details class="ns-answer" id="answer-3"><summary>Show model answer</summary><div class="ns-answer-body"><p class="ns-reading-label">Selected framework: MBTI preferences</p><p>Assuming these are her usual working preferences, I would propose ENTP. She develops ideas through discussion, supporting E. She focuses on future possibilities rather than detailed procedures, supporting N. She compares costs, profits and test results, supporting T. She keeps options open and changes direction late, supporting P.</p><p>She knows she thinks aloud and changes ideas quickly. The case does not show that she knows her full type. She also dismisses the rework caused by her changes, so awareness of her impact is weak.</p><p>I would discuss two improvement options with her, explain the wider benefits and compare costs and quality results. We could agree on one short trial and a clear review date.</p></div></details></section><section class="ns-question"><div class="ns-question-head"><h3 id="q4">Q4 · Which two aspects of job design and rewards should change first?</h3><p>Choose suitable frameworks and explain how the arrangements create problems. For each change, explain what should change, why it may work and how the existing gains can be protected.</p></div><details class="ns-answer" id="answer-4"><summary>Show model answer</summary><div class="ns-answer-body"><p class="ns-reading-label">Selected frameworks: JCM, goal setting and reinforcement</p><h4>1 · Restore meaningful ownership</h4><p>I would give an employee or small team responsibility for a client case from the beginning to confirmed completion. They should receive final client feedback and have clear limits for routine decisions. This improves task identity, autonomy and feedback. Seeing client results also makes the work more meaningful.</p><p>I would keep useful checklists and scheduling controls, and review resolution quality, rework and on-time delivery.</p><h4>2 · Reward reliable completion</h4><p>I would consider closure volume together with solution quality and team results. Staff should discuss case difficulty when targets are set. A reopened case should be reviewed to understand its cause; staff should not lose rewards simply for honestly reporting a problem.</p><p>This reduces pressure to focus only on numbers. Track on-time delivery and reopened cases together, so improving one does not damage the other.</p></div></details></section><section class="ns-question"><div class="ns-question-head"><h3 id="q5">Q5 · If you were Mira’s executive coach, how would you analyze and support her?</h3><p>Choose a suitable framework and examine all its dimensions. Connect each problem to a specific event. Propose matching practices or management tasks and a way to assess improvement. State any assumptions where facts are incomplete.</p></div><details class="ns-answer" id="answer-5"><summary>Show model answer</summary><div class="ns-answer-body"><p class="ns-reading-label">Selected framework: the five EQ factors</p><p>I would use EQ because the case shows problems in self-understanding, responses to others and shared direction. Coaching should preserve Mira’s delivery strengths while changing the behaviors that harm the team.</p><h4>1 · Self-awareness and self-control</h4><p>She knows some habits but dismisses their impact and publicly threatens an employee. Review one real incident with the coach: her intention, her words and the staff experience. Before correction, pause and address factual problems privately.</p><p class="ns-subtle">Check: Check later corrections for respect and usefulness; compare her account with confidential staff feedback.</p><h4>2 · Empathy</h4><p>She does not first understand conflicting deadlines. When a workload concern arises, listen, repeat the problem in her own words and agree priorities before adding work.</p><p class="ns-subtle">Check: Check whether staff felt understood and whether the agreed priorities resolved the conflict.</p><h4>3 · Social expertise</h4><p>She rejects feedback and staff speak less. In the regular team review, invite concerns, let people finish and respond without personal attack. Agree an owner and follow-up date for each issue.</p><p class="ns-subtle">Check: Check useful responses and follow-through, and whether staff become more willing to raise problems.</p><h4>4 · Personal influence</h4><p>No one volunteers for the project. Explain why it matters, invite staff ideas and give a willing project leader real support and clear decision rights. Recognize specific contributions.</p><p class="ns-subtle">Check: Look for useful voluntary contributions and completed improvements, rather than praise counts alone.</p><h4>5 · Mastery of vision</h4><p>Staff hear changing slogans but lack priorities. Mira and the owner should agree on a clear direction and practical decision rules, then use them consistently when explaining goals and changes.</p><p class="ns-subtle">Check: Ask staff to explain the priorities and apply them to a real deadline-versus-quality problem.</p><p>Use the same regular team review where possible. Five factors do not require five separate meeting programs. The owner should review behavior, staff feedback and delivery results together.</p></div></details></section><section class="ns-question"><div class="ns-question-head"><h3 id="q6">Q6 · You can recommend only three priority actions to the owner. What would you choose?</h3><p>Combine the analysis into one plan. Explain the problem each action addresses, how the actions work together and which of Mira’s strengths should be retained.</p></div><details class="ns-answer" id="answer-6"><summary>Show model answer</summary><div class="ns-answer-body"><h4>1 · Align goals and rewards</h4><p>Define success as timely and reliable completion. Consider case difficulty, and include quality and team results in rewards. This closes the gap between case numbers and reliable service.</p><h4>2 · Restore ownership and learning</h4><p>Give staff ownership of complete cases, clear limits for routine decisions and learning opportunities. Return final client results to the people doing the work. This supports autonomy, responsibility, growth and problem-solving.</p><h4>3 · Change the response to concerns</h4><p>Make respectful correction, listening and follow-through part of Mira’s responsibilities. The owner and coach review real incidents and staff feedback. This helps employees raise problems early and join improvements.</p><p class="key">The first action defines the right result. The second gives staff the ability and responsibility to achieve it. The third allows people to speak and contribute. Keep Mira’s scheduling discipline, useful checklists and ability to present ideas. Protect on-time delivery while reducing reopened cases and improving cooperation and retention.</p></div></details></section><div class="ns-footer"><p>Related study pages</p><a href="management-lms.html">Lee Medical Supply</a> · <a href="management.html">Management course</a></div></article></main></div><script>
+(function(){
+ const bilingual=false, lenses=[{"label": ["S1 · Personality", "S1・人格"], "fact": ["She develops ideas through discussion and keeps changing options.", "她透過討論形成想法，並持續改變選項。"], "framework": ["MBTI preferences", "MBTI 偏好"], "reading": ["E and P are supported clues. N and T need their own evidence. Assume the pattern reflects her usual preferences.", "有支持 E、P 的線索；N、T 仍須各自找證據。假設此模式反映她平常的偏好。"], "link": "s1"}, {"label": ["S2 · Values", "S2・價值觀"], "fact": ["The company promises autonomy and learning, but approvals increase and training stops.", "公司承諾自主與學習，實際卻增加核准、停止培訓。"], "framework": ["Stated values versus practice", "宣稱價值與實際做法"], "reading": ["Ana agrees with the stated values. The clearer gap is between those values and daily practice.", "Ana 認同宣稱價值；更明顯的缺口在價值與日常做法之間。"], "link": "s2"}, {"label": ["S3 · Motivation", "S3・動機"], "fact": ["Bonuses exist, but learning, responsibility and respectful supervision weaken.", "有獎金，但學習、責任及尊重的督導變弱。"], "framework": ["Herzberg as one useful lens", "Herzberg 是一個有用視角"], "reading": ["Public criticism is a supervision problem; stopped training and restricted responsibility weaken motivators. Herzberg separates those two problems.", "公開批評是督導問題；培訓停止及責任受限削弱激勵因素。Herzberg 將這兩種問題分開。"], "link": "s3"}, {"label": ["S4 · Work & rewards", "S4・工作與獎勵"], "fact": ["Jobs are fragmented. Ten closures earn a bonus, even if a case reopens.", "工作被切碎；十件結案即可獲獎，案件重開也不撤回。"], "framework": ["JCM and reinforcement", "JCM 與增強理論"], "reading": ["JCM explains the experience of work. Reinforcement explains which behavior the reward rule supports.", "JCM 解釋工作經驗；增強理論解釋獎勵規則支持了哪些行為。"], "link": "s4"}, {"label": ["S5 · EQ", "S5・EQ"], "fact": ["Mira publicly threatens an employee and rejects feedback. Staff then speak less.", "Mira 公開威脅員工並拒絕回饋，之後員工發言減少。"], "framework": ["Five-factor EQ framework", "五因素 EQ 框架"], "reading": ["Match the event to each relevant factor and explain the distinct gap. Knowing a preference differs from knowing its impact.", "將事件對到相關因素，說明不同缺口。知道偏好與知道其影響是兩回事。"], "link": "s5"}];
+ const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const pair=(en,zh)=>esc(en)+(bilingual&&zh?'<span class="zh-full" lang="zh-Hant">'+esc(zh)+'</span>':'');
+ const toggle=document.getElementById('zhToggle'), mode=document.getElementById('zhModeLabel');
+ if(toggle){toggle.checked=false;document.body.classList.remove('show-zh');toggle.addEventListener('change',()=>{document.body.classList.toggle('show-zh',toggle.checked);mode.textContent=toggle.checked?'ON':'OFF';});}
+ const practice=document.getElementById('practiceToggle');
+ if(practice){practice.setAttribute('aria-pressed','false');practice.addEventListener('click',()=>{const on=practice.getAttribute('aria-pressed')!=='true';practice.setAttribute('aria-pressed',String(on));document.getElementById('practiceState').textContent=on?'On':'Off';const z=document.getElementById('practiceChinese');if(z)z.textContent=on?'練習模式：開啟':'練習模式：關閉';document.querySelectorAll('.practice-prompt').forEach(p=>p.hidden=!on);});}
+ const host=document.querySelector('[data-mw="northstar-lens"]'),tabs=host.querySelector('.ns-tabs'),panel=host.querySelector('.ns-panel');
+ let current=0;
+ const buttons=lenses.map((v,i)=>{const b=document.createElement('button');b.type='button';b.id='ns-lens-'+i;b.setAttribute('role','tab');b.setAttribute('aria-controls',panel.id);b.innerHTML=pair(...v.label);b.addEventListener('click',()=>draw(i));tabs.append(b);return b;});
+ function draw(i){current=i;buttons.forEach((b,k)=>{b.setAttribute('aria-selected',String(k===i));b.tabIndex=k===i?0:-1;});const v=lenses[i];panel.setAttribute('aria-labelledby',buttons[i].id);panel.innerHTML='<dl><dt>'+pair('Case fact','個案事實')+'</dt><dd>'+pair(...v.fact)+'</dd><dt>'+pair('Useful framework','有用框架')+'</dt><dd>'+pair(...v.framework)+'</dd><dt>'+pair('How it explains the fact','如何解釋此事實')+'</dt><dd>'+pair(...v.reading)+'</dd></dl><a href="#'+v.link+'">'+pair('Read the full analysis →','閱讀完整分析 →')+'</a>';}
+ tabs.addEventListener('keydown',e=>{let i=current;if(e.key==='ArrowRight')i=(i+1)%buttons.length;else if(e.key==='ArrowLeft')i=(i+buttons.length-1)%buttons.length;else if(e.key==='Home')i=0;else if(e.key==='End')i=buttons.length-1;else return;e.preventDefault();draw(i);buttons[i].focus();});draw(0);host.dataset.ready='1';
+ const answers=[...document.querySelectorAll('.ns-answer')],all=document.getElementById('nsAnswersAll');
+ function syncAnswers(){const on=answers.every(d=>d.open);all.setAttribute('aria-expanded',String(on));all.innerHTML=pair(on?'Hide all model answers':'Show all model answers',on?'收起全部示範答案':'展開全部示範答案');}
+ all.addEventListener('click',()=>{const open=!answers.every(d=>d.open);answers.forEach(d=>d.open=open);syncAnswers();});answers.forEach(d=>d.addEventListener('toggle',syncAnswers));syncAnswers();
+ const toc=document.getElementById('toc'),rail=document.getElementById('rail');
+ const headings=[...document.querySelectorAll('article h2,article h3')];
+ headings.forEach(h=>{const li=document.createElement('li');if(h.tagName==='H3')li.className='h3';const a=document.createElement('a');a.href='#'+h.id;const clone=h.cloneNode(true);clone.querySelectorAll('.ns-count').forEach(n=>n.remove());a.innerHTML=clone.innerHTML;li.append(a);toc.append(li);});
+ const tocToggle=document.getElementById('tocBtn');tocToggle.addEventListener('click',()=>{const open=!rail.classList.contains('open');rail.classList.toggle('open',open);tocToggle.setAttribute('aria-expanded',String(open));});
+ toc.addEventListener('click',e=>{const link=e.target.closest('a');if(!link)return;rail.classList.remove('open');tocToggle.setAttribute('aria-expanded','false');});
+ if('IntersectionObserver' in window){const links=[...toc.querySelectorAll('a')];const ob=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(!entry.isIntersecting)return;links.forEach(a=>a.classList.toggle('on',a.hash==='#'+entry.target.id));});},{rootMargin:'-15% 0px -70% 0px'});headings.forEach(h=>ob.observe(h));}
+ const header=document.querySelector('.top');const measure=()=>document.documentElement.style.setProperty('--header-height',Math.ceil(header.getBoundingClientRect().height)+'px');if('ResizeObserver' in window)new ResizeObserver(measure).observe(header);measure();
+ let before=[];window.addEventListener('beforeprint',()=>{before=answers.map(d=>d.open);answers.forEach(d=>d.open=true);});window.addEventListener('afterprint',()=>{answers.forEach((d,i)=>d.open=before[i]||false);syncAnswers();});
+})();
+</script></body></html>
