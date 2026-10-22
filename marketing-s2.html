@@ -491,6 +491,35 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 .answer-example p{margin:.5rem 0 0}
 .sessions a.pill:hover{background:var(--tint);color:var(--accent-ink);border-color:var(--accent)}
 @media(max-width:600px){.top-in{gap:8px 10px}.page-tools{flex-basis:100%;justify-content:flex-end;flex-wrap:wrap;margin:0}.page-tools .practice-toggle{max-width:100%}.answer-example{padding:14px}.doc .tbl td,.doc .tbl th{min-width:130px}}
+</style><style id="reading-design">
+:root{--example-bg:#EDF3F7;--example-line:#C4D5E0;--example-ink:#385E75;--extra-bg:#F5F3F4}
+@media(prefers-color-scheme:dark){:root{--example-bg:#202B33;--example-line:#405D70;--example-ink:#B5D5E8;--extra-bg:#252124}}
+.doc p,.doc li,.hero .lead{max-width:none}
+.reading-block{margin:18px 0;padding:18px 22px;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
+.reading-block>p{margin:0 0 12px}.reading-block>p:last-child{margin-bottom:0}
+.reading-block>.reading-label,.case-story>.reading-label{font:650 .7rem var(--sans);text-transform:uppercase;letter-spacing:.09em;margin:0 0 10px;color:var(--muted)}
+.reading-key{background:var(--tint);border-left:4px solid var(--accent)}
+.reading-key>.reading-label{color:var(--accent-ink)}
+.reading-key>p:not(.reading-label){font-weight:550}
+.reading-why{border-left:3px solid var(--line)}
+.reading-example,.case-story{background:var(--example-bg);border-color:var(--example-line);border-left:4px solid var(--example-line)}
+.reading-example>.reading-label,.case-story>.reading-label{color:var(--example-ink)}
+.reading-extra{background:var(--extra-bg);border-style:dashed;font-size:.92rem}
+.case-story{padding:20px 24px;border:1px solid var(--example-line);border-left:4px solid var(--example-line);border-radius:12px;margin:1.2rem 0}
+.case-story>p:last-child{margin-bottom:0}
+.example-table{border-top:3px solid var(--example-line);border-radius:10px}
+.example-table th{background:var(--example-bg);color:var(--example-ink)}
+.worked-answer,.answer-example{border:1px solid var(--line);border-left:4px solid var(--accent);background:var(--paper);border-radius:12px;padding:20px 24px;margin:1.2rem 0}
+.question-brief{background:var(--example-bg);border:1px solid var(--example-line);border-radius:10px;padding:16px 20px}
+.doc .abbr-full{font-size:.88em;font-weight:450;text-transform:none;letter-spacing:normal}
+.doc h2 .abbr-full,.doc h3 .abbr-full{color:var(--muted);font-family:var(--sans);font-size:.68em;line-height:1.55}
+.rail .abbr-full{display:none}
+.table-scroll-hint{font-size:.73rem;color:var(--muted);margin:0 0 6px;text-align:right}
+.reading-block>.reading-label{display:block}
+.case-source{font-size:.8rem;color:var(--muted)}
+.doc :is(h2,h3){scroll-margin-top:calc(var(--header-height,80px) + 20px)}
+.doc :is(.mw,.mk,.study-widget){border-top:3px solid var(--accent)}
+@media(max-width:600px){.reading-block,.case-story,.worked-answer,.answer-example{padding:16px}.question-brief{padding:14px}}
 </style></head><body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
@@ -505,13 +534,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 
 <div class="wrap">
   <aside class="rail" id="rail"><p class="lbl">Contents</p><ol id="toc"></ol></aside>
-  <main><article class="doc"><div class="hero">
-  <p class="kick">Strategic Marketing Management · Session 2</p>
-  <h1>CRM, Customer Data and Marketing Metrics</h1>
-  <p class="lead">More data is not better insight. Turn customer interactions into useful information, use it to improve relationships and experience, and test whether actions change behavior and create economic value.</p>
-</div>
-
-<h2 id="map">Chapter map</h2>
+  <main><article class="doc"><div class="hero"><p class="kick">Strategic Marketing Management · Session 2</p><h1>Customer Relationships, Data and Metrics</h1><p class="lead">Use customer data to improve the next experience. Choose measures that show whether people return and whether the relationship creates value.</p></div><h2 id="map">Chapter map</h2>
 <div class="method"><span>Interaction</span><i>→</i><span>Data</span><i>→</i><span>Pattern</span><i>→</i><span>Interpretation</span><i>→</i><span class="hi">Decision</span><i>→</i><span>Customer behavior</span><i>→</i><span>Metric</span><i>→</i><span>Learning</span></div>
 <div class="three">
   <div class="tcard"><span class="tnum">1</span><b>Lesson 1</b><p>How do we understand customers and create value?</p></div>
@@ -525,48 +548,48 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
   <div><b>Transaction</b> <span class="zh">單次交易</span><p>How do I make this sale?</p></div>
   <div><b>Relationship</b> <span class="zh">關係行銷</span><p>How do I create enough value that this customer keeps choosing us? "Buy one time vs a lifetime."</p></div>
 </div>
-<p>CRM <span class="zh">顧客關係管理</span> is managing acquisition, retention and value creation over time. It is not merely software.</p>
-<p><b>CRM connects acquisition, retention and churn.</b> Acquisition adds new customers; retention keeps a defined group active over a stated period; churn records those lost. Starting base + acquired customers − customers lost = ending base, when the definitions and period are consistent. Do not subtract losses again from a figure that already counts only retained customers. Acquiring 1,000 while losing 900 gives a net addition of 100, not evidence of strong relationships.</p><div data-mk="getkeep"></div>
+<div class="reading-block reading-key"><p class="reading-label">Key idea</p><p>CRM <span class="abbr-full">(Customer Relationship Management)</span> manages how a company wins customers, keeps them and creates value over time. Software helps, but the work is about relationships.<span class="zh">顧客關係管理</span> is managing acquisition, retention and value creation over time. It is not merely software.</p></div>
+<div class="reading-block reading-why"><p class="reading-label">How it works</p><p>Use one period and one customer definition: starting customers + new customers − lost customers = ending customers. Winning 1,000 and losing 900 adds only 100. Count each customer once.</p></div><div data-mk="getkeep"></div>
 <h3 id="clv">Customer lifetime value</h3>
-<p>CLV is the economic value of a relationship over time, not today's revenue. It depends on frequency, retention, margin, serving cost and acquisition cost. The professor's warning: 100% loyalty is unrealistic.</p>
-<p>Consider two purchase histories: THB 100 three times a week for 52 weeks produces THB 15,600 in annual revenue; a one-time THB 500 purchase produces THB 500. The first relationship generates more revenue, but its value still depends on contribution margin, service cost and how long it lasts. <b>CLV helps decide how much acquisition or retention spending a relationship can support.</b> The model below simplifies that economic question; it is not a promise of permanent loyalty.</p><div data-mk="clv"></div>
-<p class="key">An expensive customer to acquire is worth it only if the relationship lasts long enough to repay the cost. Retention is not the goal for every customer at any cost.</p>
+<div class="reading-block reading-key"><p class="reading-label">Key idea</p><p>CLV <span class="abbr-full">(Customer Lifetime Value)</span> is the value a customer relationship creates over time. It depends on buying frequency, how long the customer stays, contribution per purchase and the costs of winning and serving that customer.</p></div>
+<div class="reading-block reading-example"><p class="reading-label">Example</p><p>THB <span class="abbr-full">(Thai Baht)</span> 100 spent three times a week for 52 weeks gives THB 15,600 in yearly revenue. One THB 500 purchase gives THB 500. Frequent small purchases can create more value, but compare margins and service costs too.</p></div><div data-mk="clv"></div>
+<div class="reading-block reading-why"><p class="reading-label">How it works</p><p>Spend on acquisition or retention when the expected relationship value covers that spending. Keeping every customer at any cost is not the goal.</p></div>
 
 <!-- 2 -->
 <h2 id="satisfaction">2. Satisfaction, importance and experience</h2>
-<p class="sub">The lowest satisfaction score is not automatically the top priority. Weight it by how much the attribute matters.</p>
+<div class="reading-block reading-key"><p class="reading-label">Key idea</p><p>Improve what matters most to the buying decision, not simply the item with the lowest satisfaction score.</p></div>
 <div class="tbl"><table>
 <thead><tr><th>Attribute</th><th>Satisfaction</th><th>Importance</th><th>Priority</th></tr></thead>
 <tbody>
 <tr><td>Store music</td><td>5/10</td><td>2/10</td><td>Low, despite the lower score</td></tr>
 <tr><td>Coffee taste</td><td>7/10</td><td>10/10</td><td>Examine first</td></tr>
 </tbody></table></div>
-<p>Music scores 5/10 and taste scores 7/10. Improving music looks attractive if the manager only ranks low scores. But taste is much more important to the buying decision, so a modest taste weakness may have a larger business effect. Importance and performance should be read together; they are not automatically a validated mathematical priority score. Serious failures of cleanliness or order accuracy still require attention even if customers take those basics for granted.</p><div data-mk="satimp"></div>
-<p class="note-small">Queue time and Wi-Fi are added examples. The quadrant view is a standard importance-performance supplement.</p>
+<div class="reading-block reading-example"><p class="reading-label">Example</p><p>Music scores 5/10 but has importance 2/10. Coffee taste scores 7/10 with importance 10/10. Taste deserves attention first because it matters much more to the choice. Basic cleanliness and correct orders still need to work.</p></div><div data-mk="satimp"></div>
+
 <h3 id="hygiene">Hygiene versus motivators</h3>
 <div class="pair">
   <div><b>Must-have (hygiene)</b><p>Correct order, cleanliness, working payment, no defects. Failure creates dissatisfaction; success only meets expectations.</p></div>
   <div><b>Nice-to-have (motivator)</b><p>Personal greeting, remembering the usual order, a surprise. Adds delight but cannot replace the basics.</p></div>
 </div>
-<p class="key">Fix serious hygiene failures first, then add experience enhancers. Customer experience management means learning fast enough to respond while the problem still matters.</p>
+<div class="reading-block reading-key"><p class="reading-label">Key idea</p><p>Fix basic failures first. A friendly greeting cannot make up for a wrong order or dirty table. Then add the touches that make the experience better.</p></div>
 
 <!-- 3 -->
-<p><b>CXM / CEM</b> both refer here to customer experience management across touchpoints. Listening produces feedback; learning identifies a problem or opportunity; reacting changes the experience. A report arriving after the customer has left may document failure without recovering the experience, so response ownership and timing matter as much as data collection.</p><h2 id="data">3. Data, information and decisions</h2>
+<div class="reading-block reading-why"><p class="reading-label">How it works</p><p>CXM <span class="abbr-full">(Customer Experience Management)</span> and CEM <span class="abbr-full">(Customer Experience Management)</span> both mean managing the customer experience. Listen → learn → respond. Assign someone to act quickly enough to help the customer, rather than only writing a report later.</p></div><h2 id="data">3. Data, information and decisions</h2>
 <div class="ladder2">
   <div><b>Data</b>Observations.</div><i>↓</i>
   <div><b>Information</b>Organized data with meaning.</div><i>↓</i>
   <div><b>Insight</b>Interpretation relevant to a business problem.</div><i>↓</i>
   <div><b>Decision</b>Action chosen with evidence plus judgment.</div>
 </div>
-<h3 id="data-worked">Follow one observation through the decision</h3><div class="tbl"><table><thead><tr><th scope="col">Stage</th><th scope="col">Retail example</th><th scope="col">What changes</th></tr></thead><tbody><tr><td>Data</td><td>Records of purchase time, items and store location.</td><td>Raw observations.</td></tr><tr><td>Information / pattern</td><td>Morning food purchases fell in school-area stores, but not factory-area stores.</td><td>A meaningful comparison.</td></tr><tr><td>Insight / hypothesis</td><td>The change may relate to the school-area customer routine; price, availability and rival activity remain alternatives.</td><td>Decision-relevant interpretation with uncertainty.</td></tr><tr><td>Decision and follow-up</td><td>Check stock and routines, then pilot a local assortment change; monitor sales, availability and waste.</td><td>A justified action and a way to learn.</td></tr></tbody></table></div><div class="pair">
-  <div><b>MIS and garbage in, garbage out</b><p>A management information system turns data into information for decisions. Technology cannot fix wrong data, the wrong question or poor interpretation.</p></div>
+<h3 id="data-worked">Follow one observation through the decision</h3><div class="tbl example-table"><table><thead><tr><th scope="col">Stage</th><th scope="col">Retail example</th><th scope="col">What changes</th></tr></thead><tbody><tr><td>Data</td><td>Records of purchase time, items and store location.</td><td>Raw observations.</td></tr><tr><td>Information / pattern</td><td>Morning food purchases fell in school-area stores, but not factory-area stores.</td><td>A meaningful comparison.</td></tr><tr><td>Insight / hypothesis</td><td>The change may relate to the school-area customer routine; price, availability and rival activity remain alternatives.</td><td>Decision-relevant interpretation with uncertainty.</td></tr><tr><td>Decision and follow-up</td><td>Check stock and routines, then pilot a local assortment change; monitor sales, availability and waste.</td><td>A justified action and a way to learn.</td></tr></tbody></table></div><div class="pair">
+  <div><b>MIS <span class="abbr-full">(Management Information Systems)</span> and garbage in, garbage out</b><p>A management information system turns data into information for decisions. Technology cannot fix wrong data, the wrong question or poor interpretation.</p></div>
   <div><b>Information overload</b><p>Ask what decision we are making, which information is relevant, which metric would change the decision, and what can be ignored.</p></div>
 </div>
 <p class="hint"><b>中文邏輯</b><span>科技改變的是 channel、速度與資訊量；顧客需求、價值與比較替代選項的邏輯不變。</span></p>
 
 <!-- 4 -->
 <h2 id="mining">4. Data mining and evidence discipline</h2>
-<p class="sub">Data mining: computers filter large datasets for patterns; humans interpret. It shows what happened better than why.</p>
+<div class="reading-block reading-key"><p class="reading-label">Key idea</p><p>Data mining finds patterns in large datasets. People then decide what those patterns mean for the business. A pattern shows what changed; it does not explain the reason by itself.</p></div>
 <div class="method"><span>Large dataset</span><i>→</i><span>Pattern</span><i>→</i><span>Human interpretation</span><i>→</i><span class="hi">Hypothesis, not conclusion</span></div>
 <div class="pair">
   <div><b>Supported</b><p>Morning purchases declined.</p></div>
@@ -585,24 +608,24 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
   <div><b>Intervention</b> <span class="zh">介入測試</span><p>If we do X, will behavior change? Run a targeted test and measure it.</p></div>
 </div>
 <div class="flow"><span>Pattern</span><i>→</i><span>Investigate cause</span><i>→</i><span>Hypothesis</span><i>→</i><span>Intervene</span><i>→</i><span>Measure behavior</span></div>
-<p>Jumping straight to intervention can fix the wrong problem and makes results hard to interpret. Session 3 covers how to test causality.</p>
+<div class="reading-block reading-key"><p class="reading-label">Key idea</p><p>Investigate to understand a problem. Intervene to test a solution. Diagnose first, then choose an action and measure the result.</p></div>
 
 <!-- 5 -->
 <h2 id="ai">5. Prediction, privacy and trust</h2>
 <div class="pair">
-  <div><b>Prediction is not certainty</b><p>AI and predictive models estimate patterns from historical data. New competitors, technology, shocks or changing preferences can break them. Past behavior is evidence, not destiny.</p></div>
+  <div><b>Prediction is not certainty</b><p>AI <span class="abbr-full">(Artificial Intelligence)</span> and predictive models estimate patterns from historical data. New competitors, technology, shocks or changing preferences can break them. Past behavior is evidence, not destiny.</p></div>
   <div><b>Personalization versus privacy</b><p>The more data is linked to a person, the more valuable and the more sensitive it becomes. Too much relevance turns into "how do they know that?"</p></div>
 </div>
-<p class="key">Do not ask how much data we can collect. Ask what data is necessary to improve the customer experience or the decision.</p>
+<div class="reading-block reading-key"><p class="reading-label">Key idea</p><p>AI uses past data to predict likely outcomes. Check whether the model still works when customers, rivals or routines change.</p></div>
 
 <!-- 6 -->
-<p>A prediction can rank likely buyers without establishing why they buy or what action will change their behavior. If a competitor opens nearby or working routines change, historical relationships may weaken. Check performance in the intended stores and period. With personalization, ask whether the added information improves the experience enough to justify its intrusiveness; more precise targeting can still reduce trust.</p><h2 id="channels">6. Omnichannel and e-commerce</h2>
+<div class="reading-block reading-why"><p class="reading-label">How it works</p><p>Personalization should make the experience easier. Collect data that helps the service or decision. Unnecessary tracking can make customers uncomfortable and reduce trust.</p></div><h2 id="channels">6. Omnichannel and e-commerce</h2>
 <div class="pair">
   <div><b>Multichannel</b><p>Store, website, app and social media, possibly run separately.</p></div>
   <div><b>Omnichannel</b> <span class="zh">全通路</span><p>Channels integrated into one seamless journey: research on mobile, check stock online, buy in store, return elsewhere.</p></div>
 </div>
-<p>More channels mean more cost, complexity and consistency problems. Ask which channels matter to the target and what role each plays.</p>
-<h3 id="ecom">E-commerce is not "just build a website"</h3>
+<div class="reading-block reading-key"><p class="reading-label">Key idea</p><p>Multichannel means using several channels. Omnichannel means connecting them into one journey: check stock online, buy in store and return through a supported channel.</p></div>
+<div class="reading-block reading-why"><p class="reading-label">How it works</p><p>Choose channels for a useful role. Each adds work, cost and a need for consistent information.</p></div><h3 id="ecom">E-commerce is not "just build a website"</h3>
 <div class="four">
   <div><b>Traffic</b><p>"If you build it, they will come": probably not. The funnel still applies.</p></div>
   <div><b>Trust</b><p>Customers cannot touch the product: show company, security, price, delivery and guarantees.</p></div>
@@ -612,7 +635,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 
 
 <!-- 7 -->
-<h3 id="commerce-economics">Who pays, and what still has to be delivered?</h3><div class="tbl"><table><thead><tr><th scope="col">Revenue model</th><th scope="col">Payment mechanism</th><th scope="col">Economic question</th></tr></thead><tbody><tr><td>Direct sale</td><td>Buyer pays for a product or service.</td><td>Does the price cover product, acquisition, delivery and returns?</td></tr><tr><td>Commission / transaction fee</td><td>A platform earns a share or fee when a transaction occurs.</td><td>Are enough valuable transactions completed after serving both sides?</td></tr><tr><td>Subscription</td><td>Customer pays repeatedly for continued access or service.</td><td>Will repeat value support retention and service cost?</td></tr><tr><td>Advertising</td><td>An advertiser pays for access to an audience.</td><td>Can audience value support revenue without damaging the user experience?</td></tr></tbody></table></div><p>Pure play means online-only; bricks-and-mortar means physical stores; clicks-and-mortar combines the two. Each can create customer value. An integrated journey requires accurate stock information, usable interfaces and workable purchase/return handoffs. A convenient website followed by failed delivery breaks the same promise that attracted the customer.</p><h2 id="digital">7. Digital behavior and pain points</h2>
+<h3 id="commerce-economics">Who pays, and what still has to be delivered?</h3><div class="tbl"><table><thead><tr><th scope="col">Revenue model</th><th scope="col">Payment mechanism</th><th scope="col">Economic question</th></tr></thead><tbody><tr><td>Direct sale</td><td>Buyer pays for a product or service.</td><td>Does the price cover product, acquisition, delivery and returns?</td></tr><tr><td>Commission / transaction fee</td><td>A platform earns a share or fee when a transaction occurs.</td><td>Are enough valuable transactions completed after serving both sides?</td></tr><tr><td>Subscription</td><td>Customer pays repeatedly for continued access or service.</td><td>Will repeat value support retention and service cost?</td></tr><tr><td>Advertising</td><td>An advertiser pays for access to an audience.</td><td>Can audience value support revenue without damaging the user experience?</td></tr></tbody></table></div><div class="reading-block reading-why"><p class="reading-label">How it works</p><p>Pure play means online-only. Bricks-and-mortar means physical stores. Clicks-and-mortar combines both. Whatever the format, accurate stock, payment, delivery and returns must support the promise.</p></div><h2 id="digital">7. Digital behavior and pain points</h2>
 <div class="tbl"><table>
 <thead><tr><th>Tool</th><th>Value</th><th>Limit</th></tr></thead>
 <tbody>
@@ -621,29 +644,29 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 <tr><td><b>Remarketing</b> <span class="zh">再行銷</span></td><td>Uses past interest to remind and convert.</td><td>If the customer already bought, the ad is irrelevant or shows a cheaper price later.</td></tr>
 </tbody></table></div>
 <div class="method"><span>Customer friction</span><i>→</i><span>Pain point</span><i>→</i><span>Alternative solution</span><i>→</i><span class="hi">Adoption opportunity</span></div>
-<p>The class uses banks, fintech and Uber/Grab to explore fees, waiting and complexity as pain points. A useful alternative removes a valued friction at a viable cost. Moving everyone to ATMs or apps can also remove face-to-face help some customers value, so efficiency and customer relationship effects must be considered together.</p>
+<div class="reading-block reading-example"><p class="reading-label">Example</p><p>Banks, fintech services and Uber/Grab show how waiting, fees and complicated steps create opportunities. A better service removes a problem customers care about. Moving everything to an app can also remove personal help that some customers value.</p></div>
 
 <!-- 8 -->
 <h2 id="loyalty">8. Loyalty programs</h2>
-<p class="sub">A loyalty program is an intervention, not the objective. Membership is not behavioral loyalty, and behavioral loyalty is not attitudinal loyalty.</p>
-<div class="tbl"><table><thead><tr><th scope="col">Concept</th><th scope="col">Evidence</th><th scope="col">Do not infer</th></tr></thead><tbody><tr><td>Program membership</td><td>Enrollment or a stamp card.</td><td>A strong brand preference.</td></tr><tr><td>Behavioral loyalty</td><td>Repeated purchase over a defined period.</td><td>The program caused those purchases.</td></tr><tr><td>Attitudinal loyalty</td><td>Ongoing preference or attachment.</td><td>Never buying another brand.</td></tr></tbody></table></div><p>In the coffee example, a customer buys 10 cups per month before joining and still buys 10 afterward. A free reward may now subsidize the same behavior. A buy-nine-get-one-free card aims to make returning more attractive, but the test is whether it creates additional visits or contribution after reward costs. Members often already like the brand, so comparing members with all nonmembers can exaggerate the program effect.</p><div data-mk="loyalty"></div>
+<div class="reading-block reading-key"><p class="reading-label">Key idea</p><p>A loyalty program is a tool to change behavior. Joining the program, buying often and feeling attached to the brand are three different things.<span class="zh">反事實</span>: what would this customer have done without the program? Rewarding behavior that would have happened anyway only reduces margin.</p></div>
+<div class="tbl"><table><thead><tr><th scope="col">Concept</th><th scope="col">Evidence</th><th scope="col">Do not infer</th></tr></thead><tbody><tr><td>Program membership</td><td>Enrollment or a stamp card.</td><td>A strong brand preference.</td></tr><tr><td>Behavioral loyalty</td><td>Repeated purchase over a defined period.</td><td>The program caused those purchases.</td></tr><tr><td>Attitudinal loyalty</td><td>Ongoing preference or attachment.</td><td>Never buying another brand.</td></tr></tbody></table></div><div class="reading-block reading-example"><p class="reading-label">Example</p><p>A customer buys 10 coffees a month before joining and still buys 10 afterward. A free reward now costs the shop money without adding visits. Compare purchases and contribution with what would happen without the reward.</p></div><div data-mk="loyalty"></div>
 <div class="formula">Program value ≈ incremental customer value − reward and program cost</div>
-<p class="key">Ask the counterfactual <span class="zh">反事實</span>: what would this customer have done without the program? Rewarding behavior that would have happened anyway only reduces margin.</p>
+<div class="reading-block reading-why"><p class="reading-label">How it works</p><p>The counterfactual asks what would happen without the program. Members often already like the brand, so a simple member-versus-nonmember comparison can overstate the program’s effect.</p></div>
 
 <!-- 9 -->
 <h2 id="metrics">9. Marketing metrics</h2>
-<p class="sub">The professor: "How should we keep score?" First answer: "What are our objectives?" Measurable does not mean useful.</p>
+<div class="reading-block reading-key"><p class="reading-label">Key idea</p><p>Choose the objective first. Then choose the customer behavior and metric that show progress. A number is useful only when it helps answer the business question.<span class="zh">虛榮指標</span> when they are not tied to the objective. Even sales can mislead: the market grew, prices rose, discounts cut margin, or acquisition rose while retention collapsed.</p></div>
 <div class="pair">
   <div><b>Right order</b><p>Objective → desired behavior → metric.</p></div>
   <div><b>Wrong order</b><p>Available metric → pretend it is the objective.</p></div>
 </div>
 <div class="method"><span>Impression</span><i>→</i><span>Click</span><i>→</i><span>Visit</span><i>→</i><span>Purchase</span><i>→</i><span>Repeat</span><i>→</i><span class="hi">Profit</span></div>
-<p>CTR is an intermediate metric. Likes and views become vanity metrics <span class="zh">虛榮指標</span> when they are not tied to the objective. Even sales can mislead: the market grew, prices rose, discounts cut margin, or acquisition rose while retention collapsed.</p>
+<div class="reading-block reading-why"><p class="reading-label">How it works</p><p>CTR <span class="abbr-full">(Click-Through Rate)</span> tracks clicks, not repeat purchases. Likes and views are vanity metrics when they distract from the objective. Sales can rise while discounts or service costs reduce profit.</p></div>
 <div class="tbl"><table><thead><tr><th scope="col">Objective</th><th scope="col">Closer outcome measure</th><th scope="col">What earlier metrics miss</th></tr></thead><tbody><tr><td>Awareness</td><td>Target awareness / relevant reach.</td><td>Exposure alone does not establish purchase.</td></tr><tr><td>Trial</td><td>First purchase or first actual use.</td><td>A click or registration may stop before use.</td></tr><tr><td>Repeat / retention</td><td>Cohort repeat rate, visit frequency, retention and churn over a stated period.</td><td>Sign-ups do not show later behavior.</td></tr><tr><td>Profitability</td><td>Incremental contribution after relevant costs.</td><td>Sales can rise while discounts and service costs erode margin.</td></tr></tbody></table></div><div data-mk="metric"></div>
 
 <!-- 10 -->
 <h2 id="cases">10. Worked cases</h2>
-<div class="tbl"><table>
+<div class="tbl example-table"><table>
 <thead><tr><th>Case</th><th>Evidence</th><th>Can say</th><th>Cannot yet say</th></tr></thead>
 <tbody>
 <tr><td><b>7-Eleven-style retailer</b></td><td>Time, product, store location</td><td>Morning demand differs by store context</td><td>Why customers behave differently</td></tr>
@@ -677,7 +700,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
   <details><summary>Investigation versus intervention?</summary><p>Investigation looks for the cause; intervention tests whether an action changes behavior.</p></details>
   <details><summary>When does personalization backfire?</summary><p>When tracking feels intrusive and reduces trust.</p></details>
   <details><summary>Why is having many channels not omnichannel?</summary><p>Channels need consistent information and an integrated experience.</p></details>
-  <details><summary>Why doesn't a large user base mean a viable business?</summary><p>Users are not a revenue model; costs, monetization and retention decide viability.</p></details>
+  <details><summary>Why doesn't a large user base mean a viable business?</summary><p>Users are not a revenue model; costs, how it earns money and retention decide viability.</p></details>
   <details><summary>Why can rewards to existing frequent buyers destroy value?</summary><p>If behavior does not change, the firm pays rewards without incremental purchases.</p></details>
   <details><summary>Why is high CTR not enough when the goal is repeat purchase?</summary><p>CTR measures an earlier step, not repeat behavior or its economic value.</p></details>
 </div>
@@ -690,7 +713,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 <tr><td><b>Digital business</b></td><td>Customer value → friction → channel → trust → logistics → revenue model</td></tr>
 <tr><td><b>Loyalty program</b></td><td>Objective → incentive → expected behavior → metric → counterfactual → program cost</td></tr>
 </tbody></table></div>
-<div class="answer-example"><b>Example · A local purchase decline</b><p>The records show that morning visits fell in school-area stores. They do not establish that price caused the decline. I would first compare availability, customer routines and nearby competition, then pilot an action matched to the likely problem. Success should be judged by incremental morning visits and contribution, alongside waste and customer feedback. Any personalized outreach should use only information needed for that purpose.</p></div><p class="key">Data, channels and visible metrics are not the goal. The test is whether actions change meaningful customer behavior and create value without damaging margin or trust.</p>
+<div class="answer-example"><b>Example · A local purchase decline</b><p>Morning visits fell near schools. Compare stock, school routines and nearby rivals. Test an action matched to the cause. Track extra visits, contribution, waste and customer feedback.</p></div><p class="key">Data, channels and visible metrics are not the goal. The test is whether actions change meaningful customer behavior and create value without damaging margin or trust.</p>
 </article></main>
 </div>
 
@@ -978,4 +1001,22 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
   if (window.MktWidgets) window.MktWidgets.mount(document);
 })();
 </script>
-</body></html>
+<script>(()=>{const h=document.querySelector('.top');if(!h)return;const f=()=>document.documentElement.style.setProperty('--header-height',Math.ceil(h.getBoundingClientRect().height)+'px');f();if('ResizeObserver'in window)new ResizeObserver(f).observe(h);window.addEventListener('resize',f)})();</script><script>(() => {
+  const bilingual=!!document.getElementById('zhToggle');
+  const tables=[...document.querySelectorAll('article .tbl')];
+  const entries=tables.map(table=>{
+    const hint=document.createElement('p');hint.className='table-scroll-hint';
+    hint.textContent='Swipe or use arrow keys to see the rest of the table.';
+    if(bilingual){const zh=document.createElement('span');zh.className='zh-full';zh.lang='zh-Hant';zh.textContent='可左右滑動，或用方向鍵查看完整表格。';hint.append(zh)}
+    table.before(hint);table.setAttribute('aria-label','Scrollable study table');
+    return {table,hint};
+  });
+  const refresh=()=>entries.forEach(({table,hint})=>{
+    const wide=table.scrollWidth>table.clientWidth+2;hint.hidden=!wide;
+    if(wide)table.tabIndex=0;else table.removeAttribute('tabindex');
+  });
+  refresh();window.addEventListener('resize',refresh);
+  if('ResizeObserver'in window){const observer=new ResizeObserver(refresh);tables.forEach(t=>observer.observe(t))}
+  if(document.fonts)document.fonts.ready.then(refresh);
+})();
+</script></body></html>

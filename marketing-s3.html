@@ -491,6 +491,35 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 .answer-example p{margin:.5rem 0 0}
 .sessions a.pill:hover{background:var(--tint);color:var(--accent-ink);border-color:var(--accent)}
 @media(max-width:600px){.top-in{gap:8px 10px}.page-tools{flex-basis:100%;justify-content:flex-end;flex-wrap:wrap;margin:0}.page-tools .practice-toggle{max-width:100%}.answer-example{padding:14px}.doc .tbl td,.doc .tbl th{min-width:130px}}
+</style><style id="reading-design">
+:root{--example-bg:#EDF3F7;--example-line:#C4D5E0;--example-ink:#385E75;--extra-bg:#F5F3F4}
+@media(prefers-color-scheme:dark){:root{--example-bg:#202B33;--example-line:#405D70;--example-ink:#B5D5E8;--extra-bg:#252124}}
+.doc p,.doc li,.hero .lead{max-width:none}
+.reading-block{margin:18px 0;padding:18px 22px;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
+.reading-block>p{margin:0 0 12px}.reading-block>p:last-child{margin-bottom:0}
+.reading-block>.reading-label,.case-story>.reading-label{font:650 .7rem var(--sans);text-transform:uppercase;letter-spacing:.09em;margin:0 0 10px;color:var(--muted)}
+.reading-key{background:var(--tint);border-left:4px solid var(--accent)}
+.reading-key>.reading-label{color:var(--accent-ink)}
+.reading-key>p:not(.reading-label){font-weight:550}
+.reading-why{border-left:3px solid var(--line)}
+.reading-example,.case-story{background:var(--example-bg);border-color:var(--example-line);border-left:4px solid var(--example-line)}
+.reading-example>.reading-label,.case-story>.reading-label{color:var(--example-ink)}
+.reading-extra{background:var(--extra-bg);border-style:dashed;font-size:.92rem}
+.case-story{padding:20px 24px;border:1px solid var(--example-line);border-left:4px solid var(--example-line);border-radius:12px;margin:1.2rem 0}
+.case-story>p:last-child{margin-bottom:0}
+.example-table{border-top:3px solid var(--example-line);border-radius:10px}
+.example-table th{background:var(--example-bg);color:var(--example-ink)}
+.worked-answer,.answer-example{border:1px solid var(--line);border-left:4px solid var(--accent);background:var(--paper);border-radius:12px;padding:20px 24px;margin:1.2rem 0}
+.question-brief{background:var(--example-bg);border:1px solid var(--example-line);border-radius:10px;padding:16px 20px}
+.doc .abbr-full{font-size:.88em;font-weight:450;text-transform:none;letter-spacing:normal}
+.doc h2 .abbr-full,.doc h3 .abbr-full{color:var(--muted);font-family:var(--sans);font-size:.68em;line-height:1.55}
+.rail .abbr-full{display:none}
+.table-scroll-hint{font-size:.73rem;color:var(--muted);margin:0 0 6px;text-align:right}
+.reading-block>.reading-label{display:block}
+.case-source{font-size:.8rem;color:var(--muted)}
+.doc :is(h2,h3){scroll-margin-top:calc(var(--header-height,80px) + 20px)}
+.doc :is(.mw,.mk,.study-widget){border-top:3px solid var(--accent)}
+@media(max-width:600px){.reading-block,.case-story,.worked-answer,.answer-example{padding:16px}.question-brief{padding:14px}}
 </style></head><body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
@@ -505,13 +534,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 
 <div class="wrap">
   <aside class="rail" id="rail"><p class="lbl">Contents</p><ol id="toc"></ol></aside>
-  <main><article class="doc"><div class="hero">
-  <p class="kick">Strategic Marketing Management · Session 3</p>
-  <h1>Marketing Research</h1>
-  <p class="lead">Research reduces uncertainty; it does not eliminate it. Start from the management decision, choose the method the question needs, study the right people, and never claim more than the evidence supports.</p>
-</div>
-
-<h2 id="map">Chapter map</h2>
+  <main><article class="doc"><div class="hero"><p class="kick">Strategic Marketing Management · Session 3</p><h1>Marketing Research: Ask, Learn, Decide</h1><p class="lead">Start with a business question. Choose the people, method and measures that can answer it. Turn the findings into an action.</p></div><h2 id="map">Chapter map</h2>
 <div class="method"><span>Business problem</span><i>→</i><span>Research question</span><i>→</i><span>Objective</span><i>→</i><span>Information gap</span><i>→</i><span class="hi">Method</span><i>→</i><span>Sample</span><i>→</i><span>Measurement</span><i>→</i><span>Analysis and limits</span><i>→</i><span>Decision</span></div>
 <div class="three">
   <div class="tcard"><span class="tnum">1</span><b>Lesson 1</b><p>What should marketing do? Customer, need, value, strategy.</p></div>
@@ -521,7 +544,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 
 <!-- 1 -->
 <h2 id="why">1. Why research?</h2>
-<p class="sub">Managers decide under uncertainty <span class="zh">不確定性</span> about wants, needs, motivations, drivers and barriers. Research improves the decision; it cannot guarantee it.</p>
+<div class="reading-block reading-key"><p class="reading-label">Key idea</p><p>Research helps managers understand customers, compare options and reduce the risk of a poor decision.<span class="zh">不確定性</span> about wants, needs, motivations, drivers and barriers. Research improves the decision; it cannot guarantee it.</p></div>
 <div class="tbl"><table>
 <thead><tr><th>Type</th><th>Main question</th><th>Example</th></tr></thead>
 <tbody>
@@ -537,13 +560,13 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 
 <!-- 2 -->
 <h2 id="question">2. Question before method</h2>
-<p class="sub">The professor's rule: you must have a question, then define objectives. The method comes last.</p>
+<div class="reading-block reading-key"><p class="reading-label">Key idea</p><p>Start with the business question. Define what must be learned. Choose the method last.</p></div>
 <div class="pair">
   <div><b>Wrong order</b><p>"Let's run a survey." Then invent a question for it.</p></div>
   <div><b>Right order</b><p>Question → objective → information needed → method.</p></div>
 </div>
-<p>Start with the decision the manager must make. Weak drink sales might call for a price change, clearer communication, wider distribution or an improved experience. Each choice requires different evidence. A survey asking whether people like the product cannot reliably choose among those actions unless it measures the relevant uncertainty.</p><h3 id="problem">Business problem versus research question</h3>
-<p>"Sales of a new drink are weak" is a symptom <span class="zh">症狀</span>. Research questions turn it into something evidence can answer:</p>
+<div class="reading-block reading-example"><p class="reading-label">Example</p><p>Weak drink sales could come from price, unclear benefits, poor access or a bad experience. Each explanation needs different information. Asking only “Do you like it?” will not tell the manager what to change.</p></div><h3 id="problem">Business problem versus research question</h3>
+<div class="reading-block reading-key"><p class="reading-label">Key idea</p><p>“Sales are weak” describes a business problem. A research question asks about one possible reason, such as awareness, price or repeat purchase.<span class="zh">症狀</span>. Research questions turn it into something evidence can answer:</p></div>
 <ul>
   <li>Are customers aware of the product?</li>
   <li>Do target customers understand the benefit?</li>
@@ -556,14 +579,14 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
   <div><b>Better</b>Understand the main barriers preventing Bangkok office workers from trying Product X.</div>
   <div><b>Best</b>Identify and rank the main barriers preventing Bangkok office workers aged 25 to 40 from trying Product X, so management can decide whether to change price, communication or distribution.</div>
 </div>
-<p class="key">A good objective names who is studied, what must be learned, and which decision it supports. If the objective is vague, the whole design becomes vague.</p>
+<div class="reading-block reading-key"><p class="reading-label">Key idea</p><p>A useful objective names the people, the information needed and the decision it supports. Specific objectives produce more useful research.</p></div>
 <h3 id="skip">When not to do research</h3>
-<p>No time or money; cost above expected value; the result will not change the decision; the decision is already made; the information already exists; timing makes it irrelevant; or there is no clear question.</p>
+<div class="reading-block reading-key"><p class="reading-label">Key idea</p><p>Skip a new study if the answer already exists, cannot arrive in time, costs more than it is worth, or will not change the decision.</p></div>
 
 <!-- 3 -->
 <h2 id="process">3. Research process and evidence sources</h2>
 <div class="flow"><span>Problem identification</span><i>→</i><span>Research design</span><i>→</i><span>Method</span><i>→</i><span>Sampling</span><i>→</i><span>Data collection</span><i>→</i><span>Analysis</span><i>→</i><span>Report</span><i>→</i><span>Follow-up</span></div>
-<p>Three parties are involved: the company writes a research brief, the research firm proposes and runs the study, and respondents provide data. A vague brief can produce research that is technically correct but useless to management.</p>
+<div class="reading-block reading-why"><p class="reading-label">How it works</p><p>The company writes the brief. The research firm designs and runs the study. Respondents provide information. A clear brief keeps all three groups focused on the same decision.</p></div>
 <div class="pair">
   <div><b>Secondary data</b> <span class="zh">次級資料</span><p>Already exists: government reports, company records, industry reports, published statistics. Check it first.</p></div>
   <div><b>Primary data</b> <span class="zh">初級資料</span><p>Collected for this question: surveys, interviews, focus groups, observation, experiments. Collect it only for the remaining gap; it costs time and money.</p></div>
@@ -571,7 +594,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 
 <!-- 4 -->
 <h2 id="qualquant">4. Qualitative versus quantitative</h2>
-<p class="sub">Qualitative is for understanding; quantitative is for measurement.</p>
+<div class="reading-block reading-key"><p class="reading-label">Key idea</p><p>Use qualitative research to explore reasons and meanings. Use quantitative research to measure how many, how often or how much.</p></div>
 <div class="tbl"><table>
 <thead><tr><th></th><th>Qualitative <span class="zh">質性</span></th><th>Quantitative <span class="zh">量化</span></th></tr></thead>
 <tbody>
@@ -581,14 +604,14 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 <tr><td>Evidence standard</td><td><b>Saturation</b>: new interviews add no new themes</td><td>The sample can <b>represent</b> the population</td></tr>
 <tr><td>Not for</td><td>Counting or population percentages</td><td>Fully explaining why</td></tr>
 </tbody></table></div>
-<p><b>Why understanding comes before counting in an unfamiliar problem.</b> EV interviews might reveal charging access, price, battery concerns and resale uncertainty in customers' own words. Those themes help design a survey that measures their prevalence and importance among realistic buyers. Ten interviews do not establish that a barrier affects a particular percentage of Thailand. Conversely, a large survey can precisely count the wrong options if the researcher omitted an important barrier.</p>
+<div class="reading-block reading-example"><p class="reading-label">Example</p><p>EV <span class="abbr-full">(Electric Vehicle)</span> interviews can reveal worries about charging, price and battery life. Use those themes to design a survey and measure how common each concern is. Interviews find possible answers; a well-designed survey estimates their size.</p></div>
 <div data-mk="method"></div>
 
 <!-- 5 -->
 <h2 id="sampling">5. Sampling</h2>
-<p class="sub">The first sampling question is not "how many?" but "who is the right respondent?"</p>
+<div class="reading-block reading-key"><p class="reading-label">Key idea</p><p>First decide whose experience matters. Then choose how to reach those people and how many to study. A large sample does not fix asking the wrong group.</p></div>
 <div class="tbl"><table><thead><tr><th scope="col">Concept</th><th scope="col">What it establishes</th><th scope="col">Limit</th></tr></thead><tbody><tr><td>Target population and screen</td><td>Define whose experience or decision matters. A recent Siam Paragon visit is relevant to a study of its recent service.</td><td>A valid screen does not make recruitment representative.</td></tr><tr><td>Probability sampling</td><td>Known selection probabilities support population estimates and sampling-error calculations under the design.</td><td>Coverage, nonresponse and measurement errors can remain.</td></tr><tr><td>Non-probability sampling</td><td>Convenient or purposive recruitment can explore relevant experiences.</td><td>Selection probabilities are unknown; a large count alone cannot justify population percentages.</td></tr><tr><td>Saturation</td><td>Further qualitative discussions add no materially new themes for the question.</td><td>Theme coverage differs from representing population proportions.</td></tr></tbody></table></div>
-<p class="key">"We interviewed 100 people, so the results represent Thailand" is wrong. Sample size is not representativeness.</p>
+
 
 <!-- 6 -->
 <h2 id="measure">6. From concept to measurement</h2>
@@ -599,21 +622,21 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
   <div class="cf-out">Intention to buy</div>
 </div>
 <div class="cf-lab"><span>Independent variables <span class="zh">自變數</span></span><span>Dependent variable <span class="zh">依變數</span></span></div>
-<p>The arrows show relationships we want to investigate. They do not prove cause.</p>
+<div class="reading-block reading-key"><p class="reading-label">Key idea</p><p>A conceptual framework links possible drivers to an outcome. Here, packaging, function, lifestyle and health benefits are tested against purchase intention.</p></div>
 <h3 id="operational">Conceptual versus operational definition</h3>
 <div class="ladder2">
   <div><b>Abstract concept</b>Health benefits</div><i>↓</i>
   <div><b>Conceptual definition: what it means</b>Low fat, low calories, high fiber, nutritional value, no sugar</div><i>↓</i>
   <div><b>Operational definition: how we measure it</b>"I prefer my ice cream to be low fat." "I prefer ice cream with low calories." Rated on a scale from 1 (strongly disagree) to 4 (strongly agree).</div>
 </div>
-<p>The health-benefit example shows a construct becoming observable. First define which aspects count as health benefits; then write items that reflect those aspects; finally specify a response scale and how responses will be interpreted. The class uses 1 = strongly disagree through 4 = strongly agree. Those numbers code answers. They do not prove that respondents understand the wording, that the items cover the intended construct, or that stated preference predicts buying.</p><p class="hint"><b>注意</b>問卷有數字不代表量對了。用字、概念定義、受訪者理解和偏誤都會影響品質。</p>
+<div class="reading-block reading-why"><p class="reading-label">How it works</p><p>First define what “health benefits” means. Then write questions about those features. The class scale runs from 1, strongly disagree, to 4, strongly agree. Clear wording helps the answers measure the intended idea.</p></div><p class="hint"><b>注意</b>問卷有數字不代表量對了。用字、概念定義、受訪者理解和偏誤都會影響品質。</p>
 <h3 id="rv">Validity versus reliability</h3>
-<p><b>Validity</b> <span class="zh">效度</span>: are we measuring what we intend to? <b>Reliability</b> <span class="zh">信度</span>: is the measurement consistent? A survey can be consistently wrong.</p>
+<div class="reading-block reading-key"><p class="reading-label">Key idea</p><p>Validity means measuring the right thing. Reliability means getting consistent results. A measure can be consistent but wrong.<span class="zh">效度</span>: are we measuring what we intend to? <span class="zh">信度</span>: is the measurement consistent? A survey can be consistently wrong.</p></div>
 <div class="targets"><div><svg viewbox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" style="fill:var(--paper);stroke:var(--line)"></circle><circle cx="50" cy="50" r="34" style="fill:var(--tint);stroke:var(--line)"></circle><circle cx="50" cy="50" r="22" style="fill:var(--paper);stroke:var(--line)"></circle><circle cx="50" cy="50" r="10" style="fill:var(--tint);stroke:var(--line)"></circle><circle cx="48" cy="48" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="52" cy="50" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="50" cy="53" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="47" cy="52" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="53" cy="47" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="50" cy="49" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle></svg><b>Reliable and valid</b><small>Consistent and on target</small></div><div><svg viewbox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" style="fill:var(--paper);stroke:var(--line)"></circle><circle cx="50" cy="50" r="34" style="fill:var(--tint);stroke:var(--line)"></circle><circle cx="50" cy="50" r="22" style="fill:var(--paper);stroke:var(--line)"></circle><circle cx="50" cy="50" r="10" style="fill:var(--tint);stroke:var(--line)"></circle><circle cx="70" cy="28" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="74" cy="30" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="72" cy="33" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="69" cy="31" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="75" cy="27" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="72" cy="30" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle></svg><b>Reliable, not valid</b><small>Consistently measures the wrong thing</small></div><div><svg viewbox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" style="fill:var(--paper);stroke:var(--line)"></circle><circle cx="50" cy="50" r="34" style="fill:var(--tint);stroke:var(--line)"></circle><circle cx="50" cy="50" r="22" style="fill:var(--paper);stroke:var(--line)"></circle><circle cx="50" cy="50" r="10" style="fill:var(--tint);stroke:var(--line)"></circle><circle cx="50" cy="22" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="76" cy="48" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="50" cy="78" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="24" cy="52" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="70" cy="70" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="30" cy="30" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle></svg><b>Valid on average, not reliable</b><small>Scattered around the target</small></div><div><svg viewbox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" style="fill:var(--paper);stroke:var(--line)"></circle><circle cx="50" cy="50" r="34" style="fill:var(--tint);stroke:var(--line)"></circle><circle cx="50" cy="50" r="22" style="fill:var(--paper);stroke:var(--line)"></circle><circle cx="50" cy="50" r="10" style="fill:var(--tint);stroke:var(--line)"></circle><circle cx="22" cy="62" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="40" cy="82" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="30" cy="72" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="18" cy="80" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="44" cy="66" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle><circle cx="28" cy="88" r="3.2" style="fill:var(--accent);stroke:var(--tone-ffffff);stroke-width:1"></circle></svg><b>Neither</b><small>Scattered and off target</small></div></div>
 
 <!-- 7 -->
 <h2 id="bias">7. Can we trust what people say?</h2>
-<p class="sub">What consumers say may not fully explain what they do.</p>
+<div class="reading-block reading-key"><p class="reading-label">Key idea</p><p>People’s answers can differ from their behavior. Understand the source of that difference before drawing a conclusion.</p></div>
 <div class="tbl"><table>
 <thead><tr><th>Danger</th><th>What happens</th></tr></thead>
 <tbody>
@@ -622,8 +645,8 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 <tr><td><b>Courtesy bias</b></td><td>Overly positive feedback to be polite, common face to face and where criticism is uncomfortable</td></tr>
 <tr><td><b>Attitude-behavior gap</b></td><td>"I care about sustainability," then buys the cheapest option</td></tr>
 </tbody></table></div>
-<p>These problems differ. Someone may sincerely explain a purchase using a reason reconstructed afterward (rationalization), report healthier habits to look responsible (social desirability), or praise a service to avoid offending the interviewer (courtesy). An attitude–behavior gap can occur even with an honestly reported attitude: budget or convenience may dominate at checkout. Neutral wording and additional behavioral evidence improve interpretation, but do not make motives directly observable.</p><div data-mk="bias"></div>
-<p>Garbage in, garbage out: statistics cannot rescue a bad question. When possible, combine stated attitudes with observed behavior or transaction data.</p>
+<div class="reading-block reading-why"><p class="reading-label">How it works</p><p>Rationalization is a reason formed after the choice. Social desirability makes an answer look responsible. Courtesy avoids offending someone. An attitude–behavior gap occurs when a sincere preference loses to price or convenience at checkout.</p></div><div data-mk="bias"></div>
+<div class="reading-block reading-why"><p class="reading-label">How it works</p><p>Use neutral questions and compare stated answers with behavior. Good statistics cannot fix a badly worded question.</p></div>
 
 <!-- 8 -->
 <h2 id="methods">8. Survey, observation and experiment</h2>
@@ -632,14 +655,14 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
   <div class="tcard"><b>Observation</b><p>Records what people actually do and avoids some self-report bias, but cannot directly show motives. Mystery shoppers check real service, prices and displays.</p></div>
   <div class="tcard"><b>Experiment</b><p>Change a treatment (X) and observe the outcome (O). Experiments are designed to test effects; credible control conditions are needed to isolate a cause.</p></div>
 </div>
-<h3 id="method-fit">Choose the mode for the information needed</h3><div class="tbl"><table><thead><tr><th scope="col">Method / setting</th><th scope="col">Useful task</th><th scope="col">Trade-off</th></tr></thead><tbody><tr><td>In-depth interview / focus group</td><td>Explore an unfamiliar buying process or an early storyboard.</td><td>Rich meaning; not a population vote.</td></tr><tr><td>Online / phone survey</td><td>Measure defined attributes among reachable qualified respondents.</td><td>Reach, question complexity and participation differ by mode.</td></tr><tr><td>Mall intercept / central location test</td><td>Evaluate a product or concept in a controlled setting.</td><td>Accessible for testing; recruited visitors may not reflect all buyers.</td></tr><tr><td>Observation / mystery shopper</td><td>See laundry routines, navigation, displays or actual service execution.</td><td>Shows actions; one visit does not represent all experiences or explain motives.</td></tr><tr><td>Controlled taste test / experiment</td><td>Compare formulas or test a defined change.</td><td>Control helps isolate a difference; realism and alternative explanations still matter.</td></tr></tbody></table></div><h3 id="pop">Correlation is not causation: the POP display</h3>
-<p><b>Read O → X → O:</b> observe sales, install the point-of-purchase (POP) display, observe sales again. A worked example rises from THB 100,000 to THB 130,000, a 30% before–after increase. That describes the change. It does not isolate the display's contribution because payday, traffic, stockouts or other promotions may also change. The comparison-store tool below asks how much of the increase would plausibly have happened without the display.</p><div data-mk="pop"></div>
-<p>A spurious factor <span class="zh">干擾因素</span> such as payday, weekend traffic, a competitor stockout, seasonality or another promotion can explain part of a before/after change. Stronger designs use comparison stores or periods and repeated observations.</p>
+<h3 id="method-fit">Choose the mode for the information needed</h3><div class="tbl example-table"><table><thead><tr><th scope="col">Method / setting</th><th scope="col">Useful task</th><th scope="col">Trade-off</th></tr></thead><tbody><tr><td>In-depth interview / focus group</td><td>Explore an unfamiliar buying process or an early storyboard.</td><td>Rich meaning; not a population vote.</td></tr><tr><td>Online / phone survey</td><td>Measure defined attributes among reachable qualified respondents.</td><td>Reach, question complexity and participation differ by mode.</td></tr><tr><td>Mall intercept / central location test</td><td>Evaluate a product or concept in a controlled setting.</td><td>Accessible for testing; recruited visitors may not reflect all buyers.</td></tr><tr><td>Observation / mystery shopper</td><td>See laundry routines, navigation, displays or actual service execution.</td><td>Shows actions; one visit does not represent all experiences or explain motives.</td></tr><tr><td>Controlled taste test / experiment</td><td>Compare formulas or test a defined change.</td><td>Control helps isolate a difference; realism and alternative explanations still matter.</td></tr></tbody></table></div><h3 id="pop">Correlation is not causation: the POP <span class="abbr-full">(Point of Purchase)</span> display</h3>
+<div class="reading-block reading-example"><p class="reading-label">Example</p><p>Sales rise from THB <span class="abbr-full">(Thai Baht)</span> 100,000 to THB 130,000 after a POP display: a 30% increase. To estimate the display’s effect, compare with similar stores over the same period. Payday, stock availability or another promotion may explain some of the rise.<span class="zh">干擾因素</span> such as payday, weekend traffic, a competitor stockout, seasonality or another promotion can explain part of a before/after change. Stronger designs use comparison stores or periods and repeated observations.</p></div><div data-mk="pop"></div>
+<div class="reading-block reading-why"><p class="reading-label">How it works</p><p>A spurious factor is another change that affects the result. Use comparable treatment and control groups and track both. Where practical, assign stores or customers to the groups rather than letting them select themselves.</p></div>
 <div class="pair">
   <div><b>Laboratory</b><p>High control, but artificial.</p></div>
   <div><b>Field</b><p>Realistic, but less control over other factors.</p></div>
 </div>
-<p><b>A comparable group needs a credible design.</b> Loyalty members may already be more frequent buyers than nonmembers. A stronger test assigns comparable customers or stores to treatment and control when feasible, tracks both over the same period, and checks other changes. A raw member–nonmember difference is not automatically the program's effect. Experiments are designed to test causes; a poorly controlled experiment can still mislead.</p><p class="note-small">This develops Session 2's counterfactual: estimate the difference a program makes using comparable treatment and control conditions, not self-selected membership alone.</p>
+<div class="reading-block reading-why"><p class="reading-label">How it works</p><p>The comparison estimates the counterfactual: what sales would look like without the display. This is the link to Session 2’s loyalty-program question.</p></div>
 
 <!-- 9 -->
 <h2 id="tools">9. Advanced tools and analysis</h2>
@@ -651,11 +674,11 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 <tr><td><b>Online communities</b></td><td>Ongoing, low-cost qualitative input with photos and tasks</td><td>Participants may not represent the market</td></tr>
 <tr><td><b>Agile research</b></td><td>Faster, cheaper feedback</td><td>Speed helps only if the company can act on it</td></tr>
 </tbody></table></div>
-<p><b>Customer experience management</b> runs Listen → Learn → React. Feedback that arrives weeks late may explain a problem but miss the chance to recover that customer. <b>Proactive</b> research looks for opportunities and threats early; <b>reactive</b> research responds after something goes wrong.</p>
-<p class="key">"63% satisfied" is a result, not an analysis. Ask which group is lower, which attribute matters most, what changed, what explains it, and what evidence is still missing.</p>
+<div class="reading-block reading-why"><p class="reading-label">How it works</p><p>Customer experience management follows Listen → Learn → Respond. Proactive research looks for new needs early. Reactive research studies a problem after it appears. Both need someone who will act on the findings.</p></div>
+<div class="reading-block reading-example"><p class="reading-label">Example</p><p>“63% satisfied” is a result. Analysis asks which group is unhappy, which feature matters, what changed and what the business should do.</p></div>
 
 <!-- 10 -->
-<h3 id="tools-worked">From an output to a management choice</h3><p><b>Cluster analysis</b> may group shoppers by similar habits, but managers still need to interpret the groups and decide whether an offer or channel can serve them. <b>Conjoint analysis</b> compares bundles: for example, a lower price with shorter battery life versus a higher price with longer battery life. It reveals trade-offs that asking for the best of every feature misses. Neither tool can compensate for irrelevant attributes or the wrong respondents.</p><p>A restaurant reporting 63% satisfaction has produced a result. Analysis asks which customers and attributes are weaker, what changed, and which explanations fit. A useful sequence is: measure the problem, explore reasons, observe peak service, test a process change, then measure again. Proactive research spots emerging needs before failure; reactive research diagnoses a problem already observed. Both need an owner who can act on the findings.</p><h2 id="traps">10. Do not mix these up</h2>
+<h3 id="tools-worked">From an output to a management choice</h3><div class="reading-block reading-example"><p class="reading-label">Example</p><p>Cluster analysis groups people with similar habits. Managers then decide whether those groups need different offers. Conjoint analysis compares feature bundles, such as a low price with short battery life versus a high price with long battery life. It shows what people are willing to trade.</p></div><div class="reading-block reading-why"><p class="reading-label">How it works</p><p>For a restaurant, measure the problem, explore reasons, observe busy periods, test a process change and measure again. The result should lead to a practical decision.</p></div><h2 id="traps">10. Do not mix these up</h2>
 <div class="traps">
   <div><s>A business problem is a research question.</s><p>The problem is a symptom; the question targets one uncertainty.</p></div>
   <div><s>We should run a survey.</s><p>The method follows the objective.</p></div>
@@ -694,7 +717,7 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
 <tr><td><b>Critique a study</b></td><td>Question → sample → measurement → bias → analysis → is the conclusion stronger than the evidence?</td></tr>
 <tr><td><b>Causal claim</b></td><td>Did X come before Y? Did Y change? Were other factors controlled? Was there a comparison group? Could it be spurious?</td></tr>
 </tbody></table></div>
-<div class="answer-example"><b>Example · Choose an EV research method</b><p>The objective is to understand why realistic prospective buyers hesitate to choose an EV. I would begin with in-depth interviews to explore the decision process and unexpected barriers. I would then use a suitably sampled survey to estimate which barriers are most common. Interview themes do not establish population percentages, and purchase intention does not prove actual adoption. A proposed solution would need its own behavioral test.</p></div></article></main>
+<div class="answer-example"><b>Example · Choose an EV research method</b><p>Interview likely EV buyers to learn why they hesitate. Use the themes to build a survey and measure the main barriers. Test the proposed solution with the relevant buyer group.</p></div></article></main>
 </div>
 
 <script>/* Marketing Session 3 widgets: method quiz, research-type quiz, POP display experiment. */
@@ -981,4 +1004,22 @@ blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); 
   if (window.MktWidgets) window.MktWidgets.mount(document);
 })();
 </script>
-</body></html>
+<script>(()=>{const h=document.querySelector('.top');if(!h)return;const f=()=>document.documentElement.style.setProperty('--header-height',Math.ceil(h.getBoundingClientRect().height)+'px');f();if('ResizeObserver'in window)new ResizeObserver(f).observe(h);window.addEventListener('resize',f)})();</script><script>(() => {
+  const bilingual=!!document.getElementById('zhToggle');
+  const tables=[...document.querySelectorAll('article .tbl')];
+  const entries=tables.map(table=>{
+    const hint=document.createElement('p');hint.className='table-scroll-hint';
+    hint.textContent='Swipe or use arrow keys to see the rest of the table.';
+    if(bilingual){const zh=document.createElement('span');zh.className='zh-full';zh.lang='zh-Hant';zh.textContent='可左右滑動，或用方向鍵查看完整表格。';hint.append(zh)}
+    table.before(hint);table.setAttribute('aria-label','Scrollable study table');
+    return {table,hint};
+  });
+  const refresh=()=>entries.forEach(({table,hint})=>{
+    const wide=table.scrollWidth>table.clientWidth+2;hint.hidden=!wide;
+    if(wide)table.tabIndex=0;else table.removeAttribute('tabindex');
+  });
+  refresh();window.addEventListener('resize',refresh);
+  if('ResizeObserver'in window){const observer=new ResizeObserver(refresh);tables.forEach(t=>observer.observe(t))}
+  if(document.fonts)document.fonts.ready.then(refresh);
+})();
+</script></body></html>
