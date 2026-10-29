@@ -1,28 +1,233 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Economics Session 6 · Study Notes</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Asymmetric Information · Economics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-:root{--bg:var(--tone-fdf9f9);--paper:var(--tone-ffffff);--tint:var(--tone-fae9ed);--line:var(--tone-efdde2);--fg:var(--tone-2f282b);--muted:var(--tone-7e6f74);--accent:var(--tone-c06c84);--accent-ink:var(--tone-9c4862);--sans:"Noto Sans TC","PingFang TC",system-ui,sans-serif;--serif:"Noto Serif TC",Georgia,serif}
-*{box-sizing:border-box}html{color-scheme:light;background:var(--bg)}body{margin:0;font:16px/1.75 var(--sans);color:var(--fg)}a{color:var(--accent-ink)}:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-header{border-bottom:1px solid var(--line);background:rgba(var(--header-rgb), .96)}.top{max-width:1160px;margin:auto;padding:13px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:16px}
-.crumbs{font-size:.86rem;display:flex;align-items:center;flex-wrap:wrap;gap:8px;color:var(--muted)}.crumbs a{text-decoration:none;color:var(--muted)}.crumbs a:hover{color:var(--accent-ink)}
-.sessions{display:flex;gap:5px;margin-left:auto}.pill{font:.85rem var(--sans);text-decoration:none;padding:5px 12px;border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--muted)}.pill[aria-current="page"]{background:var(--accent);border-color:var(--accent);color:var(--tone-ffffff)}.sessions a.pill:hover,.sessions a.pill:focus-visible{background:var(--tone-fceef2);border-color:var(--tone-b86b7b);color:var(--tone-8e4357)}
-main{max-width:780px;margin:0 auto;padding:74px 22px 120px}.kick{color:var(--accent-ink);letter-spacing:.15em;text-transform:uppercase;font-size:.76rem;font-weight:700}h1{font:700 clamp(2.2rem,5vw,3.2rem)/1.23 var(--serif);margin:6px 0 16px}.note{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:24px 28px;margin-top:30px}.label{font-weight:700;color:var(--accent-ink);font-size:.82rem;letter-spacing:.07em;text-transform:uppercase}.note p{margin:9px 0 0}.back{display:inline-block;margin-top:22px;text-decoration:none;border-bottom:1px solid var(--accent);font-weight:600}
-@media(max-width:520px){.sessions{margin-left:0}main{padding-top:50px}.note{padding:20px}}
+/* Layout: one reading column with a sticky chapter rail; colors follow system appearance. */
+:root {
+  color-scheme: light;
+  --bg: var(--tone-fdf9f9); --panel: var(--tone-f8eef0); --paper: var(--tone-ffffff); --tint: var(--tone-fae9ed); --line: var(--tone-efdde2);
+  --fg: var(--tone-2f282b); --muted: var(--tone-7e6f74); --accent: var(--tone-c06c84); --accent-ink: var(--tone-9c4862);
+  --demand: var(--tone-3f5675); --supply: var(--tone-c06c84); --ext: var(--tone-6e3f55); --world: var(--tone-8a7a5c); --policy: var(--tone-3f7f7a);
+  --cs: var(--tone-a7cdb6); --ps: var(--tone-b2c4e3); --dwl: var(--tone-d9674f); --rev: var(--tone-e5c171); --rev2: var(--tone-f1dca8); --time: var(--tone-ddb3cb); --ts: var(--tone-bfdcc9);
+  --serif: "Noto Serif TC", "Songti TC", Georgia, serif;
+  --sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; background: var(--bg); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 16px; line-height: 1.75; }
+a { color: var(--accent-ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(var(--header-rgb), .94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); padding-inline: 16px; }
+.top-in { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 14px; min-height: 56px; flex-wrap: wrap; padding-block: 8px; }
+.brand { font-family: var(--serif); font-weight: 700; font-size: 1.02rem; white-space: nowrap; }
+.brand small { font-family: var(--sans); font-weight: 500; color: var(--muted); font-size: .76rem; margin-left: 6px; letter-spacing: .06em; }
+.sessions { display: flex; gap: 4px; margin-left: auto; }
+.crumbs { font-size: .86rem; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.crumbs a { color: var(--muted); text-decoration: none; } .crumbs a:hover { color: var(--accent-ink); } .crumbs span { color: var(--line); } .crumbs b { font-family: var(--serif); }
+.sessions a.pill { text-decoration: none; transition: border-color .15s, color .15s; }
+.sessions a.pill:hover, .sessions a.pill:focus-visible { border-color: var(--accent); color: var(--accent-ink); background: var(--tint); }
+.sessions .pill { font: 500 .82rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--muted); padding: 4px 12px; border-radius: 999px; }
+.sessions .pill[aria-current="page"] { background: var(--accent); border-color: var(--accent); color: var(--tone-ffffff); }
+.sessions .pill.off { opacity: .5; cursor: not-allowed; }
+.toc-btn { display: none; font: 500 .85rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--fg); border-radius: 8px; padding: 5px 12px; }
+
+.wrap { max-width: 1160px; margin: 0 auto; padding-inline: 16px; display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 52px; }
+.rail { position: sticky; top: 76px; align-self: start; max-height: calc(100vh - 92px); overflow: auto; padding-block: 34px 40px; font-size: .86rem; line-height: 1.5; }
+.rail .lbl { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.rail ol { list-style: none; margin: 0; padding: 0; }
+.rail li a { display: block; padding: 4px 10px; color: var(--muted); text-decoration: none; border-radius: 6px; }
+.rail li a:hover { color: var(--fg); background: var(--tint); }
+.rail li.h3 a { padding-left: 22px; font-size: .8rem; }
+.rail li a.on { color: var(--accent-ink); background: var(--tint); font-weight: 500; }
+
+main { min-width: 0; padding-block: 30px 120px; }
+.doc { max-width: 780px; }
+.hero { padding-block: 8px 26px; border-bottom: 1px solid var(--line); }
+.kick { font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); margin: 0 0 6px; font-weight: 500; }
+.hero h1 { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.25; margin: 0 0 12px; text-wrap: balance; }
+.lead { margin: 0; font-size: 1.04rem; max-width: 62ch; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 16px; font-size: .78rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+.doc h2 { font-family: var(--serif); font-size: 1.55rem; line-height: 1.35; margin: 3.4rem 0 .3rem; text-wrap: balance; }
+.doc h3 { font-size: 1.1rem; line-height: 1.45; margin: 2.2rem 0 .5rem; color: var(--accent-ink); text-wrap: balance; }
+.sub { margin: 0 0 1.2rem; color: var(--muted); max-width: 66ch; }
+.doc p, .doc li { max-width: none; }
+.doc ul, .doc ol { padding-left: 1.25em; }
+.doc li { margin: .25rem 0; }
+.zh { display: inline-block; font-size: .78em; line-height: 1.3; color: var(--accent-ink); background: var(--tint); padding: 0 6px; border-radius: 4px; margin-left: 2px; vertical-align: 1px; font-weight: 500; }
+.hint { font-size: .9rem; color: var(--muted); display: flex; gap: 10px; align-items: baseline; }
+.hint b { flex: none; font-size: .72rem; color: var(--tone-ffffff); background: var(--accent); padding: 0 7px; border-radius: 4px; font-weight: 500; }
+.key { background: var(--tint); padding: 12px 16px; border-radius: 8px; font-weight: 500; }
+.note-small { font-size: .8rem; color: var(--muted); }
+
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 1rem 0; }
+.pair > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; }
+.pair b { color: var(--accent-ink); }
+.pair p { margin: 4px 0 0; font-size: .92rem; }
+
+.matrix { display: grid; grid-template-columns: minmax(90px, .7fr) repeat(2, minmax(0, 1fr)); gap: 6px; margin: 1rem 0 1.2rem; font-size: .9rem; max-width: 620px; }
+.matrix .mh { font-weight: 700; font-size: .8rem; color: var(--muted); align-self: end; padding: 0 4px 2px; }
+.matrix .mh.side { align-self: center; }
+.matrix .cell { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px; font-weight: 500; }
+.matrix .cell.hi { background: var(--tint); border-color: var(--accent); }
+.matrix small { display: block; font-weight: 400; color: var(--muted); font-size: .8rem; margin-top: 2px; line-height: 1.45; }
+
+.map { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.3fr) auto minmax(0, 1fr); gap: 10px; align-items: center; margin: 1rem 0; }
+.mcol { display: flex; flex-direction: column; gap: 8px; }
+.mbox { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .84rem; line-height: 1.5; display: flex; flex-direction: column; gap: 2px; }
+.mbox b { font-size: .9rem; } .mbox span { color: var(--muted); } .mbox em { font-style: normal; color: var(--accent-ink); font-size: .78rem; font-weight: 500; }
+.mbox.good { border-color: var(--cs); } .mbox.ask { background: var(--tint); border-color: var(--accent); }
+.marrow { color: var(--accent); font-weight: 700; }
+
+.flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 1rem 0; font-size: .86rem; }
+.flow span { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; line-height: 1.45; }
+.flow i { font-style: normal; color: var(--accent); font-weight: 700; }
+.formula { font-family: var(--mono); font-size: .9rem; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; line-height: 1.9; overflow-x: auto; }
+.steps { counter-reset: s; list-style: none; padding-left: 0 !important; }
+.steps li { counter-increment: s; display: flex; gap: 10px; }
+.steps li::before { content: counter(s); flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--tint); color: var(--accent-ink); font: 700 .75rem/22px var(--sans); text-align: center; margin-top: 3px; }
+.assign { margin: 1.6rem 0; border: 1px dashed var(--accent); border-radius: 10px; padding: 14px 16px; background: var(--paper); }
+.assign p { margin: 6px 0 0; font-size: .92rem; }
+
+.tbl { overflow-x: auto; margin: 1rem 0; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+.doc table { border-collapse: collapse; width: 100%; font-size: .88rem; line-height: 1.55; }
+.doc th, .doc td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+.doc th { background: var(--panel); font-weight: 700; }
+.doc tr:last-child td { border-bottom: 0; }
+.drill .ans { filter: blur(5px); cursor: pointer; user-select: none; transition: filter .2s; }
+.drill .ans.shown { filter: none; user-select: auto; }
+
+.traps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 1rem; }
+.traps > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: .88rem; line-height: 1.55; }
+.traps s { color: var(--muted); text-decoration-color: var(--dwl); }
+.traps p { margin: 6px 0 0; font-weight: 500; }
+
+.qa-tools { margin: .4rem 0 .8rem; }
+.qa-tools button { font: 500 .82rem var(--sans); border: 1px solid var(--accent); background: var(--paper); color: var(--accent-ink); border-radius: 6px; padding: 5px 12px; cursor: pointer; }
+.qa { display: flex; flex-direction: column; gap: 6px; }
+.qa details { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
+.qa summary { cursor: pointer; padding: 10px 14px; font-weight: 500; font-size: .93rem; list-style: none; display: flex; gap: 10px; }
+.qa summary::before { content: "Q"; color: var(--accent); font-weight: 700; }
+.qa details[open] summary { border-bottom: 1px dashed var(--line); }
+.qa details p { margin: 0; padding: 10px 14px 12px 36px; font-size: .9rem; }
+
+/* graphs */
+.graph { max-width: 900px; margin: 1.8rem 0 2.2rem; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px 18px 14px; }
+.g-head h4 { font-family: var(--serif); font-size: 1.12rem; margin: 2px 0 2px; line-height: 1.45; }
+.g-head p { margin: 0 0 10px; color: var(--muted); font-size: .86rem; }
+.g-kicker { font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); }
+.g-body { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.g-plot svg { width: 100%; height: auto; display: block; }
+.g-side { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.g-ctrl { display: flex; flex-direction: column; gap: 10px; }
+.sl label { display: flex; justify-content: space-between; font-size: .8rem; color: var(--muted); line-height: 1.3; }
+.sl output { font-family: var(--mono); color: var(--fg); font-size: .8rem; }
+.sl input { width: 100%; accent-color: var(--accent); margin: 4px 0 0; }
+.g-btn { align-self: flex-start; font: 500 .8rem var(--sans); border: 1px solid var(--accent); color: var(--accent-ink); background: transparent; border-radius: 6px; padding: 4px 11px; cursor: pointer; }
+.g-btn:hover { background: var(--tint); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; align-self: flex-start; }
+.seg button { font: 500 .8rem var(--sans); border: 0; background: transparent; color: var(--muted); padding: 5px 12px; cursor: pointer; }
+.seg button[aria-checked="true"] { background: var(--accent); color: var(--paper); }
+.chk { display: flex; gap: 8px; align-items: center; font-size: .8rem; color: var(--muted); }
+.chk input { accent-color: var(--accent); }
+.g-stats { margin: 0; border-top: 1px solid var(--line); padding-top: 10px; display: flex; flex-direction: column; gap: 3px; }
+.st { display: flex; justify-content: space-between; gap: 10px; font-size: .8rem; line-height: 1.45; }
+.st dt { color: var(--muted); display: flex; align-items: center; gap: 7px; }
+.st dd { margin: 0; font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.st.big dd { font-weight: 500; color: var(--accent-ink); font-size: .92rem; }
+.g-note { margin: 12px 0 0; padding: 9px 12px; background: var(--tint); border-radius: 6px; font-size: .85rem; line-height: 1.6; }
+
+.sw { width: 11px; height: 11px; border-radius: 2px; display: inline-block; flex: none; }
+.sw.none { background: transparent; }
+.sw.a-cs { background: var(--cs); } .sw.a-ps { background: var(--ps); } .sw.a-ps2 { background: var(--ps); outline: 1px solid var(--demand); }
+.sw.a-dwl { background: repeating-linear-gradient(45deg, var(--dwl) 0 2px, transparent 2px 4px); outline: 1px solid var(--dwl); }
+.sw.a-rev { background: var(--rev); } .sw.a-rev2 { background: var(--rev2); } .sw.a-time { background: var(--time); } .sw.a-ts { background: var(--ts); }
+.sw.ln { height: 3px; border-radius: 2px; width: 16px; }
+
+svg .ax { stroke: var(--muted); stroke-width: 1.2; }
+svg .axl { fill: var(--muted); font: 500 11px var(--sans); }
+svg .tk { fill: var(--muted); font: 500 10.5px var(--mono); }
+svg .gd { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 4; opacity: .7; }
+svg .cv { stroke-width: 2.6; fill: none; stroke-linecap: round; }
+svg .cv.dash { stroke-dasharray: 7 5; stroke-width: 2; }
+svg .cvl { font: 700 11.5px var(--sans); }
+svg .c-d { stroke: var(--demand); fill: var(--demand); } svg .c-s { stroke: var(--supply); fill: var(--supply); }
+svg .c-x { stroke: var(--ext); fill: var(--ext); } svg .c-w { stroke: var(--world); fill: var(--world); } svg .c-t { stroke: var(--policy); fill: var(--policy); }
+svg text.cvl { stroke: none; }
+svg .pt { fill: var(--paper); stroke: var(--fg); stroke-width: 2; }
+svg .ptl { fill: var(--fg); font: 700 11px var(--sans); }
+svg .atag { fill: var(--fg); font: 700 11px var(--sans); opacity: .8; }
+svg .a-cs { fill: var(--cs); fill-opacity: .6; } svg .a-ps { fill: var(--ps); fill-opacity: .6; }
+svg .a-ps2 { fill: var(--ps); fill-opacity: .95; } svg .a-ts { fill: var(--ts); fill-opacity: .6; }
+svg .a-dwl { fill: url(#dwlHatch); stroke: var(--dwl); stroke-width: 1.2; }
+svg .a-rev { fill: var(--rev); fill-opacity: .75; } svg .a-rev2 { fill: var(--rev2); fill-opacity: .8; } svg .a-time { fill: var(--time); fill-opacity: .65; }
+
+svg .grid { stroke: var(--line); stroke-width: 1; }
+svg .a-prof { fill: var(--cs); fill-opacity: .75; } svg .a-loss { fill: var(--dwl); fill-opacity: .35; }
+.sw.a-prof { background: var(--cs); } .sw.a-loss { background: var(--dwl); opacity: .5; }
+.twin { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.tw-t { margin: 0 0 2px; font-size: .78rem; font-weight: 700; color: var(--muted); }
+.g-ctrl .g-btn + .g-btn { margin-top: -4px; }
+.graph.wide .g-body { grid-template-columns: minmax(0, 1fr); }
+.graph.wide .g-side { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+@media (max-width: 700px) { .twin, .graph.wide .g-side { grid-template-columns: minmax(0, 1fr); } }
+svg polyline.cv { fill: none !important; }
+
+.graph { background: var(--paper); }
+.g-note { background: var(--tint); }
+
+@media (max-width: 900px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .rail { display: none; position: fixed; inset: 64px 0 0 0; max-height: none; background: var(--bg); z-index: 15; padding: 20px 16px 60px; }
+  .rail.open { display: block; }
+  .toc-btn { display: inline-block; }
+  .g-body { grid-template-columns: minmax(0, 1fr); }
+  .map { grid-template-columns: minmax(0, 1fr); }
+  .marrow { transform: rotate(90deg); justify-self: center; }
+}
+@media (max-width: 560px) { .pair, .traps { grid-template-columns: minmax(0, 1fr); } }
+.spectrum { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: center; margin: 1rem 0 .2rem; font-weight: 700; font-size: .9rem; }
+.spectrum .bar { height: 12px; border-radius: 6px; background: linear-gradient(90deg, var(--tone-d9674f), var(--tone-e5c171), var(--tone-a7cdb6)); }
+.spec-l { display: flex; justify-content: space-between; font-size: .78rem; color: var(--muted); margin-bottom: 1rem; }
+.no, .yes { font-size: .74rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; }
+.no { background: var(--tone-fce3dd); color: var(--tone-a8432f); } .yes { background: var(--tone-e3f2e9); color: var(--tone-2f6b4f); }
+table.oil { font-variant-numeric: tabular-nums; }
+table.oil th, table.oil td { text-align: right; padding: 6px 8px; white-space: nowrap; }
+table.oil th:first-child, table.oil td:first-child { text-align: left; font-weight: 700; }
+table.oil td.hi { background: var(--tint); color: var(--accent-ink); font-weight: 700; }
+
 </style>
 <style id="system-theme">
 /* System appearance only changes colors. Print retains the light palette. */
 :root {
   --header-rgb: 253, 249, 249;
   --tone-2f282b: #2f282b;
+  --tone-2f6b4f: #2f6b4f;
+  --tone-3f5675: #3f5675;
+  --tone-3f7f7a: #3f7f7a;
+  --tone-6e3f55: #6e3f55;
   --tone-7e6f74: #7e6f74;
-  --tone-8e4357: #8e4357;
+  --tone-8a7a5c: #8a7a5c;
   --tone-9c4862: #9c4862;
-  --tone-b86b7b: #b86b7b;
+  --tone-a7cdb6: #a7cdb6;
+  --tone-a8432f: #a8432f;
+  --tone-b2c4e3: #b2c4e3;
+  --tone-bfdcc9: #bfdcc9;
   --tone-c06c84: #c06c84;
+  --tone-d9674f: #d9674f;
+  --tone-ddb3cb: #ddb3cb;
+  --tone-e3f2e9: #e3f2e9;
+  --tone-e5c171: #e5c171;
   --tone-efdde2: #efdde2;
+  --tone-f1dca8: #f1dca8;
+  --tone-f8eef0: #f8eef0;
   --tone-fae9ed: #fae9ed;
-  --tone-fceef2: #fceef2;
+  --tone-fce3dd: #fce3dd;
   --tone-fdf9f9: #fdf9f9;
   --tone-ffffff: #ffffff;
 }
@@ -31,19 +236,459 @@ main{max-width:780px;margin:0 auto;padding:74px 22px 120px}.kick{color:var(--acc
     color-scheme: dark;
     --header-rgb: 29, 24, 26;
     --tone-2f282b: #EEE4E6;
+    --tone-2f6b4f: #A0D2B2;
+    --tone-3f5675: #93AECB;
+    --tone-3f7f7a: #8CC4BE;
+    --tone-6e3f55: #C9A3D6;
     --tone-7e6f74: #BEACB2;
-    --tone-8e4357: #E6B3BE;
+    --tone-8a7a5c: #C9B68C;
     --tone-9c4862: #E6B3BE;
-    --tone-b86b7b: #D79AA7;
+    --tone-a7cdb6: #6E8C6B;
+    --tone-a8432f: #F0A48D;
+    --tone-b2c4e3: #667C96;
+    --tone-bfdcc9: #5F7A5C;
     --tone-c06c84: #D79AA7;
+    --tone-d9674f: #E08A6F;
+    --tone-ddb3cb: #8C6680;
+    --tone-e3f2e9: #23372D;
+    --tone-e5c171: #C9A250;
     --tone-efdde2: #55424A;
+    --tone-f1dca8: #8F7A4A;
+    --tone-f8eef0: #2B2226;
     --tone-fae9ed: #35272D;
-    --tone-fceef2: #35272D;
+    --tone-fce3dd: #412B28;
     --tone-fdf9f9: #1D181A;
     --tone-ffffff: #241E21;
   }
 }
 </style>
-</head><body>
-<header><div class="top"><nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Study Notes</a><span>/</span><a href="economics.html">Economics</a><span>/</span><b>Session 6</b></nav><nav class="sessions" aria-label="Sessions 5–8"><a class="pill" href="economics-s5.html">S5</a><span class="pill" aria-current="page">S6</span><a class="pill" href="economics-s7.html">S7</a><a class="pill" href="economics-s8.html">S8</a></nav></div></header>
-<main><p class="kick">MGMG515 · Session 6</p><h1>Economics — Session 6</h1><section class="note"><div class="label">Coming soon</div><p>This lesson is not published yet. This reserved page keeps the S5–S8 navigation working in the meantime.</p><p>When the lesson is ready, the completed HTML can replace this file directly.</p></section><a class="back" href="economics.html">← Back to Economics sessions</a></main></body></html>
+
+<style>
+body{margin:0}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:1rem 0}
+.three>div,.method{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+.three b,.method>b{color:var(--accent-ink)}.three p,.method p{margin:4px 0 0;font-size:.92rem}
+.method{margin:12px 0}.endnote{margin-top:32px}
+.plot-legend{display:flex;flex-wrap:wrap;gap:7px 16px;margin:4px 0 14px;font-size:.78rem;color:var(--muted)}
+.plot-legend span{display:inline-flex;gap:6px;align-items:center}
+svg .tk{font-size:11.5px}svg .axl{font-size:12px}.g-plot svg{overflow:visible}
+.seg{display:flex;flex-wrap:wrap;gap:2px;max-width:100%}.seg button{flex:1 1 auto;white-space:normal}
+.seg button[aria-pressed=true]{background:var(--accent);color:var(--paper)}
+.best-row{background:var(--tint);font-weight:700;color:var(--accent-ink)}
+.g-ctrl [hidden]{display:none!important}.sl label{gap:12px}.sl label span{min-width:0}
+.sl output{flex-shrink:0}.g-note:empty{display:none}.doc p,.doc li{overflow-wrap:break-word}
+@media(max-width:700px){.three{grid-template-columns:minmax(0,1fr)}.graph{padding:14px 12px}.st dd{white-space:normal;text-align:right;max-width:60%}.top-in{gap:8px 12px}}
+@media(max-width:420px){.top-in{align-items:center}.sessions{margin-left:0}.crumbs{flex:1 1 100%;font-size:.8rem}.toc-btn{order:2;margin-left:auto}.sessions{order:1}.rail{inset:108px 0 0}.graph.wide .g-side{gap:14px}.doc h2{font-size:1.4rem}}
+@media print{.top,.rail,.g-ctrl,.qa-tools{display:none}.wrap{display:block}.qa details p{display:block}.graph{break-inside:avoid}body{background:#fff}.doc{max-width:none}}
+</style>
+
+<style>
+.extra,.graph-guide,.number-readout{background:var(--paper);border:1px solid var(--line);border-radius:9px;margin:1rem 0;padding:0 14px}
+.extra>summary,.graph-guide>summary,.number-readout>summary{cursor:pointer;padding:11px 0;color:var(--accent-ink);font-size:.87rem;font-weight:500}
+.extra[open]>summary,.graph-guide[open]>summary,.number-readout[open]>summary{border-bottom:1px dashed var(--line)}
+.extra>p,.graph-guide>p{font-size:.9rem}.graph-guide .steps{font-size:.91rem;line-height:1.65}.graph-guide .steps li{margin:12px 0}
+.g-reading{min-width:0}.g-reading .g-note{margin:0}.number-readout{margin:12px 0 0;padding:0 10px}.number-readout .g-stats{border-top:0;padding-bottom:10px}
+</style>
+<style>svg .a-faded{opacity:.28}.map .mbox{min-width:0}</style></head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><pattern id="dwlHatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" style="fill:var(--dwl);fill-opacity:.12"/><rect width="2.2" height="6" style="fill:var(--dwl);fill-opacity:.75"/></pattern></defs></svg>
+<header class="top"><div class="top-in">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Study Notes</a><span>/</span><a href="economics.html">Economics</a><span>/</span><b>Session 6</b></nav>
+<button class="toc-btn" type="button" id="tocBtn" aria-expanded="false" aria-controls="rail">Contents</button>
+<nav aria-label="Sessions 5–8" class="sessions"><a class="pill" href="economics-s5.html">S5</a><span aria-current="page" class="pill">S6</span><span aria-disabled="true" class="pill off">S7</span><span aria-disabled="true" class="pill off">S8</span></nav>
+</div></header>
+<div class="wrap"><aside class="rail" id="rail"><p class="lbl">Contents</p><ol id="toc"></ol></aside>
+<main><article class="doc"><div class="hero"><p class="kick">MGMG515 · Session 6</p><h1>Asymmetric Information</h1><p class="lead">When one side of a deal knows more than the other, two things can go wrong. Hidden quality or risk changes who shows up to trade, and hidden behavior changes what people do after a contract is signed. This session traces both problems, the fixes that reduce them, and what they mean for the value of a degree.</p></div>
+
+<h2 id="map">Chapter map</h2>
+<div class="map">
+<div class="mcol"><div class="mbox ask"><b>Who knows more?</b><span>Name the informed side, then ask what is hidden: an existing type or a later action.</span></div></div>
+<div class="marrow">→</div>
+<div class="mcol">
+<div class="mbox"><b>Hidden type</b><span>Pooled terms change who participates.</span><em>Adverse selection</em></div>
+<div class="mbox"><b>Hidden action</b><span>Shifted consequences change behavior.</span><em>Moral hazard</em></div>
+</div>
+<div class="marrow">→</div>
+<div class="mcol"><div class="mbox good"><b>Match the fix</b><span>Better information: screening, inspection, credible signals. Better incentives: monitoring, cost sharing, reputation.</span></div></div>
+</div>
+<p class="hint"><b>中文邏輯</b><span>類型影響「誰進來」；誘因影響「怎麼做」；訊號影響「別人怎麼相信」。</span></p>
+
+<h2 id="info">1. Who knows what, and what is hidden?</h2>
+<p class="sub">Start every case by naming the informed side. Then ask whether the hidden thing already exists or is a later choice.</p>
+<div class="tbl"><table><thead><tr><th>Concept</th><th>Definition</th><th>Example</th><th>Do not confuse with</th></tr></thead><tbody>
+<tr><td><b>Imperfect information</b></td><td>A decision maker lacks some relevant knowledge.</td><td>Two traders are both unsure about next year's flood.</td><td>Asymmetric information, which needs one side to know more.</td></tr>
+<tr><td><b>Asymmetric information</b><span class="zh">資訊不對稱</span></td><td>One party has better relevant information than the other.</td><td>A seller knows the car was flood-damaged; the buyer cannot tell.</td><td>Uncertainty that both sides share.</td></tr>
+<tr><td><b>Hidden type</b></td><td>An existing characteristic the other side cannot observe, such as quality, health risk or ability.</td><td>Engine damage that existed before the sale.</td><td>A choice made after the contract.</td></tr>
+<tr><td><b>Hidden action</b></td><td>Behavior the other side cannot fully observe, such as effort or precaution.</td><td>An owner skips agreed maintenance after buying coverage.</td><td>A trait the person already had.</td></tr>
+</tbody></table></div>
+<p class="key">“Before or after signing” is a handy shortcut, not the definition. Ask whether the problem is selection among existing types or behavior that responds to incentives. Plans can be made before signing, and private information can last after it.</p>
+
+<h2 id="lemons">2. Adverse selection in used cars</h2>
+<p class="sub">Buyers who cannot tell quality apart pay for the average car, and paying the average drives good cars away.</p>
+<p>In Akerlof's lemons model, sellers know whether a car is a reliable plum or an unreliable lemon<span class="zh">劣質車</span>, but buyers cannot tell. Buyers therefore pay for the expected quality on offer, and that price is too low for some owners of good cars.</p>
+<div class="flow"><span>Quality hidden</span><i>→</i><span>Buyers pay for the average</span><i>→</i><span>Good cars withdrawn</span><i>→</i><span>Average quality falls</span><i>→</i><span>Offers fall again</span></div>
+<div data-widget="lemons"></div>
+<p>In this example the market shrinks to lemons only, but it does not disappear: lemons still trade between ฿80,000 and ฿100,000. Adverse selection<span class="zh">逆向選擇</span> destroys the gains from good-car trades, not necessarily the whole market. Real used-car markets survive partly because inspections, vehicle histories, warranties and dealer reputation narrow the information gap.</p>
+<p class="hint"><b>中文邏輯</b><span>不是「便宜的車一定差」；是買家分不出品質，只能出平均價，好車車主因此退出，市場平均品質真的被拉低。</span></p>
+<details class="extra"><summary>Optional: the numbers behind the graph</summary>
+<div class="tbl"><table class="oil" aria-label="Used-car example in thousand baht per car"><thead><tr><th>Type</th><th>Buyer value</th><th>Seller minimum</th><th>Gain from trade</th></tr></thead><tbody>
+<tr><td>Good car</td><td>300</td><td>260</td><td>40</td></tr>
+<tr><td>Lemon</td><td>100</td><td>80</td><td>20</td></tr></tbody></table></div>
+<p>With equal numbers of each type, the pooled offer is 0.5×300 + 0.5×100 = 200. That is below the good-car minimum of 260, so good cars leave. Buyers then expect only lemons and offer 100, which lemon owners accept because 100 ≥ 80. With verified quality, both types would trade.</p>
+</details>
+<p class="note-small">All baht figures in the car, insurance, signal and cost-sharing examples are teaching numbers, not market data. Car values are in thousand baht per car.</p>
+
+<h2 id="insurance">3. Insurance pools and the death spiral</h2>
+<p class="sub">In insurance the buyer often holds the private information, so the premium decides which risks stay in the pool.</p>
+<div class="tbl"><table><thead><tr><th>Term</th><th>Meaning</th><th>Example</th></tr></thead><tbody>
+<tr><td><b>Expected loss</b></td><td>The probability-weighted average loss.</td><td>A 10% chance of a ฿100,000 claim gives ฿10,000.</td></tr>
+<tr><td><b>Actuarially fair premium</b></td><td>A premium equal to expected covered claims, before admin costs and profit.</td><td>Expected claims of ฿10,000 imply a fair premium of ฿10,000.</td></tr>
+<tr><td><b>Risk pooling</b><span class="zh">風險分攤</span></td><td>Combining many uncertain losses so premiums can pay the claims.</td><td>Many households pay into one accident fund.</td></tr>
+<tr><td><b>Risk aversion</b><span class="zh">風險趨避</span></td><td>Preferring a certain payment to a risky one with the same expected value.</td><td>Paying ฿15,000 to avoid a risk that averages ฿10,000.</td></tr>
+<tr><td><b>Death spiral</b></td><td>Higher premiums push out lower risks, which raises premiums again.</td><td>Each repricing leaves a riskier pool.</td></tr>
+</tbody></table></div>
+<p>A common premium follows the pool's average claims. If lower-risk buyers find it poor value and leave, the average and the premium rise. Risk aversion slows this: a careful buyer may pay above expected claims for peace of mind.</p>
+<div data-widget="pool"></div>
+<div class="pair"><div><b>Adverse selection</b><p>Higher-risk people are keener to buy, so the insured pool is riskier than the population.</p></div><div><b>Advantageous selection</b><p>Cautious people may both prevent losses and buy coverage, so the insured pool can be safer than the uninsured. Which pattern holds is an empirical question for each product and price.</p></div></div>
+<details class="extra"><summary>Optional: MRU's stylized death spiral</summary>
+<p>In MRU's teaching example, covered costs spread evenly from $0 to $30,000, so the first premium averages $15,000. If everyone expecting less than that drops out, the remaining pool averages $22,500, and the cycle can repeat. A continuous range of risks is what turns a smaller pool into a full spiral.</p>
+</details>
+
+<h2 id="fixes">4. Fixing adverse selection</h2>
+<p class="sub">Either reveal the hidden type or change who joins the pool. Each fix has a cost.</p>
+<p>Screening<span class="zh">篩選</span> is started by the less-informed side, such as a buyer ordering an inspection or an insurer asking for verifiable records. Certification passes on the result of a credible test; a badge with no real test behind it adds little.</p>
+<div class="tbl"><table><thead><tr><th>Response</th><th>How it helps</th><th>Limit</th></tr></thead><tbody>
+<tr><td>Independent inspection or vehicle history</td><td>Verified quality lets prices match quality, so good sellers can return.</td><td>Costs money, can miss damage, and the inspector may have conflicts.</td></tr>
+<tr><td>Seller warranty</td><td>Lemons generate more claims, so the promise carries information (section 8).</td><td>Works only if enforceable and costly for low types to copy.</td></tr>
+<tr><td>Risk classification</td><td>Premiums follow observed risk predictors, so low risks face fairer prices.</td><td>High risks may face unaffordable terms, and less risk is shared.</td></tr>
+<tr><td>Group insurance</td><td>Membership is not chosen on individual health risk, which broadens the pool.</td><td>Plan design can still attract some risks, and coverage may be tied to a job.</td></tr>
+<tr><td>Broad enrollment incentives or requirements</td><td>Bringing in lower risks lowers average claims and steadies premiums.</td><td>Results depend on take-up, subsidies, enforcement and benefit design.</td></tr>
+</tbody></table></div>
+<p class="hint"><b>中文邏輯</b><span>分得越清楚，越不會逆向選擇；但高風險的人也可能越難負擔。效率、風險分攤和公平是不同的問題。</span></p>
+
+<h2 id="moral-hazard">5. Moral hazard: coverage changes behavior</h2>
+<p class="sub">Moral hazard is about incentives under imperfect monitoring, not about bad people.</p>
+<p>Moral hazard<span class="zh">道德風險</span> arises when someone does not bear the full consequences of an action that others cannot fully observe. Insurance, guarantees, delegation and incomplete contracts can all shift consequences. No lie or fraud is needed.</p>
+<div class="flow"><span>Shop buys fire insurance</span><i>→</i><span>Insurer bears much of a fire loss</span><i>→</i><span>Private payoff from prevention falls</span><i>→</i><span>Precautions slip</span><i>→</i><span>Expected claims rise</span></div>
+<p>This is not adverse selection: the same owner changes behavior after the contract, rather than a riskier type choosing to buy.</p>
+<h3 id="visits">Insurance and the use of care</h3>
+<p>If a visit uses ฿1,000 of real resources but the patient pays a ฿200 copayment, the patient faces a lower price. That is a movement along the demand curve for visits, not a shift of it. The ฿1,000 cost does not disappear; the pool pays the difference.</p>
+<div data-widget="copay"></div>
+<p class="key">More insured care is not automatically waste. Some extra visits are worth less than their cost; others were blocked by cash or uncertainty and are worth more. Compare marginal benefit with resource cost before calling the change a loss.</p>
+<p class="hint"><b>中文邏輯</b><span>「道德」二字容易誤導。重點是行為的成本與利益分配變了，未必有人說謊。</span></p>
+
+<h2 id="agency">6. Principal-agent problems</h2>
+<p class="sub">Hiring an expert helps because they know more, and that same gap creates room for conflict.</p>
+<p>A principal<span class="zh">委託人</span> hires an agent to do a task. Problems arise when the agent's better information combines with incentives that differ from the principal's. MRU's examples are a mechanic who may recommend unneeded repairs, a taxi driver who knows the routes better than a tourist, and an employee whose effort is hard to see.</p>
+<div class="tbl"><table><thead><tr><th>Element</th><th>Repair case</th></tr></thead><tbody>
+<tr><td>Principal</td><td>Car owner who wants a reliable repair at a fair cost.</td></tr>
+<tr><td>Agent</td><td>Mechanic who diagnoses the problem and also sells the repair.</td></tr>
+<tr><td>Information gap</td><td>Only the mechanic can judge whether a part really needs replacing.</td></tr>
+<tr><td>Conflict</td><td>Extra billed work pays the mechanic even when the owner does not need it.</td></tr>
+<tr><td>Wider loss</td><td>Fearing overcharges, owners refuse even useful preventive work.</td></tr>
+</tbody></table></div>
+<p class="key">The deepest cost is not only overcharging. Distrust makes people turn down trades that would have helped them.</p>
+<p>Shirking is the effort version: when effort is costly and pay barely depends on it, an agent may do less than agreed. A bad outcome alone does not prove shirking, because luck, demand and tools also matter.</p>
+
+<h2 id="remedies">7. Reducing moral hazard</h2>
+<p class="sub">Narrow the information gap, or change who bears the consequences.</p>
+<div class="tbl"><table><thead><tr><th>Tool</th><th>How it works</th><th>Limit</th></tr></thead><tbody>
+<tr><td>Monitoring and audits</td><td>Better observation raises the chance of detection, so misconduct pays less.</td><td>Costly, and people may game the measured number.</td></tr>
+<tr><td>Reputation and reviews</td><td>Bad conduct today costs future customers, and reviews also inform buyers.</td><td>Fake reviews and one-off sellers weaken it.</td></tr>
+<tr><td>Independent diagnosis<span class="zh">獨立診斷</span></td><td>The assessor cannot profit from selling the repair, so there is less reason to exaggerate.</td><td>Independence does not guarantee competence.</td></tr>
+<tr><td>Warranty on the work</td><td>Poor work leads to seller-paid repeat repairs.</td><td>Must be clear and enforceable.</td></tr>
+<tr><td>Pay linked to results</td><td>The agent shares the gains from good outcomes.</td><td>Outcomes are noisy, and metrics can be gamed.</td></tr>
+<tr><td>Cost sharing</td><td>The insured bears part of each loss or bill, so private incentives move closer to real cost.</td><td>Weakens protection and may deter valuable care.</td></tr>
+</tbody></table></div>
+<h3 id="cost-sharing">Three kinds of cost sharing</h3>
+<div class="tbl"><table><thead><tr><th>Term</th><th>Rule</th><th>Simplified example</th></tr></thead><tbody>
+<tr><td><b>Deductible</b></td><td>The insured pays losses up to a set amount before the insurer starts paying.</td><td>A ฿12,000 claim with a ฿5,000 deductible: insured ฿5,000, insurer ฿7,000.</td></tr>
+<tr><td><b>Copayment</b></td><td>A fixed amount per covered service.</td><td>฿200 per eligible visit.</td></tr>
+<tr><td><b>Coinsurance</b></td><td>A share of each eligible bill.</td><td>10% of a ฿12,000 bill: insured ฿1,200, insurer ฿10,800.</td></tr>
+</tbody></table></div>
+<p class="note-small">These are separate examples, not one combined policy.</p>
+<h3 id="info-good">Information as a public good</h3>
+<p>A trustworthy product test is costly to produce, but once shared it is nonrival and hard to keep from non-payers. Users free ride, so reliable testing may be underprovided. That raises the question of how independent information is financed; it does not mean every review platform fails.</p>
+
+<h2 id="signaling">8. Signaling: making a claim believable</h2>
+<p class="sub">A signal works when the low type would not want to copy it.</p>
+<p>Signaling<span class="zh">訊號傳遞</span> is started by the informed side. In MRU's historical example, Hyundai improved its cars and backed them with an unusually long warranty. For reliable cars, expected warranty claims are low; for unreliable cars, the same promise would be expensive. That cost difference is what makes the warranty believable.</p>
+<div class="tbl"><table><thead><tr><th>Question</th><th>Signaling</th><th>Screening</th></tr></thead><tbody>
+<tr><td>Who acts?</td><td>The better-informed side.</td><td>The less-informed side.</td></tr>
+<tr><td>Car example</td><td>Seller offers a warranty.</td><td>Buyer orders an inspection.</td></tr>
+<tr><td>Key test</td><td>Would a low type want to copy it?</td><td>Does the test actually separate the types?</td></tr>
+</tbody></table></div>
+<div data-widget="signal"></div>
+<div class="tbl"><table><thead><tr><th>Term</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><b>Separating outcome</b></td><td>Different types make different choices, so the choice reveals the type.</td></tr>
+<tr><td><b>Pooling outcome</b></td><td>Types make the same choice, so uncertainty remains.</td></tr>
+<tr><td><b>Cheap talk</b></td><td>A costless claim like “excellent condition” that any seller can make, so it separates nothing.</td></tr>
+</tbody></table></div>
+<p>A credible signal need not be costly for the good type. What matters is that copying is costly for the bad type and that the promise can be honored. A warranty also transfers risk and changes later incentives for repair quality and buyer care.</p>
+
+<h2 id="education">9. Education: skills, signals or prior ability?</h2>
+<p class="sub">Graduates earn more. Three mechanisms can explain it, and they can work at the same time.</p>
+<div class="tbl"><table><thead><tr><th>Explanation</th><th>What changes</th><th>Chain</th><th>Example</th></tr></thead><tbody>
+<tr><td><b>Human capital</b><span class="zh">人力資本</span></td><td>Productive skills.</td><td>Study builds skills, output rises, and employers value the worker more.</td><td>An analyst learns spreadsheet modeling and forecasts better.</td></tr>
+<tr><td><b>Signaling</b></td><td>What employers know about existing traits.</td><td>Finishing a hard degree shows persistence, employers update their view, and offers improve even with unchanged skills.</td><td>A demanding degree helps an employer infer persistence.</td></tr>
+<tr><td><b>Ability bias</b></td><td>Who gets educated.</td><td>Prior ability or resources raise both schooling and earnings, so the raw gap overstates the effect of schooling.</td><td>Highly motivated students might earn more even without the degree.</td></tr>
+</tbody></table></div>
+<p class="hint"><b>中文邏輯</b><span>薪水較高，可能是學到東西，可能是雇主終於看出能力，也可能本來就有優勢；同一筆相關資料分不出三者的比例。</span></p>
+<p>The sheepskin effect<span class="zh">文憑完成溢價</span> is a jump in earnings at the point a credential is completed, beyond what extra years of study would predict. It fits signaling, but completion can also open licensed jobs, finish a key skill, or mark people who differ in unobserved ways. It does not prove that education is pure signaling.</p>
+<details class="extra"><summary>Optional: from skills to wages</summary>
+<div class="formula">MPL = Δoutput / Δlabor (physical units)<br>MRPL = MR × MPL (revenue); for a price taker, MRPL = P × MPL<br>A wage-taking firm hires while MRPL ≥ wage</div>
+<p>MRU's lesson calls a dollar-valued gain the “marginal product of labor”. Standard texts call that the marginal revenue product. Keep the units straight: output versus money.</p>
+<div class="flow"><span>Training raises skills</span><i>→</i><span>MPL and MRPL rise</span><i>→</i><span>Labor demand shifts right</span><i>→</i><span>With supply unchanged, wage and employment rise</span></div>
+<p>That market result needs a broad rise in demand for the skill, not one person's degree. If many people gain the skill, labor supply also shifts, and the wage effect can be smaller.</p>
+</details>
+
+<h2 id="debate">10. The Econ Duel: learning or signaling?</h2>
+<p class="sub">Tyler Cowen and Alex Tabarrok agree that graduates earn more. They disagree about why, and about what that means for society.</p>
+<div class="tbl"><table><thead><tr><th>Speaker</th><th>Position</th><th>Examples used</th></tr></thead><tbody>
+<tr><td><b>Cowen</b></td><td>Lasting learning explains much of the gap; education builds critical thinking and social skills.</td><td>Educated self-employed workers, Scandinavian schooling changes and Asian development; education works alongside infrastructure and governance.</td></tr>
+<tr><td><b>Tabarrok</b></td><td>Credentials reveal ability and persistence and open doors to careers.</td><td>Students cheering canceled classes yet valuing the degree; a credential race that disadvantages people without degrees.</td></tr>
+</tbody></table></div>
+<p class="note-small">These are debate positions. The video does not give enough study detail to split the wage gap into learning and signaling shares.</p>
+<h3 id="returns">Private return versus social return</h3>
+<div class="pair"><div><b>Private return</b><p>The student's extra earnings and other benefits, minus tuition, effort, time and forgone pay.</p></div><div><b>Social return</b><p>Extra real output, better job matching and spillovers, minus the real resources used. Tuition can be a transfer; teachers' time and buildings are real costs.</p></div></div>
+<p>In a pure credential race, one person's degree can lift their rank without raising total skill. If everyone responds by studying longer for unchanged jobs, credential inflation<span class="zh">學歷門檻膨脹</span> uses resources and shuts out non-graduates. Better matching can still create some social value, and some jobs really have become more complex.</p>
+<h3 id="evidence">What evidence could separate the explanations?</h3>
+<div class="tbl"><table><thead><tr><th>Comparison</th><th>What it can test</th><th>Why caution remains</th></tr></thead><tbody>
+<tr><td>A credible change in access to schooling</td><td>The effect of extra schooling on those affected.</td><td>Needs a valid comparison group and no other changes at the same time.</td></tr>
+<tr><td>Credential status with similar measured skills</td><td>The information or eligibility value of a degree.</td><td>Completers may still differ in unobserved traits.</td></tr>
+<tr><td>Direct tests of job skills and output</td><td>Whether learning raises capability.</td><td>Tests can miss skills; tools and jobs also matter.</td></tr>
+<tr><td>How employer beliefs change over time</td><td>Whether early credential-based pay adjusts to performance.</td><td>Performance is noisy, and early career paths persist.</td></tr>
+<tr><td>Cross-country schooling and income</td><td>A pattern to explain.</td><td>Institutions, health, capital and reverse causation can drive it.</td></tr>
+</tbody></table></div>
+<p class="key">A wage gap compares different people, so it lacks the counterfactual<span class="zh">反事實</span>: what the same people would earn without the degree. No single comparison settles the debate, and being unable to measure the shares is an evidence limit, not a reason to assume they are equal.</p>
+
+<h2 id="traps">11. Do not mix these up</h2>
+<div class="traps">
+<div><s>Uncertainty means asymmetric information.</s><p>Both sides can lack the same facts. Look for a relative gap.</p></div>
+<div><s>Adverse selection means any bad outcome.</s><p>Hidden types must change who participates.</p></div>
+<div><s>Moral hazard means dishonest people.</s><p>It is an incentive and monitoring problem; no fraud is needed.</p></div>
+<div><s>The signing date is the whole distinction.</s><p>Ask: selection among types, or behavior under incentives?</p></div>
+<div><s>Adverse selection always destroys the market.</s><p>It can leave a smaller, stable pool.</p></div>
+<div><s>Screening and signaling are the same.</s><p>Check who starts the revealing action.</p></div>
+<div><s>An expensive signal is automatically credible.</s><p>Ask whether a low type would copy it.</p></div>
+<div><s>More insured care is all waste.</s><p>Compare each visit's benefit with its resource cost.</p></div>
+<div><s>Cost sharing has no downside.</s><p>It weakens protection and can deter valuable care.</p></div>
+<div><s>A graduate wage gap proves learning.</s><p>Signaling and ability bias can contribute too.</p></div>
+</div>
+
+<h2 id="coldcall">12. Cold call practice</h2>
+<div class="qa-tools"><button id="qaAll" type="button">Show all answers</button></div>
+<div class="qa">
+<details><summary>What is adverse selection?</summary><p>Hidden characteristics change who participates, so the uninformed side faces a worse average pool, as when a pooled used-car offer drives good cars away.</p></details>
+<details><summary>Why can risk aversion keep low-risk buyers insured?</summary><p>They value avoiding a large uncertain loss, so they may pay a premium above their expected claims.</p></details>
+<details><summary>What is moral hazard?</summary><p>Behavior that others cannot fully observe changes because someone else bears part of the consequences, as when an insured shop cuts fire precautions.</p></details>
+<details><summary>How do reviews reduce moral hazard?</summary><p>They inform buyers and make bad conduct cost future business. Fake reviews weaken both effects.</p></details>
+<details><summary>Why can reliable test information be underprovided?</summary><p>It is costly to produce, but once shared it is nonrival and hard to exclude, so users free ride.</p></details>
+<details><summary>How does signaling differ from screening?</summary><p>The informed side signals, for example with a warranty. The uninformed side screens, for example with an inspection.</p></details>
+<details><summary>What is cheap talk?</summary><p>A costless claim any type can make, so it does not separate types.</p></details>
+<details><summary>What is the sheepskin effect?</summary><p>An earnings jump at credential completion beyond smooth years-of-schooling effects. It fits signaling but does not prove pure signaling.</p></details>
+<details><summary>When can a contract menu screen types?</summary><p>When different risks reliably choose different options. The resulting pool still has to be checked, not assumed.</p></details>
+</div>
+
+<h2 id="templates">13. Answer templates</h2>
+<div class="method"><b>Adverse selection</b><p>“One party privately knows its type. Common terms attract a different mix of participants, which changes the quality or risk of the pool. That feedback can worsen the terms and eliminate useful trades, although the market need not collapse completely.”</p></div>
+<div class="method"><b>Moral hazard</b><p>“The contract changes the private consequences of an action that is hard to observe. Behavior can then shift costs to someone else. I identify the action that changes and compare monitoring or incentive fixes with their costs.”</p></div>
+<div class="method"><b>Principal-agent</b><p>“The principal delegates to an agent with better information. Their incentives differ, and the principal cannot fully verify the agent's action or advice. A good remedy narrows the information gap or the conflict, rather than simply assuming the expert is dishonest.”</p></div>
+<div class="method"><b>Credible signaling</b><p>“The informed party takes an action that an inferior type would not want to copy. Buyers then update their beliefs. The key is differential cost and enforceability, not expense alone.”</p></div>
+<div class="method"><b>Education debate</b><p>“Education can build skills and signal existing traits at the same time, and prior ability can raise both schooling and earnings. A wage premium alone cannot identify the causal shares, and private returns need not equal the gain in social output.”</p></div>
+<p class="note-small endnote">Sources: MRU lessons on used cars, health insurance, moral hazard and its solutions, signaling, human capital, and the marginal product of labor; MRU Econ Duel, <a href="https://mru.org/courses/econ-duel/education-signaling-human-capital">Is Education Signaling or Skill Building?</a> The Hyundai and U.S. examples are historical, not current terms or prices.</p>
+<p class="note-small">Continue from <a href="economics-s5.html">Session 5: monopoly and price discrimination</a>, or return to <a href="economics.html">Economics sessions</a>.</p>
+</article></main></div>
+<script>/* Reusable economics widgets. Shared Plot and controls are embedded for offline use. */
+(() => {
+  'use strict';
+  const NS='http://www.w3.org/2000/svg'; let uid=0;
+  const money=n=>{const value=Math.round(Math.abs(n)*100)/100;return (n<0?'−$':'$')+value.toLocaleString('en-US',{minimumFractionDigits:Number.isInteger(value)?0:2,maximumFractionDigits:2});};
+  const num=n=>n.toLocaleString('en-US',{maximumFractionDigits:2});
+  const colors={d:'var(--demand)',mr:'var(--ext)',mc:'var(--supply)',atc:'var(--world)',cs:'var(--cs)',ps:'var(--ps)'};
+  function el(tag,attrs={},parent){const e=document.createElementNS(NS,tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));if(parent)parent.append(e);return e;}
+  function Plot(svg,qMax,pMax,pMin=0){
+    const W=Math.max(280,svg.getBoundingClientRect().width||500),H=340,L=48,R=18,T=28,B=51;
+    svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.replaceChildren();
+    const sx=q=>L+q/qMax*(W-L-R),sy=p=>H-B-(p-pMin)/(pMax-pMin)*(H-T-B);
+    const defs=el('defs',{},svg),clip=el('clipPath',{id:'plot-clip-'+(++uid)},defs);
+    el('rect',{x:L,y:T,width:W-L-R,height:H-T-B},clip);
+    const grid=el('g',{},svg),area=el('g',{'clip-path':'url(#'+clip.id+')'},svg),lines=el('g',{'clip-path':'url(#'+clip.id+')'},svg),top=el('g',{},svg);
+    const text=(x,y,s,attrs={})=>{const t=el('text',{x,y,class:'tk',...attrs},top);t.textContent=s;return t;};
+    return {sx,sy,W,H,
+      axes(xl,yl){el('line',{x1:L,y1:T,x2:L,y2:H-B,class:'ax'},grid);el('line',{x1:L,y1:H-B,x2:W-R,y2:H-B,class:'ax'},grid);text(L,T-12,yl,{class:'axl'});text((L+W-R)/2,H-8,xl,{'text-anchor':'middle',class:'axl'});},
+      xticks(values,fmt=num){values.forEach(q=>text(sx(q),H-B+19,fmt(q),{'text-anchor':'middle'}));},
+      yticks(values,fmt=num){values.forEach(p=>{el('line',{x1:L,y1:sy(p),x2:W-R,y2:sy(p),class:'grid'},grid);text(L-7,sy(p)+4,fmt(p),{'text-anchor':'end'});});},
+      path(points,color,dash=false){el('polyline',{points:points.map(([q,p])=>sx(q)+','+sy(p)).join(' '),fill:'none',stroke:color,'stroke-width':2.5,'stroke-dasharray':dash?'6 5':'none'},lines);},
+      line(a,b,color){this.path([[0,a],[qMax,a+b*qMax]],color);},
+      hline(p,color,dash=false){this.path([[0,p],[qMax,p]],color,dash);},
+      poly(points,cls){el('polygon',{points:points.map(([q,p])=>sx(q)+','+sy(p)).join(' '),class:cls},area);},
+      rect(q0,q1,p0,p1,cls){this.poly([[q0,p0],[q1,p0],[q1,p1],[q0,p1]],cls);},
+      guide(q,p){el('line',{x1:sx(q),y1:sy(p),x2:sx(q),y2:sy(pMin),class:'gd'},lines);el('line',{x1:L,y1:sy(p),x2:sx(q),y2:sy(p),class:'gd'},lines);},
+      point(q,p,color){el('circle',{cx:sx(q),cy:sy(p),r:4,fill:color,stroke:'var(--paper)','stroke-width':1.3},lines);},
+      tag(q,p,s,anchor='middle',dy=-7){return text(sx(q),sy(p)+dy,s,{'text-anchor':anchor});},
+      bar(q,value,color){el('rect',{x:sx(q-.28),y:sy(value),width:sx(q+.28)-sx(q-.28),height:Math.max(0,sy(0)-sy(value)),fill:color},area);text(sx(q),sy(value)-8,num(value),{'text-anchor':'middle'});}
+    };
+  }
+  function shell(host,title,sub,legend,twinTitles){
+    host.classList.add('graph','wide');const id='econ-'+(++uid);
+    host.innerHTML='<div class="g-head"><span class="g-kicker">Interactive graph</span><h4></h4><p></p></div><div class="plot-legend"></div><div class="g-body"><div class="g-plot"></div><div class="g-side"><div class="g-ctrl"></div><dl class="g-stats" aria-live="off"></dl></div></div><p class="g-note" aria-live="polite"></p>';
+    host.querySelector('h4').textContent=title;host.querySelector('.g-head p').textContent=sub;
+    const leg=host.querySelector('.plot-legend');legend.forEach(([s,c])=>{const item=document.createElement('span'),sw=document.createElement('i');sw.style.background=c;sw.className='sw ln';item.append(sw,document.createTextNode(s));leg.append(item);});
+    if(host.dataset.readout==='optional'){
+      const side=host.querySelector('.g-side'),stats=host.querySelector('.g-stats'),note=host.querySelector('.g-note');
+      const reading=document.createElement('div'),details=document.createElement('details'),summary=document.createElement('summary');
+      reading.className='g-reading';details.className='number-readout';summary.textContent='View numerical readout';details.append(summary,stats);reading.append(note,details);side.append(reading);
+    }
+    const plot=host.querySelector('.g-plot'),svgs=[];
+    if(twinTitles){plot.classList.add('twin');twinTitles.forEach(name=>{const div=document.createElement('div'),t=document.createElement('p');t.className='tw-t';t.textContent=name;div.append(t);const svg=el('svg',{role:'img','aria-label':title+': '+name},div);plot.append(div);svgs.push(svg);});}
+    else svgs.push(el('svg',{role:'img','aria-label':title},plot));
+    const ctrl=host.querySelector('.g-ctrl');
+    return {svgs,host,
+      slider(key,label,min,max,step,value,format,on){const row=document.createElement('div');row.className='sl';const lab=document.createElement('label'),span=document.createElement('span'),output=document.createElement('output'),input=document.createElement('input');input.type='range';input.setAttribute('aria-label',label);Object.assign(input,{id:id+'-'+key,min,max,step,value});lab.htmlFor=input.id;span.textContent=label;lab.append(span,output);output.htmlFor=input.id;row.append(lab,input);ctrl.append(row);const sync=()=>output.textContent=format(+input.value);input.addEventListener('input',()=>{sync();on(+input.value);});sync();return {set(v){input.value=v;sync();},input};},
+      button(label,on){const b=document.createElement('button');b.type='button';b.className='g-btn';b.textContent=label;b.addEventListener('click',on);ctrl.append(b);return b;},
+      seg(label,options,value,on){const group=document.createElement('div');group.className='seg';group.setAttribute('role','group');group.setAttribute('aria-label',label);options.forEach(([v,t])=>{const b=document.createElement('button');b.type='button';b.textContent=t;b.dataset.value=v;b.setAttribute('aria-pressed',String(v===value));b.addEventListener('click',()=>{[...group.children].forEach(x=>x.setAttribute('aria-pressed',String(x===b)));on(v);});group.append(b);});ctrl.append(group);},
+      show(rows,note){const stats=host.querySelector('.g-stats');stats.replaceChildren();rows.forEach(([key,value,big=false])=>{const row=document.createElement('div');row.className='st'+(big?' big':'');row.dataset.stat=key;const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=key;dd.textContent=value;row.append(dt,dd);stats.append(row);});host.querySelector('.g-note').textContent=note;},
+      redrawOnResize(draw){let last='';const obs=new ResizeObserver(()=>{const widths=svgs.map(svg=>Math.round(svg.getBoundingClientRect().width)).join('|');if(widths!==last){last=widths;draw();}});obs.observe(plot);svgs.forEach(svg=>obs.observe(svg.parentElement));}
+    };
+  }
+  const W_={};
+  const kb=n=>'฿'+num(n)+'k';
+  const baht=n=>(n<0?'−฿':'฿')+Math.round(Math.abs(n)).toLocaleString('en-US');
+  const pct=n=>Math.round(n*100)+'%';
+  const signed=n=>(n<0?'−':'')+num(Math.abs(n));
+
+  /* Used cars: a two-type lemons market, stepped round by round. */
+  W_.lemons=host=>{
+    const s=shell(host,'Watch the used-car pool unravel','Predict whether owners of good cars accept an offer based on the average car. Step through the rounds, then switch to verified quality.',[['Buyer value',colors.ps],['Seller minimum','var(--rev)'],['Buyer offer',colors.d]]);
+    let share=.5,hMin=260,step=0,info='hidden';
+    const rounds=()=>{const first=share*300+(1-share)*100;const r=[{offer:first,good:first>=hMin,lemon:first>=80}];if(first<hMin)r.push({offer:100,good:false,lemon:true});return r;};
+    const draw=()=>{
+      const r=rounds();if(step>r.length)step=r.length;
+      const cur=step?r[step-1]:null,verified=info==='verified',fadeGood=!verified&&cur&&!cur.good;
+      const P=Plot(s.svgs[0],4,340);P.axes('','Thousand baht per car');P.xticks([1,3],v=>v===1?'Good cars':'Lemons');P.yticks([0,100,200,300]);
+      P.rect(.55,.98,0,300,'a-ps'+(fadeGood?' a-faded':''));P.rect(1.02,1.45,0,hMin,'a-rev'+(fadeGood?' a-faded':''));P.rect(2.55,2.98,0,100,'a-ps');P.rect(3.02,3.45,0,80,'a-rev');
+      P.tag(.765,300,'300');P.tag(1.235,hMin,num(hMin));P.tag(2.765,100,'100');P.tag(3.235,80,'80');
+      if(verified){P.path([[.45,300],[1.55,300]],colors.d,true);P.path([[2.45,100],[3.55,100]],colors.d,true);}
+      else if(cur){P.hline(cur.offer,colors.d);P.tag(2,cur.offer,num(cur.offer));}
+      let rows,note;
+      if(verified){
+        rows=[['Stage','Quality verified',true],['Good cars sell','Yes'],['Lemons sell','Yes'],['Gains realized (one car of each type)',kb(60),true],['Gains lost',kb(0)]];
+        note='With verified quality, each type gets its own price. Both trades happen and all '+kb(60)+' of gains are realized.';
+      }else if(!cur){
+        rows=[['Stage','Before any offer',true],['Share of good cars',pct(share)],['Good-car seller minimum',kb(hMin)]];
+        note='Buyers know only the mix of cars. Predict: will good-car owners accept an offer based on the average?';
+      }else{
+        const final=step===r.length,gains=(cur.good?40:0)+(cur.lemon?20:0);
+        rows=[['Stage',final?'Round '+step+' (stable)':'Round '+step,true],['Buyer offer',kb(cur.offer)],['Good cars sell',cur.good?'Yes':'No'],['Lemons sell',cur.lemon?'Yes':'No'],['Gains realized (one car of each type)',kb(gains),true],['Gains lost',kb(60-gains)]];
+        if(cur.good)note='The pooled offer of '+kb(cur.offer)+' covers the good-car minimum of '+kb(hMin)+', so both types sell. Pooling is stable here.';
+        else if(step===1)note='The pooled offer of '+kb(cur.offer)+' is below the good-car minimum of '+kb(hMin)+', so good cars are withdrawn. Buyers will notice that the pool has changed.';
+        else note='Only lemons remain, so buyers offer '+kb(100)+'. Lemon owners accept because 100 ≥ 80. The market shrinks but survives.';
+      }
+      s.show(rows,note);
+    };
+    s.seg('Information',[['hidden','Hidden quality'],['verified','Verified quality']],info,v=>{info=v;draw();});
+    s.slider('share','Share of good cars',10,90,5,share*100,v=>v+'%',v=>{share=v/100;draw();});
+    s.slider('hmin','Good-car seller minimum',200,300,10,hMin,kb,v=>{hMin=v;draw();});
+    s.button('Next round',()=>{if(info==='hidden'){step=Math.min(step+1,rounds().length);draw();}});
+    s.button('Reset rounds',()=>{step=0;draw();});
+    draw();s.redrawOnResize(draw);
+  };
+
+  /* Insurance: a two-type pool repriced until it stops changing. */
+  W_.pool=host=>{
+    const s=shell(host,'Reprice the insurance pool','Predict whether low-risk buyers stay when the premium reflects the average claim. Raise their willingness to pay to see how risk aversion holds a pool together.',[['Expected claims',colors.ps],['Willingness to pay',colors.cs],['Premium',colors.d]]);
+    let lowShare=.5,lowWtp=15,step=0;
+    const rounds=()=>{const r=[];let low=true,high=true;for(let i=0;i<4;i++){const w=(low?lowShare:0)+(high?1-lowShare:0);if(!w)break;const prem=((low?lowShare*10:0)+(high?(1-lowShare)*30:0))/w;const nl=low&&lowWtp>=prem,nh=high&&35>=prem;r.push({prem,low:nl,high:nh,wasLow:low});if(nl===low&&nh===high)break;low=nl;high=nh;}return r;};
+    const draw=()=>{
+      const r=rounds();if(step>r.length)step=r.length;const cur=step?r[step-1]:null;
+      const P=Plot(s.svgs[0],4,42);P.axes('','Thousand baht per year');P.xticks([1,3],v=>v===1?'Low risk':'High risk');P.yticks([0,10,20,30,40]);
+      const fadeLow=cur&&!cur.low;
+      P.rect(.55,.98,0,10,'a-ps'+(fadeLow?' a-faded':''));P.rect(1.02,1.45,0,lowWtp,'a-cs'+(fadeLow?' a-faded':''));P.rect(2.55,2.98,0,30,'a-ps');P.rect(3.02,3.45,0,35,'a-cs');
+      P.tag(.765,10,'10');P.tag(1.235,lowWtp,num(lowWtp));P.tag(2.765,30,'30');P.tag(3.235,35,'35');
+      if(cur){P.hline(cur.prem,colors.d);P.tag(2,cur.prem,num(cur.prem));}
+      let rows,note;
+      if(!cur){
+        rows=[['Stage','Before pricing',true],['Share of low-risk buyers',pct(lowShare)],['Low-risk willingness to pay',kb(lowWtp)]];
+        note='The insurer cannot tell the types apart. Predict: will low-risk buyers accept a premium based on the average claim?';
+      }else{
+        const final=step===r.length,pool=cur.low&&cur.high?'Mixed pool':cur.high?'High risk only':cur.low?'Low risk only':'Nobody insured';
+        rows=[['Stage',final?'Round '+step+' (stable)':'Round '+step,true],['Premium',kb(cur.prem)],['Low risk stays insured',cur.low?'Yes':'No'],['High risk stays insured',cur.high?'Yes':'No'],['Pool after this round',pool,true]];
+        if(cur.low&&cur.high)note='Both types stay because the premium of '+kb(cur.prem)+' is within both willingness-to-pay levels. Risk aversion keeps the pool mixed.';
+        else if(cur.wasLow&&!cur.low)note='A premium of '+kb(cur.prem)+' exceeds the low-risk willingness to pay of '+kb(lowWtp)+', so low-risk buyers leave. The insurer must reprice.';
+        else note='Only high-risk buyers remain at '+kb(cur.prem)+'. They stay because 30 ≤ 35. The pool shrinks but survives.';
+      }
+      s.show(rows,note);
+    };
+    s.slider('share','Share of low-risk buyers',10,90,5,lowShare*100,v=>v+'%',v=>{lowShare=v/100;draw();});
+    s.slider('wtp','Low-risk willingness to pay',10,30,1,lowWtp,kb,v=>{lowWtp=v;draw();});
+    s.button('Next round',()=>{step=Math.min(step+1,rounds().length);draw();});
+    s.button('Reset rounds',()=>{step=0;draw();});
+    draw();s.redrawOnResize(draw);
+  };
+
+  /* Moral hazard in care: a lower out-of-pocket price moves patients along demand. */
+  W_.copay=host=>{
+    const s=shell(host,'Lower the price a patient pays','Each visit uses ฿1,000 of resources. Predict how many extra visits a ฿200 copayment creates, then ask whether those visits are worth their cost.',[['Demand D',colors.d],['Resource cost',colors.mc],['Benefit including blocked care',colors.atc],['Worth more than cost','var(--cs)'],['Worth less than cost','var(--dwl)']]);
+    let c=200,view='demand';
+    const draw=()=>{
+      const mb=view==='blocked',a=mb?2500:2000,B=x=>a-20*x,cross=mb?75:50,q=(2000-c)/20;
+      const P=Plot(s.svgs[0],105,2300);P.axes('Visits per 100 members a year','Baht per visit');P.xticks([0,25,50,75,100]);P.yticks([0,500,1000,1500,2000]);
+      const hiEnd=Math.min(q,cross);if(hiEnd>50)P.poly([[50,1000],[50,B(50)],[hiEnd,B(hiEnd)],[hiEnd,1000]],'a-prof');
+      const loStart=Math.max(50,cross);if(q>loStart)P.poly([[loStart,1000],[q,1000],[q,B(q)],[loStart,B(loStart)]],'a-loss');
+      P.line(2000,-20,colors.d);P.hline(1000,colors.mc);if(mb)P.path([[0,2500],[105,400]],colors.atc,true);
+      P.path([[0,c],[q,c]],colors.mc,true);P.guide(q,c);P.point(q,c,colors.d);P.point(50,1000,colors.d);
+      const above=Math.max(0,Math.min(q,cross)-50),below=Math.max(0,q-Math.max(50,cross)),net=(a-1000)*(q-50)-10*(q*q-2500);
+      const rows=[['Patient pays per visit',baht(c)],['Resource cost per visit',baht(1000)],['Pool pays per visit',baht(1000-c)],['Visits',num(q),true],['Extra visits versus uninsured',num(q-50)],['Extra visits worth more than cost',num(above)],['Extra visits worth less than cost',num(below)],['Net value of extra visits (per 100 members)',baht(net),true]];
+      let note;
+      if(c>=1000)note='At '+baht(1000)+' the patient pays the full resource cost: the uninsured benchmark of 50 visits.';
+      else if(!mb)note='The lower price moves patients down the demand curve to '+num(q)+' visits. Every extra visit is valued below its '+baht(1000)+' cost, so the change loses '+baht(-net)+' of value.';
+      else note='Some extra visits treat needs that a lack of cash had blocked. Visits 50 to '+num(Math.min(q,cross))+' are worth more than cost'+(q>cross?'; visits beyond '+num(cross)+' are worth less':'')+'. Net change: '+baht(net)+'.';
+      s.show(rows,note);
+    };
+    s.seg('Benefit view',[['demand','Demand shows the full benefit'],['blocked','Some valuable care was blocked']],view,v=>{view=v;draw();});
+    const slider=s.slider('price','Out-of-pocket price per visit',0,1000,50,c,baht,v=>{c=v;draw();});
+    s.button('Reset to ฿200 copayment',()=>{c=200;slider.set(c);draw();});
+    draw();s.redrawOnResize(draw);
+  };
+
+  /* Signaling: a signal separates types only when the low type would not copy it. */
+  W_.signal=host=>{
+    const s=shell(host,'Test whether a signal separates the types','Predict who sends the signal when it raises a seller\'s revenue by 30, costs a high-quality seller 10 and costs a low-quality seller 50. Then change the numbers.',[['Benefit if seen as high quality','var(--cs)'],['Cost of sending the signal','var(--rev)']]);
+    let ben=30,ch=10,cl=50;
+    const draw=()=>{
+      const P=Plot(s.svgs[0],4,90);P.axes('','Payoff (illustrative units)');P.xticks([1,3],v=>v===1?'High type':'Low type');P.yticks([0,20,40,60,80]);
+      P.rect(.55,.98,0,ben,'a-cs');P.rect(1.02,1.45,0,ch,'a-rev');P.rect(2.55,2.98,0,ben,'a-cs');P.rect(3.02,3.45,0,cl,'a-rev');
+      P.tag(.765,ben,num(ben));P.tag(1.235,ch,num(ch));P.tag(2.765,ben,num(ben));P.tag(3.235,cl,num(cl));
+      const hs=ben>ch,ls=ben>cl;
+      const outcome=hs&&!ls?'Separating':hs&&ls?'Pooling':!hs&&!ls?'No one signals':'Only the low type signals';
+      let note;
+      if(hs&&!ls)note='Separating: the high type gains '+num(ben-ch)+' and the low type would lose '+num(cl-ben)+' by copying. Only good sellers signal, so buyers can trust it.';
+      else if(hs&&ls)note='Pooling: copying pays for the low type too, so both types signal and the signal tells buyers nothing. Buyers would stop paying extra for it.';
+      else if(!hs&&!ls)note='No one signals: the benefit does not cover even the high type\'s cost.';
+      else note='Only the low type would signal here, so a buyer should read the signal as bad news.';
+      s.show([['High type net gain',signed(ben-ch)],['Low type net gain if copying',signed(ben-cl)],['Outcome',outcome,true]],note);
+    };
+    const b=s.slider('ben','Benefit of being seen as high quality',0,80,1,ben,num,v=>{ben=v;draw();});
+    const h=s.slider('ch','Signal cost: high type',0,80,1,ch,num,v=>{ch=v;draw();});
+    const l=s.slider('cl','Signal cost: low type',0,80,1,cl,num,v=>{cl=v;draw();});
+    s.button('Reset example',()=>{ben=30;ch=10;cl=50;b.set(ben);h.set(ch);l.set(cl);draw();});
+    draw();s.redrawOnResize(draw);
+  };
+
+  window.EconWidgets={mount(root){root.querySelectorAll('[data-widget]').forEach(host=>{const init=W_[host.dataset.widget];if(init&&!host.dataset.ready){host.dataset.ready='1';init(host);}});}};
+})();
+</script>
+<script>
+(() => {
+ const toc=document.getElementById('toc'),rail=document.getElementById('rail'),button=document.getElementById('tocBtn');
+ const headings=[...document.querySelectorAll('.doc > h2,.doc > h3')];
+ headings.forEach(h=>{const li=document.createElement('li'),a=document.createElement('a');li.className=h.tagName.toLowerCase();li.dataset.id=h.id;a.href='#'+h.id;a.textContent=h.childNodes[0].textContent.trim();li.append(a);toc.append(li);});
+ const spy=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;toc.querySelectorAll('.on').forEach(a=>a.classList.remove('on'));const a=toc.querySelector('[data-id="'+e.target.id+'"] a');if(a)a.classList.add('on');}),{rootMargin:'-100px 0px -65% 0px'});headings.forEach(h=>spy.observe(h));
+ function close(){rail.classList.remove('open');button.setAttribute('aria-expanded','false');}
+ button.addEventListener('click',()=>{const open=rail.classList.toggle('open');button.setAttribute('aria-expanded',String(open));});
+ toc.addEventListener('click',e=>{if(e.target.closest('a'))close();});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&rail.classList.contains('open')){close();button.focus();}});
+ const all=document.getElementById('qaAll');all.addEventListener('click',()=>{const ds=[...document.querySelectorAll('.qa details')],open=!ds.every(d=>d.open);ds.forEach(d=>d.open=open);all.textContent=open?'Hide all answers':'Show all answers';});
+ window.EconWidgets.mount(document);
+})();
+</script>
+</body></html>
