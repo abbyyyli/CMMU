@@ -290,15 +290,32 @@ svg .tk{font-size:11.5px}svg .axl{font-size:12px}.g-plot svg{overflow:visible}
 .g-reading{min-width:0}.g-reading .g-note{margin:0}.number-readout{margin:12px 0 0;padding:0 10px}.number-readout .g-stats{border-top:0;padding-bottom:10px}
 </style>
 <style>
-.sort-list{display:flex;flex-direction:column;gap:10px;margin:6px 0 12px}
-.sort-item{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg)}
-.sort-item.is-ok{border-color:var(--cs)}.sort-item.is-no{border-color:var(--dwl)}
-.sort-q{margin:0 0 8px;font-weight:500;font-size:.92rem}
-.sort-item .seg button.is-right{box-shadow:inset 0 -3px 0 var(--cs);color:var(--fg)}
-.sort-item .seg button[aria-pressed=true].is-right{color:var(--paper)}
-.sort-fb{margin:8px 0 0;font-size:.86rem;line-height:1.6;padding:8px 10px;border-radius:6px;background:var(--tint)}
-.sort-fb[hidden]{display:none}
-.sort-tools{flex-direction:row;flex-wrap:wrap;gap:8px}.sort-tools .g-btn+.g-btn{margin-top:0}
+.four{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:1rem 0}
+.four>div{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.four b{color:var(--accent-ink)}.four p{margin:4px 0 0;font-size:.9rem;line-height:1.55}
+@media (max-width:980px){.four{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.four{grid-template-columns:minmax(0,1fr)}}
+.ring-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin:14px 0 4px}
+.ring-card{display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;font:inherit;font-size:.86rem;line-height:1.45;color:var(--fg);background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:9px 11px;cursor:pointer}
+.ring-card:hover{border-color:var(--accent)}
+.ring-card.done{background:var(--tint);border-color:var(--accent)}
+.ring-card.off-reg{border-style:dashed}.ring-card.off-reg .rc-t{text-decoration:line-through;color:var(--muted)}
+.rc-amt{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.78rem;color:var(--muted)}
+.rc-tag{font-size:.74rem;font-weight:700;letter-spacing:.04em;color:var(--accent-ink)}.rc-tag:empty{display:none}
+.sort-tools{display:flex;flex-direction:row;flex-wrap:wrap;gap:8px;margin-top:6px}.sort-tools .g-btn+.g-btn{margin-top:0}
+.g-btn:disabled{opacity:.45;cursor:default}
+.ladder{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.rung{display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px;align-items:start;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.rung-1{margin-left:14px}.rung-2{margin-left:28px;background:var(--tint)}.rung-3{margin-left:42px;background:var(--tint);border-color:var(--accent)}
+.rung-n{width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--paper);display:grid;place-items:center;font-weight:700;font-size:.85rem}
+.rung-b p{margin:0}.rung-q{font-size:.85rem;color:var(--muted)}.rung-a{font-family:var(--serif);font-weight:700;font-size:1.06rem;margin:2px 0 4px!important}.rung-ex{font-size:.92rem;line-height:1.6}
+@media (max-width:560px){.rung-1{margin-left:6px}.rung-2{margin-left:12px}.rung-3{margin-left:18px}}
+.timeline{list-style:none;margin:12px 0 12px 8px;padding:0 0 0 18px!important;border-left:2px solid var(--line)}
+.timeline li{position:relative;display:grid;grid-template-columns:64px minmax(0,1fr);gap:10px;padding:6px 0;margin:0}
+.timeline li::before{content:"";position:absolute;left:-25px;top:12px;width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.timeline li.what-if::before{background:var(--paper);border:2px dashed var(--accent);width:8px;height:8px}
+.timeline li.what-if>span{color:var(--muted);font-style:italic}
+.timeline b{font-family:"JetBrains Mono",ui-monospace,monospace;color:var(--accent-ink);font-weight:500}
 </style><style>svg .a-faded{opacity:.28}.map .mbox{min-width:0}</style></head><body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><pattern id="dwlHatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" style="fill:var(--dwl);fill-opacity:.12"/><rect width="2.2" height="6" style="fill:var(--dwl);fill-opacity:.75"/></pattern></defs></svg>
 <header class="top"><div class="top-in">
@@ -307,213 +324,233 @@ svg .tk{font-size:11.5px}svg .axl{font-size:12px}.g-plot svg{overflow:visible}
 <nav aria-label="Sessions 5–8" class="sessions"><a class="pill" href="economics-s5.html">S5</a><a class="pill" href="economics-s6.html">S6</a><span aria-current="page" class="pill">S7</span><span aria-disabled="true" class="pill off">S8</span></nav>
 </div></header>
 <div class="wrap"><aside class="rail" id="rail"><p class="lbl">Contents</p><ol id="toc"></ol></aside>
-<main><article class="doc"><div class="hero"><p class="kick">MGMG515 · Session 7</p><h1>GDP and Economic Growth</h1><p class="lead">GDP tells us how much an economy produces. Once prices and population are taken out, it becomes the best single gauge of average living standards. This session measures GDP, compares it across time and countries, and asks why some countries grew rich while others stayed poor.</p></div>
+<main><article class="doc"><div class="hero"><p class="kick">MGMG515 · Session 7</p><h1>GDP and Economic Growth</h1><p class="lead">How rich is a country, and why? First we learn to measure it properly, then we see how small differences in growth turn into enormous differences in how people live, and finally we dig for the causes.</p></div>
 
 <h2 id="map">Chapter map</h2>
 <div class="map">
-<div class="mcol"><div class="mbox ask"><b>Measure it</b><span>GDP, then real GDP, then real GDP per person, then PPP prices for country comparisons.</span></div></div>
+<div class="mcol"><div class="mbox ask"><b>Measure</b><span>Count final output, take out prices, divide by people, compare at common prices.</span></div></div>
 <div class="marrow">→</div>
 <div class="mcol">
-<div class="mbox"><b>Compare it</b><span>Today's gaps are huge: the United States is about 90 times richer than the Central African Republic.</span><em>Basic facts of wealth</em></div>
-<div class="mbox"><b>Trace it</b><span>Gaps come from growth rates sustained for decades.</span><em>Rule of 70, miracles, disasters</em></div>
+<div class="mbox"><b>Compare</b><span>The richest countries have about 90 times the income of the poorest.</span></div>
+<div class="mbox"><b>Trace</b><span>Those gaps come from growth rates kept up for decades.</span></div>
 </div>
 <div class="marrow">→</div>
-<div class="mcol"><div class="mbox good"><b>Explain it</b><span>Immediate cause: more and better factors of production. Deeper causes: incentives, institutions, geography, history and luck.</span></div></div>
+<div class="mcol"><div class="mbox good"><b>Explain</b><span>Capital and knowledge make workers productive. Incentives and institutions decide whether a country builds them.</span></div></div>
 </div>
-<p class="hint"><b>中文邏輯</b><span>先會「量」，再會「比」，最後會「解釋」：差距來自長期成長率，而成長率取決於誘因和制度。</span></p>
+<p class="hint"><b>中文邏輯</b><span>先會量，再會比，最後會解釋：差距來自長期成長率，而成長率取決於誘因和制度。</span></p>
 
-<h2 id="gdp">1. What GDP counts</h2>
-<p class="sub">MRU pictures the economy as a giant supermarket. Every time a finished good or service is sold, the register rings up its price. Add up a year of sales and you have GDP.</p>
-<p><b>Gross Domestic Product</b><span class="zh">國內生產毛額</span> is the market value of all finished goods and services produced within a country in a year. Each phrase is a counting rule.</p>
-<div class="tbl"><table><thead><tr><th>Phrase</th><th>Rule</th><th>MRU example</th><th>Do not confuse with</th></tr></thead><tbody>
-<tr><td><b>Market value</b></td><td>Prices let us add apples and haircuts.</td><td>Polar bears are left out because there is no easy market price, not because they lack value.</td><td>Total value to society.</td></tr>
-<tr><td><b>Finished (final)</b></td><td>Count goods sold to their end user.</td><td>Eggs for a home omelet count; eggs a baker uses for a cake do not, because the cake's price already includes them.</td><td>Intermediate goods<span class="zh">中間財</span>, used up inside another product.</td></tr>
-<tr><td><b>Capital goods</b><span class="zh">資本財</span></td><td>Count them: they are finished goods.</td><td>A tractor sold to a farm counts, even though it helps produce other goods.</td><td>Intermediate inputs, which are not resold as part of another product.</td></tr>
-<tr><td><b>Produced in a year</b></td><td>Count new production only.</td><td>A newly built house counts; selling an old house adds nothing.</td><td>Resales, which were counted when first produced.</td></tr>
-<tr><td><b>Within a country</b></td><td>Location of production decides.</td><td>French wine bought in the United States adds to France's GDP.</td><td>GNI, which counts income earned by a country's residents wherever they produce.</td></tr>
+<h2 id="gdp">1. What goes into GDP</h2>
+<p class="sub">Picture the whole economy as one giant supermarket. GDP is what the register rings up in a year.</p>
+<p><b>Gross Domestic Product</b><span class="zh">國內生產毛額</span> is the market value of all final goods and services produced within a country in a year. The register follows four rules, and almost every GDP question tests one of them.</p>
+<div class="four">
+<div><b>Final only</b><p>Flour a bakery uses is already inside the bread's price. Count the bread, not the flour.</p></div>
+<div><b>Capital goods count</b><p>A tractor helps make other goods, but it is not sold again as part of them, so it counts.</p></div>
+<div><b>New production only</b><p>A used car or an old house was counted when it was made. Reselling it adds nothing.</p></div>
+<div><b>Inside the borders</b><p>A Korean-owned factory in Chonburi adds to Thai GDP. Income Thais earn abroad belongs in GNI instead.</p></div>
+</div>
+<p>Spending is split into four buckets: <b>Y = C + I + G + NX</b>, where net exports are exports minus imports. Imports come off because they were made abroad, not because imports are bad. Pension checks and other <b>transfers</b><span class="zh">移轉支付</span> buy nothing, so they stay off the register until someone spends them.</p>
+<div class="tbl"><table><thead><tr><th>Part</th><th>Definition</th><th>Example</th><th>Do not confuse with</th></tr></thead><tbody>
+<tr><td><b>C</b> Consumption</td><td>Household spending on final goods and services; the largest part, about 63% of US GDP.</td><td>Groceries, phone plans, a massage.</td><td>Buying used goods.</td></tr>
+<tr><td><b>I</b> Investment</td><td>New capital goods, usually bought by firms.</td><td>Machines, tractors, a new warehouse.</td><td>Buying shares or bonds.</td></tr>
+<tr><td><b>G</b> Government purchases</td><td>Goods and services the government buys directly.</td><td>A rail line, teachers' salaries, office supplies.</td><td>Transfers such as pensions, which buy nothing.</td></tr>
+<tr><td><b>NX</b> Net exports</td><td>Exports minus imports.</td><td>Tourists paying Phuket hotels is an export; imported fuel is an import.</td><td>A sign that imports are bad.</td></tr>
 </tbody></table></div>
-<p>GDP also leaves out purely financial trades, such as buying shares, and transfer payments, such as pensions. Neither one produces anything new.</p>
-<div data-widget="gdpsort"></div>
-<p class="note-small">The transactions are illustrative Thai examples, not national-accounts data.</p>
+<p>Why split GDP at all? Households, firms and governments respond to different forces. When GDP falls, it matters whether consumption, investment or government purchases fell, because the policy response is different.</p>
+<div data-widget="ringup"></div>
+<p class="note-small">Amounts are a made-up economy in million baht. The income-side split is illustrative.</p>
+<p>The second bar is the point of the income side. Every baht spent on final output ends up as someone's wages, rent, interest or profit, so adding up incomes (gross domestic income, GDI) should give the same total. In practice the two are measured separately and differ slightly, and in a recession economists watch both.</p>
+<p>A third cut is by sector: who produces the output. Thailand's economy has been shifting toward services.</p>
+<div class="tbl"><table class="oil" aria-label="Thailand GDP by sector"><thead><tr><th>Share of Thai GDP</th><th>2010</th><th>2020</th></tr></thead><tbody>
+<tr><td>Agriculture</td><td>10.5%</td><td>8.6%</td></tr>
+<tr><td>Industry</td><td>39.9%</td><td>33.1%</td></tr>
+<tr><td>Services</td><td>49.6%</td><td class="hi">58.3%</td></tr>
+</tbody></table></div>
+<p class="note-small">Source: Statista, as shown in class.</p>
 
-<h2 id="real">2. Nominal versus real GDP</h2>
-<p class="sub">GDP can rise because the economy produces more, or only because prices went up. MRU calls the second kind a mirage.</p>
-<div class="tbl"><table><thead><tr><th>Term</th><th>Definition</th><th>Example</th></tr></thead><tbody>
-<tr><td><b>Nominal GDP</b></td><td>Output valued at the prices of the year it is produced.</td><td>A loaf of bread that cost a dime now costs a couple of dollars.</td></tr>
-<tr><td><b>Real GDP</b></td><td>Output valued at the same set of base-year prices, so it changes only when quantities change.</td><td>Valuing this year's rice and haircuts at last year's prices.</td></tr>
-<tr><td><b>GDP deflator</b><span class="zh">平減指數</span></td><td>Nominal GDP divided by real GDP, times 100: a price index for all domestic output.</td><td>Nominal 8.66 million ÷ real 7.40 million × 100 ≈ 117.</td></tr>
-<tr><td><b>Real GDP per capita</b></td><td>Real GDP divided by population.</td><td>Real GDP +5.7% with population +5% leaves about +0.7% per person.</td></tr>
-<tr><td><b>Recession</b></td><td>A broad fall in real economic activity; falling real GDP is part of the definition.</td><td>US real GDP fell 3.6% in 2009, and unemployment spiked.</td></tr>
+<h2 id="real">2. Three adjustments that make GDP comparable</h2>
+<p class="sub">Raw GDP answers "how big is this economy?" It does not answer "how well do people live?" Three adjustments close the gap.</p>
+<p>A chart of the ASEAN-6 shows why. Indonesia's economy, at about $1.44 trillion, is more than twice the size of Singapore's $565 billion, Thailand's $538 billion or Vietnam's $514 billion. Yet one reader asked the obvious question underneath: then why are Indonesians still poor compared with Singaporeans? A big total spread across a very large population is not the same as a high income per person.</p>
+<p class="note-small">The chart shown in class labels Indonesia "$1.443B"; the comments and the bar heights show it means trillion.</p>
+<div class="tbl"><table><thead><tr><th>Adjustment</th><th>What it removes</th><th>Use it to compare</th></tr></thead><tbody>
+<tr><td><b>Real GDP</b></td><td>Inflation: every year's output is valued at the same base-year prices.</td><td>One country over time.</td></tr>
+<tr><td><b>GDP per capita</b></td><td>Differences in population size: divide by the number of people.</td><td>Countries of different sizes.</td></tr>
+<tr><td><b>Purchasing power parity (PPP)</b></td><td>Differences in the cost of living: value every country's output at the same prices.</td><td>Living standards across countries (section 4).</td></tr>
 </tbody></table></div>
-<p>MRU's FRED example for the United States shows each step shrinking the headline number:</p>
-<div class="tbl"><table class="oil" aria-label="United States GDP, 1950 and 2015"><thead><tr><th>Measure</th><th>1950</th><th>2015</th><th>Multiple</th></tr></thead><tbody>
-<tr><td>Nominal GDP</td><td>$320 bn</td><td>$17 tn+</td><td>≈ 55×</td></tr>
-<tr><td>Real GDP (2009 $)</td><td>$2 tn</td><td>$16 tn</td><td>≈ 8×</td></tr>
-<tr><td>Real GDP per capita</td><td>$14,000</td><td>$50,000</td><td class="hi">≈ 3.6×</td></tr>
+<p>Start with the first two. A rising GDP number can be a mirage: prices may have gone up while output stayed put.</p>
+<div class="tbl"><table><thead><tr><th>Measure</th><th>What it does</th><th>Answers the question</th></tr></thead><tbody>
+<tr><td><b>Nominal GDP</b></td><td>Values output at this year's prices.</td><td>How much money changed hands?</td></tr>
+<tr><td><b>Real GDP</b></td><td>Values every year's output at the same base-year prices.</td><td>Did we produce more?</td></tr>
+<tr><td><b>GDP deflator</b><span class="zh">平減指數</span></td><td>Nominal ÷ real × 100.</td><td>How much did prices rise overall?</td></tr>
+<tr><td><b>Real GDP per capita</b></td><td>Real GDP ÷ population.</td><td>Is the average person better off?</td></tr>
 </tbody></table></div>
-<p class="note-small">MRU rounds the last row to "about four times". Going from 8× to roughly 4× also tells us population about doubled.</p>
-<div data-widget="realgdp"></div>
-<p class="hint"><b>中文邏輯</b><span>名目看「錢」，實質看「東西」，再除以人口才接近「每個人過得怎樣」。</span></p>
-<details class="extra"><summary>Optional: the rice-and-haircut calculation</summary>
+<div data-widget="waterfall"></div>
+<p class="note-small">US figures come from FRED, in 2009 dollars. The per-person rise is 3.6 times on these rounded numbers, often quoted as "about four times".</p>
+<p>A fall in real GDP is part of what defines a <b>recession</b>. In 2009 US real GDP shrank 3.6% and unemployment jumped.</p>
+<details class="extra"><summary>Optional: the small Thai economy, worked out</summary>
 <div class="tbl"><table class="oil" aria-label="Two-good example in baht"><thead><tr><th>Item</th><th>Year 1 P</th><th>Year 1 Q</th><th>Year 2 P</th><th>Year 2 Q</th></tr></thead><tbody>
 <tr><td>Rice, baht per ton</td><td>20,000</td><td>100</td><td>22,000</td><td>110</td></tr>
 <tr><td>Haircuts, baht each</td><td>100</td><td>50,000</td><td>120</td><td>52,000</td></tr></tbody></table></div>
-<div class="formula">Nominal: 7,000,000 → 8,660,000 (+23.7%)<br>Real at Year 1 prices: 7,000,000 → 7,400,000 (+5.7%)<br>Deflator: 100 → 117.0<br>Real per person (population 1,000 → 1,050): 7,000 → 7,047.6 (+0.7%)</div>
-<p>For small rates, real growth ≈ nominal growth − inflation, and growth per person ≈ real growth − population growth. The shortcut drifts when rates are large, as here.</p>
+<div class="formula">Nominal: 7,000,000 → 8,660,000 (+23.7%)<br>Real at Year 1 prices: 7,000,000 → 7,400,000 (+5.7%)<br>Deflator: 100 → 117.0<br>Real per person, population 1,000 → 1,050: 7,000 → 7,047.6 (+0.7%)</div>
+<p>Quick rule for small rates: real growth ≈ nominal growth − inflation, and growth per person ≈ real growth − population growth. With rates this large the shortcut drifts.</p>
 </details>
 
-<h2 id="living">3. Is GDP per person a good measure of living standards?</h2>
-<p class="sub">MRU's answer: imperfect, but probably the best single measure, because it moves with many things money cannot buy directly.</p>
-<div class="pair"><div><b>What it tracks</b><p>Countries with higher real GDP per capita tend to have longer life expectancy, happier people on average, higher scores on the UN Human Development Index, and, over time, rising incomes for the poorest 20%.</p></div><div><b>What it misses</b><p>Distribution. Nigeria, Pakistan and Honduras have similar real GDP per capita, yet about 80%, 60% and 33% of their people live on under $2 a day. Nigeria's income is far more unequal.</p></div></div>
-<p>It also leaves out leisure, unpaid household work and pollution. Because rich countries tend to be healthier, people sometimes read the link as cause and effect. It is a correlation: good institutions could raise both income and health.</p>
-
-<h2 id="split">4. Two ways to split GDP</h2>
-<p class="sub">The same total can be split by who buys the output, or by who receives the income from making it.</p>
-<div class="formula">National spending approach: Y = C + I + G + NX, where NX = exports − imports<br>Factor income approach: GDI = employee compensation + rent + interest + profit</div>
-<div class="tbl"><table><thead><tr><th>Part</th><th>Definition</th><th>MRU example</th><th>Do not confuse with</th></tr></thead><tbody>
-<tr><td><b>C</b> Consumption</td><td>Household spending on final goods and services; about 63% of US GDP.</td><td>Cakes and massages.</td><td>Spending on used goods.</td></tr>
-<tr><td><b>I</b> Investment</td><td>New capital goods, usually bought by businesses.</td><td>Computers and tractors.</td><td>Buying shares or bonds.</td></tr>
-<tr><td><b>G</b> Government purchases</td><td>Goods and services bought directly by government, both everyday items and capital.</td><td>Paper and pens; tanks and computers.</td><td>Transfer payments<span class="zh">移轉支付</span> such as a social security check, which buy nothing.</td></tr>
-<tr><td><b>NX</b> Net exports</td><td>Exports minus imports; small for the United States.</td><td>Foreigners buy our goods; we subtract what C, I and G bought from abroad.</td><td>A judgment that imports are bad.</td></tr>
+<h2 id="living">3. What GDP per person misses</h2>
+<p class="sub">It is not a measure of happiness, yet it is still the best single summary we have.</p>
+<div class="pair"><div><b>Why it still works</b><p>The good things in life tend to come together. Countries with higher real GDP per person usually have longer lives, happier people on average, better education, and, over time, higher incomes for the poorest fifth.</p></div><div><b>What it leaves out</b><p>Who gets the income, how much leisure people have, unpaid work at home, and damage to the environment. A rise in GDP can even come with more pollution.</p></div></div>
+<div class="tbl"><table class="oil" aria-label="Similar GDP per person, different poverty"><thead><tr><th>Country</th><th>Real GDP per person</th><th>Living on under $2 a day</th></tr></thead><tbody>
+<tr><td>Nigeria</td><td>Similar</td><td class="hi">≈ 80%</td></tr>
+<tr><td>Pakistan</td><td>Similar</td><td>≈ 60%</td></tr>
+<tr><td>Honduras</td><td>Similar</td><td>≈ 33%</td></tr>
 </tbody></table></div>
-<p>Why exclude the pension check? When the retiree spends it, that spending is already counted as consumption, so counting the check too would double count. Why split GDP at all? Consumption, investment and government purchases respond to different forces, and a recession calls for different tools depending on which one fell.</p>
-<p>The income side works because every baht spent on final output ends up with workers, landlords, lenders or entrepreneurs. In theory GDP equals gross domestic income (GDI). They are measured in different ways, so the two numbers differ slightly, and economists watch both in a recession because one may give an earlier signal.</p>
+<p>The same average hides very different lives. Nigeria has many very poor people and some very rich ones, so the rich pull the average up while most people stay poor. GDP per person tells you how much there is, not who gets it.</p>
+<p>Be careful with cause and effect. Richer countries are healthier, but health also raises productivity, and good institutions can lift both at once.</p>
 
-<h2 id="ppp">5. Comparing countries: the haircut test</h2>
-<p class="sub">To compare GDP across countries, we must account for the fact that the same dollar buys more in a poor country.</p>
-<div class="tbl"><table><thead><tr><th>In India</th><th>Price</th><th>Why</th></tr></thead><tbody>
-<tr><td><b>iPhone 7 Plus</b></td><td>About 70,000 rupees, roughly $1,000: at least the US price.</td><td><b>Tradable</b><span class="zh">可貿易</span>: if it were much cheaper in India, people would buy there and resell in the US. Arbitrage pulls prices together.</td></tr>
-<tr><td><b>Haircut and head massage</b></td><td>50 rupees, under $1.</td><td><b>Service</b>: hard to trade. The barber, Raju, is as good as any in the US but earns $10 a day or less, versus maybe $10 an hour in the US. Laws stop him moving, so labor is immobile.</td></tr>
-</tbody></table></div>
-<p>Services that cannot move, such as haircuts, housecleaning, taxis and massage, are much cheaper in poorer countries. This is the <b>Balassa-Samuelson effect</b>. Because services are cheap, the overall price level is lower and each dollar goes further. Converting a poor country's GDP at market exchange rates therefore understates its living standard. <b>Purchasing power parity</b><span class="zh">購買力平價</span> (PPP) values output at a common set of prices, which MRU calls the most accurate way we know to compare countries.</p>
-<div class="flow"><span>High productivity in factories and offices</span><i>→</i><span>High wages across the economy</span><i>→</i><span>A barber's outside option rises</span><i>→</i><span>Haircut supply shifts left</span><i>→</i><span>Higher service prices</span></div>
+<h2 id="ppp">4. Comparing countries fairly</h2>
+<p class="sub">In India an iPhone costs about as much as in the United States, roughly $1,000. A haircut with a head massage costs 50 rupees, under a dollar.</p>
+<div class="pair"><div><b>Tradable goods</b><p>If phones were much cheaper in India, people would buy them there and resell them in the US. That arbitrage pulls prices together everywhere.</p></div><div><b>Services that cannot move</b><p>You cannot ship a haircut, and the barber cannot easily move to the US, where he might earn $10 an hour instead of $10 a day. Haircuts, cleaning, taxis and massage stay cheap in poor countries.</p></div></div>
+<p>This is the <b>Balassa-Samuelson effect</b>: where factories and offices pay high wages, every job has to pay well to keep its workers, including the barber's. Cheap services make the whole price level lower in poor countries, so a dollar goes further there. Comparing incomes at market exchange rates therefore makes poor countries look poorer than they are. <b>Purchasing power parity</b><span class="zh">購買力平價</span> (PPP) fixes this by valuing every country's output at the same prices.</p>
+<p>The 2026 world economy shows how much this matters. At market exchange rates the world produces about $128 trillion; at PPP the same output is worth about $219 trillion, because so much of it happens in countries where prices are low.</p>
+<div data-widget="pppflip"></div>
+<p class="note-small">IMF estimates for 2026, compiled by Visual Capitalist, as shown in class.</p>
+<p>Why do poorer countries gain the most from the adjustment? The haircut shows the mechanism.</p>
 <div data-widget="haircut" data-readout="optional"></div>
-<p class="note-small">The supply and demand numbers are a teaching model. MRU's video explains the price gap through low wages and immobile labor; the productivity link is the standard Balassa-Samuelson reasoning.</p>
 <details class="graph-guide"><summary>How to build this graph</summary>
-<ol class="steps"><li><span>Put haircuts per day on the horizontal axis and baht per haircut on the vertical axis. Draw D sloping down and S1 sloping up; mark E1, P1 and Q1.</span></li><li><span>Ask what changed. A higher wage elsewhere raises the cost of each haircut, so the supply curve shifts left (up) to S2.</span></li><li><span>Mark E2 where D meets S2. Read P2 above P1 and Q2 below Q1. If local incomes also rise, shift D right too, and P rises further.</span></li></ol></details>
+<ol class="steps"><li><span>Haircuts per day on the horizontal axis, baht per haircut on the vertical axis. Draw D sloping down and S1 sloping up; mark E1, P1, Q1.</span></li><li><span>A better-paid job elsewhere raises the cost of each haircut, so supply shifts left (up) to S2.</span></li><li><span>Mark E2: P2 is above P1, Q2 below Q1. If local incomes rise too, shift D right and P climbs further.</span></li></ol></details>
 <p class="hint"><b>中文邏輯</b><span>理髮便宜不是因為理髮師比較差，而是整個國家的工資低。可貿易品被套利拉平，服務拉不平，所以要用 PPP 才公平。</span></p>
 
-<h2 id="gaps">6. How big are the gaps?</h2>
-<p class="sub">Measured in PPP dollars, the differences between countries are not small. They are often 10, 20, 50, sometimes 100 times.</p>
-<div data-widget="baskets"></div>
-<p class="note-small">IMF data as used by MRU. *MRU states the United States is 90 times the CAR but does not read out the basket count; 90 × 6 baskets gives about 540, roughly $54,000.</p>
-<p>The Central African Republic is small, landlocked and has suffered civil war; MRU calls it probably the poorest country in the world. Mexico is about 29 times richer than the CAR, and the United States about 3 times richer than Mexico. Countries we lump together as "poor" are not in the same league: Mexico is much closer to the United States than to the truly destitute.</p>
-<p>For most of history, average income barely grew. Sustained growth began with the Industrial Revolution and then bent sharply upward, the "hockey stick" of human prosperity. Today's gaps are therefore recent: they reflect when countries started growing and how steadily they kept going.</p>
+<h2 id="gaps">5. How big the gaps are</h2>
+<p class="sub">Measured at common prices, the gaps between countries are not 20% or 50%. They are 10, 20, sometimes nearly 100 times.</p>
+<div data-widget="guess"></div>
+<p class="note-small">IMF data, PPP-adjusted: CAR about $600 a year, Mexico $17,800. The US is given as 90 times the CAR, which works out to roughly 540 baskets.</p>
+<p>Two lessons. First, "poor countries" are not one group: Mexico is far closer to the United States than to the Central African Republic, a small landlocked country torn by civil war. Second, these gaps are recent. For most of history average income barely moved; sustained growth began with the Industrial Revolution and then shot up like the blade of a hockey stick.</p>
 
-<h2 id="growth">7. Growth rates are crucial</h2>
-<p class="sub">The main reason the United States is rich is simply that it grew steadily for a long time.</p>
-<div class="tbl"><table><thead><tr><th>Tool</th><th>Definition</th><th>Example</th></tr></thead><tbody>
-<tr><td><b>Compound growth</b><span class="zh">複利</span></td><td>Each year's growth builds on last year's higher level.</td><td>At 3% a year, income is about 2.8 times higher after 35 years, not 2.05 times.</td></tr>
-<tr><td><b>Rule of 70</b><span class="zh">70 法則</span></td><td>Years to double ≈ 70 ÷ growth rate in percent; it also works backward.</td><td>US income went from about $2,000 in 1845 to $4,000 in 1880: 35 years, so about 2% a year.</td></tr>
-<tr><td><b>Ratio scale</b></td><td>Each tick is a doubling, so a straight line means constant growth.</td><td>On an ordinary scale, steady growth looks like it is speeding up.</td></tr>
+<h2 id="growth">6. Why growth rates matter so much</h2>
+<p class="sub">The United States is rich mainly because it kept growing about 2% a year for two centuries.</p>
+<div class="tbl"><table><thead><tr><th>Idea</th><th>Definition</th><th>Example</th></tr></thead><tbody>
+<tr><td><b>Compound growth</b><span class="zh">複利</span></td><td>Each year's growth builds on last year's higher level.</td><td>3% a year for 35 years gives 2.8 times, not 2.05.</td></tr>
+<tr><td><b>Rule of 70</b><span class="zh">70 法則</span></td><td>Years to double ≈ 70 ÷ growth rate in percent.</td><td>US income went from about $2,000 in 1845 to $4,000 in 1880: doubled in 35 years, so about 2% a year.</td></tr>
+<tr><td><b>Ratio scale</b></td><td>Each step on the axis is a doubling, so steady growth is a straight line.</td><td>On an ordinary scale, steady growth looks like it is speeding up.</td></tr>
 </tbody></table></div>
-<p>MRU's counterfactuals: had the US grown at 1% a year since 1800, it would be about as rich today as in 1940, when few people had cars and the average income would now count as poverty. At 3% it would have reached today's living standard in 1917, and real GDP per capita today would be about $893,000. At current rates, the US will not reach that level until 2159.</p>
+<p>Run the numbers on the US and the stakes are clear. Had it grown only 1% a year since 1800, it would be about as rich today as it was in 1940. Had it grown 3%, it would have reached today's living standard back in 1917, and real GDP per person today would be about $893,000. At current growth rates, it will not get there until 2159.</p>
 <div data-widget="compound" data-readout="optional"></div>
-<p class="key">Comparing poor countries to past US years is imperfect. Every country today has higher life expectancy than the richest countries had in 1800, thanks to spillovers such as smallpox eradication, antibiotics and better sanitation.</p>
+<p>Another way to feel the gap is to place today's countries in American history:</p>
+<ol class="timeline">
+<li><b>1800</b><span>Bangladesh and Uganda today</span></li>
+<li><b>1880</b><span>India today</span></li>
+<li class="what-if"><b>1917</b><span>When the US would have reached today's living standard, had it grown 3% a year</span></li>
+<li><b>1920s</b><span>China today</span></li>
+<li class="what-if"><b>1940</b><span>Where the US would be today, had it grown only 1% a year: few cars, no TV, incomes below today's poverty line</span></li>
+<li><b>1980</b><span>Italy today</span></li>
+</ol>
+<p class="note-small">India and China grow fast, so their places keep moving. The comparison is also imperfect: every country today lives longer than the richest countries did in 1800, thanks to vaccines, antibiotics and sanitation spreading from rich countries.</p>
 <p class="hint"><b>中文邏輯</b><span>1% 的差距一年看不出來，一百多年後就是好幾倍。富國的秘密不是哪一年長很快，而是長很久都不停。</span></p>
 
-<h2 id="miracles">8. Growth miracles and growth disasters</h2>
-<p class="sub">Are poor countries catching up? Since the Industrial Revolution, regions have diverged: "Divergence, Big Time". Country by country, the story splits.</p>
+<h2 id="miracles">7. Miracles and disasters</h2>
+<p class="sub">Since the Industrial Revolution, rich and poor regions have mostly pulled apart. Country by country, though, some have raced ahead and others have stalled.</p>
 <div class="tbl"><table><thead><tr><th></th><th>Japan</th><th>Argentina</th></tr></thead><tbody>
-<tr><td>1950</td><td>Poor, similar to Mexico.</td><td>Similar to many Western European economies; about twice Japan's living standard.</td></tr>
-<tr><td>Growth</td><td>Doubled living standards about every 8 years; 70 ÷ 8.2 ≈ 8.5% a year.</td><td>Periods of negative growth; doubled only once in 65 years, about 1.1% a year.</td></tr>
-<tr><td>2015</td><td>Over 10 times its 1950 level; about twice as prosperous as Argentina.</td><td>Stagnated.</td></tr>
+<tr><td>1950</td><td>Poor, about the level of Mexico.</td><td>Rich, like much of Western Europe; about twice Japan's living standard.</td></tr>
+<tr><td>What happened</td><td>Doubled living standards about every 8 years; by the rule of 70, about 8.5% a year.</td><td>Some years of negative growth; doubled only once in 65 years, about 1.1% a year.</td></tr>
+<tr><td>2015</td><td>More than 10 times its 1950 level; about twice as rich as Argentina.</td><td>Stagnated.</td></tr>
 </tbody></table></div>
-<div class="pair"><div><b>Growth miracle</b><p>A long run of very fast per capita growth: Japan, South Korea, China, and perhaps India now. What took the US 200 years of steady growth can happen in about 40.</p></div><div><b>Growth disaster</b><p>Long stagnation or decline: Argentina stalled, while Niger and Chad never had significant growth. That means shorter, less happy lives, not just smaller numbers.</p></div></div>
-<p>Catch-up<span class="zh">收斂</span> is possible but not automatic. A poor country can grow fast by adopting technology that already exists and adding capital where it is scarce. A country at the frontier must invent new ideas, which is slower. MRU's condition is "the right factors in place", the subject of the next section.</p>
+<p>The reversal is just the rule of 70 at work. Several Japanese doublings against one Argentine doubling more than wiped out a two-to-one head start.</p>
+<div class="pair"><div><b>Growth miracle</b><p>Decades of very fast growth per person: Japan, South Korea, China, and perhaps India now. What took the US 200 years of steady growth can happen in about 40.</p></div><div><b>Growth disaster</b><p>Long stagnation or decline. Argentina grew for a while, then stalled. Niger and Chad never took off at all. Behind the numbers are shorter, harder lives.</p></div></div>
+<p>Why can poor countries grow faster than rich ones? They can copy technology that already exists and add machines where machines are scarce, so each investment pays off a lot. A country already at the frontier has to invent new ideas, which is slower. That is <b>catch-up growth</b><span class="zh">追趕型成長</span>, and it is possible, not automatic. It needs the right conditions, which is where the next section begins.</p>
 
-<h2 id="puzzle">9. The puzzle of growth</h2>
-<p class="sub">MRU follows one farmer and digs from the immediate cause down to the deepest one.</p>
-<div class="tbl"><table><thead><tr><th>Layer</th><th>What it says</th><th>Example</th><th>Next question</th></tr></thead><tbody>
-<tr><td><b>1. Factors of production</b></td><td>Workers are productive when they have physical capital (tools, roads, buildings), human capital (tools in the mind), technological knowledge, and entrepreneurs who organize them.</td><td>Soil science and genetics inform the books the farmer reads.</td><td>"A bit too easy": why do rich countries have more factors?</td></tr>
-<tr><td><b>2. Incentives</b><span class="zh">誘因</span></td><td>People work and invest when they keep the rewards.</td><td>In China's Great Leap Forward, an extra bag of potatoes earned a collective farmer 1/100 of a bag. With other errors, some 20 to 40 million starved. China took off once farmers could keep what they grew.</td><td>Why do some countries have good incentives?</td></tr>
-<tr><td><b>3. Institutions</b><span class="zh">制度</span></td><td>The rules that create incentives (five key ones below).</td><td>A deed that stands up in court protects the farm.</td><td>Why do some countries have good institutions?</td></tr>
-<tr><td><b>4. Deeper roots</b></td><td>History, ideas, culture, geography and luck; the most debated question in development.</td><td>The US Constitution was written when Locke's and Smith's ideas were popular, and Washington stopped at two terms.</td><td></td></tr>
-</tbody></table></div>
-<div class="tbl"><table><thead><tr><th>MRU's five key institutions</th><th>What it protects</th><th>Without it</th></tr></thead><tbody>
+<h2 id="puzzle">8. Why some countries grow: keep asking why</h2>
+<p class="sub">"Rich countries have more capital" is true but too easy. The useful answer comes from asking why, again and again.</p>
+<p>The answer comes in layers. The most immediate one is that workers in rich countries have more physical capital, more human capital and better technology, organized by entrepreneurs. But that only moves the question back: why did those countries build so much capital? Because people had incentives to work, save and invest. And why the incentives? Because institutions protected the rewards. Why the institutions? That is the least settled part, a mix of history, ideas, culture, geography and luck.</p>
+<div data-widget="ladder"></div>
+<div class="tbl"><table><thead><tr><th>Five key institutions</th><th>What it protects</th><th>Without it</th></tr></thead><tbody>
 <tr><td><b>Property rights</b><span class="zh">財產權</span></td><td>Your investment.</td><td>Someone could build on your farm.</td></tr>
 <tr><td><b>Honest government</b></td><td>Permits without bribes; no seizure.</td><td>Bribes become a cost of doing business.</td></tr>
 <tr><td><b>Political stability</b></td><td>Long-term plans.</td><td>Civil war can wash plans away.</td></tr>
-<tr><td><b>Dependable legal system</b></td><td>Contracts, debts, borrowing and lending.</td><td>Hard to collect a debt or prove ownership.</td></tr>
-<tr><td><b>Competitive and open markets</b></td><td>Market signals and innovation.</td><td>Needless regulations create monopolies.</td></tr>
+<tr><td><b>Dependable legal system</b></td><td>Contracts, debts, borrowing and lending.</td><td>Hard to collect a debt or prove who owns what.</td></tr>
+<tr><td><b>Competitive, open markets</b></td><td>Price signals and room to innovate.</td><td>Needless regulations protect monopolies.</td></tr>
 </tbody></table></div>
-<p class="hint"><b>中文邏輯</b><span>資本、人力、技術是「直接原因」；但為什麼累積得到？要往下挖到誘因，再到制度，最後是地理、歷史和運氣。</span></p>
+<p class="hint"><b>中文邏輯</b><span>資本、人力、技術是直接原因；要追問為什麼能累積，答案是誘因，誘因來自制度，制度又來自歷史、文化、地理和運氣。</span></p>
 
-<h2 id="institutions">10. Institutions: one peninsula, two outcomes</h2>
-<p class="sub">Tyler Cowen calls the division of Korea an almost perfect natural experiment.</p>
-<p>Institutions are laws and regulations, including property rights, reliable courts and political stability, plus cultural norms of honesty, trust and cooperation. Before division, the two Koreas had the same people, culture, language and history and similar economies; if anything, the north was wealthier. After the Second World War, communism was imposed on the North and the South ended up with a relatively free market. Different institutions created different incentives.</p>
+<h2 id="institutions">9. Institutions in action</h2>
+<p class="sub">Two cases at very different scales: a divided country and a single coffee shop.</p>
+<h3 id="korea">One peninsula, two outcomes</h3>
+<p>Before 1945 the two Koreas had the same people, language, culture and history, and similar economies; the north was, if anything, richer. Then the North got central planning and the South got a market economy. Tyler Cowen calls it an almost perfect natural experiment.</p>
 <div class="tbl"><table><thead><tr><th></th><th>South Korea</th><th>North Korea</th></tr></thead><tbody>
-<tr><td>Rules</td><td>Entrepreneurs keep profits from serving consumers; failing firms go bankrupt, so capital moves to better uses.</td><td>Central planning, price controls, no right to start businesses or keep profits.</td></tr>
-<tr><td>Where effort goes</td><td>Commercial cooperation built on trust.</td><td>Influencing politics, since the party allocates capital.</td></tr>
-<tr><td>Result</td><td>Developed-country living standards; Hyundai cars, K-pop, films and cosmetics sold abroad.</td><td>Periodic starvation, because prices and property rights did not reward farmers for growing enough food.</td></tr>
-<tr><td>From space at night</td><td>Bright.</td><td>Dark, except Pyongyang.</td></tr>
+<tr><td>Incentive</td><td>Serve customers and keep the profit; failing firms close, so capital moves to better uses.</td><td>No right to start a business or keep profits; prices controlled; capital handed out by the party.</td></tr>
+<tr><td>Where effort goes</td><td>Making things people want.</td><td>Winning favor with officials.</td></tr>
+<tr><td>Result</td><td>Rich-country living standards; Hyundai cars, K-pop, films and cosmetics sold across Asia and beyond.</td><td>Repeated famines, because farmers had no reason to grow enough food.</td></tr>
+<tr><td>Seen from space at night</td><td>Bright</td><td>Dark, apart from Pyongyang</td></tr>
 </tbody></table></div>
-<p class="note-small">"Almost perfect" is fair, not exact: the two halves also differed in allies, aid and war damage.</p>
-<h3 id="mumbai">Institutions at street level: a café in Mumbai</h3>
-<p>The World Bank's Doing Business index once ranked India 130th of 190 and estimated 14 procedures and 26 days for a simple Mumbai business license. Shannon D'Souza of Koinonia Coffee Roasters said 26 days "would be a dream".</p>
-<div class="tbl"><table><thead><tr><th>Hurdle</th><th>What happened</th></tr></thead><tbody>
-<tr><td>Location first</td><td>He had to lease commercial space before the company existed, just to register it: a 60-square-foot space with the company board.</td></tr>
-<tr><td>Licenses</td><td>Three consultants and a list of 10 to 12 licenses, some of which disappeared or changed along the way.</td></tr>
-<tr><td>Pollution permit</td><td>Needed for a roaster that runs on LPG "like a kitchen stove": maps, emissions details, 8 to 12 visits to an office an hour away, then weeks in a pile.</td></tr>
-<tr><td>Bribes</td><td>None paid, "not even a hundred rupees". One licensing firm with a "100% record" declined to help without "considerations".</td></tr>
-<tr><td>Cost of honesty</td><td>A three-month shutdown with staff and rent to pay, and a tiny hidden location to survive.</td></tr>
+<p class="note-small">Not a perfect experiment: the two halves also had different allies, aid and war damage.</p>
+<h3 id="mumbai">The road to opening a café in Mumbai</h3>
+<div class="pair"><div><b>On paper</b><p>The World Bank once ranked India 130th of 190 for ease of doing business and estimated 14 procedures and 26 days for a simple Mumbai license.</p></div><div><b>In practice</b><p>The owner of Koinonia Coffee Roasters said 26 days "would be a dream".</p></div></div>
+<ol class="steps">
+<li><span>Lease a commercial space before the company even exists, just to have an address to register.</span></li>
+<li><span>Write down in advance everything the business might ever do; adding anything later means amending the papers.</span></li>
+<li><span>Work through 10 to 12 licenses with three consultants, some of which changed along the way.</span></li>
+<li><span>Get a pollution permit for a gas-powered roaster: maps, emissions details and 8 to 12 trips to an office an hour away.</span></li>
+<li><span>Refuse to pay bribes, and lose a licensing firm that would not work without them.</span></li>
+<li><span>Sit closed for three months, paying staff and rent, ready to open but waiting for paper.</span></li>
+</ol>
+<div class="flow"><span>More licenses and delays</span><i>→</i><span>Costlier, slower entry</span><i>→</i><span>Fewer cafés open</span><i>→</i><span>Supply shifts left</span><i>→</i><span>Higher prices, less output, idle capital</span></div>
+<p class="note-small">One honest firm shows bribe-free business is possible, not that it is easy or typical. The World Bank has since stopped publishing Doing Business.</p>
+
+<h2 id="geography">10. Geography: the natural tariff</h2>
+<p class="sub">Think of the most prosperous cities you know. Most sit on a coast or a major river.</p>
+<div class="flow"><span>Cheap shipping by water</span><i>→</i><span>Lower trade costs</span><i>→</i><span>Bigger markets</span><i>→</i><span>More specialization and new ideas</span><i>→</i><span>Growth</span></div>
+<p>That chain goes back to Adam Smith, and a map of output per square kilometer bears it out: GDP piles up along the US coasts and the Great Lakes, in Western Europe, Japan, coastal China and coastal Australia. Landlocked countries are, on average, poorer. Africa is huge, big enough to hold most of the US, China, India and much of Europe, yet Europe has two to three times more coastline. Africa is the most landlocked continent and has the most poor countries.</p>
+<div data-widget="tariff" data-readout="optional"></div>
+<div class="pair"><div><b>The lesson</b><p>Being landlocked works like a <b>natural tariff</b><span class="zh">天然關稅</span>, a tax on every import and export. If a natural tariff slows growth, a tariff chosen by government is unlikely to help it.</p></div><div><b>The limit</b><p>Geography is not destiny. Landlocked Switzerland is rich, and railways and roads can cut the natural tariff. Growth depends on natural advantages and on policy.</p></div></div>
+
+<h2 id="data">11. When the numbers themselves are weak</h2>
+<p class="sub">Every comparison above assumes we can count output and people. In the poorest countries, often we cannot.</p>
+<p>The Central African Republic has no reliable birth and death records and no recent census. In 2022 researchers went house to house by car, boat, motorbike and on foot and found that nearly 6% of the population had died that year, mostly from malaria, diarrhea and violence. The UN's figure was about four times lower, because it projected older data forward as if conditions were stable.</p>
+<div class="tbl"><table class="oil" aria-label="Two mortality estimates for the CAR, 2022"><thead><tr><th>Estimate</th><th>Deaths per 10,000 people a day</th><th>Above the emergency line of 1?</th></tr></thead><tbody>
+<tr><td>Household survey</td><td>≈ 1.6</td><td class="hi">Yes</td></tr>
+<tr><td>UN estimate</td><td>≈ 0.4</td><td>No</td></tr>
 </tbody></table></div>
-<div class="flow"><span>More licenses and delays</span><i>→</i><span>Higher cost and time to enter</span><i>→</i><span>Fewer cafés open</span><i>→</i><span>Market supply shifts left</span><i>→</i><span>P up, Q down, idle capital</span></div>
-<p class="note-small">One honest firm shows bribe-free business is possible, not that it is easy or typical. The rank is the figure quoted in the video; the World Bank has since discontinued Doing Business.</p>
+<p>The difference is not academic. Aid agencies treat one death per 10,000 people a day as the threshold for an emergency, so which estimate you believe decides whether the CAR counts as a crisis at all.</p>
+<p class="note-small">Survey rate converted from nearly 6% of the population a year. The CAR government and the UN's chief demographer disputed the survey, so treat it as evidence of large uncertainty rather than a settled figure.</p>
+<p>The lesson for GDP: the countries at the bottom of every ranking are exactly where both the output figures and the population counts are weakest. "About 90 times richer" is an order of magnitude, not a precise fact.</p>
 
-<h2 id="geography">11. Geography and the natural tariff</h2>
-<p class="sub">The most prosperous cities usually sit on a major coast or river. Water makes trade cheap.</p>
-<div class="flow"><span>Cheap water transport</span><i>→</i><span>Lower trade costs</span><i>→</i><span>Larger markets</span><i>→</i><span>More specialization and innovation</span><i>→</i><span>Growth</span></div>
-<p>This is Adam Smith's argument. MRU's map of GDP per square kilometer shows output piled on US coasts and the Great Lakes rivers, Western Europe, Japan, China's coast and Australia's coast. Even today, landlocked countries are on average poorer. Africa is enormous, big enough to hold most of the US, China, India and much of Europe, yet Europe has two to three times Africa's coastline. Africa is the most landlocked continent and has the most poor countries.</p>
-<div class="tbl"><table><thead><tr><th>MRU's conclusion</th><th>Limit</th></tr></thead><tbody>
-<tr><td>Being landlocked is a <b>natural tariff</b><span class="zh">天然關稅</span>, a tax on trade. If natural tariffs hurt growth, tariffs set by governments probably do not help either.</td><td>Fits the standard trade model, where a tariff raises prices and creates deadweight loss. Exceptions argued for specific cases need evidence.</td></tr>
-<tr><td>Growth is not only about policy; some places have natural blessings.</td><td>Geography is not destiny: landlocked Switzerland is rich, and rail links can cut transport costs.</td></tr>
-</tbody></table></div>
-<p class="note-small">Event chain: landlocked → higher transport cost per shipment → supply of imports shifts left, so import prices rise and quantities fall; exporters receive less → less trade and specialization.</p>
-
-<h2 id="data">12. When the numbers themselves are weak</h2>
-<p class="sub">GDP per capita needs good counts of output and people. The poorest countries often have neither.</p>
-<p>The Central African Republic, the poorest country in MRU's comparison, has no reliable birth and death records or recent census. Researchers led by Les Roberts surveyed households by car, boat, motorcycle and on foot and estimated that nearly 6% of the population died in 2022, mostly from malaria, diarrhea and violence. The UN's estimate was about four times lower, because it projected older survey data forward with models that assume stable conditions. Only the survey rate crossed the emergency threshold of one death per 10,000 people a day, which matters for aid. The CAR government and the UN's chief demographer disputed the study.</p>
-<div class="pair"><div><b>The article's claim</b><p>Official figures in fragile states can badly undercount suffering, and weak data plus low attention keep crises unseen.</p></div><div><b>Careful reading</b><p>One disputed survey is evidence of large uncertainty, not a settled number. The economics lesson: model-based estimates fail where conditions change fastest, so GDP comparisons at the bottom are rough.</p></div></div>
-
-<h2 id="traps">13. Do not mix these up</h2>
+<h2 id="traps">12. Do not mix these up</h2>
 <div class="traps">
-<div><s>Anything used to make other goods is intermediate.</s><p>Capital goods such as a tractor are finished goods and count.</p></div>
+<div><s>Anything used to make other goods is intermediate.</s><p>Capital goods such as a tractor are final goods and count.</p></div>
 <div><s>GDP counts what citizens produce anywhere.</s><p>That is GNI. GDP counts production inside the borders.</p></div>
-<div><s>Investment means buying stocks.</s><p>In GDP, investment is new capital goods.</p></div>
-<div><s>All government spending is G.</s><p>Transfers such as pensions buy nothing and are excluded.</p></div>
-<div><s>The US economy grew 55 times since 1950.</s><p>That is nominal. Real is about 8 times; per person about 3.6 times.</p></div>
-<div><s>Same GDP per capita means same poverty.</s><p>Distribution differs: Nigeria versus Honduras.</p></div>
-<div><s>Haircuts are cheap in India because barbers are worse.</s><p>Wages are low economy-wide and labor cannot move.</p></div>
-<div><s>Compare countries at market exchange rates.</s><p>Use PPP, or poor countries look poorer than they are.</p></div>
-<div><s>A one-point growth gap is small.</s><p>Over 140 years, 3% versus 2% is about 3.9 times.</p></div>
+<div><s>Investment means buying shares.</s><p>In GDP, investment means new capital goods.</p></div>
+<div><s>All government spending is G.</s><p>Transfers such as pensions buy nothing and are left out.</p></div>
+<div><s>The US economy grew 55 times since 1950.</s><p>That is nominal. Real is about 8 times; per person about 3.6.</p></div>
+<div><s>Indonesia has the biggest economy in ASEAN, so Indonesians are the richest.</s><p>Total GDP measures size. Divide by population to compare living standards.</p></div>
+<div><s>Same GDP per person means the same poverty.</s><p>Distribution differs, as Nigeria and Honduras show.</p></div>
+<div><s>Haircuts are cheap in India because barbers are worse.</s><p>Wages are low across the economy and workers cannot move.</p></div>
+<div><s>Compare incomes at market exchange rates.</s><p>Use PPP, or poor countries look poorer than they are.</p></div>
+<div><s>A one-point growth gap is small.</s><p>Over 140 years, 3% against 2% is about 3.9 times.</p></div>
 <div><s>Poor countries automatically catch up.</s><p>Argentina, Niger and Chad did not.</p></div>
-<div><s>Rich countries have more capital, so capital explains growth.</s><p>That is the immediate cause; ask why capital accumulated.</p></div>
-<div><s>Geography is destiny.</s><p>Natural tariffs matter, but institutions and infrastructure can offset them.</p></div>
+<div><s>More capital explains why rich countries are rich.</s><p>That is the immediate cause. Ask why the capital was built.</p></div>
+<div><s>Geography is destiny.</s><p>It matters, but institutions and infrastructure can offset it.</p></div>
 </div>
 
-<h2 id="coldcall">14. Cold call practice</h2>
+<h2 id="coldcall">13. Cold call practice</h2>
 <div class="qa-tools"><button id="qaAll" type="button">Show all answers</button></div>
 <div class="qa">
 <details><summary>What is GDP?</summary><p>The market value of all final goods and services produced within a country in a year, for example cars built in Rayong and massages sold in Bangkok this year.</p></details>
-<details><summary>Why does a tractor count but a baker's eggs do not?</summary><p>The eggs are used up inside the cake, whose price already includes them. The tractor is a finished capital good that is not resold as part of another product.</p></details>
-<details><summary>Why are transfer payments not part of G?</summary><p>They buy no output. When recipients spend the money, it is counted as consumption, so counting the transfer too would double count.</p></details>
-<details><summary>What is the difference between nominal and real GDP?</summary><p>Nominal uses current prices, so it rises with inflation; real holds prices at a base year, so it rises only when output rises.</p></details>
-<details><summary>Is real GDP per capita a good measure of living standards?</summary><p>It is the best single measure because it correlates with life expectancy, happiness and the HDI, but it misses distribution, leisure and the environment.</p></details>
-<details><summary>What is purchasing power parity?</summary><p>Valuing output at a common set of prices so that cross-country comparisons reflect real buying power, since a dollar buys more in poor countries.</p></details>
-<details><summary>What is the Balassa-Samuelson effect?</summary><p>Services that cannot be traded are cheaper in poorer countries because wages there are low, so the price level is lower; a haircut in India costs under $1.</p></details>
-<details><summary>What is the rule of 70?</summary><p>Doubling time is about 70 divided by the growth rate in percent: 2% doubles in about 35 years, 7% in about 10.</p></details>
-<details><summary>What are MRU's five key institutions for growth?</summary><p>Property rights, honest government, political stability, a dependable legal system, and competitive and open markets.</p></details>
-<details><summary>Why is being landlocked called a natural tariff?</summary><p>High transport costs act like a tax on every import and export, shrinking markets and specialization.</p></details>
+<details><summary>Why does a tractor count but a bakery's flour does not?</summary><p>The flour is used up inside the bread, whose price already includes it. The tractor is a final capital good that is never resold as part of another product.</p></details>
+<details><summary>Why are pensions not part of G?</summary><p>They are transfers that buy no output. When retirees spend the money it shows up as consumption, so counting the check as well would double count.</p></details>
+<details><summary>What three adjustments make GDP comparable?</summary><p>Real GDP removes inflation, so we can compare over time; GDP per capita removes population size, so we can compare countries of different sizes; PPP removes differences in the cost of living.</p></details>
+<details><summary>What is the difference between nominal and real GDP?</summary><p>Nominal GDP uses current prices, so it rises with inflation. Real GDP holds prices fixed, so it rises only when output rises.</p></details>
+<details><summary>Is real GDP per capita a good measure of living standards?</summary><p>It is the best single measure because it moves with life expectancy, happiness and education, but it ignores how income is shared, leisure and the environment.</p></details>
+<details><summary>What is purchasing power parity?</summary><p>Valuing every country's output at the same prices, so comparisons reflect what incomes actually buy. Without it, poor countries with cheap services look poorer than they are.</p></details>
+<details><summary>What is the Balassa-Samuelson effect?</summary><p>Services that cannot be traded are cheaper in poor countries because wages there are low, which makes the overall price level lower. A haircut in India costs under a dollar.</p></details>
+<details><summary>What is the rule of 70?</summary><p>Doubling time is about 70 divided by the growth rate in percent: about 35 years at 2%, about 10 years at 7%.</p></details>
+<details><summary>What are the key institutions for growth?</summary><p>Property rights, honest government, political stability, a dependable legal system, and competitive, open markets.</p></details>
+<details><summary>Why is being landlocked called a natural tariff?</summary><p>High transport costs act like a tax on every import and export: prices inland rise, trade shrinks and specialization suffers.</p></details>
 </div>
 
-<h2 id="templates">15. Answer templates</h2>
-<div class="method"><b>Define GDP</b><p>“GDP is the market value of all final goods and services produced within a country in a year. Final means we skip intermediate inputs to avoid double counting, and produced means resales and transfers do not count.”</p></div>
-<div class="method"><b>Nominal, real, per capita</b><p>“Nominal GDP uses current prices, so it rises with inflation. Real GDP holds prices fixed, so it shows whether we produce more. Dividing by population gives real GDP per capita, a rough measure of average living standards.”</p></div>
-<div class="method"><b>Comparing countries</b><p>“Tradable goods cost about the same everywhere because of arbitrage, but services cannot be traded and workers cannot move freely. Poor countries have low wages, so services and the price level are lower. PPP adjusts for that.”</p></div>
-<div class="method"><b>Growth rates</b><p>“By the rule of 70, 2% growth doubles income every 35 years and 7% every 10. Small differences compound: Japan's fast doubling turned half of Argentina's income in 1950 into twice Argentina's by 2015.”</p></div>
-<div class="method"><b>Why some countries are rich</b><p>“The immediate reason is productive workers with more physical capital, human capital and technology, organized by entrepreneurs. The deeper reason is incentives created by institutions: property rights, honest government, stability, dependable courts and open markets. North and South Korea show how different institutions can produce a miracle and a disaster from the same start.”</p></div>
-<p class="note-small endnote">Sources: MRU Principles of Macroeconomics lessons on GDP, nominal and real GDP, real GDP per capita, splitting GDP, basic facts of wealth, growth rates, growth miracles, institutions, geography and the puzzle of growth; MRU Development Economics, <i>When in India, Get a Haircut</i> and <i>No Considerations: Doing Business in India Without Bribes</i>; Amy Maxmen, <a href="https://undark.org/2024/01/24/central-african-republic-mortality/">How the World's Deadliest Crises Go Unseen</a>, Undark (2024). Historical prices, rankings and US figures are as reported in those sources, not current data.</p>
+<h2 id="templates">14. Answer templates</h2>
+<div class="method"><b>Define GDP</b><p>“GDP is the market value of all final goods and services produced within a country in a year. Final means we skip intermediate inputs to avoid double counting; produced means resales and transfers do not count.”</p></div>
+<div class="method"><b>Nominal, real, per person</b><p>“Nominal GDP rises with prices. Real GDP holds prices fixed, so it shows whether we produce more. Dividing by population gives real GDP per capita, the closest single measure of how the average person is doing.”</p></div>
+<div class="method"><b>Comparing countries</b><p>“Tradable goods cost about the same everywhere because of arbitrage, but services cannot be traded and workers cannot move freely. Low wages make services and the whole price level cheaper in poor countries, so we compare incomes at PPP.”</p></div>
+<div class="method"><b>Growth rates</b><p>“By the rule of 70, 2% growth doubles income every 35 years and 7% every 10. Small gaps compound: Japan went from half of Argentina's living standard in 1950 to twice it by 2015.”</p></div>
+<div class="method"><b>Why some countries are rich</b><p>“The immediate reason is productive workers with more physical capital, human capital and technology, organized by entrepreneurs. The deeper reason is incentives created by institutions: property rights, honest government, stability, dependable courts and open markets. North and South Korea show how different institutions turn the same starting point into a miracle and a disaster.”</p></div>
+<p class="note-small endnote">Sources: Marginal Revolution University, Principles of Macroeconomics (GDP and economic growth) and Development Economics (<i>When in India, Get a Haircut</i>; <i>No Considerations: Doing Business in India Without Bribes</i>); Amy Maxmen, <a href="https://undark.org/2024/01/24/central-african-republic-mortality/">How the World's Deadliest Crises Go Unseen</a>, Undark (2024). Figures and rankings are as reported in those sources, not current data.</p>
 <p class="note-small">Continue from <a href="economics-s6.html">Session 6: asymmetric information</a>, or return to <a href="economics.html">Economics sessions</a>.</p>
 </article></main></div>
 
@@ -575,166 +612,239 @@ svg .tk{font-size:11.5px}svg .axl{font-size:12px}.g-plot svg{overflow:visible}
   const baht=n=>(n<0?'−฿':'฿')+Math.round(Math.abs(n)).toLocaleString('en-US');
   const pct=n=>Math.round(n*100)+'%';
   const signed=n=>(n<0?'−':'')+num(Math.abs(n));
-  const tr=en=>en;const L=en=>[en,''];
+  const tr=en=>en;const L=en=>[en,''];const zhOn=()=>false;
   
+  const T=p=>tr(p[0],p[1]);
   const pc1=n=>(Math.abs(n)<0.05?'0.0':(n<0?'−':'')+Math.abs(n).toFixed(1))+'%';
   const times=n=>n>=100?Math.round(n).toLocaleString('en-US')+'×':n>=10?n.toFixed(0)+'×':n.toFixed(1)+'×';
   function live(s,draw){draw();s.redrawOnResize(draw);}
   function niceStep(span,count){const raw=span/count,p=Math.pow(10,Math.floor(Math.log10(raw))),m=raw/p;return (m<=1?1:m<=2?2:m<=5?5:10)*p;}
+  function make(tag,cls,text,parent){const n=document.createElement(tag);if(cls)n.className=cls;if(text!=null)n.textContent=text;if(parent)parent.append(n);return n;}
 
-  /* GDP accounting: classify a transaction into C, I, G, exports, or not counted. */
-  W_.gdpsort=host=>{
-    host.classList.add('graph','wide');
+  /* 1. Ring up GDP: each transaction either lands in C, I, G, X or M, or stays off the register. */
+  W_.ringup=host=>{
+    const K={C:[L('Consumption'),'var(--ps)','a-ps'],I:[L('Investment'),'var(--rev)','a-rev'],G:[L('Government purchases'),'var(--cs)','a-cs'],X:[L('Exports'),'var(--time)','a-time'],M:[L('Imports, subtracted'),'var(--dwl)','a-loss']};
     const items=[
-      [L('A Bangkok family buys groceries for dinner.'),'c',L('Household spending on a final good is consumption.')],
-      [L('A Thai rice farm buys a new tractor made in Thailand.'),'i',L('A tractor is a finished capital good, so it counts as investment even though it helps produce rice later.')],
-      [L('A bakery buys eggs to bake cakes it will sell.'),'x',L('The eggs are an intermediate good. Their value is already inside the price of the cake.')],
-      [L('The government builds a new rail line.'),'g',L('The government is buying construction output, so this is a government purchase.')],
-      [L('The government sends pension checks to retirees.'),'x',L('A transfer buys no output. When retirees spend the money, that spending is counted as consumption, so counting the check too would double count.')],
-      [L('Foreign tourists pay for hotel rooms in Phuket.'),'e',L('Foreigners buying a service produced in Thailand is a Thai export.')],
-      [L('You buy a second-hand phone from another student.'),'x',L('The phone was counted when it was first produced. A resale adds nothing new.')],
-      [L('You buy shares on the stock exchange.'),'x',L('Buying shares changes who owns an asset. Nothing new is produced, so it is not investment in the GDP sense.')],
-      [L('A Thai airline buys a new plane built abroad.'),'i',L('It is investment, but it is also an import. Subtracting the import leaves Thai GDP about unchanged.')]
+      [L('Households buy food, phone plans and massages'),500,'C',L('Household spending on final goods and services.')],
+      [L('Firms buy new machines and build a warehouse'),150,'I',L('New capital goods: they count even though they will help make other things.')],
+      [L('Government builds a rail line and pays teachers'),180,'G',L('The government buys output: construction and teaching services.')],
+      [L('Foreign tourists pay hotels in Phuket'),120,'X',L('Thai output bought by foreigners.')],
+      [L('People and firms buy imported phones and fuel'),110,'M',L('This spending is already inside C and I, but it was produced abroad, so it comes off.')],
+      [L('Bakeries buy flour to bake bread'),30,'N',L('Intermediate good: its value is already inside the price of the bread.')],
+      [L('Government sends pension checks'),60,'N',L('Transfer: nothing is bought. When retirees spend it, that is consumption.')],
+      [L('People resell used cars'),40,'N',L('Resale: the cars were counted in the year they were built.')],
+      [L('Investors buy shares'),90,'N',L('Financial trade: ownership changes hands, nothing new is made.')]
     ];
-    const opts=[['c',L('Consumption')],['i',L('Investment')],['g',L('Government purchase')],['e',L('Export')],['x',L('Not counted')]];
-    const head=document.createElement('div');head.className='g-head';
-    const k=document.createElement('span');k.className='g-kicker';k.textContent=tr('Classification');
-    const h=document.createElement('h4');h.textContent=tr('Does it count in GDP, and in which part?');
-    const p=document.createElement('p');p.textContent=tr('Choose a bucket for each transaction, then read why. The answers follow the national spending approach, Y = C + I + G + NX.');
-    head.append(k,h,p);host.append(head);
-    const list=document.createElement('div');list.className='sort-list';host.append(list);
-    const rows=items.map(([q,ans,why],n)=>{
-      const ansName=opts.find(o=>o[0]===ans)[1];
-      const box=document.createElement('div');box.className='sort-item';
-      const qp=document.createElement('p');qp.className='sort-q';qp.textContent=tr((n+1)+'. '+q[0],(n+1)+'. '+q[1]);
-      const group=document.createElement('div');group.className='seg';group.setAttribute('role','group');group.setAttribute('aria-label',tr('Choose a GDP category'));
-      const fb=document.createElement('p');fb.className='sort-fb';fb.hidden=true;fb.setAttribute('aria-live','polite');
-      const reveal=pick=>{
-        [...group.children].forEach(b=>{b.setAttribute('aria-pressed',String(b.dataset.value===pick));b.classList.toggle('is-right',b.dataset.value===ans);});
-        const right=pick===ans;box.classList.toggle('is-ok',right);box.classList.toggle('is-no',!right&&pick!==null);
-        const lead=pick===null?L(`Answer: ${ansName[0]}. `):right?L('Correct. '):L('Not quite. ');
-        fb.textContent=tr(lead[0]+why[0],lead[1]+why[1]);fb.hidden=false;
-      };
-      opts.forEach(([v,t])=>{const b=document.createElement('button');b.type='button';b.textContent=tr(t[0],t[1]);b.dataset.value=v;b.setAttribute('aria-pressed','false');b.addEventListener('click',()=>reveal(v));group.append(b);});
-      box.append(qp,group,fb);list.append(box);
-      return {reset(){box.classList.remove('is-ok','is-no');fb.hidden=true;fb.textContent='';[...group.children].forEach(b=>{b.setAttribute('aria-pressed','false');b.classList.remove('is-right');});},show(){reveal(null);}};
+    const s=shell(host,tr('Ring up the economy'),tr('Tap a transaction to send it to the register. Before each tap, decide whether it counts and in which part.'),Object.values(K).map(([n,c])=>[T(n),c]));
+    const rung=new Set();let view='spend',last=null;
+    const grid=make('div','ring-grid');
+    const cards=items.map(([t,v,k,why],i)=>{
+      const b=make('button','ring-card',null,grid);b.type='button';b.setAttribute('aria-pressed','false');
+      make('span','rc-t',T(t),b);make('span','rc-amt','฿'+v+'m',b);const tag=make('span','rc-tag',null,b);
+      b.addEventListener('click',()=>{rung.add(i);last=i;sync();draw();});
+      return {b,tag,k,why};
     });
-    const tools=document.createElement('div');tools.className='g-ctrl sort-tools';
-    const all=document.createElement('button');all.type='button';all.className='g-btn';all.textContent=tr('Show all answers');all.addEventListener('click',()=>rows.forEach(r=>r.show()));
-    const reset=document.createElement('button');reset.type='button';reset.className='g-btn';reset.textContent=tr('Reset');reset.addEventListener('click',()=>rows.forEach(r=>r.reset()));
-    tools.append(all,reset);host.append(tools);
-  };
-
-  /* Nominal to real to per person: remove price growth, then population growth. */
-  W_.realgdp=host=>{
-    const s=shell(host,tr('Strip out prices, then people'),tr('Set nominal GDP growth, inflation and population growth. Predict real growth and growth per person before you read the bars.'),[[tr('Nominal growth'),'var(--rev)'],[tr('Real growth'),colors.ps],[tr('Real growth per person'),colors.cs]]);
-    let n=6,pi=4,pop=1;
+    host.append(grid);
+    const sum=k=>items.reduce((a,[,v,kk],i)=>a+(rung.has(i)&&kk===k?v:0),0);
+    const sync=()=>cards.forEach((c,i)=>{const on=rung.has(i);c.b.classList.toggle('done',on);c.b.classList.toggle('off-reg',on&&c.k==='N');c.b.setAttribute('aria-pressed',String(on));c.tag.textContent=on?(c.k==='N'?tr('Not counted'):T(K[c.k][0])):'';});
     const draw=()=>{
-      const real=((1+n/100)/(1+pi/100)-1)*100,pc=((1+real/100)/(1+pop/100)-1)*100,vals=[n,real,pc];
-      const hi=Math.max(10,Math.ceil(Math.max(...vals)/5)*5),lo=Math.min(0,Math.floor(Math.min(...vals)/5)*5);
-      const P=Plot(s.svgs[0],4,hi,lo);P.axes('',tr('Percent change'));
-      P.xticks([1,2,3],v=>[tr('Nominal'),tr('Real'),tr('Real per person')][v-1]);
-      const step=niceStep(hi-lo,4),ticks=[];for(let t=Math.ceil(lo/step)*step;t<=hi+1e-9;t+=step)ticks.push(Math.round(t*100)/100);P.yticks(ticks,v=>v+'%');
-      ['a-rev','a-ps','a-cs'].forEach((cls,i)=>{const v=vals[i];P.rect(i+.7,i+1.3,Math.min(0,v),Math.max(0,v),cls);P.tag(i+1,Math.max(0,v),pc1(v));});
-      if(lo<0)P.hline(0,'var(--muted)');
-      const rows=[[tr('Nominal GDP growth'),pc1(n)],[tr('Inflation (GDP deflator)'),pc1(pi)],[tr('Real GDP growth'),pc1(real),true],[tr('Population growth'),pc1(pop)],[tr('Real GDP growth per person'),pc1(pc),true],[tr('Quick rule: nominal − inflation − population'),pc1(n-pi-pop)]];
-      let note;
-      if(pc<-0.05)note=tr('Spending rose in money terms, yet each person\'s share of real output fell.');
-      else if(n>0&&pi>=n*0.6)note=tr('Most of the nominal growth is higher prices, the mirage MRU warns about. Only the real bar shows more goods and services.');
-      else note=tr('Real growth removes price changes. Dividing by a growing population then shrinks it again, so the last bar is the best guide to average living standards.');
+      const v={C:sum('C'),I:sum('I'),G:sum('G'),X:sum('X'),M:sum('M')},gross=v.C+v.I+v.G+v.X,gdp=gross-v.M;
+      const P=Plot(s.svgs[0],3,1000);P.axes('',tr('Million baht'));P.yticks([0,250,500,750,1000]);
+      P.xticks([1,2],q=>q===1?tr('Spending side'):tr('Income side'));
+      let y=0;['C','I','G','X'].forEach(k=>{if(v[k]){P.rect(.62,1.38,y,y+v[k],K[k][2]);if(v[k]>=60){if(k==='X'&&v.M)P.tag(.58,y+v[k]/2+4,'X','end');else P.tag(1,y+v[k]/2+4,k);}y+=v[k];}});
+      if(v.M){P.rect(.62,1.38,gdp,gross,'a-dwl');P.tag(1.42,gross-v.M/2+4,'−M','start');}
+      if(gdp>0){P.path([[.5,gdp],[2.5,gdp]],'var(--fg)',true);P.tag(2.5,gdp,'GDP '+num(gdp),'end');
+        const inc=[[L('Wages'),.56],[L('Rent'),.07],[L('Interest'),.06],[L('Profit'),.31]];let z=0;
+        inc.forEach(([n,sh],j)=>{const h=gdp*sh;P.rect(1.62,2.38,z,z+h,['a-ps2','a-ts','a-rev2','a-prof'][j]);if(h>=60)P.tag(2,z+h/2+4,T(n));z+=h;});}
+      const rows=[['C',num(v.C)],['I',num(v.I)],['G',num(v.G)],[tr('Exports'),num(v.X)],[tr('Imports'),v.M?'−'+num(v.M):'0'],['NX',(v.X-v.M<0?'−':'')+num(Math.abs(v.X-v.M))],['GDP = C + I + G + NX',num(gdp),true],[tr('Left off the register'),num(items.reduce((a,[,val,k],i)=>a+(rung.has(i)&&k==='N'?val:0),0))]];
+      const note=last===null?tr('Nothing rung up yet. Start with the household shopping, then try the trickier ones at the bottom.'):T(cards[last].why)+(rung.size===items.length?' '+tr('Same total from both sides: every baht spent ends up as someone\'s wages, rent, interest or profit.'):'');
       s.show(rows,note);
     };
-    const a=s.slider('n',tr('Nominal GDP growth'),0,30,.1,n,v=>v.toFixed(1)+'%',v=>{n=v;draw();});
-    const b=s.slider('pi',tr('Inflation (deflator growth)'),0,25,.1,pi,v=>v.toFixed(1)+'%',v=>{pi=v;draw();});
-    const c=s.slider('pop',tr('Population growth'),-1,6,.1,pop,v=>v.toFixed(1)+'%',v=>{pop=v;draw();});
-    s.button(tr('Load the rice-and-haircut example'),()=>{n=23.7;pi=17;pop=5;a.set(n);b.set(pi);c.set(pop);draw();});
-    s.button(tr('Reset'),()=>{n=6;pi=4;pop=1;a.set(n);b.set(pi);c.set(pop);draw();});
+    s.button(tr('Ring up everything'),()=>{items.forEach((_,i)=>rung.add(i));last=items.length-1;sync();draw();});
+    s.button(tr('Clear the register'),()=>{rung.clear();last=null;sync();draw();});
     live(s,draw);
   };
 
-  /* Balassa-Samuelson: a higher outside wage raises the cost, and price, of a haircut. */
+  /* 2. Nominal to real to per person, as a waterfall. */
+  W_.waterfall=host=>{
+    const s=shell(host,tr('From the headline number to living standards'),tr('Start with nominal GDP, take out price increases, then share what is left among more people.'),[[tr('Nominal'),'var(--rev)'],[tr('Lost to prices or people'),'var(--dwl)'],[tr('Real'),'var(--ps)'],[tr('Real per person'),'var(--cs)']]);
+    let mode='us',n=6,pi=4,pop=1;
+    const draw=()=>{
+      let a,b,c,unit,fmt;
+      if(mode==='us'){a=55;b=8;c=3.6;fmt=v=>num(v)+'×';}
+      else{a=n;b=((1+n/100)/(1+pi/100)-1)*100;c=((1+b/100)/(1+pop/100)-1)*100;fmt=pc1;}
+      const vals=[a,b,c],hi=mode==='us'?60:Math.max(10,Math.ceil(Math.max(...vals)/5)*5),lo=mode==='us'?0:Math.min(0,Math.floor(Math.min(...vals)/5)*5);
+      const P=Plot(s.svgs[0],5.6,hi,lo);P.axes('',mode==='us'?tr('US GDP in 2015 as a multiple of 1950'):tr('Percent change'));
+      P.xticks([1,2,3,4,5],q=>[tr('Nominal'),tr('Prices'),tr('Real'),tr('People'),tr('Per head')][q-1]);
+      const st=niceStep(hi-lo,5),tk=[];for(let t=Math.ceil(lo/st)*st;t<=hi+1e-9;t+=st)tk.push(Math.round(t*100)/100);P.yticks(tk,mode==='us'?v=>v+'×':v=>v+'%');
+      const bar=(x,y0,y1,cls,label)=>{P.rect(x-.34,x+.34,Math.min(y0,y1),Math.max(y0,y1),cls);if(label)P.tag(x,Math.max(y0,y1),label);};
+      const dl=(x,y)=>mode==='us'?'÷'+(x/y).toFixed(1):(x>=y?'−':'+')+Math.abs(x-y).toFixed(1);bar(1,0,a,'a-rev',fmt(a));bar(2,a,b,'a-loss',dl(a,b));bar(3,0,b,'a-ps',fmt(b));bar(4,b,c,'a-loss',dl(b,c));bar(5,0,c,'a-cs',fmt(c));
+      P.path([[1.34,a],[1.66,a]],'var(--muted)',true);P.path([[2.34,b],[2.66,b]],'var(--muted)',true);P.path([[3.34,b],[3.66,b]],'var(--muted)',true);P.path([[4.34,c],[4.66,c]],'var(--muted)',true);
+      if(lo<0)P.hline(0,'var(--muted)');
+      let rows,note;
+      if(mode==='us'){rows=[[tr('Nominal GDP, 1950 to 2015'),'$320 bn → $17 tn+'],[tr('Real GDP, 2009 dollars'),'$2 tn → $16 tn'],[tr('Real GDP per person'),'$14,000 → $50,000',true],[tr('Price level rose about'),'6.9×'],[tr('Population rose about'),'2.2×']];
+        note=tr('Prices did most of the work in the headline 55×. Per person, Americans ended up roughly three and a half times better off.');}
+      else{rows=[[tr('Nominal GDP growth'),pc1(n)],[tr('Inflation'),pc1(pi)],[tr('Real GDP growth'),pc1(b),true],[tr('Population growth'),pc1(pop)],[tr('Real growth per person'),pc1(c),true]];
+        note=c<-0.05?tr('Spending rose in money terms, yet each person\'s share of real output fell.'):tr('Only the last bar answers "are people better off?" The first one mostly measures prices.');}
+      s.show(rows,note);
+    };
+    const own=()=>{mode='own';draw();};
+    const sa=s.slider('n',tr('Nominal GDP growth'),0,30,.1,n,v=>v.toFixed(1)+'%',v=>{n=v;own();});
+    const sb=s.slider('pi',tr('Inflation'),0,25,.1,pi,v=>v.toFixed(1)+'%',v=>{pi=v;own();});
+    const sc=s.slider('pop',tr('Population growth'),-1,6,.1,pop,v=>v.toFixed(1)+'%',v=>{pop=v;own();});
+    s.button(tr('Show the US, 1950 to 2015'),()=>{mode='us';draw();});
+    s.button(tr('A year in a small Thai economy'),()=>{n=23.7;pi=17;pop=5;sa.set(n);sb.set(pi);sc.set(pop);own();});
+    live(s,draw);
+  };
+
+  /* Nominal versus PPP: the professor's 2026 comparison. */
+  W_.pppflip=host=>{
+    const s=shell(host,tr('The same economies at market prices and at PPP'),tr('Switch from nominal GDP to PPP-adjusted GDP. Predict first: which countries grow on the chart, and which barely move?'),[[tr('Nominal GDP'),'var(--rev)'],[tr('PPP GDP','PPP GDP'),'var(--ps)']]);
+    const d=[[L('US'),32.6,31.8,'US'],[L('China'),21.5,43.5,'CHN'],[L('India'),4.1,19.1,'IND'],[L('Japan'),4.3,6.9,'JPN'],[L('Indonesia'),1.5,5.4,'IDN'],[L('Thailand'),0.599,1.9,'THA']];
+    let mode='nom';
+    const draw=()=>{
+      const P=Plot(s.svgs[0],7,50);P.axes('',tr('Trillion US dollars, 2026 estimates'));P.yticks([0,10,20,30,40],v=>'$'+v+'T');
+      P.xticks([1,2,3,4,5,6],q=>d[q-1][3]);
+      d.forEach(([,n,p],i)=>{const v=mode==='nom'?n:p;P.rect(i+.66,i+1.34,0,v,mode==='nom'?'a-rev':'a-ps');P.tag(i+1,v,'$'+(v<1?Math.round(v*1000)+'B':v+'T'));});
+      const rows=d.map(([nm,n,p])=>[tr(`${nm[0]}: PPP ÷ nominal`),(p/n).toFixed(1)+'×',nm[0]==='Thailand']);
+      rows.push([tr('World GDP'),mode==='nom'?'$128T':'$219.2T']);
+      s.show(rows,mode==='nom'?tr('At market exchange rates the US is the largest economy by far, and Thailand is about $0.6 trillion.'):tr('At PPP, China passes the US (it did so in 2014), India nearly quintuples and Thailand more than triples. The US barely moves. Low-wage economies have cheap services, so their output is worth more once prices are made equal.'));
+    };
+    s.seg(tr('Measure'),[['nom',tr('Nominal')],['ppp','PPP']],mode,v=>{mode=v;draw();});
+    live(s,draw);
+  };
+
+  /* 4. Balassa-Samuelson: a higher outside wage raises the cost, and price, of a haircut. */
   W_.haircut=host=>{
-    const s=shell(host,tr('Why a haircut costs more where wages are high'),tr('Raise the wage a barber could earn in another job. Predict which curve shifts and what happens to the price of a haircut.'),[[tr('Demand D'),colors.d],[tr('Supply S'),colors.mc]]);
+    const s=shell(host,tr('Why a haircut costs more where wages are high'),tr('Raise what a barber could earn in another job. Predict which curve moves and what happens to the price.'),[[tr('Demand D'),colors.d],[tr('Supply S'),colors.mc]]);
     let w=100,rich=false;const w0=100,a0=600;
     const eq=(a,wage)=>{const q=(a-0.5*wage)/6;return [q,a-4*q];};
     const draw=()=>{
-      const a=rich?800:600,[q1,p1]=eq(a0,w0),[q2,p2]=eq(a,w),moved=w!==w0||rich;
+      const a=rich?800:600,[q1,p1]=eq(a0,w0),[q2,p2]=eq(a,w),movedS=w!==w0,moved=movedS||rich;
       const P=Plot(s.svgs[0],120,820);P.axes(tr('Haircuts per day in one district'),tr('Baht per haircut'));P.xticks([0,30,60,90,120]);P.yticks([0,200,400,600,800]);
-      P.line(0.5*w,2,colors.mc);
-      P.line(a,-4,colors.d);
-      if(moved&&w!==w0){P.path([[0,0.5*w0],[120,0.5*w0+240]],colors.mc,true);}
-      if(rich){P.path([[0,a0],[120,a0-480]],colors.d,true);}
-      const sLab=q=>[q,0.5*w+2*q];
-      P.tag(...sLab(112),moved&&w!==w0?'S2':'S','end');if(moved&&w!==w0)P.tag(112,0.5*w0+224,'S1','end',14);
+      if(movedS)P.path([[0,0.5*w0],[120,0.5*w0+240]],colors.mc,true);
+      if(rich)P.path([[0,a0],[120,a0-480]],colors.d,true);
+      P.line(0.5*w,2,colors.mc);P.line(a,-4,colors.d);
+      P.tag(112,0.5*w+224,movedS?'S2':'S','end');if(movedS)P.tag(112,0.5*w0+224,'S1','end',14);
       P.tag(8,a-32,rich?'D2':'D','start',-4);if(rich)P.tag(8,a0-32,'D1','start',16);
-      P.guide(q1,p1);P.point(q1,p1,'var(--fg)');P.tag(q1,p1,'E1','start',-9);P.tag(1.5,p1,moved?'P1':'P','start',p2>p1||!moved?14:-4);P.tag(q1,0,moved?'Q1':'Q','start',-5);
+      P.guide(q1,p1);P.point(q1,p1,'var(--fg)');P.tag(q1,p1,moved?'E1':'E','start',-9);P.tag(1.5,p1,moved?'P1':'P','start',p2>p1||!moved?14:-4);P.tag(q1,0,moved?'Q1':'Q','start',-5);
       if(moved){P.guide(q2,p2);P.point(q2,p2,'var(--fg)');P.tag(q2,p2,'E2','end',-9);P.tag(1.5,p2,'P2','start',p2>p1?-4:14);P.tag(q2,0,'Q2','end',-5);}
-      const rows=[[tr('Barber\'s outside wage per hour'),baht(w)],[tr('Labor cost of a 30-minute haircut'),baht(w/2)],['P1, Q1',baht(p1)+', '+num(Math.round(q1*10)/10)]];
-      if(moved)rows.push(['P2, Q2',baht(p2)+', '+num(Math.round(q2*10)/10),true],[tr('Price change'),(p2>=p1?'+':'−')+baht(Math.abs(p2-p1)),true]);
+      const rows=[[tr('Outside wage per hour'),baht(w)],[tr('Labor cost of a 30-minute haircut'),baht(w/2)],[moved?'P1, Q1':'P, Q',baht(p1)+', '+num(Math.round(q1*10)/10)]];
+      if(moved)rows.push(['P2, Q2',baht(p2)+', '+num(Math.round(q2*10)/10),true]);
       let note;
-      if(!moved)note=tr('Start: barbers could earn ฿100 an hour elsewhere. Predict what happens to S if that outside wage rises.');
-      else if(w>w0&&!rich)note=tr('A higher outside wage raises the cost of every haircut, so S shifts left (up). P rises and Q falls, though barbers are no more productive than before.');
-      else if(w<w0&&!rich)note=tr('A lower outside wage makes haircuts cheaper to supply, so S shifts right (down) and the price falls.');
-      else note=tr('Higher local incomes also raise demand, so D shifts right. With S shifting left as well, P rises a lot; what happens to Q depends on which shift is larger.');
+      if(!moved)note=tr('A barber could earn ฿100 an hour elsewhere. What happens to S if factories nearby start paying more?');
+      else if(movedS&&!rich)note=w>w0?tr('Each haircut now costs more to supply, so S shifts left (up). P rises and Q falls, though the barber is no more skilled than before.'):tr('Cheaper labor makes haircuts cheaper to supply, so S shifts right (down) and the price falls.');
+      else note=tr('Richer locals also want more haircuts, so D shifts right too. P rises even more; Q depends on which shift is bigger.');
       s.show(rows,note);
     };
     const sl=s.slider('w',tr('Outside wage for a barber (baht per hour)'),40,500,10,w,baht,v=>{w=v;draw();});
-    s.seg(tr('Local demand'),[['same',tr('Local incomes unchanged')],['rich',tr('Local incomes higher too')]],'same',v=>{rich=v==='rich';draw();});
+    s.seg(tr('Local demand'),[['same',tr('Local incomes unchanged')],['rich',tr('Local incomes rise too')]],'same',v=>{rich=v==='rich';draw();});
     s.button(tr('Reset'),()=>{w=w0;sl.set(w);draw();});
     live(s,draw);
   };
 
-  /* Basic facts of wealth: compare baskets on an ordinary and a ratio scale. */
-  W_.baskets=host=>{
-    const s=shell(host,tr('How far apart are living standards?'),tr('Each basket is $100 of buying power a year, PPP-adjusted. Guess Mexico and the United States before you look, then switch to a ratio scale.'),[[tr('Baskets per person a year'),colors.ps]]);
-    let scale='ord';
-    const data=[['CAR',6],['Mexico',178],['United States',540]];
+  /* 5. Guess the gap: one square is one basket of goods a year. */
+  W_.guess=host=>{
+    const s=shell(host,tr('Guess the gap'),tr('One square is one basket: $100 of buying power a year, adjusted for prices. The average person in the Central African Republic gets 6. Guess Mexico and the United States, then reveal.'),[[tr('Actual baskets'),'var(--ps)'],[tr('Your guess'),'var(--fg)']]);
+    let gm=40,gu=120,shown=false;
+    const C=[[L('CAR'),6],[L('Mexico'),178],[L('United States'),540]];
     const draw=()=>{
-      const log=scale==='ratio';
-      const P=log?Plot(s.svgs[0],4,10):Plot(s.svgs[0],4,600);
-      P.axes('',log?tr('Baskets (ratio scale)'):tr('Baskets per person a year'));
-      P.xticks([1,2,3],v=>[tr('CAR'),tr('Mexico'),tr('US')][v-1]);
-      if(log)P.yticks([0,2,4,6,8,10],v=>num(2**v));else P.yticks([0,150,300,450,600]);
-      data.forEach(([,v],i)=>{const y=log?Math.log2(v):v;P.rect(i+.7,i+1.3,0,y,'a-ps');P.tag(i+1,y,num(v)+(i===2?'*':''));});
-      const rows=[[tr('CAR'),tr('6 baskets, about $600')],[tr('Mexico'),tr('178 baskets, $17,800')],[tr('United States'),tr('about 540 baskets*')],[tr('Mexico vs CAR'),'29×',true],[tr('United States vs Mexico'),'3×',true],[tr('United States vs CAR'),'90×',true]];
-      const note=log?tr('On a ratio scale each step up is the same multiple, so the 29× gap between CAR and Mexico now looks larger than the 3× gap between Mexico and the United States.'):tr('On an ordinary scale the CAR bar nearly vanishes. Mexico sits much closer to the United States than to the poorest countries.');
-      s.show(rows,note);
+      const svg=s.svgs[0],W=Math.max(280,svg.getBoundingClientRect().width||500),colW=W/3,per=20,cell=Math.min(9,(colW-14)/per),gap=cell*.18;
+      const rows=Math.ceil(Math.max(540,gu)/per),H=40+rows*cell+30;
+      svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.replaceChildren();
+      C.forEach(([name,actual],i)=>{
+        const guess=i===0?6:i===1?gm:gu,x0=i*colW+(colW-per*cell)/2,y0=40;
+        const lab=el('text',{x:i*colW+colW/2,y:16,'text-anchor':'middle',class:'axl'},svg);lab.textContent=T(name);
+        if(zhOn()&&name[1]){const z=el('text',{x:i*colW+colW/2,y:30,'text-anchor':'middle',class:'tk'},svg);z.textContent=name[1];}
+        const n=Math.max(shown?actual:0,guess);
+        for(let k=0;k<n;k++){const x=x0+(k%per)*cell,y=y0+Math.floor(k/per)*cell;
+          const inA=shown&&k<actual,inG=k<guess;
+          el('rect',{x:x+gap/2,y:y+gap/2,width:cell-gap,height:cell-gap,rx:1,fill:inA||i===0?'var(--ps)':'none',stroke:inG&&i>0?'var(--fg)':'none','stroke-width':inG&&i>0?.9:0},svg);}
+        const cap=el('text',{x:i*colW+colW/2,y:y0+Math.ceil(n/per)*cell+16,'text-anchor':'middle',class:'tk'},svg);
+        cap.textContent=i===0?'6':shown?(i===2?'≈'+actual:String(actual))+' · '+tr('guess')+' '+guess:tr('guess')+' '+guess;
+      });
+      const rr=shown?[[tr('Mexico vs CAR'),'29×',true],[tr('United States vs Mexico'),'3×',true],[tr('United States vs CAR'),'90×',true],[tr('Actual US compared with your guess'),times(540/gu)]]:[[tr('Your Mexico guess'),String(gm)],[tr('Your US guess'),String(gu)]];
+      s.show(rr,shown?tr('Most people put Mexico near the CAR. It is about 29 times richer, and much closer to the United States than to the poorest countries.'):tr('Set your two guesses, then reveal.'));
     };
-    s.seg(tr('Scale'),[['ord',tr('Ordinary scale')],['ratio',tr('Ratio scale')]],scale,v=>{scale=v;draw();});
+    s.slider('gm',tr('Your guess: Mexico'),1,600,1,gm,v=>String(v),v=>{gm=v;draw();});
+    s.slider('gu',tr('Your guess: United States'),1,900,1,gu,v=>String(v),v=>{gu=v;draw();});
+    s.button(tr('Reveal or hide the answer'),()=>{shown=!shown;draw();});
     live(s,draw);
   };
 
-  /* Compound growth and the rule of 70. */
+  /* 6. Compound growth and the rule of 70. */
   W_.compound=host=>{
-    const s=shell(host,tr('Small growth gaps, huge level gaps'),tr('Two economies start at the same income. Predict how far apart they end, then check the doubling times against the rule of 70.'),[[tr('Economy A'),colors.d],[tr('Economy B'),colors.mc]]);
-    let g1=2,g2=3,T=140,scale='ord';
+    const s=shell(host,tr('Small growth gaps, huge level gaps'),tr('Two economies start at the same income. Predict how far apart they end up, then check the doubling times against the rule of 70.'),[[tr('Economy A'),colors.d],[tr('Economy B'),colors.mc]]);
+    let g1=2,g2=3,Y=140,scale='ord';
     const idx=(g,t)=>Math.pow(1+g/100,t);
-    const dbl=g=>g<=0?tr('never'):(70/g).toFixed(1)+' / '+(Math.log(2)/Math.log(1+g/100)).toFixed(1);
+    const dbl=g=>g<=0?'∞':(70/g).toFixed(1)+' / '+(Math.log(2)/Math.log(1+g/100)).toFixed(1);
     const draw=()=>{
-      const log=scale==='ratio',end=[idx(g1,T),idx(g2,T)],top=Math.max(...end);
-      let P;
-      if(log){const hi=Math.max(1,Math.ceil(Math.log2(top)));P=Plot(s.svgs[0],T,hi,0);const st=Math.max(1,Math.ceil(hi/6)),tk=[];for(let k=0;k<=hi;k+=st)tk.push(k);P.yticks(tk,v=>num(2**v)+'×');}
-      else{const step=niceStep(top,5),hi=Math.ceil(top/step)*step;P=Plot(s.svgs[0],T,hi,0);const tk=[];for(let v=0;v<=hi+1e-9;v+=step)tk.push(v);P.yticks(tk,v=>num(v));}
-      P.axes(tr('Years'),log?tr('Income index (ratio scale, start = 1)'):tr('Income index (start = 1)'));
-      const xs=niceStep(T,4),xt=[];for(let t=0;t<=T+1e-9;t+=xs)xt.push(t);P.xticks(xt);
-      [[g1,colors.d],[g2,colors.mc]].forEach(([g,c])=>{const pts=[];for(let i=0;i<=80;i++){const t=T*i/80,v=idx(g,t);pts.push([t,log?Math.log2(v):v]);}P.path(pts,c);});
-      P.tag(T,log?Math.log2(end[0]):end[0],'A','end',end[0]>=end[1]?-8:14);P.tag(T,log?Math.log2(end[1]):end[1],'B','end',end[1]>end[0]?-8:14);
+      const log=scale==='ratio',end=[idx(g1,Y),idx(g2,Y)],top=Math.max(...end);let P;
+      if(log){const hi=Math.max(1,Math.ceil(Math.log2(top)));P=Plot(s.svgs[0],Y,hi,0);const st=Math.max(1,Math.ceil(hi/6)),tk=[];for(let k=0;k<=hi;k+=st)tk.push(k);P.yticks(tk,v=>num(2**v)+'×');}
+      else{const step=niceStep(top,5),hi=Math.ceil(top/step)*step;P=Plot(s.svgs[0],Y,hi,0);const tk=[];for(let v=0;v<=hi+1e-9;v+=step)tk.push(v);P.yticks(tk,v=>num(v));}
+      P.axes(tr('Years'),log?tr('Income, start = 1 (ratio scale)'):tr('Income, start = 1'));
+      const xs=niceStep(Y,4),xt=[];for(let t=0;t<=Y+1e-9;t+=xs)xt.push(t);P.xticks(xt);
+      [[g1,colors.d],[g2,colors.mc]].forEach(([g,c])=>{const pts=[];for(let i=0;i<=80;i++){const t=Y*i/80,v=idx(g,t);pts.push([t,log?Math.log2(v):v]);}P.path(pts,c);});
+      P.tag(Y,log?Math.log2(end[0]):end[0],'A','end',end[0]>=end[1]?-8:14);P.tag(Y,log?Math.log2(end[1]):end[1],'B','end',end[1]>end[0]?-8:14);
       const r=end[1]/end[0];
-      const rows=[[tr('Years for A to double (rule of 70 / exact)'),dbl(g1)],[tr('Years for B to double (rule of 70 / exact)'),dbl(g2)],[tr(`A after ${T} years`),times(end[0])],[tr(`B after ${T} years`),times(end[1])],[tr('B relative to A'),times(r),true]];
-      const note=Math.abs(g2-g1)<0.05?tr('Same growth rate, same path.'):(()=>{const gap=Math.abs(g2-g1).toFixed(1),m=times(Math.max(r,1/r));return tr(`A growth gap of ${gap} points a year leaves one economy ${m} as rich as the other after ${T} years.`);})();
-      s.show(rows,note);
+      s.show([[tr('Years to double, A (rule of 70 / exact)'),dbl(g1)],[tr('Years to double, B (rule of 70 / exact)'),dbl(g2)],[tr(`A after ${Y} years`),times(end[0])],[tr(`B after ${Y} years`),times(end[1])],[tr('B compared with A'),times(r),true]],
+        Math.abs(g2-g1)<0.05?tr('Same growth rate, same path.'):(()=>{const gap=Math.abs(g2-g1).toFixed(1),m=times(Math.max(r,1/r));return tr(`A gap of ${gap} points a year leaves one economy ${m} as rich as the other after ${Y} years. On the ratio scale, steady growth is a straight line.`);})());
     };
     const a=s.slider('g1',tr('Growth rate of A'),0,10,.1,g1,v=>v.toFixed(1)+'%',v=>{g1=v;draw();});
     const b=s.slider('g2',tr('Growth rate of B'),0,10,.1,g2,v=>v.toFixed(1)+'%',v=>{g2=v;draw();});
-    const c=s.slider('T',tr('Years'),10,220,5,T,v=>String(v),v=>{T=v;draw();});
-    s.seg(tr('Scale'),[['ord',tr('Ordinary scale')],['ratio',tr('Ratio scale')]],scale,v=>{scale=v;draw();});
-    const set=(x,y,t)=>{g1=x;g2=y;T=t;a.set(x);b.set(y);c.set(t);draw();};
-    s.button(tr('MRU: 1% vs 2% since 1800'),()=>set(1,2,215));
+    const c=s.slider('Y',tr('Years'),10,220,5,Y,v=>String(v),v=>{Y=v;draw();});
+    s.seg(tr('Scale'),[['ord',tr('Ordinary')],['ratio',tr('Ratio')]],scale,v=>{scale=v;draw();});
+    const set=(x,y,t)=>{g1=x;g2=y;Y=t;a.set(x);b.set(y);c.set(t);draw();};
+    s.button(tr('US since 1800: 1% vs 2%'),()=>set(1,2,215));
     s.button(tr('2% vs 3% for 140 years'),()=>set(2,3,140));
-    s.button(tr('Miracle vs stagnation: 1.1% vs 8.5%, 20 years'),()=>set(1.1,8.5,20));
+    s.button(tr('1.1% vs 8.5% for 20 years'),()=>set(1.1,8.5,20));
     live(s,draw);
   };
 
+  /* 8. Keep asking why: from factors of production down to deep roots. */
+  W_.ladder=host=>{
+    host.classList.add('graph','wide');
+    const steps=[
+      [L('Why is a farmer in a rich country so productive?'),L('Factors of production'),L('She works with physical capital (tractors, roads), human capital (skills in her head) and technological knowledge (soil science, genetics), brought together by entrepreneurs.')],
+      [L('Why does her country have so much of these?'),L('Incentives'),L('People build and learn when they keep the rewards. On China\'s collective farms, an extra bag of potatoes earned a worker 1/100 of a bag. Some 20 to 40 million people starved; growth came only after farmers could keep what they grew.')],
+      [L('Why do some countries have good incentives?'),L('Institutions'),L('Rules that protect rewards: property rights, honest government, political stability, a dependable legal system, and competitive, open markets.')],
+      [L('Why do some countries have good institutions?'),L('History, ideas, culture, geography, luck'),L('The least settled part of the puzzle. The US Constitution was written when the ideas of Locke and Smith were popular, and George Washington chose to stop at two terms.')]
+    ];
+    const head=make('div','g-head',null,host);make('span','g-kicker',tr('Dig deeper'),head);make('h4',null,tr('Keep asking why'),head);make('p',null,tr('Each answer raises a deeper question. Move from the immediate cause of wealth to the ultimate one.'),head);
+    const wrap=make('div','ladder',null,host);let d=0;
+    const tools=make('div','g-ctrl sort-tools',null,host);
+    const next=make('button','g-btn',tr('Ask why again'),tools);next.type='button';
+    const reset=make('button','g-btn',tr('Start over'),tools);reset.type='button';
+    const render=()=>{wrap.replaceChildren();steps.slice(0,d+1).forEach(([q,a,ex],i)=>{const card=make('div','rung rung-'+i,null,wrap);make('span','rung-n',String(i+1),card);const body=make('div','rung-b',null,card);make('p','rung-q',T(q),body);make('p','rung-a',T(a),body);make('p','rung-ex',T(ex),body);});next.disabled=d>=steps.length-1;};
+    next.addEventListener('click',()=>{if(d<steps.length-1){d++;render();}});reset.addEventListener('click',()=>{d=0;render();});
+    render();
+  };
+
+  /* 9. A natural tariff and a government tariff have the same shape. */
+  W_.tariff=host=>{
+    const s=shell(host,tr('The natural tariff'),tr('Goods arrive at the port at a world price of ฿80. Raise the cost of getting them inland and watch imports shrink.'),[[tr('Demand D'),colors.d],[tr('Domestic supply S'),colors.mc],[tr('Lost trade'),'var(--dwl)']]);
+    let t=0,kind='nat';const Pw=80;
+    const draw=()=>{
+      const p=Math.min(Pw+t,160),qd=(300-p)/2,qs=(p-20)/2,qd0=(300-Pw)/2,qs0=(Pw-20)/2,imp=Math.max(0,qd-qs),tt=p-Pw;
+      const P=Plot(s.svgs[0],150,320);P.axes(tr('Quantity'),tr('Baht per unit'));P.xticks([0,50,100,150]);P.yticks([0,80,160,240,320]);
+      if(tt>0){if(imp>0)P.rect(qs,qd,Pw,p,'a-rev');P.poly([[qs0,Pw],[qs,p],[qs,Pw]],'a-dwl');P.poly([[qd,p],[qd0,Pw],[qd,Pw]],'a-dwl');}
+      P.line(300,-2,colors.d);P.line(20,2,colors.mc);P.hline(Pw,'var(--world)',true);
+      if(tt>0)P.hline(p,'var(--fg)');
+      P.tag(146,Pw,tr('World price at the port'),'end',-6);if(tt>0)P.tag(146,p,tr('Price inland'),'end',-6);
+      P.tag(8,280,'D','start');P.tag(140,296,'S','end');
+      P.guide(qs,p);P.guide(qd,p);P.tag(qs,0,'Qs','middle',-5);P.tag(qd,0,'Qd','middle',-5);
+      const lost=0.5*(qs-qs0)*tt+0.5*(qd0-qd)*tt;
+      const rect=kind==='nat'?tr('Spent on trucks and roads (used up)'):tr('Tariff revenue (moves to the government)');
+      s.show([[tr('Price inland'),baht(p)],[tr('Imports, Qd − Qs'),num(Math.round(imp*10)/10),true],[tr('Domestic production'),num(Math.round(qs*10)/10)],[rect,baht(Math.round(imp*tt))],[tr('Lost trade (two triangles)'),baht(Math.round(lost))]],
+        tt===0?tr('At the coast the country trades at the world price and imports a lot. Now make inland transport costly.'):kind==='nat'?tr('Transport costs act like a tariff: the inland price rises, imports shrink and two triangles of trade are lost. Unlike a tariff, even the rectangle is a real cost, not a transfer.'):tr('A government tariff of the same size gives the same price, the same imports and the same lost triangles. The rectangle becomes government revenue instead of trucking costs.'));
+    };
+    const sl=s.slider('t',tr('Extra cost to bring goods inland (baht)'),0,100,5,t,baht,v=>{t=v;draw();});
+    s.seg(tr('Source of the extra cost'),[['nat',tr('Distance from the sea')],['gov',tr('Government tariff')]],kind,v=>{kind=v;draw();});
+    s.button(tr('Reset'),()=>{t=0;sl.set(0);draw();});
+    live(s,draw);
+  };
+
+  
   window.EconWidgets={mount(root){root.querySelectorAll('[data-widget]').forEach(host=>{const init=W_[host.dataset.widget];if(init&&!host.dataset.ready){host.dataset.ready='1';init(host);}});}};
 })();
 </script>
