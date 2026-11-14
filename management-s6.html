@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/><title>Cross-Cultural Management · Management</title>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"><title>Cross-Cultural Management · Management</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 <style>
 /* Layout: one reading column with a sticky chapter rail; colors follow system appearance. */
 :root {
@@ -354,6 +354,32 @@ html{scroll-padding-top:calc(var(--header-height,64px) + 12px)}@media(max-width:
 .qz-o:focus-visible,.qz-nav .g-btn:focus-visible{outline:2px solid var(--accent-ink);outline-offset:3px}
 .qz-o[aria-disabled="true"]{cursor:default}
 
+
+
+/* Shared reading rhythm and responsive controls. */
+.doc select{font-family:var(--sans);font-size:.88rem}
+.hero .lead{max-width:none}
+html{scroll-padding-top:calc(var(--header-height,64px) + 12px)}
+@media(max-width:900px){.rail.open{top:var(--header-height,64px);bottom:0;inset-inline:0;max-height:calc(100vh - var(--header-height,64px))}}
+.eq-controls label{min-width:0;max-width:100%}
+.eq-controls select{display:block;max-width:100%;margin-top:5px}
+@media(max-width:560px){.top-in .crumbs{flex-basis:100%}.top-in .toc-btn{order:1}.top-in .sessions{order:2;margin-left:auto}.top-in .sessions .pill{padding:3px 9px}.top-in{gap:8px}}
+/* Boss activity uses the existing colors and typography. */
+.boss-controls[hidden],.boss-panel[hidden]{display:none!important}
+.boss-controls{position:relative;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.boss-controls>span{flex-basis:100%;font-size:.85rem;font-weight:700;color:var(--accent-ink)}
+.boss-panel{margin-top:24px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.boss-panel h3{margin-top:1rem}.boss-panel h4{font-size:1.03rem;color:var(--accent-ink);margin:2rem 0 .65rem}
+.boss-panel blockquote{margin:1rem 0;padding:10px 18px;border-left:3px solid var(--accent);background:var(--paper);border-radius:0 8px 8px 0}
+
+.boss-panel .tbl th[scope="row"]{background:transparent;font-weight:600;width:23%}
+.boss-matrix table{min-width:650px}.boss-matrix td{width:38%}.supplement{margin:1.3rem 0;padding:12px 16px;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.supplement>summary{cursor:pointer;font-weight:600;color:var(--accent-ink)}.supplement .culture-map{border:0;padding-inline:0}
+@media(max-width:560px){.culture-bar{grid-template-columns:80px minmax(0,1fr) 28px}.boss-controls button{flex:1 1 120px}.boss-panel .tbl{font-size:.85rem}}
+@media print{.boss-controls{display:none!important}.boss-panel[hidden]{display:block!important}.boss-panel{break-before:page}.boss-panel h3,.boss-panel h4{break-after:avoid}.tbl{overflow:visible}.boss-matrix table{min-width:0}tr{break-inside:avoid}.supplement{display:none}.top,.rail{display:none!important}.wrap{display:block}.doc{max-width:none}main{padding:0}.boss-panel .qa details:not([open])>p{display:block}}
+
+.boss-panel .boss-analysis table{min-width:820px;table-layout:fixed}.boss-panel .boss-analysis th[scope="row"],.boss-panel .boss-analysis td{width:auto}.boss-analysis th,.boss-analysis td{overflow-wrap:break-word}
+@media print{.boss-panel .boss-analysis table{min-width:0}}
 </style>
 <style id="system-theme">
 /* System appearance only changes colors. Print retains the light palette. */
@@ -366,6 +392,7 @@ html{scroll-padding-top:calc(var(--header-height,64px) + 12px)}@media(max-width:
   --tone-6e3f55: #6e3f55;
   --tone-6e3f6a: #6e3f6a;
   --tone-6fae8b: #6fae8b;
+  --tone-77777755: #77777755;
   --tone-7e6f74: #7e6f74;
   --tone-8a6216: #8a6216;
   --tone-8a7a5c: #8a7a5c;
@@ -378,6 +405,7 @@ html{scroll-padding-top:calc(var(--header-height,64px) + 12px)}@media(max-width:
   --tone-b98ab5: #b98ab5;
   --tone-bfdcc9: #bfdcc9;
   --tone-c06c84: #c06c84;
+  --tone-d5c6ca: #d5c6ca;
   --tone-d9674f: #d9674f;
   --tone-d9ebe1: #d9ebe1;
   --tone-ddb3cb: #ddb3cb;
@@ -387,6 +415,7 @@ html{scroll-padding-top:calc(var(--header-height,64px) + 12px)}@media(max-width:
   --tone-eaf5ee: #eaf5ee;
   --tone-ebd7ea: #ebd7ea;
   --tone-edc2b8: #edc2b8;
+  --tone-eee6e8: #eee6e8;
   --tone-eee9eb: #eee9eb;
   --tone-efdde2: #efdde2;
   --tone-f1dca8: #f1dca8;
@@ -410,6 +439,7 @@ html{scroll-padding-top:calc(var(--header-height,64px) + 12px)}@media(max-width:
     --tone-6e3f55: #C9A3D6;
     --tone-6e3f6a: #DAB3D6;
     --tone-6fae8b: #8CC3A0;
+    --tone-77777755: #00000066;
     --tone-7e6f74: #BEACB2;
     --tone-8a6216: #E3C480;
     --tone-8a7a5c: #C9B68C;
@@ -422,6 +452,7 @@ html{scroll-padding-top:calc(var(--header-height,64px) + 12px)}@media(max-width:
     --tone-b98ab5: #BD99C1;
     --tone-bfdcc9: #5F7A5C;
     --tone-c06c84: #D79AA7;
+    --tone-d5c6ca: #8B737F;
     --tone-d9674f: #E08A6F;
     --tone-d9ebe1: #2C4135;
     --tone-ddb3cb: #8C6680;
@@ -431,6 +462,7 @@ html{scroll-padding-top:calc(var(--header-height,64px) + 12px)}@media(max-width:
     --tone-eaf5ee: #25372D;
     --tone-ebd7ea: #413047;
     --tone-edc2b8: #B77F70;
+    --tone-eee6e8: #4B3E45;
     --tone-eee9eb: #30282D;
     --tone-efdde2: #55424A;
     --tone-f1dca8: #8F7A4A;
@@ -443,11 +475,13 @@ html{scroll-padding-top:calc(var(--header-height,64px) + 12px)}@media(max-width:
     --tone-fdf9f9: #1D181A;
     --tone-ffffff: #241E21;
   }
+  .topswitch input:after { background: var(--fg); }
+  .topswitch input:checked:after { background: var(--paper); }
 }
 </style>
-</head><body><header class="top"><div class="top-in"><nav aria-label="Breadcrumb" class="crumbs"><a href="index.html">Study Notes</a><span>/</span><a href="management.html">Management</a><span>/</span><b>Session 6</b></nav><button aria-expanded="false" class="toc-btn" id="tocBtn" type="button">Contents</button><nav aria-label="Sessions" class="sessions"><a class="pill" href="management-s5.html">S5</a><span aria-current="page" class="pill">S6</span><span class="pill off">S7</span><span class="pill off">S8</span></nav></div></header><div class="wrap"><aside class="rail" id="rail"><p class="lbl">Contents</p><ol id="toc"></ol></aside><main><article class="doc"><div class="hero"><p class="kick">Managing People in Organizations · Session 6</p><h1>Cross-Cultural Management</h1><p class="lead">Use cultural differences to ask better questions, then adapt to the person and the workplace.</p></div>
+</head><body><header class="top"><div class="top-in"><nav aria-label="Breadcrumb" class="crumbs"><a href="index.html">Study Notes</a><span>/</span><a href="management.html">Management</a><span>/</span><b>Session 6</b></nav><button aria-expanded="false" class="toc-btn" id="tocBtn" type="button">Contents</button><nav aria-label="Sessions" class="sessions"><a class="pill" href="management-s5.html">S5</a><span aria-current="page" class="pill">S6</span><a class="pill" href="management-s8.html">S8</a></nav></div></header><div class="wrap"><aside class="rail" id="rail"><p class="lbl">Contents</p><ol id="toc"></ol></aside><main><article class="doc"><div class="hero"><p class="kick">Managing People in Organizations · Session 6</p><h1>Cross-Cultural Management</h1><p class="lead">Use cultural differences to ask better questions, then adapt to the person and the workplace.</p></div>
 <h2 id="map">Chapter map</h2>
-<div class="three"><div class="tcard"><b>Read the message</b><p>Culture and high/low context</p><span class="zh">理解情境</span></div><div class="tcard"><b>Choose a lens</b><p>Five dimensions and Thai illustrations</p><span class="zh">辨認構面</span></div><div class="tcard"><b>Check and adapt</b><p>Country comparison, boss preparation and case answers</p><span class="zh">驗證與調整</span></div></div>
+<div class="three"><div class="tcard"><b>Read the message</b><p>Culture and high/low context</p><span class="zh">理解情境</span></div><div class="tcard"><b>Choose a lens</b><p>Five dimensions and Thai illustrations</p><span class="zh">辨認構面</span></div><div class="tcard"><b>Check and adapt</b><p>Country comparison and boss analysis</p><span class="zh">驗證與調整</span></div></div>
 <div class="method"><span>Framework</span><i>→</i><span>Actual evidence</span><i>→</i><span>Possible gap</span><i>→</i><span class="hi">Adapt and check</span></div>
 <h2 id="culture">1. Culture and communication context</h2>
 <p>In <b>Hofstede's definition</b>, culture is collective mental programming learned through shared education and life experience. Family, institutions and repeated experience turn expectations into habits. A new “speak up” policy can therefore arrive faster than employees' willingness to challenge a senior person.</p>
@@ -459,15 +493,15 @@ html{scroll-padding-top:calc(var(--header-height,64px) + 12px)}@media(max-width:
 <h3 id="misreading">How a message gets misread</h3>
 <div class="message-chain"><div><b>Boss asks</b><p>“Any objections?”</p></div><i>→</i><div><b>Employee responds</b><p>A smile and silence.</p></div><i>→</i><div class="hi"><b>Boss assumes</b><p>“Everyone agrees.”</p></div></div>
 <p>The missing step is checking meaning. Ask for one concern or risk, and offer a private or written reply. Agreement, politeness and hesitation can look similar from the outside.</p>
-<p class="hint"><b>中文邏輯</b><span>訊號不等於完整意思；先確認對方怎麼理解，再把決定說清楚。</span></p>
+<p class="hint"><b>中文邏輯</b><span>先理解語氣與情境，再確認雙方對決定的共同理解。</span></p>
 <h2 id="dimensions">2. Five dimensions: definition and application</h2>
 <p>The five main dimensions compare different cultural expectations. The lecture also introduces <b>Indulgence/Restraint</b>: how desires and impulses are regulated.</p>
-<div class="tbl"><table><thead><tr><th>Dimension</th><th>Definition and contrast</th><th>Workplace example</th><th>Do not confuse with</th></tr></thead><tbody>
-<tr><td><b>Power Distance (PD)</b> <span class="zh">權力距離</span></td><td>Acceptance of differences in authority and status.<br/><b>Higher:</b> greater deference to rank.<br/><b>Lower:</b> smaller status differences.</td><td>A junior employee prefers to question a senior manager privately rather than in a meeting.</td><td>Aggression or technical ability</td></tr>
-<tr><td><b>Individualism (IDV)</b> <span class="zh">個人／集體</span></td><td>Individual versus group-centered identity and obligations.<br/><b>Higher:</b> personal independence and goals.<br/><b>Lower:</b> belonging, duties and “we.”</td><td>Agree whether recognition should emphasize individual ownership, team success or both.</td><td>Introversion or refusing teamwork</td></tr>
-<tr><td><b>Uncertainty Avoidance (UA)</b> <span class="zh">不確定性規避</span></td><td>Preference for structure over ambiguity.<br/><b>Higher:</b> rules, expertise and predictability.<br/><b>Lower:</b> more room for experimentation.</td><td>Before a new process launches, staff ask for clear roles, written procedures and a review point.</td><td>Hierarchy or J/P preference</td></tr>
-<tr><td><b>Masculinity (MAS)</b> <span class="zh">成就／關懷</span></td><td>Achievement versus care and quality of life.<br/><b>Higher:</b> competition, money and assertiveness.<br/><b>Lower:</b> harmony, care and life quality.</td><td>A reward discussion balances performance targets with employee well-being and relationships.</td><td>Biological sex, intelligence or EQ</td></tr>
-<tr><td><b>Time Orientation (LTO)</b> <span class="zh">時間取向</span></td><td>Longer-run versus shorter-run focus.<br/><b>Higher:</b> long-term orientation on the index.<br/><b>Lower:</b> shorter-term priorities.</td><td>Clarify how an immediate milestone contributes to a longer development plan.</td><td>Planning ability or an MBO deadline</td></tr>
+<div class="tbl"><table><thead><tr><th>Dimension</th><th>Definition and contrast</th><th>Workplace example</th><th>Related distinction</th></tr></thead><tbody>
+<tr><td><b>Power Distance (PD)</b> <span class="zh">權力距離</span></td><td>Acceptance of differences in authority and status.<br><b>Higher:</b> greater deference to rank.<br><b>Lower:</b> smaller status differences.</td><td>A junior employee chooses a private discussion to raise a concern with a senior manager.</td><td>Status expectations concern rank; technical ability concerns expertise.</td></tr>
+<tr><td><b>Individualism (IDV)</b> <span class="zh">個人／集體</span></td><td>Individual versus group-centered identity and obligations.<br><b>Higher:</b> personal independence and goals.<br><b>Lower:</b> belonging, duties and “we.”</td><td>Agree whether recognition should emphasize individual ownership, team success or both.</td><td>IDV concerns individual/group obligations; I/E concerns personal processing preferences.</td></tr>
+<tr><td><b>Uncertainty Avoidance (UA)</b> <span class="zh">不確定性規避</span></td><td>Preference for structure over ambiguity.<br><b>Higher:</b> rules, expertise and predictability.<br><b>Lower:</b> more room for experimentation.</td><td>Before a new process launches, staff ask for clear roles, written procedures and a review point.</td><td>UA concerns ambiguity; J/P concerns how a person structures work.</td></tr>
+<tr><td><b>Masculinity (MAS)</b> <span class="zh">成就／關懷</span></td><td>Achievement versus care and quality of life.<br><b>Higher:</b> competition, money and assertiveness.<br><b>Lower:</b> harmony, care and life quality.</td><td>A reward discussion balances performance targets with employee well-being and relationships.</td><td>MAS concerns achievement/care values; EQ concerns emotional skills.</td></tr>
+<tr><td><b>Time Orientation (LTO)</b> <span class="zh">時間取向</span></td><td>Longer-run versus shorter-run focus.<br><b>Higher:</b> long-term orientation on the index.<br><b>Lower:</b> shorter-term priorities.</td><td>Clarify how an immediate milestone contributes to a longer development plan.</td><td>LTO concerns time horizons; planning turns goals into schedules and milestones.</td></tr>
 </tbody></table></div>
 <div class="pair"><div><b>PD: how is rank accepted?</b><p>Who may challenge whom, and how should disagreement be raised?</p></div><div><b>UA: how is uncertainty handled?</b><p>How much structure is needed before people can act?</p></div></div>
 <div data-mw="culture-sort"></div>
@@ -485,7 +519,7 @@ html{scroll-padding-top:calc(var(--header-height,64px) + 12px)}@media(max-width:
 <div class="pair"><div><b>“Western” assumptions on the slide</b><p>Productivity is central. Managed conflict, collaboration and confrontation can improve solutions; face-saving may weaken effectiveness.</p></div><div><b>“Thai” assumptions on the slide</b><p>Harmony, face and boss loyalty matter. Relationships and hierarchy may take priority; unspoken conflict can remain even when confrontation is avoided.</p></div></div>
 <p class="note-small">Source: Roongrengsuke and Chansuthus (1998), cited on lecture pp.20–21.</p>
 <div class="flow"><span>Invite concerns</span><i>→</i><span>Offer a suitable channel</span><i>→</i><span>Discuss evidence</span><i>→</i><span>Confirm the decision</span></div>
-<p class="hint"><b>中文邏輯</b><span>沒有公開衝突，不代表沒有問題；直接討論，也不等於可以羞辱對方。</span></p>
+<p class="hint"><b>中文邏輯</b><span>先用合適管道提出分歧，再以尊重的方式說清問題、證據與決定。</span></p>
 <h2 id="time-personality">5. Time orientation and personality</h2>
 <div class="tbl"><table><thead><tr><th>Lecture illustration</th><th>Emphasis</th></tr></thead><tbody>
 <tr><td>Japan: longer term</td><td>Thrift, future savings, persistence and connections across time</td></tr>
@@ -495,7 +529,7 @@ html{scroll-padding-top:calc(var(--header-height,64px) + 12px)}@media(max-width:
 <p>Long- and short-term tendencies can coexist. The lecture links the longer view to patience, cycles and less emphasis on immediate goals. In practice, connect persistence toward a longer purpose with milestones for current work.</p>
 <p><b>Culture and personality operate at different levels.</b> The lecturer suggests I could weaken presumed group orientation and J could strengthen performance emphasis in a Thai example. Use this as an interaction idea: ask how the individual prefers to process information, decide and work with others.</p>
 <div class="flow"><span>Country norms</span><i>+</i><span>Individual preferences</span><i>+</i><span>Workplace situation</span><i>→</i><span>Observe the actual response</span></div>
-<p class="hint"><b>中文邏輯</b><span>人格偏好可能影響文化傾向的表現，但不能用四個字母換算國家構面分數。</span></p>
+<p class="hint"><b>中文邏輯</b><span>文化說明共享期待，人格說明個人偏好；兩者一起影響溝通與工作方式。</span></p>
 <h2 id="countries">6. Read the four-country chart</h2>
 <div class="tbl"><table><thead><tr><th>Index</th><th>China</th><th>Russia</th><th>Switzerland</th><th>Thailand</th></tr></thead><tbody>
 <tr><td>PD</td><td>80</td><td>93</td><td>34</td><td>64</td></tr>
@@ -505,40 +539,42 @@ html{scroll-padding-top:calc(var(--header-height,64px) + 12px)}@media(max-width:
 <tr><td>LTO</td><td>77</td><td>58</td><td>42</td><td>67</td></tr>
 </tbody></table></div>
 <p class="note-small">Source: lecturer's four-country comparison, p.25.</p>
-<h3 id="pd-ua-map">PD × UA: two different questions</h3><figure class="culture-map"><div class="chart-axis-label">Higher UA: more structure and predictability</div><svg aria-labelledby="pd-ua-title pd-ua-desc" class="pd-ua-chart" role="img" viewbox="0 0 500 310"><title id="pd-ua-title">Power Distance and Uncertainty Avoidance</title><desc id="pd-ua-desc">China: PD 80, UA 30. Russia: PD 93, UA 95. Switzerland: PD 34, UA 58. Thailand: PD 64, UA 64. Higher power distance does not imply the same uncertainty avoidance.</desc><path class="chart-grid" d="M 42.0 30 V 275 M 42 275.0 H 460"></path><text class="chart-tick" text-anchor="middle" x="42.0" y="298">0</text><text class="chart-tick" text-anchor="end" x="31" y="280.0">0</text><path class="chart-grid" d="M 146.5 30 V 275 M 42 213.75 H 460"></path><text class="chart-tick" text-anchor="middle" x="146.5" y="298">25</text><text class="chart-tick" text-anchor="end" x="31" y="218.75">25</text><path class="chart-grid" d="M 251.0 30 V 275 M 42 152.5 H 460"></path><text class="chart-tick" text-anchor="middle" x="251.0" y="298">50</text><text class="chart-tick" text-anchor="end" x="31" y="157.5">50</text><path class="chart-grid" d="M 355.5 30 V 275 M 42 91.25 H 460"></path><text class="chart-tick" text-anchor="middle" x="355.5" y="298">75</text><text class="chart-tick" text-anchor="end" x="31" y="96.25">75</text><path class="chart-grid" d="M 460.0 30 V 275 M 42 29.99999999999997 H 460"></path><text class="chart-tick" text-anchor="middle" x="460.0" y="298">100</text><text class="chart-tick" text-anchor="end" x="31" y="34.99999999999997">100</text><path class="chart-axis" d="M 42 30 V 275 H 460"></path><g><title>China: PD 80, UA 30</title><circle cx="376.4" cy="201.5" fill="var(--tone-c06c84)" r="6"></circle><text class="chart-country" fill="var(--tone-c06c84)" text-anchor="end" x="367.4" y="191.5">China (80, 30)</text></g><g><title>Russia: PD 93, UA 95</title><circle cx="430.73999999999995" cy="42.24999999999997" fill="var(--tone-9c4862)" r="6"></circle><text class="chart-country" fill="var(--tone-9c4862)" text-anchor="end" x="421.73999999999995" y="31.24999999999997">Russia (93, 95)</text></g><g><title>Switzerland: PD 34, UA 58</title><circle cx="184.12" cy="132.89999999999998" fill="var(--tone-3f5675)" r="6"></circle><text class="chart-country" fill="var(--tone-3f5675)" text-anchor="start" x="193.12" y="156.9">Switzerland (34, 58)</text></g><g><title>Thailand: PD 64, UA 64</title><circle cx="309.52" cy="118.19999999999999" fill="var(--tone-7e6f74)" r="6"></circle><text class="chart-country" fill="var(--tone-7e6f74)" text-anchor="start" x="318.52" y="108.19999999999999">Thailand (64, 64)</text></g></svg><figcaption>Horizontal axis: Power Distance →<br/>Country labels show (PD, UA).</figcaption></figure>
+<h3 id="all-five">Compare all five dimensions with Thailand</h3>
+<p>The table and interactive bars use the lecturer’s country indices. Δ is the comparison country minus Thailand, measured in index points. Read each score as a guide to the cultural expectation it describes.</p>
 <div data-mw="culture-chart"></div>
-<p><b>Read the contrast:</b> China and Russia both have high PD, yet UA is <b>30 versus 95</b>. Hierarchy and demand for predictability are separate. Switzerland's largest gap from Thailand is IDV: <b>+60 points</b>.</p>
-<h2 id="bosses">7. Four-boss preparation activity</h2>
-<p>Choose <b>one</b> boss and present how a hypothetical “typical Thai” employee should prepare: <b>Chinese, Russian, Swiss or INTJ Thai</b>. Use a relevant dimension, explain a possible mismatch, and ask about actual expectations.</p>
-<div data-mw="culture-boss"></div>
-<h2 id="traps">8. Do not mix these up</h2>
-<div class="traps"><div><s>PD 80 means 80% of managers are authoritarian.</s><p>PD is a country-level index of accepted authority differences, not a percentage or a personal score.</p></div><div><s>High context and high PD describe the same thing.</s><p>Context asks where meaning comes from; PD asks how authority differences are accepted. Reading a smile and challenging a boss are different questions.</p></div><div><s>High PD means high UA.</s><p>PD concerns rank; UA concerns ambiguity. China and Russia both have high PD, but their UA scores are 30 and 95.</p></div><div><s>Individualism means introversion or refusing teamwork.</s><p>IDV contrasts individual and group obligations. E/I describes personal energy and processing preferences; individual ownership can coexist with teamwork.</p></div><div><s>Masculinity measures biological sex or emotional skill.</s><p>MAS contrasts achievement and assertiveness with care and quality of life. It is a cultural value orientation, not a gender or EQ test.</p></div><div><s>Long-term orientation means better planning.</s><p>LTO compares time horizons. A short-term deadline is a task requirement; it does not measure a worker’s cultural orientation.</p></div><div><s>A calm employee agrees and is satisfied.</s><p>Calm conduct can coexist with unspoken conflict. Check the employee’s meaning, concerns and work attitudes before treating silence as agreement.</p></div><div><s>INTJ identifies a manager’s Hofstede scores.</s><p>INTJ describes individual preferences; country indices describe shared patterns. Use both to frame questions, then check the person’s actual expectations.</p></div></div>
-<h2 id="coldcall">9. Cold call practice</h2>
+<div class="tbl "><table><thead><tr><th scope="col">Dimension</th><th scope="col">China Δ</th><th scope="col">Russia Δ</th><th scope="col">Switzerland Δ</th></tr></thead><tbody><tr><th scope="row">PD</th><td>+16</td><td>+29</td><td>-30</td></tr><tr><th scope="row">IDV</th><td>+24</td><td>+27</td><td>+60</td></tr><tr><th scope="row">MAS</th><td>+32</td><td>+2</td><td>+36</td></tr><tr><th scope="row">UA</th><td>-34</td><td>+31</td><td>-6</td></tr><tr><th scope="row">LTO</th><td>+10</td><td>-9</td><td>-25</td></tr></tbody></table></div>
+<p>China and Russia both emphasize hierarchy, while their UA scores point to different needs for structure. Swiss lower PD and higher IDV support more direct discussion and personal ownership. Russian MAS is close to Thailand’s, providing common ground in cooperation and relationships.</p>
+<p>The Thai lecture illustration combines quick results with a longer Buddhist perspective. The activity chart uses LTO 67 for Thailand, linking current milestones with longer-term purposes.</p>
+
+<h2 id="bosses">7. Four-boss activity: background, gap and action</h2><p>The class considered how a Thai employee could work with Chinese, Russian, Swiss and INTJ Thai bosses. Read the cultural background, identify the difference in working expectations, then explain the adjustment.</p><p class="note-small">Source: S6 lecture activity and four group whiteboards, October 23, 2026. Country scores follow the lecturer’s comparison chart.</p><div class="flow"><span>Background</span><i>→</i><span>Gap</span><i>→</i><span>What to do</span></div><div class="eq-controls boss-controls" id="bossControls" hidden="" aria-label="Choose a boss"><span>Choose a boss</span><button type="button" data-boss-choice="chinese" aria-controls="boss-chinese" aria-pressed="false">Chinese boss</button><button type="button" data-boss-choice="russian" aria-controls="boss-russian" aria-pressed="false">Russian boss</button><button type="button" data-boss-choice="swiss" aria-controls="boss-swiss" aria-pressed="false">Swiss boss</button><button type="button" data-boss-choice="intj" aria-controls="boss-intj" aria-pressed="false">INTJ Thai boss</button></div><section class="boss-panel" id="boss-chinese" data-boss-panel="chinese" aria-labelledby="boss-title-chinese"><h3 id="boss-title-chinese">Chinese boss</h3><p class="key">Higher PD and achievement orientation combine with lower UA: respect authority, deliver results and adapt as work develops.</p><div class="tbl boss-matrix boss-analysis"><table><colgroup><col style="width:18%"><col style="width:24%"><col style="width:26%"><col style="width:32%"></colgroup><thead><tr><th scope="col">Dimension and score</th><th scope="col">Meaning</th><th scope="col">Gap</th><th scope="col">What to do</th></tr></thead><tbody><tr><th scope="row">PD: 80 vs 64 (Δ +16)</th><td>Higher PD emphasizes rank, titles and senior authority.</td><td>A Thai employee is familiar with hierarchy; the boss may expect clearer deference and approval boundaries.</td><td>Use respectful greetings and the preferred title. Offer suggestions privately; agree which decisions belong to the boss and which are delegated.</td></tr><tr><th scope="row">IDV: 43 vs 19 (Δ +24)</th><td>Higher relative IDV gives more weight to individual ideas and responsibility.</td><td>The employee may wait for group consensus, while the boss expects a recommendation and a named owner.</td><td>Share a reasoned proposal, own a deliverable and identify the support needed from teammates. Recognize collaborators’ contributions.</td></tr><tr><th scope="row">MAS: 66 vs 34 (Δ +32)</th><td>Higher MAS emphasizes achievement, competition and visible results.</td><td>A harmony-focused employee may soften performance concerns; the boss wants the result and the problem stated clearly.</td><td>Agree output, quality and deadlines. Use time effectively; report the performance gap with evidence and a recovery option.</td></tr><tr><th scope="row">UA: 30 vs 64 (Δ −34)</th><td>Lower UA favors flexibility, changing plans and action with incomplete information.</td><td>The employee wants complete instructions; the boss may expect an initial attempt followed by adjustment.</td><td>Act within delegated authority. Start with a small trial, clear assumptions, a budget limit, stop conditions and a review point.</td></tr><tr><th scope="row">LTO: 77 vs 67 (Δ +10)</th><td>Both scores support persistence and longer-term relationships; China places somewhat more emphasis on the longer horizon.</td><td>The employee may look for early recognition, while the boss emphasizes sustained contribution and commitment.</td><td>Keep commitments, build trust over time and connect current results with future capability. Use development milestones to make progress visible.</td></tr></tbody></table></div><p class="note-small">Class links: formal address and meal etiquette express respect for rank; patience and loyalty support long-term trust. Performance discussions should make workload and availability clear.</p></section>
+<section class="boss-panel" id="boss-russian" data-boss-panel="russian" aria-labelledby="boss-title-russian"><h3 id="boss-title-russian">Russian boss</h3><p class="key">High PD and high UA combine authority with predictability: clarify who decides, how work proceeds and who delivers.</p><div class="tbl boss-matrix boss-analysis"><table><colgroup><col style="width:18%"><col style="width:24%"><col style="width:26%"><col style="width:32%"></colgroup><thead><tr><th scope="col">Dimension and score</th><th scope="col">Meaning</th><th scope="col">Gap</th><th scope="col">What to do</th></tr></thead><tbody><tr><th scope="row">PD: 93 vs 64 (Δ +29)</th><td>Higher PD emphasizes hierarchy and senior approval.</td><td>The boss may expect a more explicit approval chain than the employee normally uses.</td><td>Identify the approver, delegated decisions and escalation channel. Present ideas respectfully and obtain clear sign-off.</td></tr><tr><th scope="row">IDV: 46 vs 19 (Δ +27)</th><td>Higher relative IDV emphasizes personal responsibility and individual input.</td><td>The employee may rely on collective agreement; the boss wants someone accountable for each action.</td><td>Prepare a personal recommendation, name task owners and agree handoffs. Bring suggestions directly through the respectful channel.</td></tr><tr><th scope="row">MAS: 36 vs 34 (Δ +2)</th><td>Similar care-oriented scores support cooperation, relationships and quality of life.</td><td>This shared emphasis provides common ground for discussing performance and team support.</td><td>Maintain respectful cooperation; discuss the required result alongside the support and workload needed to achieve it.</td></tr><tr><th scope="row">UA: 95 vs 64 (Δ +31)</th><td>Higher UA emphasizes clear procedures, planning and predictability.</td><td>A general promise to handle the task may leave the boss wanting more detail about standards, risks and exceptions.</td><td>Provide a structured plan, acceptance criteria, key risks and contingencies. Agree how exceptions are approved, then follow the plan.</td></tr><tr><th scope="row">LTO: 58 vs 67 (Δ −9)</th><td>Both profiles support sustained effort and future benefits; Russia has a relatively shorter horizon.</td><td>The shared longer-term focus still needs a clear timetable for the current task.</td><td>Connect longer benefits with dated milestones and a clear review schedule.</td></tr></tbody></table></div><p class="note-small">Class link: take responsibility and offer ideas respectfully. The boss makes the final decision; the employee then carries it out within the agreed authority.</p></section>
+<section class="boss-panel" id="boss-swiss" data-boss-panel="swiss" aria-labelledby="boss-title-swiss"><h3 id="boss-title-swiss">Swiss boss</h3><p class="key">Lower PD, higher IDV and higher MAS emphasize direct discussion, individual ownership and measurable achievement.</p><div class="tbl boss-matrix boss-analysis"><table><colgroup><col style="width:18%"><col style="width:24%"><col style="width:26%"><col style="width:32%"></colgroup><thead><tr><th scope="col">Dimension and score</th><th scope="col">Meaning</th><th scope="col">Gap</th><th scope="col">What to do</th></tr></thead><tbody><tr><th scope="row">PD: 34 vs 64 (Δ −30)</th><td>Lower PD favors more equal interaction and direct discussion with senior staff.</td><td>The employee may wait for the boss to speak; the boss may expect employees to contribute their views.</td><td>Raise suggestions and concerns directly with evidence. Discuss the work constructively and make decision responsibilities clear.</td></tr><tr><th scope="row">IDV: 79 vs 19 (Δ +60)</th><td>Higher IDV emphasizes independence, personal ownership and individual accountability.</td><td>A group-centered employee may seek frequent reassurance; the boss expects independent delivery after requirements are clear.</td><td>Clarify requirements at the start, own a named deliverable and seek feedback at agreed points. Specify the input needed from the team.</td></tr><tr><th scope="row">MAS: 70 vs 34 (Δ +36)</th><td>Higher MAS emphasizes performance, competence and measurable outcomes.</td><td>The employee may prioritize harmony, while the boss expects clear evidence of quality and progress.</td><td>Communicate concisely with data. Agree quality and output targets; use feedback to identify a specific improvement and next action.</td></tr><tr><th scope="row">UA: 58 vs 64 (Δ −6)</th><td>Slightly lower UA allows somewhat more flexibility in how a task is carried out.</td><td>The employee may prefer detailed instructions, while the boss may accept a proposed method and a trial.</td><td>Propose a workable approach, identify key risks and quality checks, and agree a review point for adjustment.</td></tr><tr><th scope="row">LTO: 42 vs 67 (Δ −25)</th><td>Lower relative LTO puts more weight on nearer-term priorities and visible benefits.</td><td>A long-term proposal may need a clearer explanation of what it delivers soon.</td><td>Connect the longer objective to the next milestone, a dated deliverable and an early benefit review.</td></tr></tbody></table></div><p class="note-small">Class links: hierarchy varies across traditional and newer companies. The group also emphasized focused working time, work-life balance and emergency-only contact after work; agree contact and feedback routines at the start.</p></section>
+<section class="boss-panel" id="boss-intj" data-boss-panel="intj" aria-labelledby="boss-title-intj"><h3 id="boss-title-intj">INTJ Thai boss</h3><p class="key">The Thai cultural background combines with I/N/T/J preferences in processing information, making decisions and organizing work.</p><h4 id="intj-preferences">I / N / T / J: working preferences</h4><div class="tbl boss-matrix"><table><thead><tr><th scope="col">Preference</th><th scope="col">Meaning</th><th scope="col">What to do</th></tr></thead><tbody><tr><th scope="row">I: Introversion</th><td>Prefer independent reflection and time to think before discussion.</td><td>Send a concise pre-read and offer private discussion.</td></tr><tr><th scope="row">N: Intuition</th><td>Focus on patterns, possibilities and the strategic big picture.</td><td>Lead with the problem, purpose and alternatives, then provide supporting detail.</td></tr><tr><th scope="row">T: Thinking</th><td>Emphasize consistent decision criteria and logical comparison.</td><td>Compare evidence and trade-offs using clear criteria.</td></tr><tr><th scope="row">J: Judging</th><td>Prefer structure, planned commitments and clear decisions.</td><td>Agree a decision date, deadlines, milestones and a change process.</td></tr></tbody></table></div><h4 id="intj-five">Culture × personality: background, gap and action</h4><div class="tbl boss-matrix boss-analysis"><table><colgroup><col style="width:18%"><col style="width:24%"><col style="width:26%"><col style="width:32%"></colgroup><thead><tr><th scope="col">Dimension and score</th><th scope="col">Meaning</th><th scope="col">Gap</th><th scope="col">What to do</th></tr></thead><tbody><tr><th scope="row">PD 64</th><td>respect for hierarchy, combined with T’s analytical style and I’s reflection.</td><td>Employees may express respect through silence; the boss expects them to identify problems and explain their reasoning.</td><td>Offer suggestions privately and respectfully, supported by logic and evidence.</td></tr><tr><th scope="row">IDV 19</th><td>group ties, alongside a preference for independent reflection.</td><td>Employees may seek collective agreement; the boss expects independent analysis and clear individual responsibility.</td><td>Cooperate with colleagues while naming each task’s owner, deadline and handoff.</td></tr><tr><th scope="row">MAS 34</th><td>care and harmony, alongside an emphasis on logic, efficiency and results.</td><td>Employees may focus on maintaining harmony; the boss wants competence and performance to be visible.</td><td>Review KPIs and workload together. Set clear standards, recognize contribution and support cooperation.</td></tr><tr><th scope="row">UA 64</th><td>preference for clear procedures, reinforced by J’s structured approach.</td><td>A new work method creates a need for predictable steps and an orderly transition.</td><td>Use the group’s two-week pilot, review results with employees and then decide how to expand.</td></tr><tr><th scope="row">LTO 67</th><td>longer-term purpose, combined with N’s strategic perspective.</td><td>Employees need clear current priorities and visible progress toward the broader goal.</td><td>Break strategy into measurable milestones. Use a monthly KPI dashboard for immediate results and long-term progress.</td></tr></tbody></table></div><p class="note-small">Lecture link: I brings independent reflection into the group-oriented setting; J adds structure and performance follow-through. The group developed these ideas through private suggestions, named owners, a pilot and milestones.</p></section>
+<h2 id="traps">8. Do not mix these up</h2><div class="tbl "><table><thead><tr><th scope="col">Concepts</th><th scope="col">First lens</th><th scope="col">Second lens</th></tr></thead><tbody><tr><th scope="row">Country index / individual preference</th><td>A country index describes shared cultural expectations.</td><td>Individual preferences describe a person’s information processing and working style.</td></tr><tr><th scope="row">Context / PD</th><td>Context explains how words, relationships and situations convey meaning.</td><td>PD explains acceptance of authority and status differences.</td></tr><tr><th scope="row">PD / UA</th><td>PD addresses who decides and how rank shapes interaction.</td><td>UA addresses the amount of structure and predictability people prefer.</td></tr><tr><th scope="row">IDV / I</th><td>IDV compares individual and group-centered obligations.</td><td>I emphasizes inward reflection and independent information processing.</td></tr><tr><th scope="row">MAS / EQ</th><td>MAS compares achievement and competition with care and quality of life.</td><td>EQ concerns recognizing emotions and managing behavior and relationships.</td></tr><tr><th scope="row">LTO / planning</th><td>LTO describes the time horizon emphasized in cultural values.</td><td>Planning translates goals into decisions, schedules and milestones.</td></tr><tr><th scope="row">Calm conduct / agreement</th><td>Calm conduct expresses emotional restraint and can help preserve harmony.</td><td>Agreement becomes clear when people state concerns and confirm the decision.</td></tr></tbody></table></div><h2 id="coldcall">9. Cold call practice</h2>
 <div class="qa-tools"><button id="qaAll" type="button">Show all answers</button></div><div class="qa">
 <details><summary>What is culture, and why can it resist change?</summary><p>Collective mental programming shaped by shared learning and experience. Early habits and institutions reinforce expectations.</p></details>
-<details><summary>High context versus low context?</summary><p>High context relies more on shared knowledge and situational cues; low context communicates more explicitly. Neither is inherently better.</p></details>
+<details><summary>High context versus low context?</summary><p>High context relies more on shared knowledge and situational cues; low context communicates more explicitly.</p></details>
 <details><summary>Name the five core dimensions in lecture order.</summary><p>Power Distance, Individualism/Collectivism, Uncertainty Avoidance, Masculinity/Femininity and Time Orientation. Indulgence/Restraint is additional.</p></details>
 <details><summary>What do Jai Yen, Jai Ron and Sanuk illustrate?</summary><p>Respectively, restraint and harmony; directness, visible emotion and results; enjoyment and relationships in work/life.</p></details>
-<details><summary>Why can clear rules coexist with resistance to restrictions?</summary><p>Predictability can be helpful while excessive controls still limit freedom. UA does not imply approval of every rule.</p></details>
-<details><summary>Can INTJ establish cultural scores or EQ?</summary><p>No. Personality preferences, country indices and emotional skills are different constructs.</p></details>
+<details><summary>Why can clear rules coexist with resistance to restrictions?</summary><p>Clear rules provide predictability; flexible procedures preserve room to act. Useful structure balances both needs.</p></details>
+<details><summary>How do culture, personality and EQ complement one another?</summary><p>Culture describes shared expectations; personality describes individual preferences; EQ concerns emotional awareness and relationship skills.</p></details>
 </div>
 <h2 id="templates">10. Answer templates</h2>
-<div class="pair"><div><b>Observed case</b><p>“The relevant framework is ___. It explains ___. The case shows ___. The gap is ___ because ___. The management issue is ___.”</p></div><div><b>Boss preparation</b><p>“The chart places ___ at ___ versus Thailand's ___. The key difference is ___. I would confirm ___, adapt ___ and check ___.”</p></div></div>
+<div class="pair"><div><b>Observed case</b><p>“The relevant framework is ___. It explains ___. The case shows ___. The gap is ___ because ___. The management issue is ___.”</p></div><div><b>Boss preparation</b><p>“The background is ___. The score indicates ___. The gap between the working expectations is ___. The employee should ___ because ___.”</p></div></div>
 <p class="note-small source">Source: S6 lecture slides, pp.3–26.</p>
 </article></main></div>
 <script>
-/* Shared option explanations for Management classification tools. */
-window.MgmtQuizExplain = function(panel, labels, reasons, correct, chosen) {
-  panel.textContent = chosen === correct
-    ? 'Correct. ' + reasons[chosen]
-    : 'Not quite. Best answer: ' + labels[correct] + '. ' + reasons[chosen];
-  panel.hidden = false;
+window.MgmtSetText=function(el,en){el.textContent=en};
+window.MgmtQuizExplain=function(panel,labels,reasons,correct,chosen){
+ const ok=chosen===correct;
+ const english=ok?'Correct. '+reasons[chosen]:'Not quite. Best answer: '+labels[correct]+'. '+reasons[chosen];
+ window.MgmtSetText(panel,english);panel.hidden=false;
 };
 </script>
 <script>
 /* Shared Management classification cards, adapted from the Session 4 quiz. */
 window.MgmtQuiz = function(host, title, instruction, items) {
-  const make = (tag, text, cls) => { const e = document.createElement(tag); if (text) e.textContent = text; if (cls) e.className = cls; return e; };
+  const make = (tag, text, cls) => { const e = document.createElement(tag); if (text) window.MgmtSetText(e, text); if (cls) e.className = cls; return e; };
   host.classList.add('mw');
   const head = make('div', null, 'g-head');
   head.append(make('span', 'Classify', 'g-kicker'), make('h4', title), make('p', instruction));
@@ -547,8 +583,8 @@ window.MgmtQuiz = function(host, title, instruction, items) {
   nav.append(count, next); body.append(question, options, note, nav); host.append(head, body);
   let index = 0, score = 0, done = 0, answered = false;
   function show() {
-    const item = items[index]; answered = false; question.textContent = item.q; options.replaceChildren(); note.textContent = ''; note.hidden = true;
-    count.textContent = 'Item ' + (index + 1) + ' of ' + items.length + (done ? ' · ' + score + ' / ' + done + ' correct' : '');
+    const item = items[index]; answered = false; window.MgmtSetText(question, item.q); options.replaceChildren(); note.textContent = ''; note.hidden = true;
+    window.MgmtSetText(count, 'Item ' + (index + 1) + ' of ' + items.length + (done ? ' · ' + score + ' / ' + done + ' correct' : ''));
     item.options.forEach((option, choice) => {
       const button = make('button', null, 'qz-o'); button.type = 'button'; button.append(make('b', option));
       button.addEventListener('click', () => {
@@ -556,7 +592,7 @@ window.MgmtQuiz = function(host, title, instruction, items) {
         options.querySelectorAll('button').forEach((b, i) => { b.classList.toggle('right', i === item.answer); b.setAttribute('aria-disabled', 'true'); });
         if (!correct) button.classList.add('wrong');
         window.MgmtQuizExplain(note, item.explanationLabels || item.options, item.explanations, item.answer, choice);
-        count.textContent = 'Item ' + (index + 1) + ' of ' + items.length + ' · ' + score + ' / ' + done + ' correct';
+        window.MgmtSetText(count, 'Item ' + (index + 1) + ' of ' + items.length + ' · ' + score + ' / ' + done + ' correct');
       });
       options.append(button);
     });
@@ -568,9 +604,8 @@ window.MgmtQuiz = function(host, title, instruction, items) {
 (function(){
  const countries={China:[80,43,66,30,77],Russia:[93,46,36,95,58],Switzerland:[34,79,70,58,42],Thailand:[64,19,34,64,67]};
  const dimensions=['Power Distance (PD)','Individualism (IDV)','Masculinity (MAS)','Uncertainty Avoidance (UA)','Long-Term Orientation (LTO)'];
- const create=(tag,text,cls)=>{const e=document.createElement(tag);if(text!==undefined&&text!==null)e.textContent=text;if(cls)e.className=cls;return e};
+ const create=(tag,text,cls)=>{const e=document.createElement(tag);if(text!==undefined&&text!==null){if(tag==='option'){e.textContent=text;}else window.MgmtSetText(e,text);}if(cls)e.className=cls;return e};
  function shell(host,title){host.classList.add('mw');host.append(create('p','Interactive · '+title,'mw-label'));const body=create('div');host.append(body);return body}
- function paragraph(host,label,text){const p=create('p');p.append(create('b',label+' '),document.createTextNode(text));host.append(p)}
  const W={};
  W['culture-chart']=host=>{
   const body=shell(host,'Compare with Thailand'),controls=create('div',null,'eq-controls'),label=create('label','Comparison country'),select=create('select');select.setAttribute('aria-label','Comparison country');
@@ -579,21 +614,14 @@ window.MgmtQuiz = function(host, title, instruction, items) {
   select.addEventListener('change',draw);draw();
  };
  const scenarios=[
-  ['A team asks for written roles and a test plan before trying an unfamiliar system. Which lens most directly addresses this request?',['Uncertainty Avoidance','Power Distance','Individualism'],0,'The request concerns predictability and ambiguity. It does not tell us who should have authority.'],
+  ['A team asks for written roles and a test plan before trying an unfamiliar system. Which lens most directly addresses this request?',['Uncertainty Avoidance','Power Distance','Individualism'],0,'The request concerns predictability and ambiguity; authority is addressed by Power Distance.'],
   ['Staff say it is inappropriate to contradict a senior manager because of rank. Which lens is most direct?',['Masculinity','Power Distance','Low context'],1,'The stated reason is rank: the employee treats authority differences as important.'],
   ['A message cannot be understood without knowing the relationship, tone and setting. Which concept fits?',['High context','Uncertainty Avoidance','Long-term orientation'],0,'The issue is where meaning comes from, rather than hierarchy, rules or time horizon.'],
   ['A team values individual ownership and personal achievement over obligations to the group. Which dimension addresses the I-versus-we distinction?',['Power Distance','Individualism','Introversion'],1,'IDV concerns cultural expectations around individual versus group priorities. Introversion is a separate personality preference.'],
   ['A manager chooses a competitive earnings target over an initiative focused on care and quality of life. Which cultural value contrast is most relevant?',['Uncertainty Avoidance','Time orientation','Masculinity/Femininity'],2,'MAS contrasts achievement and assertiveness with care and quality of life.']
  ];
- const cultureExplanations=[["Written roles and a test plan create predictability before an unfamiliar task, addressing uncertainty and ambiguity.", "Power Distance concerns authority and acceptance of rank differences; the request does not identify who should decide.", "Individualism concerns personal versus group priorities; wanting a plan does not identify that preference."], ["Masculinity concerns achievement and assertiveness versus care and quality of life; the cue here is rank.", "The stated objection is to contradicting a senior person because of rank, directly linking to acceptance of unequal authority.", "Low context emphasizes explicit messages; the issue here is the right to challenge authority, not where a message gets its meaning."], ["Meaning depends on the relationship, tone and setting, which is the defining cue for High context.", "Uncertainty Avoidance concerns comfort with ambiguity and unpredictability; the question asks where meaning comes from.", "Long-term orientation concerns priorities across time; no future-versus-present choice appears here."], ["Power Distance concerns unequal authority; the question contrasts individual with group priorities.", "The I-versus-we contrast directly concerns individual ownership and obligations to the group.", "Introversion is an individual personality preference concerning inward focus; it is separate from a cultural I-versus-we value."], ["Uncertainty Avoidance concerns ambiguity and predictability; the choice here compares achievement with care.", "Time orientation concerns present and future priorities; no time-horizon contrast is stated.", "Competitive earnings versus care and quality of life directly matches the Masculinity/Femininity value contrast."]];
+ const cultureExplanations=[["Written roles and a test plan create predictability before an unfamiliar task, addressing uncertainty and ambiguity.", "Power Distance concerns authority and acceptance of rank differences; written roles and a test plan address predictability.", "Individualism concerns personal versus group priorities; this request emphasizes structure and predictability."], ["Masculinity concerns achievement and assertiveness versus care and quality of life; the cue here is rank.", "The stated objection is to contradicting a senior person because of rank, directly linking to acceptance of unequal authority.", "Low context emphasizes explicit messages; this scenario focuses on the authority to challenge a senior person."], ["Meaning depends on the relationship, tone and setting, which is the defining cue for High context.", "Uncertainty Avoidance concerns comfort with ambiguity and unpredictability; the question asks where meaning comes from.", "Long-term orientation concerns priorities across time; this scenario emphasizes how relationships and context convey meaning."], ["Power Distance concerns unequal authority; the question contrasts individual with group priorities.", "The I-versus-we contrast directly concerns individual ownership and obligations to the group.", "Introversion is an individual personality preference concerning inward focus; it is separate from a cultural I-versus-we value."], ["Uncertainty Avoidance concerns ambiguity and predictability; the choice here compares achievement with care.", "Time orientation concerns present and future priorities; this question contrasts achievement with care and quality of life.", "Competitive earnings versus care and quality of life directly matches the Masculinity/Femininity value contrast."]];
  W['culture-sort']=host=>window.MgmtQuiz(host,'Choose the relevant lens','Read the situation, then choose the concept that best explains the stated cue.',scenarios.map((v,i)=>({q:v[0],options:v[1],answer:v[2],why:v[3],explanations:cultureExplanations[i]})));
- const bosses=[
- ['Chinese','MAS 66 vs. 34; UA 30 vs. 64.','Clarify performance priorities, decision speed and how much discretion is expected.','How should I report a performance problem, and which decisions can I make with incomplete information?','Check agreed targets, decision rights and whether rework or delays fall.'],
- ['Russian','PD 93 vs. 64; UA 95 vs. 64.','Confirm approval responsibilities, written standards and escalation rules.','Which decisions need approval, and what documentation is expected before implementation?','Check approval clarity, avoidable revisions and escalation timeliness.'],
- ['Swiss','IDV 79 vs. 19; MAS 70 vs. 34; PD 34 vs. 64.','Clarify individual ownership, performance criteria and expectations for evidence-based input.','How independently should I take responsibility, and how should I challenge a proposal?','Check ownership, accepted feedback channels and reliable follow-through.'],
- ['INTJ Thai','Individual preferences alongside the Thai cultural context.','Prepare structured strategic alternatives, then verify this person’s actual preferences.','How do you prefer to review options, decide and receive updates?','Check whether the agreed format improves decisions and coordination.']
- ];
- W['culture-boss']=host=>{const body=shell(host,'Four-boss preparation'),controls=create('div',null,'eq-controls culture-roles'),panel=create('div',null,'eq-result culture-compact');panel.setAttribute('aria-live','polite');body.append(controls,panel);bosses.forEach(v=>{const b=create('button',v[0]);b.type='button';b.addEventListener('click',()=>{controls.querySelectorAll('button').forEach(n=>n.setAttribute('aria-pressed',String(n===b)));panel.replaceChildren();paragraph(panel,'Starting contrast:',v[1]);paragraph(panel,'Preparation:',v[2]);paragraph(panel,'Ask:',v[3]);paragraph(panel,'Check:',v[4])});controls.append(b)});controls.firstChild.click()};
  const header=document.querySelector('.top');function measureHeader(){document.documentElement.style.setProperty('--header-height',Math.ceil(header.getBoundingClientRect().height)+'px')}if('ResizeObserver'in window)new ResizeObserver(measureHeader).observe(header);measureHeader();
  window.MgmtWidgets={mount(root){root.querySelectorAll('[data-mw]').forEach(host=>{if(!host.dataset.ready&&W[host.dataset.mw]){host.dataset.ready='1';W[host.dataset.mw](host)}})}};
 })();
@@ -621,12 +649,31 @@ window.MgmtQuiz = function(host, title, instruction, items) {
   const all = document.getElementById('qaAll');
   if (all) all.addEventListener('click', () => {
     const ds = document.querySelectorAll('.qa details'), open = ![...ds].every(d => d.open);
-    ds.forEach(d => d.open = open); all.textContent = open ? 'Hide all answers' : 'Show all answers';
+    ds.forEach(d => d.open = open); window.MgmtSetText(all, open ? 'Hide all answers' : 'Show all answers');
   });
   document.querySelectorAll('.drill .ans').forEach(s => s.addEventListener('click', () => s.classList.toggle('shown')));
 
   if (window.EconWidgets) window.EconWidgets.mount(document);
   if (window.MgmtWidgets) window.MgmtWidgets.mount(document);
+})();
+</script>
+
+<script>
+(function(){
+ const controls=document.getElementById('bossControls');
+ const panels=[...document.querySelectorAll('[data-boss-panel]')];
+ const buttons=[...controls.querySelectorAll('[data-boss-choice]')];
+ const reveal=document.createElement('button');reveal.type='button';
+ window.MgmtSetText(reveal,'Show all four analyses');controls.append(reveal);
+ function choose(key){
+  panels.forEach(p=>p.hidden=key!=='all'&&p.dataset.bossPanel!==key);
+  buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.bossChoice===key)));
+  reveal.setAttribute('aria-pressed',String(key==='all'));
+ }
+ buttons.forEach(b=>b.addEventListener('click',()=>choose(b.dataset.bossChoice)));
+ reveal.addEventListener('click',()=>choose('all'));
+ function followHash(){const target=document.getElementById(decodeURIComponent(location.hash.slice(1)));const panel=target&&target.closest('[data-boss-panel]');if(panel)choose(panel.dataset.bossPanel)}
+ controls.hidden=false;choose('chinese');followHash();window.addEventListener('hashchange',followHash);
 })();
 </script>
 </body></html>
