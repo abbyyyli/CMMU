@@ -1,28 +1,233 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Economics Session 8 · Study Notes</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>The Financial System · Economics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-:root{--bg:var(--tone-fdf9f9);--paper:var(--tone-ffffff);--tint:var(--tone-fae9ed);--line:var(--tone-efdde2);--fg:var(--tone-2f282b);--muted:var(--tone-7e6f74);--accent:var(--tone-c06c84);--accent-ink:var(--tone-9c4862);--sans:"Noto Sans TC","PingFang TC",system-ui,sans-serif;--serif:"Noto Serif TC",Georgia,serif}
-*{box-sizing:border-box}html{color-scheme:light;background:var(--bg)}body{margin:0;font:16px/1.75 var(--sans);color:var(--fg)}a{color:var(--accent-ink)}:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-header{border-bottom:1px solid var(--line);background:rgba(var(--header-rgb), .96)}.top{max-width:1160px;margin:auto;padding:13px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:16px}
-.crumbs{font-size:.86rem;display:flex;align-items:center;flex-wrap:wrap;gap:8px;color:var(--muted)}.crumbs a{text-decoration:none;color:var(--muted)}.crumbs a:hover{color:var(--accent-ink)}
-.sessions{display:flex;gap:5px;margin-left:auto}.pill{font:.85rem var(--sans);text-decoration:none;padding:5px 12px;border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--muted)}.pill[aria-current="page"]{background:var(--accent);border-color:var(--accent);color:var(--tone-ffffff)}.sessions a.pill:hover,.sessions a.pill:focus-visible{background:var(--tone-fceef2);border-color:var(--tone-b86b7b);color:var(--tone-8e4357)}
-main{max-width:780px;margin:0 auto;padding:74px 22px 120px}.kick{color:var(--accent-ink);letter-spacing:.15em;text-transform:uppercase;font-size:.76rem;font-weight:700}h1{font:700 clamp(2.2rem,5vw,3.2rem)/1.23 var(--serif);margin:6px 0 16px}.note{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:24px 28px;margin-top:30px}.label{font-weight:700;color:var(--accent-ink);font-size:.82rem;letter-spacing:.07em;text-transform:uppercase}.note p{margin:9px 0 0}.back{display:inline-block;margin-top:22px;text-decoration:none;border-bottom:1px solid var(--accent);font-weight:600}
-@media(max-width:520px){.sessions{margin-left:0}main{padding-top:50px}.note{padding:20px}}
+/* Layout: one reading column with a sticky chapter rail; colors follow system appearance. */
+:root {
+  color-scheme: light;
+  --bg: var(--tone-fdf9f9); --panel: var(--tone-f8eef0); --paper: var(--tone-ffffff); --tint: var(--tone-fae9ed); --line: var(--tone-efdde2);
+  --fg: var(--tone-2f282b); --muted: var(--tone-7e6f74); --accent: var(--tone-c06c84); --accent-ink: var(--tone-9c4862);
+  --demand: var(--tone-3f5675); --supply: var(--tone-c06c84); --ext: var(--tone-6e3f55); --world: var(--tone-8a7a5c); --policy: var(--tone-3f7f7a);
+  --cs: var(--tone-a7cdb6); --ps: var(--tone-b2c4e3); --dwl: var(--tone-d9674f); --rev: var(--tone-e5c171); --rev2: var(--tone-f1dca8); --time: var(--tone-ddb3cb); --ts: var(--tone-bfdcc9);
+  --serif: "Noto Serif TC", "Songti TC", Georgia, serif;
+  --sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; background: var(--bg); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 16px; line-height: 1.75; }
+a { color: var(--accent-ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(var(--header-rgb), .94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); padding-inline: 16px; }
+.top-in { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 14px; min-height: 56px; flex-wrap: wrap; padding-block: 8px; }
+.brand { font-family: var(--serif); font-weight: 700; font-size: 1.02rem; white-space: nowrap; }
+.brand small { font-family: var(--sans); font-weight: 500; color: var(--muted); font-size: .76rem; margin-left: 6px; letter-spacing: .06em; }
+.sessions { display: flex; gap: 4px; margin-left: auto; }
+.crumbs { font-size: .86rem; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.crumbs a { color: var(--muted); text-decoration: none; } .crumbs a:hover { color: var(--accent-ink); } .crumbs span { color: var(--line); } .crumbs b { font-family: var(--serif); }
+.sessions a.pill { text-decoration: none; transition: border-color .15s, color .15s; }
+.sessions a.pill:hover, .sessions a.pill:focus-visible { border-color: var(--accent); color: var(--accent-ink); background: var(--tint); }
+.sessions .pill { font: 500 .82rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--muted); padding: 4px 12px; border-radius: 999px; }
+.sessions .pill[aria-current="page"] { background: var(--accent); border-color: var(--accent); color: var(--tone-ffffff); }
+.sessions .pill.off { opacity: .5; cursor: not-allowed; }
+.toc-btn { display: none; font: 500 .85rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--fg); border-radius: 8px; padding: 5px 12px; }
+
+.wrap { max-width: 1160px; margin: 0 auto; padding-inline: 16px; display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 52px; }
+.rail { position: sticky; top: 76px; align-self: start; max-height: calc(100vh - 92px); overflow: auto; padding-block: 34px 40px; font-size: .86rem; line-height: 1.5; }
+.rail .lbl { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.rail ol { list-style: none; margin: 0; padding: 0; }
+.rail li a { display: block; padding: 4px 10px; color: var(--muted); text-decoration: none; border-radius: 6px; }
+.rail li a:hover { color: var(--fg); background: var(--tint); }
+.rail li.h3 a { padding-left: 22px; font-size: .8rem; }
+.rail li a.on { color: var(--accent-ink); background: var(--tint); font-weight: 500; }
+
+main { min-width: 0; padding-block: 30px 120px; }
+.doc { max-width: 780px; }
+.hero { padding-block: 8px 26px; border-bottom: 1px solid var(--line); }
+.kick { font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); margin: 0 0 6px; font-weight: 500; }
+.hero h1 { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.25; margin: 0 0 12px; text-wrap: balance; }
+.lead { margin: 0; font-size: 1.04rem; max-width: 62ch; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 16px; font-size: .78rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+.doc h2 { font-family: var(--serif); font-size: 1.55rem; line-height: 1.35; margin: 3.4rem 0 .3rem; text-wrap: balance; }
+.doc h3 { font-size: 1.1rem; line-height: 1.45; margin: 2.2rem 0 .5rem; color: var(--accent-ink); text-wrap: balance; }
+.sub { margin: 0 0 1.2rem; color: var(--muted); max-width: 66ch; }
+.doc p, .doc li { max-width: none; }
+.doc ul, .doc ol { padding-left: 1.25em; }
+.doc li { margin: .25rem 0; }
+.zh { display: inline-block; font-size: .78em; line-height: 1.3; color: var(--accent-ink); background: var(--tint); padding: 0 6px; border-radius: 4px; margin-left: 2px; vertical-align: 1px; font-weight: 500; }
+.hint { font-size: .9rem; color: var(--muted); display: flex; gap: 10px; align-items: baseline; }
+.hint b { flex: none; font-size: .72rem; color: var(--tone-ffffff); background: var(--accent); padding: 0 7px; border-radius: 4px; font-weight: 500; }
+.key { background: var(--tint); padding: 12px 16px; border-radius: 8px; font-weight: 500; }
+.note-small { font-size: .8rem; color: var(--muted); }
+
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 1rem 0; }
+.pair > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; }
+.pair b { color: var(--accent-ink); }
+.pair p { margin: 4px 0 0; font-size: .92rem; }
+
+.matrix { display: grid; grid-template-columns: minmax(90px, .7fr) repeat(2, minmax(0, 1fr)); gap: 6px; margin: 1rem 0 1.2rem; font-size: .9rem; max-width: 620px; }
+.matrix .mh { font-weight: 700; font-size: .8rem; color: var(--muted); align-self: end; padding: 0 4px 2px; }
+.matrix .mh.side { align-self: center; }
+.matrix .cell { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px; font-weight: 500; }
+.matrix .cell.hi { background: var(--tint); border-color: var(--accent); }
+.matrix small { display: block; font-weight: 400; color: var(--muted); font-size: .8rem; margin-top: 2px; line-height: 1.45; }
+
+.map { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.3fr) auto minmax(0, 1fr); gap: 10px; align-items: center; margin: 1rem 0; }
+.mcol { display: flex; flex-direction: column; gap: 8px; }
+.mbox { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .84rem; line-height: 1.5; display: flex; flex-direction: column; gap: 2px; }
+.mbox b { font-size: .9rem; } .mbox span { color: var(--muted); } .mbox em { font-style: normal; color: var(--accent-ink); font-size: .78rem; font-weight: 500; }
+.mbox.good { border-color: var(--cs); } .mbox.ask { background: var(--tint); border-color: var(--accent); }
+.marrow { color: var(--accent); font-weight: 700; }
+
+.flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 1rem 0; font-size: .86rem; }
+.flow span { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; line-height: 1.45; }
+.flow i { font-style: normal; color: var(--accent); font-weight: 700; }
+.formula { font-family: var(--mono); font-size: .9rem; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; line-height: 1.9; overflow-x: auto; }
+.steps { counter-reset: s; list-style: none; padding-left: 0 !important; }
+.steps li { counter-increment: s; display: flex; gap: 10px; }
+.steps li::before { content: counter(s); flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--tint); color: var(--accent-ink); font: 700 .75rem/22px var(--sans); text-align: center; margin-top: 3px; }
+.assign { margin: 1.6rem 0; border: 1px dashed var(--accent); border-radius: 10px; padding: 14px 16px; background: var(--paper); }
+.assign p { margin: 6px 0 0; font-size: .92rem; }
+
+.tbl { overflow-x: auto; margin: 1rem 0; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+.doc table { border-collapse: collapse; width: 100%; font-size: .88rem; line-height: 1.55; }
+.doc th, .doc td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+.doc th { background: var(--panel); font-weight: 700; }
+.doc tr:last-child td { border-bottom: 0; }
+.drill .ans { filter: blur(5px); cursor: pointer; user-select: none; transition: filter .2s; }
+.drill .ans.shown { filter: none; user-select: auto; }
+
+.traps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 1rem; }
+.traps > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: .88rem; line-height: 1.55; }
+.traps s { color: var(--muted); text-decoration-color: var(--dwl); }
+.traps p { margin: 6px 0 0; font-weight: 500; }
+
+.qa-tools { margin: .4rem 0 .8rem; }
+.qa-tools button { font: 500 .82rem var(--sans); border: 1px solid var(--accent); background: var(--paper); color: var(--accent-ink); border-radius: 6px; padding: 5px 12px; cursor: pointer; }
+.qa { display: flex; flex-direction: column; gap: 6px; }
+.qa details { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
+.qa summary { cursor: pointer; padding: 10px 14px; font-weight: 500; font-size: .93rem; list-style: none; display: flex; gap: 10px; }
+.qa summary::before { content: "Q"; color: var(--accent); font-weight: 700; }
+.qa details[open] summary { border-bottom: 1px dashed var(--line); }
+.qa details p { margin: 0; padding: 10px 14px 12px 36px; font-size: .9rem; }
+
+/* graphs */
+.graph { max-width: 900px; margin: 1.8rem 0 2.2rem; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px 18px 14px; }
+.g-head h4 { font-family: var(--serif); font-size: 1.12rem; margin: 2px 0 2px; line-height: 1.45; }
+.g-head p { margin: 0 0 10px; color: var(--muted); font-size: .86rem; }
+.g-kicker { font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); }
+.g-body { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.g-plot svg { width: 100%; height: auto; display: block; }
+.g-side { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.g-ctrl { display: flex; flex-direction: column; gap: 10px; }
+.sl label { display: flex; justify-content: space-between; font-size: .8rem; color: var(--muted); line-height: 1.3; }
+.sl output { font-family: var(--mono); color: var(--fg); font-size: .8rem; }
+.sl input { width: 100%; accent-color: var(--accent); margin: 4px 0 0; }
+.g-btn { align-self: flex-start; font: 500 .8rem var(--sans); border: 1px solid var(--accent); color: var(--accent-ink); background: transparent; border-radius: 6px; padding: 4px 11px; cursor: pointer; }
+.g-btn:hover { background: var(--tint); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; align-self: flex-start; }
+.seg button { font: 500 .8rem var(--sans); border: 0; background: transparent; color: var(--muted); padding: 5px 12px; cursor: pointer; }
+.seg button[aria-checked="true"] { background: var(--accent); color: var(--paper); }
+.chk { display: flex; gap: 8px; align-items: center; font-size: .8rem; color: var(--muted); }
+.chk input { accent-color: var(--accent); }
+.g-stats { margin: 0; border-top: 1px solid var(--line); padding-top: 10px; display: flex; flex-direction: column; gap: 3px; }
+.st { display: flex; justify-content: space-between; gap: 10px; font-size: .8rem; line-height: 1.45; }
+.st dt { color: var(--muted); display: flex; align-items: center; gap: 7px; }
+.st dd { margin: 0; font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.st.big dd { font-weight: 500; color: var(--accent-ink); font-size: .92rem; }
+.g-note { margin: 12px 0 0; padding: 9px 12px; background: var(--tint); border-radius: 6px; font-size: .85rem; line-height: 1.6; }
+
+.sw { width: 11px; height: 11px; border-radius: 2px; display: inline-block; flex: none; }
+.sw.none { background: transparent; }
+.sw.a-cs { background: var(--cs); } .sw.a-ps { background: var(--ps); } .sw.a-ps2 { background: var(--ps); outline: 1px solid var(--demand); }
+.sw.a-dwl { background: repeating-linear-gradient(45deg, var(--dwl) 0 2px, transparent 2px 4px); outline: 1px solid var(--dwl); }
+.sw.a-rev { background: var(--rev); } .sw.a-rev2 { background: var(--rev2); } .sw.a-time { background: var(--time); } .sw.a-ts { background: var(--ts); }
+.sw.ln { height: 3px; border-radius: 2px; width: 16px; }
+
+svg .ax { stroke: var(--muted); stroke-width: 1.2; }
+svg .axl { fill: var(--muted); font: 500 11px var(--sans); }
+svg .tk { fill: var(--muted); font: 500 10.5px var(--mono); }
+svg .gd { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 4; opacity: .7; }
+svg .cv { stroke-width: 2.6; fill: none; stroke-linecap: round; }
+svg .cv.dash { stroke-dasharray: 7 5; stroke-width: 2; }
+svg .cvl { font: 700 11.5px var(--sans); }
+svg .c-d { stroke: var(--demand); fill: var(--demand); } svg .c-s { stroke: var(--supply); fill: var(--supply); }
+svg .c-x { stroke: var(--ext); fill: var(--ext); } svg .c-w { stroke: var(--world); fill: var(--world); } svg .c-t { stroke: var(--policy); fill: var(--policy); }
+svg text.cvl { stroke: none; }
+svg .pt { fill: var(--paper); stroke: var(--fg); stroke-width: 2; }
+svg .ptl { fill: var(--fg); font: 700 11px var(--sans); }
+svg .atag { fill: var(--fg); font: 700 11px var(--sans); opacity: .8; }
+svg .a-cs { fill: var(--cs); fill-opacity: .6; } svg .a-ps { fill: var(--ps); fill-opacity: .6; }
+svg .a-ps2 { fill: var(--ps); fill-opacity: .95; } svg .a-ts { fill: var(--ts); fill-opacity: .6; }
+svg .a-dwl { fill: url(#dwlHatch); stroke: var(--dwl); stroke-width: 1.2; }
+svg .a-rev { fill: var(--rev); fill-opacity: .75; } svg .a-rev2 { fill: var(--rev2); fill-opacity: .8; } svg .a-time { fill: var(--time); fill-opacity: .65; }
+
+svg .grid { stroke: var(--line); stroke-width: 1; }
+svg .a-prof { fill: var(--cs); fill-opacity: .75; } svg .a-loss { fill: var(--dwl); fill-opacity: .35; }
+.sw.a-prof { background: var(--cs); } .sw.a-loss { background: var(--dwl); opacity: .5; }
+.twin { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.tw-t { margin: 0 0 2px; font-size: .78rem; font-weight: 700; color: var(--muted); }
+.g-ctrl .g-btn + .g-btn { margin-top: -4px; }
+.graph.wide .g-body { grid-template-columns: minmax(0, 1fr); }
+.graph.wide .g-side { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+@media (max-width: 700px) { .twin, .graph.wide .g-side { grid-template-columns: minmax(0, 1fr); } }
+svg polyline.cv { fill: none !important; }
+
+.graph { background: var(--paper); }
+.g-note { background: var(--tint); }
+
+@media (max-width: 900px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .rail { display: none; position: fixed; inset: 64px 0 0 0; max-height: none; background: var(--bg); z-index: 15; padding: 20px 16px 60px; }
+  .rail.open { display: block; }
+  .toc-btn { display: inline-block; }
+  .g-body { grid-template-columns: minmax(0, 1fr); }
+  .map { grid-template-columns: minmax(0, 1fr); }
+  .marrow { transform: rotate(90deg); justify-self: center; }
+}
+@media (max-width: 560px) { .pair, .traps { grid-template-columns: minmax(0, 1fr); } }
+.spectrum { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: center; margin: 1rem 0 .2rem; font-weight: 700; font-size: .9rem; }
+.spectrum .bar { height: 12px; border-radius: 6px; background: linear-gradient(90deg, var(--tone-d9674f), var(--tone-e5c171), var(--tone-a7cdb6)); }
+.spec-l { display: flex; justify-content: space-between; font-size: .78rem; color: var(--muted); margin-bottom: 1rem; }
+.no, .yes { font-size: .74rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; }
+.no { background: var(--tone-fce3dd); color: var(--tone-a8432f); } .yes { background: var(--tone-e3f2e9); color: var(--tone-2f6b4f); }
+table.oil { font-variant-numeric: tabular-nums; }
+table.oil th, table.oil td { text-align: right; padding: 6px 8px; white-space: nowrap; }
+table.oil th:first-child, table.oil td:first-child { text-align: left; font-weight: 700; }
+table.oil td.hi { background: var(--tint); color: var(--accent-ink); font-weight: 700; }
+
 </style>
 <style id="system-theme">
 /* System appearance only changes colors. Print retains the light palette. */
 :root {
   --header-rgb: 253, 249, 249;
   --tone-2f282b: #2f282b;
+  --tone-2f6b4f: #2f6b4f;
+  --tone-3f5675: #3f5675;
+  --tone-3f7f7a: #3f7f7a;
+  --tone-6e3f55: #6e3f55;
   --tone-7e6f74: #7e6f74;
-  --tone-8e4357: #8e4357;
+  --tone-8a7a5c: #8a7a5c;
   --tone-9c4862: #9c4862;
-  --tone-b86b7b: #b86b7b;
+  --tone-a7cdb6: #a7cdb6;
+  --tone-a8432f: #a8432f;
+  --tone-b2c4e3: #b2c4e3;
+  --tone-bfdcc9: #bfdcc9;
   --tone-c06c84: #c06c84;
+  --tone-d9674f: #d9674f;
+  --tone-ddb3cb: #ddb3cb;
+  --tone-e3f2e9: #e3f2e9;
+  --tone-e5c171: #e5c171;
   --tone-efdde2: #efdde2;
+  --tone-f1dca8: #f1dca8;
+  --tone-f8eef0: #f8eef0;
   --tone-fae9ed: #fae9ed;
-  --tone-fceef2: #fceef2;
+  --tone-fce3dd: #fce3dd;
   --tone-fdf9f9: #fdf9f9;
   --tone-ffffff: #ffffff;
 }
@@ -31,19 +236,583 @@ main{max-width:780px;margin:0 auto;padding:74px 22px 120px}.kick{color:var(--acc
     color-scheme: dark;
     --header-rgb: 29, 24, 26;
     --tone-2f282b: #EEE4E6;
+    --tone-2f6b4f: #A0D2B2;
+    --tone-3f5675: #93AECB;
+    --tone-3f7f7a: #8CC4BE;
+    --tone-6e3f55: #C9A3D6;
     --tone-7e6f74: #BEACB2;
-    --tone-8e4357: #E6B3BE;
+    --tone-8a7a5c: #C9B68C;
     --tone-9c4862: #E6B3BE;
-    --tone-b86b7b: #D79AA7;
+    --tone-a7cdb6: #6E8C6B;
+    --tone-a8432f: #F0A48D;
+    --tone-b2c4e3: #667C96;
+    --tone-bfdcc9: #5F7A5C;
     --tone-c06c84: #D79AA7;
+    --tone-d9674f: #E08A6F;
+    --tone-ddb3cb: #8C6680;
+    --tone-e3f2e9: #23372D;
+    --tone-e5c171: #C9A250;
     --tone-efdde2: #55424A;
+    --tone-f1dca8: #8F7A4A;
+    --tone-f8eef0: #2B2226;
     --tone-fae9ed: #35272D;
-    --tone-fceef2: #35272D;
+    --tone-fce3dd: #412B28;
     --tone-fdf9f9: #1D181A;
     --tone-ffffff: #241E21;
   }
 }
 </style>
-</head><body>
-<header><div class="top"><nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Study Notes</a><span>/</span><a href="economics.html">Economics</a><span>/</span><b>Session 8</b></nav><nav class="sessions" aria-label="Sessions 5–8"><a class="pill" href="economics-s5.html">S5</a><a class="pill" href="economics-s6.html">S6</a><a class="pill" href="economics-s7.html">S7</a><span class="pill" aria-current="page">S8</span></nav></div></header>
-<main><p class="kick">MGMG515 · Session 8</p><h1>Economics — Session 8</h1><section class="note"><div class="label">Coming soon</div><p>This lesson is not published yet. This reserved page keeps the S5–S8 navigation working in the meantime.</p><p>When the lesson is ready, the completed HTML can replace this file directly.</p></section><a class="back" href="economics.html">← Back to Economics sessions</a></main></body></html>
+
+<style>
+body{margin:0}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:1rem 0}
+.three>div,.method{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+.three b,.method>b{color:var(--accent-ink)}.three p,.method p{margin:4px 0 0;font-size:.92rem}
+.method{margin:12px 0}.endnote{margin-top:32px}
+.plot-legend{display:flex;flex-wrap:wrap;gap:7px 16px;margin:4px 0 14px;font-size:.78rem;color:var(--muted)}
+.plot-legend span{display:inline-flex;gap:6px;align-items:center}
+svg .tk{font-size:11.5px}svg .axl{font-size:12px}.g-plot svg{overflow:visible}
+.seg{display:flex;flex-wrap:wrap;gap:2px;max-width:100%}.seg button{flex:1 1 auto;white-space:normal}
+.seg button[aria-pressed=true]{background:var(--accent);color:var(--paper)}
+.best-row{background:var(--tint);font-weight:700;color:var(--accent-ink)}
+.g-ctrl [hidden]{display:none!important}.sl label{gap:12px}.sl label span{min-width:0}
+.sl output{flex-shrink:0}.g-note:empty{display:none}.doc p,.doc li{overflow-wrap:break-word}
+@media(max-width:700px){.three{grid-template-columns:minmax(0,1fr)}.graph{padding:14px 12px}.st dd{white-space:normal;text-align:right;max-width:60%}.top-in{gap:8px 12px}}
+@media(max-width:420px){.top-in{align-items:center}.sessions{margin-left:0}.crumbs{flex:1 1 100%;font-size:.8rem}.toc-btn{order:2;margin-left:auto}.sessions{order:1}.rail{inset:108px 0 0}.graph.wide .g-side{gap:14px}.doc h2{font-size:1.4rem}}
+@media print{.top,.rail,.g-ctrl,.qa-tools{display:none}.wrap{display:block}.qa details p{display:block}.graph{break-inside:avoid}body{background:#fff}.doc{max-width:none}}
+</style>
+
+<style>
+.extra,.graph-guide,.number-readout{background:var(--paper);border:1px solid var(--line);border-radius:9px;margin:1rem 0;padding:0 14px}
+.extra>summary,.graph-guide>summary,.number-readout>summary{cursor:pointer;padding:11px 0;color:var(--accent-ink);font-size:.87rem;font-weight:500}
+.extra[open]>summary,.graph-guide[open]>summary,.number-readout[open]>summary{border-bottom:1px dashed var(--line)}
+.extra>p,.graph-guide>p{font-size:.9rem}.graph-guide .steps{font-size:.91rem;line-height:1.65}.graph-guide .steps li{margin:12px 0}
+.g-reading{min-width:0}.g-reading .g-note{margin:0}.number-readout{margin:12px 0 0;padding:0 10px}.number-readout .g-stats{border-top:0;padding-bottom:10px}
+</style>
+<style>
+.four{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:1rem 0}
+.four>div{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.four b{color:var(--accent-ink)}.four p{margin:4px 0 0;font-size:.9rem;line-height:1.55}
+@media (max-width:980px){.four{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.four{grid-template-columns:minmax(0,1fr)}}
+.ring-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin:14px 0 4px}
+.ring-card{display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;font:inherit;font-size:.86rem;line-height:1.45;color:var(--fg);background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:9px 11px;cursor:pointer}
+.ring-card:hover{border-color:var(--accent)}
+.ring-card.done{background:var(--tint);border-color:var(--accent)}
+.ring-card.off-reg{border-style:dashed}.ring-card.off-reg .rc-t{text-decoration:line-through;color:var(--muted)}
+.rc-amt{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.78rem;color:var(--muted)}
+.rc-tag{font-size:.74rem;font-weight:700;letter-spacing:.04em;color:var(--accent-ink)}.rc-tag:empty{display:none}
+.sort-tools{display:flex;flex-direction:row;flex-wrap:wrap;gap:8px;margin-top:6px}.sort-tools .g-btn+.g-btn{margin-top:0}
+.g-btn:disabled{opacity:.45;cursor:default}
+.ladder{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.rung{display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px;align-items:start;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.rung-1{margin-left:14px}.rung-2{margin-left:28px;background:var(--tint)}.rung-3{margin-left:42px;background:var(--tint);border-color:var(--accent)}
+.rung-n{width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--paper);display:grid;place-items:center;font-weight:700;font-size:.85rem}
+.rung-b p{margin:0}.rung-q{font-size:.85rem;color:var(--muted)}.rung-a{font-family:var(--serif);font-weight:700;font-size:1.06rem;margin:2px 0 4px!important}.rung-ex{font-size:.92rem;line-height:1.6}
+@media (max-width:560px){.rung-1{margin-left:6px}.rung-2{margin-left:12px}.rung-3{margin-left:18px}}
+.timeline{list-style:none;margin:12px 0 12px 8px;padding:0 0 0 18px!important;border-left:2px solid var(--line)}
+.timeline li{position:relative;display:grid;grid-template-columns:64px minmax(0,1fr);gap:10px;padding:6px 0;margin:0}
+.timeline li::before{content:"";position:absolute;left:-25px;top:12px;width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.timeline li.what-if::before{background:var(--paper);border:2px dashed var(--accent);width:8px;height:8px}
+.timeline li.what-if>span{color:var(--muted);font-style:italic}
+.timeline b{font-family:"JetBrains Mono",ui-monospace,monospace;color:var(--accent-ink);font-weight:500}
+</style><style>svg .a-faded{opacity:.28}.map .mbox{min-width:0}</style></head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><pattern id="dwlHatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" style="fill:var(--dwl);fill-opacity:.12"/><rect width="2.2" height="6" style="fill:var(--dwl);fill-opacity:.75"/></pattern></defs></svg>
+<header class="top"><div class="top-in">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Study Notes</a><span>/</span><a href="economics.html">Economics</a><span>/</span><b>Session 8</b></nav>
+<button class="toc-btn" type="button" id="tocBtn" aria-expanded="false" aria-controls="rail">Contents</button>
+<nav aria-label="Sessions 5–8" class="sessions"><a class="pill" href="economics-s5.html">S5</a><a class="pill" href="economics-s6.html">S6</a><a class="pill" href="economics-s7.html">S7</a><span aria-current="page" class="pill">S8</span></nav>
+</div></header>
+<div class="wrap"><aside class="rail" id="rail"><p class="lbl">Contents</p><ol id="toc"></ol></aside>
+<main><article class="doc"><div class="hero"><p class="kick">MGMG515 · Session 8</p><h1>The Financial System</h1><p class="lead">Some people have money they do not need yet; others have plans they cannot pay for yet. This chapter follows the bridges between them: the interest rate that prices the crossing, the banks and markets that carry the money, why the bridges collapsed in 2008, and what all of it means for your own savings.</p></div>
+
+<h2 id="map">Chapter map</h2>
+<div class="map">
+<div class="mcol"><div class="mbox ask"><b>Market</b><span>Saving meets borrowing; the interest rate is the price.</span></div></div>
+<div class="marrow">→</div>
+<div class="mcol">
+<div class="mbox"><b>Bridges</b><span>Banks, bond markets and stock markets carry savings to borrowers.</span></div>
+<div class="mbox"><b>Collapse</b><span>Four reasons bridges fail, and the 2008 crisis.</span></div>
+</div>
+<div class="marrow">→</div>
+<div class="mcol"><div class="mbox good"><b>Your money</b><span>Do not pick stocks, diversify, keep fees low, think twice before buying a house.</span></div></div>
+</div>
+<p class="hint"><b>中文邏輯</b><span>金融體系就是把錢「在人之間、在時間上」搬動：利率是價格，銀行和市場是橋，信任一垮橋就斷。</span></p>
+
+<h2 id="ethics">1. Opening: two ways to judge an action</h2>
+<p class="sub">The session opened by returning to moral economics, with Alvin Roth's <i>Moral Economics</i> on the first slide.</p>
+<div class="tbl"><table><thead><tr><th>Lens</th><th>Definition</th><th>Example from the slides</th><th>Do not confuse with</th></tr></thead><tbody>
+<tr><td><b>Deontology</b><span class="zh">義務論</span></td><td>"Deon" means duty: an act is right or wrong because of the rule or duty it follows, whatever the outcome.</td><td>Kneeling during the anthem is wrong, because patriotism is a duty and disrespecting the flag breaks it.</td><td>Following the law: a duty can be moral even where no law requires it.</td></tr>
+<tr><td><b>Consequentialism</b><span class="zh">結果論</span></td><td>An act is judged by its consequences; utilitarianism, the best-known version, adds up the gains and harms to everyone.</td><td>Kneeling hurts nobody and raises awareness for oppressed minorities, so it is good.</td><td>Self-interest: the consequences that count are everyone's, not only your own.</td></tr>
+</tbody></table></div>
+<p>The footbridge version of the trolley problem asks "focus on the consequences?" Pushing one person off the bridge would stop the trolley and save five. A strict consequentialist counts five against one; most people still refuse to push, which is a deontological intuition at work. Colin Kaepernick kneeling during the national anthem gets opposite verdicts from the two lenses, as the table shows.</p>
+<div class="pair"><div><b>Airbnb: a market experiment</b><p>Edelman, Luca and Svirsky (2016) sent booking requests from guest profiles that were identical except for names that signal race. Hosts said yes more often to guests with white-sounding names (about 1,150 against 940) and said no more often to guests with African-American-sounding names (about 870 against 660).</p></div><div><b>Reading it with both lenses</b><p>A deontologist says refusing a guest because of race is wrong whatever it costs or earns. A consequentialist asks about the harm to excluded guests and the gains and losses to hosts and the platform. Both lenses can condemn the same act for different reasons.</p></div></div>
+<p class="note-small">Counts are read from Figure 2 of the paper as shown on the slide, and are approximate.</p>
+
+<h2 id="why">2. Why people save and borrow</h2>
+<p class="sub">Saving and borrowing move spending across time. Income is hump-shaped over a life; spending does not have to be.</p>
+<div class="tbl"><table><thead><tr><th>Stage</th><th>Income vs consumption</th><th>Action</th><th>Example</th></tr></thead><tbody>
+<tr><td><b>Young</b></td><td>Income below consumption</td><td>Borrow</td><td>A loan for CMMU tuition.</td></tr>
+<tr><td><b>Prime working years</b></td><td>Income above consumption</td><td>Repay debt, save</td><td>Contributions to a provident fund.</td></tr>
+<tr><td><b>Retired</b></td><td>Income below consumption</td><td>Dissave: spend past savings</td><td>Living on the fund after 60.</td></tr>
+</tbody></table></div>
+<p>This is the <b>life-cycle theory of saving</b>. Smoothing consumption this way raises well-being even though lifetime income is unchanged. Three more forces shape how much people save. <b>Time preference</b>: some people strongly prefer spending now, others are patient. <b>Nudges</b>: when an employer enrolls workers in a retirement plan by default, they save more, although nothing about the incentives changed. <b>Big investments</b>: students borrow for education, firms borrow for projects, and entrepreneurs such as Howard Schultz, building Starbucks, raise money they do not have.</p>
+
+<h2 id="loanable">3. The market for loanable funds</h2>
+<p class="sub">Treat saving and borrowing like any other market. The good being traded is the use of money for a while, and the interest rate is its price.</p>
+<div class="tbl"><table><thead><tr><th>Part</th><th>Definition</th><th>Example</th><th>Do not confuse with</th></tr></thead><tbody>
+<tr><td><b>Supply of savings</b></td><td>Slopes up: a higher interest rate brings more savings into the market.</td><td>Higher deposit rates pull cash out from under the mattress.</td><td>Money supply, which the central bank controls.</td></tr>
+<tr><td><b>Demand to borrow</b></td><td>Slopes down: a lower interest rate makes more projects worth borrowing for.</td><td>A Thai SME buys a machine when loan rates fall.</td><td>Demand for money to hold as cash.</td></tr>
+<tr><td><b>Interest rate</b></td><td>The price of borrowing and the reward for saving.</td><td>2% on a deposit, 7% on a business loan.</td><td>The <b>real</b> rate: nominal rate minus expected inflation.</td></tr>
+</tbody></table></div>
+<p>Decide first whether an event changes how much people want to <b>save</b> or how much they want to <b>borrow</b>, then shift that curve.</p>
+<div class="tbl"><table><thead><tr><th>Event</th><th>Curve</th><th>Interest rate</th><th>Lending</th></tr></thead><tbody>
+<tr><td>Households decide to save more (MRU: South Korea, China)</td><td>Supply right</td><td>↓</td><td>↑</td></tr>
+<tr><td>Firms become less optimistic</td><td>Demand left</td><td>↓</td><td>↓</td></tr>
+<tr><td>Government gives an investment tax credit</td><td>Demand right</td><td>↑</td><td>↑</td></tr>
+</tbody></table></div>
+<div data-widget="loanable" data-readout="optional"></div>
+<details class="graph-guide"><summary>How to build this graph</summary>
+<ol class="steps"><li><span>Quantity of loanable funds on the horizontal axis, the interest rate on the vertical axis. Draw S (savings) sloping up and D (borrowing) sloping down; mark E1, r1, Q1.</span></li><li><span>Ask who the event affects. Savers: shift S. Borrowers, including the government: shift D.</span></li><li><span>Mark E2 and read the new r2 and Q2 off the axes.</span></li></ol></details>
+<p>There is no single building called the market for loanable funds. There are many markets for different borrowers and lenders, linked by banks, bond markets and stock markets. The model shows the raw forces behind interest rates. The rate that matters for decisions is the <b>real interest rate</b><span class="zh">實質利率</span>: if a Thai bank pays 2% and prices rise 2%, a saver's buying power does not grow at all.</p>
+<p class="hint"><b>中文邏輯</b><span>利率是錢的價格。想存的人變多，錢就便宜（利率降）；想借的人變多，錢就變貴（利率升）。</span></p>
+
+<h2 id="banks">4. What banks do</h2>
+<p class="sub">The slides draw three bridges from lenders and savers to borrowers: banks, bond markets and stock markets. These are <b>financial intermediaries</b><span class="zh">金融中介</span>.</p>
+<div class="four">
+<div><b>Pay interest</b><p>Deposits earn interest, which attracts savings.</p></div>
+<div><b>Screen borrowers</b><p>Loan officers do the due diligence that no single saver could afford.</p></div>
+<div><b>Pool and spread risk</b><p>Many small deposits fund many loans, so a few bad loans hurt no one badly.</p></div>
+<div><b>Keep reserves</b><p>Only a fraction of deposits is kept as cash for withdrawals; the rest is lent.</p></div>
+</div>
+<p>The bank earns the <b>spread</b>: it might pay depositors 2% and lend at 7%. MRU builds the case with Starbucks.</p>
+<div class="tbl"><table><thead><tr><th>Arrangement</th><th>Problem</th></tr></thead><tbody>
+<tr><td>You alone lend Howard Schultz $1 million.</td><td>If the venture fails, the loss to you is huge.</td></tr>
+<tr><td>You and 99 friends lend $10,000 each.</td><td>Risk is shared, but 100 people each studying the business plan is slow and costly.</td></tr>
+<tr><td>Appoint one coffee-market expert to evaluate for everyone.</td><td>This is what a bank does: specialists do the screening.</td></tr>
+<tr><td>A bank pools deposits.</td><td>Now it is like 100,000 people lending Schultz $10 each, and lending to thousands of other entrepreneurs too. A few bad loans will not bankrupt the bank.</td></tr>
+</tbody></table></div>
+<div data-widget="pool" data-readout="optional"></div>
+<p class="note-small">The graph assumes borrowers default independently. In 2008 many mortgages failed together, which pooling cannot fix (section 9).</p>
+<div class="pair"><div><b>Liquidity transformation</b><span class="zh">流動性轉換</span><p>Your deposit can be withdrawn any day, while the loan it funds is locked up for years.</p></div><div><b>Maturity transformation</b><span class="zh">期限轉換</span><p>Short-term deposits fund long-term loans such as a 20-year mortgage.</p></div></div>
+<p>The same feature makes banks both useful and fragile. A bank counts on depositors not all asking for their money on the same day. If they do, even a sound bank runs out of cash, because the money is tied up in loans. The 2022 Nobel Prize in economics, shown in the slides, went to Ben Bernanke, Douglas Diamond and Philip Dybvig "for research on banks and financial crises". Diamond and Dybvig modeled exactly this: why banks that turn short deposits into long loans are valuable, and why that leaves them open to runs.</p>
+<p class="hint"><b>中文邏輯</b><span>銀行賺的是「資訊和分散風險」的錢；它把隨時要還的存款變成很久才收回的貸款，這是它最大的貢獻，也是最容易出事的地方。</span></p>
+
+<h2 id="stocks">5. Stock markets</h2>
+<p class="sub">A stock is a share of ownership with a claim on the firm's profits. Most stock trading does not give the firm a single baht.</p>
+<div class="tbl"><table><thead><tr><th>Market</th><th>Definition</th><th>Example</th><th>Does the firm get money?</th></tr></thead><tbody>
+<tr><td><b>Primary market</b></td><td>The firm sells new shares, first at its <b>IPO</b><span class="zh">首次公開發行</span>, later in new issues.</td><td>Starbucks went public in 1992; a Thai startup listing on the SET.</td><td><span class="yes">Yes</span></td></tr>
+<tr><td><b>Secondary market</b></td><td>Investors trade existing shares with each other.</td><td>Everyday trading on the Stock Exchange of Thailand.</td><td><span class="no">No</span></td></tr>
+</tbody></table></div>
+<p>The secondary market still matters. Because shares are easy to resell, investors are willing to buy new issues in the first place. An IPO also rewards founders and venture capitalists who backed the firm when it was risky, and lets them diversify. Buying a stock is a bet on the company, so some shareholders end up happy and others "a little bit sad"; bank depositors usually do not see the value of their deposits swing.</p>
+<p class="note-small">Same distinction as Session 7: buying existing shares is not investment in GDP, which counts only new capital goods.</p>
+
+<h2 id="bonds">6. Bonds: IOUs, risk and yield</h2>
+<p class="sub">A bond is an IOU: it says who owes how much, and when. A well-known firm like Starbucks, which has issued over $1 billion of bonds, can borrow directly from investors and skip the bank.</p>
+<div class="tbl"><table><thead><tr><th></th><th>Bond</th><th>Stock</th></tr></thead><tbody>
+<tr><td><b>You hold</b></td><td>A loan to the firm</td><td>Part ownership</td></tr>
+<tr><td><b>You receive</b></td><td>A fixed sum on a fixed date, sometimes with regular <b>coupon</b> payments</td><td>A share of profits, as dividends or growth</td></tr>
+<tr><td><b>Who is paid first</b></td><td>Bondholders</td><td>Shareholders get what is left</td></tr>
+<tr><td><b>Main risk</b></td><td><b>Default risk</b>: the borrower cannot pay</td><td>The business does badly</td></tr>
+</tbody></table></div>
+<p>Riskier borrowers pay more. Rating agencies such as Standard &amp; Poor's grade bonds from <b>AAA</b> down to <b>D</b>; anything below <b>BBB-</b> is called a junk bond. In the video Starbucks is rated A-, and Illinois (A-) pays more to borrow than Virginia (AAA). <b>Collateral</b> lowers the rate too: if you default on a mortgage the bank takes the house, but "once you've been to Maui, the bank can't repossess your vacation."</p>
+<p>A bond's <b>yield</b><span class="zh">殖利率</span> is the gain from holding it divided by the price paid. The face value is fixed, so the only way a bond can offer a higher yield is to sell for less.</p>
+<div data-widget="bond" data-readout="optional"></div>
+<p>MRU's lesson from the three bonds: the 14.8% bond is not a free lunch. <b>Equally risky assets must pay the same return</b>, or everyone would buy the higher-yield one until its price rose. A high yield is a signal of high risk. Which bond to buy depends on how much risk you can live with.</p>
+
+<h2 id="crowding">7. Crowding out: when the government borrows</h2>
+<p class="sub">In 2016 the US government owed the public almost $14 trillion. A borrower that large moves the whole market.</p>
+<div class="tbl"><table class="oil" aria-label="MRU crowding-out numbers"><thead><tr><th>$ billion</th><th>Before</th><th>After the government borrows 100</th></tr></thead><tbody>
+<tr><td>Interest rate</td><td>7%</td><td class="hi">9%</td></tr>
+<tr><td>Savings supplied</td><td>200</td><td>250</td></tr>
+<tr><td>Private borrowing</td><td>200</td><td>150</td></tr>
+<tr><td>Government borrowing</td><td>0</td><td>100</td></tr>
+</tbody></table></div>
+<p>Two things give way. Saving rises by 50, and to save more people consume less, so <b>private consumption falls by 50</b>. At 9% private borrowers want only 150, so <b>private investment falls by 50</b>. Together that is <b>crowding out</b><span class="zh">排擠效果</span>: 100 of government borrowing displaces 50 of consumption and 50 of investment.</p>
+<div data-widget="crowd" data-readout="optional"></div>
+<div class="pair"><div><b>The 50/50 split</b><p>It comes from the slopes MRU drew. A steeper savings supply curve puts more of the burden on investment.</p></div><div><b>Limit</b><p>This is a full-employment, closed-economy result. Crowding out is smaller in a recession or when foreign savers fund the borrowing, and borrowing for productive infrastructure can raise future output.</p></div></div>
+
+<h2 id="failures">8. Four reasons the bridges fail</h2>
+<p class="sub">Tyler Cowen compares intermediaries to bridges: we notice how much we rely on them only when they crumble. In many poor countries a working bridge never existed.</p>
+<div class="tbl"><table><thead><tr><th>Reason</th><th>What it destroys</th><th>Mechanism</th><th>MRU examples</th></tr></thead><tbody>
+<tr><td><b>1. Insecure property rights</b></td><td>Willingness to save</td><td>If deposits or shares can be frozen or seized, people keep cash and gold instead.</td><td>Cyprus seized deposits in 2013; Argentina and Brazil froze them; Russia and Yukos.</td></tr>
+<tr><td><b>2. Interest rate controls</b></td><td>The price signal</td><td>A <b>usury law</b> is a price ceiling on loans: below equilibrium it creates a shortage of credit.</td><td>Cowen has seen loans at 50% or 100% and asks whether that is always bad.</td></tr>
+<tr><td><b>3. Politicized lending</b></td><td>Screening by merit</td><td>Loans follow political connections; insolvent <b>zombie banks</b> are kept alive.</td><td>Japan's lost decade, 1990 to 2000; more state-owned banks go with slower growth.</td></tr>
+<tr><td><b>4. Runs, panics, scandals</b></td><td>Trust</td><td>With fractional reserves, a rush to withdraw can sink even a sound bank: a <b>bank run</b><span class="zh">擠兌</span>.</td><td>Almost half of US banks failed in the Great Depression; Enron, WorldCom, Madoff.</td></tr>
+</tbody></table></div>
+<p>Use the "Interest rate cap" setting in the graph in section 7 to see reason 2: a cap at 5% raises the quantity demanded to 250, cuts the quantity supplied to 150, and actual lending falls from 200 to 150. The borrowers shut out are usually the riskiest, who then go without or turn to illegal lenders.</p>
+<p>After the Depression runs, the US created <b>deposit insurance</b> (the FDIC). If depositors know they will be repaid even when the bank fails, nobody needs to rush. The cost is <b>moral hazard</b>: insured depositors stop watching the bank, and banks may take more risk, which is why insurance comes with regulation.</p>
+<p class="note-small">The link between state-owned banks and slower growth is a cross-country correlation; weak institutions may cause both.</p>
+<p class="hint"><b>中文邏輯</b><span>四個原因各破壞一樣東西：沒收存款破壞財產權，利率上限破壞價格，政治放款破壞篩選，擠兌讓信任瞬間崩潰。</span></p>
+
+<h2 id="recession">9. The Great Recession</h2>
+<p class="sub">Most of the slides follow this story. The economy stands on a cliff edge with a load hanging below it, and MRU adds four weights one at a time. Then house prices fall, and the load drops.</p>
+<h3 id="homeowners">Weight 1: homeowner leverage</h3>
+<p>A $100,000 house bought with a typical 20% down payment carries an $80,000 mortgage and $20,000 of <b>owner's equity</b>: what the owner would keep after selling and repaying the loan. Equity is the cushion. The <b>leverage ratio</b><span class="zh">槓桿比率</span> divides the mortgage by the owner's equity.</p>
+<div class="formula">Leverage ratio = mortgage ÷ owner's equity<br>20% down: 80,000 ÷ 20,000 = 4<br>5% down: 95,000 ÷ 5,000 = 19</div>
+<p>Before the crisis many homes were bought with 10%, 5% or even zero down. With 5% down, a fall to $90,000 leaves the house worth less than the $95,000 still owed: the owner is <b>underwater</b>, and equity is gone. That hurts the bank too, because in a foreclosure it gets a house worth less than the loan.</p>
+<div data-widget="leverage" data-readout="optional"></div>
+<h3 id="banklev">Weight 2: bank leverage</h3>
+<p>Banks did the same thing with their own balance sheets. Lehman Brothers' leverage ratio rose from about 20 in 2004 to 44 by 2007. At 44, a fall of about 2.2% in the value of its assets wipes out its equity; when the fall came, Lehman was underwater and went bankrupt on September 15, 2008. Why would experienced managers do this? Cowen gives two reasons: <b>overconfidence</b> that house prices could not fall much, and <b>incentives</b>, since bonuses rose with profits while the managers did not personally go bankrupt when the bank did.</p>
+<h3 id="securitization">Weight 3: securitization</h3>
+<p><b>Securitization</b><span class="zh">證券化</span> bundles many individual mortgages into one tradable security and sells it to outside investors. The slides show four mortgages going into one package:</p>
+<div class="tbl"><table class="oil" aria-label="Mortgages bundled into a security"><thead><tr><th>Mortgage</th><th>House value</th><th>Mortgage</th><th>Equity</th></tr></thead><tbody>
+<tr><td>1</td><td>$81,000</td><td>$77,000</td><td>$4,000</td></tr>
+<tr><td>2</td><td>$86,000</td><td>$78,000</td><td>$8,000</td></tr>
+<tr><td>3</td><td>$85,000</td><td>$75,000</td><td>$10,000</td></tr>
+<tr><td>4</td><td>$83,000</td><td>$71,000</td><td>$12,000</td></tr>
+</tbody></table></div>
+<p class="note-small">The slide labels the third mortgage's equity $8,000; house value minus mortgage gives $10,000.</p>
+<p>Standard &amp; Poor's, Moody's and Fitch rated such packages, often AA- or even AAA. Many turned out to be riskier than advertised, through outright fraud, rating failures, and above all complacency about house prices. Securitization itself is a useful tool: it frees cash for banks and spreads risk to investors who want it. The failure was in quality, transparency and ratings.</p>
+<h3 id="shadow">Weight 4: the shadow banking system</h3>
+<div class="tbl"><table><thead><tr><th>Part of the shadow banking system</th><th>Names on the slide</th></tr></thead><tbody>
+<tr><td>Investment banks</td><td>Lehman Brothers, Bear Stearns</td></tr>
+<tr><td>Parts of commercial banks</td><td>Citibank, Bank of America</td></tr>
+<tr><td>Money market funds</td><td>Vanguard, PIMCO</td></tr>
+<tr><td>Issuers of asset-backed securities</td><td>BNP Paribas</td></tr>
+<tr><td>Hedge funds</td><td>Bridgewater, Man, Brevan Howard</td></tr>
+</tbody></table></div>
+<p>A commercial bank is funded by insured deposits. An investment bank such as Lehman is funded by investors, mostly through short-term loans, with no comparable guarantee: "use at your own risk." These lenders are watchful and quick to flee. Shadow banks borrow short to lend long like a bank, but without deposit insurance, and by 2008 they lent more than traditional commercial banks.</p>
+<h3 id="collapse">The nudge: house prices fall</h3>
+<div class="flow"><span>2007: house prices fall</span><i>→</i><span>Homeowners underwater, defaults rise</span><i>→</i><span>Mortgage securities, even AAA, lose value</span><i>→</i><span>Leveraged banks near insolvency</span><i>→</i><span>Short-term lenders run from shadow banks</span><i>→</i><span>Fire sales push prices lower</span><i>→</i><span>Credit crunch, layoffs, store closings</span></div>
+<p>The last slide shows the response: a bank leverage ratio of 16.66, meaning more equity behind each dollar of assets. Cowen thinks requiring <b>more equity and less leverage</b> makes sense; it has been enacted, and "it remains to be seen" how well it works. A government guarantee for shadow banks would be the radical alternative, but it could expose taxpayers to trillions and would give leveraged managers even more reason to take risk.</p>
+<p class="hint"><b>中文邏輯</b><span>2008 不是單一原因，而是四層脆弱疊在一起：屋主槓桿、銀行槓桿、看不懂的房貸證券、沒有存款保險的影子銀行。房價一跌，短期資金一夜抽走，橋就斷了。</span></p>
+
+<h2 id="thai">10. The Thai bond market</h2>
+<p class="sub">Before 1997 Thailand's financial system stood on one leg: bank loans. When banks and finance companies got into trouble, firms had nowhere else to borrow. After the crisis the country built a second bridge.</p>
+<div class="tbl"><table class="oil" aria-label="Thai financial structure as a share of GDP"><thead><tr><th>Share of GDP</th><th>1997</th><th>Sep 2021</th></tr></thead><tbody>
+<tr><td>Bank loans</td><td>131%</td><td>112%</td></tr>
+<tr><td>Bond market</td><td>12%</td><td class="hi">94%</td></tr>
+<tr><td>Corporate bonds</td><td>3%</td><td>27%</td></tr>
+<tr><td>Stock market capitalization</td><td>24%</td><td>117%</td></tr>
+</tbody></table></div>
+<p>In September 2021 the market held 14.9 trillion baht of bonds: government bonds including T-bills 45%, corporate bonds 27%, Bank of Thailand bonds 20%, state-enterprise bonds 7%, foreign bonds 1%. Government-related bonds are therefore about 72%. That shows who the big borrower is; on its own it does not prove crowding out, since corporate bonds grew over the same period.</p>
+<div class="tbl"><table><thead><tr><th>Step</th><th>How it works in Thailand</th><th>Link to the model</th></tr></thead><tbody>
+<tr><td><b>Issuing government bonds</b></td><td>Auctions through the Bank of Thailand: T-bills Monday, BoT bonds Tuesday, loan bonds Wednesday, SOE bonds Thursday. T-bills, under one year, are sold at a discount.</td><td>Primary market; a T-bill works like the zero-coupon bonds in section 6.</td></tr>
+<tr><td><b>Issuing corporate bonds</b></td><td>A public offering can be sold to anyone but needs SEC approval, full disclosure and an investment-grade rating from TRIS or Fitch (Thailand). Private placements go to at most 10 investors, institutions, or high-net-worth investors.</td><td>Ratings price default risk.</td></tr>
+<tr><td><b>Trading</b></td><td>Over the counter between dealers, by phone or broker; every trade reported to ThaiBMA within 30 minutes.</td><td>Secondary market; reporting builds the trust that reason 4 needs.</td></tr>
+<tr><td><b>Who holds</b></td><td>Government bonds: pension funds and the Social Security Office 32%, insurers 29%, non-residents 16%. Corporate bonds: individual investors are the largest group, 33%.</td><td>Ordinary savers bear default risk directly.</td></tr>
+</tbody></table></div>
+<p class="note-small">Figures are from the ThaiBMA page "About Thai Bond Market", dated September 2021 (holders September 2020). Later estimates put the market near 18 trillion baht in 2026 and the retail share of corporate bonds near 40%.</p>
+
+<h2 id="money">11. Your own money: four rules</h2>
+<p class="sub">MRU's Money Skills videos turn the same economics into personal advice.</p>
+<div class="tbl"><table><thead><tr><th>Rule</th><th>Why</th><th>Evidence MRU uses</th></tr></thead><tbody>
+<tr><td><b>1. Ignore expert stock pickers</b></td><td>Past winners rarely repeat, and luck is hard to tell from skill.</td><td>Malkiel's dart-throwing monkey; of the top quarter of funds, under 4% stay on top two years later, 1% after five.</td></tr>
+<tr><td><b>2. It is hard to beat the market</b></td><td>The <b>efficient market hypothesis</b><span class="zh">效率市場假說</span>: prices already reflect public information.</td><td>"America is aging, buy nursing homes" is already priced in; after the 1986 Challenger explosion, Morton Thiokol fell over 11% that day, months before it was found responsible.</td></tr>
+<tr><td><b>3. Diversify, keep fees low</b></td><td><b>Diversification</b><span class="zh">分散投資</span> lowers risk without lowering expected return.</td><td>Enron employees held about 60% of their retirement savings in Enron stock and lost both job and savings.</td></tr>
+<tr><td><b>4. Even an imperfect market is more rational than you</b></td><td>Investors are overconfident and herd; anomalies exist but are small and fade once known.</td><td>Shiller's Nobel work; Monday, January and momentum effects; Buffett tells his heirs to buy index funds.</td></tr>
+</tbody></table></div>
+<p>The coin-flip experiment shows why rule 1 holds. Give 1,000 "experts" a coin to predict whether the market rises. After one year 500 are right, after two 250, and after five about 31 have never been wrong (MRU says 32). They will be called geniuses and write books, yet they were certain to exist whatever the market did.</p>
+<div data-widget="fees" data-readout="optional"></div>
+<p class="note-small">MRU quotes about $57,000 and $70,000; those cannot be reproduced with a plain 8% return. The graph uses 10,000 × (1.08 − fee)^25, which gives $54,274 and $65,384. The lesson is the same.</p>
+<p>Diversification removes the risk specific to one firm, not the risk of the whole market falling, as it did in 2008. It also argues against <b>home market bias</b>: a Thai investor with her savings in her employer's shares and a condo in the same city has job, shares and property all exposed to one local shock.</p>
+
+<h2 id="rent">12. Rent or buy?</h2>
+<p class="sub">An MRU Econ Duel: Tyler Cowen argues for buying, Alex Tabarrok for renting. They end closer than they start.</p>
+<div class="tbl"><table><thead><tr><th>Issue</th><th>Tyler: buy</th><th>Alex: rent</th></tr></thead><tbody>
+<tr><td><b>Investment</b></td><td>Does not dispute it.</td><td>House prices are not guaranteed to rise; do not expect a great investment.</td></tr>
+<tr><td><b>Taxes</b></td><td>Mortgage interest is deductible, so buying can be cheaper.</td><td>Much of the tax break is built into the price, so the seller captures it.</td></tr>
+<tr><td><b>Elasticity</b></td><td>Where builders can add homes (Texas, Florida), the price falls back and the buyer keeps the benefit.</td><td>Where permits are nearly impossible (San Francisco, New York, Boston), landowners get it.</td></tr>
+<tr><td><b>Stability</b></td><td>A family wants the school district and no rent renegotiation.</td><td>Only if you value stability more than the average buyer; owners pay for roofs and heating.</td></tr>
+<tr><td><b>Diversification</b></td><td>Better for the wealthier.</td><td>A house puts a big share of wealth in one asset in one place.</td></tr>
+</tbody></table></div>
+<div class="flow"><span>Tax break for buyers</span><i>→</i><span>Housing demand shifts right</span><i>→</i><span>Fixed supply: price up a lot, seller gains</span><i>/</i><span>Elastic supply: more homes, buyer gains</span></div>
+<p>Where they agree: it is a <b>marginal</b> question. The price already reflects the average buyer's tax benefit, taste for stability and repair costs, so you gain from buying only where you differ from the average buyer. A low down payment is also high leverage (5% down is a ratio of 19), and one house is the opposite of diversification.</p>
+<p class="note-small">The duel assumes US tax rules; Thai taxes, mortgage terms and condo markets differ.</p>
+
+<h2 id="traps">13. Do not mix these up</h2>
+<div class="traps">
+<div><s>Higher saving raises interest rates.</s><p>More saving shifts supply right, so the interest rate falls.</p></div>
+<div><s>A 5% deposit rate makes me 5% richer.</s><p>Subtract inflation: the real rate is what counts.</p></div>
+<div><s>The bank keeps my deposit in the vault.</s><p>Most is lent out; only a fraction is held as reserves.</p></div>
+<div><s>Buying shares on the SET gives the company money.</s><p>Only new issues do; trading existing shares pays the previous owner.</p></div>
+<div><s>Bondholders own part of the firm.</s><p>They are lenders; shareholders are the owners.</p></div>
+<div><s>A high yield is a bargain.</s><p>Equally risky assets pay the same; a high yield signals high risk.</p></div>
+<div><s>When interest rates rise, bond prices rise.</s><p>They move in opposite directions.</p></div>
+<div><s>An interest rate cap makes loans cheaper for everyone.</s><p>It creates a shortage; total lending falls and risky borrowers are shut out.</p></div>
+<div><s>Bank runs only hit bad banks.</s><p>With fractional reserves, even a sound bank cannot pay everyone at once.</p></div>
+<div><s>Leverage ratio = debt ÷ assets.</s><p>Here it is debt ÷ equity: 95,000 ÷ 5,000 = 19.</p></div>
+<div><s>2008 was a run on ordinary bank deposits.</s><p>It was a run on the uninsured shadow banking system.</p></div>
+<div><s>Securitization is fraud.</s><p>It is a legitimate tool; the problem was quality, opacity and ratings.</p></div>
+<div><s>A five-year winning record proves skill.</s><p>About 31 of 1,000 coin flippers would have one.</p></div>
+<div><s>Diversification removes all risk.</s><p>It removes firm-specific risk, not market-wide risk.</p></div>
+<div><s>The Thai bond market is mostly corporate bonds.</s><p>Corporate bonds are 27%; government-related bonds are about 72% (Sep 2021).</p></div>
+<div><s>Deontology and consequentialism always disagree.</s><p>They can condemn the same act, such as the Airbnb discrimination, for different reasons.</p></div>
+</div>
+
+<h2 id="coldcall">14. Cold call practice</h2>
+<div class="qa-tools"><button id="qaAll" type="button">Show all answers</button></div>
+<div class="qa">
+<details><summary>What is the difference between deontology and consequentialism?</summary><p>Deontology judges an act by the duty or rule it follows; consequentialism judges it by its outcomes. On kneeling during the anthem, one calls it a breach of patriotic duty, the other a harmless way to raise awareness.</p></details>
+<details><summary>What is the market for loanable funds?</summary><p>The model where the supply of savings meets the demand to borrow, with the interest rate as the price, for example Thai household deposits meeting Thai firms' demand for loans.</p></details>
+<details><summary>What happens when households save more?</summary><p>The supply of savings shifts right, so the interest rate falls and the quantity of lending rises.</p></details>
+<details><summary>What does a bank do beyond holding your money?</summary><p>It pays interest, screens borrowers, pools many deposits into many loans so risk is spread, and keeps reserves for withdrawals. It earns the spread between loan and deposit rates.</p></details>
+<details><summary>When does the stock market turn saving into investment?</summary><p>Only when new shares are issued and sold, as in an IPO. Trading existing shares only changes who owns them.</p></details>
+<details><summary>A $1,000 one-year bond sells for $871. What is its yield, and what does it tell you?</summary><p>129 ÷ 871 = 14.8%. Equally risky assets pay the same return, so a yield this high signals high default risk.</p></details>
+<details><summary>What is crowding out?</summary><p>Government borrowing raises the interest rate and displaces private spending. In MRU's example, 100 billion of borrowing raises the rate from 7% to 9% and cuts investment and consumption by 50 billion each.</p></details>
+<details><summary>Name the four reasons financial intermediaries fail.</summary><p>Insecure property rights, interest rate controls, politicized lending, and runs, panics and scandals.</p></details>
+<details><summary>Why can a bank run destroy a healthy bank?</summary><p>Banks hold only fractional reserves and lend the rest long term, so no bank can repay all depositors at once.</p></details>
+<details><summary>What is the leverage ratio with 5% down on a $100,000 house?</summary><p>95,000 ÷ 5,000 = 19. A fall of just 5% in the house price wipes out the owner's equity.</p></details>
+<details><summary>What is the shadow banking system, and why was it vulnerable?</summary><p>Investment banks, hedge funds, money market funds and other institutions that borrow short and lend long like banks, but without deposit insurance, so lenders run at the first sign of trouble.</p></details>
+<details><summary>What is the efficient market hypothesis?</summary><p>Prices already reflect all public information, so you cannot systematically beat the market by trading on it. Morton Thiokol's shares fell within hours of the Challenger explosion.</p></details>
+<details><summary>Why is your employer's stock a bad retirement investment?</summary><p>It concentrates wealth in one asset, and if the company fails you lose your job and your savings together, as Enron's employees did.</p></details>
+<details><summary>How did Thailand's financial system change after 1997?</summary><p>The bond market grew from 12% to 94% of GDP while bank loans fell from 131% to 112%, giving firms a second way to borrow. About 72% of bonds are government-related.</p></details>
+</div>
+
+<h2 id="templates">15. Answer templates</h2>
+<div class="method"><b>Loanable funds</b><p>“In the market for loanable funds, savers supply funds and borrowers demand them, and the interest rate is the price. If households save more, supply shifts right, the interest rate falls and lending rises. If firms become more optimistic or get an investment tax credit, demand shifts right and the interest rate rises.”</p></div>
+<div class="method"><b>What banks do</b><p>“A bank pools many small deposits, screens borrowers on savers' behalf, and spreads risk across many loans, earning the spread between loan and deposit rates. Because it turns deposits that can be withdrawn any day into long-term loans, it is useful but open to runs.”</p></div>
+<div class="method"><b>Bonds and risk</b><p>“A bond is an IOU with a fixed face value. Riskier issuers must offer higher yields, and since the face value is fixed, a higher yield means a lower price. Ratings and collateral lower the rate a borrower pays.”</p></div>
+<div class="method"><b>Crowding out</b><p>“Government borrowing shifts the demand for loanable funds right and raises the interest rate. In MRU's example, 100 billion of borrowing raises the rate from 7 to 9 percent, cutting private investment by 50 billion and consumption by 50 billion.”</p></div>
+<div class="method"><b>The Great Recession</b><p>“Four weights hung on the economy: homeowners with little equity, banks such as Lehman with leverage of 44, mortgage securities riskier than their ratings, and shadow banks funded by uninsured short-term loans. When house prices fell in 2007, lenders ran from the shadow banks, fire sales pushed prices lower, and the result was a credit crunch and high unemployment.”</p></div>
+<div class="method"><b>Your money</b><p>“Prices already reflect public information and past winners rarely repeat, so do not pick stocks. Buy a diversified, low-fee index fund, including international stocks, and avoid holding your employer's stock.”</p></div>
+<p class="note-small endnote">Sources: professor's Session 8 slides; Marginal Revolution University, Principles of Macroeconomics (Savings, Investment and the Financial System; Personal Finance, including the Econ Duel <i>Rent or Buy?</i>); Cowen and Tabarrok, <i>Modern Principles: Macroeconomics</i>; Edelman, Luca and Svirsky (2016), <a href="https://www.hbs.edu/faculty/Publication%20Files/16-069_5c3b2b36-d9f8-4b38-9639-2175aaf9ebc9.pdf">Racial Discrimination in the Sharing Economy</a>; ThaiBMA, <a href="https://www.thaibma.or.th/EN/Education/ThaiBondMarket.aspx">About Thai Bond Market</a>. Figures are as reported in those sources, not current data.</p>
+<p class="note-small">Continue from <a href="economics-s7.html">Session 7: GDP and economic growth</a>, or return to <a href="economics.html">Economics sessions</a>.</p>
+</article></main></div>
+
+<script>/* Reusable economics widgets. Shared Plot and controls are embedded for offline use. */
+(() => {
+  'use strict';
+  const NS='http://www.w3.org/2000/svg'; let uid=0;
+  const money=n=>{const value=Math.round(Math.abs(n)*100)/100;return (n<0?'−$':'$')+value.toLocaleString('en-US',{minimumFractionDigits:Number.isInteger(value)?0:2,maximumFractionDigits:2});};
+  const num=n=>n.toLocaleString('en-US',{maximumFractionDigits:2});
+  const colors={d:'var(--demand)',mr:'var(--ext)',mc:'var(--supply)',atc:'var(--world)',cs:'var(--cs)',ps:'var(--ps)'};
+  function el(tag,attrs={},parent){const e=document.createElementNS(NS,tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));if(parent)parent.append(e);return e;}
+  function Plot(svg,qMax,pMax,pMin=0){
+    const W=Math.max(280,svg.getBoundingClientRect().width||500),H=340,L=48,R=18,T=28,B=51;
+    svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.replaceChildren();
+    const sx=q=>L+q/qMax*(W-L-R),sy=p=>H-B-(p-pMin)/(pMax-pMin)*(H-T-B);
+    const defs=el('defs',{},svg),clip=el('clipPath',{id:'plot-clip-'+(++uid)},defs);
+    el('rect',{x:L,y:T,width:W-L-R,height:H-T-B},clip);
+    const grid=el('g',{},svg),area=el('g',{'clip-path':'url(#'+clip.id+')'},svg),lines=el('g',{'clip-path':'url(#'+clip.id+')'},svg),top=el('g',{},svg);
+    const text=(x,y,s,attrs={})=>{const t=el('text',{x,y,class:'tk',...attrs},top);t.textContent=s;return t;};
+    return {sx,sy,W,H,
+      axes(xl,yl){el('line',{x1:L,y1:T,x2:L,y2:H-B,class:'ax'},grid);el('line',{x1:L,y1:H-B,x2:W-R,y2:H-B,class:'ax'},grid);text(L,T-12,yl,{class:'axl'});text((L+W-R)/2,H-8,xl,{'text-anchor':'middle',class:'axl'});},
+      xticks(values,fmt=num){values.forEach(q=>text(sx(q),H-B+19,fmt(q),{'text-anchor':'middle'}));},
+      yticks(values,fmt=num){values.forEach(p=>{el('line',{x1:L,y1:sy(p),x2:W-R,y2:sy(p),class:'grid'},grid);text(L-7,sy(p)+4,fmt(p),{'text-anchor':'end'});});},
+      path(points,color,dash=false){el('polyline',{points:points.map(([q,p])=>sx(q)+','+sy(p)).join(' '),fill:'none',stroke:color,'stroke-width':2.5,'stroke-dasharray':dash?'6 5':'none'},lines);},
+      line(a,b,color){this.path([[0,a],[qMax,a+b*qMax]],color);},
+      hline(p,color,dash=false){this.path([[0,p],[qMax,p]],color,dash);},
+      poly(points,cls){el('polygon',{points:points.map(([q,p])=>sx(q)+','+sy(p)).join(' '),class:cls},area);},
+      rect(q0,q1,p0,p1,cls){this.poly([[q0,p0],[q1,p0],[q1,p1],[q0,p1]],cls);},
+      guide(q,p){el('line',{x1:sx(q),y1:sy(p),x2:sx(q),y2:sy(pMin),class:'gd'},lines);el('line',{x1:L,y1:sy(p),x2:sx(q),y2:sy(p),class:'gd'},lines);},
+      point(q,p,color){el('circle',{cx:sx(q),cy:sy(p),r:4,fill:color,stroke:'var(--paper)','stroke-width':1.3},lines);},
+      tag(q,p,s,anchor='middle',dy=-7){return text(sx(q),sy(p)+dy,s,{'text-anchor':anchor});},
+      bar(q,value,color){el('rect',{x:sx(q-.28),y:sy(value),width:sx(q+.28)-sx(q-.28),height:Math.max(0,sy(0)-sy(value)),fill:color},area);text(sx(q),sy(value)-8,num(value),{'text-anchor':'middle'});}
+    };
+  }
+  function shell(host,title,sub,legend,twinTitles){
+    host.classList.add('graph','wide');const id='econ-'+(++uid);
+    host.innerHTML='<div class="g-head"><span class="g-kicker">Interactive graph</span><h4></h4><p></p></div><div class="plot-legend"></div><div class="g-body"><div class="g-plot"></div><div class="g-side"><div class="g-ctrl"></div><dl class="g-stats" aria-live="off"></dl></div></div><p class="g-note" aria-live="polite"></p>';
+    host.querySelector('h4').textContent=title;host.querySelector('.g-head p').textContent=sub;
+    const leg=host.querySelector('.plot-legend');legend.forEach(([s,c])=>{const item=document.createElement('span'),sw=document.createElement('i');sw.style.background=c;sw.className='sw ln';item.append(sw,document.createTextNode(s));leg.append(item);});
+    if(host.dataset.readout==='optional'){
+      const side=host.querySelector('.g-side'),stats=host.querySelector('.g-stats'),note=host.querySelector('.g-note');
+      const reading=document.createElement('div'),details=document.createElement('details'),summary=document.createElement('summary');
+      reading.className='g-reading';details.className='number-readout';summary.textContent='View numerical readout';details.append(summary,stats);reading.append(note,details);side.append(reading);
+    }
+    const plot=host.querySelector('.g-plot'),svgs=[];
+    if(twinTitles){plot.classList.add('twin');twinTitles.forEach(name=>{const div=document.createElement('div'),t=document.createElement('p');t.className='tw-t';t.textContent=name;div.append(t);const svg=el('svg',{role:'img','aria-label':title+': '+name},div);plot.append(div);svgs.push(svg);});}
+    else svgs.push(el('svg',{role:'img','aria-label':title},plot));
+    const ctrl=host.querySelector('.g-ctrl');
+    return {svgs,host,
+      slider(key,label,min,max,step,value,format,on){const row=document.createElement('div');row.className='sl';const lab=document.createElement('label'),span=document.createElement('span'),output=document.createElement('output'),input=document.createElement('input');input.type='range';input.setAttribute('aria-label',label);Object.assign(input,{id:id+'-'+key,min,max,step,value});lab.htmlFor=input.id;span.textContent=label;lab.append(span,output);output.htmlFor=input.id;row.append(lab,input);ctrl.append(row);const sync=()=>output.textContent=format(+input.value);input.addEventListener('input',()=>{sync();on(+input.value);});sync();return {set(v){input.value=v;sync();},input};},
+      button(label,on){const b=document.createElement('button');b.type='button';b.className='g-btn';b.textContent=label;b.addEventListener('click',on);ctrl.append(b);return b;},
+      seg(label,options,value,on){const group=document.createElement('div');group.className='seg';group.setAttribute('role','group');group.setAttribute('aria-label',label);options.forEach(([v,t])=>{const b=document.createElement('button');b.type='button';b.textContent=t;b.dataset.value=v;b.setAttribute('aria-pressed',String(v===value));b.addEventListener('click',()=>{[...group.children].forEach(x=>x.setAttribute('aria-pressed',String(x===b)));on(v);});group.append(b);});ctrl.append(group);},
+      show(rows,note){const stats=host.querySelector('.g-stats');stats.replaceChildren();rows.forEach(([key,value,big=false])=>{const row=document.createElement('div');row.className='st'+(big?' big':'');row.dataset.stat=key;const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=key;dd.textContent=value;row.append(dt,dd);stats.append(row);});host.querySelector('.g-note').textContent=note;},
+      redrawOnResize(draw){let last='';const obs=new ResizeObserver(()=>{const widths=svgs.map(svg=>Math.round(svg.getBoundingClientRect().width)).join('|');if(widths!==last){last=widths;draw();}});obs.observe(plot);svgs.forEach(svg=>obs.observe(svg.parentElement));}
+    };
+  }
+  const W_={};
+  const kb=n=>'฿'+num(n)+'k';
+  const baht=n=>(n<0?'−฿':'฿')+Math.round(Math.abs(n)).toLocaleString('en-US');
+  const pct=n=>Math.round(n*100)+'%';
+  const signed=n=>(n<0?'−':'')+num(Math.abs(n));
+  const tr=en=>en;const L=en=>[en,''];const zhOn=()=>false;
+  
+  const T=p=>tr(p[0],p[1]);
+  const pc1=n=>(Math.abs(n)<0.05?'0.0':(n<0?'−':'')+Math.abs(n).toFixed(1))+'%';
+  const times=n=>n>=100?Math.round(n).toLocaleString('en-US')+'×':n>=10?n.toFixed(0)+'×':n.toFixed(1)+'×';
+  function live(s,draw){draw();s.redrawOnResize(draw);}
+  function niceStep(span,count){const raw=span/count,p=Math.pow(10,Math.floor(Math.log10(raw))),m=raw/p;return (m<=1?1:m<=2?2:m<=5?5:10)*p;}
+  function make(tag,cls,text,parent){const n=document.createElement(tag);if(cls)n.className=cls;if(text!=null)n.textContent=text;if(parent)parent.append(n);return n;}
+
+
+  /* 1. Loanable funds: shift saving supply or borrowing demand, predict first. */
+  W_.loanable=host=>{
+    const s=shell(host,tr('Shift the market for loanable funds'),tr('Pick an event. Before revealing, decide: does it change saving or borrowing, and which way does the interest rate go?'),[[tr('Supply of savings S'),colors.mc],[tr('Demand to borrow D'),colors.d]]);
+    const ev={none:[0,0,L('Choose an event, or drag the sliders yourself.')],save:[50,0,L('Households save more, so the supply of savings shifts right. The interest rate falls and lending rises.')],gloom:[0,-50,L('Firms expect lower returns, so the demand to borrow shifts left. The interest rate falls and lending falls too.')],credit:[0,50,L('An investment tax credit raises the after-tax return on projects, so the demand to borrow shifts right. The interest rate and lending both rise.')]};
+    let dS=0,dD=0,cur='none',shown=true;
+    const eq=(a,b)=>{const q=(400+a+b)/2;return [q,(q-a-25)/25];};
+    const draw=()=>{
+      const sS=shown?dS:0,sD=shown?dD:0,moved=sS!==0||sD!==0,[q1,r1]=eq(0,0),[q2,r2]=eq(sS,sD);
+      const P=Plot(s.svgs[0],400,14);P.axes(tr('Loanable funds (billion baht)'),tr('Interest rate, %'));P.xticks([0,100,200,300,400]);P.yticks([0,2,4,6,8,10,12,14],v=>v+'%');
+      if(sS)P.path([[0,-1],[400,15]],colors.mc,true);
+      if(sD)P.path([[0,15],[400,-1]],colors.d,true);
+      P.path([[0,-1-sS*.04],[400,15-sS*.04]],colors.mc);
+      P.path([[0,15+sD*.04],[400,-1+sD*.04]],colors.d);
+      const qs=Math.min(390,320+sS);P.tag(qs,(qs-sS-25)/25,sS?'S2':'S','start',14);if(sS)P.tag(320,(320-25)/25,'S1','end',-6);
+      const qd=Math.min(390,320+sD);P.tag(qd,(375+sD-qd)/25,sD?'D2':'D','start',-6);if(sD)P.tag(320,(375-320)/25,'D1','end',14);
+      P.guide(q1,r1);P.point(q1,r1,'var(--fg)');P.tag(q1,r1,moved?'E1':'E','start',-9);
+      if(moved){P.guide(q2,r2);P.point(q2,r2,'var(--fg)');P.tag(q2,r2,'E2','end',-9);}
+      const rows=[[moved?'r1, Q1':'r, Q',r1.toFixed(1)+'%, '+num(q1)]];
+      if(moved)rows.push(['r2, Q2',r2.toFixed(1)+'%, '+num(q2),true],[tr('Change in the interest rate'),(r2>=r1?'+':'−')+Math.abs(r2-r1).toFixed(1)+tr(' points')]);
+      let note;
+      if(!shown)note=tr('Predict first: which curve moves, and does the interest rate rise or fall? Then reveal.');
+      else if(cur!=='none'&&dS===ev[cur][0]&&dD===ev[cur][1])note=T(ev[cur][2]);
+      else if(!moved)note=T(ev.none[2]);
+      else note=sS&&sD?tr('Both curves moved. The interest rate depends on which shift is larger; check the readout.'):tr('Read the new equilibrium off the axes.');
+      s.show(rows,note);
+    };
+    const a=s.slider('dS',tr('Shift in saving supply'),-100,100,10,dS,v=>(v>0?'+':v<0?'−':'')+Math.abs(v),v=>{dS=v;cur='none';shown=true;draw();});
+    const b=s.slider('dD',tr('Shift in borrowing demand'),-100,100,10,dD,v=>(v>0?'+':v<0?'−':'')+Math.abs(v),v=>{dD=v;cur='none';shown=true;draw();});
+    s.seg(tr('Event'),[['save',tr('Households save more')],['gloom',tr('Firms turn pessimistic')],['credit',tr('Investment tax credit')]],null,v=>{cur=v;dS=ev[v][0];dD=ev[v][1];a.set(dS);b.set(dD);shown=false;draw();});
+    s.button(tr('Reveal the shift'),()=>{shown=true;draw();});
+    s.button(tr('Reset'),()=>{dS=0;dD=0;cur='none';shown=true;a.set(0);b.set(0);draw();});
+    live(s,draw);
+  };
+
+  /* 2. Pooling: lend to one borrower or spread the same money across many. */
+  W_.pool=host=>{
+    const s=shell(host,tr('Spread the same money across more loans'),tr('Each borrower defaults with the same chance and repays nothing if it does. Add borrowers and watch the chance of a big loss.'),[[tr('Chance of each outcome'),'var(--ps)']]);
+    const NS_=[1,2,5,10,50,100,1000];let ni=0,p=5;
+    const buckets=[[L('0%','0%'),-1,0],[L('0 to 5%'),0,.05],[L('5 to 10%'),.05,.10],[L('10 to 20%'),.10,.20],[L('20 to 50%'),.20,.50],[L('Over 50%'),.50,1]];
+    const draw=()=>{
+      const n=NS_[ni],q=p/100,pmf=[];let v=Math.pow(1-q,n);for(let k=0;k<=n;k++){pmf.push(v);v=v*(n-k)/(k+1)*q/(1-q);}
+      const share=buckets.map(([,lo,hi])=>pmf.reduce((acc,x,k)=>{const f=k/n;return acc+((lo<0?f===0:(f>lo+1e-12&&f<=hi+1e-12))?x:0);},0)*100);
+      const P=Plot(s.svgs[0],6.6,100);P.axes(tr('Share of your money lost'),tr('Chance, %'));P.yticks([0,25,50,75,100],v=>v+'%');
+      P.xticks([1,2,3,4,5,6],x=>T(buckets[x-1][0]));
+      share.forEach((v,i)=>{P.rect(i+.66,i+1.34,0,v,'a-ps');P.tag(i+1,v,v<0.05?'0':v<1?v.toFixed(1)+'%':Math.round(v)+'%');});
+      const big=pmf.reduce((acc,x,k)=>acc+(k/n>.10+1e-12?x:0),0)*100,all=Math.pow(q,n)*100;
+      s.show([[tr('Number of borrowers'),num(n)],[tr('Expected loss'),p+'%'],[tr('Chance of losing more than 10%'),big<0.01?'≈ 0%':big.toFixed(big<1?2:1)+'%',true],[tr('Chance of losing everything'),all<0.01?'≈ 0%':all.toFixed(1)+'%']],
+        n===1?tr('One borrower: you either lose nothing or lose everything. The average loss is small, but the risk is all or nothing.'):n>=100?tr('With many borrowers the expected loss is unchanged, but a large loss becomes very unlikely. This is what pooling buys a saver.'):tr('The expected loss stays the same; what shrinks is the chance of a painful loss.'));
+    };
+    s.slider('n',tr('Number of borrowers'),0,NS_.length-1,1,ni,i=>num(NS_[i]),v=>{ni=v;draw();});
+    s.slider('p',tr('Chance each borrower defaults'),1,20,1,p,v=>v+'%',v=>{p=v;draw();});
+    live(s,draw);
+  };
+
+  /* 3. Bond price and yield. */
+  W_.bond=host=>{
+    const s=shell(host,tr('Price and yield of a one-year bond'),tr('The bond repays 1,000 in one year and pays no coupon. Lower the price and see what happens to the yield.'),[[tr('Yield at each price'),colors.d]]);
+    let price=963;
+    const draw=()=>{
+      const y=(1000-price)/price*100;
+      const P=Plot(s.svgs[0],200,25);P.axes(tr('Price today'),tr('Yield, %'));
+      P.xticks([0,50,100,150,200],v=>String(800+v));P.yticks([0,5,10,15,20,25],v=>v+'%');
+      const pts=[];for(let x=0;x<=200;x+=2)pts.push([x,(1000-(800+x))/(800+x)*100]);P.path(pts,colors.d);
+      [[963,'A'],[871,'B'],[985,'C']].forEach(([pp,l])=>{P.point(pp-800,(1000-pp)/pp*100,'var(--muted)');P.tag(pp-800,(1000-pp)/pp*100,l,'start',14);});
+      P.guide(price-800,y);P.point(price-800,y,'var(--fg)');
+      const read=y>10?tr('A yield this high is a warning: lenders see a real chance of default.'):y<2.5?tr('A low yield means investors see this borrower as very safe.'):tr('A moderate yield: some risk, priced in.');
+      s.show([[tr('Price'),num(price)],[tr('Gain at maturity'),num(1000-price)],[tr('Yield = gain ÷ price'),y.toFixed(1)+'%',true]],read+' '+tr('The face value is fixed, so a higher yield can only come from a lower price.'));
+    };
+    const sl=s.slider('p',tr('Price today'),800,1000,1,price,v=>num(v),v=>{price=v;draw();});
+    const set=v=>{price=v;sl.set(v);draw();};
+    s.button(tr('MRU company A: 963'),()=>set(963));
+    s.button(tr('MRU company B: 871'),()=>set(871));
+    s.button(tr('MRU company C: 985'),()=>set(985));
+    s.button(tr('Market rate 2%: price 980'),()=>set(980));
+    s.button(tr('Market rate 5%: price 952'),()=>set(952));
+    live(s,draw);
+  };
+
+  /* 4. Crowding out and interest rate ceilings on MRU's lines. */
+  W_.crowd=host=>{
+    const s=shell(host,tr('Government borrowing and interest rate caps'),tr('Lines pass through MRU\'s numbers. Let the government borrow, or switch to a legal cap on the interest rate.'),[[tr('Supply of savings S'),colors.mc],[tr('Private demand D'),colors.d],[tr('Private + government demand'),colors.mr]]);
+    let mode='gov',G=100,cap=5;
+    const draw=()=>{
+      const P=Plot(s.svgs[0],400,12);P.axes(tr('Loanable funds ($ billion)'),tr('Interest rate, %'));P.xticks([0,100,200,300,400]);P.yticks([0,2,4,6,8,10,12],v=>v+'%');
+      P.line(-1,.04,colors.mc);P.line(15,-.04,colors.d);P.tag(300,(300-25)/25,'S','start',14);P.tag(340,(375-340)/25,'D','start',-6);
+      let rows,note;
+      if(mode==='gov'){
+        const r=(350+G)/50,Q=25*r+25,priv=375-25*r;
+        if(G>0){P.line(15+G*.04,-.04,colors.mr);const qq=340;P.tag(qq,(375+G-qq)/25,'D + G','start',-6);}
+        P.guide(200,7);P.point(200,7,'var(--fg)');P.tag(200,7,G?'E1':'E','end',-9);
+        if(G>0){P.guide(Q,r);P.point(Q,r,'var(--fg)');P.tag(Q,r,'E2','start',-9);P.point(priv,r,'var(--muted)');P.tag(priv,r,tr('private'),'end',-8);P.path([[priv,r],[Q,r]],'var(--muted)',true);}
+        rows=[[tr('Interest rate'),r.toFixed(1)+'%',true],[tr('Total saving and lending'),num(Q)],[tr('Private borrowing (investment)'),num(priv)+' ('+(priv>=200?'+':'−')+num(Math.abs(200-priv))+')'],[tr('Consumption change (= − extra saving)'),(Q>200?'−':'+')+num(Math.abs(Q-200))],[tr('Government borrowing'),num(G)]];
+        note=G===0?tr('No government borrowing: 7% and 200. Now let the government borrow.'):tr(`Government borrowing of ${G} raises the rate to ${r.toFixed(1)}%. Private investment falls by ${num(200-priv)} and consumption falls by ${num(Q-200)}: crowding out.`);
+      }else{
+        const qs=25*cap+25,qd=375-25*cap,bind=cap<7;
+        P.hline(cap,'var(--fg)',true);P.tag(392,cap,tr('Legal cap'),'end',-6);
+        P.guide(200,7);P.point(200,7,'var(--muted)');P.tag(200,7,'E','end',-9);
+        if(bind){P.guide(qs,cap);P.guide(qd,cap);P.tag(qs,0,'Qs','middle',-5);P.tag(qd,0,'Qd','middle',-5);P.rect(qs,qd,cap-.12,cap+.12,'a-dwl');}
+        rows=bind?[[tr('Quantity demanded'),num(qd)],[tr('Quantity supplied'),num(qs)],[tr('Shortage'),num(qd-qs),true],[tr('Actual lending (was 200)'),num(qs),true]]:[[tr('Cap'),cap+'%'],[tr('Lending'),'200']];
+        note=bind?tr(`At a ${cap}% cap borrowers want ${num(qd)} but savers offer only ${num(qs)}. Lending falls to ${num(qs)} and the riskiest borrowers are shut out.`):tr('A cap at or above 7% does not bind: the market clears at 7% and 200.');
+      }
+      s.show(rows,note);
+    };
+    const gs=s.slider('G',tr('Government borrowing ($ billion)'),0,150,10,G,v=>num(v),v=>{G=v;mode='gov';draw();});
+    const cs=s.slider('cap',tr('Legal interest rate cap'),3,9,.5,cap,v=>v+'%',v=>{cap=v;mode='cap';draw();});
+    s.seg(tr('Policy'),[['gov',tr('Government borrows')],['cap',tr('Interest rate cap')]],mode,v=>{mode=v;draw();});
+    s.button(tr('MRU example: borrow 100'),()=>{G=100;gs.set(100);mode='gov';host.querySelector('.seg button[data-value="gov"]').click();});
+    live(s,draw);
+  };
+
+  /* 5. Leverage: a balance sheet that can go underwater. */
+  W_.leverage=host=>{
+    const s=shell(host,tr('Equity is the cushion'),tr('Set the down payment, then let the asset price fall. The slides use a $100,000 house; the same arithmetic applies to a bank such as Lehman.'),[[tr('Asset value'),'var(--rev)'],[tr('Debt (mortgage)'),'var(--ps)'],[tr('Owner\'s equity'),'var(--cs)'],[tr('Underwater'),'var(--dwl)']]);
+    let dp=20,chg=0;
+    const draw=()=>{
+      const debt=100*(1-dp/100),val=100*(1+chg/100),eqv=val-debt,lev=dp>0?debt/(100-debt):Infinity;
+      const P=Plot(s.svgs[0],3,130);P.axes('',tr('Thousand dollars'));P.yticks([0,20,40,60,80,100,120]);
+      P.xticks([1,2],x=>x===1?tr('Asset value'):tr('Debt + equity'));
+      P.rect(.62,1.38,0,val,'a-rev');P.tag(1,val,'$'+num(Math.round(val*10)/10)+'k');
+      P.rect(1.62,2.38,0,debt,'a-ps');if(debt>=12)P.tag(2,debt/2+3,tr('Debt')+' '+num(Math.round(debt*10)/10));
+      if(eqv>0){P.rect(1.62,2.38,debt,val,'a-cs');P.tag(2.42,(debt+val)/2+3,tr('Equity')+' '+num(Math.round(eqv*10)/10),'start');}
+      else{P.rect(1.62,2.38,val,debt,'a-dwl');P.hline(val,'var(--dwl)',true);P.tag(2.42,debt,tr('Underwater'),'start',-4);}
+      P.path([[.4,100],[2.38,100]],'var(--muted)',true);
+      const roe=dp>0?(10/dp*100):Infinity;
+      s.show([[tr('Down payment (equity at the start)'),dp.toFixed(dp%1?2:0)+'%'],[tr('Leverage ratio = debt ÷ equity'),dp>0?(Math.round(lev*100)/100).toString():'∞',true],[tr('Fall that wipes out equity'),dp.toFixed(dp%1?2:0)+'%'],[tr('Equity after the price change'),(eqv<0?'−$':'$')+num(Math.abs(Math.round(eqv*10)/10))+'k'],[tr('Return on equity if prices rise 10%'),dp>0?Math.round(roe)+'%':'∞']],
+        eqv<=0?tr('The asset is now worth less than the debt. The owner has lost everything put in, and the lender holds a loan bigger than the collateral.'):dp<=5?tr('Thin equity: a small fall in prices wipes it out, while a small rise multiplies the owner\'s return. Large upside, fragile downside.'):tr('A thicker cushion: prices can fall a good deal before the owner is underwater.'));
+    };
+    const ds=s.slider('dp',tr('Down payment, % of the price'),0,40,.01,dp,v=>v.toFixed(v%1?2:0)+'%',v=>{dp=v;draw();});
+    const pc=s.slider('chg',tr('Change in asset price'),-30,20,1,chg,v=>(v>0?'+':v<0?'−':'')+Math.abs(v)+'%',v=>{chg=v;draw();});
+    const set=(d,c)=>{dp=d;chg=c;ds.set(d);pc.set(c);draw();};
+    s.button(tr('Typical: 20% down'),()=>set(20,0));
+    s.button(tr('5% down: leverage 19'),()=>set(5,0));
+    s.button(tr('5% down, house falls to $90,000'),()=>set(5,-10));
+    s.button(tr('Lehman 2007: leverage 44'),()=>set(100/45,0));
+    s.button(tr('After regulation: leverage 16.66'),()=>set(100/17.66,0));
+    live(s,draw);
+  };
+
+  /* 6. Fees compound against you. */
+  W_.fees=host=>{
+    const s=shell(host,tr('What a fee costs over time'),tr('Invest 10,000 at an 8% market return. Compare a high-fee fund with a low-fee index fund.'),[[tr('Fund A (higher fee)'),colors.d],[tr('Fund B (lower fee)'),colors.mc]]);
+    let fa=1,fb=.2,Y=25;
+    const grow=(f,t)=>10000*Math.pow(1.08-f/100,t);
+    const draw=()=>{
+      const ea=grow(fa,Y),eb=grow(fb,Y),top=Math.max(ea,eb),st=niceStep(top,5),hi=Math.ceil(top/st)*st;
+      const P=Plot(s.svgs[0],Y,hi);P.axes(tr('Years'),tr('Value'));
+      const xs=niceStep(Y,5),xt=[];for(let t=0;t<=Y+1e-9;t+=xs)xt.push(t);P.xticks(xt);
+      const yt=[];for(let v=0;v<=hi+1e-9;v+=st)yt.push(v);P.yticks(yt,v=>num(v/1000)+'k');
+      [[fa,colors.d],[fb,colors.mc]].forEach(([f,c])=>{const pts=[];for(let i=0;i<=60;i++){const t=Y*i/60;pts.push([t,grow(f,t)]);}P.path(pts,c);});
+      P.tag(Y,ea,'A','end',ea>eb?-8:14);P.tag(Y,eb,'B','end',eb>=ea?-8:14);
+      const gap=Math.abs(eb-ea),share=gap/Math.max(ea,eb)*100;
+      s.show([[tr('Fund A after')+' '+Y+tr(' years'),num(Math.round(ea))],[tr('Fund B after')+' '+Y+tr(' years'),num(Math.round(eb))],[tr('Gap'),num(Math.round(gap)),true],[tr('Share of the larger amount lost to fees'),share.toFixed(0)+'%']],
+        tr(`A fee gap of ${Math.abs(fa-fb).toFixed(1)} points a year costs about ${share.toFixed(0)}% of the final amount after ${Y} years, and buys nothing, since most active funds do not beat the index.`));
+    };
+    s.slider('fa',tr('Fee of fund A'),0,3,.1,fa,v=>v.toFixed(1)+'%',v=>{fa=v;draw();});
+    s.slider('fb',tr('Fee of fund B'),0,3,.1,fb,v=>v.toFixed(1)+'%',v=>{fb=v;draw();});
+    s.slider('Y',tr('Years'),5,40,1,Y,v=>String(v),v=>{Y=v;draw();});
+    live(s,draw);
+  };
+
+  window.EconWidgets={mount(root){root.querySelectorAll('[data-widget]').forEach(host=>{const init=W_[host.dataset.widget];if(init&&!host.dataset.ready){host.dataset.ready='1';init(host);}});}};
+})();
+</script>
+<script>
+(() => {
+ const toc=document.getElementById('toc'),rail=document.getElementById('rail'),button=document.getElementById('tocBtn');
+ const headings=[...document.querySelectorAll('.doc > h2,.doc > h3')];
+ headings.forEach(h=>{const li=document.createElement('li'),a=document.createElement('a');li.className=h.tagName.toLowerCase();li.dataset.id=h.id;a.href='#'+h.id;a.textContent=h.childNodes[0].textContent.trim();li.append(a);toc.append(li);});
+ const spy=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;toc.querySelectorAll('.on').forEach(a=>a.classList.remove('on'));const a=toc.querySelector('[data-id="'+e.target.id+'"] a');if(a)a.classList.add('on');}),{rootMargin:'-100px 0px -65% 0px'});headings.forEach(h=>spy.observe(h));
+ function close(){rail.classList.remove('open');button.setAttribute('aria-expanded','false');}
+ button.addEventListener('click',()=>{const open=rail.classList.toggle('open');button.setAttribute('aria-expanded',String(open));});
+ toc.addEventListener('click',e=>{if(e.target.closest('a'))close();});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&rail.classList.contains('open')){close();button.focus();}});
+ const all=document.getElementById('qaAll');all.addEventListener('click',()=>{const ds=[...document.querySelectorAll('.qa details')],open=!ds.every(d=>d.open);ds.forEach(d=>d.open=open);all.textContent=open?'Hide all answers':'Show all answers';});
+ window.EconWidgets.mount(document);
+})();
+</script>
+</body></html>
