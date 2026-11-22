@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"><title>Leadership · Management</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+/* Layout: one reading column with a sticky chapter rail; colors follow system appearance. */
+:root {
+  color-scheme: light;
+  --bg: var(--tone-fdf9f9); --panel: var(--tone-f8eef0); --paper: var(--tone-ffffff); --tint: var(--tone-fae9ed); --line: var(--tone-efdde2);
+  --fg: var(--tone-2f282b); --muted: var(--tone-7e6f74); --accent: var(--tone-c06c84); --accent-ink: var(--tone-9c4862);
+  --demand: var(--tone-3f5675); --supply: var(--tone-c06c84); --ext: var(--tone-6e3f55); --world: var(--tone-8a7a5c); --policy: var(--tone-3f7f7a);
+  --cs: var(--tone-a7cdb6); --ps: var(--tone-b2c4e3); --dwl: var(--tone-d9674f); --rev: var(--tone-e5c171); --rev2: var(--tone-f1dca8); --time: var(--tone-ddb3cb); --ts: var(--tone-bfdcc9);
+  --serif: "Noto Serif TC", "Songti TC", Georgia, serif;
+  --sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; background: var(--bg); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 16px; line-height: 1.75; }
+a { color: var(--accent-ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(var(--header-rgb), .94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); padding-inline: 16px; }
+.top-in { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 14px; min-height: 56px; flex-wrap: wrap; padding-block: 8px; }
+.brand { font-family: var(--serif); font-weight: 700; font-size: 1.02rem; white-space: nowrap; }
+.brand small { font-family: var(--sans); font-weight: 500; color: var(--muted); font-size: .76rem; margin-left: 6px; letter-spacing: .06em; }
+.sessions { display: flex; gap: 4px; margin-left: auto; }
+.crumbs { font-size: .86rem; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.crumbs a { color: var(--muted); text-decoration: none; } .crumbs a:hover { color: var(--accent-ink); } .crumbs span { color: var(--line); } .crumbs b { font-family: var(--serif); }
+.sessions a.pill { text-decoration: none; transition: border-color .15s, color .15s; }
+.sessions a.pill:hover, .sessions a.pill:focus-visible { border-color: var(--accent); color: var(--accent-ink); background: var(--tint); }
+.sessions .pill { font: 500 .82rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--muted); padding: 4px 12px; border-radius: 999px; }
+.sessions .pill[aria-current="page"] { background: var(--accent); border-color: var(--accent); color: var(--tone-ffffff); }
+.sessions .pill.off { opacity: .5; cursor: not-allowed; }
+.toc-btn { display: none; font: 500 .85rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--fg); border-radius: 8px; padding: 5px 12px; }
+
+.wrap { max-width: 1160px; margin: 0 auto; padding-inline: 16px; display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 52px; }
+.rail { position: sticky; top: 76px; align-self: start; max-height: calc(100vh - 92px); overflow: auto; padding-block: 34px 40px; font-size: .86rem; line-height: 1.5; }
+.rail .lbl { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.rail ol { list-style: none; margin: 0; padding: 0; }
+.rail li a { display: block; padding: 4px 10px; color: var(--muted); text-decoration: none; border-radius: 6px; }
+.rail li a:hover { color: var(--fg); background: var(--tint); }
+.rail li.h3 a { padding-left: 22px; font-size: .8rem; }
+.rail li a.on { color: var(--accent-ink); background: var(--tint); font-weight: 500; }
+
+main { min-width: 0; padding-block: 30px 120px; }
+.doc { max-width: 780px; }
+.hero { padding-block: 8px 26px; border-bottom: 1px solid var(--line); }
+.kick { font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); margin: 0 0 6px; font-weight: 500; }
+.hero h1 { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.25; margin: 0 0 12px; text-wrap: balance; }
+.lead { margin: 0; font-size: 1.04rem; max-width: 62ch; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 16px; font-size: .78rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+.doc h2 { font-family: var(--serif); font-size: 1.55rem; line-height: 1.35; margin: 3.4rem 0 .3rem; text-wrap: balance; }
+.doc h3 { font-size: 1.1rem; line-height: 1.45; margin: 2.2rem 0 .5rem; color: var(--accent-ink); text-wrap: balance; }
+.sub { margin: 0 0 1.2rem; color: var(--muted); max-width: 66ch; }
+.doc p, .doc li { max-width: none; }
+.doc ul, .doc ol { padding-left: 1.25em; }
+.doc li { margin: .25rem 0; }
+.zh { display: inline-block; font-size: .78em; line-height: 1.3; color: var(--accent-ink); background: var(--tint); padding: 0 6px; border-radius: 4px; margin-left: 2px; vertical-align: 1px; font-weight: 500; }
+.hint { font-size: .9rem; color: var(--muted); display: flex; gap: 10px; align-items: baseline; }
+.hint b { flex: none; font-size: .72rem; color: var(--tone-ffffff); background: var(--accent); padding: 0 7px; border-radius: 4px; font-weight: 500; }
+.key { background: var(--tint); padding: 12px 16px; border-radius: 8px; font-weight: 500; }
+.note-small { font-size: .8rem; color: var(--muted); }
+
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 1rem 0; }
+.pair > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; }
+.pair b { color: var(--accent-ink); }
+.pair p { margin: 4px 0 0; font-size: .92rem; }
+
+.matrix { display: grid; grid-template-columns: minmax(90px, .7fr) repeat(2, minmax(0, 1fr)); gap: 6px; margin: 1rem 0 1.2rem; font-size: .9rem; max-width: 620px; }
+.matrix .mh { font-weight: 700; font-size: .8rem; color: var(--muted); align-self: end; padding: 0 4px 2px; }
+.matrix .mh.side { align-self: center; }
+.matrix .cell { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px; font-weight: 500; }
+.matrix .cell.hi { background: var(--tint); border-color: var(--accent); }
+.matrix small { display: block; font-weight: 400; color: var(--muted); font-size: .8rem; margin-top: 2px; line-height: 1.45; }
+
+.map { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.3fr) auto minmax(0, 1fr); gap: 10px; align-items: center; margin: 1rem 0; }
+.mcol { display: flex; flex-direction: column; gap: 8px; }
+.mbox { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .84rem; line-height: 1.5; display: flex; flex-direction: column; gap: 2px; }
+.mbox b { font-size: .9rem; } .mbox span { color: var(--muted); } .mbox em { font-style: normal; color: var(--accent-ink); font-size: .78rem; font-weight: 500; }
+.mbox.good { border-color: var(--cs); } .mbox.ask { background: var(--tint); border-color: var(--accent); }
+.marrow { color: var(--accent); font-weight: 700; }
+
+.flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 1rem 0; font-size: .86rem; }
+.flow span { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; line-height: 1.45; }
+.flow i { font-style: normal; color: var(--accent); font-weight: 700; }
+.formula { font-family: var(--mono); font-size: .9rem; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; line-height: 1.9; overflow-x: auto; }
+.steps { counter-reset: s; list-style: none; padding-left: 0 !important; }
+.steps li { counter-increment: s; display: flex; gap: 10px; }
+.steps li::before { content: counter(s); flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--tint); color: var(--accent-ink); font: 700 .75rem/22px var(--sans); text-align: center; margin-top: 3px; }
+.assign { margin: 1.6rem 0; border: 1px dashed var(--accent); border-radius: 10px; padding: 14px 16px; background: var(--paper); }
+.assign p { margin: 6px 0 0; font-size: .92rem; }
+
+.tbl { overflow-x: auto; margin: 1rem 0; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+.doc table { border-collapse: collapse; width: 100%; font-size: .88rem; line-height: 1.55; }
+.doc th, .doc td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+.doc th { background: var(--panel); font-weight: 700; }
+.doc tr:last-child td { border-bottom: 0; }
+.drill .ans { filter: blur(5px); cursor: pointer; user-select: none; transition: filter .2s; }
+.drill .ans.shown { filter: none; user-select: auto; }
+
+.traps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 1rem; }
+.traps > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: .88rem; line-height: 1.55; }
+.traps s { color: var(--muted); text-decoration-color: var(--dwl); }
+.traps p { margin: 6px 0 0; font-weight: 500; }
+
+.qa-tools { margin: .4rem 0 .8rem; }
+.qa-tools button { font: 500 .82rem var(--sans); border: 1px solid var(--accent); background: var(--paper); color: var(--accent-ink); border-radius: 6px; padding: 5px 12px; cursor: pointer; }
+.qa { display: flex; flex-direction: column; gap: 6px; }
+.qa details { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
+.qa summary { cursor: pointer; padding: 10px 14px; font-weight: 500; font-size: .93rem; list-style: none; display: flex; gap: 10px; }
+.qa summary::before { content: "Q"; color: var(--accent); font-weight: 700; }
+.qa details[open] summary { border-bottom: 1px dashed var(--line); }
+.qa details p { margin: 0; padding: 10px 14px 12px 36px; font-size: .9rem; }
+
+/* graphs */
+.graph { max-width: 900px; margin: 1.8rem 0 2.2rem; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px 18px 14px; }
+.g-head h4 { font-family: var(--serif); font-size: 1.12rem; margin: 2px 0 2px; line-height: 1.45; }
+.g-head p { margin: 0 0 10px; color: var(--muted); font-size: .86rem; }
+.g-kicker { font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); }
+.g-body { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.g-plot svg { width: 100%; height: auto; display: block; }
+.g-side { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.g-ctrl { display: flex; flex-direction: column; gap: 10px; }
+.sl label { display: flex; justify-content: space-between; font-size: .8rem; color: var(--muted); line-height: 1.3; }
+.sl output { font-family: var(--mono); color: var(--fg); font-size: .8rem; }
+.sl input { width: 100%; accent-color: var(--accent); margin: 4px 0 0; }
+.g-btn { align-self: flex-start; font: 500 .8rem var(--sans); border: 1px solid var(--accent); color: var(--accent-ink); background: transparent; border-radius: 6px; padding: 4px 11px; cursor: pointer; }
+.g-btn:hover { background: var(--tint); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; align-self: flex-start; }
+.seg button { font: 500 .8rem var(--sans); border: 0; background: transparent; color: var(--muted); padding: 5px 12px; cursor: pointer; }
+.seg button[aria-checked="true"] { background: var(--accent); color: var(--paper); }
+.chk { display: flex; gap: 8px; align-items: center; font-size: .8rem; color: var(--muted); }
+.chk input { accent-color: var(--accent); }
+.g-stats { margin: 0; border-top: 1px solid var(--line); padding-top: 10px; display: flex; flex-direction: column; gap: 3px; }
+.st { display: flex; justify-content: space-between; gap: 10px; font-size: .8rem; line-height: 1.45; }
+.st dt { color: var(--muted); display: flex; align-items: center; gap: 7px; }
+.st dd { margin: 0; font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.st.big dd { font-weight: 500; color: var(--accent-ink); font-size: .92rem; }
+.g-note { margin: 12px 0 0; padding: 9px 12px; background: var(--tint); border-radius: 6px; font-size: .85rem; line-height: 1.6; }
+
+.sw { width: 11px; height: 11px; border-radius: 2px; display: inline-block; flex: none; }
+.sw.none { background: transparent; }
+.sw.a-cs { background: var(--cs); } .sw.a-ps { background: var(--ps); } .sw.a-ps2 { background: var(--ps); outline: 1px solid var(--demand); }
+.sw.a-dwl { background: repeating-linear-gradient(45deg, var(--dwl) 0 2px, transparent 2px 4px); outline: 1px solid var(--dwl); }
+.sw.a-rev { background: var(--rev); } .sw.a-rev2 { background: var(--rev2); } .sw.a-time { background: var(--time); } .sw.a-ts { background: var(--ts); }
+.sw.ln { height: 3px; border-radius: 2px; width: 16px; }
+
+svg .ax { stroke: var(--muted); stroke-width: 1.2; }
+svg .axl { fill: var(--muted); font: 500 11px var(--sans); }
+svg .tk { fill: var(--muted); font: 500 10.5px var(--mono); }
+svg .gd { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 4; opacity: .7; }
+svg .cv { stroke-width: 2.6; fill: none; stroke-linecap: round; }
+svg .cv.dash { stroke-dasharray: 7 5; stroke-width: 2; }
+svg .cvl { font: 700 11.5px var(--sans); }
+svg .c-d { stroke: var(--demand); fill: var(--demand); } svg .c-s { stroke: var(--supply); fill: var(--supply); }
+svg .c-x { stroke: var(--ext); fill: var(--ext); } svg .c-w { stroke: var(--world); fill: var(--world); } svg .c-t { stroke: var(--policy); fill: var(--policy); }
+svg text.cvl { stroke: none; }
+svg .pt { fill: var(--paper); stroke: var(--fg); stroke-width: 2; }
+svg .ptl { fill: var(--fg); font: 700 11px var(--sans); }
+svg .atag { fill: var(--fg); font: 700 11px var(--sans); opacity: .8; }
+svg .a-cs { fill: var(--cs); fill-opacity: .6; } svg .a-ps { fill: var(--ps); fill-opacity: .6; }
+svg .a-ps2 { fill: var(--ps); fill-opacity: .95; } svg .a-ts { fill: var(--ts); fill-opacity: .6; }
+svg .a-dwl { fill: url(#dwlHatch); stroke: var(--dwl); stroke-width: 1.2; }
+svg .a-rev { fill: var(--rev); fill-opacity: .75; } svg .a-rev2 { fill: var(--rev2); fill-opacity: .8; } svg .a-time { fill: var(--time); fill-opacity: .65; }
+
+svg .grid { stroke: var(--line); stroke-width: 1; }
+svg .a-prof { fill: var(--cs); fill-opacity: .75; } svg .a-loss { fill: var(--dwl); fill-opacity: .35; }
+.sw.a-prof { background: var(--cs); } .sw.a-loss { background: var(--dwl); opacity: .5; }
+.twin { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.tw-t { margin: 0 0 2px; font-size: .78rem; font-weight: 700; color: var(--muted); }
+.g-ctrl .g-btn + .g-btn { margin-top: -4px; }
+.graph.wide .g-body { grid-template-columns: minmax(0, 1fr); }
+.graph.wide .g-side { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+@media (max-width: 700px) { .twin, .graph.wide .g-side { grid-template-columns: minmax(0, 1fr); } }
+svg polyline.cv { fill: none !important; }
+
+.graph { background: var(--paper); }
+.g-note { background: var(--tint); }
+
+@media (max-width: 900px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .rail { display: none; position: fixed; inset: 64px 0 0 0; max-height: none; background: var(--bg); z-index: 15; padding: 20px 16px 60px; }
+  .rail.open { display: block; }
+  .toc-btn { display: inline-block; }
+  .g-body { grid-template-columns: minmax(0, 1fr); }
+  .map { grid-template-columns: minmax(0, 1fr); }
+  .marrow { transform: rotate(90deg); justify-self: center; }
+}
+@media (max-width: 560px) { .pair, .traps { grid-template-columns: minmax(0, 1fr); } }
+/* Management components */
+.three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 1rem 0; }
+.tcard { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
+.tcard .tnum { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: var(--tone-ffffff); font: 700 .78rem/24px var(--sans); text-align: center; }
+.tcard p { margin: 0; color: var(--muted); font-size: .88rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+.tags span { font-size: .74rem; background: var(--tint); color: var(--accent-ink); padding: 1px 8px; border-radius: 999px; font-weight: 500; }
+.method, .loop, .cascade { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 1rem 0; font-size: .86rem; }
+.method span, .loop span, .cascade span { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 5px 11px; line-height: 1.4; }
+.method span.hi { background: var(--tint); border-color: var(--accent); color: var(--accent-ink); font-weight: 700; }
+.method i, .loop i, .cascade i { font-style: normal; color: var(--accent); font-weight: 700; }
+.loop i.back { font-size: 1.1rem; }
+.cascade { flex-direction: column; align-items: flex-start; gap: 2px; }
+.cascade span:nth-of-type(2) { margin-left: 18px; } .cascade span:nth-of-type(3) { margin-left: 36px; } .cascade span:nth-of-type(4) { margin-left: 54px; }
+.cascade i:nth-of-type(1) { margin-left: 14px; } .cascade i:nth-of-type(2) { margin-left: 32px; } .cascade i:nth-of-type(3) { margin-left: 50px; }
+.four { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 1rem 0; }
+.four > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+.four b { font-size: .9rem; color: var(--accent-ink); } .four p { margin: 4px 0 0; font-size: .84rem; color: var(--muted); line-height: 1.5; }
+
+.ladder { display: grid; grid-template-columns: minmax(0, 1fr) 118px 118px; grid-template-rows: repeat(5, auto); gap: 5px 8px; margin: 1rem 0 .3rem; max-width: 640px; }
+.lv { grid-column: 1; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; font-weight: 700; font-size: .9rem; line-height: 1.35; }
+.lv small { display: block; font-weight: 400; color: var(--muted); font-size: .78rem; }
+.lv.l5 { grid-row: 1; margin-inline: 22%; } .lv.l4 { grid-row: 2; margin-inline: 16%; } .lv.l3 { grid-row: 3; margin-inline: 10%; } .lv.l2 { grid-row: 4; margin-inline: 5%; } .lv.l1 { grid-row: 5; }
+.lv.l5, .lv.l4 { background: var(--tone-f6e9f4); } .lv.l3 { background: var(--tint); } .lv.l2, .lv.l1 { background: var(--tone-eaf2ee); }
+.erg { border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .84rem; text-align: center; padding: 6px; }
+.erg.g { grid-column: 2; grid-row: 1 / span 2; background: var(--tone-ebd7ea); color: var(--tone-6e3f6a); }
+.erg.r { grid-column: 3; grid-row: 2 / span 2; background: var(--tint); color: var(--accent-ink); }
+.erg.e { grid-column: 2; grid-row: 4 / span 2; background: var(--tone-d9ebe1); color: var(--tone-2f6b4f); }
+
+.mw { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px; margin: 1.6rem 0 2rem; }
+.mw-body { margin-top: 10px; }
+.hz-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.hz-t { margin: 0 0 6px; font-weight: 700; font-size: .88rem; } .hz-t small { font-weight: 400; color: var(--muted); }
+.chips { display: flex; flex-direction: column; gap: 5px; }
+.chip { display: flex; justify-content: space-between; gap: 10px; font: 500 .84rem var(--sans); text-align: left; background: var(--bg); border: 1px solid var(--line); color: var(--fg); border-radius: 7px; padding: 6px 10px; cursor: pointer; }
+.chip em { font-style: normal; font-size: .74rem; color: var(--muted); }
+.hz-cols > div:first-child .chip[aria-pressed="true"] { border-color: var(--dwl); background: var(--tone-fcedea); }
+.hz-cols > div:first-child .chip[aria-pressed="true"] em { color: var(--tone-a8432f); }
+.hz-cols > div:last-child .chip[aria-pressed="true"] { border-color: var(--tone-6fae8b); background: var(--tone-eaf5ee); }
+.hz-cols > div:last-child .chip[aria-pressed="true"] em { color: var(--tone-2f6b4f); }
+.scale { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 6px; margin-top: 18px; }
+.half { height: 14px; background: var(--bg); border: 1px solid var(--line); border-radius: 7px; position: relative; overflow: hidden; }
+.half i { position: absolute; top: 0; bottom: 0; transition: width .25s; }
+.half.left i { right: 0; background: var(--dwl); } .half.right i { left: 0; background: var(--tone-6fae8b); }
+@media (prefers-reduced-motion: reduce) { .half i { transition: none; } }
+.zero { font: 700 .8rem var(--mono); color: var(--muted); }
+.scale-l { display: flex; justify-content: space-between; font-size: .74rem; color: var(--muted); margin-top: 4px; }
+
+.kpi-flow { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.3fr) auto minmax(0, .8fr) auto minmax(0, 1fr); gap: 8px; align-items: stretch; margin-top: 12px; font-size: .84rem; }
+.kpi-flow > div { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; line-height: 1.45; }
+.kpi-flow > i { font-style: normal; color: var(--accent); font-weight: 700; align-self: center; }
+.kpi-flow b { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.kpi-flow p { margin: 3px 0 0; } .kpi-flow ul { margin: 3px 0 0; padding-left: 1.1em; }
+.kpi-flow .bad { border-color: var(--dwl); background: var(--tone-fcedea); } .kpi-flow .good { border-color: var(--tone-6fae8b); background: var(--tone-eaf5ee); }
+
+.cmp-sel { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; font-size: .84rem; color: var(--muted); }
+.cmp-sel select { font: 500 .88rem var(--sans); padding: 5px 8px; border: 1px solid var(--line); border-radius: 7px; background: var(--paper); color: var(--fg); }
+table.cmp td:first-child { font-weight: 700; color: var(--muted); width: 22%; }
+
+.tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line); }
+.tabs button { font: 500 .86rem var(--sans); background: none; border: 0; border-bottom: 2px solid transparent; color: var(--muted); padding: 6px 12px; cursor: pointer; margin-bottom: -1px; }
+.tabs button[aria-selected="true"] { color: var(--accent-ink); border-bottom-color: var(--accent); }
+.ev { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+.ev > div { display: grid; grid-template-columns: 190px auto minmax(0, 1fr); gap: 10px; align-items: baseline; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; font-size: .86rem; line-height: 1.5; }
+.ev p { margin: 0; }
+.tag { font-size: .72rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; white-space: nowrap; }
+.tag.gap { background: var(--tone-fce3dd); color: var(--tone-a8432f); } .tag.ok { background: var(--tone-e3f2e9); color: var(--tone-2f6b4f); }
+.tag.maybe { background: var(--tone-fbf0d9); color: var(--tone-8a6216); } .tag.na { background: var(--tone-eee9eb); color: var(--muted); }
+.issue { margin-top: 12px; background: var(--tint); border-radius: 8px; padding: 10px 14px; font-size: .9rem; }
+.issue p { margin: 4px 0 0; }
+
+.xgrid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 1rem 0; }
+.xgrid > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 5px; font-size: .84rem; line-height: 1.4; }
+.xgrid small { color: var(--muted); font-size: .76rem; }
+.xgrid .ok, .xgrid .gap { align-self: flex-start; font-size: .72rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; }
+.xgrid .ok { background: var(--tone-e3f2e9); color: var(--tone-2f6b4f); } .xgrid .gap { background: var(--tone-fce3dd); color: var(--tone-a8432f); }
+
+@media (max-width: 760px) {
+  .three, .four { grid-template-columns: minmax(0, 1fr); }
+  .xgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hz-cols { grid-template-columns: minmax(0, 1fr); }
+  .kpi-flow { grid-template-columns: minmax(0, 1fr); } .kpi-flow > i { transform: rotate(90deg); justify-self: center; }
+  .ev > div { grid-template-columns: minmax(0, 1fr); gap: 3px; } .ev .tag { justify-self: start; }
+  .ladder { grid-template-columns: minmax(0, 1fr) 84px 84px; }
+}
+
+/* Session 4 + case page */
+.tcard small.dont { color: var(--muted); font-size: .78rem; border-top: 1px dashed var(--line); padding-top: 6px; margin-top: 4px; }
+.quotes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: .6rem 0 1rem; }
+.quotes q { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; font-style: italic; color: var(--muted); font-size: .9rem; }
+.six { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 1rem 0; }
+.six > div { display: flex; gap: 10px; align-items: flex-start; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .88rem; line-height: 1.5; }
+.six span { flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--tint); color: var(--accent-ink); font: 700 .76rem/24px var(--sans); text-align: center; }
+a.cta { display: inline-block; background: var(--accent); color: var(--tone-ffffff); text-decoration: none; font-weight: 500; padding: 8px 16px; border-radius: 8px; }
+a.cta:hover { background: var(--accent-ink); }
+blockquote.say { margin: .6rem 0; padding: 12px 16px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; font-size: .92rem; line-height: 1.7; }
+.timeline { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 1rem 0; }
+.timeline > div { background: var(--paper); border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: 10px; padding: 10px 14px; font-size: .88rem; line-height: 1.5; }
+.timeline time { font: 500 .76rem var(--mono); color: var(--accent-ink); display: block; }
+.timeline p { margin: 4px 0 0; color: var(--muted); }
+.score { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 1rem 0; }
+.score > div { border-radius: 10px; padding: 10px 12px; font-size: .84rem; line-height: 1.5; border: 1px solid var(--line); }
+.score .up { background: var(--tone-eaf5ee); border-color: var(--tone-a9d3ba); } .score .down { background: var(--tone-fcedea); border-color: var(--tone-edc2b8); }
+.score b::after { margin-left: 6px; font-size: .78rem; } .score .up b::after { content: "improved"; color: var(--tone-2f6b4f); } .score .down b::after { content: "worse"; color: var(--tone-a8432f); }
+.score ul { margin: 6px 0 0; padding-left: 1.1em; }
+
+.jcm { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, .9fr); gap: 16px; }
+.jdims { display: flex; flex-direction: column; gap: 8px; }
+.jd.g0 label span { color: var(--tone-6e3f6a); } .jd.g1 label span { color: var(--accent-ink); } .jd.g2 label span { color: var(--tone-2f6b4f); }
+.jstates { display: flex; flex-direction: column; gap: 12px; padding-top: 4px; }
+.jst span { font-size: .8rem; font-weight: 500; }
+.jbar { height: 12px; border-radius: 6px; background: var(--bg); border: 1px solid var(--line); overflow: hidden; margin-top: 3px; }
+.jbar i { display: block; height: 100%; transition: width .25s; }
+.jst.g0 .jbar i { background: var(--tone-b98ab5); } .jst.g1 .jbar i { background: var(--accent); } .jst.g2 .jbar i { background: var(--tone-6fae8b); }
+@media (prefers-reduced-motion: reduce) { .jbar i { transition: none; } }
+.jout ul { margin: 8px 0 0; padding-left: 1.1em; font-size: .82rem; color: var(--muted); }
+.jlvl { display: inline-block; font-weight: 700; padding: 3px 12px; border-radius: 999px; font-size: .86rem; }
+.jlvl.strong { background: var(--tone-e3f2e9); color: var(--tone-2f6b4f); } .jlvl.moderate { background: var(--tone-fbf0d9); color: var(--tone-8a6216); } .jlvl.weak { background: var(--tone-fce3dd); color: var(--tone-a8432f); }
+.jgns { margin-top: 14px; }
+
+.qz-item { font-size: 1rem; font-weight: 500; margin: 4px 0 12px; }
+.qz-opts { display: grid; gap: 8px; }
+.qz-opts.grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 520px; }
+.qz-opts.row5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.qz-o { font: 500 .88rem var(--sans); background: var(--bg); border: 1px solid var(--line); color: var(--fg); border-radius: 8px; padding: 10px; cursor: pointer; display: flex; flex-direction: column; gap: 2px; text-align: center; }
+.qz-o small { color: var(--muted); font-size: .74rem; font-weight: 400; }
+.qz-o:hover { border-color: var(--accent); }
+.qz-o.right { background: var(--tone-e3f2e9); border-color: var(--tone-6fae8b); } .qz-o.wrong { background: var(--tone-fce3dd); border-color: var(--dwl); }
+.qz-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: .8rem; color: var(--muted); }
+
+.rsteps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+.rsteps > div { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: .85rem; line-height: 1.5; }
+.rsteps > div.g { background: var(--tint); border-color: var(--accent); }
+.rsteps b { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.rsteps p { margin: 4px 0 0; }
+.risk { font-size: .88rem; } .risk b { font-size: .72rem; color: var(--tone-ffffff); background: var(--tone-b98a2e); padding: 1px 7px; border-radius: 4px; margin-right: 6px; }
+.sayd summary { cursor: pointer; font-weight: 500; color: var(--accent-ink); font-size: .9rem; }
+
+@media (max-width: 760px) {
+  .quotes, .six, .timeline, .rsteps { grid-template-columns: minmax(0, 1fr); }
+  .score { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .jcm { grid-template-columns: minmax(0, 1fr); }
+  .qz-opts.row5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+
+.eq-controls{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}.eq-controls button,.eq-controls select{font:500 .86rem var(--sans);color:var(--accent-ink);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:8px 12px;max-width:100%;cursor:pointer}.eq-controls button[aria-pressed="true"]{background:var(--tint);border-color:var(--accent)}.eq-result{background:var(--tint);border-radius:8px;padding:14px;min-height:100px}.eq-result p{margin:5px 0}.eq-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.eq-grid>div{border:1px solid var(--line);border-radius:10px;padding:14px;background:var(--paper)}.eq-grid b{color:var(--accent-ink)}.eq-num{font:500 1.8rem var(--mono);display:block;color:var(--accent-ink)}.eq-map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.eq-map>div{padding:16px;background:var(--paper);border:1px solid var(--line);border-radius:10px}.eq-map p{margin:6px 0}body{margin:0}.hint span{min-width:0} @media(max-width:600px){.eq-grid,.eq-map{grid-template-columns:minmax(0,1fr)}.hint{flex-wrap:wrap}.mw{padding:14px}.doc{overflow-wrap:break-word}}
+
+html{scroll-padding-top:calc(var(--header-height,64px) + 12px)}@media(max-width:900px){.rail.open{top:var(--header-height,64px);max-height:calc(100vh - var(--header-height,64px));bottom:0}}
+.culture-rows{display:grid;gap:18px;margin:18px 0}.culture-row{border-bottom:1px solid var(--line);padding-bottom:12px}.culture-row:last-child{border:0}.culture-dimension{font-weight:700;font-size:.88rem;margin-bottom:6px;color:var(--accent-ink)}.culture-bar{display:grid;grid-template-columns:100px minmax(0,1fr) 30px;gap:9px;align-items:center;margin:5px 0;font-size:.8rem}.culture-track{height:11px;background:var(--bg);border-radius:99px;overflow:hidden}.culture-track i{display:block;height:100%;background:var(--accent);border-radius:99px}.culture-bar.comparison .culture-track i{background:var(--demand)}.culture-bar output{font-family:var(--mono);text-align:right}.culture-cue{font:500 .8rem var(--mono);color:var(--accent-ink);margin-top:5px}.culture-compact p{margin:.4rem 0}.culture-answer{padding:14px;background:var(--tint);border-radius:8px;min-height:84px}.culture-answer p{margin:4px 0}.culture-count{font-size:.78rem;color:var(--muted)}.culture-roles{display:flex;flex-wrap:wrap;gap:6px}.culture-roles button{font-size:.8rem}.eq-controls label{min-width:0;max-width:100%}.eq-controls select{display:block;width:100%;max-width:100%;margin-top:5px}.source{margin-top:1rem}@media(max-width:560px){.culture-bar{grid-template-columns:82px minmax(0,1fr) 25px;gap:7px}.eq-controls button{padding:7px 9px}.hint{flex-wrap:wrap}.doc td,.doc th{padding:8px}}
+
+.context-diagram .flow{align-items:center;gap:5px;font-size:.8rem;margin:.8rem 0}.context-diagram .flow span{padding:4px 7px}.context-diagram small{display:block;color:var(--muted);font-size:.8rem;margin-top:7px}
+.message-chain{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:9px;margin:1rem 0}.message-chain>div{border:1px solid var(--line);background:var(--paper);border-radius:9px;padding:13px}.message-chain>div.hi{background:var(--tint);border-color:var(--accent)}.message-chain b{font-size:.83rem;color:var(--accent-ink)}.message-chain p{margin:5px 0 0;font-size:.9rem}.message-chain>i{font-style:normal;color:var(--accent)}
+.culture-map{margin:1.2rem 0 1.7rem;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px}.chart-axis-label,.culture-map figcaption{font:500 .8rem/1.6 var(--sans);color:var(--muted)}.pd-ua-chart{width:100%;max-width:560px;height:auto;display:block;margin:5px auto}.chart-grid{stroke:var(--line);stroke-width:1;fill:none}.chart-axis{stroke:var(--muted);stroke-width:1.3;fill:none}.chart-tick{fill:var(--muted);font:400 14px var(--mono)}.chart-country{font:500 16px var(--sans)}
+.culture-cue{font-family:var(--sans)}
+@media(max-width:560px){.message-chain{grid-template-columns:minmax(0,1fr);gap:6px}.message-chain>i{text-align:center;transform:rotate(90deg)}.culture-map{padding:10px}.chart-country{font-size:18px}}
+
+#map + .sub + .three > .tcard > .zh, .three > .tcard > .zh { align-self: flex-start; }
+
+.qz-o:focus-visible,.qz-nav .g-btn:focus-visible{outline:2px solid var(--accent-ink);outline-offset:3px}
+.qz-o[aria-disabled="true"]{cursor:default}
+
+
+
+/* Shared reading rhythm and responsive controls. */
+.doc select{font-family:var(--sans);font-size:.88rem}
+.hero .lead{max-width:none}
+html{scroll-padding-top:calc(var(--header-height,64px) + 12px)}
+@media(max-width:900px){.rail.open{top:var(--header-height,64px);bottom:0;inset-inline:0;max-height:calc(100vh - var(--header-height,64px))}}
+.eq-controls label{min-width:0;max-width:100%}
+.eq-controls select{display:block;max-width:100%;margin-top:5px}
+@media(max-width:560px){.top-in .crumbs{flex-basis:100%}.top-in .toc-btn{order:1}.top-in .sessions{order:2;margin-left:auto}.top-in .sessions .pill{padding:3px 9px}.top-in{gap:8px}}
+/* Boss activity uses the existing colors and typography. */
+.boss-controls[hidden],.boss-panel[hidden]{display:none!important}
+.boss-controls{position:relative;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.boss-controls>span{flex-basis:100%;font-size:.85rem;font-weight:700;color:var(--accent-ink)}
+.boss-panel{margin-top:24px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.boss-panel h3{margin-top:1rem}.boss-panel h4{font-size:1.03rem;color:var(--accent-ink);margin:2rem 0 .65rem}
+.boss-panel blockquote{margin:1rem 0;padding:10px 18px;border-left:3px solid var(--accent);background:var(--paper);border-radius:0 8px 8px 0}
+
+.boss-panel .tbl th[scope="row"]{background:transparent;font-weight:600;width:23%}
+.boss-matrix table{min-width:650px}.boss-matrix td{width:38%}.supplement{margin:1.3rem 0;padding:12px 16px;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.supplement>summary{cursor:pointer;font-weight:600;color:var(--accent-ink)}.supplement .culture-map{border:0;padding-inline:0}
+@media(max-width:560px){.culture-bar{grid-template-columns:80px minmax(0,1fr) 28px}.boss-controls button{flex:1 1 120px}.boss-panel .tbl{font-size:.85rem}}
+@media print{.boss-controls{display:none!important}.boss-panel[hidden]{display:block!important}.boss-panel{break-before:page}.boss-panel h3,.boss-panel h4{break-after:avoid}.tbl{overflow:visible}.boss-matrix table{min-width:0}tr{break-inside:avoid}.supplement{display:none}.top,.rail{display:none!important}.wrap{display:block}.doc{max-width:none}main{padding:0}.boss-panel .qa details:not([open])>p{display:block}}
+
+.boss-panel .boss-analysis table{min-width:820px;table-layout:fixed}.boss-panel .boss-analysis th[scope="row"],.boss-panel .boss-analysis td{width:auto}.boss-analysis th,.boss-analysis td{overflow-wrap:break-word}
+@media print{.boss-panel .boss-analysis table{min-width:0}}
+</style>
+<style id="system-theme">
+/* System appearance only changes colors. Print retains the light palette. */
+:root {
+  --header-rgb: 253, 249, 249;
+  --tone-2f282b: #2f282b;
+  --tone-2f6b4f: #2f6b4f;
+  --tone-3f5675: #3f5675;
+  --tone-3f7f7a: #3f7f7a;
+  --tone-6e3f55: #6e3f55;
+  --tone-6e3f6a: #6e3f6a;
+  --tone-6fae8b: #6fae8b;
+  --tone-77777755: #77777755;
+  --tone-7e6f74: #7e6f74;
+  --tone-8a6216: #8a6216;
+  --tone-8a7a5c: #8a7a5c;
+  --tone-9c4862: #9c4862;
+  --tone-a7cdb6: #a7cdb6;
+  --tone-a8432f: #a8432f;
+  --tone-a9d3ba: #a9d3ba;
+  --tone-b2c4e3: #b2c4e3;
+  --tone-b98a2e: #b98a2e;
+  --tone-b98ab5: #b98ab5;
+  --tone-bfdcc9: #bfdcc9;
+  --tone-c06c84: #c06c84;
+  --tone-d5c6ca: #d5c6ca;
+  --tone-d9674f: #d9674f;
+  --tone-d9ebe1: #d9ebe1;
+  --tone-ddb3cb: #ddb3cb;
+  --tone-e3f2e9: #e3f2e9;
+  --tone-e5c171: #e5c171;
+  --tone-eaf2ee: #eaf2ee;
+  --tone-eaf5ee: #eaf5ee;
+  --tone-ebd7ea: #ebd7ea;
+  --tone-edc2b8: #edc2b8;
+  --tone-eee6e8: #eee6e8;
+  --tone-eee9eb: #eee9eb;
+  --tone-efdde2: #efdde2;
+  --tone-f1dca8: #f1dca8;
+  --tone-f6e9f4: #f6e9f4;
+  --tone-f8eef0: #f8eef0;
+  --tone-fae9ed: #fae9ed;
+  --tone-fbf0d9: #fbf0d9;
+  --tone-fce3dd: #fce3dd;
+  --tone-fcedea: #fcedea;
+  --tone-fdf9f9: #fdf9f9;
+  --tone-ffffff: #ffffff;
+}
+@media screen and (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --header-rgb: 29, 24, 26;
+    --tone-2f282b: #EEE4E6;
+    --tone-2f6b4f: #A0D2B2;
+    --tone-3f5675: #93AECB;
+    --tone-3f7f7a: #8CC4BE;
+    --tone-6e3f55: #C9A3D6;
+    --tone-6e3f6a: #DAB3D6;
+    --tone-6fae8b: #8CC3A0;
+    --tone-77777755: #00000066;
+    --tone-7e6f74: #BEACB2;
+    --tone-8a6216: #E3C480;
+    --tone-8a7a5c: #C9B68C;
+    --tone-9c4862: #E6B3BE;
+    --tone-a7cdb6: #6E8C6B;
+    --tone-a8432f: #F0A48D;
+    --tone-a9d3ba: #669C7D;
+    --tone-b2c4e3: #667C96;
+    --tone-b98a2e: #D8B66B;
+    --tone-b98ab5: #BD99C1;
+    --tone-bfdcc9: #5F7A5C;
+    --tone-c06c84: #D79AA7;
+    --tone-d5c6ca: #8B737F;
+    --tone-d9674f: #E08A6F;
+    --tone-d9ebe1: #2C4135;
+    --tone-ddb3cb: #8C6680;
+    --tone-e3f2e9: #23372D;
+    --tone-e5c171: #C9A250;
+    --tone-eaf2ee: #29362F;
+    --tone-eaf5ee: #25372D;
+    --tone-ebd7ea: #413047;
+    --tone-edc2b8: #B77F70;
+    --tone-eee6e8: #4B3E45;
+    --tone-eee9eb: #30282D;
+    --tone-efdde2: #55424A;
+    --tone-f1dca8: #8F7A4A;
+    --tone-f6e9f4: #342938;
+    --tone-f8eef0: #2B2226;
+    --tone-fae9ed: #35272D;
+    --tone-fbf0d9: #3C3223;
+    --tone-fce3dd: #412B28;
+    --tone-fcedea: #382724;
+    --tone-fdf9f9: #1D181A;
+    --tone-ffffff: #241E21;
+  }
+  .topswitch input:after { background: var(--fg); }
+  .topswitch input:checked:after { background: var(--paper); }
+}
+</style>
+<style>
+/* Session 8 culture components */
+svg.org{font-family:var(--sans);width:100%;height:auto;display:block;max-width:640px;margin:0 auto}
+svg.org text{fill:var(--fg);font-size:12.5px;font-weight:500}
+svg.org text.sm{font-size:10.5px;fill:var(--muted);font-weight:400}
+svg.org .bx{fill:var(--paper);stroke:var(--muted);stroke-width:1.2}
+svg.org .bx.hi{fill:var(--tint);stroke:var(--accent);stroke-width:1.6}
+svg.org .bx.cu{fill:var(--tone-eaf5ee);stroke:var(--tone-6fae8b)}
+svg.org .ln{stroke:var(--muted);stroke-width:1.5;fill:none}
+svg.org .ar{stroke:var(--accent-ink);stroke-width:1.6}
+svg .arw{fill:var(--accent)}
+.figbox{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px;margin:1rem 0}
+.figbox figcaption{font-size:.8rem;color:var(--muted);margin-top:6px}
+.checks{list-style:none;padding-left:0!important;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:1rem 0}
+.checks li{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px;font-size:.86rem;line-height:1.45;margin:0}
+.checks li b{display:block;color:var(--accent-ink);font-size:.78rem;margin-bottom:2px}
+.pyr{display:flex;flex-direction:column;align-items:center;gap:4px;margin:1rem 0}
+.pyr>div{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:8px 12px;text-align:center;font-size:.86rem;line-height:1.45}
+.pyr>div b{display:block;color:var(--accent-ink)}
+.pyr>div span{color:var(--muted);font-size:.8rem}
+.pyr .l4{width:46%}.pyr .l3{width:60%}.pyr .l2{width:76%}.pyr .l1{width:92%;background:var(--tint);border-color:var(--accent)}
+.ev-tabs [role=tabpanel]{padding-top:12px}
+.ev-tabs h4{font-family:var(--serif);font-size:1.08rem;margin:2px 0 6px}
+.ev-meta{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 10px}
+.ev-meta span{font-size:.74rem;background:var(--tint);color:var(--accent-ink);padding:2px 9px;border-radius:999px;font-weight:500}
+.mw-label{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-ink);margin:0 0 4px}
+@media(max-width:760px){.checks{grid-template-columns:minmax(0,1fr)}.pyr .l4,.pyr .l3,.pyr .l2,.pyr .l1{width:100%}}
+@media print{.ev-tabs [role=tabpanel][hidden]{display:block!important}.ev-tabs .tabs{display:none}}
+</style>
+<style>.rp-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:8px 0}.rp-lbl{min-width:6.5rem;font-weight:600;font-size:.86rem}.rp-opts{display:flex;flex-wrap:wrap;gap:6px}.rp-b{font:500 .86rem var(--sans);border:1px solid var(--line);background:var(--paper);color:var(--fg);padding:6px 14px;border-radius:999px;cursor:pointer}.rp-b:hover{border-color:var(--accent)}.rp-b[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--tone-ffffff)}.rp-b[aria-pressed=true] .zh-full{color:inherit}.rp-out{margin-top:12px;background:var(--tint);border-radius:10px;padding:12px 14px}.rp-out p{margin:.25rem 0}.rp-r{font-weight:700;color:var(--accent-ink)}.rp-style{font-weight:600}.rp-wait{color:var(--muted)}</style></head><body><svg aria-hidden="true" width="0" height="0" style="position:absolute"><defs><marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arw"/></marker><marker id="arw2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="arw"/></marker></defs></svg><header class="top"><div class="top-in"><nav aria-label="Breadcrumb" class="crumbs"><a href="index.html">Study Notes</a><span>/</span><a href="management.html">Management</a><span>/</span><b>Session 9</b></nav><button aria-expanded="false" class="toc-btn" id="tocBtn" type="button">Contents</button><nav aria-label="Sessions" class="sessions"><span aria-current="page" class="pill">S9</span><span class="pill off">S10</span><span class="pill off">S11</span><span class="pill off">S12</span></nav></div></header><div class="wrap"><aside class="rail" id="rail"><p class="lbl">Contents</p><ol id="toc"></ol></aside><main><article class="doc"><div class="hero"><p class="kick">Managing People in Organizations · Session 9</p><h1>Leadership</h1><p class="lead">Read the follower first. Then decide how much to direct and how much to support. The session also compares leading through rewards with leading through growth and vision.</p></div><h2 id="map">Chapter map</h2><p class="sub">Three questions to ask about any leader.</p><div class="three"><div class="tcard"><span class="tnum">1</span><b>Who and what</b><p>What kind of person is the leader, and what do they actually do?</p><div class="tags"><span>Traits</span><span>Consideration</span><span>Initiating structure</span></div></div><div class="tcard"><span class="tnum">2</span><b>Which style, when</b><p>Does the style fit this follower on this task?</p><div class="tags"><span>Readiness</span><span>S1 to S4</span></div></div><div class="tcard"><span class="tnum">3</span><b>How deep</b><p>Does the leader trade rewards for work, or grow people?</p><div class="tags"><span>Transactional</span><span>Transformational</span><span>Vision</span></div></div></div><div class="method"><span>Read the follower</span><i aria-hidden="true">→</i><span>Pick the style</span><i aria-hidden="true">→</i><span>Check the fit</span><i aria-hidden="true">→</i><span class="hi">Adjust as they grow</span></div><h2 id="lead-mgmt">1. Leadership and management</h2><p class="sub">The lecture calls them “distinct, yet complementary.” They are two different jobs.</p><div class="pair"><div><b>Management</b><p>Controls complexity. Keeps things running with plans, budgets and checks.</p></div><div><b>Leadership</b><p>Produces useful change. Gives people a direction and gets them to commit to it.</p></div></div><p class="key">Healthy organizations need both.</p><h2 id="traits">2. Trait theory</h2><p class="sub">Traits are personal qualities that set leaders apart from followers. This theory asks what kind of person becomes a leader.</p><div class="tbl"><table><thead><tr><th scope="col">Trait</th><th scope="col">In plain words</th></tr></thead><tbody><tr><th scope="row">Intelligence (EQ and IQ)</th><td>Thinking ability and emotional skill</td></tr><tr><th scope="row">Dominance or assertiveness</th><td>Willing to take charge and speak up</td></tr><tr><th scope="row">Self-confidence</th><td>Trusts their own judgment</td></tr><tr><th scope="row">Energy and activity</th><td>Has drive and stamina</td></tr><tr><th scope="row">Task-relevant knowledge</th><td>Knows the work they lead</td></tr></tbody></table></div><p class="key">Traits describe the leader. They do not say what to do in a given situation. The next theories fill that gap.</p><p class="hint"><b>連到前面</b><span>S5 的 EQ 在這裡是領導特質之一。</span></p><h2 id="behavior">3. Behavioral theories</h2><p class="sub">The Ohio State studies looked at what leaders do. They found two kinds of behavior.</p><div class="tbl"><table><thead><tr><th scope="col">Behavior</th><th scope="col">What it is</th><th scope="col">Ask yourself</th><th scope="col">Do not confuse with</th></tr></thead><tbody><tr><th scope="row">Consideration <span class="zh">關懷</span></th><td>Building mutual trust, respect and relationships</td><td>Does the leader build trust?</td><td>Lowering standards to keep people happy</td></tr><tr><th scope="row">Initiating structure <span class="zh">定結構</span></th><td>Setting goals, defining tasks and checking the work</td><td>Does the leader organize the work?</td><td>Watching every step all day</td></tr></tbody></table></div><p class="key">Leaders tend to lean toward one. Effective leadership combines both.</p><p class="hint"><b>中文邏輯</b><span>關懷看「人」，定結構看「事」。到情境領導時，這兩個就是 support 和 task。</span></p><h2 id="situational">4. Situational leadership</h2><p class="sub">There is no single best style. The right style depends on the situation, and above all on the follower.</p><h3 id="contingency">What shapes the situation</h3><div class="tbl"><table><thead><tr><th scope="col">Area</th><th scope="col">Factors the lecture lists</th></tr></thead><tbody><tr><th scope="row">People</th><td>The leader, the followers, the leader’s boss, key colleagues</td></tr><tr><th scope="row">Organization</th><td>Power of the role, company policies, norms and traditions (culture), constraints</td></tr><tr><th scope="row">The work</th><td>Job demands, the nature of the task, time to decide</td></tr></tbody></table></div><h3 id="readiness">Readiness</h3><p class="key">Readiness = ability + willingness, for one specific task.</p><div class="pair"><div><b>Ability <span class="zh">能力</span></b><p>Can they do it? Look at skill, knowledge, experience with the task, past results and deadlines met.</p></div><div><b>Willingness <span class="zh">意願</span></b><p>Do they want to, and do they feel sure? Look at confidence, commitment, interest, initiative and persistence.</p></div></div><p>The same person can be R4 on one task and R1 on a new one.</p><h3 id="styles">Four levels, four styles</h3><figure class="figbox"><svg class="org" viewBox="0 0 640 340" role="img" aria-label="Situational leadership: task behavior on the horizontal axis, support behavior on the vertical axis. Top left S3 Supporting, top right S2 Coaching, bottom left S4 Delegating, bottom right S1 Directing. Below, follower readiness from R4 on the left to R1 on the right."><rect class="bx hi" x="110" y="20" width="238" height="108" rx="8"/><rect class="bx hi" x="352" y="20" width="238" height="108" rx="8"/><rect class="bx" x="110" y="132" width="238" height="108" rx="8"/><rect class="bx" x="352" y="132" width="238" height="108" rx="8"/><text x="229" y="68" text-anchor="middle">S3 Supporting</text><text class="sm" x="229" y="88" text-anchor="middle">Low task, high support</text><text x="471" y="68" text-anchor="middle">S2 Coaching</text><text class="sm" x="471" y="88" text-anchor="middle">High task, high support</text><text x="229" y="180" text-anchor="middle">S4 Delegating</text><text class="sm" x="229" y="200" text-anchor="middle">Low task, low support</text><text x="471" y="180" text-anchor="middle">S1 Directing</text><text class="sm" x="471" y="200" text-anchor="middle">High task, low support</text><line class="ln" x1="96" y1="240" x2="96" y2="24" marker-end="url(#arw)"/><text class="sm" x="70" y="134" text-anchor="middle" transform="rotate(-90 70 134)">Support behavior</text><text class="sm" x="84" y="236" text-anchor="end">Low</text><text class="sm" x="84" y="30" text-anchor="end">High</text><line class="ln" x1="110" y1="254" x2="588" y2="254" marker-end="url(#arw)"/><text class="sm" x="350" y="249" text-anchor="middle">Task behavior: low to high</text><rect class="bx cu" x="110" y="266" width="118" height="44" rx="6"/><text x="169" y="284" text-anchor="middle">R4</text><text class="sm" x="169" y="301" text-anchor="middle">Able, willing</text><rect class="bx" x="231" y="266" width="118" height="44" rx="6"/><text x="290" y="284" text-anchor="middle">R3</text><text class="sm" x="290" y="301" text-anchor="middle">Able, unwilling</text><rect class="bx" x="352" y="266" width="118" height="44" rx="6"/><text x="411" y="284" text-anchor="middle">R2</text><text class="sm" x="411" y="301" text-anchor="middle">Unable, willing</text><rect class="bx" x="473" y="266" width="118" height="44" rx="6"/><text x="532" y="284" text-anchor="middle">R1</text><text class="sm" x="532" y="301" text-anchor="middle">Unable, unwilling</text><text class="sm" x="110" y="328">High readiness</text><text class="sm" x="590" y="328" text-anchor="end">Low readiness</text></svg><figcaption>Each style sits above the readiness level it fits.</figcaption></figure><div class="tbl"><table><thead><tr><th scope="col">Follower</th><th scope="col">Style</th><th scope="col">What the leader does</th></tr></thead><tbody><tr><th scope="row">R1: unable, and unwilling or insecure</th><td>S1 Directing <span class="zh">指導</span></td><td>Says what to do, how and when. Checks that they understand. Gives regular feedback. Talk is mostly one-way.</td></tr><tr><th scope="row">R2: unable, but willing or confident</th><td>S2 Coaching <span class="zh">教練</span></td><td>Still teaches the task and sets deadlines. Also explains why it matters, shows confidence in them and solves some problems together.</td></tr><tr><th scope="row">R3: able, but unwilling or insecure</th><td>S3 Supporting <span class="zh">支持</span></td><td>Outlines the task only. Talks through how and when with them. Solves problems together. Gives credit.</td></tr><tr><th scope="row">R4: able, and willing or confident</th><td>S4 Delegating <span class="zh">授權</span></td><td>Agrees on goals and a follow-up plan. Steps in only when they cannot solve a problem. Gives credit.</td></tr></tbody></table></div><p class="key">Task behavior follows ability: the less able, the more direction. Support is highest in the middle, for R2 and R3.</p><p class="hint"><b>中文邏輯</b><span>能力決定要不要教，意願決定要不要鼓勵。</span></p><div data-mw="readiness-pick"></div><h3 id="slt-pairs">Pairs people mix up</h3><div class="tbl"><table><thead><tr><th scope="col">Pair</th><th scope="col">How to tell them apart</th></tr></thead><tbody><tr><th scope="row">R2 / R3</th><td>Both need high support. R2 cannot do the task yet, so the leader still teaches. R3 already can, so the leader stops teaching and encourages instead.</td></tr><tr><th scope="row">S4 / leaving people alone</th><td>S4 still sets goals, follows up and gives credit. Leaving people alone with no follow-up is laissez-faire.</td></tr></tbody></table></div><h3 id="slt-how">How to answer a situational leadership question</h3><ol><li>Name the task.</li><li>Judge ability with evidence.</li><li>Judge willingness with evidence.</li><li>Name the R level and the matching style.</li><li>Say what the leader should do.</li><li>Say what comes next. As readiness rises, move one step toward S4. If it drops, move one step back.</li></ol><h3 id="scenarios">Practice: six scenarios from the lecture</h3><div data-mw="scenario-sort"></div><p class="note-small">There is no official answer key. These answers follow the model. Scenarios 3, 4 and 6 have other reasonable answers, shown in the explanations.</p><h2 id="transactional">5. Transactional leadership</h2><p class="sub">Leadership as a trade: “what I give you in return for what you’ll do for me.” The leader directs and controls to reach the organization’s goals.</p><div class="tbl"><table><thead><tr><th scope="col">Form</th><th scope="col">What it looks like</th><th scope="col">Example</th></tr></thead><tbody><tr><th scope="row">Contingent reward <span class="zh">依績效給獎勵</span></th><td>Rewards are tied to performance</td><td>A bonus for hitting the monthly target</td></tr><tr><th scope="row">Management by exception, active</th><td>Watches closely and tracks mistakes</td><td>Checking every report for errors</td></tr><tr><th scope="row">Management by exception, passive</th><td>Waits until a problem is reported, then steps in</td><td>Acting only after a customer complains</td></tr></tbody></table></div><h2 id="transformational">6. Transformational leadership</h2><p class="sub">Leaders who grow their people, help them see old problems in new ways, and inspire them to give more than expected.</p><div class="tbl"><table><thead><tr><th scope="col">Dimension</th><th scope="col">What it is</th><th scope="col">Example</th><th scope="col">Do not confuse with</th></tr></thead><tbody><tr><th scope="row">Inspirational motivation <span class="zh">激勵鼓舞</span></th><td>Gives people an attractive vision of the future</td><td>“We make the parts no one else can make.”</td><td>A sales target with no larger purpose</td></tr><tr><th scope="row">Idealized influence <span class="zh">理想化影響</span></th><td>Acts the way they want others to act, and earns respect</td><td>Follows the safety rules even when it costs time</td><td>Being famous or popular</td></tr><tr><th scope="row">Intellectual stimulation <span class="zh">智力啟發</span></th><td>Gets people to rethink problems and build their own skills</td><td>“How would you fix this old delivery problem?”</td><td>Asking for ideas, then ignoring them</td></tr><tr><th scope="row">Individualized consideration <span class="zh">個別關懷</span></th><td>Coaches each person based on their own needs</td><td>A monthly growth talk with each person</td><td>Ohio State consideration, which builds trust with the whole group</td></tr></tbody></table></div><p class="note-small">The lecture groups the first two under “charisma.” Together the four are often called the four I’s.</p><div class="tbl"><table><thead><tr><th scope="col"></th><th scope="col">Transactional</th><th scope="col">Transformational</th></tr></thead><tbody><tr><th scope="row">The deal</th><td>Work in exchange for rewards</td><td>Growth in exchange for commitment</td></tr><tr><th scope="row">Effort</th><td>What was agreed</td><td>More than expected, often more than they thought possible</td></tr><tr><th scope="row">Main tools</th><td>Rewards and monitoring</td><td>Vision, role modeling, new ideas, coaching</td></tr></tbody></table></div><p class="key">Long-term success may need both.</p><div data-mw="tf-sort"></div><h2 id="full-range">7. The full-range leadership model</h2><p class="sub">All the styles on one chart. The more active the leader, and the more they develop people, the more effective they are.</p><figure class="figbox"><svg class="org" viewBox="0 0 640 330" role="img" aria-label="Full-range of leadership model: from passive and ineffective at the bottom left to active and effective at the top right: laissez-faire, management by exception, contingent reward, individualized consideration, intellectual stimulation, inspirational motivation, idealized influence."><line class="ln" x1="80" y1="300" x2="80" y2="16" marker-end="url(#arw)"/><line class="ln" x1="80" y1="300" x2="624" y2="300" marker-end="url(#arw)"/><text class="sm" x="72" y="24" text-anchor="end">Effective</text><text class="sm" x="72" y="296" text-anchor="end">Ineffective</text><text class="sm" x="84" y="318">Passive</text><text class="sm" x="620" y="318" text-anchor="end">Active</text><rect class="bx" x="90" y="258" width="165" height="30" rx="6"/><text x="172" y="277" text-anchor="middle" style="font-size:11.5px">Laissez-faire</text><rect class="bx cu" x="152" y="222" width="165" height="30" rx="6"/><text x="234" y="241" text-anchor="middle" style="font-size:11.5px">Management by exception</text><rect class="bx cu" x="214" y="186" width="165" height="30" rx="6"/><text x="296" y="205" text-anchor="middle" style="font-size:11.5px">Contingent reward</text><rect class="bx hi" x="276" y="150" width="165" height="30" rx="6"/><text x="358" y="169" text-anchor="middle" style="font-size:11.5px">Individualized consideration</text><rect class="bx hi" x="338" y="114" width="165" height="30" rx="6"/><text x="420" y="133" text-anchor="middle" style="font-size:11.5px">Intellectual stimulation</text><rect class="bx hi" x="400" y="78" width="165" height="30" rx="6"/><text x="482" y="97" text-anchor="middle" style="font-size:11.5px">Inspirational motivation</text><rect class="bx hi" x="462" y="42" width="165" height="30" rx="6"/><text x="544" y="61" text-anchor="middle" style="font-size:11.5px">Idealized influence</text><rect class="bx cu" x="450" y="236" width="14" height="14" rx="3"/><text class="sm" x="470" y="248">Transactional</text><rect class="bx hi" x="450" y="258" width="14" height="14" rx="3"/><text class="sm" x="470" y="270">Transformational</text></svg><figcaption>Source: Robbins and Judge (2009).</figcaption></figure><p class="note-small">Laissez-faire means avoiding decisions and not leading at all. The slides show it but do not define it. The chart has one box for management by exception, covering both the active and passive forms.</p><h2 id="vision">8. What makes a vision work</h2><p class="sub">Kantabutra’s research: people commit only when they know where the organization is going. A clear vision also gets different groups pulling in the same direction.</p><div class="tbl"><table><thead><tr><th scope="col">Attribute</th><th scope="col">In plain words</th><th scope="col">Ask yourself</th></tr></thead><tbody><tr><th scope="row">Conciseness</th><td>Short</td><td>Can people remember it?</td></tr><tr><th scope="row">Clarity</th><td>Easy to understand</td><td>Does everyone read it the same way?</td></tr><tr><th scope="row">Future orientation</th><td>About the long-term future</td><td>Does it say where we want to be?</td></tr><tr><th scope="row">Stability</th><td>Does not change often</td><td>Will it still hold in five years?</td></tr><tr><th scope="row">Challenge</th><td>Hard to reach</td><td>Does it make people stretch?</td></tr><tr><th scope="row">Abstractness</th><td>A broad direction, not one target</td><td>Is it bigger than one number?</td></tr><tr><th scope="row">Ability to inspire</th><td>Makes people want to work for it</td><td>Does it give people a reason to care?</td></tr></tbody></table></div><p class="note-small">Source: Kantabutra and Avery (2010).</p><div class="pair"><div><b>Weak</b><p>“Increase sales by 8% next year.” A one-year number. It is not about the long-term future, not a broad direction, and not inspiring.</p></div><div><b>Stronger</b><p>“Make the parts no one else can make.” Short, clear, long-term, hard to reach and broad. The 8% can sit under it as a goal.</p></div></div><h2 id="case">9. Precision Plastics: Session 9 task</h2><div class="assign"><b>Team activity: situational leadership</b><p>Find the R level of the <b>tool and die workers</b> and of the <b>molding machine workers</b>. Find the S levels of <b>Joe</b> and <b>Bill</b>. Recommend the leadership style and actions that would improve the situation. Present to class.</p></div><div class="assign"><b>Group activity: transformational leadership (30 minutes)</b><p>Use the transformational framework to say what is wrong with the current leadership style, and recommend improvements. Present to class.</p></div><p class="note-small">The second activity does not name a case. This page applies it to Precision Plastics.</p><h3 id="case-facts">The case in brief</h3><div class="tbl"><table><thead><tr><th scope="col">Who</th><th scope="col">What the case says</th></tr></thead><tbody><tr><th scope="row">The company</th><td>Makes small, precise plastic parts for medical and photo equipment. Its molds are hard to design, so it has few competitors. Known for quality.</td></tr><tr><th scope="row">Tool and die workers</th><td>Make the molds. Every mold is different. Highly skilled, experienced, proud of their work and well paid.</td></tr><tr><th scope="row">Joe Casey</th><td>Ran tool and die. Focused on quality and let workers decide how to do their work.</td></tr><tr><th scope="row">Molding machine workers</th><td>Routine, low-skill, low-pay work. They ignore safety rules and turnover is high. Bill says they have little interest in the job.</td></tr><tr><th scope="row">Bill Smith</th><td>Runs molding. Believes in close supervision and enjoys it. His department is productive and on schedule.</td></tr><tr><th scope="row">What changed</th><td>Joe retires. Bill takes over tool and die too. He adds rules, pushes for speed, tries to make everyone work the same way, and tells experts how to work though he knows little about the craft.</td></tr><tr><th scope="row">The result</th><td>Workers complain. Work falls behind. One long-time worker quits. Workers tell Jim Hunt, the production manager, that Bill is a poor supervisor.</td></tr></tbody></table></div><h3 id="case-diagnosis">Diagnosis: R levels and S styles</h3><div class="tbl"><table><thead><tr><th scope="col">Who</th><th scope="col">Evidence</th><th scope="col">Verdict</th></tr></thead><tbody><tr><th scope="row">Tool and die workers</th><td>Skilled, experienced, proud, high quality</td><td><span class="tag maybe">R4 → R3</span> R4 under Joe. Under Bill their skill is the same, but their willingness has dropped.</td></tr><tr><th scope="row">Molding machine workers</th><td>Ignore safety rules, high turnover, low interest (Bill’s view)</td><td><span class="tag gap">R1</span> On following safety rules. High turnover means many are new. A few experienced workers may be R3.</td></tr><tr><th scope="row">Joe Casey</th><td>Quality focus, lets workers decide</td><td><span class="tag ok">S4: fits</span> Matches R4 workers. Result: high quality and happy workers.</td></tr><tr><th scope="row">Bill Smith</th><td>Close supervision, new rules, tells people how to work</td><td><span class="tag gap">S1: fits molding only</span> Works for R1 molding workers. Wrong for R4 tool and die workers.</td></tr></tbody></table></div><p class="key">The core problem: Bill used S1 on R4 experts. They needed S4. Directing able people tells them they are not trusted.</p><div class="tbl"><table><thead><tr><th scope="col">Other theory</th><th scope="col">What it adds</th></tr></thead><tbody><tr><th scope="row">Trait</th><td>Bill lacks task-relevant knowledge of tool and die work.</td></tr><tr><th scope="row">Behavioral</th><td>High on structure, low on consideration.</td></tr><tr><th scope="row">Situation</th><td>He ignored the nature of the task (custom, skilled work) and the existing culture (informal, autonomous).</td></tr></tbody></table></div><h3 id="case-tf">Transformational view of Bill</h3><div class="tbl"><table><thead><tr><th scope="col">Dimension</th><th scope="col">What Bill does</th><th scope="col">What is missing</th></tr></thead><tbody><tr><th scope="row">Idealized influence</th><td>Tells experts how to work without knowing the craft</td><td>Respect. Workers do not see him as a role model.</td></tr><tr><th scope="row">Inspirational motivation</th><td>Talks only about speed</td><td>A vision. The company wins on quality, and he never mentions it.</td></tr><tr><th scope="row">Intellectual stimulation</th><td>Picks one method himself and imposes it</td><td>Using the workers’ expertise to solve problems</td></tr><tr><th scope="row">Individualized consideration</th><td>Controls everyone the same way</td><td>Attention to each worker’s skill and pride</td></tr></tbody></table></div><p>Bill is transactional, mainly management by exception, active: he checks constantly and catches problems. That sits near the bottom of the full-range model. For routine molding work, clear rules plus rewards still make sense.</p><h3 id="case-evidence">What we know, infer and cannot conclude</h3><div class="tbl"><table><thead><tr><th scope="col">Know</th><th scope="col">Infer</th><th scope="col">Cannot conclude</th></tr></thead><tbody><tr><th scope="row">Complaints started after Bill arrived</th><td>His style caused the drop in willingness</td><td>That the workers are unwilling by nature</td></tr><tr><th scope="row">One long-time worker quit</th><td>More may leave if nothing changes</td><td>How many will leave</td></tr><tr><th scope="row">Molding workers ignore safety rules</th><td>Many are new to the job</td><td>That they do not care. Only Bill says so.</td></tr></tbody></table></div><div class="issue"><b>Issue statement</b><p>Precision Plastics put a directing, transactional supervisor in charge of R4 experts. His close control works for routine molding, but it tells skilled tool and die workers they are not trusted. Their willingness is falling, work is late and one expert has quit. That puts the company’s core skill at risk. The molding department still has a safety and turnover problem that close control alone has not fixed.</p></div><h2 id="recommend">10. Worked recommendations</h2><div class="method"><span>Read the task</span><i aria-hidden="true">→</i><span>Judge R levels</span><i aria-hidden="true">→</i><span>Match S styles</span><i aria-hidden="true">→</i><span>Find the mismatch</span><i aria-hidden="true">→</i><span class="hi">Act, explain, check</span></div><p>Owner: Jim Hunt, the production manager. He assigned the supervisors and has heard the complaints.</p><h3 id="rec-tool">Tool and die department</h3><div class="tbl"><table><thead><tr><th scope="col">Action</th><th scope="col">Why it works</th><th scope="col">Timing and check</th></tr></thead><tbody><tr><th scope="row"><b>1. Change the leader.</b> Make a respected senior tool and die maker the lead, or hire an experienced supervisor. Bill goes back to molding.</th><td>Bill enjoys close control, so he is unlikely to change fast. The new lead knows the craft.</td><td>Within a month. Check: the lead is in place.</td></tr><tr><th scope="row"><b>2. Start with S3, then go back to S4.</b> The new lead listens to complaints, drops rules that do not help quality, and agrees goals and deadlines with the workers.</th><td>The workers are able but unhappy, so they are R3 for now. Once trust returns, delegate again.</td><td>First three months. Check: work back on schedule, complaints stop.</td></tr><tr><th scope="row"><b>3. Let the workers lead any standardization.</b> They compare methods, choose what to share, and keep room for custom work.</th><td>Every mold is different. The experts know which steps can be shared.</td><td>Three to six months. Check: quality stays high, speed improves.</td></tr><tr><th scope="row"><b>4. Hold stay interviews,</b> including with the worker who left.</th><td>Keeps rare skills and shows the company is listening.</td><td>Within a month. Check: no more quits.</td></tr><tr><th scope="row"><b>5. Start an apprentice program</b> where senior workers train young hires.</th><td>The workers already worry that young people are not entering the trade. This gives them a purpose and keeps the skill alive.</td><td>Plan within six months. Check: apprentices hired and staying.</td></tr></tbody></table></div><h3 id="rec-molding">Molding department</h3><div class="tbl"><table><thead><tr><th scope="col">Action</th><th scope="col">Why it works</th><th scope="col">Timing and check</th></tr></thead><tbody><tr><th scope="row"><b>6. Keep S1 for safety, then move toward S2.</b> Bill keeps clear rules and checks, but also explains why each rule matters and praises safe work.</th><td>The workers are R1 on safety. As they improve, add explanation and support.</td><td>Monthly. Check: safety violations and accidents.</td></tr><tr><th scope="row"><b>7. Reward safety and attendance.</b></th><td>Rewards for results work better than only catching mistakes, and suit routine jobs.</td><td>Quarterly. Check: turnover and violations.</td></tr><tr><th scope="row"><b>8. Coach Bill</b> to read each group’s readiness.</th><td>He uses one style for everyone.</td><td>Three months. Check: Bill can explain each group’s R level and his plan.</td></tr></tbody></table></div><p>For the whole plant, Jim and the new lead share one simple vision about quality, such as “Make the parts no one else can make.” It gives both departments a better reason than “faster.”</p><div class="pair"><div><b>Risks</b><p>There may be no suitable internal lead, and an outside hire needs time to earn trust. Bill may feel demoted, so present the move as using his strength. Delegating fully again before trust is rebuilt.</p></div><div><b>What to track</b><p>Tool and die: on-time delivery, quality and rework, quits. Molding: safety violations, accidents, turnover and output.</p></div></div><details class="sayd"><summary>60 to 90 second presentation answer</summary><blockquote class="say">“The tool and die workers are skilled, experienced and proud of their work. Under Joe they were R4, and Joe used S4, delegating. He gave them freedom and focused on quality, so it worked. The molding workers do routine work, ignore safety rules and leave often. They are R1, so Bill’s S1 directing style fits them, and their output is high. The trouble started when Bill took over tool and die. He used S1 on R4 experts. He checked them constantly and told them how to work, though he knew little about it. Their skill did not change, but their willingness dropped. Work fell behind and one long-time worker quit. We recommend that Jim Hunt move Bill back to molding and make a respected senior tool and die maker the lead. The new lead starts with S3, listening and solving problems together, then goes back to S4 once trust returns. Any standardization should come from the workers. In molding, Bill keeps clear safety rules but moves toward S2, explaining the rules and rewarding safe work. We would track delivery, quality, quits and safety incidents.”</blockquote></details><h3 id="follow-ups">Questions the professor may ask</h3><div class="qa-tools"><button id="qaAll" type="button">Show all answers</button></div><div class="qa"><details><summary>Why not just train Bill to delegate?</summary><p>He enjoys close control and does not know the craft. Training takes time, and skilled workers are already leaving. A new lead is faster. Coaching Bill still helps in molding.</p></details><details><summary>Are the molding workers R1 or R3?</summary><p>Mostly R1 on safety. Their willingness is low, and high turnover means many are new. A few experienced ones may be R3.</p></details><details><summary>Is standardization wrong?</summary><p>Not in itself. Forcing it without knowing the craft is the problem. The workers should lead it.</p></details></div><h2 id="traps">11. Do not mix these up</h2><div class="traps"><div><s>Leadership is better than management.</s><p>They are different jobs. Organizations need both.</p></div><div><s>Traits tell you what a leader should do.</s><p>Traits describe the person. Situational theory says what to do.</p></div><div><s>R1 followers need lots of support.</s><p>They first need clear direction. Support rises at R2.</p></div><div><s>Transactional leadership is bad.</s><p>It works for routine tasks. Long-term success may need both types.</p></div><div><s>An abstract vision is a vague one.</s><p>Abstract means a broad direction. It should still be clear.</p></div><div><s>Bill is a bad leader.</s><p>His style fits one group and not the other. The problem is the match.</p></div><div><s>The molding workers are lazy.</s><p>Only Bill says they lack interest. Use the evidence: safety violations and turnover.</p></div></div><h2 id="coldcall">12. Cold call practice</h2><div class="qa-tools"><button id="qaAll" type="button">Show all answers</button></div><div class="qa"><details><summary>Leadership versus management?</summary><p>Management controls complexity. Leadership produces useful change. Organizations need both.</p></details><details><summary>What is trait theory?</summary><p>Leaders differ from followers in traits such as intelligence, confidence and task knowledge.</p></details><details><summary>What are the two Ohio State behaviors?</summary><p>Consideration builds trust. Initiating structure organizes the work. Effective leaders combine both.</p></details><details><summary>What is readiness?</summary><p>A follower’s ability and willingness to do one specific task.</p></details><details><summary>Match R1 to R4 with the styles.</summary><p>R1 Directing, R2 Coaching, R3 Supporting, R4 Delegating.</p></details><details><summary>What is transactional leadership?</summary><p>Leading through exchange: rewards for performance, and stepping in when things go wrong.</p></details><details><summary>Name the four I’s.</summary><p>Idealized influence, inspirational motivation, intellectual stimulation, individualized consideration.</p></details><details><summary>What does the full-range model show?</summary><p>Styles from least to most effective: laissez-faire at the bottom, the four I’s at the top.</p></details><details><summary>Name the seven vision attributes.</summary><p>Conciseness, clarity, future orientation, stability, challenge, abstractness, ability to inspire.</p></details><details><summary>What went wrong at Precision Plastics?</summary><p>Bill used S1 on R4 experts. They felt distrusted, slowed down, and one quit.</p></details></div><h2 id="templates">13. Answer templates</h2><div class="pair"><div><b>Situational leadership</b><p>“On [task], the [followers] are R[_]: their ability is [high/low] because [evidence], and their willingness is [high/low] because [evidence]. They need S[_]. The leader uses S[_], which [fits / does not fit]. I recommend [owner] [action]. As readiness rises, move toward S4.”</p></div><div><b>Transformational</b><p>“The leader is mainly transactional, using [form]. Of the four I’s, [dimension] is missing because [evidence]. I recommend [action] to build it. Transactional tools can stay for [routine work].”</p></div></div><p class="note-small source">Source: Session 9 lecture slides; Precision Plastics case.</p></article></main></div><script>
+window.MgmtSetText=function(el,en){el.textContent=en};
+window.MgmtQuizExplain=function(panel,labels,reasons,correct,chosen){
+ const ok=chosen===correct;
+ panel.textContent=(ok?'Correct. ':'Not quite. Best answer: '+labels[correct]+'. ')+reasons[chosen];panel.hidden=false;
+};
+</script><script>
+/* Shared Management classification cards, adapted from the Session 4 quiz. */
+window.MgmtQuiz = function(host, title, instruction, items) {
+  const make = (tag, text, cls) => { const e = document.createElement(tag); if (text) window.MgmtSetText(e, text); if (cls) e.className = cls; return e; };
+  host.classList.add('mw');
+  const head = make('div', null, 'g-head');
+  head.append(make('span', 'Classify', 'g-kicker'), make('h4', title), make('p', instruction));
+  const body = make('div', null, 'mw-body'), question = make('p', null, 'qz-item'), options = make('div', null, 'qz-opts grid2'), note = make('div', null, 'g-note'), nav = make('div', null, 'qz-nav'), count = make('span'), next = make('button', 'Next', 'g-btn');
+  note.setAttribute('aria-live', 'polite'); next.type = 'button';
+  nav.append(count, next); body.append(question, options, note, nav); host.append(head, body);
+  let index = 0, score = 0, done = 0, answered = false;
+  function show() {
+    const item = items[index]; answered = false; window.MgmtSetText(question, item.q); options.replaceChildren(); note.textContent = ''; note.hidden = true;
+    window.MgmtSetText(count, 'Item ' + (index + 1) + ' of ' + items.length + (done ? ' · ' + score + ' / ' + done + ' correct' : ''));
+    item.options.forEach((option, choice) => {
+      const button = make('button', null, 'qz-o'); button.type = 'button'; button.append(make('b', option));
+      button.addEventListener('click', () => {
+        if (answered) return; answered = true; done++; const correct = choice === item.answer; if (correct) score++;
+        options.querySelectorAll('button').forEach((b, i) => { b.classList.toggle('right', i === item.answer); b.setAttribute('aria-disabled', 'true'); });
+        if (!correct) button.classList.add('wrong');
+        window.MgmtQuizExplain(note, item.explanationLabels || item.options, item.explanations, item.answer, choice);
+        window.MgmtSetText(count, 'Item ' + (index + 1) + ' of ' + items.length + ' · ' + score + ' / ' + done + ' correct');
+      });
+      options.append(button);
+    });
+  }
+  next.addEventListener('click', () => { index = (index + 1) % items.length; show(); }); show();
+};
+</script><script>
+(function(){
+ const W={};
+ W['scenario-sort']=host=>window.MgmtQuiz(host,'Which style fits?','Read each scenario, then choose the style.',[{"q": "1. A new secretary makes many personal calls, is always late with reports and complains of being overloaded.", "options": ["S1 Directing", "S2 Coaching", "S3 Supporting"], "answer": 0, "explanations": ["R1: late reports show low ability on this job, and the calls and complaints show low willingness. Set clear tasks, deadlines and checks.", "Coaching fits someone willing but not yet able. She shows little willingness.", "Supporting assumes she can already do the work. Her late reports say otherwise."]}, {"q": "2. Your assistant always finishes on time and solves problems well. His current deadline is near.", "options": ["S2 Coaching", "S3 Supporting", "S4 Delegating"], "answer": 2, "explanations": ["He does not need teaching. He is able and willing.", "He is not insecure or unwilling, so extra support is not needed.", "R4: proven and reliable. Let him finish. Do not step in just because the deadline is close."]}, {"q": "3. A new employee is excited about learning Dreamweaver, but you are unsure of his computer skills.", "options": ["S1 Directing", "S2 Coaching", "S4 Delegating"], "answer": 1, "explanations": ["He is excited, so he is willing. On the slide scale that is R2. (Blanchard’s later SLII model would call him D1 and use S1.)", "R2: willing, but skills are unknown. Teach the steps and keep up his enthusiasm.", "You are unsure of his skills, so he is not yet able."]}, {"q": "4. An assistant who uses a database well says a project may be a little late. He is working on a new design to make the report more useful.", "options": ["S1 Directing", "S3 Supporting", "S4 Delegating"], "answer": 2, "explanations": ["Taking control would punish useful initiative from a proven performer.", "Some answer keys say S3: talk with him about the delay. Either way, do not take over the task.", "R4: proven skill and initiative. Let him continue and agree on a new date."]}, {"q": "5. A slow customer service team has improved over the past month under close monitoring and strict deadlines. What next?", "options": ["Stay with S1", "Move to S2", "Jump to S4"], "answer": 1, "explanations": ["Close monitoring worked, but staying there ignores their progress.", "Readiness is rising from R1 toward R2. Keep the deadlines, and add praise, reasons and two-way talk.", "One good month is not enough. Move one step at a time."]}, {"q": "6. Your excellent copy editor, a friend, is much slower than usual on a project with a key deadline. Friendly support has not helped.", "options": ["Keep S3", "Step back to S2", "Move to S4"], "answer": 1, "explanations": ["Friendly support alone has not worked.", "She is able, but performance has dropped. Add task behavior: set the deadline, agree on steps and check progress, while keeping the relationship.", "Less involvement would leave a late project unmanaged."]}]);
+ W['tf-sort']=host=>window.MgmtQuiz(host,'Which leadership behavior?','Choose the transactional or transformational behavior shown.',[{"q": "A sales manager pays a bonus to everyone who hits the monthly target.", "options": ["Contingent reward", "Individualized consideration", "Management by exception, active"], "answer": 0, "explanations": ["A reward for an agreed result.", "Individualized consideration develops each person. This is the same deal for everyone.", "Nothing here is about watching for mistakes."]}, {"q": "A supervisor checks every report for errors and corrects them right away.", "options": ["Management by exception, active", "Management by exception, passive", "Intellectual stimulation"], "answer": 0, "explanations": ["Watching closely and tracking mistakes.", "Passive means waiting until someone reports a problem. This supervisor goes looking for it.", "Correcting errors is not helping people think in new ways."]}, {"q": "A manager steps in only after a customer complains.", "options": ["Management by exception, active", "Management by exception, passive", "Laissez-faire"], "answer": 1, "explanations": ["Active means watching for problems before anyone complains.", "Waits to be told, then intervenes.", "Laissez-faire avoids acting at all. This manager does act, but only after a problem."]}, {"q": "A director asks the team to find a new way to fix an old delivery problem, and lets them test it.", "options": ["Intellectual stimulation", "Inspirational motivation", "Contingent reward"], "answer": 0, "explanations": ["Helping people look at old problems in new ways.", "Inspirational motivation is about a vision of the future.", "No reward is offered here."]}, {"q": "A CEO describes a future where every hospital trusts the company first.", "options": ["Inspirational motivation", "Idealized influence", "Individualized consideration"], "answer": 0, "explanations": ["Creating an attractive vision.", "Idealized influence is about modeling behavior, not describing the future.", "This is a message to everyone, not attention to one person’s needs."]}, {"q": "A leader follows the same safety rules she asks of everyone, even when it costs her time.", "options": ["Idealized influence", "Management by exception, active", "Inspirational motivation"], "answer": 0, "explanations": ["Modeling the behavior she wants from others.", "She is not checking others for mistakes. She is setting the example.", "No vision is described. The point is her own behavior."]}, {"q": "A manager meets each team member monthly to plan their growth.", "options": ["Individualized consideration", "Contingent reward", "Intellectual stimulation"], "answer": 0, "explanations": ["Focus on each person’s needs, with a coaching approach.", "No reward is tied to a result.", "The focus is each person’s development, not a problem to solve."]}]);
+
+ W['readiness-pick']=host=>{
+  const T=window.MgmtSetText,mk=(tag,text,cls)=>{const e=document.createElement(tag);if(text)T(e,text);if(cls)e.className=cls;return e};
+  host.classList.add('mw');
+  const head=mk('div',null,'g-head');head.append(mk('span','Try it','g-kicker'),mk('h4','Read the follower, then pick the style'),mk('p',"Choose the follower's ability and willingness for one specific task."));
+  const body=mk('div',null,'mw-body'),st={a:null,w:null};
+  [['a','Ability',['Low','High']],['w','Willingness',['Low or insecure','High or confident']]].forEach(([k,label,opts])=>{
+   const row=mk('div',null,'rp-row'),box=mk('div',null,'rp-opts');row.append(mk('span',label,'rp-lbl'));
+   opts.forEach((o,i)=>{const b=mk('button',o,'rp-b');b.type='button';b.setAttribute('aria-pressed','false');
+    b.addEventListener('click',()=>{st[k]=i;box.querySelectorAll('button').forEach((x,j)=>x.setAttribute('aria-pressed',String(j===i)));render()});box.append(b)});
+   row.append(box);body.append(row)});
+  const out=mk('div',null,'rp-out');out.setAttribute('aria-live','polite');body.append(out);
+  const R={'00':['R1: unable and unwilling, or insecure','Use S1 Directing: high task, low support','Tell them what to do, how and when. Check that they understand. Give regular feedback.'],
+   '01':['R2: unable but willing, or confident','Use S2 Coaching: high task, high support','Teach the task and explain why it matters. Set standards and deadlines. Show confidence in them.'],
+   '10':['R3: able but unwilling, or insecure','Use S3 Supporting: low task, high support','Do not re-teach the task. Share ideas, solve problems together and help them feel responsible.'],
+   '11':['R4: able and willing, or confident','Use S4 Delegating: low task, low support','Agree on goals and a follow-up plan. Step in only if they cannot solve a problem.']};
+  function render(){out.replaceChildren();if(st.a===null||st.w===null){out.append(mk('p','Pick one option in each row.','rp-wait'));return}
+   const r=R[''+st.a+st.w];out.append(mk('p',r[0],'rp-r'),mk('p',r[1],'rp-style'),mk('p',r[2]))}
+  render();host.append(head,body);
+ };
+ const header=document.querySelector('.top');function measureHeader(){document.documentElement.style.setProperty('--header-height',Math.ceil(header.getBoundingClientRect().height)+'px')}if('ResizeObserver'in window)new ResizeObserver(measureHeader).observe(header);measureHeader();
+ window.MgmtWidgets={mount(root){root.querySelectorAll('[data-mw]').forEach(host=>{if(!host.dataset.ready&&W[host.dataset.mw]){host.dataset.ready='1';W[host.dataset.mw](host)}})}};
+})();
+</script><script>
+(function () {
+  const toc = document.getElementById('toc'), rail = document.getElementById('rail');
+  const hs = [...document.querySelectorAll('.doc > h2, .doc > h3')];
+  hs.forEach(h => {
+    const li = document.createElement('li'); li.className = h.tagName.toLowerCase(); li.dataset.id = h.id;
+    const a = document.createElement('a'); a.href = '#' + h.id; a.textContent = h.childNodes[0].textContent.trim();
+    li.appendChild(a); toc.appendChild(li);
+  });
+  const spy = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    toc.querySelectorAll('a.on').forEach(a => a.classList.remove('on'));
+    const a = toc.querySelector('li[data-id="' + e.target.id + '"] a'); if (a) a.classList.add('on');
+  }), { rootMargin: '-80px 0px -70% 0px' });
+  hs.forEach(h => spy.observe(h));
+
+  const tb = document.getElementById('tocBtn');
+  tb.addEventListener('click', () => { const o = rail.classList.toggle('open'); tb.setAttribute('aria-expanded', o); });
+  toc.addEventListener('click', e => { if (e.target.closest('a')) { rail.classList.remove('open'); tb.setAttribute('aria-expanded', false); } });
+
+  const all = document.getElementById('qaAll');
+  if (all) all.addEventListener('click', () => {
+    const ds = document.querySelectorAll('.qa details'), open = ![...ds].every(d => d.open);
+    ds.forEach(d => d.open = open); window.MgmtSetText(all, open ? 'Hide all answers' : 'Show all answers');
+  });
+  document.querySelectorAll('.drill .ans').forEach(s => s.addEventListener('click', () => s.classList.toggle('shown')));
+
+  if (window.EconWidgets) window.EconWidgets.mount(document);
+  if (window.MgmtWidgets) window.MgmtWidgets.mount(document);
+})();
+</script><script>
+(function(){
+ document.querySelectorAll('.ev-tabs').forEach(set=>{
+  const tabs=set.querySelector('[role=tablist]'),btns=[...tabs.querySelectorAll('[role=tab]')],panels=btns.map(b=>document.getElementById(b.getAttribute('aria-controls')));
+  function pick(i,f){btns.forEach((b,j)=>{const on=i===j;b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1;panels[j].hidden=!on});if(f)btns[i].focus()}
+  btns.forEach((b,i)=>{b.addEventListener('click',()=>pick(i));b.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();pick((i+(e.key==='ArrowRight'?1:btns.length-1))%btns.length,true)}})});
+  tabs.hidden=false;pick(0);
+ });
+})();
+</script></body></html>
