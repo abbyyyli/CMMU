@@ -201,6 +201,7 @@ table.oil th, table.oil td { text-align: right; padding: 6px 8px; white-space: n
 table.oil th:first-child, table.oil td:first-child { text-align: left; font-weight: 700; }
 table.oil td.hi { background: var(--tint); color: var(--accent-ink); font-weight: 700; }
 
+.g-assume{margin:4px 2px 0;font-size:.74rem;line-height:1.5;color:var(--muted)}
 </style>
 <style id="system-theme">
 /* System appearance only changes colors. Print retains the light palette. */
@@ -310,8 +311,8 @@ svg .tk{font-size:11.5px}svg .axl{font-size:12px}.g-plot svg{overflow:visible}
 .rung{display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px;align-items:start;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
 .rung-1{margin-left:14px}.rung-2{margin-left:28px;background:var(--tint)}.rung-3{margin-left:42px;background:var(--tint);border-color:var(--accent)}
 .rung-n{width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--paper);display:grid;place-items:center;font-weight:700;font-size:.85rem}
-.rung-b p{margin:0}.rung-q{font-size:.85rem;color:var(--muted)}.rung-a{font-family:var(--serif);font-weight:700;font-size:1.06rem;margin:2px 0 4px!important}.rung-ex{font-size:.92rem;line-height:1.6}
 @media (max-width:560px){.rung-1{margin-left:6px}.rung-2{margin-left:12px}.rung-3{margin-left:18px}}
+.rung-b p{margin:0}.rung-q{font-size:.85rem;color:var(--muted)}.rung-a{font-family:var(--serif);font-weight:700;font-size:1.06rem;margin:2px 0 4px!important}.rung-ex{font-size:.92rem;line-height:1.6}
 .timeline{list-style:none;margin:12px 0 12px 8px;padding:0 0 0 18px!important;border-left:2px solid var(--line)}
 .timeline li{position:relative;display:grid;grid-template-columns:64px minmax(0,1fr);gap:10px;padding:6px 0;margin:0}
 .timeline li::before{content:"";position:absolute;left:-25px;top:12px;width:10px;height:10px;border-radius:50%;background:var(--accent)}
@@ -358,7 +359,7 @@ svg .tk{font-size:11.5px}svg .axl{font-size:12px}.g-plot svg{overflow:visible}
 <tr><td><b>NX</b> Net exports</td><td>Exports minus imports.</td><td>Tourists paying Phuket hotels is an export; imported fuel is an import.</td><td>A sign that imports are bad.</td></tr>
 </tbody></table></div>
 <p>Why split GDP at all? Households, firms and governments respond to different forces. When GDP falls, it matters whether consumption, investment or government purchases fell, because the policy response is different.</p>
-<div data-widget="ringup"></div>
+<div data-widget="ringup" data-assume="GDP = C + I + G + NX"></div>
 <p class="note-small">Amounts are a made-up economy in million baht. The income-side split is illustrative.</p>
 <p>The second bar is the point of the income side. Every baht spent on final output ends up as someone's wages, rent, interest or profit, so adding up incomes (gross domestic income, GDI) should give the same total. In practice the two are measured separately and differ slightly, and in a recession economists watch both.</p>
 <p>A third cut is by sector: who produces the output. Thailand's economy has been shifting toward services.</p>
@@ -385,7 +386,7 @@ svg .tk{font-size:11.5px}svg .axl{font-size:12px}.g-plot svg{overflow:visible}
 <tr><td><b>GDP deflator</b><span class="zh">平減指數</span></td><td>Nominal ÷ real × 100.</td><td>How much did prices rise overall?</td></tr>
 <tr><td><b>Real GDP per capita</b></td><td>Real GDP ÷ population.</td><td>Is the average person better off?</td></tr>
 </tbody></table></div>
-<div data-widget="waterfall"></div>
+<div data-widget="waterfall" data-assume="Take prices out of headline GDP, then divide by population, to see the real change per person."></div>
 <p class="note-small">US figures come from FRED, in 2009 dollars. The per-person rise is 3.6 times on these rounded numbers, often quoted as "about four times".</p>
 <p>A fall in real GDP is part of what defines a <b>recession</b>. In 2009 US real GDP shrank 3.6% and unemployment jumped.</p>
 <details class="extra"><summary>Optional: the small Thai economy, worked out</summary>
@@ -423,15 +424,18 @@ svg .tk{font-size:11.5px}svg .axl{font-size:12px}.g-plot svg{overflow:visible}
 <li><span>Higher cost per haircut means the supply of haircuts sits further left, so the price is high, even though the haircut itself is no better.</span></li>
 </ol>
 <p>In a poor country the chain runs the other way: low productivity in factories, low wages everywhere, cheap services. Add up all those cheap services and the whole <b>price level</b><span class="zh">物價水準</span> is lower.</p>
+
 <div class="flow"><span>High productivity in tradables</span><i>→</i><span>High wages economy-wide</span><i>→</i><span>Barber's opportunity cost up</span><i>→</i><span>Haircut supply shifts left</span><i>→</i><span>Services and price level higher</span></div>
+<div data-widget="haircut" data-readout="optional" data-assume="Labor cost of one haircut = outside wage per hour × 0.5 hour"></div>
+<details class="graph-guide"><summary>How to build this graph</summary>
+<ol class="steps"><li><span>Haircuts per day on the horizontal axis, baht per haircut on the vertical axis. Draw D sloping down and S1 sloping up; mark E1, P1, Q1.</span></li><li><span>A better-paid job elsewhere raises the cost of each haircut, so supply shifts left (up) to S2.</span></li><li><span>Mark E2: P2 is above P1, Q2 below Q1. If local incomes rise too, shift D right and P climbs further.</span></li></ol></details>
 
 <h3 id="ppp-how">What purchasing power parity actually does</h3>
 <p><b>Purchasing power parity</b><span class="zh">購買力平價</span> (PPP) asks a simple question: how many baht does it take to buy the same basket of goods and services that one dollar buys in the US? That number is the PPP exchange rate. It is usually very different from the market rate you see at the bank.</p>
 <div class="formula">Basket in the US: $100<br>Same basket in Thailand: ฿1,200<br>PPP rate = 1,200 ÷ 100 = ฿12 per $<br>Market rate (say) = ฿35 per $<br>Income ฿420,000 at market rate = $12,000<br>Income ฿420,000 at PPP = $35,000</div>
 <p class="note-small">Round numbers for illustration, not official data.</p>
 <p>Same income, same goods, but the PPP figure is almost three times bigger, because ฿420,000 really does buy almost three times as much in Thailand as $12,000 buys in the US. The class slide shows nearly the same gap with real data: Thailand's 2026 GDP is about $0.6 trillion at market rates and $1.9 trillion at PPP, about 3.2 times bigger.</p>
-<p>The world economy shows how much this matters. At market exchange rates the world produces about $128 trillion; at PPP the same output is worth about $219 trillion, because so much of it happens in countries where prices are low.</p>
-<div data-widget="pppflip"></div>
+<div data-widget="pppflip" data-assume="PPP rate = cost of a basket in local money ÷ cost of the same basket in dollars"></div>
 <p class="note-small">IMF estimates for 2026, compiled by Visual Capitalist, as shown in class.</p>
 
 <div class="tbl"><table><thead><tr><th>Your question</th><th>Use</th><th>Why</th></tr></thead><tbody>
@@ -440,17 +444,7 @@ svg .tk{font-size:11.5px}svg .axl{font-size:12px}.g-plot svg{overflow:visible}
 <tr><td>Which is the biggest economy?</td><td>Say which measure</td><td>The US is bigger at market rates; China passed it at PPP in 2014.</td></tr>
 <tr><td>Did Thailand grow this year?</td><td>Real GDP in baht</td><td>No exchange rate needed at all.</td></tr>
 </tbody></table></div>
-
-<p>Why do poorer countries gain the most from the adjustment? Because they have the most cheap services, so their price level is furthest below the US. The haircut market shows the mechanism.</p>
-<div data-widget="haircut" data-readout="optional"></div>
-<details class="graph-guide"><summary>How to build this graph</summary>
-<ol class="steps"><li><span>Haircuts per day on the horizontal axis, baht per haircut on the vertical axis. Draw D sloping down and S1 sloping up; mark E1, P1, Q1.</span></li><li><span>A better-paid job elsewhere raises the cost of each haircut, so supply shifts left (up) to S2.</span></li><li><span>Mark E2: P2 is above P1, Q2 below Q1. If local incomes rise too, shift D right and P climbs further.</span></li></ol></details>
-
-<div class="tbl"><table><thead><tr><th>The simple story says</th><th>A careful answer adds</th></tr></thead><tbody>
-<tr><td>Services are cheap in poor countries because wages are low and workers cannot move.</td><td>True, and it is the core of Balassa-Samuelson. But tradable goods prices also differ somewhat, because firms charge different prices in different markets, so nontradables are not the only reason.</td></tr>
-<tr><td>Use PPP to compare living standards.</td><td>Agreed. But PPP depends on which basket is priced, and new price surveys can move the rankings. Treat PPP figures as good estimates, not exact facts.</td></tr>
-<tr><td>PPP shows a country's true size.</td><td>Only for what its people can consume at home. For buying from the world, the market rate is still the right one.</td></tr>
-</tbody></table></div>
+<p class="note-small">Limits: tradable goods prices also differ somewhat, because firms charge different prices in different markets. PPP also depends on which basket is priced, and new price surveys can move the rankings. Treat PPP figures as good estimates.</p>
 <p class="hint"><b>中文邏輯</b><span>理髮便宜不是因為理髮師比較差，而是整個國家的工資低。可貿易品被套利拉平，服務拉不平，所以窮國物價水準低。PPP 把各國產出用同一套價格計算；比生活水準用 PPP，比國際購買力用市場匯率。</span></p>
 
 <h2 id="gaps">5. How big the gaps are</h2>
@@ -467,7 +461,7 @@ svg .tk{font-size:11.5px}svg .axl{font-size:12px}.g-plot svg{overflow:visible}
 <tr><td><b>Ratio scale</b></td><td>Each step on the axis is a doubling, so steady growth is a straight line.</td><td>On an ordinary scale, steady growth looks like it is speeding up.</td></tr>
 </tbody></table></div>
 <p>Run the numbers on the US and the stakes are clear. Had it grown only 1% a year since 1800, it would be about as rich today as it was in 1940. Had it grown 3%, it would have reached today's living standard back in 1917, and real GDP per person today would be about $893,000. At current growth rates, it will not get there until 2159.</p>
-<div data-widget="compound" data-readout="optional"></div>
+<div data-widget="compound" data-readout="optional" data-assume="Years to double ≈ 70 ÷ growth rate in %"></div>
 <p>Another way to feel the gap is to place today's countries in American history:</p>
 <ol class="timeline">
 <li><b>1800</b><span>Bangladesh and Uganda today</span></li>
@@ -492,8 +486,7 @@ svg .tk{font-size:11.5px}svg .axl{font-size:12px}.g-plot svg{overflow:visible}
 <p>Why can poor countries grow faster than rich ones? They can copy technology that already exists and add machines where machines are scarce, so each investment pays off a lot. A country already at the frontier has to invent new ideas, which is slower. That is <b>catch-up growth</b><span class="zh">追趕型成長</span>, and it is possible, not automatic. It needs the right conditions, which is where the next section begins.</p>
 
 <h2 id="puzzle">8. Why some countries grow: keep asking why</h2>
-<p class="sub">"Rich countries have more capital" is true but too easy. The useful answer comes from asking why, again and again.</p>
-<p>The answer comes in layers. The most immediate one is that workers in rich countries have more physical capital, more human capital and better technology, organized by entrepreneurs. But that only moves the question back: why did those countries build so much capital? Because people had incentives to work, save and invest. And why the incentives? Because institutions protected the rewards. Why the institutions? That is the least settled part, a mix of history, ideas, culture, geography and luck.</p>
+<p class="sub">"Rich countries have more capital" is true but too easy. The useful answer comes from asking why, again and again. Each answer raises a deeper question.</p>
 <div data-widget="ladder"></div>
 
 <h3 id="layer1">Layer 1: what makes a worker productive</h3>
@@ -504,61 +497,36 @@ svg .tk{font-size:11.5px}svg .axl{font-size:12px}.g-plot svg{overflow:visible}
 <div><b>Technological knowledge</b><p>Know-how about the world: seed genetics, soil chemistry, better ways to do the job.</p></div>
 <div><b>Entrepreneurs</b><p>The people who bring ideas, workers and capital together and organize them into something that sells.</p></div>
 </div>
-<p class="key">This is the immediate cause of wealth, and it is correct. It just does not explain anything yet, because it leaves the real question open: why did some countries build these factors and others did not?</p>
+<p class="key">This is the immediate cause of wealth, and it is correct. It just leaves the real question open: why did some countries build these factors and others did not?</p>
 
 <h3 id="layer2">Layer 2: incentives, the potato test</h3>
 <p>In China's Great Leap Forward, from the late 1950s to the early 1960s, private farms were merged into big collectives. Do the math from one farmer's point of view.</p>
 <div class="formula">Own farm: grow 1 more bag → keep 1 bag<br>100-person collective: grow 1 more bag → keep 1/100 bag<br>Slack off: group loses 1 bag → you lose 1/100 bag</div>
-<p>Effort and reward came apart, so everyone had a reason to <b>free ride</b><span class="zh">搭便車</span> on everyone else. Same land, same people, same tools, but output collapsed. Together with other leadership mistakes, some 20 to 40 million people starved. China only took off once farmers were allowed to keep what they grew above their quota.</p>
+<p>Effort and reward came apart, so everyone had a reason to <b>free ride</b><span class="zh">搭便車</span> on everyone else. Same land, people and tools, yet output collapsed. With other leadership mistakes, some 20 to 40 million people starved. China took off only once farmers could keep what they grew above their quota.</p>
 <div class="flow"><span>Farms collectivized</span><i>→</i><span>Pay cut off from effort</span><i>→</i><span>Everyone free rides</span><i>→</i><span>Food supply shifts left</span><i>→</i><span>Famine</span></div>
 <p class="key">Capital, skills and ideas do not pile up by themselves. People build them only when they expect to keep a fair share of what they produce.</p>
 
 <h3 id="five">Layer 3: the five key institutions</h3>
 <p><b>Institutions</b><span class="zh">制度</span> are the rules of the game. They include formal rules, such as laws, courts and regulations, and informal ones, such as norms of honesty, trust and cooperation. Their job in growth is simple: they decide whether the reward for working, saving, studying and investing stays with the person who earned it. That is where incentives come from.</p>
 <div class="flow"><span>Rules protect rewards</span><i>→</i><span>Expected payoff from effort up</span><i>→</i><span>People save, study, invest, start firms</span><i>→</i><span>More capital, skills, ideas</span><i>→</i><span>Higher GDP per person</span></div>
-<p>Each of the five institutions blocks a different way the reward can be taken away. Learn each one as a pair: what it protects, and what goes wrong without it.</p>
-
-<div class="method"><b>1. Property rights</b>
-<p><i>What it means:</i> what you build, grow or buy is yours, and you can prove it, for example with a deed that stands up in court.</p>
-<p><i>How it drives growth:</i> you collect the payoff from draining a field or opening a shop, so you are willing to put money and years into it.</p>
-<p><i>Without it:</i> why improve land if the harvest goes to a collective or someone else can build on your farm? You invest only in what you can hide or carry.</p>
-<p><i>Where we saw it:</i> China's collective farms; North Korean farmers.</p></div>
-
-<div class="method"><b>2. Honest government</b>
-<p><i>What it means:</i> officials do their jobs without bribes, and the state does not grab successful businesses.</p>
-<p><i>How it drives growth:</i> the cost of starting and running a business is known in advance, and talent goes into making better products rather than buying favors.</p>
-<p><i>Without it:</i> a bribe works like a secret, unpredictable tax. Worse, officials now gain from creating delays, because delay is what people pay to skip.</p>
-<p><i>Where we saw it:</i> the Mumbai licensing firm with a "100% record" that would not work without "considerations".</p></div>
-
-<div class="method"><b>3. Political stability</b>
-<p><i>What it means:</i> no civil war or coups, and power changes hands peacefully, so the rules do not flip overnight.</p>
-<p><i>How it drives growth:</i> factories, schools and ports pay off over decades. People only start them if they expect the country to still work in twenty years.</p>
-<p><i>Without it:</i> a war can wash away years of investment, so people keep plans short and wealth abroad.</p>
-<p><i>Where we saw it:</i> George Washington stepping down after two terms set a habit of peaceful handover in the US.</p></div>
-
-<div class="method"><b>4. Dependable legal system</b>
-<p><i>What it means:</i> courts enforce contracts fairly and fast enough to matter, so you can collect a debt or prove who owns what.</p>
-<p><i>How it drives growth:</i> you can sell on credit, borrow, lend and deal with strangers. Markets get bigger, which allows more specialization.</p>
-<p><i>Without it:</i> people only trade with family and friends they can trust, so businesses stay small.</p>
-<p><i>Where we saw it:</i> it is the quiet base under every loan and contract; when it fails, credit and long supply chains are the first things to go.</p></div>
-
-<div class="method"><b>5. Competitive and open markets</b>
-<p><i>What it means:</i> anyone can enter, compete and import, and firms that fail are allowed to close.</p>
-<p><i>How it drives growth:</i> competition pushes prices down and quality up, and bankruptcy frees capital and workers for better uses.</p>
-<p><i>Without it:</i> needless licenses and import duties shield existing firms, which then act like monopolies: higher prices, less output, fewer new ideas.</p>
-<p><i>Where we saw it:</i> South Korea letting failing firms go bankrupt; the 10 to 12 licenses and the import license for one espresso machine in Mumbai.</p></div>
-
+<p>Each institution blocks a different way the reward can be taken away.</p>
+<div class="tbl"><table><thead><tr><th>Institution</th><th>What it protects, and how that drives growth</th><th>Without it</th><th>Example</th></tr></thead><tbody>
+<tr><td><b>1. Property rights</b></td><td>What you build, grow or buy is yours, and you can prove it with a deed that holds up in court. You collect the payoff from draining a field or opening a shop, so you are willing to put money and years into it.</td><td>Why improve land if the harvest goes to a collective or someone else can build on your farm? You invest only in what you can hide or carry.</td><td>China's collective farms; North Korean farmers</td></tr>
+<tr><td><b>2. Honest government</b></td><td>Officials do their jobs without bribes, and the state does not grab successful businesses. The cost of starting a business is known in advance, and talent goes into better products rather than buying favors.</td><td>A bribe works like a secret, unpredictable tax. Worse, officials now gain from creating delays, because delay is what people pay to skip.</td><td>The Mumbai licensing firm that would not work without "considerations"</td></tr>
+<tr><td><b>3. Political stability</b></td><td>No civil war or coups, and power changes hands peacefully. Factories, schools and ports pay off over decades, and people start them only if they expect the country to still work in twenty years.</td><td>A war can wash away years of investment, so people keep plans short and wealth abroad.</td><td>George Washington stepping down after two terms</td></tr>
+<tr><td><b>4. Dependable legal system</b></td><td>Courts enforce contracts fairly and fast enough to matter. You can sell on credit, borrow, lend and deal with strangers, so markets get bigger and allow more specialization.</td><td>People only trade with family and friends they can trust, so businesses stay small.</td><td>The quiet base under every loan and long supply chain</td></tr>
+<tr><td><b>5. Competitive and open markets</b></td><td>Anyone can enter, compete and import, and failing firms can close. Competition pushes prices down and quality up, and bankruptcy frees capital and workers for better uses.</td><td>Needless licenses and import duties shield existing firms, which then act like monopolies: higher prices, less output, fewer new ideas.</td><td>South Korea letting failing firms go bankrupt; 10 to 12 licenses in Mumbai</td></tr>
+</tbody></table></div>
 <div data-widget="instquiz"></div>
 
 <h3 id="layer4">Layer 4: where good institutions come from</h3>
-<p>This is the most debated question in development economics, and nobody has a single answer. The usual suspects are history, ideas, culture, geography and luck. The US shows how they mix: its Constitution was written when the ideas of John Locke and Adam Smith were popular, it inherited British legal traditions, it had an open frontier, and George Washington chose to stop at two terms. Take away one piece and the story might have gone differently. Geography, one of these deep roots, gets its own section next.</p>
-
+<p>This is the least settled question in development economics. The US shows how the roots mix: its Constitution was written when the ideas of John Locke and Adam Smith were popular, it inherited British legal traditions, it had an open frontier, and George Washington chose to stop at two terms. Geography, one of these deep roots, gets its own section next.</p>
 <h3 id="causes">Immediate and ultimate causes, side by side</h3>
-<div class="tbl"><table><thead><tr><th>Layer</th><th>Type of cause</th><th>Case in this session</th></tr></thead><tbody>
-<tr><td>Factors of production</td><td>Immediate</td><td>Japan, South Korea and China catching up by building capital (section 7)</td></tr>
-<tr><td>Incentives</td><td>In between</td><td>Collective farms in China; North Korean farmers</td></tr>
-<tr><td>Institutions</td><td>Deep</td><td>The Korean split; the Mumbai café (section 9)</td></tr>
-<tr><td>History, ideas, culture, geography, luck</td><td>Ultimate</td><td>The US founding; coasts and rivers (section 10)</td></tr>
+<div class="tbl"><table><thead><tr><th>Layer</th><th>Question it answers</th><th>Answer</th><th>Type of cause</th><th>Case</th></tr></thead><tbody>
+<tr><td>1</td><td>Why is a worker in a rich country so productive?</td><td>Factors of production: physical capital, human capital, technology, entrepreneurs</td><td>Immediate</td><td>Japan, South Korea and China catching up (section 7)</td></tr>
+<tr><td>2</td><td>Why did people build those factors?</td><td>Incentives: people keep the reward from their effort</td><td>In between</td><td>China's collective farms</td></tr>
+<tr><td>3</td><td>Where do the incentives come from?</td><td>Institutions: five rules that protect the reward</td><td>Deep</td><td>The Korean split; the Mumbai café (section 9)</td></tr>
+<tr><td>4</td><td>Where do good institutions come from?</td><td>History, ideas, culture, geography, luck</td><td>Ultimate, and the least settled</td><td>The US founding; coasts and rivers (section 10)</td></tr>
 </tbody></table></div>
 <p>One warning about cause and effect. Rich countries tend to have more capital, better institutions and better coastlines all at once, so a simple correlation cannot tell you which one matters. You need a comparison that holds the others fixed. That is exactly why the Korean peninsula gets used so often.</p>
 <p class="key">Exam move: answer in layers. "The immediate reason is ... . But that depends on incentives, which come from institutions such as ... . And those institutions were shaped by ... ."</p>
@@ -587,17 +555,13 @@ svg .tk{font-size:11.5px}svg .axl{font-size:12px}.g-plot svg{overflow:visible}
 <p class="note-small">The 2024 Nobel prize in economics went to Daron Acemoglu, Simon Johnson and James Robinson for research on how institutions form and shape prosperity.</p>
 
 <h3 id="mumbai">The road to opening a café in Mumbai</h3>
-<p>Koinonia Coffee Roasters roasts beans from the owner's family estate in Chikmagalur and already ships 20 to 30 tons a year to Melbourne. So these are capable business people. The hard part was opening a small café at home.</p>
+<p>Koinonia Coffee Roasters already ships 20 to 30 tons of coffee a year to Melbourne, so these are capable business people. The hard part was opening a small café at home.</p>
 <div class="pair"><div><b>On paper</b><p>The World Bank once ranked India 130th of 190 for ease of doing business (New Zealand was first) and estimated 14 procedures and 26 days for a simple Mumbai license.</p></div><div><b>In practice</b><p>The owner, Shannon D'Souza, said that if it had taken 26 days, "it would be a dream".</p></div></div>
 <ol class="steps">
-<li><span>Lease commercial space before the company even exists, just to have an address to register. Their first "office" was a 60-square-foot board with the company name on it.</span></li>
-<li><span>Collect identity papers: a director number, a professional tax number and a tax card, with addresses that must match across tax, bank and national ID records.</span></li>
-<li><span>List in advance everything the business might ever do, from exporting green coffee to making coffee face cream. Adding anything later means amending the papers.</span></li>
-<li><span>Work through 10 to 12 licenses with three consultants. Some licenses disappeared or were replaced while they were waiting.</span></li>
-<li><span>Get a pollution permit for a roaster that runs on gas "like a kitchen stove": maps, process diagrams, chimney details, distance from the ocean, and 8 to 12 trips to an office an hour away. Files sat in a pile for weeks, with no clear yes or no.</span></li>
-<li><span>Refuse to pay any bribes, not even a hundred rupees. One licensing firm with a "100% record" would not even prepare the documents once told there would be no "considerations". The likely reason: it could not keep its record without them.</span></li>
-<li><span>Import an espresso machine: that needs an import-export license, and duties protect local manufacturers. They kept receipts for everything.</span></li>
-<li><span>Sit closed for three months, paying staff and rent, ready to open but waiting for paper. In the end they chose a tiny, hidden location in a village to survive.</span></li>
+<li><span>Lease commercial space before the company even exists, just to have an address to register. List in advance everything the business might ever do.</span></li>
+<li><span>Work through 10 to 12 licenses with three consultants. A pollution permit for a gas roaster took 8 to 12 trips and weeks with no clear yes or no. Importing one espresso machine needed its own license.</span></li>
+<li><span>Refuse to pay any bribes, not even a hundred rupees. One licensing firm with a "100% record" would not take the job without "considerations".</span></li>
+<li><span>Sit closed for three months, paying staff and rent. In the end they opened in a tiny, hidden location in a village.</span></li>
 </ol>
 <div class="flow"><span>More licenses and delays</span><i>→</i><span>Costlier, slower entry</span><i>→</i><span>Fewer cafés open</span><i>→</i><span>Supply shifts left</span><i>→</i><span>Higher prices, less output, idle capital</span></div>
 <div class="tbl"><table><thead><tr><th>Institution</th><th>Touched by the café story?</th></tr></thead><tbody>
@@ -618,7 +582,7 @@ svg .tk{font-size:11.5px}svg .axl{font-size:12px}.g-plot svg{overflow:visible}
 <p class="sub">Think of the most prosperous cities you know. Most sit on a coast or a major river.</p>
 <div class="flow"><span>Cheap shipping by water</span><i>→</i><span>Lower trade costs</span><i>→</i><span>Bigger markets</span><i>→</i><span>More specialization and new ideas</span><i>→</i><span>Growth</span></div>
 <p>That chain goes back to Adam Smith, and a map of output per square kilometer bears it out: GDP piles up along the US coasts and the Great Lakes, in Western Europe, Japan, coastal China and coastal Australia. Landlocked countries are, on average, poorer. Africa is huge, big enough to hold most of the US, China, India and much of Europe, yet Europe has two to three times more coastline. Africa is the most landlocked continent and has the most poor countries.</p>
-<div data-widget="tariff" data-readout="optional"></div>
+<div data-widget="tariff" data-readout="optional" data-assume="Inland price = world price at the port + cost of getting goods inland"></div>
 <div class="pair"><div><b>The lesson</b><p>Being landlocked works like a <b>natural tariff</b><span class="zh">天然關稅</span>, a tax on every import and export. If a natural tariff slows growth, a tariff chosen by government is unlikely to help it.</p></div><div><b>The limit</b><p>Geography is not destiny. Landlocked Switzerland is rich, and railways and roads can cut the natural tariff. Growth depends on natural advantages and on policy.</p></div></div>
 
 <h2 id="data">11. When the numbers themselves are weak</h2>
@@ -872,35 +836,6 @@ svg .tk{font-size:11.5px}svg .axl{font-size:12px}.g-plot svg{overflow:visible}
     live(s,draw);
   };
 
-  /* 5. Guess the gap: one square is one basket of goods a year. */
-  W_.guess=host=>{
-    const s=shell(host,tr('Guess the gap'),tr('One square is one basket: $100 of buying power a year, adjusted for prices. The average person in the Central African Republic gets 6. Guess Mexico and the United States, then reveal.'),[[tr('Actual baskets'),'var(--ps)'],[tr('Your guess'),'var(--fg)']]);
-    let gm=40,gu=120,shown=false;
-    const C=[[L('CAR'),6],[L('Mexico'),178],[L('United States'),540]];
-    const draw=()=>{
-      const svg=s.svgs[0],W=Math.max(280,svg.getBoundingClientRect().width||500),colW=W/3,per=20,cell=Math.min(9,(colW-14)/per),gap=cell*.18;
-      const rows=Math.ceil(Math.max(540,gu)/per),H=40+rows*cell+30;
-      svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.replaceChildren();
-      C.forEach(([name,actual],i)=>{
-        const guess=i===0?6:i===1?gm:gu,x0=i*colW+(colW-per*cell)/2,y0=40;
-        const lab=el('text',{x:i*colW+colW/2,y:16,'text-anchor':'middle',class:'axl'},svg);lab.textContent=T(name);
-        if(zhOn()&&name[1]){const z=el('text',{x:i*colW+colW/2,y:30,'text-anchor':'middle',class:'tk'},svg);z.textContent=name[1];}
-        const n=Math.max(shown?actual:0,guess);
-        for(let k=0;k<n;k++){const x=x0+(k%per)*cell,y=y0+Math.floor(k/per)*cell;
-          const inA=shown&&k<actual,inG=k<guess;
-          el('rect',{x:x+gap/2,y:y+gap/2,width:cell-gap,height:cell-gap,rx:1,fill:inA||i===0?'var(--ps)':'none',stroke:inG&&i>0?'var(--fg)':'none','stroke-width':inG&&i>0?.9:0},svg);}
-        const cap=el('text',{x:i*colW+colW/2,y:y0+Math.ceil(n/per)*cell+16,'text-anchor':'middle',class:'tk'},svg);
-        cap.textContent=i===0?'6':shown?(i===2?'≈'+actual:String(actual))+' · '+tr('guess')+' '+guess:tr('guess')+' '+guess;
-      });
-      const rr=shown?[[tr('Mexico vs CAR'),'29×',true],[tr('United States vs Mexico'),'3×',true],[tr('United States vs CAR'),'90×',true],[tr('Actual US compared with your guess'),times(540/gu)]]:[[tr('Your Mexico guess'),String(gm)],[tr('Your US guess'),String(gu)]];
-      s.show(rr,shown?tr('Most people put Mexico near the CAR. It is about 29 times richer, and much closer to the United States than to the poorest countries.'):tr('Set your two guesses, then reveal.'));
-    };
-    s.slider('gm',tr('Your guess: Mexico'),1,600,1,gm,v=>String(v),v=>{gm=v;draw();});
-    s.slider('gu',tr('Your guess: United States'),1,900,1,gu,v=>String(v),v=>{gu=v;draw();});
-    s.button(tr('Reveal or hide the answer'),()=>{shown=!shown;draw();});
-    live(s,draw);
-  };
-
   /* 6. Compound growth and the rule of 70. */
   W_.compound=host=>{
     const s=shell(host,tr('Small growth gaps, huge level gaps'),tr('Two economies start at the same income. Predict how far apart they end up, then check the doubling times against the rule of 70.'),[[tr('Economy A'),colors.d],[tr('Economy B'),colors.mc]]);
@@ -928,25 +863,6 @@ svg .tk{font-size:11.5px}svg .axl{font-size:12px}.g-plot svg{overflow:visible}
     s.button(tr('2% vs 3% for 140 years'),()=>set(2,3,140));
     s.button(tr('1.1% vs 8.5% for 20 years'),()=>set(1.1,8.5,20));
     live(s,draw);
-  };
-
-  /* 8. Keep asking why: from factors of production down to deep roots. */
-  W_.ladder=host=>{
-    host.classList.add('graph','wide');
-    const steps=[
-      [L('Why is a farmer in a rich country so productive?'),L('Factors of production'),L('She works with physical capital (tractors, roads), human capital (skills in her head) and technological knowledge (soil science, genetics), brought together by entrepreneurs.')],
-      [L('Why does her country have so much of these?'),L('Incentives'),L('People build and learn when they keep the rewards. On China\'s collective farms, an extra bag of potatoes earned a worker 1/100 of a bag. Some 20 to 40 million people starved; growth came only after farmers could keep what they grew.')],
-      [L('Why do some countries have good incentives?'),L('Institutions'),L('Rules that protect rewards: property rights, honest government, political stability, a dependable legal system, and competitive, open markets.')],
-      [L('Why do some countries have good institutions?'),L('History, ideas, culture, geography, luck'),L('The least settled part of the puzzle. The US Constitution was written when the ideas of Locke and Smith were popular, and George Washington chose to stop at two terms.')]
-    ];
-    const head=make('div','g-head',null,host);make('span','g-kicker',tr('Dig deeper'),head);make('h4',null,tr('Keep asking why'),head);make('p',null,tr('Each answer raises a deeper question. Move from the immediate cause of wealth to the ultimate one.'),head);
-    const wrap=make('div','ladder',null,host);let d=0;
-    const tools=make('div','g-ctrl sort-tools',null,host);
-    const next=make('button','g-btn',tr('Ask why again'),tools);next.type='button';
-    const reset=make('button','g-btn',tr('Start over'),tools);reset.type='button';
-    const render=()=>{wrap.replaceChildren();steps.slice(0,d+1).forEach(([q,a,ex],i)=>{const card=make('div','rung rung-'+i,null,wrap);make('span','rung-n',String(i+1),card);const body=make('div','rung-b',null,card);make('p','rung-q',T(q),body);make('p','rung-a',T(a),body);make('p','rung-ex',T(ex),body);});next.disabled=d>=steps.length-1;};
-    next.addEventListener('click',()=>{if(d<steps.length-1){d++;render();}});reset.addEventListener('click',()=>{d=0;render();});
-    render();
   };
 
   /* 8b. Which institution is missing? Match each situation to one of the five key institutions. */
@@ -1012,7 +928,56 @@ svg .tk{font-size:11.5px}svg .axl{font-size:12px}.g-plot svg{overflow:visible}
   };
 
   
-  window.EconWidgets={mount(root){root.querySelectorAll('[data-widget]').forEach(host=>{const init=W_[host.dataset.widget];if(init&&!host.dataset.ready){host.dataset.ready='1';init(host);}});}};
+    /* 5. Guess the gap: one square is one basket of goods a year. */
+  W_.guess=host=>{
+    const s=shell(host,tr('Guess the gap'),tr('One square is one basket: $100 of buying power a year, adjusted for prices. The average person in the Central African Republic gets 6. Guess Mexico and the United States, then reveal.'),[[tr('Actual baskets'),'var(--ps)'],[tr('Your guess'),'var(--fg)']]);
+    let gm=40,gu=120,shown=false;
+    const C=[[L('CAR'),6],[L('Mexico'),178],[L('United States'),540]];
+    const draw=()=>{
+      const svg=s.svgs[0],W=Math.max(280,svg.getBoundingClientRect().width||500),colW=W/3,per=20,cell=Math.min(9,(colW-14)/per),gap=cell*.18;
+      const rows=Math.ceil(Math.max(540,gu)/per),H=40+rows*cell+30;
+      svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.replaceChildren();
+      C.forEach(([name,actual],i)=>{
+        const guess=i===0?6:i===1?gm:gu,x0=i*colW+(colW-per*cell)/2,y0=40;
+        const lab=el('text',{x:i*colW+colW/2,y:16,'text-anchor':'middle',class:'axl'},svg);lab.textContent=T(name);
+        if(zhOn()&&name[1]){const z=el('text',{x:i*colW+colW/2,y:30,'text-anchor':'middle',class:'tk'},svg);z.textContent=name[1];}
+        const n=Math.max(shown?actual:0,guess);
+        for(let k=0;k<n;k++){const x=x0+(k%per)*cell,y=y0+Math.floor(k/per)*cell;
+          const inA=shown&&k<actual,inG=k<guess;
+          el('rect',{x:x+gap/2,y:y+gap/2,width:cell-gap,height:cell-gap,rx:1,fill:inA||i===0?'var(--ps)':'none',stroke:inG&&i>0?'var(--fg)':'none','stroke-width':inG&&i>0?.9:0},svg);}
+        const cap=el('text',{x:i*colW+colW/2,y:y0+Math.ceil(n/per)*cell+16,'text-anchor':'middle',class:'tk'},svg);
+        cap.textContent=i===0?'6':shown?(i===2?'≈'+actual:String(actual))+' · '+tr('guess')+' '+guess:tr('guess')+' '+guess;
+      });
+      const rr=shown?[[tr('Mexico vs CAR'),'29×',true],[tr('United States vs Mexico'),'3×',true],[tr('United States vs CAR'),'90×',true],[tr('Actual US compared with your guess'),times(540/gu)]]:[[tr('Your Mexico guess'),String(gm)],[tr('Your US guess'),String(gu)]];
+      s.show(rr,shown?tr('Most people put Mexico near the CAR. It is about 29 times richer, and much closer to the United States than to the poorest countries.'):tr('Set your two guesses, then reveal.'));
+    };
+    s.slider('gm',tr('Your guess: Mexico'),1,600,1,gm,v=>String(v),v=>{gm=v;draw();});
+    s.slider('gu',tr('Your guess: United States'),1,900,1,gu,v=>String(v),v=>{gu=v;draw();});
+    s.button(tr('Reveal or hide the answer'),()=>{shown=!shown;draw();});
+    live(s,draw);
+  };
+
+  /* 8. Keep asking why: from factors of production down to deep roots. */
+  W_.ladder=host=>{
+    host.classList.add('graph','wide');
+    const steps=[
+      [L('Why is a farmer in a rich country so productive?'),L('Factors of production'),L('She works with physical capital (tractors, roads), human capital (skills in her head) and technological knowledge (soil science, genetics), brought together by entrepreneurs.')],
+      [L('Why does her country have so much of these?'),L('Incentives'),L('People build and learn when they keep the rewards. On China\'s collective farms, an extra bag of potatoes earned a worker 1/100 of a bag. Some 20 to 40 million people starved; growth came only after farmers could keep what they grew.')],
+      [L('Why do some countries have good incentives?'),L('Institutions'),L('Rules that protect rewards: property rights, honest government, political stability, a dependable legal system, and competitive, open markets.')],
+      [L('Why do some countries have good institutions?'),L('History, ideas, culture, geography, luck'),L('The least settled part of the puzzle. The US Constitution was written when the ideas of Locke and Smith were popular, and George Washington chose to stop at two terms.')]
+    ];
+    const head=make('div','g-head',null,host);make('span','g-kicker',tr('Dig deeper'),head);make('h4',null,tr('Keep asking why'),head);make('p',null,tr('Each answer raises a deeper question. Move from the immediate cause of wealth to the ultimate one.'),head);
+    const wrap=make('div','ladder',null,host);let d=0;
+    const tools=make('div','g-ctrl sort-tools',null,host);
+    const next=make('button','g-btn',tr('Ask why again'),tools);next.type='button';
+    const reset=make('button','g-btn',tr('Start over'),tools);reset.type='button';
+    const render=()=>{wrap.replaceChildren();steps.slice(0,d+1).forEach(([q,a,ex],i)=>{const card=make('div','rung rung-'+i,null,wrap);make('span','rung-n',String(i+1),card);const body=make('div','rung-b',null,card);make('p','rung-q',T(q),body);make('p','rung-a',T(a),body);make('p','rung-ex',T(ex),body);});next.disabled=d>=steps.length-1;};
+    next.addEventListener('click',()=>{if(d<steps.length-1){d++;render();}});reset.addEventListener('click',()=>{d=0;render();});
+    render();
+  };
+
+  function assume(host){const a=host.dataset.assume;if(!a)return;const p=make('p','g-assume',a,host.querySelector('.g-plot')||host);if(host.dataset.assumeZh){const s=make('span','zh-full',host.dataset.assumeZh,p);s.lang='zh-Hant';}}
+  window.EconWidgets={mount(root){root.querySelectorAll('[data-widget]').forEach(host=>{const init=W_[host.dataset.widget];if(init&&!host.dataset.ready){host.dataset.ready='1';init(host);assume(host);}});}};
 })();
 </script>
 <script>

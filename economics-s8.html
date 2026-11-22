@@ -201,6 +201,7 @@ table.oil th, table.oil td { text-align: right; padding: 6px 8px; white-space: n
 table.oil th:first-child, table.oil td:first-child { text-align: left; font-weight: 700; }
 table.oil td.hi { background: var(--tint); color: var(--accent-ink); font-weight: 700; }
 
+.g-assume{margin:4px 2px 0;font-size:.74rem;line-height:1.5;color:var(--muted)}
 </style>
 <style id="system-theme">
 /* System appearance only changes colors. Print retains the light palette. */
@@ -417,7 +418,7 @@ svg .tk{font-size:11.5px}svg .axl{font-size:12px}.g-plot svg{overflow:visible}
 </tbody></table></div>
 <p>Riskier borrowers pay more. Rating agencies such as Standard &amp; Poor's grade bonds from <b>AAA</b> down to <b>D</b>; anything below <b>BBB-</b> is called a junk bond. In the video Starbucks is rated A-, and Illinois (A-) pays more to borrow than Virginia (AAA). <b>Collateral</b> lowers the rate too: if you default on a mortgage the bank takes the house, but "once you've been to Maui, the bank can't repossess your vacation."</p>
 <p>A bond's <b>yield</b><span class="zh">殖利率</span> is the gain from holding it divided by the price paid. The face value is fixed, so the only way a bond can offer a higher yield is to sell for less.</p>
-<div data-widget="bond" data-readout="optional"></div>
+<div data-widget="bond" data-readout="optional" data-assume="Yield = (1,000 − price) ÷ price"></div>
 <p>MRU's lesson from the three bonds: the 14.8% bond is not a free lunch. <b>Equally risky assets must pay the same return</b>, or everyone would buy the higher-yield one until its price rose. A high yield is a signal of high risk. Which bond to buy depends on how much risk you can live with.</p>
 
 <h2 id="crowding">7. Crowding out: when the government borrows</h2>
@@ -451,7 +452,7 @@ svg .tk{font-size:11.5px}svg .axl{font-size:12px}.g-plot svg{overflow:visible}
 <p>A $100,000 house bought with a typical 20% down payment carries an $80,000 mortgage and $20,000 of <b>owner's equity</b>: what the owner would keep after selling and repaying the loan. Equity is the cushion. The <b>leverage ratio</b><span class="zh">槓桿比率</span> divides the mortgage by the owner's equity.</p>
 <div class="formula">Leverage ratio = mortgage ÷ owner's equity<br>20% down: 80,000 ÷ 20,000 = 4<br>5% down: 95,000 ÷ 5,000 = 19</div>
 <p>Before the crisis many homes were bought with 10%, 5% or even zero down. With 5% down, a fall to $90,000 leaves the house worth less than the $95,000 still owed: the owner is <b>underwater</b>, and equity is gone. That hurts the bank too, because in a foreclosure it gets a house worth less than the loan.</p>
-<div data-widget="leverage" data-readout="optional"></div>
+<div data-widget="leverage" data-readout="optional" data-assume="Fall that wipes out equity = 1 ÷ (1 + leverage ratio)"></div>
 <h3 id="banklev">Weight 2: bank leverage</h3>
 <p>Banks did the same thing with their own balance sheets. Lehman Brothers' leverage ratio rose from about 20 in 2004 to 44 by 2007. At 44, a fall of about 2.2% in the value of its assets wipes out its equity; when the fall came, Lehman was underwater and went bankrupt on September 15, 2008. Why would experienced managers do this? Cowen gives two reasons: <b>overconfidence</b> that house prices could not fall much, and <b>incentives</b>, since bonuses rose with profits while the managers did not personally go bankrupt when the bank did.</p>
 <h3 id="securitization">Weight 3: securitization</h3>
@@ -465,14 +466,8 @@ svg .tk{font-size:11.5px}svg .axl{font-size:12px}.g-plot svg{overflow:visible}
 <p class="note-small">The slide labels the third mortgage's equity $8,000; house value minus mortgage gives $10,000.</p>
 <p>Standard &amp; Poor's, Moody's and Fitch rated such packages, often AA- or even AAA. Many turned out to be riskier than advertised, through outright fraud, rating failures, and above all complacency about house prices. Securitization itself is a useful tool: it frees cash for banks and spreads risk to investors who want it. The failure was in quality, transparency and ratings.</p>
 <h3 id="shadow">Weight 4: the shadow banking system</h3>
-<div class="tbl"><table><thead><tr><th>Part of the shadow banking system</th><th>Names on the slide</th></tr></thead><tbody>
-<tr><td>Investment banks</td><td>Lehman Brothers, Bear Stearns</td></tr>
-<tr><td>Parts of commercial banks</td><td>Citibank, Bank of America</td></tr>
-<tr><td>Money market funds</td><td>Vanguard, PIMCO</td></tr>
-<tr><td>Issuers of asset-backed securities</td><td>BNP Paribas</td></tr>
-<tr><td>Hedge funds</td><td>Bridgewater, Man, Brevan Howard</td></tr>
-</tbody></table></div>
 <p>A commercial bank is funded by insured deposits. An investment bank such as Lehman is funded by investors, mostly through short-term loans, with no comparable guarantee: "use at your own risk." These lenders are watchful and quick to flee. Shadow banks borrow short to lend long like a bank, but without deposit insurance, and by 2008 they lent more than traditional commercial banks.</p>
+<p class="note-small">Names on the slide: investment banks (Lehman Brothers, Bear Stearns), uninsured parts of commercial banks (Citibank, Bank of America), money market funds (Vanguard, PIMCO), issuers of asset-backed securities (BNP Paribas) and hedge funds (Bridgewater, Man, Brevan Howard).</p>
 <h3 id="collapse">The nudge: house prices fall</h3>
 <div class="flow"><span>2007: house prices fall</span><i>→</i><span>Homeowners underwater, defaults rise</span><i>→</i><span>Mortgage securities, even AAA, lose value</span><i>→</i><span>Leveraged banks near insolvency</span><i>→</i><span>Short-term lenders run from shadow banks</span><i>→</i><span>Fire sales push prices lower</span><i>→</i><span>Credit crunch, layoffs, store closings</span></div>
 <p>The last slide shows the response: a bank leverage ratio of 16.66, meaning more equity behind each dollar of assets. Cowen thinks requiring <b>more equity and less leverage</b> makes sense; it has been enacted, and "it remains to be seen" how well it works. A government guarantee for shadow banks would be the radical alternative, but it could expose taxpayers to trillions and would give leveraged managers even more reason to take risk.</p>
@@ -503,7 +498,11 @@ svg .tk{font-size:11.5px}svg .axl{font-size:12px}.g-plot svg{overflow:visible}
 <tr><td><b>3. Diversify, keep fees low</b></td><td><b>Diversification</b><span class="zh">分散投資</span> lowers risk without lowering expected return.</td><td>Enron employees held about 60% of their retirement savings in Enron stock and lost both job and savings.</td></tr>
 <tr><td><b>4. Even an imperfect market is more rational than you</b></td><td>Investors are overconfident and herd; anomalies exist but are small and fade once known.</td><td>Shiller's Nobel work; Monday, January and momentum effects; Buffett tells his heirs to buy index funds.</td></tr>
 </tbody></table></div>
-<p>The coin-flip experiment shows why rule 1 holds. Give 1,000 "experts" a coin to predict whether the market rises. After one year 500 are right, after two 250, and after five about 31 have never been wrong (MRU says 32). They will be called geniuses and write books, yet they were certain to exist whatever the market did.</p>
+<p>The coin-flip experiment shows why rule 1 holds. Give 1,000 "experts" a coin to predict each year whether the market rises.</p>
+<div class="tbl"><table><thead><tr><th>Year</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead><tbody>
+<tr><td>Still never wrong</td><td>1,000</td><td>500</td><td>250</td><td>125</td><td>about 63</td><td>about 31</td></tr>
+</tbody></table></div>
+<p>Those 31 will be called geniuses and write books, yet pure chance guarantees they exist. MRU rounds the last number to 32.</p>
 <div data-widget="fees" data-readout="optional"></div>
 <p class="note-small">MRU quotes about $57,000 and $70,000; those cannot be reproduced with a plain 8% return. The graph uses 10,000 × (1.08 − fee)^25, which gives $54,274 and $65,384. The lesson is the same.</p>
 <p>Diversification removes the risk specific to one firm, not the risk of the whole market falling, as it did in 2008. It also argues against <b>home market bias</b>: a Thai investor with her savings in her employer's shares and a condo in the same city has job, shares and property all exposed to one local shock.</p>
@@ -518,6 +517,7 @@ svg .tk{font-size:11.5px}svg .axl{font-size:12px}.g-plot svg{overflow:visible}
 <tr><td><b>Diversification</b></td><td>Better for the wealthier.</td><td>A house puts a big share of wealth in one asset in one place.</td></tr>
 </tbody></table></div>
 <div class="flow"><span>Tax break for buyers</span><i>→</i><span>Housing demand shifts right</span><i>→</i><span>Fixed supply: price up a lot, seller gains</span><i>/</i><span>Elastic supply: more homes, buyer gains</span></div>
+<div data-widget="rentbuy" data-readout="optional" data-assume="Share to sellers = price rise ÷ size of the tax break"></div>
 <p>Where they agree: it is a <b>marginal</b> question. The price already reflects the average buyer's tax benefit, taste for stability and repair costs, so you gain from buying only where you differ from the average buyer. A low down payment is also high leverage (5% down is a ratio of 19), and one house is the opposite of diversification.</p>
 <p class="note-small">The duel assumes US tax rules; Thai taxes, mortgage terms and condo markets differ.</p>
 
@@ -799,7 +799,36 @@ svg .tk{font-size:11.5px}svg .axl{font-size:12px}.g-plot svg{overflow:visible}
     live(s,draw);
   };
 
-  window.EconWidgets={mount(root){root.querySelectorAll('[data-widget]').forEach(host=>{const init=W_[host.dataset.widget];if(init&&!host.dataset.ready){host.dataset.ready='1';init(host);}});}};
+    /* 7. Rent or buy: who gets a tax break for home buyers? */
+  W_.rentbuy=host=>{
+    const s=shell(host,tr('Who gets the tax break for home buyers?'),tr('The tax break shifts demand up by 20. Change how easily builders can add homes and watch where the 20 goes.'),[[tr('Demand D'),colors.d],[tr('Supply of homes S'),colors.mc]]);
+    let v=85,on=true;
+    const kOf=v=>v<=0?0:.2*Math.pow(25,v/100);
+    const draw=()=>{
+      const k=kOf(v),sub=on?20:0,q2=50+sub/(1+k),p2=50+k*sub/(1+k),rise=p2-50,share=sub?rise/sub:0;
+      const P=Plot(s.svgs[0],100,100);P.axes(tr('Number of homes'),tr('House price'));P.xticks([0,25,50,75,100]);P.yticks([0,25,50,75,100]);
+      P.line(50-50*k,k,colors.mc);
+      const qs=k>0?Math.min(92,50+42/k):92;P.tag(qs,50+k*(qs-50),'S','start',k>1?16:-8);
+      if(on){P.path([[0,100],[100,0]],colors.d,true);P.tag(88,12,'D1','start',-6);P.line(120,-1,colors.d);P.tag(88,32,'D2','start',-6);}
+      else{P.line(100,-1,colors.d);P.tag(88,12,'D','start',-6);}
+      P.guide(50,50);P.point(50,50,'var(--fg)');P.tag(50,50,on?'E1':'E','end',-9);
+      if(on){P.guide(q2,p2);P.point(q2,p2,'var(--fg)');P.tag(q2,p2,'E2','start',-9);}
+      const rows=[[tr('Size of the tax break'),String(sub)],[tr('Price rise'),'+'+rise.toFixed(1)],[tr('Extra homes'),'+'+(q2-50).toFixed(1)],[tr('Share of the break in the price (to sellers)'),(share*100).toFixed(0)+'%',true],[tr('Share kept by buyers'),((1-share)*100).toFixed(0)+'%']];
+      let note;
+      if(!on)note=tr('No tax break yet. Switch it on.');
+      else if(share>=.6)note=tr('Supply is steep: builders cannot add many homes, so most of the tax break shows up as a higher price. Sellers and landowners get it, as Alex argues for San Francisco or New York.');
+      else if(share<=.4)note=tr('Supply is flat: builders add homes, so the price barely moves and buyers keep most of the tax break, as Tyler argues for Texas or Florida.');
+      else note=tr('Price and the number of homes both rise, so buyers and sellers split the tax break.');
+      s.show(rows,note);
+    };
+    const sl=s.slider('v',tr('How hard it is to add homes'),0,100,1,v,v=>v<=0?tr('Very easy (flat supply)'):v<35?tr('Easy (elastic)'):v>65?tr('Hard (inelastic)'):tr('Moderate'),x=>{v=x;draw();});
+    s.seg(tr('Market'),[['tx',tr('Builders can add homes')],['sf',tr('Land is fixed')]],null,x=>{v=x==='tx'?10:95;sl.set(v);draw();});
+    s.button(tr('Tax break on / off'),()=>{on=!on;draw();});
+    live(s,draw);
+  };
+
+  function assume(host){const a=host.dataset.assume;if(!a)return;const p=make('p','g-assume',a,host.querySelector('.g-plot')||host);if(host.dataset.assumeZh){const s=make('span','zh-full',host.dataset.assumeZh,p);s.lang='zh-Hant';}}
+  window.EconWidgets={mount(root){root.querySelectorAll('[data-widget]').forEach(host=>{const init=W_[host.dataset.widget];if(init&&!host.dataset.ready){host.dataset.ready='1';init(host);assume(host);}});}};
 })();
 </script>
 <script>
