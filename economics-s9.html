@@ -1,0 +1,763 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Inflation and the Quantity Theory of Money · Economics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column with a sticky chapter rail; colors follow system appearance. */
+:root {
+  color-scheme: light;
+  --bg: var(--tone-fdf9f9); --panel: var(--tone-f8eef0); --paper: var(--tone-ffffff); --tint: var(--tone-fae9ed); --line: var(--tone-efdde2);
+  --fg: var(--tone-2f282b); --muted: var(--tone-7e6f74); --accent: var(--tone-c06c84); --accent-ink: var(--tone-9c4862);
+  --demand: var(--tone-3f5675); --supply: var(--tone-c06c84); --ext: var(--tone-6e3f55); --world: var(--tone-8a7a5c); --policy: var(--tone-3f7f7a);
+  --cs: var(--tone-a7cdb6); --ps: var(--tone-b2c4e3); --dwl: var(--tone-d9674f); --rev: var(--tone-e5c171); --rev2: var(--tone-f1dca8); --time: var(--tone-ddb3cb); --ts: var(--tone-bfdcc9);
+  --serif: "Noto Serif TC", "Songti TC", Georgia, serif;
+  --sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; background: var(--bg); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 16px; line-height: 1.75; }
+a { color: var(--accent-ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(var(--header-rgb), .94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); padding-inline: 16px; }
+.top-in { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 14px; min-height: 56px; flex-wrap: wrap; padding-block: 8px; }
+.brand { font-family: var(--serif); font-weight: 700; font-size: 1.02rem; white-space: nowrap; }
+.brand small { font-family: var(--sans); font-weight: 500; color: var(--muted); font-size: .76rem; margin-left: 6px; letter-spacing: .06em; }
+.sessions { display: flex; gap: 4px; margin-left: auto; }
+.crumbs { font-size: .86rem; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.crumbs a { color: var(--muted); text-decoration: none; } .crumbs a:hover { color: var(--accent-ink); } .crumbs span { color: var(--line); } .crumbs b { font-family: var(--serif); }
+.sessions a.pill { text-decoration: none; transition: border-color .15s, color .15s; }
+.sessions a.pill:hover, .sessions a.pill:focus-visible { border-color: var(--accent); color: var(--accent-ink); background: var(--tint); }
+.sessions .pill { font: 500 .82rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--muted); padding: 4px 12px; border-radius: 999px; }
+.sessions .pill[aria-current="page"] { background: var(--accent); border-color: var(--accent); color: var(--tone-ffffff); }
+.sessions .pill.off { opacity: .5; cursor: not-allowed; }
+.toc-btn { display: none; font: 500 .85rem var(--sans); border: 1px solid var(--line); background: var(--paper); color: var(--fg); border-radius: 8px; padding: 5px 12px; }
+
+.wrap { max-width: 1160px; margin: 0 auto; padding-inline: 16px; display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 52px; }
+.rail { position: sticky; top: 76px; align-self: start; max-height: calc(100vh - 92px); overflow: auto; padding-block: 34px 40px; font-size: .86rem; line-height: 1.5; }
+.rail .lbl { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+.rail ol { list-style: none; margin: 0; padding: 0; }
+.rail li a { display: block; padding: 4px 10px; color: var(--muted); text-decoration: none; border-radius: 6px; }
+.rail li a:hover { color: var(--fg); background: var(--tint); }
+.rail li.h3 a { padding-left: 22px; font-size: .8rem; }
+.rail li a.on { color: var(--accent-ink); background: var(--tint); font-weight: 500; }
+
+main { min-width: 0; padding-block: 30px 120px; }
+.doc { max-width: 780px; }
+.hero { padding-block: 8px 26px; border-bottom: 1px solid var(--line); }
+.kick { font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); margin: 0 0 6px; font-weight: 500; }
+.hero h1 { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.25; margin: 0 0 12px; text-wrap: balance; }
+.lead { margin: 0; font-size: 1.04rem; max-width: 62ch; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 16px; font-size: .78rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+.doc h2 { font-family: var(--serif); font-size: 1.55rem; line-height: 1.35; margin: 3.4rem 0 .3rem; text-wrap: balance; }
+.doc h3 { font-size: 1.1rem; line-height: 1.45; margin: 2.2rem 0 .5rem; color: var(--accent-ink); text-wrap: balance; }
+.sub { margin: 0 0 1.2rem; color: var(--muted); max-width: 66ch; }
+.doc p, .doc li { max-width: none; }
+.doc ul, .doc ol { padding-left: 1.25em; }
+.doc li { margin: .25rem 0; }
+.zh { display: inline-block; font-size: .78em; line-height: 1.3; color: var(--accent-ink); background: var(--tint); padding: 0 6px; border-radius: 4px; margin-left: 2px; vertical-align: 1px; font-weight: 500; }
+.hint { font-size: .9rem; color: var(--muted); display: flex; gap: 10px; align-items: baseline; }
+.hint b { flex: none; font-size: .72rem; color: var(--tone-ffffff); background: var(--accent); padding: 0 7px; border-radius: 4px; font-weight: 500; }
+.key { background: var(--tint); padding: 12px 16px; border-radius: 8px; font-weight: 500; }
+.note-small { font-size: .8rem; color: var(--muted); }
+
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 1rem 0; }
+.pair > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; }
+.pair b { color: var(--accent-ink); }
+.pair p { margin: 4px 0 0; font-size: .92rem; }
+
+.matrix { display: grid; grid-template-columns: minmax(90px, .7fr) repeat(2, minmax(0, 1fr)); gap: 6px; margin: 1rem 0 1.2rem; font-size: .9rem; max-width: 620px; }
+.matrix .mh { font-weight: 700; font-size: .8rem; color: var(--muted); align-self: end; padding: 0 4px 2px; }
+.matrix .mh.side { align-self: center; }
+.matrix .cell { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px; font-weight: 500; }
+.matrix .cell.hi { background: var(--tint); border-color: var(--accent); }
+.matrix small { display: block; font-weight: 400; color: var(--muted); font-size: .8rem; margin-top: 2px; line-height: 1.45; }
+
+.map { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.3fr) auto minmax(0, 1fr); gap: 10px; align-items: center; margin: 1rem 0; }
+.mcol { display: flex; flex-direction: column; gap: 8px; }
+.mbox { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .84rem; line-height: 1.5; display: flex; flex-direction: column; gap: 2px; }
+.mbox b { font-size: .9rem; } .mbox span { color: var(--muted); } .mbox em { font-style: normal; color: var(--accent-ink); font-size: .78rem; font-weight: 500; }
+.mbox.good { border-color: var(--cs); } .mbox.ask { background: var(--tint); border-color: var(--accent); }
+.marrow { color: var(--accent); font-weight: 700; }
+
+.flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 1rem 0; font-size: .86rem; }
+.flow span { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; line-height: 1.45; }
+.flow i { font-style: normal; color: var(--accent); font-weight: 700; }
+.formula { font-family: var(--mono); font-size: .9rem; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; line-height: 1.9; overflow-x: auto; }
+.steps { counter-reset: s; list-style: none; padding-left: 0 !important; }
+.steps li { counter-increment: s; display: flex; gap: 10px; }
+.steps li::before { content: counter(s); flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--tint); color: var(--accent-ink); font: 700 .75rem/22px var(--sans); text-align: center; margin-top: 3px; }
+.assign { margin: 1.6rem 0; border: 1px dashed var(--accent); border-radius: 10px; padding: 14px 16px; background: var(--paper); }
+.assign p { margin: 6px 0 0; font-size: .92rem; }
+
+.tbl { overflow-x: auto; margin: 1rem 0; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+.doc table { border-collapse: collapse; width: 100%; font-size: .88rem; line-height: 1.55; }
+.doc th, .doc td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+.doc th { background: var(--panel); font-weight: 700; }
+.doc tr:last-child td { border-bottom: 0; }
+.drill .ans { filter: blur(5px); cursor: pointer; user-select: none; transition: filter .2s; }
+.drill .ans.shown { filter: none; user-select: auto; }
+
+.traps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 1rem; }
+.traps > div { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: .88rem; line-height: 1.55; }
+.traps s { color: var(--muted); text-decoration-color: var(--dwl); }
+.traps p { margin: 6px 0 0; font-weight: 500; }
+
+.qa-tools { margin: .4rem 0 .8rem; }
+.qa-tools button { font: 500 .82rem var(--sans); border: 1px solid var(--accent); background: var(--paper); color: var(--accent-ink); border-radius: 6px; padding: 5px 12px; cursor: pointer; }
+.qa { display: flex; flex-direction: column; gap: 6px; }
+.qa details { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
+.qa summary { cursor: pointer; padding: 10px 14px; font-weight: 500; font-size: .93rem; list-style: none; display: flex; gap: 10px; }
+.qa summary::before { content: "Q"; color: var(--accent); font-weight: 700; }
+.qa details[open] summary { border-bottom: 1px dashed var(--line); }
+.qa details p { margin: 0; padding: 10px 14px 12px 36px; font-size: .9rem; }
+
+/* graphs */
+.graph { max-width: 900px; margin: 1.8rem 0 2.2rem; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px 18px 14px; }
+.g-head h4 { font-family: var(--serif); font-size: 1.12rem; margin: 2px 0 2px; line-height: 1.45; }
+.g-head p { margin: 0 0 10px; color: var(--muted); font-size: .86rem; }
+.g-kicker { font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); }
+.g-body { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.g-plot svg { width: 100%; height: auto; display: block; }
+.g-side { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.g-ctrl { display: flex; flex-direction: column; gap: 10px; }
+.sl label { display: flex; justify-content: space-between; font-size: .8rem; color: var(--muted); line-height: 1.3; }
+.sl output { font-family: var(--mono); color: var(--fg); font-size: .8rem; }
+.sl input { width: 100%; accent-color: var(--accent); margin: 4px 0 0; }
+.g-btn { align-self: flex-start; font: 500 .8rem var(--sans); border: 1px solid var(--accent); color: var(--accent-ink); background: transparent; border-radius: 6px; padding: 4px 11px; cursor: pointer; }
+.g-btn:hover { background: var(--tint); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; align-self: flex-start; }
+.seg button { font: 500 .8rem var(--sans); border: 0; background: transparent; color: var(--muted); padding: 5px 12px; cursor: pointer; }
+.seg button[aria-checked="true"] { background: var(--accent); color: var(--paper); }
+.chk { display: flex; gap: 8px; align-items: center; font-size: .8rem; color: var(--muted); }
+.chk input { accent-color: var(--accent); }
+.g-stats { margin: 0; border-top: 1px solid var(--line); padding-top: 10px; display: flex; flex-direction: column; gap: 3px; }
+.st { display: flex; justify-content: space-between; gap: 10px; font-size: .8rem; line-height: 1.45; }
+.st dt { color: var(--muted); display: flex; align-items: center; gap: 7px; }
+.st dd { margin: 0; font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.st.big dd { font-weight: 500; color: var(--accent-ink); font-size: .92rem; }
+.g-note { margin: 12px 0 0; padding: 9px 12px; background: var(--tint); border-radius: 6px; font-size: .85rem; line-height: 1.6; }
+
+.sw { width: 11px; height: 11px; border-radius: 2px; display: inline-block; flex: none; }
+.sw.none { background: transparent; }
+.sw.a-cs { background: var(--cs); } .sw.a-ps { background: var(--ps); } .sw.a-ps2 { background: var(--ps); outline: 1px solid var(--demand); }
+.sw.a-dwl { background: repeating-linear-gradient(45deg, var(--dwl) 0 2px, transparent 2px 4px); outline: 1px solid var(--dwl); }
+.sw.a-rev { background: var(--rev); } .sw.a-rev2 { background: var(--rev2); } .sw.a-time { background: var(--time); } .sw.a-ts { background: var(--ts); }
+.sw.ln { height: 3px; border-radius: 2px; width: 16px; }
+
+svg .ax { stroke: var(--muted); stroke-width: 1.2; }
+svg .axl { fill: var(--muted); font: 500 11px var(--sans); }
+svg .tk { fill: var(--muted); font: 500 10.5px var(--mono); }
+svg .gd { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 4; opacity: .7; }
+svg .cv { stroke-width: 2.6; fill: none; stroke-linecap: round; }
+svg .cv.dash { stroke-dasharray: 7 5; stroke-width: 2; }
+svg .cvl { font: 700 11.5px var(--sans); }
+svg .c-d { stroke: var(--demand); fill: var(--demand); } svg .c-s { stroke: var(--supply); fill: var(--supply); }
+svg .c-x { stroke: var(--ext); fill: var(--ext); } svg .c-w { stroke: var(--world); fill: var(--world); } svg .c-t { stroke: var(--policy); fill: var(--policy); }
+svg text.cvl { stroke: none; }
+svg .pt { fill: var(--paper); stroke: var(--fg); stroke-width: 2; }
+svg .ptl { fill: var(--fg); font: 700 11px var(--sans); }
+svg .atag { fill: var(--fg); font: 700 11px var(--sans); opacity: .8; }
+svg .a-cs { fill: var(--cs); fill-opacity: .6; } svg .a-ps { fill: var(--ps); fill-opacity: .6; }
+svg .a-ps2 { fill: var(--ps); fill-opacity: .95; } svg .a-ts { fill: var(--ts); fill-opacity: .6; }
+svg .a-dwl { fill: url(#dwlHatch); stroke: var(--dwl); stroke-width: 1.2; }
+svg .a-rev { fill: var(--rev); fill-opacity: .75; } svg .a-rev2 { fill: var(--rev2); fill-opacity: .8; } svg .a-time { fill: var(--time); fill-opacity: .65; }
+
+svg .grid { stroke: var(--line); stroke-width: 1; }
+svg .a-prof { fill: var(--cs); fill-opacity: .75; } svg .a-loss { fill: var(--dwl); fill-opacity: .35; }
+.sw.a-prof { background: var(--cs); } .sw.a-loss { background: var(--dwl); opacity: .5; }
+.twin { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.tw-t { margin: 0 0 2px; font-size: .78rem; font-weight: 700; color: var(--muted); }
+.g-ctrl .g-btn + .g-btn { margin-top: -4px; }
+.graph.wide .g-body { grid-template-columns: minmax(0, 1fr); }
+.graph.wide .g-side { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+@media (max-width: 700px) { .twin, .graph.wide .g-side { grid-template-columns: minmax(0, 1fr); } }
+svg polyline.cv { fill: none !important; }
+
+.graph { background: var(--paper); }
+.g-note { background: var(--tint); }
+
+@media (max-width: 900px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .rail { display: none; position: fixed; inset: 64px 0 0 0; max-height: none; background: var(--bg); z-index: 15; padding: 20px 16px 60px; }
+  .rail.open { display: block; }
+  .toc-btn { display: inline-block; }
+  .g-body { grid-template-columns: minmax(0, 1fr); }
+  .map { grid-template-columns: minmax(0, 1fr); }
+  .marrow { transform: rotate(90deg); justify-self: center; }
+}
+@media (max-width: 560px) { .pair, .traps { grid-template-columns: minmax(0, 1fr); } }
+.spectrum { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: center; margin: 1rem 0 .2rem; font-weight: 700; font-size: .9rem; }
+.spectrum .bar { height: 12px; border-radius: 6px; background: linear-gradient(90deg, var(--tone-d9674f), var(--tone-e5c171), var(--tone-a7cdb6)); }
+.spec-l { display: flex; justify-content: space-between; font-size: .78rem; color: var(--muted); margin-bottom: 1rem; }
+.no, .yes { font-size: .74rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; }
+.no { background: var(--tone-fce3dd); color: var(--tone-a8432f); } .yes { background: var(--tone-e3f2e9); color: var(--tone-2f6b4f); }
+table.oil { font-variant-numeric: tabular-nums; }
+table.oil th, table.oil td { text-align: right; padding: 6px 8px; white-space: nowrap; }
+table.oil th:first-child, table.oil td:first-child { text-align: left; font-weight: 700; }
+table.oil td.hi { background: var(--tint); color: var(--accent-ink); font-weight: 700; }
+
+.g-assume{margin:4px 2px 0;font-size:.74rem;line-height:1.5;color:var(--muted)}
+</style>
+<style id="system-theme">
+/* System appearance only changes colors. Print retains the light palette. */
+:root {
+  --header-rgb: 253, 249, 249;
+  --tone-2f282b: #2f282b;
+  --tone-2f6b4f: #2f6b4f;
+  --tone-3f5675: #3f5675;
+  --tone-3f7f7a: #3f7f7a;
+  --tone-6e3f55: #6e3f55;
+  --tone-7e6f74: #7e6f74;
+  --tone-8a7a5c: #8a7a5c;
+  --tone-9c4862: #9c4862;
+  --tone-a7cdb6: #a7cdb6;
+  --tone-a8432f: #a8432f;
+  --tone-b2c4e3: #b2c4e3;
+  --tone-bfdcc9: #bfdcc9;
+  --tone-c06c84: #c06c84;
+  --tone-d9674f: #d9674f;
+  --tone-ddb3cb: #ddb3cb;
+  --tone-e3f2e9: #e3f2e9;
+  --tone-e5c171: #e5c171;
+  --tone-efdde2: #efdde2;
+  --tone-f1dca8: #f1dca8;
+  --tone-f8eef0: #f8eef0;
+  --tone-fae9ed: #fae9ed;
+  --tone-fce3dd: #fce3dd;
+  --tone-fdf9f9: #fdf9f9;
+  --tone-ffffff: #ffffff;
+}
+@media screen and (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --header-rgb: 29, 24, 26;
+    --tone-2f282b: #EEE4E6;
+    --tone-2f6b4f: #A0D2B2;
+    --tone-3f5675: #93AECB;
+    --tone-3f7f7a: #8CC4BE;
+    --tone-6e3f55: #C9A3D6;
+    --tone-7e6f74: #BEACB2;
+    --tone-8a7a5c: #C9B68C;
+    --tone-9c4862: #E6B3BE;
+    --tone-a7cdb6: #6E8C6B;
+    --tone-a8432f: #F0A48D;
+    --tone-b2c4e3: #667C96;
+    --tone-bfdcc9: #5F7A5C;
+    --tone-c06c84: #D79AA7;
+    --tone-d9674f: #E08A6F;
+    --tone-ddb3cb: #8C6680;
+    --tone-e3f2e9: #23372D;
+    --tone-e5c171: #C9A250;
+    --tone-efdde2: #55424A;
+    --tone-f1dca8: #8F7A4A;
+    --tone-f8eef0: #2B2226;
+    --tone-fae9ed: #35272D;
+    --tone-fce3dd: #412B28;
+    --tone-fdf9f9: #1D181A;
+    --tone-ffffff: #241E21;
+  }
+}
+</style>
+
+<style>
+body{margin:0}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:1rem 0}
+.three>div,.method{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+.three b,.method>b{color:var(--accent-ink)}.three p,.method p{margin:4px 0 0;font-size:.92rem}
+.method{margin:12px 0}.endnote{margin-top:32px}
+.plot-legend{display:flex;flex-wrap:wrap;gap:7px 16px;margin:4px 0 14px;font-size:.78rem;color:var(--muted)}
+.plot-legend span{display:inline-flex;gap:6px;align-items:center}
+svg .tk{font-size:11.5px}svg .axl{font-size:12px}.g-plot svg{overflow:visible}
+.seg{display:flex;flex-wrap:wrap;gap:2px;max-width:100%}.seg button{flex:1 1 auto;white-space:normal}
+.seg button[aria-pressed=true]{background:var(--accent);color:var(--paper)}
+.best-row{background:var(--tint);font-weight:700;color:var(--accent-ink)}
+.g-ctrl [hidden]{display:none!important}.sl label{gap:12px}.sl label span{min-width:0}
+.sl output{flex-shrink:0}.g-note:empty{display:none}.doc p,.doc li{overflow-wrap:break-word}
+@media(max-width:700px){.three{grid-template-columns:minmax(0,1fr)}.graph{padding:14px 12px}.st dd{white-space:normal;text-align:right;max-width:60%}.top-in{gap:8px 12px}}
+@media(max-width:420px){.top-in{align-items:center}.sessions{margin-left:0}.crumbs{flex:1 1 100%;font-size:.8rem}.toc-btn{order:2;margin-left:auto}.sessions{order:1}.rail{inset:108px 0 0}.graph.wide .g-side{gap:14px}.doc h2{font-size:1.4rem}}
+@media print{.top,.rail,.g-ctrl,.qa-tools{display:none}.wrap{display:block}.qa details p{display:block}.graph{break-inside:avoid}body{background:#fff}.doc{max-width:none}}
+</style>
+
+<style>
+.extra,.graph-guide,.number-readout{background:var(--paper);border:1px solid var(--line);border-radius:9px;margin:1rem 0;padding:0 14px}
+.extra>summary,.graph-guide>summary,.number-readout>summary{cursor:pointer;padding:11px 0;color:var(--accent-ink);font-size:.87rem;font-weight:500}
+.extra[open]>summary,.graph-guide[open]>summary,.number-readout[open]>summary{border-bottom:1px dashed var(--line)}
+.extra>p,.graph-guide>p{font-size:.9rem}.graph-guide .steps{font-size:.91rem;line-height:1.65}.graph-guide .steps li{margin:12px 0}
+.g-reading{min-width:0}.g-reading .g-note{margin:0}.number-readout{margin:12px 0 0;padding:0 10px}.number-readout .g-stats{border-top:0;padding-bottom:10px}
+</style>
+<style>
+.four{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:1rem 0}
+.four>div{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.four b{color:var(--accent-ink)}.four p{margin:4px 0 0;font-size:.9rem;line-height:1.55}
+@media (max-width:980px){.four{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.four{grid-template-columns:minmax(0,1fr)}}
+.ring-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin:14px 0 4px}
+.ring-card{display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;font:inherit;font-size:.86rem;line-height:1.45;color:var(--fg);background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:9px 11px;cursor:pointer}
+.ring-card:hover{border-color:var(--accent)}
+.ring-card.done{background:var(--tint);border-color:var(--accent)}
+.ring-card.off-reg{border-style:dashed}.ring-card.off-reg .rc-t{text-decoration:line-through;color:var(--muted)}
+.rc-amt{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.78rem;color:var(--muted)}
+.rc-tag{font-size:.74rem;font-weight:700;letter-spacing:.04em;color:var(--accent-ink)}.rc-tag:empty{display:none}
+.sort-tools{display:flex;flex-direction:row;flex-wrap:wrap;gap:8px;margin-top:6px}.sort-tools .g-btn+.g-btn{margin-top:0}
+.g-btn:disabled{opacity:.45;cursor:default}
+.ladder{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.rung{display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px;align-items:start;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.rung-1{margin-left:14px}.rung-2{margin-left:28px;background:var(--tint)}.rung-3{margin-left:42px;background:var(--tint);border-color:var(--accent)}
+.rung-n{width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--paper);display:grid;place-items:center;font-weight:700;font-size:.85rem}
+.rung-b p{margin:0}.rung-q{font-size:.85rem;color:var(--muted)}.rung-a{font-family:var(--serif);font-weight:700;font-size:1.06rem;margin:2px 0 4px!important}.rung-ex{font-size:.92rem;line-height:1.6}
+@media (max-width:560px){.rung-1{margin-left:6px}.rung-2{margin-left:12px}.rung-3{margin-left:18px}}
+.timeline{list-style:none;margin:12px 0 12px 8px;padding:0 0 0 18px!important;border-left:2px solid var(--line)}
+.timeline li{position:relative;display:grid;grid-template-columns:64px minmax(0,1fr);gap:10px;padding:6px 0;margin:0}
+.timeline li::before{content:"";position:absolute;left:-25px;top:12px;width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.timeline li.what-if::before{background:var(--paper);border:2px dashed var(--accent);width:8px;height:8px}
+.timeline li.what-if>span{color:var(--muted);font-style:italic}
+.timeline b{font-family:"JetBrains Mono",ui-monospace,monospace;color:var(--accent-ink);font-weight:500}
+</style><style>svg .a-faded{opacity:.28}.map .mbox{min-width:0}</style><style>.is-ok{border-color:var(--accent);background:var(--tint);opacity:1;font-weight:700}.is-no{text-decoration:line-through;opacity:.7}</style></head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><pattern id="dwlHatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" style="fill:var(--dwl);fill-opacity:.12"/><rect width="2.2" height="6" style="fill:var(--dwl);fill-opacity:.75"/></pattern></defs></svg>
+<header class="top"><div class="top-in">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Study Notes</a><span>/</span><a href="economics.html">Economics</a><span>/</span><b>Session 9</b></nav>
+<button class="toc-btn" type="button" id="tocBtn" aria-expanded="false" aria-controls="rail">Contents</button>
+<nav aria-label="Sessions 9–12" class="sessions"><span aria-current="page" class="pill">S9</span><span class="pill off">S10</span><span class="pill off">S11</span><span class="pill off">S12</span></nav>
+</div></header>
+<div class="wrap"><aside class="rail" id="rail"><p class="lbl">Contents</p><ol id="toc"></ol></aside>
+<main><article class="doc"><div class="hero"><p class="kick">MGMG515 · Session 9</p><h1>Inflation and the Quantity Theory of Money</h1><p class="lead">Prices in general rise when more money chases the same goods. This chapter shows how inflation is measured, why money growth drives it, why unpredictable inflation hurts even when wages keep up, who wins and who loses, and why governments create it anyway.</p></div>
+
+<h2 id="map">Chapter map</h2>
+<div class="map">
+<div class="mcol"><div class="mbox ask"><b>Measure</b><span>The CPI tracks the average price of a basket. Inflation is its percentage change.</span></div></div>
+<div class="marrow">→</div>
+<div class="mcol">
+<div class="mbox"><b>Cause</b><span>M × V = P × Y. Output and velocity move slowly, so lasting inflation comes from money growth.</span></div>
+<div class="mbox"><b>Cost</b><span>Noisy prices, surprise transfers between borrowers and lenders, broken long-term lending.</span></div>
+</div>
+<div class="marrow">→</div>
+<div class="mcol"><div class="mbox good"><b>Temptation</b><span>Governments print money for revenue or a short boost. The boost fades and stopping inflation costs a recession.</span></div></div>
+</div>
+<p class="hint"><b>中文邏輯</b><span>錢變多、東西沒變多，每張鈔票能買的就變少。通膨可怕的不是「漲」，而是「漲多少猜不到」。</span></p>
+
+<h2 id="zimbabwe">1. What runaway inflation looks like: Zimbabwe</h2>
+<p class="sub">Around 2000, President Robert Mugabe needed money to reward allies and buy off rivals. He had already taxed almost everything, and investors had left. So he printed money.</p>
+<div class="flow"><span>Print money to pay for spending</span><i>→</i><span>No new factories or productivity, so the same goods</span><i>→</i><span>More money chases the same goods</span><i>→</i><span>Prices rise</span><i>→</i><span>The government needs even more money</span><i>→</i><span>Print more</span></div>
+<p>That loop is why it got out of control. The faster prices rose, the more the government printed, and the faster prices rose again.</p>
+<ol class="timeline">
+<li><b>~2000</b><span>Prices rising about 50% a year</span></li>
+<li><b>2001</b><span>100% a year</span></li>
+<li><b>2002</b><span>200% a year</span></li>
+<li><b>2003</b><span>600% a year</span></li>
+<li><b>2006</b><span>Over 1,000% a year. Z$417 for one sheet of toilet paper, not one roll</span></li>
+<li><b>2008</b><span>Thousands of percent a month, then a peak of 7.6 billion percent a month and Z$100 trillion notes. By the end of the year the Zimbabwe dollar is effectively dead and foreign currencies are made legal</span></li>
+</ol>
+<p>People spent cash the moment they got it, because money held in the morning bought less by evening. A million Zimbabwe dollars might buy a chicken, if you were lucky. Germany in 1923, China in 1949 and Yugoslavia in 1994 went through the same thing, each time because a government desperate for cash had little to fall back on except the printing press.</p>
+<p class="note-small">Hyperinflation<span class="zh">惡性通膨</span> has no single official line. A common textbook threshold is 50% or more per month.</p>
+
+<h2 id="measure">2. Measuring inflation</h2>
+<p class="sub">Supply and demand push single prices up and down all the time. Think of each price as a ping pong ball bouncing inside an elevator. Inflation is the elevator going up.</p>
+<div class="tbl"><table><thead><tr><th>Term</th><th>What it is</th><th>Ask yourself</th><th>Example</th></tr></thead><tbody>
+<tr><td><b>Inflation</b><span class="zh">通貨膨脹</span></td><td>A rise in the average level of prices, also called the price level.</td><td>Is the whole basket getting dearer, or only one item?</td><td>The elevator goes up. One mango getting dearer after a bad harvest is one ball, not the elevator.</td></tr>
+<tr><td><b>Consumer Price Index (CPI)</b><span class="zh">消費者物價指數</span></td><td>The average price of a large basket of goods and services that consumers buy.</td><td>Which basket, and which base year equals 100?</td><td>The basket in the slides: food and beverages, housing, apparel, transportation, medical care, recreation, education and communication.</td></tr>
+<tr><td><b>Weighted average</b></td><td>Each item counts in proportion to how much of the budget it takes.</td><td>Does this item take a big share of spending?</td><td>A rise in rent moves the CPI more than a rise in the price of toothbrushes.</td></tr>
+<tr><td><b>Inflation rate</b></td><td>The percentage change in the price index over a period, usually a year.</td><td>What was the index last year and this year?</td><td>US CPI 44.425 in 1973 and 49.317 in 1974.</td></tr>
+<tr><td><b>Deflation</b><span class="zh">通貨緊縮</span></td><td>A fall in the average price level. The inflation rate is negative.</td><td>Is the index lower than a year ago?</td><td>Brief US deflation in the 2009 recession.</td></tr>
+<tr><td><b>Disinflation</b></td><td>Inflation slowing down. Prices still rise, just more slowly.</td><td>Is the inflation rate falling but still above zero?</td><td>US inflation fell from about 14% in 1980 to 3% in 1983.</td></tr>
+</tbody></table></div>
+<div class="formula">Inflation rate = (P2 − P1) ÷ P1 × 100<br>US 1974: (49.317 − 44.425) ÷ 44.425 × 100 = 11.01%</div>
+<p>The US CPI sets the 1982 to 1984 average at 100. By mid-2016 it was 239, so prices had more than doubled in about 33 years. That does not make Americans poorer, because wages rose too, and on average by more than prices.</p>
+<div class="pair"><div><b>United States, 1948 to 2015</b><p>Inflation climbed through the 1960s and 1970s and peaked a little above 14% around 1980. After that it averaged about 2.5% for years, with a brief dip below zero in 2009.</p></div><div><b>Thailand, 1960 to today</b><p>The IMF series in the slides shows two big spikes: about 24% in the mid-1970s and about 20% around 1980. Since then Thai inflation has mostly stayed between about −1% and 8%, with smaller peaks around 1998, 2008 and 2022.</p></div></div>
+<p class="note-small">The Thai figures are read off the chart in the slides and are approximate.</p>
+
+<h2 id="qtm">3. The quantity theory of money: M × V = P × Y</h2>
+<p class="sub">Follow one dollar for a year. Tyler buys a pupusa from Don. Don gives the dollar to his daughter, who spends it on a pony ride. It ends up with Alex, who loses it in his couch, finds it, and buys a coffee on a road trip. One dollar, spent three times.</p>
+<div class="tbl"><table><thead><tr><th>Letter</th><th>What it is</th><th>In the story</th><th>For a whole economy</th></tr></thead><tbody>
+<tr><td><b>M</b></td><td>Money</td><td>The one dollar bill</td><td>The money supply<span class="zh">貨幣供給</span>: all the money in the economy</td></tr>
+<tr><td><b>V</b></td><td>Velocity<span class="zh">流通速度</span></td><td>3, since it was spent three times</td><td>How many times the average dollar is spent on final goods and services in a year</td></tr>
+<tr><td><b>P</b></td><td>Price level</td><td>The prices of the pupusa, pony ride and coffee</td><td>The average price of all final goods and services</td></tr>
+<tr><td><b>Y</b></td><td>Real output</td><td>The pupusa, pony ride and coffee</td><td>Real GDP</td></tr>
+</tbody></table></div>
+<div class="pair"><div><b>Left side: M × V</b><p>All the money times how often it is spent. This is what buyers paid in total, which is nominal GDP.</p></div><div><b>Right side: P × Y</b><p>Everything sold times its price. This is what sellers received in total, which is also nominal GDP.</p></div></div>
+<p>Everything sold is bought by someone, so the two sides are always equal. The equation is an <b>identity</b>: true by definition. On its own it says nothing about cause. The theory comes in the next section, when we add facts about which letters move.</p>
+
+<h2 id="causes">4. What causes inflation</h2>
+<p class="sub">Rewrite the identity as P = M × V ÷ Y. If the price level changes, only three things can be behind it.</p>
+<div class="three">
+<div><b>Y: real GDP</b><p>A 10% rise in one year would be astonishing growth. A 10% fall would be a great depression. It moves too little.</p></div>
+<div><b>V: velocity</b><p>About 7 in the US in recent years. It depends on habits like weekly or biweekly pay. It might drift to 6 or 8, usually not much more.</p></div>
+<div><b>M: money</b><p>Can grow very fast, as in Zimbabwe or Peru. The only candidate for large, lasting price rises.</p></div>
+</div>
+<p class="key">When more money chases the same amount of goods and services, prices must rise.</p>
+<p>In growth rates, the identity becomes a rule of thumb you can use in an answer:</p>
+<div class="formula">Inflation ≈ money growth + velocity growth − real GDP growth</div>
+<div data-widget="qtm" data-readout="optional" data-assume="Each year: P grows by (1 + money growth)(1 + velocity growth) ÷ (1 + real GDP growth)"></div>
+<div class="pair"><div><b>Peru</b><p>Something costing 1 inti in 1980 cost 10 million intis by 1995. Money and prices rose together. In 1990 money grew about 6,000% a year, and inflation was about 6,000% a year.</p><p class="note-small">Another MRU video puts Peru's 1990 inflation at about 7,500%. The point is the same either way: money and prices rose together.</p></div><div><b>About 110 countries, 1960 to 1990</b><p>Plot inflation against money growth and the points lie close to a line: one extra point of money growth goes with about one extra point of inflation. The US sits near the bottom, Poland higher up, Argentina at about 80%. Indonesia sits in the middle, with inflation below its money growth.</p></div></div>
+<div class="tbl"><table><thead><tr><th>Principle</th><th>In plain words</th></tr></thead><tbody>
+<tr><td><b>1. Money is neutral in the long run</b><span class="zh">貨幣中立</span></td><td>Double the money supply and, in time, prices double. Real output is not changed.</td></tr>
+<tr><td><b>2. Inflation is a monetary phenomenon</b></td><td>Milton Friedman: inflation is "always and everywhere a monetary phenomenon." Large, lasting inflation always comes with fast money growth.</td></tr>
+<tr><td><b>3. Central banks control inflation</b></td><td>Central banks largely control the money supply, so they largely control inflation.</td></tr>
+</tbody></table></div>
+<h3 id="thaim1">Reading the Thai charts together</h3>
+<p>The slides also show Thailand's narrow money supply, M1, from the Bank of Thailand. It rose from about 1.9 trillion baht in 2017 to about 3.6 trillion in 2026, so it nearly doubled. That is about 7% a year. Over the same years Thai inflation stayed low. The growth rule explains the gap. Real output grew, which absorbed part of the new money. Velocity fell, because people held more money relative to what they spent. So 7% money growth did not turn into 7% inflation.</p>
+<p class="note-small">M1 values are read off the chart. The explanation is our own use of the quantity theory, not from the slides.</p>
+<p class="hint"><b>中文邏輯</b><span>P 會變只有三個來源：M、V、Y。Y 和 V 一年內動不了多少，所以「長期、大幅」的物價上漲幾乎都是印太多錢造成的。</span></p>
+
+<h2 id="costs">5. Why unpredictable inflation is costly</h2>
+<p class="sub">Inflation raises wages along with prices. If everyone knew it would be 2% or 8% every year, people could plan for it. The trouble is that nobody knows.</p>
+<div class="tbl"><table><thead><tr><th>Place</th><th>How inflation moved</th></tr></thead><tbody>
+<tr><td>United States</td><td>1.3% in 1964, 5.9% in 1970, 11% in 1974, 14% in 1980, 3% in 1983. People were caught off guard each time.</td></tr>
+<tr><td>Peru</td><td>77% in 1986, then thousands of percent in 1990, then 73% in 1992.</td></tr>
+</tbody></table></div>
+<div class="pair"><div><b>Price confusion</b><span class="zh">價格混淆</span><p>A price is a signal wrapped in an incentive. When oil gets dearer, users should economize. With inflation every price is rising, so nobody can tell whether oil is scarcer or there is simply more money around. Prices become noisy, and the economy coordinates less well.</p></div><div><b>Money illusion</b><span class="zh">貨幣幻覺</span><p>Mistaking a change in a nominal price for a change in a real price. A movie ticket doubles while wages double too, yet movies "feel" too expensive and people go less.</p></div></div>
+<p>A <b>nominal</b> price is the number on the tag. A <b>real</b> price is what it costs in hours of work or other goods. A bowl of noodles going from 30 to 60 baht is no dearer in real terms if wages also doubled.</p>
+
+<h2 id="redistribution">6. Real interest rates and arbitrary redistribution</h2>
+<p class="sub">Loans are written in money. Inflation changes what that money is worth by the time it is repaid.</p>
+<div class="formula">Real interest rate = nominal interest rate − inflation rate<br>A bank lends $100 at 10%. Inflation is 10%. It gets back $110, which buys what $100 bought. Real return: 0.</div>
+<p>The slides show a 1978 mortgage: a 12% nominal rate is a 2% real rate plus 10% inflation. Whether that deal turns out well depends on what inflation actually does next.</p>
+<div class="tbl"><table><thead><tr><th>Surprise</th><th>Borrowers</th><th>Lenders</th><th>MRU example</th></tr></thead><tbody>
+<tr><td><b>Inflation higher than expected</b></td><td><span class="yes">Gain</span></td><td><span class="no">Lose</span></td><td>Mortgages from the 1960s were repaid in the cheap dollars of the 1970s.</td></tr>
+<tr><td><b>Inflation lower than expected</b></td><td><span class="no">Lose</span></td><td><span class="yes">Gain</span></td><td>A mortgage at 18% around 1981. Inflation fell from about 14% to under 5%, so the real rate became 13%.</td></tr>
+</tbody></table></div>
+<p>Lenders protect themselves against the inflation they <b>expect</b>. If they expect 10% inflation and want a 5% real return, they charge 15%. Nominal rates rise with expected inflation: the <b>Fisher effect</b><span class="zh">費雪效果</span>. The US chart in the slides shows it. Interest rates followed inflation up in the 1970s, peaked near 20% when inflation hit about 14%, and came down with it.</p>
+<div data-widget="realrate" data-readout="optional" data-assume="Real rate = nominal rate − inflation"></div>
+<p>Now make inflation high and volatile. Lenders fear a surprise rise. Borrowers fear a surprise fall. Both avoid long contracts, so 20-year mortgages and long business loans become costly and rare. Moving savings to borrowers, which is <b>financial intermediation</b>, starts to break down, and the economy builds less wealth.</p>
+<p class="hint"><b>中文邏輯</b><span>費雪效果只保護「預期到的」通膨。財富重分配來自沒預期到的那一段：通膨比預期高，借款人賺；比預期低，放款人賺。</span></p>
+
+<h2 id="taxes">7. Expected inflation still hurts savers</h2>
+<p class="sub">The Fisher effect does not fix one problem: the government taxes nominal interest, including the part that only makes up for inflation.</p>
+<div class="tbl"><table class="oil" aria-label="Real after-tax return, MRU Office Hours"><thead><tr><th>Case</th><th>Nominal rate</th><th>Inflation</th><th>Nominal after 33% tax</th><th>Real after tax</th></tr></thead><tbody>
+<tr><td>Low inflation</td><td>6%</td><td>3%</td><td>4%</td><td class="hi">+1%</td></tr>
+<tr><td>Moderate inflation</td><td>12%</td><td>9%</td><td>8%</td><td class="hi">−1%</td></tr>
+<tr><td>High inflation</td><td>90%</td><td>87%</td><td>60%</td><td class="hi">−27% (shortcut)</td></tr>
+</tbody></table></div>
+<p>In every case the lender expected inflation correctly and set a 3% real rate before tax. Saving still loses money once inflation is moderate. Cash under the mattress does even worse, since it earns nothing. When inflation is very high, people spend money as fast as they get it. That raises V, and by the quantity theory prices rise faster still.</p>
+<p class="note-small">The table uses MRU's shortcut: nominal after tax minus inflation. It is close for small rates. At 87% inflation the exact loss is about −14%. Either way the saver loses.</p>
+<div data-widget="aftertax" data-readout="optional"></div>
+<details class="extra"><summary>Optional: why the shortcut breaks at high inflation</summary>
+<p>"Nominal after tax minus inflation" is a shortcut that only works for small rates. The exact real return is (1 + nominal after tax) ÷ (1 + inflation) − 1. MRU leaves 900% inflation as a practice question. Keeping a 3% real rate before tax, the nominal rate is 903%, so the shortcut gives 602% − 900% = −298%. Nobody can lose more than everything they saved. The exact answer is about −30%. Either way, savers lose.</p></details>
+
+<h2 id="winners">8. Winners and losers through the ages</h2>
+<p class="sub">MRU's time machine puts you in three moments in history. The question each time: will inflation, or deflation, make you a winner or a loser?</p>
+<div class="tbl"><table><thead><tr><th>Who</th><th>The choice</th><th>Right call</th><th>What happened</th></tr></thead><tbody>
+<tr><td><b>US farmer, 1893</b></td><td>Inflation has been 0% for two years. Borrow $100 for a tractor?</td><td><span class="no">No</span></td><td>Deflation hit (−1.1% in 1893). By 1895 the $100 owed was worth $108 in real terms, on top of interest.</td></tr>
+<tr><td><b>US retiree, 1946</b></td><td>Living on a $25 monthly Social Security check. Lobby for automatic inflation adjustment?</td><td><span class="yes">Yes</span></td><td>Inflation reached 14% in 1947. By the end of 1948 the check bought what $18.70 used to. Automatic adjustment came in 1975.</td></tr>
+<tr><td><b>Venezuelan saver, 2013</b></td><td>Holding 1,000 bolivars after inflation of 21% in 2012. Pay high fees to move into another currency?</td><td><span class="yes">Yes</span></td><td>Prices rose about 40% in a year, so the 1,000 bolivars bought what 712 used to. By the end of 2018 they were worth 0.11 in real terms.</td></tr>
+</tbody></table></div>
+<p>The pattern: anyone holding a <b>fixed amount of money</b>, as savings, a loan they made or a fixed income, is hurt by surprise inflation. Anyone <b>owing</b> a fixed amount is hurt by surprise deflation. <b>Indexation</b><span class="zh">物價連動</span>, which ties a payment to the price level, protects against both.</p>
+<div data-widget="winners"></div>
+
+<h2 id="governments">9. Why governments create inflation</h2>
+<p class="sub">If inflation is this costly, why does any government create it? MRU gives two reasons and one warning.</p>
+<div class="pair"><div><b>Reason 1: an inflation tax</b><span class="zh">通膨稅</span><p>Printing money and spending it moves wealth from everyone holding money to the government. It is a poor tax, used when a government cannot raise money any other way, as in Zimbabwe.</p></div><div><b>Reason 2: a short-run boost</b><p>An unexpected increase in money can raise real output for a while. That can help in a recession. It can also be abused, for example to win an election.</p></div></div>
+<h3 id="parable">The parable of inflation</h3>
+<ol class="steps">
+<li><span>A government pays its soldiers with newly printed money. They buy bread. The baker thinks demand is up, works longer, hires help, bakes more and raises his price.</span></li>
+<li><span>The tailor and the carpenter feel the same, because soldiers buy from them too.</span></li>
+<li><span>The baker goes to buy shirts and finds their price has risen. All three earned more dollars, but those dollars buy less. Their real wages fell.</span></li>
+<li><span>Next time the government must print more to buy the same goods. Everyone rushes to spend before prices rise, so V goes up and prices rise faster.</span></li>
+<li><span>They catch on. They expect inflation, stop working extra hours, and the boost is gone.</span></li>
+</ol>
+<div data-widget="parable" data-readout="optional" data-assume="V fixed, so Y = M × V ÷ P. Prices close a share of the gap each period."></div>
+<p>The warning: stopping inflation is costly. Cutting money growth works the same story in reverse. Output falls until prices adjust, which is a recession. MRU compares inflation to a drug: it lifts you at first, then you need more for the same effect, then you need it just to feel normal, and quitting brings withdrawal. The US lived this. By the late 1970s inflation no longer lowered unemployment, and the country had <b>stagflation</b><span class="zh">停滯性通膨</span>: high inflation and high unemployment together. Inflation came down in the early 1980s, under Ronald Reagan, at the price of a severe recession in 1981 and 1982.</p>
+<p class="hint"><b>中文邏輯</b><span>短期印錢會讓大家「以為」生意變好；等發現什麼都漲了，就只剩物價上漲。要把通膨降回來，得先挨一段衰退。</span></p>
+
+<h2 id="india">10. India 2016: when 86% of the cash disappeared</h2>
+<p class="sub">An MRU "Economists in the Wild" video. Zimbabwe printed too much money. India did the opposite, suddenly and on purpose.</p>
+<div class="flow"><span>November 2016: target "black money"</span><i>→</i><span>Large notes can no longer be spent, only deposited</span><i>→</i><span>86% of the currency gone overnight</span><i>→</i><span>About 8 months to print enough new notes</span></div>
+<p>Black money meant cash from ill-gotten sources, such as a corrupt official's hoard of bribes or counterfeit notes used to fund terrorism. People could deposit old notes at a bank if they could show the money was clean. Predictions differed widely. The government did not expect much harm. Some private economists predicted a recession of 7% or 8% of the economy.</p>
+<div class="pair"><div><b>A natural experiment</b><span class="zh">自然實驗</span><p>Some districts got new notes quickly, so their cash shortage was short. Others waited much longer. Comparing them shows the effect of losing cash.</p></div><div><b>Measuring it without good data</b><p>Regional data in India are weak, so the researchers used an employment survey and satellite images of night lights, down to about one square kilometer. Human-made light tracks economic activity.</p></div></div>
+<p>The published study found that districts hit harder lost more jobs and night-time light, had slower bank lending and moved faster to e-wallets and cards. Nationally, activity fell about 3 percentage points in December 2016, and the effects faded over the following months. More than 99% of the old notes eventually came back into banks.</p>
+<p>In the language of this chapter, usable M fell suddenly. Output fell in the short run before cash returned, which fits section 9: money is not neutral in the short run. It does not contradict long-run neutrality, since the effects faded.</p>
+<p class="note-small">Findings: Chodorow-Reich, Gopinath, Mishra and Narayanan, "Cash and the Economy: Evidence from India's Demonetization."</p>
+
+<h2 id="traps">11. Do not mix these up</h2>
+<div class="traps">
+<div><s>Prices doubled since 1984, so people are poorer.</s><p>Compare real values. Wages rose more than prices on average.</p></div>
+<div><s>M × V = P × Y proves money causes inflation.</s><p>The identity proves nothing by itself. The theory adds that V and Y are fairly stable.</p></div>
+<div><s>Money is never neutral.</s><p>It is neutral in the long run. In the short run an unexpected change can move output.</p></div>
+<div><s>Inflation is costly because prices go up.</s><p>Wages go up too. The costs come from unpredictability, transfers and broken long-term lending.</p></div>
+<div><s>Inflation always hurts borrowers.</s><p>Unexpected inflation helps borrowers. Unexpected deflation hurts them.</p></div>
+<div><s>If inflation is fully expected, savers are fine.</s><p>Not when tax falls on nominal interest: 12% nominal with 9% inflation gives −1% real after tax.</p></div>
+<div><s>Disinflation means prices are falling.</s><p>Disinflation means inflation is slowing. Prices still rise. Deflation is when they fall.</p></div>
+<div><s>India's demonetization was too much money, like Zimbabwe.</s><p>It was a sudden cut in usable cash, the reverse case.</p></div>
+</div>
+
+<h2 id="coldcall">12. Cold call practice</h2>
+<div class="qa-tools"><button id="qaAll" type="button">Show all answers</button></div>
+<div class="qa">
+<details><summary>What is inflation? Give an example.</summary><p>Inflation is a rise in the average level of prices. If the CPI goes from 100 to 103 in a year, inflation is 3%. One good getting dearer is not inflation by itself.</p></details>
+<details><summary>What is the CPI, and why is it weighted?</summary><p>The average price of a basket of goods and services that consumers buy. Items count by their share of spending, so housing moves it more than toothbrushes.</p></details>
+<details><summary>A price index rises from 120 to 126. What is the inflation rate?</summary><p>(126 − 120) ÷ 120 × 100 = 5%.</p></details>
+<details><summary>What are M, V, P and Y?</summary><p>The money supply, the velocity of money, the price level and real GDP. M × V is total spending and P × Y is total sales, so both equal nominal GDP.</p></details>
+<details><summary>What causes large, lasting inflation?</summary><p>Fast growth in the money supply. Real GDP and velocity move too little to explain it. Zimbabwe printed money to pay for spending and prices rose billions of percent a month.</p></details>
+<details><summary>Money grows 8% a year, velocity is steady and real GDP grows 3%. Roughly what is inflation?</summary><p>About 5%: 8 + 0 − 3.</p></details>
+<details><summary>What does "money is neutral in the long run" mean?</summary><p>A change in the money supply eventually changes prices only, not real output. Double the money and prices double.</p></details>
+<details><summary>What is price confusion?</summary><p>When all prices are rising, people cannot tell whether a price rose because a good is scarcer or because of inflation, so price signals become noisy.</p></details>
+<details><summary>What is money illusion?</summary><p>Mistaking a nominal price change for a real one, such as feeling movies are too expensive after ticket prices and wages both doubled.</p></details>
+<details><summary>What is the real interest rate on a 12% mortgage with 10% inflation?</summary><p>2%: the nominal rate minus inflation, as in the 1978 example from the slides.</p></details>
+<details><summary>Who gains from unexpected inflation?</summary><p>Borrowers, because they repay with money worth less. Lenders, cash savers and people on fixed incomes lose.</p></details>
+<details><summary>What is the Fisher effect?</summary><p>Nominal interest rates rise with expected inflation. Expecting 10% inflation and wanting a 5% real return, a lender charges 15%.</p></details>
+<details><summary>Why does volatile inflation reduce long-term lending?</summary><p>Lenders fear a surprise rise and borrowers fear a surprise fall, so both avoid long contracts and financial intermediation breaks down.</p></details>
+<details><summary>Why can expected inflation still hurt savers?</summary><p>Tax is charged on nominal interest, including the part that only offsets inflation. At 12% nominal, 9% inflation and a 33% tax, the real return is −1%.</p></details>
+<details><summary>Why do governments create inflation?</summary><p>As a tax when they cannot raise money any other way, and for a short-run boost to output. The boost fades once people expect inflation.</p></details>
+<details><summary>Why is stopping inflation costly?</summary><p>Cutting money growth lowers output before prices adjust, causing a recession, as in the US in 1981 and 1982.</p></details>
+<details><summary>What is stagflation?</summary><p>High inflation and high unemployment at the same time, as in the US in the late 1970s.</p></details>
+<details><summary>Why is India's demonetization called a natural experiment?</summary><p>Districts got new notes at different speeds by chance, so researchers could compare places with short and long cash shortages.</p></details>
+</div>
+
+<h2 id="templates">13. Answer templates</h2>
+<div class="method"><b>Define and give an example</b><p>"Inflation is a rise in the average price level, measured by the percentage change in a price index such as the CPI. If the CPI goes from 100 to 103, inflation is 3%. One price rising on its own is a relative price change."</p></div>
+<div class="method"><b>What causes inflation</b><p>"By the quantity theory, M times V equals P times Y. Real output and velocity change slowly, so large and lasting inflation comes from growth in the money supply. Zimbabwe printed money to pay for spending, and prices rose billions of percent a month."</p></div>
+<div class="method"><b>Why inflation is costly</b><p>"Wages rise with prices, so the main problem is unpredictability. High, volatile inflation blurs price signals, moves wealth between borrowers and lenders, and makes long-term lending too risky."</p></div>
+<div class="method"><b>Who wins and who loses</b><p>"When inflation is higher than expected, borrowers gain because they repay in cheaper money. Lenders, cash savers and people on fixed incomes lose. When inflation is lower than expected, it is the reverse."</p></div>
+<div class="method"><b>Why governments do it</b><p>"Governments use inflation as a tax when they cannot raise money any other way, or to boost output in the short run. The boost fades once people expect inflation, and bringing inflation down again usually causes a recession."</p></div>
+<p class="note-small endnote">Sources: professor's Session 9 slides; Marginal Revolution University, Principles of Macroeconomics (Inflation and Quantity Theory of Money, including Office Hours: Costs of Inflation); MRU Economists in the Wild, Demonetization; McCandless and Weber (1995), "Some Monetary Facts"; Chodorow-Reich, Gopinath, Mishra and Narayanan, <a href="https://www.ideasforindia.in/topics/macroeconomics/cash-and-the-economy-evidence-from-india-s-demonetisation.html">Cash and the Economy</a>. Figures are as reported in those sources, not current data.</p>
+<p class="note-small">Continue from <a href="economics-s8.html">Session 8: The financial system</a>, or return to <a href="economics.html">Economics sessions</a>.</p>
+</article></main></div>
+
+<script>/* Reusable economics widgets. Shared Plot and controls are embedded for offline use. */
+(() => {
+  'use strict';
+  const NS='http://www.w3.org/2000/svg'; let uid=0;
+  const money=n=>{const value=Math.round(Math.abs(n)*100)/100;return (n<0?'−$':'$')+value.toLocaleString('en-US',{minimumFractionDigits:Number.isInteger(value)?0:2,maximumFractionDigits:2});};
+  const num=n=>n.toLocaleString('en-US',{maximumFractionDigits:2});
+  const colors={d:'var(--demand)',mr:'var(--ext)',mc:'var(--supply)',atc:'var(--world)',cs:'var(--cs)',ps:'var(--ps)'};
+  function el(tag,attrs={},parent){const e=document.createElementNS(NS,tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));if(parent)parent.append(e);return e;}
+  function Plot(svg,qMax,pMax,pMin=0){
+    const W=Math.max(280,svg.getBoundingClientRect().width||500),H=340,L=48,R=18,T=28,B=51;
+    svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.replaceChildren();
+    const sx=q=>L+q/qMax*(W-L-R),sy=p=>H-B-(p-pMin)/(pMax-pMin)*(H-T-B);
+    const defs=el('defs',{},svg),clip=el('clipPath',{id:'plot-clip-'+(++uid)},defs);
+    el('rect',{x:L,y:T,width:W-L-R,height:H-T-B},clip);
+    const grid=el('g',{},svg),area=el('g',{'clip-path':'url(#'+clip.id+')'},svg),lines=el('g',{'clip-path':'url(#'+clip.id+')'},svg),top=el('g',{},svg);
+    const text=(x,y,s,attrs={})=>{const t=el('text',{x,y,class:'tk',...attrs},top);t.textContent=s;return t;};
+    return {sx,sy,W,H,
+      axes(xl,yl){el('line',{x1:L,y1:T,x2:L,y2:H-B,class:'ax'},grid);el('line',{x1:L,y1:H-B,x2:W-R,y2:H-B,class:'ax'},grid);text(L,T-12,yl,{class:'axl'});text((L+W-R)/2,H-8,xl,{'text-anchor':'middle',class:'axl'});},
+      xticks(values,fmt=num){values.forEach(q=>text(sx(q),H-B+19,fmt(q),{'text-anchor':'middle'}));},
+      yticks(values,fmt=num){values.forEach(p=>{el('line',{x1:L,y1:sy(p),x2:W-R,y2:sy(p),class:'grid'},grid);text(L-7,sy(p)+4,fmt(p),{'text-anchor':'end'});});},
+      path(points,color,dash=false){el('polyline',{points:points.map(([q,p])=>sx(q)+','+sy(p)).join(' '),fill:'none',stroke:color,'stroke-width':2.5,'stroke-dasharray':dash?'6 5':'none'},lines);},
+      line(a,b,color){this.path([[0,a],[qMax,a+b*qMax]],color);},
+      hline(p,color,dash=false){this.path([[0,p],[qMax,p]],color,dash);},
+      poly(points,cls){el('polygon',{points:points.map(([q,p])=>sx(q)+','+sy(p)).join(' '),class:cls},area);},
+      rect(q0,q1,p0,p1,cls){this.poly([[q0,p0],[q1,p0],[q1,p1],[q0,p1]],cls);},
+      guide(q,p){el('line',{x1:sx(q),y1:sy(p),x2:sx(q),y2:sy(pMin),class:'gd'},lines);el('line',{x1:L,y1:sy(p),x2:sx(q),y2:sy(p),class:'gd'},lines);},
+      point(q,p,color){el('circle',{cx:sx(q),cy:sy(p),r:4,fill:color,stroke:'var(--paper)','stroke-width':1.3},lines);},
+      tag(q,p,s,anchor='middle',dy=-7){return text(sx(q),sy(p)+dy,s,{'text-anchor':anchor});},
+      bar(q,value,color){el('rect',{x:sx(q-.28),y:sy(value),width:sx(q+.28)-sx(q-.28),height:Math.max(0,sy(0)-sy(value)),fill:color},area);text(sx(q),sy(value)-8,num(value),{'text-anchor':'middle'});}
+    };
+  }
+  function shell(host,title,sub,legend,twinTitles){
+    host.classList.add('graph','wide');const id='econ-'+(++uid);
+    host.innerHTML='<div class="g-head"><span class="g-kicker">Interactive graph</span><h4></h4><p></p></div><div class="plot-legend"></div><div class="g-body"><div class="g-plot"></div><div class="g-side"><div class="g-ctrl"></div><dl class="g-stats" aria-live="off"></dl></div></div><p class="g-note" aria-live="polite"></p>';
+    host.querySelector('h4').textContent=title;host.querySelector('.g-head p').textContent=sub;
+    const leg=host.querySelector('.plot-legend');legend.forEach(([s,c])=>{const item=document.createElement('span'),sw=document.createElement('i');sw.style.background=c;sw.className='sw ln';item.append(sw,document.createTextNode(s));leg.append(item);});
+    if(host.dataset.readout==='optional'){
+      const side=host.querySelector('.g-side'),stats=host.querySelector('.g-stats'),note=host.querySelector('.g-note');
+      const reading=document.createElement('div'),details=document.createElement('details'),summary=document.createElement('summary');
+      reading.className='g-reading';details.className='number-readout';summary.textContent='View numerical readout';details.append(summary,stats);reading.append(note,details);side.append(reading);
+    }
+    const plot=host.querySelector('.g-plot'),svgs=[];
+    if(twinTitles){plot.classList.add('twin');twinTitles.forEach(name=>{const div=document.createElement('div'),t=document.createElement('p');t.className='tw-t';t.textContent=name;div.append(t);const svg=el('svg',{role:'img','aria-label':title+': '+name},div);plot.append(div);svgs.push(svg);});}
+    else svgs.push(el('svg',{role:'img','aria-label':title},plot));
+    const ctrl=host.querySelector('.g-ctrl');
+    return {svgs,host,
+      slider(key,label,min,max,step,value,format,on){const row=document.createElement('div');row.className='sl';const lab=document.createElement('label'),span=document.createElement('span'),output=document.createElement('output'),input=document.createElement('input');input.type='range';input.setAttribute('aria-label',label);Object.assign(input,{id:id+'-'+key,min,max,step,value});lab.htmlFor=input.id;span.textContent=label;lab.append(span,output);output.htmlFor=input.id;row.append(lab,input);ctrl.append(row);const sync=()=>output.textContent=format(+input.value);input.addEventListener('input',()=>{sync();on(+input.value);});sync();return {set(v){input.value=v;sync();},input};},
+      button(label,on){const b=document.createElement('button');b.type='button';b.className='g-btn';b.textContent=label;b.addEventListener('click',on);ctrl.append(b);return b;},
+      seg(label,options,value,on){const group=document.createElement('div');group.className='seg';group.setAttribute('role','group');group.setAttribute('aria-label',label);options.forEach(([v,t])=>{const b=document.createElement('button');b.type='button';b.textContent=t;b.dataset.value=v;b.setAttribute('aria-pressed',String(v===value));b.addEventListener('click',()=>{[...group.children].forEach(x=>x.setAttribute('aria-pressed',String(x===b)));on(v);});group.append(b);});ctrl.append(group);},
+      show(rows,note){const stats=host.querySelector('.g-stats');stats.replaceChildren();rows.forEach(([key,value,big=false])=>{const row=document.createElement('div');row.className='st'+(big?' big':'');row.dataset.stat=key;const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=key;dd.textContent=value;row.append(dt,dd);stats.append(row);});host.querySelector('.g-note').textContent=note;},
+      redrawOnResize(draw){let last='';const obs=new ResizeObserver(()=>{const widths=svgs.map(svg=>Math.round(svg.getBoundingClientRect().width)).join('|');if(widths!==last){last=widths;draw();}});obs.observe(plot);svgs.forEach(svg=>obs.observe(svg.parentElement));}
+    };
+  }
+  const W_={};
+  const kb=n=>'฿'+num(n)+'k';
+  const baht=n=>(n<0?'−฿':'฿')+Math.round(Math.abs(n)).toLocaleString('en-US');
+  const pct=n=>Math.round(n*100)+'%';
+  const signed=n=>(n<0?'−':'')+num(Math.abs(n));
+  const tr=en=>en;const L=en=>[en,''];const zhOn=()=>false;
+  
+  const T=p=>tr(p[0],p[1]);
+  const pc1=n=>(Math.abs(n)<0.05?'0.0':(n<0?'−':'')+Math.abs(n).toFixed(1))+'%';
+  const times=n=>n>=100?Math.round(n).toLocaleString('en-US')+'×':n>=10?n.toFixed(0)+'×':n.toFixed(1)+'×';
+  function live(s,draw){draw();s.redrawOnResize(draw);}
+  function niceStep(span,count){const raw=span/count,p=Math.pow(10,Math.floor(Math.log10(raw))),m=raw/p;return (m<=1?1:m<=2?2:m<=5?5:10)*p;}
+  function make(tag,cls,text,parent){const n=document.createElement(tag);if(cls)n.className=cls;if(text!=null)n.textContent=text;if(parent)parent.append(n);return n;}
+
+
+  /* 1. Quantity theory in growth rates, drawn on a ratio scale. */
+  W_.qtm=host=>{
+    const s=shell(host,tr('Money growth and the price level'),tr('Set how fast money, velocity and real output grow. Predict the inflation rate, then read it off the graph.'),[[tr('Money M'),colors.d],[tr('Price level P'),colors.mc],[tr('Real GDP Y'),'var(--policy)']]);
+    let gM=10,gV=0,gY=3;const N=10;
+    const ticks=[50,100,200,500,1000,2000,5000,10000];
+    const draw=()=>{
+      const step=(1+gM/100)*(1+gV/100)/(1+gY/100),pi=(step-1)*100,approx=gM+gV-gY;
+      const lg=v=>Math.log10(v);
+      const P=Plot(s.svgs[0],N,lg(10000),lg(30));P.axes(tr('Years'),tr('Index, year 0 = 100 (ratio scale)'));
+      P.xticks([0,2,4,6,8,10]);P.yticks(ticks.map(lg),v=>num(Math.round(Math.pow(10,v))));
+      const series=(g,c,dash)=>{const pts=[];for(let t=0;t<=N;t++)pts.push([t,lg(100*Math.pow(g,t))]);P.path(pts,c,dash);return pts[N][1];};
+      const yM=series(1+gM/100,colors.d,true),yP=series(step,colors.mc),yY=series(1+gY/100,'var(--policy)');
+      const lab=[['M',yM],['P',yP],['Y',yY]].sort((a,b)=>b[1]-a[1]);
+      let last=99;lab.forEach(([n,y])=>{const yy=Math.min(y,last-.09);P.tag(N,yy,n,'start',4).setAttribute('dx','6');last=yy;});
+      const end=100*Math.pow(step,N);
+      s.show([[tr('Rule of thumb: M + V − Y'),pc1(approx)],[tr('Inflation each year (exact)'),pc1(pi),true],[tr('Price level after 10 years'),times(end/100)]],
+        pi>=30?tr('Money grows far faster than output, so prices take off. This is the road to Zimbabwe and Peru.'):pi<0?tr('Output grows faster than money and velocity, so prices fall: deflation.'):Math.abs(gM-pi)<1.5&&gV===0?tr('With velocity steady, inflation is about money growth minus output growth. Part of the new money is absorbed by extra goods.'):tr('Inflation is roughly money growth plus velocity growth minus output growth.'));
+    };
+    const a=s.slider('gM',tr('Money growth per year'),0,50,1,gM,v=>v+'%',v=>{gM=v;draw();});
+    const b=s.slider('gV',tr('Velocity growth per year'),-5,5,1,gV,v=>(v>0?'+':v<0?'−':'')+Math.abs(v)+'%',v=>{gV=v;draw();});
+    const c=s.slider('gY',tr('Real GDP growth per year'),-5,10,1,gY,v=>(v>0?'+':v<0?'−':'')+Math.abs(v)+'%',v=>{gY=v;draw();});
+    const set=(x,y,z)=>{gM=x;gV=y;gY=z;a.set(x);b.set(y);c.set(z);draw();};
+    s.button(tr('Steady: money 5%, output 3%'),()=>set(5,0,3));
+    s.button(tr('Printing press: money 40%, output 0%'),()=>set(40,0,0));
+    s.button(tr('People spend faster: velocity +5%'),()=>set(40,5,0));
+    s.button(tr('Output outgrows money'),()=>set(2,0,5));
+    live(s,draw);
+  };
+
+  /* 2. Real rate at signing vs real rate realized: who gains from a surprise? */
+  W_.realrate=host=>{
+    const s=shell(host,tr('Who gains when inflation surprises?'),tr('A loan is signed at a nominal rate with some inflation expected. Pick a case, predict who gains, then reveal what inflation actually did.'),[[tr('Inflation'),'var(--dwl)'],[tr('Real interest rate'),'var(--ps)'],[tr('Nominal rate'),'var(--fg)']]);
+    let i=12,pe=10,pa=10,shown=true,cur=null;
+    const cases={
+      slide:[12,10,10,L('The 1978 mortgage from the slides: 12% nominal is 2% real plus 10% inflation. Inflation came in as expected, so nobody gains at the other\'s expense.')],
+      fisher:[15,10,10,L('The lender expected 10% inflation and wanted 5% real, so charged 15%. Inflation was as expected, so the lender earns the 5% it planned.')],
+      y81:[18,15,5,L('Borrowed at 18% expecting 15% inflation. Inflation fell to 5%, so the real rate jumped from 3% to 13%. The lender gains and the borrower loses.')],
+      surprise:[6,3,10,L('Borrowed at 6% expecting 3% inflation. Inflation hit 10%, so the real rate became −4%. The borrower repays in cheaper money and gains.')]};
+    const draw=()=>{
+      const re=i-pe,ra=i-(shown?pa:pe),act=shown?pa:pe;
+      const P=Plot(s.svgs[0],3,25,-10);P.axes('',tr('Percent per year'));P.yticks([-10,-5,0,5,10,15,20,25],v=>v+'%');
+      P.xticks([1,2],x=>x===1?tr('Expected'):tr(shown?'Actual':'Actual: ?'));
+      const bar=(x,inf)=>{const lo=Math.min(0,inf),top=Math.max(0,inf);P.rect(x-.3,x+.3,lo,top,'a-loss');
+        if(i>=inf)P.rect(x-.3,x+.3,Math.max(inf,0),i,'a-ps');else P.rect(x-.3,x+.3,i,inf,'a-dwl');
+        P.path([[x-.38,i],[x+.38,i]],'var(--fg)');};
+      P.path([[0,0],[3,0]],'var(--muted)');
+      bar(1,pe);bar(2,act);
+      const labels=(x,inf)=>{
+        const lo=Math.min(0,inf),infTop=inf>0?Math.min(inf,i):0;
+        if(inf>0&&infTop>=1.5)P.tag(x,infTop/2,inf+'%','middle',4);
+        if(inf<0)P.tag(x,inf/2,inf+'%','middle',4);
+        const real=i-inf,a=Math.max(Math.min(inf,i),0),b=Math.max(inf,i);
+        if(Math.abs(b-a)>=1.5)P.tag(x,(a+b)/2,(real>0?'+':'')+real+'%','middle',4);
+      };
+      P.tag(1,i,tr('nominal ')+i+'%','middle',-6);labels(1,pe);
+      if(shown){P.tag(2,Math.max(i,pa),tr('nominal ')+i+'%','middle',-6);labels(2,pa);}
+      const gap=shown?pa-pe:0;
+      const who=gap>0?tr('Borrower gains, lender loses'):gap<0?tr('Lender gains, borrower loses'):tr('No transfer');
+      s.show([[tr('Nominal rate'),i+'%'],[tr('Real rate expected'),re+'%'],[tr('Real rate realized'),shown?ra+'%':'?',true],[tr('Surprise in inflation'),shown?(gap>0?'+':gap<0?'−':'')+Math.abs(gap)+tr(' points'):'?'],[tr('Result'),shown?who:'?',true],[tr('Transfer on a 1,000,000 baht loan, per year'),shown?baht(Math.abs(gap)*10000):'?']],
+        !shown?tr('Predict first: if inflation turns out higher than expected, who gains? Then reveal.'):cur&&i===cases[cur][0]&&pe===cases[cur][1]&&pa===cases[cur][2]?T(cases[cur][3]):gap>0?tr('Inflation beat expectations, so the real rate fell. Wealth moves from lender to borrower.'):gap<0?tr('Inflation fell short of expectations, so the real rate rose. Wealth moves from borrower to lender.'):tr('Inflation matched expectations. The real rate is what both sides agreed to.'));
+    };
+    const a=s.slider('i',tr('Nominal rate on the loan'),0,20,1,i,v=>v+'%',v=>{i=v;cur=null;shown=true;draw();});
+    const b=s.slider('pe',tr('Inflation expected at signing'),-5,20,1,pe,v=>v+'%',v=>{pe=v;cur=null;shown=true;draw();});
+    const c=s.slider('pa',tr('Inflation that actually happens'),-5,20,1,pa,v=>v+'%',v=>{pa=v;cur=null;shown=true;draw();});
+    s.seg(tr('Case'),[['slide',tr('1978 mortgage')],['fisher',tr('Fisher: 15%')],['y81',tr('1981 mortgage')],['surprise',tr('Surprise inflation')]],null,v=>{cur=v;[i,pe,pa]=cases[v];a.set(i);b.set(pe);c.set(pa);shown=false;draw();});
+    s.button(tr('Reveal what happened'),()=>{shown=true;draw();});
+    live(s,draw);
+  };
+
+  /* 3. Real after-tax return when inflation is fully expected. */
+  W_.aftertax=host=>{
+    const s=shell(host,tr('Taxed on nominal interest'),tr('The lender always adds expected inflation to the rate, so the real rate before tax is fixed. Raise inflation and watch the real return after tax.'),[[tr('Shortcut: after-tax nominal − inflation'),colors.d],[tr('Exact real return'),colors.mc]]);
+    let tax=33,r=3,pi=9;
+    const f=(p)=>{const nom=p+r,at=nom*(1-tax/100);return [nom,at,at-p,((1+at/100)/(1+p/100)-1)*100];};
+    const draw=()=>{
+      const P=Plot(s.svgs[0],100,10,-50);P.axes(tr('Expected inflation, %'),tr('Real return after tax, %'));P.xticks([0,20,40,60,80,100],v=>v+'%');P.yticks([-50,-40,-30,-20,-10,0,10],v=>v+'%');
+      P.path([[0,0],[100,0]],'var(--muted)');
+      const sc=[],ex=[];for(let p=0;p<=100;p+=1){const v=f(p);sc.push([p,v[2]]);ex.push([p,v[3]]);}
+      P.path(sc,colors.d,true);P.path(ex,colors.mc);
+      const [nom,at,short,exact]=f(pi);
+      P.guide(pi,short);P.point(pi,short,'var(--fg)');P.point(pi,exact,'var(--fg)');
+      const be=tax>0?r*(1-tax/100)/(tax/100):Infinity;
+      if(be<=100){P.point(be,0,'var(--muted)');P.tag(be,0,tr('break-even'),'start',-8);}
+      s.show([[tr('Nominal rate'),pc1(nom)],[tr('After tax'),pc1(at)],[tr('Real after tax, shortcut'),pc1(short),true],[tr('Real after tax, exact'),pc1(exact)],[tr('Inflation where saving stops paying'),be<=100?pc1(be):tr('none')]],
+        short<0?tr('Saving loses money in real terms, even though inflation was fully expected. The tax falls on the part of interest that only replaces lost buying power.'):tr('Still positive, but the tax already takes a bigger bite of the real return than the headline rate suggests.'));
+    };
+    const ps=s.slider('pi',tr('Expected inflation'),0,100,1,pi,v=>v+'%',v=>{pi=v;draw();});
+    s.slider('tax',tr('Tax on nominal interest'),0,50,1,tax,v=>v+'%',v=>{tax=v;draw();});
+    s.slider('r',tr('Real rate before tax'),0,6,.5,r,v=>v+'%',v=>{r=v;draw();});
+    s.button(tr('MRU: 6% nominal, 3% inflation'),()=>{pi=3;ps.set(3);draw();});
+    s.button(tr('MRU: 12% nominal, 9% inflation'),()=>{pi=9;ps.set(9);draw();});
+    s.button(tr('MRU: 90% nominal, 87% inflation'),()=>{pi=87;ps.set(87);draw();});
+    live(s,draw);
+  };
+
+  /* 4. The parable: money changes once, prices catch up over time, V fixed so Y = MV/P. */
+  W_.parable=host=>{
+    const s=shell(host,tr('Short run and long run of a money change'),tr('Money changes once in period 2. Choose whether people saw it coming, then watch prices and real output.'),[[tr('Money M'),colors.d],[tr('Price level P'),colors.mc],[tr('Real output Y'),'var(--policy)'],[tr('Lost output'),'var(--dwl)']]);
+    let mode='surprise',m=15,lam=.6;
+    const draw=()=>{
+      const lg=host.querySelectorAll('.plot-legend span');if(lg[3])lg[3].style.display=mode==='cut'?'':'none';
+      const sign=mode==='cut'?-1:1,mm=sign*m/100,l=mode==='expected'?0:lam,N=12;
+      const Mf=t=>t<2?100:100*(1+mm),Pf=t=>t<2?100:100*Math.pow(1+mm,1-Math.pow(l,(t-2)+(l===0?1:0))),Yf=t=>Mf(t)/Pf(t)*100;
+      const fine=f=>{const a=[];for(let k=0;k<=N*4;k++){const t=k/4;if(t===2)a.push([2,100]);a.push([t,t<2?100:f(t)]);}return a;};
+      const P=Plot(s.svgs[0],N,130,70);P.axes(tr('Period'),tr('Index, period 0 = 100'));P.xticks([0,2,4,6,8,10,12]);P.yticks([70,80,90,100,110,120,130]);
+      if(sign<0){const poly=fine(Yf).filter(([t])=>t>=2);P.poly([[2,100],...poly,[N,100]],'a-loss');}
+      P.path([[0,100],[2,100],[2,Mf(2)],[N,Mf(N)]],colors.d,true);
+      P.path(fine(Pf),colors.mc);P.path(fine(Yf),'var(--policy)');
+      P.tag(N,Mf(N),'M','end',sign>0?-8:16);if(mode!=='expected')P.tag(6,Pf(6),'P','middle',sign>0?16:-8);P.tag(N,Yf(N),'Y','end',-8);
+      const peak=sign>0?Math.max(...fine(Yf).map(x=>x[1])):Math.min(...fine(Yf).map(x=>x[1]));
+      const half=l>0?Math.log(.5)/Math.log(l):0;
+      s.show([[tr('Biggest change in real output'),pc1(peak-100),true],[tr('Long-run change in prices'),pc1(mm*100)],[tr('Long-run change in real output'),pc1(Yf(N)-100)],[tr('Periods for prices to close half the gap'),l>0?half.toFixed(1):'0']],
+        mode==='expected'?tr('People expect the new money, so prices jump at once and real output does not move. Money is neutral even in the short run.'):mode==='cut'?tr('Money falls but prices are slow to come down, so real output drops: a recession. In the long run prices are lower and output is back. This is the cost of stopping inflation.'):tr('Prices are slow to catch up, so the new money first buys more goods and output rises. As prices adjust, output returns to normal and only prices stay higher.'));
+    };
+    s.seg(tr('Case'),[['surprise',tr('Surprise money boost')],['expected',tr('Boost people expect')],['cut',tr('Cut money to stop inflation')]],mode,v=>{mode=v;draw();});
+    s.slider('m',tr('Size of the money change'),5,25,1,m,v=>v+'%',v=>{m=v;draw();});
+    s.slider('lam',tr('How slowly prices adjust'),.2,.85,.05,lam,v=>v<.4?tr('Fast'):v>.65?tr('Slow'):tr('Medium'),v=>{lam=v;draw();});
+    live(s,draw);
+  };
+
+  /* 5. Who gains, who loses: sort each situation. */
+  W_.winners=host=>{
+    host.classList.add('graph','wide');
+    const O=[L('Gains'),L('Loses'),L('Protected')];
+    const Q=[
+      [L('A Thai shop owner took a five-year fixed-rate loan in baht. Prices then fall when everyone expected them to rise.'),1,L('Deflation makes each baht owed worth more. The real burden of the debt grows.')],
+      [L('A graduate has a fixed-rate student loan. Inflation turns out much higher than expected.'),0,L('The loan is repaid with money worth less than planned. Surprise inflation moves wealth to borrowers.')],
+      [L('A bank holds many fixed-rate mortgages it made last year. Inflation turns out much higher than expected.'),1,L('The bank is the lender. It gets back money worth less than it planned for.')],
+      [L('A lender expected 5% inflation and charged 8%. Inflation turns out to be exactly 5%.'),2,L('The Fisher effect at work. The lender built expected inflation into the rate and earns the planned 3% real return.')],
+      [L('A household keeps its savings in cash at home. Prices fall 2% when people expected them to stay flat.'),0,L('Cash buys more when prices fall. Unexpected deflation helps anyone holding money.')],
+      [L('A pensioner whose payment is adjusted every year for the change in the CPI.'),2,L('Indexation ties the payment to the price level, so its real value holds whatever inflation does.')],
+      [L('A government pays its bills by printing new money.'),0,L('This is the inflation tax: buying power moves from everyone holding money to the government.')],
+      [L('A Thai worker on a salary fixed for three years. Inflation turns out much higher than expected.'),1,L('The baht amount is fixed, so its real value falls as prices rise faster than planned.')]
+    ];
+    const head=make('div','g-head',null,host);make('span','g-kicker',tr('Check yourself'),head);make('h4',null,tr('Winner or loser?'),head);make('p',null,tr('New cases, not the ones in the table. Decide whether each person gains, loses or is protected.'),head);
+    const count=make('p','rung-q',null,host),box=make('p','key',null,host);
+    const opts=make('div','g-ctrl sort-tools',null,host);
+    const verdict=make('p','rung-a',null,host),fb=make('p','g-note',null,host);
+    const nav=make('div','g-ctrl sort-tools',null,host);
+    const next=make('button','g-btn',tr('Next situation'),nav);next.type='button';
+    const again=make('button','g-btn',tr('Start over'),nav);again.type='button';
+    let i=0,pick=null,score=0;
+    const render=()=>{
+      const [q,ans,ex]=Q[i];
+      count.textContent=tr(`Situation ${i+1} of ${Q.length} · score ${score}`);
+      box.textContent=T(q);opts.replaceChildren();
+      O.forEach((p,k)=>{const b=make('button','g-btn',T(p),opts);b.type='button';
+        if(pick!==null){b.disabled=true;if(k===ans)b.classList.add('is-ok');else if(k===pick)b.classList.add('is-no');}
+        b.addEventListener('click',()=>{if(pick!==null)return;pick=k;if(k===ans)score++;render();});});
+      if(pick===null){verdict.textContent='';fb.textContent='';}
+      else{verdict.textContent=pick===ans?tr('Right.'):tr(`Not quite. Best answer: ${O[ans][0]}.`);fb.textContent=T(ex);}
+      next.disabled=pick===null||i>=Q.length-1;
+    };
+    next.addEventListener('click',()=>{if(i<Q.length-1){i++;pick=null;render();}});
+    again.addEventListener('click',()=>{i=0;pick=null;score=0;render();});
+    render();
+  };
+
+  function assume(host){const a=host.dataset.assume;if(!a)return;const p=make('p','g-assume',a,host.querySelector('.g-plot')||host);if(host.dataset.assumeZh){const s=make('span','zh-full',host.dataset.assumeZh,p);s.lang='zh-Hant';}}
+  window.EconWidgets={mount(root){root.querySelectorAll('[data-widget]').forEach(host=>{const init=W_[host.dataset.widget];if(init&&!host.dataset.ready){host.dataset.ready='1';init(host);assume(host);}});}};
+})();
+</script>
+<script>
+(() => {
+ const toc=document.getElementById('toc'),rail=document.getElementById('rail'),button=document.getElementById('tocBtn');
+ const headings=[...document.querySelectorAll('.doc > h2,.doc > h3')];
+ headings.forEach(h=>{const li=document.createElement('li'),a=document.createElement('a');li.className=h.tagName.toLowerCase();li.dataset.id=h.id;a.href='#'+h.id;a.textContent=h.childNodes[0].textContent.trim();li.append(a);toc.append(li);});
+ const spy=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;toc.querySelectorAll('.on').forEach(a=>a.classList.remove('on'));const a=toc.querySelector('[data-id="'+e.target.id+'"] a');if(a)a.classList.add('on');}),{rootMargin:'-100px 0px -65% 0px'});headings.forEach(h=>spy.observe(h));
+ function close(){rail.classList.remove('open');button.setAttribute('aria-expanded','false');}
+ button.addEventListener('click',()=>{const open=rail.classList.toggle('open');button.setAttribute('aria-expanded',String(open));});
+ toc.addEventListener('click',e=>{if(e.target.closest('a'))close();});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&rail.classList.contains('open')){close();button.focus();}});
+ const all=document.getElementById('qaAll');all.addEventListener('click',()=>{const ds=[...document.querySelectorAll('.qa details')],open=!ds.every(d=>d.open);ds.forEach(d=>d.open=open);all.textContent=open?'Hide all answers':'Show all answers';});
+ window.EconWidgets.mount(document);
+})();
+</script>
+</body></html>
